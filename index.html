@@ -1,0 +1,1497 @@
+<title>Tonight's Bill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+:root{
+  --ground:#EEF0F4; --surface:#FFFFFF; --surface-2:#E6E9F0; --sunk:#DFE3EC;
+  --ink:#14161C; --ink-2:#4A4E5C; --ink-3:#787E92;
+  --line:#D3D8E2; --line-2:#C2C8D5;
+  --accent:#A85B08; --accent-hot:#8C4B05; --accent-soft:#F7E6CE; --accent-line:#E0BB86;
+  --loved:#2C6B4E; --loved-soft:#DCEFE4;
+  --hated:#8B3743; --hated-soft:#F6DDE0;
+  --fresh:#3E7A4F; --rotten:#A8452F;
+  --shadow:0 1px 2px rgba(20,22,28,.06),0 8px 24px -12px rgba(20,22,28,.18);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#101219; --surface:#171A23; --surface-2:#1E222E; --sunk:#0B0D13;
+    --ink:#ECEAE5; --ink-2:#A9AEBF; --ink-3:#737990;
+    --line:#282D3A; --line-2:#353B4B;
+    --accent:#F0A249; --accent-hot:#FFBB6D; --accent-soft:#33251A; --accent-line:#5A421F;
+    --loved:#74C39A; --loved-soft:#16281F;
+    --hated:#E28695; --hated-soft:#2B171B;
+    --fresh:#79C08D; --rotten:#E08A72;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#101219; --surface:#171A23; --surface-2:#1E222E; --sunk:#0B0D13;
+  --ink:#ECEAE5; --ink-2:#A9AEBF; --ink-3:#737990;
+  --line:#282D3A; --line-2:#353B4B;
+  --accent:#F0A249; --accent-hot:#FFBB6D; --accent-soft:#33251A; --accent-line:#5A421F;
+  --loved:#74C39A; --loved-soft:#16281F;
+  --hated:#E28695; --hated-soft:#2B171B;
+  --fresh:#79C08D; --rotten:#E08A72;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:'Archivo',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; text-wrap:balance}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
+
+.mono{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{
+  font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:10.5px; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+}
+
+/* ---- masthead ---- */
+.masthead{
+  border-bottom:1px solid var(--line); background:var(--surface);
+  padding:18px 26px 16px; display:flex; align-items:flex-end;
+  justify-content:space-between; gap:20px; flex-wrap:wrap;
+}
+.brand{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.brand h1{
+  font-family:'Instrument Serif',Georgia,'Times New Roman',serif;
+  font-size:34px; font-weight:400; letter-spacing:-.01em; line-height:1;
+}
+.brand .sub{color:var(--ink-3); font-size:13px; max-width:46ch}
+.mast-right{display:flex; align-items:center; gap:10px}
+.themebtn{
+  background:var(--surface-2); border:1px solid var(--line); border-radius:999px;
+  padding:7px 13px; font-size:12px; font-weight:500; color:var(--ink-2);
+}
+.themebtn:hover{border-color:var(--line-2); color:var(--ink)}
+
+/* ---- shell ---- */
+.shell{display:grid; grid-template-columns:352px minmax(0,1fr); align-items:start; gap:0}
+.rail{
+  border-right:1px solid var(--line); background:var(--surface);
+  padding:22px; position:sticky; top:0; max-height:100vh; overflow-y:auto;
+  display:flex; flex-direction:column; gap:24px;
+}
+.stage{padding:24px 26px 72px; min-width:0}
+
+/* ---- rail blocks ---- */
+.block{display:flex; flex-direction:column; gap:11px}
+.block-head{display:flex; align-items:baseline; justify-content:space-between; gap:8px}
+.block-head .hint{font-size:11px; color:var(--ink-3)}
+
+.seg{display:grid; gap:6px}
+.seg-row{display:flex; gap:6px; flex-wrap:wrap}
+.opt{
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+  border-radius:7px; padding:7px 11px; font-size:12.5px; font-weight:500;
+  transition:background .12s,border-color .12s,color .12s;
+}
+.opt:hover{border-color:var(--accent-line); color:var(--ink)}
+.opt[aria-pressed="true"]{
+  background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot); font-weight:600;
+}
+:root:not([data-theme="dark"]) .opt[aria-pressed="true"]{color:var(--accent)}
+
+/* runtime */
+.time-read{display:flex; align-items:baseline; gap:8px}
+.time-read .big{font-family:'IBM Plex Mono',monospace; font-size:26px; font-weight:600; letter-spacing:-.02em}
+.time-read .unit{font-size:12px; color:var(--ink-3)}
+input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; height:22px; background:transparent; cursor:pointer;
+}
+input[type=range]::-webkit-slider-runnable-track{height:4px; background:var(--sunk); border-radius:99px; border:1px solid var(--line)}
+input[type=range]::-moz-range-track{height:4px; background:var(--sunk); border-radius:99px; border:1px solid var(--line)}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:16px; height:16px; margin-top:-7px; border-radius:50%;
+  background:var(--accent); border:2px solid var(--surface); box-shadow:0 0 0 1px var(--accent-line);
+}
+input[type=range]::-moz-range-thumb{
+  width:14px; height:14px; border-radius:50%; background:var(--accent);
+  border:2px solid var(--surface); box-shadow:0 0 0 1px var(--accent-line);
+}
+.ticks{display:flex; justify-content:space-between; font-size:10px; color:var(--ink-3); margin-top:-4px}
+
+/* services */
+.svc{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:5px 0}
+.svc-name{display:flex; align-items:center; gap:8px; font-size:13px}
+.dot{width:8px; height:8px; border-radius:2px; flex:none}
+.sw{
+  width:36px; height:20px; border-radius:999px; border:1px solid var(--line);
+  background:var(--sunk); position:relative; flex:none; transition:background .15s,border-color .15s;
+}
+.sw::after{
+  content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%;
+  background:var(--ink-3); transition:transform .15s,background .15s;
+}
+.sw[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent-line)}
+.sw[aria-pressed="true"]::after{transform:translateX(16px); background:var(--accent)}
+.svc.off .svc-name{color:var(--ink-3)}
+
+.runbtn{
+  width:100%; border:1px solid var(--accent-line); background:var(--accent); color:var(--surface);
+  border-radius:8px; padding:12px; font-size:14px; font-weight:600; letter-spacing:.01em;
+  transition:filter .12s,transform .06s;
+}
+:root[data-theme="dark"] .runbtn{color:#14161C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .runbtn{color:#14161C}}
+.runbtn:hover{filter:brightness(1.07)}
+.runbtn:active{transform:translateY(1px)}
+.resetbtn{
+  width:100%; background:none; border:1px solid var(--line); border-radius:8px;
+  padding:9px; font-size:12.5px; color:var(--ink-3);
+}
+.resetbtn:hover{color:var(--ink); border-color:var(--line-2)}
+</style>
+<style>
+/* ---- taste picker ---- */
+.taste-bar{display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap}
+.search{
+  flex:1 1 220px; min-width:0; background:var(--surface); border:1px solid var(--line);
+  border-radius:8px; padding:9px 12px; font:inherit; font-size:13.5px; color:var(--ink);
+}
+.search::placeholder{color:var(--ink-3)}
+.search:focus{outline:none; border-color:var(--accent-line); box-shadow:0 0 0 3px var(--accent-soft)}
+.legend{display:flex; gap:12px; font-size:11.5px; color:var(--ink-3); align-items:center}
+.legend b{font-weight:500}
+.key{display:inline-flex; align-items:center; gap:5px}
+.key i{width:9px; height:9px; border-radius:2px; display:inline-block}
+
+.grid-titles{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(178px,1fr)); gap:7px;
+  max-height:330px; overflow-y:auto; padding:3px; border:1px solid var(--line);
+  border-radius:10px; background:var(--sunk);
+}
+.tcard{
+  text-align:left; background:var(--surface); border:1px solid var(--line);
+  border-radius:7px; padding:8px 10px; display:flex; flex-direction:column; gap:2px;
+  transition:border-color .12s,background .12s;
+}
+.tcard:hover{border-color:var(--line-2)}
+.tcard .tt{font-size:12.5px; font-weight:600; line-height:1.25}
+.tcard .ty{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-3)}
+.tcard[data-state="loved"]{background:var(--loved-soft); border-color:var(--loved)}
+.tcard[data-state="loved"] .tt{color:var(--loved)}
+.tcard[data-state="hated"]{background:var(--hated-soft); border-color:var(--hated)}
+.tcard[data-state="hated"] .tt{color:var(--hated); text-decoration:line-through; text-decoration-thickness:1px}
+.tcard .mark{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase}
+
+.filtersum{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:13px}
+.fchip{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:11.5px; font-weight:500; color:var(--ink-2);
+  background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:4px 10px;
+}
+.fchip b{font-weight:600; color:var(--ink)}
+.fchip.on{background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot)}
+:root:not([data-theme="dark"]) .fchip.on{color:var(--accent)}
+.gridnote{margin:0 0 9px; font-size:12px; color:var(--ink-3); line-height:1.45; max-width:72ch}
+.fitbtn{
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+  border-radius:7px; padding:8px 12px; font-size:12.5px; font-weight:500; white-space:nowrap;
+}
+.fitbtn:hover{border-color:var(--accent-line); color:var(--ink)}
+.fitbtn[aria-pressed="true"]{
+  background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot); font-weight:600;
+}
+:root:not([data-theme="dark"]) .fitbtn[aria-pressed="true"]{color:var(--accent)}
+.tcard.unfit{opacity:.42}
+.tcard.unfit:hover{opacity:.72}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; min-height:0}
+.chip{
+  display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:4px 6px 4px 11px;
+  font-size:12px; font-weight:500; border:1px solid;
+}
+.chip.l{background:var(--loved-soft); border-color:var(--loved); color:var(--loved)}
+.chip.h{background:var(--hated-soft); border-color:var(--hated); color:var(--hated)}
+.chip button{background:none; border:none; padding:0 3px; font-size:14px; line-height:1; opacity:.6}
+.chip button:hover{opacity:1}
+
+/* ---- section headers ---- */
+.sec{margin-bottom:26px}
+.sec-head{
+  display:flex; align-items:baseline; gap:12px; padding-bottom:9px;
+  border-bottom:1px solid var(--line); margin-bottom:14px; flex-wrap:wrap;
+}
+.sec-head h2{
+  font-family:'Instrument Serif',Georgia,serif; font-size:23px; font-weight:400; letter-spacing:-.005em;
+}
+.sec-head .count{margin-left:auto; font-size:11.5px; color:var(--ink-3)}
+
+/* ---- result cards ---- */
+.bill{display:flex; flex-direction:column; gap:10px}
+.pick{
+  display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:16px; align-items:start;
+  background:var(--surface); border:1px solid var(--line); border-radius:11px;
+  padding:15px 17px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+}
+.pick.top{border-color:var(--accent-line)}
+.pick.top::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent);
+}
+.rank{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--ink-3);
+  padding-top:3px; width:22px; text-align:right;
+}
+.pick.top .rank{color:var(--accent)}
+.body{min-width:0; display:flex; flex-direction:column; gap:6px}
+.title-line{display:flex; align-items:baseline; gap:9px; flex-wrap:wrap}
+.title-line h3{
+  font-family:'Instrument Serif',Georgia,serif; font-size:21px; font-weight:400; line-height:1.15;
+}
+.title-line .yr{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-3)}
+.meta{display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:12px; color:var(--ink-3)}
+.meta .sep{opacity:.4}
+.hook{font-size:13.5px; color:var(--ink-2); max-width:64ch; line-height:1.45}
+.why{
+  font-size:12.5px; color:var(--ink-2); background:var(--surface-2); border-left:2px solid var(--accent);
+  padding:7px 11px; border-radius:0 6px 6px 0; max-width:64ch;
+}
+.why b{color:var(--ink); font-weight:600}
+.tags{display:flex; gap:5px; flex-wrap:wrap}
+.tag{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase;
+  border:1px solid var(--line); border-radius:4px; padding:2px 6px; color:var(--ink-3);
+}
+
+.aside{display:flex; flex-direction:column; align-items:flex-end; gap:8px; flex:none}
+.svc-badge{
+  font-size:11px; font-weight:600; border-radius:5px; padding:3px 8px; white-space:nowrap;
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+}
+.score{display:flex; flex-direction:column; align-items:flex-end; gap:4px}
+.score .num{font-family:'IBM Plex Mono',monospace; font-size:19px; font-weight:600; letter-spacing:-.02em}
+.score .lbl{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3)}
+.meter{width:78px; height:4px; border-radius:99px; background:var(--sunk); overflow:hidden; border:1px solid var(--line)}
+.meter span{display:block; height:100%; background:var(--accent); border-radius:99px}
+.runtime-pill{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--ink);
+  background:var(--surface-2); border:1px solid var(--line); border-radius:5px; padding:3px 8px; white-space:nowrap;
+}
+.runtime-pill.tight{border-color:var(--accent-line); color:var(--accent-hot); background:var(--accent-soft)}
+.rate{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.04em;
+  border:1px solid var(--line-2); border-radius:3px; padding:1px 5px; color:var(--ink-2);
+}
+.rt{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
+  display:inline-flex; align-items:center; gap:4px; color:var(--ink-2);
+}
+.rt i{width:7px; height:7px; border-radius:50%; display:inline-block; background:var(--fresh)}
+.rt.rotten i{background:var(--rotten)}
+.score-note{font-size:11px; color:var(--ink-3); line-height:1.4; margin-top:-3px}
+:root:not([data-theme="dark"]) .runtime-pill.tight{color:var(--accent)}
+
+/* ---- states ---- */
+.empty{
+  border:1px dashed var(--line-2); border-radius:12px; padding:44px 30px; text-align:center;
+  color:var(--ink-3); background:var(--surface);
+}
+.empty h3{font-family:'Instrument Serif',Georgia,serif; font-size:22px; font-weight:400; color:var(--ink-2); margin-bottom:7px}
+.empty p{margin:0 auto; max-width:44ch; font-size:13.5px; line-height:1.5}
+.nudge{
+  display:flex; gap:11px; align-items:flex-start; background:var(--accent-soft);
+  border:1px solid var(--accent-line); border-radius:9px; padding:11px 14px; font-size:12.5px;
+  color:var(--ink-2); margin-bottom:16px; line-height:1.45;
+}
+.nudge b{color:var(--ink)}
+.locked{
+  font-size:12px; color:var(--ink-3); border-top:1px solid var(--line);
+  padding-top:12px; margin-top:16px; line-height:1.5;
+}
+.locked b{color:var(--ink-2); font-weight:600}
+.handoff{
+  margin-top:26px; border:1px solid var(--line); border-radius:11px; background:var(--surface);
+  padding:17px 19px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+}
+.handoff p{margin:4px 0 0; font-size:12.5px; color:var(--ink-3); max-width:56ch; line-height:1.45}
+.handoff h3{font-family:'Instrument Serif',Georgia,serif; font-size:19px; font-weight:400}
+.copybtn{
+  border:1px solid var(--line-2); background:var(--surface-2); border-radius:8px;
+  padding:10px 16px; font-size:13px; font-weight:600; white-space:nowrap;
+}
+.copybtn:hover{border-color:var(--accent-line); color:var(--accent-hot)}
+:root:not([data-theme="dark"]) .copybtn:hover{color:var(--accent)}
+.foot{margin-top:30px; font-size:11.5px; color:var(--ink-3); line-height:1.55; max-width:70ch}
+
+@media (max-width:940px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static; max-height:none; border-right:none; border-bottom:1px solid var(--line)}
+  .stage{padding:20px 18px 60px}
+  .masthead{padding:16px 18px 14px}
+  .pick{grid-template-columns:auto minmax(0,1fr); row-gap:12px}
+  .aside{grid-column:2; flex-direction:row; align-items:center; justify-content:flex-start; flex-wrap:wrap}
+  .brand h1{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
+</style>
+<div class="masthead">
+  <div class="brand">
+    <h1>Tonight&rsquo;s Bill</h1>
+    <span class="sub">Set the room, the clock, and the taste. The engine programs the evening.</span>
+  </div>
+  <div class="mast-right">
+    <button class="themebtn" id="themebtn" type="button">Theme</button>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="rail">
+
+    <div class="block">
+      <div class="block-head"><span class="eyebrow">Who&rsquo;s watching</span></div>
+      <div class="seg-row" id="room"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <span class="eyebrow">Time on the clock</span>
+        <span class="hint" id="timehint"></span>
+      </div>
+      <div class="time-read">
+        <span class="big" id="timebig">140</span>
+        <span class="unit" id="timeunit">min &mdash; 2h 20m</span>
+      </div>
+      <input type="range" id="time" min="80" max="240" step="5" value="140" aria-label="Maximum runtime in minutes">
+      <div class="ticks"><span>1h 20m</span><span>2h 40m</span><span>4h</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <span class="eyebrow">Minimum rating</span>
+        <span class="hint" id="ratehint"></span>
+      </div>
+      <div class="seg-row" id="rating"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <span class="eyebrow">Critic score</span>
+        <span class="hint" id="rthint"></span>
+      </div>
+      <div class="time-read">
+        <span class="big" id="rtbig">0</span>
+        <span class="unit" id="rtunit">% and up &mdash; everything</span>
+      </div>
+      <input type="range" id="rt" min="0" max="95" step="5" value="0" aria-label="Minimum critic score">
+      <div class="score-note">Approximate Tomatometer scores, from memory rather than a live
+        feed. Good for sorting the great from the mediocre, not for settling an argument.</div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <span class="eyebrow">Genres you&rsquo;re after</span>
+        <span class="hint">optional</span>
+      </div>
+      <div class="seg-row" id="genres"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <span class="eyebrow">Your services</span>
+        <span class="hint" id="svchint"></span>
+      </div>
+      <div id="services"></div>
+    </div>
+
+    <div class="block">
+      <button class="runbtn" id="run" type="button">Program the evening</button>
+      <button class="resetbtn" id="reset" type="button">Clear everything</button>
+    </div>
+
+  </aside>
+
+  <main class="stage">
+
+    <div class="sec" id="sec-bill">
+      <div class="sec-head">
+        <h2>The bill</h2>
+        <span class="count" id="billcount"></span>
+      </div>
+      <div class="filtersum" id="filtersum"></div>
+      <div id="bill"></div>
+      <div class="locked" id="locked"></div>
+    </div>
+
+    <div class="sec" id="sec-taste">
+      <div class="sec-head">
+        <h2>Calibrate your taste</h2>
+        <span class="count" id="tastecount"></span>
+      </div>
+      <div class="nudge" id="nudge">
+        <div>
+          <b>Click once to love it. Click again to mark it a miss.</b> Every title you tag teaches the
+          engine what you respond to &mdash; pace, tone, how much work a film asks of you &mdash; not just
+          genre. Five or six tags is enough to get sharp. Marking misses matters as much as marking loves.
+        </div>
+      </div>
+      <div class="taste-bar">
+        <input class="search" id="search" type="search" placeholder="Search the catalog by title or director&hellip;" aria-label="Search titles">
+        <button class="fitbtn" id="fitonly" type="button" aria-pressed="false">Only what fits tonight</button>
+        <div class="legend">
+          <span class="key"><i style="background:var(--loved)"></i><b>Loved</b></span>
+          <span class="key"><i style="background:var(--hated)"></i><b>Missed</b></span>
+        </div>
+      </div>
+      <p class="gridnote" id="gridnote"></p>
+      <div class="grid-titles" id="titlegrid"></div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="handoff">
+      <div>
+        <h3>Nothing here tonight?</h3>
+        <p>Copy your brief and hand it to Claude in chat. That covers new releases and anything
+          outside this catalog, with live availability instead of a baked-in snapshot.</p>
+      </div>
+      <button class="copybtn" id="copy" type="button">Copy brief</button>
+    </div>
+
+    <div class="foot" id="foot"></div>
+
+  </main>
+</div>
+<script>
+/* ============================================================================
+   CATALOG
+   Columns: [ title, year, runtime, genres, attributes, service, director, hook, audience,
+                fame, mpaa, tomatometer ]
+     genres/attributes .... pipe-separated
+     service .............. NFX Netflix | MAX Max | HUL Hulu | DIS Disney+
+                            PRV Prime Video | APL Apple TV+ | PAR Paramount+ | PCK Peacock
+     audience ............. all | teen | adult
+     fame ................. 3 iconic, 2 well known, 1 for film people
+     mpaa ................. G | PG | PG-13 | R | NR (NR falls back to the audience column)
+     tomatometer .......... APPROXIMATE critic score from knowledge, NOT a live feed.
+                            Treat as a rough quality signal only; verify anything that matters.
+   Availability is a snapshot, not a live feed. Verify before you commit the evening.
+   ========================================================================== */
+const COLS = ["t","y","r","g","a","s","d","h","k","pop","mpaa","rt"];
+const RAW = [
+["The Godfather",1972,175,"crime|drama","slowburn|epic|characterstudy|dialogue|auteur|violent","PAR","Francis Ford Coppola","A reluctant son inherits the family business, and the family business is blood.","adult",3,"R",97],
+["Goodfellas",1990,146,"crime|drama","propulsive|stylish|violent|ensemble|auteur|ironic","MAX","Martin Scorsese","Thirty years of mob life at the speed of a coke rush, then the crash.","adult",3,"R",96],
+["Pulp Fiction",1994,154,"crime|drama","stylish|dialogue|ensemble|ironic|violent|twisty","MAX","Quentin Tarantino","Three stories fold into each other across one very bad week in Los Angeles.","adult",3,"R",92],
+["The Departed",2006,151,"crime|thriller","propulsive|twisty|violent|ensemble|dialogue","MAX","Martin Scorsese","A cop in the mob and a mobster in the cops, both running out of room.","adult",3,"R",90],
+["No Country for Old Men",2007,122,"thriller|crime","slowburn|bleak|violent|visual|auteur|grounded","PRV","Joel & Ethan Coen","A hunter takes the money. The man who comes for it does not negotiate.","adult",3,"R",93],
+["Heat",1995,170,"crime|thriller","slowburn|epic|violent|characterstudy|grounded","MAX","Michael Mann","A thief and a detective recognize each other completely, which changes nothing.","adult",2,"R",88],
+["Se7en",1995,127,"thriller|mystery","bleak|scary|twisty|visual|violent|propulsive","MAX","David Fincher","Two detectives, seven sins, and a rain that never lets up.","adult",3,"R",82],
+["Zodiac",2007,157,"thriller|mystery","slowburn|cerebral|grounded|dialogue|auteur","PRV","David Fincher","Not about catching the killer. About what not catching him does to you.","adult",2,"R",90],
+["Gone Girl",2014,149,"thriller|mystery","twisty|ironic|bleak|propulsive|stylish","MAX","David Fincher","A wife vanishes, a husband smiles wrong on camera, and the story turns.","adult",3,"R",88],
+["Prisoners",2013,153,"thriller|crime","bleak|slowburn|visceral|characterstudy|grounded","PRV","Denis Villeneuve","Two girls are taken and a father decides the law is moving too slowly.","adult",2,"R",81],
+["Sicario",2015,121,"thriller|crime","propulsive|bleak|visual|visceral|grounded","NFX","Denis Villeneuve","An idealist agent discovers the war has no rules and never did.","adult",2,"R",92],
+["The Silence of the Lambs",1991,118,"thriller|horror","scary|cerebral|characterstudy|propulsive|twisty","MAX","Jonathan Demme","A trainee agent bargains with one monster to catch another.","adult",3,"R",95],
+["Parasite",2019,132,"thriller|drama","twisty|ironic|visceral|stylish|auteur|bleak","MAX","Bong Joon-ho","A poor family infiltrates a rich one, and the basement has other plans.","adult",3,"R",99],
+["Memento",2000,113,"thriller|mystery","twisty|cerebral|bleak|stylish","PRV","Christopher Nolan","A man with no short-term memory hunts a killer, told backwards.","adult",2,"R",94],
+["Nightcrawler",2014,117,"thriller|crime","bleak|ironic|characterstudy|stylish|propulsive","NFX","Dan Gilroy","A striver finds his calling filming other people's worst nights.","adult",2,"R",95],
+["Uncut Gems",2019,135,"thriller|drama","propulsive|visceral|bleak|characterstudy|weird","NFX","Josh & Benny Safdie","Two hours of a man making the worst possible choice, every time, at volume.","adult",2,"R",92],
+
+["Blade Runner 2049",2017,164,"scifi|drama","slowburn|visual|cerebral|melancholy|auteur|spectacle","MAX","Denis Villeneuve","A replicant detective pulls a thread that unravels what counts as alive.","adult",2,"R",88],
+["Blade Runner",1982,117,"scifi|thriller","slowburn|visual|melancholy|cerebral|stylish","MAX","Ridley Scott","Neon rain, artificial people, and a hunter who may be one of them.","adult",3,"R",89],
+["Arrival",2016,116,"scifi|drama","slowburn|cerebral|melancholy|visual|twisty|earnest","PRV","Denis Villeneuve","First contact is a language problem, and language rewrites the mind that learns it.","teen",3,"PG-13",94],
+["Dune",2021,155,"scifi|adventure","epic|spectacle|visual|slowburn|auteur","MAX","Denis Villeneuve","A noble house is handed a desert planet as a trap, and the son starts dreaming.","teen",3,"PG-13",83],
+["Dune: Part Two",2024,166,"scifi|adventure","epic|spectacle|visual|propulsive|auteur","MAX","Denis Villeneuve","The messiah story goes exactly as warned, which is the horror of it.","teen",3,"PG-13",92],
+["Interstellar",2014,169,"scifi|drama","epic|spectacle|earnest|cerebral|visual","PRV","Christopher Nolan","A farmer leaves a dying Earth and the clock runs at different speeds for everyone.","teen",3,"PG-13",73],
+["Inception",2010,148,"scifi|action","propulsive|cerebral|spectacle|twisty|stylish","MAX","Christopher Nolan","A heist inside a mind, nested four layers deep, on a folding city.","teen",3,"PG-13",87],
+["The Matrix",1999,136,"scifi|action","propulsive|stylish|cerebral|spectacle|visceral","MAX","The Wachowskis","A programmer learns the world is software and he can edit it.","teen",3,"R",83],
+["Alien",1979,117,"scifi|horror","slowburn|scary|visual|practical|visceral","HUL","Ridley Scott","A working crew answers a distress call and brings something aboard.","adult",3,"R",93],
+["Aliens",1986,137,"scifi|action","propulsive|visceral|practical|spectacle|ensemble","HUL","James Cameron","She goes back with marines. The marines are not enough.","adult",3,"R",94],
+["Ex Machina",2014,108,"scifi|thriller","slowburn|cerebral|stylish|twisty|dialogue","MAX","Alex Garland","A coder is invited to test an AI, and the test runs both ways.","adult",2,"R",92],
+["Everything Everywhere All at Once",2022,139,"scifi|comedy|drama","weird|propulsive|earnest|ensemble|visceral|uplifting","PRV","Daniels","A laundromat audit becomes a multiverse war becomes a mother apologizing.","teen",3,"R",93],
+["Children of Men",2006,109,"scifi|thriller","bleak|propulsive|visual|grounded|visceral","PCK","Alfonso Cuaron","Eighteen years without a birth, and one woman is pregnant.","adult",2,"R",92],
+["Mad Max: Fury Road",2015,120,"action|scifi","propulsive|spectacle|practical|visual|visceral","MAX","George Miller","One long chase out and the same chase back, and it never stops moving.","adult",3,"R",97],
+["Edge of Tomorrow",2014,113,"scifi|action","propulsive|comic|spectacle|twisty","PRV","Doug Liman","A coward dies on the same beach until he learns to win it.","teen",2,"PG-13",91],
+["Her",2013,126,"scifi|romance|drama","melancholy|earnest|slowburn|characterstudy|visual","NFX","Spike Jonze","A lonely man falls for an operating system and it is not played as a joke.","adult",2,"R",95],
+["Annihilation",2018,115,"scifi|horror","weird|slowburn|visual|bleak|cerebral","PRV","Alex Garland","A team enters a zone that refracts everything inside it, including them.","adult",2,"R",88],
+["Gravity",2013,91,"scifi|thriller","propulsive|spectacle|visual|visceral","MAX","Alfonso Cuaron","Ninety minutes of trying to get back down.","teen",2,"PG-13",96],
+["The Martian",2015,144,"scifi|adventure","hopeful|comic|propulsive|earnest|spectacle","HUL","Ridley Scott","Left for dead on Mars, a botanist decides to science his way home.","teen",3,"PG-13",91],
+["Looper",2012,119,"scifi|thriller","twisty|propulsive|violent|cerebral","NFX","Rian Johnson","A hitman kills people sent back from the future until they send back himself.","adult",2,"R",93],
+["District 9",2009,112,"scifi|action","visceral|grounded|bleak|practical|propulsive","PCK","Neill Blomkamp","Aliens land and get put in a camp, and a bureaucrat starts to change.","adult",2,"R",90],
+["Minority Report",2002,145,"scifi|thriller","propulsive|cerebral|spectacle|twisty|stylish","PAR","Steven Spielberg","A cop who arrests people before they kill is flagged for a murder he hasn't done.","teen",2,"PG-13",90],
+["Jurassic Park",1993,127,"adventure|scifi","spectacle|practical|propulsive|scary|earnest","PCK","Steven Spielberg","The park is open, the fences are down, and the kitchen has doors.","teen",3,"PG-13",91],
+["E.T. the Extra-Terrestrial",1982,115,"family|scifi","earnest|hopeful|uplifting|practical|cozy","PCK","Steven Spielberg","A boy hides an alien in his closet and neither of them wants to say goodbye.","all",3,"PG",99],
+["Back to the Future",1985,116,"scifi|comedy|adventure","brisk|comic|hopeful|propulsive|uplifting","NFX","Robert Zemeckis","A teenager stalls his own existence and has to talk his parents back together.","all",3,"PG",93],
+["Star Wars: A New Hope",1977,121,"scifi|adventure","spectacle|hopeful|epic|practical|earnest","DIS","George Lucas","A farm boy, a smuggler, and a princess against a moon-sized gun.","all",3,"PG",93],
+["The Empire Strikes Back",1980,124,"scifi|adventure","epic|spectacle|melancholy|practical|twisty","DIS","Irvin Kershner","Everything goes wrong, and the villain says the worst possible sentence.","all",3,"PG",95],
+["Rogue One",2016,133,"scifi|war|adventure","bleak|spectacle|ensemble|propulsive|epic","DIS","Gareth Edwards","The people who stole the plans, and what it cost every one of them.","teen",2,"PG-13",84],
+
+["The Dark Knight",2008,152,"action|crime|thriller","propulsive|bleak|spectacle|characterstudy|violent","MAX","Christopher Nolan","An agent of chaos proves a city will eat itself if you ask it nicely.","teen",3,"PG-13",94],
+["Batman Begins",2005,140,"action|crime","propulsive|grounded|earnest|spectacle","MAX","Christopher Nolan","How the suit got built, and why the man needed it.","teen",2,"PG-13",85],
+["Oppenheimer",2023,180,"drama|war","epic|cerebral|bleak|characterstudy|dialogue|auteur","PCK","Christopher Nolan","The man who ended the war and spent the rest of his life on trial for it.","adult",3,"R",93],
+["Dunkirk",2017,106,"war|thriller","propulsive|visceral|spectacle|visual|grounded","MAX","Christopher Nolan","Three timelines, one beach, and the sound of engines getting closer.","teen",2,"PG-13",92],
+["Saving Private Ryan",1998,169,"war|drama","visceral|violent|epic|ensemble|earnest","PAR","Steven Spielberg","Eight men sent to pull one man out, and the arithmetic nobody likes.","adult",3,"R",94],
+["1917",2019,119,"war|drama","propulsive|visual|visceral|grounded|epic","PRV","Sam Mendes","Two runners cross no man's land to stop an attack, apparently in one shot.","adult",2,"R",89],
+["Inglourious Basterds",2009,153,"war|drama","stylish|dialogue|violent|ironic|ensemble","PRV","Quentin Tarantino","Long conversations at gunpoint, and a plan involving a very flammable cinema.","adult",3,"R",89],
+["Apocalypse Now",1979,147,"war|drama","epic|weird|bleak|visual|auteur|slowburn","MAX","Francis Ford Coppola","Up the river to find a colonel who has stopped pretending war has a point.","adult",3,"R",90],
+["Full Metal Jacket",1987,116,"war|drama","bleak|ironic|violent|auteur|characterstudy","MAX","Stanley Kubrick","Boot camp breaks them, then Vietnam finishes the job.","adult",2,"R",90],
+
+["The Shawshank Redemption",1994,142,"drama","slowburn|hopeful|earnest|characterstudy|uplifting","MAX","Frank Darabont","Two decades inside, one very patient plan, and a friendship that outlasts it.","adult",3,"R",89],
+["Forrest Gump",1994,142,"drama|romance","earnest|epic|melancholy|uplifting|characterstudy","PAR","Robert Zemeckis","A simple man walks through four decades of American history without noticing.","teen",3,"PG-13",74],
+["The Social Network",2010,120,"drama","propulsive|dialogue|ironic|characterstudy|stylish","NFX","David Fincher","A company gets built and every friendship in the room gets spent doing it.","teen",3,"PG-13",96],
+["Whiplash",2014,106,"drama|music","propulsive|visceral|bleak|characterstudy|dialogue","NFX","Damien Chazelle","A drummer and a teacher who will break him to find out if he is great.","adult",3,"R",94],
+["There Will Be Blood",2007,158,"drama","slowburn|bleak|characterstudy|epic|auteur|visual","MAX","Paul Thomas Anderson","Oil, God, and a man who cannot stand to see anyone else succeed.","adult",2,"R",91],
+["Moonlight",2016,111,"drama","slowburn|melancholy|visual|characterstudy|earnest|auteur","NFX","Barry Jenkins","Three chapters of one man learning what he is allowed to want.","adult",2,"R",98],
+["Manchester by the Sea",2016,137,"drama","bleak|slowburn|melancholy|characterstudy|grounded","PRV","Kenneth Lonergan","A man is handed a nephew and a town he cannot bear to be in.","adult",2,"R",96],
+["Marriage Story",2019,137,"drama|romance","dialogue|melancholy|characterstudy|grounded|earnest","NFX","Noah Baumbach","Two decent people, one divorce, and lawyers who make it worse.","adult",2,"R",95],
+["The Banshees of Inisherin",2022,114,"drama|comedy","ironic|bleak|dialogue|melancholy|characterstudy|weird","MAX","Martin McDonagh","A man decides he no longer likes his friend, and the island takes sides.","adult",2,"R",96],
+["Little Women",2019,135,"drama|romance","earnest|ensemble|cozy|melancholy|visual","NFX","Greta Gerwig","Four sisters, one shifting timeline, and what a woman was allowed to become.","all",2,"PG",95],
+["Lady Bird",2017,94,"drama|comedy","earnest|comic|characterstudy|grounded|melancholy","PRV","Greta Gerwig","A senior year, a mother, and a hometown you can only love from far away.","teen",2,"R",99],
+["The Grand Budapest Hotel",2014,99,"comedy|adventure","stylish|comic|visual|ensemble|weird|auteur","HUL","Wes Anderson","A concierge, a stolen painting, and a Europe about to disappear.","teen",3,"R",92],
+["Knives Out",2019,130,"mystery|comedy","twisty|ensemble|comic|brisk|stylish","PRV","Rian Johnson","A rich novelist dies and everyone in the house has a motive and a bad alibi.","teen",3,"PG-13",97],
+["The Menu",2022,107,"thriller|comedy|horror","ironic|twisty|stylish|bleak|weird","MAX","Mark Mylod","Dinner on a private island, and the chef has written an ending.","adult",2,"R",88],
+["Glass Onion",2022,139,"mystery|comedy","twisty|ensemble|comic|brisk|stylish","NFX","Rian Johnson","A tech billionaire stages a murder party and someone improves on it.","teen",2,"PG-13",92],
+["Get Out",2017,104,"horror|thriller","twisty|scary|ironic|propulsive|grounded","PCK","Jordan Peele","Meet the parents, and the weekend has a plan for you.","adult",3,"R",98],
+["Hereditary",2018,127,"horror|drama","scary|bleak|slowburn|visceral|weird","MAX","Ari Aster","Grief opens a door in a family that was already holding one closed.","adult",2,"R",90],
+["The Babadook",2014,94,"horror|drama","scary|slowburn|bleak|characterstudy","PRV","Jennifer Kent","A widow, a difficult son, and a pop-up book that will not stay shut.","adult",1,"NR",98],
+["A Quiet Place",2018,90,"horror|thriller","scary|propulsive|visceral|grounded|earnest","PAR","John Krasinski","Make a sound and they come. The family has learned to farm in silence.","teen",3,"PG-13",96],
+["The Shining",1980,146,"horror","scary|slowburn|weird|visual|auteur|bleak","MAX","Stanley Kubrick","A caretaker, an empty hotel, and a winter with no way down the mountain.","adult",3,"R",83],
+["The Thing",1982,109,"horror|scifi","scary|practical|bleak|visceral|slowburn","PCK","John Carpenter","Something in the Antarctic camp is imitating them, and it is very good at it.","adult",2,"R",85],
+["It Follows",2014,100,"horror","scary|slowburn|stylish|weird|visual","PRV","David Robert Mitchell","It walks. It never stops. It only walks.","adult",1,"R",95],
+["Sinners",2025,137,"horror|drama","stylish|visceral|scary|epic|visual|auteur","MAX","Ryan Coogler","Twin brothers open a juke joint in 1932 Mississippi and something worse than the town shows up.","adult",2,"R",97],
+["Nope",2022,130,"horror|scifi","weird|spectacle|slowburn|visual|scary","PCK","Jordan Peele","Something is living in the cloud above the ranch, and they decide to film it.","adult",2,"R",83],
+["28 Days Later",2002,113,"horror|thriller","bleak|propulsive|visceral|grounded|scary","HUL","Danny Boyle","He wakes in an empty hospital in an empty London and it is not empty.","adult",2,"R",87],
+
+["Spirited Away",2001,125,"animation|fantasy","weird|visual|earnest|cozy|auteur","MAX","Hayao Miyazaki","A girl's parents become pigs and she has to work a bathhouse for spirits to save them.","all",3,"PG",97],
+["My Neighbor Totoro",1988,86,"animation|family","cozy|earnest|hopeful|visual|uplifting","MAX","Hayao Miyazaki","Two sisters, a sick mother, and a forest spirit who waits at the bus stop.","all",3,"G",94],
+["Princess Mononoke",1997,134,"animation|fantasy","epic|visual|violent|earnest|auteur","MAX","Hayao Miyazaki","A war between the forest and the ironworks, and nobody is simply wrong.","teen",2,"PG-13",93],
+["Spider-Man: Into the Spider-Verse",2018,117,"animation|action","stylish|visual|propulsive|earnest|uplifting|spectacle","NFX","Persichetti, Ramsey, Rothman","A kid from Brooklyn learns every version of the mask, including his own.","all",3,"PG",97],
+["Spider-Man: Across the Spider-Verse",2023,140,"animation|action","stylish|visual|propulsive|spectacle|earnest","NFX","Dos Santos, Powers, Thompson","The multiverse has rules and he decides to break every one of them.","all",3,"PG",95],
+["The Incredibles",2004,115,"animation|action|family","brisk|comic|ensemble|spectacle|uplifting","DIS","Brad Bird","A family of retired supers is bored, and boredom is the real villain.","all",3,"PG",97],
+["Ratatouille",2007,111,"animation|family|comedy","earnest|cozy|comic|uplifting|visual","DIS","Brad Bird","A rat can cook, and Paris has opinions about that.","all",3,"G",96],
+["WALL-E",2008,98,"animation|scifi|family","earnest|melancholy|visual|hopeful|uplifting","DIS","Andrew Stanton","Forty minutes of near-silence, one lonely robot, and a plant in a boot.","all",3,"G",95],
+["Toy Story",1995,81,"animation|family|comedy","brisk|comic|earnest|uplifting|cozy","DIS","John Lasseter","A cowboy doll discovers he is no longer the favorite.","all",3,"G",100],
+["Inside Out",2015,95,"animation|family|drama","earnest|comic|uplifting|cerebral|melancholy","DIS","Pete Docter","Five emotions run a girl's head and Joy learns she needs Sadness.","all",3,"PG",98],
+["Coco",2017,105,"animation|family|musical","earnest|visual|uplifting|melancholy|cozy","DIS","Lee Unkrich","A boy crosses into the land of the dead to ask his family for permission.","all",3,"PG",97],
+["Up",2009,96,"animation|family|adventure","earnest|melancholy|uplifting|comic|cozy","DIS","Pete Docter","A widower flies his house to South America with a boy scout on the porch.","all",3,"PG",98],
+["Finding Nemo",2003,100,"animation|family|adventure","brisk|comic|earnest|uplifting|visual","DIS","Andrew Stanton","An anxious father crosses an ocean for a son who was already fine.","all",3,"G",99],
+["Zootopia",2016,108,"animation|family|comedy","brisk|comic|twisty|uplifting|earnest","DIS","Howard, Moore","A rabbit cop and a fox conman work a case the city wanted buried.","all",3,"PG",98],
+["Moana",2016,107,"animation|family|musical","earnest|uplifting|visual|spectacle|cozy","DIS","Clements, Musker","A girl who is not supposed to sail past the reef sails past the reef.","all",3,"PG",95],
+["How to Train Your Dragon",2010,98,"animation|family|adventure","earnest|uplifting|spectacle|visual|cozy","PCK","DeBlois, Sanders","A viking boy befriends the thing his village exists to kill.","all",3,"PG",99],
+["The Lion King",1994,88,"animation|family|musical","epic|earnest|melancholy|uplifting|visual","DIS","Allers, Minkoff","A prince runs from a death he thinks he caused.","all",3,"G",93],
+["Klaus",2019,96,"animation|family|comedy","cozy|earnest|uplifting|visual|comic","NFX","Sergio Pablos","A terrible postman and a reclusive toymaker accidentally invent Christmas.","all",2,"PG",95],
+["Puss in Boots: The Last Wish",2022,102,"animation|family|adventure","brisk|comic|stylish|earnest|uplifting","PCK","Joel Crawford","Eight lives gone, one left, and Death is walking behind him whistling.","all",2,"PG",95],
+
+["The Lord of the Rings: The Fellowship of the Ring",2001,178,"fantasy|adventure","epic|spectacle|earnest|visual|ensemble","MAX","Peter Jackson","Nine set out to walk a ring into a volcano.","teen",3,"PG-13",92],
+["The Lord of the Rings: The Two Towers",2002,179,"fantasy|adventure","epic|spectacle|visceral|ensemble|visual","MAX","Peter Jackson","A fortress, a siege, and a wizard arriving at dawn.","teen",3,"PG-13",95],
+["The Lord of the Rings: The Return of the King",2003,201,"fantasy|adventure","epic|spectacle|earnest|uplifting|ensemble","MAX","Peter Jackson","Everything converges on one field and one mountain.","teen",3,"PG-13",93],
+["Pan's Labyrinth",2006,118,"fantasy|drama|war","visual|bleak|weird|earnest|auteur","MAX","Guillermo del Toro","A girl under fascism is offered a door, and the fairies are not kind.","adult",2,"R",95],
+["The Princess Bride",1987,98,"fantasy|comedy|romance","comic|cozy|brisk|uplifting|earnest","DIS","Rob Reiner","Pirates, giants, revenge, and true love, as read aloud to a sick kid.","all",3,"PG",97],
+["Harry Potter and the Prisoner of Azkaban",2004,142,"fantasy|adventure","visual|earnest|twisty|cozy|auteur","MAX","Alfonso Cuaron","Third year, an escaped prisoner, and a timeline that doubles back.","all",3,"PG",90],
+
+["Casablanca",1942,102,"romance|drama|war","dialogue|melancholy|earnest|stylish|romantic","MAX","Michael Curtiz","He runs a bar in a neutral city until the one person he cannot refuse walks in.","all",3,"PG",99],
+["When Harry Met Sally",1989,96,"romance|comedy","dialogue|comic|cozy|romantic|earnest","MAX","Rob Reiner","Twelve years of arguing about whether men and women can be friends.","teen",3,"R",91],
+["Before Sunrise",1995,101,"romance|drama","dialogue|slowburn|romantic|earnest|grounded","MAX","Richard Linklater","Two strangers get off a train in Vienna and talk until the sun comes up.","teen",2,"R",100],
+["Eternal Sunshine of the Spotless Mind",2004,108,"romance|scifi|drama","weird|melancholy|romantic|cerebral|visual","PRV","Michel Gondry","He pays to have her erased and then fights to keep one memory.","adult",3,"R",92],
+["La La Land",2016,128,"romance|musical|drama","stylish|melancholy|visual|romantic|uplifting","MAX","Damien Chazelle","Two people help each other become what they wanted, at the cost of each other.","teen",3,"PG-13",91],
+["Notting Hill",1999,124,"romance|comedy","cozy|comic|romantic|earnest|brisk","MAX","Roger Michell","A bookshop owner and the most famous woman alive, which is a logistics problem.","teen",2,"PG-13",83],
+["Crazy Rich Asians",2018,120,"romance|comedy","brisk|comic|romantic|ensemble|uplifting","MAX","Jon M. Chu","Meet the family. The family owns most of Singapore and does not approve.","teen",2,"PG-13",91],
+["Past Lives",2023,105,"romance|drama","slowburn|melancholy|dialogue|earnest|grounded","PRV","Celine Song","Two childhood friends, twenty-four years apart, and one week in New York.","teen",2,"PG-13",95],
+["Portrait of a Lady on Fire",2019,122,"romance|drama","slowburn|visual|melancholy|romantic|auteur","HUL","Celine Sciamma","A painter is hired to study a woman in secret, and studying becomes something else.","adult",1,"R",98],
+["Brokeback Mountain",2005,134,"romance|drama","slowburn|melancholy|bleak|characterstudy|visual","PRV","Ang Lee","Two ranch hands and forty years of a thing neither can say out loud.","adult",2,"R",87],
+
+["Superbad",2007,113,"comedy","comic|brisk|earnest|ensemble","NFX","Greg Mottola","Two best friends try to buy alcohol and accidentally say goodbye.","adult",3,"R",88],
+["Bridesmaids",2011,125,"comedy","comic|ensemble|earnest|visceral","PCK","Paul Feig","A maid of honor loses her best friend to a better-funded rival.","adult",3,"R",89],
+["Airplane!",1980,88,"comedy","comic|brisk|weird|ironic","PRV","Zucker, Abrahams, Zucker","A joke every nine seconds for eighty-eight minutes.","teen",3,"PG",97],
+["The Big Lebowski",1998,117,"comedy|crime","weird|comic|dialogue|ironic|ensemble","PCK","Joel & Ethan Coen","A slacker's rug is ruined and the recovery effort spirals.","adult",3,"R",83],
+["Groundhog Day",1993,101,"comedy|romance|fantasy","comic|earnest|uplifting|cozy|cerebral","PRV","Harold Ramis","The same day forever, until he becomes worth releasing.","all",3,"PG",96],
+["Hot Fuzz",2007,121,"comedy|action","comic|brisk|ironic|violent|ensemble","PRV","Edgar Wright","A supercop is exiled to a village where nothing happens, loudly.","adult",2,"R",91],
+["Shaun of the Dead",2004,99,"comedy|horror","comic|brisk|ironic|visceral","PCK","Edgar Wright","The zombie apocalypse arrives and he still has to sort out his relationship.","adult",2,"R",92],
+["Booksmart",2019,102,"comedy","comic|brisk|earnest|ensemble|uplifting","HUL","Olivia Wilde","Two overachievers realize they should have gone to a party at some point.","adult",2,"R",96],
+["Palm Springs",2020,90,"comedy|romance|scifi","comic|weird|earnest|brisk|uplifting","HUL","Max Barbakow","Stuck in a wedding day loop, which is better with company.","adult",2,"R",94],
+["Game Night",2018,100,"comedy|thriller","comic|twisty|brisk|ensemble","MAX","Daley, Goldstein","The fake kidnapping at game night is not fake.","adult",2,"R",84],
+["The Nice Guys",2016,116,"comedy|crime","comic|dialogue|violent|stylish|twisty","NFX","Shane Black","Two bad detectives in 1977 LA, mostly failing upward.","adult",2,"R",92],
+["Jojo Rabbit",2019,108,"comedy|drama|war","comic|earnest|ironic|melancholy|weird","MAX","Taika Waititi","A Hitler Youth boy finds a girl in the wall and his imaginary friend objects.","teen",2,"PG-13",80],
+
+["Mission: Impossible - Fallout",2018,147,"action|thriller","propulsive|spectacle|practical|visceral","PAR","Christopher McQuarrie","Stunts that a real person actually did, strung on a plot that keeps moving.","teen",3,"PG-13",98],
+["John Wick",2014,101,"action|crime","propulsive|stylish|violent|visceral|brisk","PCK","Chad Stahelski","They killed the dog. That was the entire miscalculation.","adult",3,"R",86],
+["Top Gun: Maverick",2022,130,"action|drama","propulsive|spectacle|earnest|uplifting|practical","PAR","Joseph Kosinski","The old pilot trains the new ones and then flies the mission himself.","teen",3,"PG-13",96],
+["Casino Royale",2006,144,"action|thriller","propulsive|grounded|stylish|visceral|characterstudy","PRV","Martin Campbell","Bond before the armor, losing at cards and in every other way.","teen",3,"PG-13",94],
+["Skyfall",2012,143,"action|thriller","propulsive|visual|stylish|characterstudy|spectacle","PRV","Sam Mendes","The past comes for the service and for the man who serves it.","teen",3,"PG-13",92],
+["Raiders of the Lost Ark",1981,115,"adventure|action","brisk|spectacle|practical|comic|propulsive","DIS","Steven Spielberg","An archaeologist races the Nazis to a box that should stay shut.","teen",3,"PG",93],
+["Die Hard",1988,132,"action|thriller","propulsive|comic|practical|visceral|grounded","HUL","John McTiernan","A cop, a tower, a party, and a very organized robbery.","adult",3,"R",94],
+["The Raid: Redemption",2011,101,"action|crime","propulsive|visceral|violent|practical|brisk","PRV","Gareth Evans","One building, thirty floors, and a squad that should not have gone in.","adult",1,"R",86],
+["Mission: Impossible - Ghost Protocol",2011,133,"action|thriller","propulsive|spectacle|practical|brisk","PAR","Brad Bird","Disavowed, underfunded, and climbing the tallest building on Earth.","teen",2,"PG-13",93],
+["Black Panther",2018,134,"action|adventure","spectacle|earnest|epic|ensemble|visual","DIS","Ryan Coogler","A new king inherits a hidden nation and a cousin with a fair grievance.","teen",3,"PG-13",96],
+["The Avengers",2012,143,"action|adventure","spectacle|comic|ensemble|propulsive|uplifting","DIS","Joss Whedon","They do not get along and then a hole opens over Manhattan.","teen",3,"PG-13",91],
+["Avengers: Infinity War",2018,149,"action|adventure","spectacle|epic|bleak|ensemble|propulsive","DIS","Anthony & Joe Russo","The villain wins, decisively, and the credits roll on that.","teen",3,"PG-13",85],
+["Avengers: Endgame",2019,181,"action|adventure","spectacle|epic|earnest|ensemble|uplifting","DIS","Anthony & Joe Russo","Five years later, a very long shot at taking it back.","teen",3,"PG-13",94],
+["Guardians of the Galaxy",2014,121,"action|comedy|scifi","comic|spectacle|ensemble|uplifting|stylish","DIS","James Gunn","A thief, an assassin, a brute, a tree, and a raccoon, badly.","teen",3,"PG-13",92],
+["Thor: Ragnarok",2017,130,"action|comedy","comic|stylish|spectacle|brisk|ensemble","DIS","Taika Waititi","Asgard falls and the movie treats that as a comedy premise, correctly.","teen",3,"PG-13",93],
+["Logan",2017,137,"action|drama","bleak|violent|characterstudy|grounded|melancholy","HUL","James Mangold","An old man, a dying mentor, and a girl he did not ask for.","adult",3,"R",94],
+["Spider-Man: No Way Home",2021,148,"action|adventure","spectacle|earnest|ensemble|uplifting|propulsive","PAR","Jon Watts","A spell goes wrong and every previous version comes through the door.","teen",3,"PG-13",93],
+
+["Whale Rider",2002,101,"drama|family","earnest|uplifting|grounded|melancholy","PRV","Niki Caro","A girl is the rightful chief and tradition says otherwise.","all",1,"PG-13",90],
+["Paddington 2",2017,103,"family|comedy","cozy|comic|uplifting|earnest|visual","NFX","Paul King","A bear goes to prison and improves it considerably.","all",2,"PG",99],
+["School of Rock",2003,109,"comedy|family|music","comic|uplifting|earnest|brisk","PAR","Richard Linklater","A failed musician substitute-teaches a class into a band.","all",3,"PG-13",92],
+["The Sandlot",1993,101,"family|comedy","cozy|earnest|uplifting|comic","DIS","David Mickey Evans","One summer, one ball over the fence, one dog behind it.","all",2,"PG",65],
+["Matilda",1996,102,"family|comedy|fantasy","comic|earnest|uplifting|weird|cozy","NFX","Danny DeVito","A gifted girl, terrible parents, and a headmistress who throws children.","all",2,"PG",91],
+["Enola Holmes",2020,123,"adventure|mystery|family","brisk|comic|earnest|twisty","NFX","Harry Bradbeer","Sherlock's younger sister runs away and solves it first.","all",2,"PG-13",91],
+["Jumanji: Welcome to the Jungle",2017,119,"adventure|comedy|family","comic|brisk|spectacle|ensemble|uplifting","PCK","Jake Kasdan","Four teenagers get sucked into a game as the wrong avatars.","all",2,"PG-13",76],
+["Wonder",2017,113,"drama|family","earnest|uplifting|melancholy|cozy","PCK","Stephen Chbosky","A boy with a facial difference starts fifth grade.","all",2,"PG",85],
+["The Princess Diaries",2001,115,"family|comedy|romance","comic|cozy|uplifting|earnest","DIS","Garry Marshall","An awkward teenager finds out she runs a country now.","all",2,"G",49],
+["Sing Street",2016,106,"drama|music|romance","uplifting|earnest|cozy|romantic|brisk","NFX","John Carney","A boy starts a band in 1985 Dublin to impress a girl, and it works out sideways.","teen",1,"PG-13",95],
+["Hunt for the Wilderpeople",2016,101,"comedy|adventure","comic|cozy|earnest|uplifting|weird","MAX","Taika Waititi","A foster kid and a grumpy uncle become a national manhunt.","all",1,"PG-13",97],
+
+["Rear Window",1954,112,"thriller|mystery","slowburn|twisty|stylish|cerebral|dialogue","PCK","Alfred Hitchcock","A photographer with a broken leg watches his neighbors and sees too much.","all",3,"PG",98],
+["Psycho",1960,109,"horror|thriller","scary|twisty|stylish|bleak","PCK","Alfred Hitchcock","She checks into the motel forty minutes in.","adult",3,"R",97],
+["12 Angry Men",1957,96,"drama","dialogue|cerebral|ensemble|grounded|earnest","PRV","Sidney Lumet","One room, twelve men, and a verdict that starts at eleven to one.","all",3,"NR",100],
+["Dr. Strangelove",1964,95,"comedy|war","comic|ironic|dialogue|weird|auteur","MAX","Stanley Kubrick","The end of the world handled as a workplace comedy.","teen",2,"PG",98],
+["2001: A Space Odyssey",1968,149,"scifi|drama","slowburn|visual|cerebral|weird|epic|auteur","MAX","Stanley Kubrick","From the bone to the monolith to whatever that ending is.","all",3,"G",92],
+["Chinatown",1974,130,"mystery|crime|drama","slowburn|bleak|twisty|stylish|dialogue","PAR","Roman Polanski","A private eye pulls on a water dispute and finds the rot underneath.","adult",2,"R",98],
+["Taxi Driver",1976,114,"drama|crime","bleak|characterstudy|violent|stylish|auteur","PCK","Martin Scorsese","A sleepless cab driver decides someone has to clean the streets.","adult",3,"R",89],
+["Jaws",1975,124,"thriller|horror|adventure","scary|propulsive|practical|ensemble|spectacle","PCK","Steven Spielberg","The beaches stay open. That is the whole problem.","teen",3,"PG",97],
+["Rocky",1976,120,"drama","earnest|uplifting|characterstudy|grounded|melancholy","PCK","John G. Avildsen","A club fighter gets one shot and just wants to still be standing.","all",3,"PG",92],
+["Alien: Romulus",2024,119,"horror|scifi","scary|visceral|practical|propulsive|visual","HUL","Fede Alvarez","Young scavengers board a derelict station that is not derelict.","adult",2,"R",80],
+["Some Like It Hot",1959,121,"comedy|romance","comic|brisk|stylish|ironic","MAX","Billy Wilder","Two musicians witness a hit and join an all-female band to disappear.","all",2,"NR",95],
+["Singin' in the Rain",1952,103,"musical|comedy|romance","uplifting|comic|cozy|visual|brisk","MAX","Kelly, Donen","Silent film hits the sound era and nobody's voice survives contact.","all",3,"G",100],
+["The Apartment",1960,125,"comedy|romance|drama","ironic|melancholy|dialogue|romantic|characterstudy","MAX","Billy Wilder","A clerk lends out his apartment for affairs and falls for one of the women.","teen",2,"NR",93],
+["Vertigo",1958,128,"thriller|mystery|romance","slowburn|weird|visual|stylish|twisty","PCK","Alfred Hitchcock","A detective with a fear of heights follows a woman into an obsession.","teen",2,"PG",94],
+
+["The Wolf of Wall Street",2013,180,"comedy|crime|drama","propulsive|ironic|visceral|characterstudy|ensemble","PRV","Martin Scorsese","Three hours of appalling behavior, funded entirely by other people's money.","adult",3,"R",80],
+["Catch Me If You Can",2002,141,"crime|drama|comedy","brisk|stylish|comic|characterstudy|propulsive","PAR","Steven Spielberg","A teenage forger stays one hotel ahead of the agent who almost likes him.","teen",3,"PG-13",96],
+["Ocean's Eleven",2001,116,"crime|comedy","brisk|stylish|ensemble|twisty|comic","MAX","Steven Soderbergh","Eleven men, three casinos, one night, and a lot of charm.","teen",3,"PG-13",83],
+["Spotlight",2015,129,"drama|crime","grounded|dialogue|ensemble|slowburn|earnest","PRV","Tom McCarthy","Reporters do the work, document by document, and it is riveting.","adult",2,"R",97],
+["The Big Short",2015,130,"drama|comedy","ironic|propulsive|ensemble|cerebral|dialogue","PRV","Adam McKay","A handful of people see the crash coming and bet on it, unhappily.","adult",2,"R",89],
+["Michael Clayton",2007,119,"thriller|drama","slowburn|grounded|dialogue|bleak|characterstudy","MAX","Tony Gilroy","A law firm's fixer runs out of things he is willing to fix.","adult",1,"R",91],
+["Drive",2011,100,"crime|thriller","stylish|slowburn|violent|visual|melancholy","PRV","Nicolas Winding Refn","A stunt driver moonlights as a wheelman and does one favor too many.","adult",2,"R",93],
+["Baby Driver",2017,113,"action|crime|music","stylish|propulsive|brisk|visual|comic","NFX","Edgar Wright","Every chase cut to the song in his earbuds.","adult",2,"R",92],
+["Collateral",2004,120,"thriller|crime","slowburn|stylish|violent|dialogue|grounded","PRV","Michael Mann","A cab driver spends one night chauffeuring a contract killer.","adult",2,"R",86],
+["Training Day",2001,122,"crime|thriller","propulsive|bleak|characterstudy|violent|dialogue","MAX","Antoine Fuqua","One day riding with a narcotics detective who has his own economy.","adult",2,"R",73],
+["A Few Good Men",1992,138,"drama|thriller","dialogue|propulsive|ensemble|earnest","MAX","Rob Reiner","A courtroom, a code, and a colonel who wants to be asked.","teen",3,"R",84],
+["Erin Brockovich",2000,131,"drama","earnest|uplifting|characterstudy|grounded","PCK","Steven Soderbergh","A single mother with no legal training builds the case anyway.","adult",2,"R",85],
+
+["Coming to America",1988,117,"comedy|romance","comic|uplifting|cozy|ensemble","PAR","John Landis","An African prince goes to Queens to find someone who does not know he is one.","teen",3,"R",73],
+["Do the Right Thing",1989,120,"drama|comedy","visceral|ensemble|stylish|auteur|grounded","PCK","Spike Lee","One block, one very hot day, and everything that was already there.","adult",2,"R",92],
+["Boyz n the Hood",1991,112,"drama|crime","grounded|bleak|earnest|characterstudy","PRV","John Singleton","Three friends in South Central and the different exits available to each.","adult",2,"R",96],
+["The Farewell",2019,100,"drama|comedy","melancholy|earnest|grounded|characterstudy|dialogue","PRV","Lulu Wang","The family decides not to tell grandma she is dying, and stages a wedding.","teen",1,"PG",98],
+["Minari",2020,115,"drama","slowburn|earnest|grounded|melancholy|characterstudy","PRV","Lee Isaac Chung","A Korean family tries to farm Arkansas and grandma arrives.","teen",1,"PG-13",98],
+["CODA",2021,111,"drama|music","earnest|uplifting|cozy|melancholy","APL","Sian Heder","The only hearing member of a deaf family wants to leave and sing.","teen",2,"PG-13",94],
+["Killers of the Flower Moon",2023,206,"crime|drama|western","epic|slowburn|bleak|auteur|characterstudy","APL","Martin Scorsese","Osage oil money, and the white men who married into it to take it.","adult",2,"R",93],
+["Napoleon",2023,158,"drama|war","epic|spectacle|bleak|characterstudy","APL","Ridley Scott","The battles, and the marriage that ran underneath all of them.","adult",2,"R",58],
+["Greyhound",2020,91,"war|action","propulsive|grounded|visceral|earnest","APL","Aaron Schneider","A destroyer captain, one Atlantic crossing, and no sleep.","teen",1,"PG-13",78],
+["The Beanie Bubble",2023,110,"drama|comedy","ironic|brisk|ensemble|characterstudy","APL","Damian Kulash, Kristin Gore","How a plush toy became a financial mania and who actually built it.","teen",1,"R",41],
+["Wolfs",2024,108,"comedy|crime","comic|brisk|dialogue|stylish","APL","Jon Watts","Two fixers are sent to the same job and neither will leave.","adult",1,"R",63],
+["The Holdovers",2023,133,"comedy|drama","melancholy|cozy|dialogue|earnest|characterstudy","PCK","Alexander Payne","A hated teacher, a stranded student, and a cook, over Christmas break 1970.","adult",2,"R",97],
+["Nomadland",2020,107,"drama","slowburn|melancholy|grounded|visual|characterstudy","HUL","Chloe Zhao","After the town dies she lives in a van and keeps moving.","adult",2,"R",92],
+["The Shape of Water",2017,123,"fantasy|romance|drama","visual|weird|romantic|earnest|auteur","MAX","Guillermo del Toro","A mute janitor and the creature in the government tank.","adult",2,"R",92],
+["Birdman",2014,119,"drama|comedy","weird|stylish|dialogue|characterstudy|visual","MAX","Alejandro G. Inarritu","A washed-up superhero actor mounts a Broadway play, apparently in one take.","adult",2,"R",91],
+["Roma",2018,135,"drama","slowburn|visual|melancholy|grounded|auteur","NFX","Alfonso Cuaron","A housekeeper in 1970s Mexico City, filmed like memory.","adult",2,"R",96],
+["The Irishman",2019,209,"crime|drama","slowburn|epic|melancholy|bleak|characterstudy","NFX","Martin Scorsese","A hitman narrates a life at the end of it, to an empty room.","adult",2,"R",95],
+["Okja",2017,120,"adventure|drama|scifi","weird|earnest|ironic|visceral|auteur","NFX","Bong Joon-ho","A girl goes to New York to get her giant pig back from the meat industry.","teen",1,"NR",86],
+["Athlete A",2020,104,"documentary|drama","grounded|bleak|earnest","NFX","Cohen, Shenk","The reporters and gymnasts who broke the USA Gymnastics story.","adult",1,"NR",100],
+["The Truman Show",1998,103,"drama|comedy|scifi","cerebral|ironic|earnest|melancholy|weird","PAR","Peter Weir","His whole life is a broadcast and the sky has a door in it.","all",3,"PG",95],
+["Good Will Hunting",1997,126,"drama","dialogue|earnest|characterstudy|melancholy|uplifting","PRV","Gus Van Sant","A janitor at MIT is a genius and would rather not deal with it.","adult",3,"R",97],
+["Dead Poets Society",1989,128,"drama","earnest|melancholy|uplifting|dialogue|cozy","DIS","Peter Weir","A teacher tells boys at a strict school to read differently.","teen",3,"PG",85],
+["Slumdog Millionaire",2008,120,"drama|romance","propulsive|visual|uplifting|epic|stylish","DIS","Danny Boyle","Every quiz answer he knows, he learned the hard way.","adult",2,"R",91],
+["The Prestige",2006,130,"drama|thriller|mystery","twisty|slowburn|bleak|cerebral|stylish","PRV","Christopher Nolan","Two magicians destroy each other over a trick neither will explain.","teen",2,"PG-13",76],
+["Shutter Island",2010,138,"thriller|mystery","twisty|scary|slowburn|bleak|visual","PAR","Martin Scorsese","A marshal investigates an escape from an asylum on a locked island.","adult",2,"R",68],
+["The Sixth Sense",1999,107,"thriller|horror|drama","twisty|slowburn|scary|melancholy|earnest","DIS","M. Night Shyamalan","A child psychologist takes a case involving a boy who sees the dead.","adult",3,"PG-13",86],
+["Fight Club",1999,139,"drama|thriller","twisty|bleak|ironic|stylish|visceral","MAX","David Fincher","An insomniac and a soap salesman start a club with rules.","adult",3,"R",79],
+["American Beauty",1999,122,"drama","ironic|melancholy|bleak|characterstudy|dialogue","PAR","Sam Mendes","A suburban father blows up his life on purpose.","adult",2,"R",87],
+["Lost in Translation",2003,102,"drama|romance","slowburn|melancholy|dialogue|characterstudy|cozy","PRV","Sofia Coppola","Two jetlagged Americans in a Tokyo hotel, awake at the wrong hours.","adult",2,"R",95],
+["Sideways",2004,127,"comedy|drama|romance","dialogue|melancholy|comic|characterstudy|grounded","HUL","Alexander Payne","Two men on a wine trip, one week before a wedding, both a mess.","adult",2,"R",97],
+["Little Miss Sunshine",2006,101,"comedy|drama","comic|earnest|ensemble|uplifting|cozy","HUL","Dayton, Faris","A broken family drives a broken van to a pageant nobody should attend.","adult",2,"R",91],
+["Juno",2007,96,"comedy|drama","comic|earnest|dialogue|cozy|characterstudy","HUL","Jason Reitman","A pregnant sixteen-year-old picks the parents and keeps her humor.","adult",2,"PG-13",94],
+["500 Days of Summer",2009,95,"romance|comedy|drama","stylish|melancholy|romantic|ironic|brisk","MAX","Marc Webb","Not a love story, as the narrator says up front.","teen",2,"PG-13",85],
+["The Perks of Being a Wallflower",2012,102,"drama|romance","earnest|melancholy|cozy|characterstudy","MAX","Stephen Chbosky","A freshman is taken in by two seniors and starts to remember things.","teen",2,"PG-13",86],
+["Boyhood",2014,165,"drama","slowburn|grounded|earnest|melancholy|characterstudy","PRV","Richard Linklater","Twelve years, one actor, filmed as he actually grew.","teen",2,"R",97],
+["Coco Before Chanel",2009,110,"drama","slowburn|characterstudy|stylish|grounded","PRV","Anne Fontaine","Before the name meant anything, she was a seamstress with a plan.","teen",1,"PG-13",65],
+["The Zone of Interest",2023,105,"drama|war","bleak|slowburn|cerebral|auteur|grounded","MAX","Jonathan Glazer","A family's pleasant garden life, with the sound of the camp over the wall.","adult",1,"PG-13",93],
+["Poor Things",2023,141,"comedy|drama|fantasy","weird|visual|stylish|ironic|auteur","HUL","Yorgos Lanthimos","A woman is reanimated with an infant's brain and grows up at speed.","adult",2,"R",92],
+["Anatomy of a Fall",2023,152,"drama|mystery|thriller","slowburn|dialogue|cerebral|grounded|twisty","HUL","Justine Triet","A man falls from a window and his wife's marriage goes on trial.","adult",1,"R",96],
+["Aftersun",2022,102,"drama","slowburn|melancholy|visual|characterstudy|grounded","MAX","Charlotte Wells","A holiday in Turkey, remembered later, when she understands what she saw.","adult",1,"R",96],
+["Everything Went Fine",2021,113,"drama","grounded|melancholy|dialogue|characterstudy","PRV","Francois Ozon","A daughter is asked by her father to help him die.","adult",1,"NR",88],
+["Talk to Me",2022,95,"horror|thriller","scary|propulsive|visceral|bleak|grounded","MAX","Danny & Michael Philippou","A hand lets teenagers host spirits for ninety seconds, as a party game.","adult",2,"R",94],
+["Barbarian",2022,102,"horror|thriller","scary|twisty|weird|propulsive","HUL","Zach Cregger","A double-booked rental, and a basement that keeps going.","adult",2,"R",92],
+["Midsommar",2019,148,"horror|drama","weird|slowburn|bleak|visual|scary","MAX","Ari Aster","A breakup, a Swedish festival, and nine days of very good weather.","adult",2,"R",83],
+["Bodies Bodies Bodies",2022,94,"horror|comedy|thriller","ironic|twisty|comic|brisk|bleak","MAX","Halina Reijn","A party game in a storm turns into an actual body count.","adult",1,"R",84],
+["Nobody",2021,92,"action|thriller","propulsive|violent|comic|brisk|visceral","PCK","Ilya Naishuller","A boring dad turns out to be extremely not that.","adult",2,"R",84],
+["The Fall Guy",2024,126,"action|comedy|romance","comic|spectacle|practical|brisk|romantic","PCK","David Leitch","A stuntman looks for a missing star and gets set on fire a lot.","teen",2,"PG-13",82],
+["Barbie",2023,114,"comedy|fantasy","comic|stylish|visual|ironic|earnest","MAX","Greta Gerwig","She leaves Barbieland and the real world is worse and more interesting.","teen",3,"PG-13",88],
+["Air",2023,112,"drama","dialogue|brisk|ensemble|uplifting|grounded","PRV","Ben Affleck","The pitch meeting that got Nike a shoe deal nobody thought possible.","teen",2,"R",92],
+["Ford v Ferrari",2019,152,"drama|action","propulsive|earnest|grounded|characterstudy|spectacle","DIS","James Mangold","A designer and a driver build a car to beat Ferrari at Le Mans.","teen",2,"PG-13",92],
+["Free Solo",2018,100,"documentary|adventure","visceral|grounded|spectacle|earnest","DIS","Chin, Vasarhelyi","He climbs El Capitan with no rope, and the crew has to watch.","teen",2,"PG-13",97],
+["Won't You Be My Neighbor?",2018,94,"documentary","earnest|uplifting|melancholy|cozy","MAX","Morgan Neville","Fred Rogers, and what he was actually doing all those years.","all",1,"PG-13",99],
+["My Octopus Teacher",2020,85,"documentary","earnest|visual|cozy|melancholy","NFX","Ehrlich, Reed","A man dives daily for a year and befriends an octopus.","all",2,"NR",93],
+
+["Coraline",2009,100,"animation|horror|fantasy","weird|visual|scary|stylish|cozy","MAX","Henry Selick","A girl finds a better version of her family behind a small door, with buttons for eyes.","teen",2,"PG",90],
+["Gremlins",1984,106,"horror|comedy|fantasy","comic|practical|scary|brisk|weird","MAX","Joe Dante","Three rules. They break all three before Christmas.","teen",2,"PG",86],
+["Beetlejuice",1988,92,"comedy|fantasy|horror","weird|comic|stylish|practical|brisk","MAX","Tim Burton","A dead couple hires a freelance poltergeist to clear out the new owners.","teen",3,"PG",85],
+["Poltergeist",1982,114,"horror|thriller","scary|practical|spectacle|propulsive|grounded","MAX","Tobe Hooper","They moved the headstones. They did not move the bodies.","teen",2,"PG",87],
+["Signs",2002,106,"thriller|scifi|horror","slowburn|scary|grounded|earnest|characterstudy","DIS","M. Night Shyamalan","A lapsed priest finds patterns in his corn and something on the roof.","teen",2,"PG-13",74],
+["Tremors",1990,96,"horror|comedy|scifi","comic|practical|brisk|ensemble|visceral","PCK","Ron Underwood","Something is under the desert and the ground is no longer safe.","teen",2,"PG-13",88],
+["ParaNorman",2012,92,"animation|horror|comedy","weird|comic|earnest|visual|cozy","PCK","Butler, Fell","A boy who talks to the dead is the only one who can stop the curse.","teen",1,"PG",88],
+["Hocus Pocus",1993,96,"comedy|fantasy|horror","comic|cozy|brisk|weird|uplifting","DIS","Kenny Ortega","Three witches come back for one night and the kids have to outlast them.","all",2,"PG",39],
+["Warm Bodies",2013,98,"horror|romance|comedy","comic|romantic|brisk|earnest|weird","HUL","Jonathan Levine","A zombie starts remembering how to be a person, mostly for her.","teen",2,"PG-13",81],
+["A Quiet Place Part II",2021,97,"horror|thriller","propulsive|visceral|scary|grounded|ensemble","PAR","John Krasinski","Out of the farmhouse and into a world that has had a year to get worse.","teen",2,"PG-13",91],
+["Jumanji",1995,104,"adventure|fantasy|family","spectacle|scary|comic|practical|brisk","PCK","Joe Johnston","A board game that plays back, twenty-six years late.","all",3,"PG",55],
+["The Iron Giant",1999,86,"animation|scifi|family","earnest|melancholy|uplifting|visual|cozy","MAX","Brad Bird","A boy hides a war machine that would rather be Superman.","all",2,"PG",96]
+];
+</script>
+<script>
+(function(){
+"use strict";
+
+/* ---------- catalog ---------- */
+const FILMS = RAW.map(function(row,i){
+  const o = {id:i};
+  COLS.forEach(function(c,j){ o[c] = row[j]; });
+  o.g = o.g.split("|"); o.a = o.a.split("|");
+  return o;
+});
+const BY_TITLE = {};
+FILMS.forEach(function(f){ BY_TITLE[f.t] = f; });
+
+/* Rarity weighting. "comic" and "brisk" are everywhere; "twisty" and "auteur" are not.
+   A shared rare tag says far more about taste than a shared common one, so every tag
+   is weighted by how uncommon it is across the catalog. */
+const IDF_A = {}, IDF_G = {};
+(function(){
+  const dfA = {}, dfG = {}, N = FILMS.length;
+  FILMS.forEach(function(f){
+    f.a.forEach(function(x){ dfA[x] = (dfA[x]||0)+1; });
+    f.g.forEach(function(x){ dfG[x] = (dfG[x]||0)+1; });
+  });
+  Object.keys(dfA).forEach(function(x){ IDF_A[x] = Math.log(N/dfA[x]) + 0.30; });
+  Object.keys(dfG).forEach(function(x){ IDF_G[x] = Math.log(N/dfG[x]) + 0.30; });
+})();
+function idfA(x){ return IDF_A[x] || 1; }
+
+/* weighted mean of a taste table over a film's tags, rare tags counting for more */
+function wmean(keys, table, idf){
+  let num = 0, den = 0;
+  for(let i=0;i<keys.length;i++){
+    const w = idf[keys[i]] || 1;
+    num += (table[keys[i]]||0) * w;
+    den += w;
+  }
+  return den ? num/den : 0;
+}
+
+/* ---------- vocab ---------- */
+const SERVICES = [
+  {k:"NFX", n:"Netflix",      c:"#E50914", on:true},
+  {k:"MAX", n:"Max",          c:"#8A5CF6", on:true},
+  {k:"HUL", n:"Hulu",         c:"#1CE783", on:true},
+  {k:"DIS", n:"Disney+",      c:"#4B7BEC", on:true},
+  {k:"PRV", n:"Prime Video",  c:"#00A8E1", on:true},
+  {k:"APL", n:"Apple TV+",    c:"#9AA0A6", on:true},
+  {k:"PAR", n:"Paramount+",   c:"#0064FF", on:false},
+  {k:"PCK", n:"Peacock",      c:"#FCCC12", on:false}
+];
+const SVC_NAME = {}; SERVICES.forEach(function(s){ SVC_NAME[s.k]=s.n; });
+
+const ROOMS = [
+  {k:"solo",   n:"Just me",       floor:"adult",
+   up:["cerebral","slowburn","weird","auteur","characterstudy","bleak","visual"], down:[]},
+  {k:"two",    n:"Two of us",     floor:"adult",
+   up:["romantic","dialogue","characterstudy","stylish","twisty","melancholy"], down:["violent"]},
+  {k:"friends",n:"Friends over",  floor:"adult",
+   up:["comic","ensemble","spectacle","propulsive","twisty","visceral","brisk"],
+   down:["slowburn","bleak","cerebral","melancholy"]},
+  {k:"teens",  n:"With teens",    floor:"teen",
+   up:["propulsive","spectacle","earnest","comic","uplifting","twisty"], down:["slowburn","bleak"]},
+  {k:"kids",   n:"Kids in the room", floor:"all",
+   up:["uplifting","comic","cozy","earnest","spectacle","visual"],
+   down:["bleak","violent","scary","slowburn"]}
+];
+const FLOOR_RANK = {all:0, teen:1, adult:2};
+
+/* Content rating, as a FLOOR — the minimum maturity you want tonight. Picking R
+   returns R and up, not everything below it. The top end is already capped by
+   "Who's watching", so the two controls squeeze from opposite directions.
+   NR titles (older films, festival and streaming releases that never went
+   through the board) fall back to the audience column, so an unrated film is
+   never silently treated as tamer than it is. */
+const RATE_RANK = {"G":0, "PG":1, "PG-13":2, "R":3, "NC-17":4};
+const NR_FALLBACK = {all:1, teen:2, adult:3};
+const RATE_FLOORS = [
+  {k:0, n:"Any"}, {k:1, n:"PG+"}, {k:2, n:"PG-13+"}, {k:3, n:"R"}
+];
+function floorName(k){
+  const f = RATE_FLOORS.filter(function(c){ return c.k === k; })[0];
+  return f ? f.n : "Any";
+}
+function rateRank(f){
+  const r = RATE_RANK[f.mpaa];
+  return (r === undefined) ? NR_FALLBACK[f.k] : r;
+}
+
+const GENRES = ["action","adventure","animation","comedy","crime","documentary","drama","fantasy",
+                "horror","musical","mystery","romance","scifi","thriller","war","family"];
+const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
+function gLabel(g){ return GENRE_LABEL[g] || g.charAt(0).toUpperCase()+g.slice(1); }
+
+const ATTR_PHRASE = {
+  slowburn:"slow-burn pacing", propulsive:"a relentless pace", brisk:"a brisk clip",
+  bleak:"a bleak streak", hopeful:"hopefulness", comic:"comedy", melancholy:"melancholy",
+  ironic:"irony", earnest:"earnestness", cerebral:"a cerebral bent", visceral:"visceral energy",
+  spectacle:"spectacle", characterstudy:"close character work", twisty:"a twisting plot",
+  visual:"visual storytelling", dialogue:"dialogue-driven scenes", ensemble:"a strong ensemble",
+  auteur:"a singular director's hand", practical:"practical effects", violent:"hard violence",
+  romantic:"romance", scary:"real scares", weird:"strangeness", grounded:"a grounded feel",
+  stylish:"style", epic:"epic scale", cozy:"warmth", uplifting:"a lift at the end"
+};
+
+/* ---------- storage ----------
+   Some embedding contexts (sandboxed frames, data: URLs) block localStorage
+   outright. Probe once so the page can tell the truth about whether a profile
+   will actually survive the visit, and fall back to memory either way. */
+const MEM = {};
+let STORAGE_OK = false;
+try {
+  localStorage.setItem("tb:probe","1");
+  localStorage.removeItem("tb:probe");
+  STORAGE_OK = true;
+} catch(e){ STORAGE_OK = false; }
+function store(k,v){
+  try{ localStorage.setItem("tb:"+k, JSON.stringify(v)); }catch(e){ MEM[k]=v; }
+}
+function load(k,dflt){
+  try{
+    const raw = localStorage.getItem("tb:"+k);
+    if(raw !== null) return JSON.parse(raw);
+  }catch(e){ if(k in MEM) return MEM[k]; }
+  return (k in MEM) ? MEM[k] : dflt;
+}
+
+/* ---------- state ---------- */
+const svcDefault = {};
+SERVICES.forEach(function(s){ svcDefault[s.k] = s.on; });
+
+const S = {
+  room:    load("room","two"),
+  time:    load("time",140),
+  /* was a ceiling (99 meant "no limit"); anything out of floor range migrates to 0 */
+  rate:    (function(v){ return (typeof v === "number" && v >= 0 && v <= 4) ? v : 0; })(load("rate",0)),
+  fitOnly: load("fitOnly",false),
+  minRT:   load("minRT",0),
+  genres:  load("genres",[]),
+  svc:     Object.assign({}, svcDefault, load("svc",{})),
+  taste:   load("taste",{}),
+  ran:     false
+};
+
+function save(){
+  store("room",S.room); store("time",S.time); store("genres",S.genres);
+  store("svc",S.svc);   store("taste",S.taste);
+  store("rate",S.rate); store("minRT",S.minRT); store("fitOnly",S.fitOnly);
+}
+
+/* ---------- helpers ---------- */
+const $ = function(id){ return document.getElementById(id); };
+function el(tag,cls,txt){
+  const n = document.createElement(tag);
+  if(cls) n.className = cls;
+  if(txt !== undefined) n.textContent = txt;
+  return n;
+}
+function hm(m){
+  const h = Math.floor(m/60), r = m%60;
+  return h ? (h+"h" + (r ? " "+r+"m" : "")) : r+"m";
+}
+function clamp(v,lo,hi){ return v<lo?lo:(v>hi?hi:v); }
+function room(){ return ROOMS.filter(function(r){ return r.k===S.room; })[0] || ROOMS[1]; }
+
+/* ---------- taste model ---------- */
+function buildTaste(){
+  const aw = {}, gw = {}, dw = {};
+  const loved = [], hated = [];
+  Object.keys(S.taste).forEach(function(t){
+    const f = BY_TITLE[t]; if(!f) return;
+    (S.taste[t] === "loved" ? loved : hated).push(f);
+  });
+  function feed(list, sign){
+    list.forEach(function(f){
+      f.a.forEach(function(x){ aw[x] = (aw[x]||0) + sign; });
+      f.g.forEach(function(x){ gw[x] = (gw[x]||0) + sign; });
+      dw[f.d] = (dw[f.d]||0) + sign;
+    });
+  }
+  feed(loved, 1);
+  feed(hated, -1.15);          /* a miss is a sharper signal than a like */
+  const n = loved.length + hated.length;
+  if(n){
+    /* Scale, don't clamp. Clamping saturates whatever tag is most common in the
+       profile, which flattens the distinctive traits into the generic ones. */
+    const d = Math.max(1, loved.length, hated.length);
+    Object.keys(aw).forEach(function(k){ aw[k] = clamp(aw[k]/d, -1.3, 1.3); });
+    Object.keys(gw).forEach(function(k){ gw[k] = clamp(gw[k]/d, -1.3, 1.3); });
+  }
+  /* total distinctive mass of what this viewer likes — the target a film tries to cover */
+  let posMass = 0;
+  Object.keys(aw).forEach(function(x){ if(aw[x] > 0) posMass += aw[x] * idfA(x); });
+  return {aw:aw, gw:gw, dw:dw, loved:loved, hated:hated, n:n, posMass:posMass};
+}
+
+function mean(arr, fn){
+  if(!arr.length) return 0;
+  let s = 0;
+  for(let i=0;i<arr.length;i++) s += fn(arr[i]);
+  return s/arr.length;
+}
+
+/* ---------- scoring ---------- */
+/* Single source of truth for "does this film fit tonight". The bill and the
+   taste grid both call it, so the two can never disagree on screen again.
+   Service is separate: it is reported rather than silently dropped. */
+function hardPass(f){
+  if(f.r > S.time) return false;
+  if(FLOOR_RANK[f.k] > FLOOR_RANK[room().floor]) return false;
+  if(rateRank(f) < S.rate) return false;
+  if(f.rt < S.minRT) return false;
+  if(S.genres.length && !f.g.some(function(g){ return S.genres.indexOf(g)>-1; })) return false;
+  return true;
+}
+
+function scoreAll(){
+  const T = buildTaste();
+  const R = room();
+  const floorMax = FLOOR_RANK[R.floor];
+  const upSet = {}, downSet = {};
+  R.up.forEach(function(x){ upSet[x]=1; });
+  R.down.forEach(function(x){ downSet[x]=1; });
+
+  const kept = [], lockedSvc = [];
+
+  FILMS.forEach(function(f){
+    if(S.taste[f.t]) return;                                  /* already seen */
+    if(!hardPass(f)) return;                                  /* clock, room, rating, score, genre */
+
+    /* taste */
+    /* purity  = of this film's own character, how much does the viewer like?
+       coverage = of the viewer's distinctive taste, how much does this film hit?
+       Purity alone lets a bland film win on two common tags; coverage is what
+       rewards actually matching the rare traits the profile is built on. */
+    let hit = 0, own = 0, cov = 0;
+    for(let i=0;i<f.a.length;i++){
+      const w = idfA(f.a[i]), a = T.aw[f.a[i]] || 0;
+      own += w; hit += a*w;
+      if(a > 0) cov += a*w;
+    }
+    const purity   = own ? hit/own : 0;
+    const coverage = T.posMass ? Math.min(1, (cov/T.posMass) * 1.4) : 0;
+    const attrScore  = 0.5*purity + 0.5*coverage;
+    const genreTaste = wmean(f.g, T.gw, IDF_G);
+    const dirScore   = clamp((T.dw[f.d]||0)/1.5, -1, 1);
+    const tasteRaw   = 0.62*attrScore + 0.26*genreTaste + 0.12*dirScore;
+    const tasteN     = T.n ? clamp((tasteRaw+1)/2, 0, 1) : 0.5;
+
+    /* explicit genre ask */
+    let genreN = 0.55;
+    if(S.genres.length){
+      const hits = f.g.filter(function(g){ return S.genres.indexOf(g)>-1; }).length;
+      genreN = clamp(hits / Math.min(f.g.length, S.genres.length), 0, 1);
+    }
+
+    /* room fit */
+    const roomRaw = mean(f.a, function(x){
+      return upSet[x] ? 1 : (downSet[x] ? -1 : 0);
+    });
+    const roomN = clamp((roomRaw+1)/2, 0, 1);
+
+    /* recognizability — a light tiebreak, heavier with a crowd */
+    const fameN = f.pop === 3 ? 1 : (f.pop === 2 ? 0.82 : 0.62);
+    /* With nothing tagged, recognizability is the only honest tiebreak. Once the
+       viewer has a real profile, fame must get out of the way of it. */
+    const fameW = !T.n ? 0.34
+                : ((S.room === "friends" || S.room === "kids") ? 0.16 : 0.09)
+                  / (1 + T.n * 0.35);
+
+    const score = (0.46*tasteN + 0.22*genreN + 0.18*roomN + fameW*fameN) /
+                  (0.46 + 0.22 + 0.18 + fameW);
+
+    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet};
+    if(!S.svc[f.s]){ lockedSvc.push(rec); return; }
+    kept.push(rec);
+  });
+
+  kept.sort(function(a,b){ return b.score - a.score; });
+  lockedSvc.sort(function(a,b){ return b.score - a.score; });
+  return {picks:kept, locked:lockedSvc, T:T};
+}
+
+/* ---------- reasoning ---------- */
+function why(rec){
+  const f = rec.f, T = rec.T;
+  const bits = [];
+
+  if(T.n){
+    /* which loved title does this most resemble? */
+    let best = null, bestN = 0;
+    T.loved.forEach(function(L){
+      const shared = f.a.filter(function(x){ return L.a.indexOf(x)>-1; });
+      let mass = 0;
+      shared.forEach(function(x){ mass += idfA(x); });
+      if(mass > bestN){
+        shared.sort(function(a,b){ return idfA(b)-idfA(a); });   /* rarest first */
+        bestN = mass; best = {L:L, shared:shared, n:shared.length};
+      }
+    });
+    const strong = f.a
+      .filter(function(x){ return (T.aw[x]||0) > 0.12; })
+      .sort(function(a,b){ return (T.aw[b]||0)*idfA(b) - (T.aw[a]||0)*idfA(a); });
+
+    if(best && best.n >= 2){
+      const ph = best.shared.slice(0,2).map(function(x){ return ATTR_PHRASE[x]||x; });
+      bits.push("Shares " + ph.join(" and ") + " with <b>" + best.L.t + "</b>, which you loved.");
+    }else if(strong.length){
+      bits.push("Leans on " + strong.slice(0,2).map(function(x){ return ATTR_PHRASE[x]||x; }).join(" and ") +
+                " &mdash; what your picks keep pointing at.");
+    }
+
+    /* director echo */
+    if((T.dw[f.d]||0) > 0 && (!best || best.L.d !== f.d)){
+      bits.push("Same director you already rated well: " + f.d + ".");
+    }
+    /* honest caveat when a disliked trait is present */
+    const risk = f.a
+      .filter(function(x){ return (T.aw[x]||0) < -0.22; })
+      .sort(function(a,b){ return (T.aw[a]||0)-(T.aw[b]||0); })[0];
+    if(risk){
+      bits.push("Fair warning: it does have " + (ATTR_PHRASE[risk]||risk) + ", which your misses share.");
+    }
+  }
+
+  /* room note */
+  const R = room();
+  const roomHits = f.a.filter(function(x){ return rec.upSet[x]; })
+                       .sort(function(a,b){ return idfA(b)-idfA(a); });
+  if(roomHits.length >= 2 && S.room !== "solo"){
+    bits.push("Built for " + R.n.toLowerCase() + ": " +
+      roomHits.slice(0,2).map(function(x){ return ATTR_PHRASE[x]||x; }).join(" and ") + ".");
+  }
+
+  /* clock note */
+  const slack = S.time - f.r;
+  if(slack <= 12) bits.push("Uses nearly all the time you have &mdash; " + hm(f.r) + " against " + hm(S.time) + ".");
+  else if(slack >= 55) bits.push("Leaves " + hm(slack) + " on the clock.");
+
+  if(!bits.length) bits.push("A clean fit for the runtime and the room. Tag a few titles above and this gets sharper.");
+  return bits.slice(0,3).join(" ");
+}
+
+/* ---------- rail: rooms ---------- */
+function renderRooms(){
+  const wrap = $("room"); wrap.innerHTML = "";
+  ROOMS.forEach(function(r){
+    const b = el("button","opt",r.n);
+    b.type = "button";
+    b.setAttribute("aria-pressed", S.room === r.k ? "true" : "false");
+    b.addEventListener("click", function(){
+      S.room = r.k; save(); renderRooms(); renderBill(); renderGrid();
+    });
+    wrap.appendChild(b);
+  });
+}
+
+/* ---------- rail: content rating ---------- */
+function renderRating(){
+  const wrap = $("rating"); wrap.innerHTML = "";
+  RATE_FLOORS.forEach(function(c){
+    const b = el("button","opt", c.n);
+    b.type = "button";
+    b.setAttribute("aria-pressed", S.rate === c.k ? "true" : "false");
+    b.setAttribute("aria-label", c.k === 0 ? "Any rating" : c.n.replace("+"," and above"));
+    b.addEventListener("click", function(){
+      S.rate = c.k; save(); renderRating(); renderBill(); renderGrid();
+    });
+    wrap.appendChild(b);
+  });
+  const fits = FILMS.filter(function(f){ return rateRank(f) >= S.rate; }).length;
+  $("ratehint").textContent = S.rate === 0 ? "no minimum" : fits + " qualify";
+}
+
+/* ---------- rail: critic score floor ---------- */
+function renderRT(){
+  $("rtbig").textContent = S.minRT;
+  $("rtunit").innerHTML = S.minRT === 0
+    ? "% and up &mdash; everything"
+    : "% and up &mdash; " + FILMS.filter(function(f){ return f.rt >= S.minRT; }).length + " qualify";
+  $("rthint").textContent = S.minRT >= 90 ? "the best only" : (S.minRT >= 75 ? "well reviewed" : "");
+}
+
+/* ---------- rail: genres ---------- */
+function renderGenres(){
+  const wrap = $("genres"); wrap.innerHTML = "";
+  GENRES.forEach(function(g){
+    const b = el("button","opt",gLabel(g));
+    b.type = "button";
+    b.setAttribute("aria-pressed", S.genres.indexOf(g)>-1 ? "true" : "false");
+    b.addEventListener("click", function(){
+      const i = S.genres.indexOf(g);
+      if(i>-1) S.genres.splice(i,1); else S.genres.push(g);
+      save(); renderGenres(); renderBill(); renderGrid();
+    });
+    wrap.appendChild(b);
+  });
+}
+
+/* ---------- rail: services ---------- */
+function renderServices(){
+  const wrap = $("services"); wrap.innerHTML = "";
+  SERVICES.forEach(function(s){
+    const row = el("div","svc" + (S.svc[s.k] ? "" : " off"));
+    const name = el("div","svc-name");
+    const dot = el("span","dot"); dot.style.background = s.c;
+    name.appendChild(dot); name.appendChild(el("span",null,s.n));
+    const sw = el("button","sw");
+    sw.type = "button";
+    sw.setAttribute("aria-pressed", S.svc[s.k] ? "true" : "false");
+    sw.setAttribute("aria-label", s.n);
+    sw.addEventListener("click", function(){
+      S.svc[s.k] = !S.svc[s.k]; save(); renderServices(); renderBill();
+    });
+    row.appendChild(name); row.appendChild(sw);
+    wrap.appendChild(row);
+  });
+  const n = SERVICES.filter(function(s){ return S.svc[s.k]; }).length;
+  $("svchint").textContent = n + " on";
+}
+
+/* ---------- rail: time ---------- */
+function renderTime(){
+  $("timebig").textContent = S.time;
+  $("timeunit").innerHTML = "min &mdash; " + hm(S.time);
+  const fits = FILMS.filter(function(f){ return f.r <= S.time; }).length;
+  $("timehint").textContent = fits + " of " + FILMS.length + " fit";
+}
+
+/* ---------- taste picker ---------- */
+let searchTerm = "";
+function renderGrid(){
+  const wrap = $("titlegrid"); wrap.innerHTML = "";
+  const q = searchTerm.trim().toLowerCase();
+  let offCount = 0;
+  const list = FILMS.filter(function(f){
+    if(q && f.t.toLowerCase().indexOf(q)===-1 && f.d.toLowerCase().indexOf(q)===-1) return false;
+    if(!hardPass(f)){ offCount++; if(S.fitOnly) return false; }
+    return true;
+  }).sort(function(a,b){
+    return (b.pop - a.pop) || (b.y - a.y);
+  });
+
+  if(!list.length){
+    const e = el("div",null,"No title matches “" + searchTerm + "”.");
+    e.style.cssText = "padding:26px;color:var(--ink-3);font-size:13px;grid-column:1/-1;text-align:center";
+    wrap.appendChild(e);
+    return;
+  }
+
+  const note = $("gridnote");
+  note.innerHTML = S.fitOnly
+    ? "Showing only titles that clear tonight&rsquo;s filters. " + offCount +
+      " hidden. Turn the toggle off to rate anything."
+    : "This is your permanent taste profile, not tonight&rsquo;s results &mdash; rate anything here, "
+      + "including films you would never watch tonight. <b>" + offCount +
+      " of these do not fit tonight&rsquo;s filters</b> and are dimmed; they are excluded from the bill above.";
+
+  list.forEach(function(f){
+    const state = S.taste[f.t] || "";
+    const b = el("button","tcard" + (hardPass(f) ? "" : " unfit"));
+    b.type = "button";
+    if(state) b.setAttribute("data-state", state);
+    b.appendChild(el("span","tt",f.t));
+    const meta = el("span","ty", f.y + "  ·  " + hm(f.r) + "  ·  " + f.mpaa);
+    b.appendChild(meta);
+    if(state) b.appendChild(el("span","mark", state === "loved" ? "✓ Loved" : "✕ Missed"));
+    b.setAttribute("aria-label", f.t + ", " + (state || "not rated") + ". Click to cycle.");
+    b.addEventListener("click", function(){
+      const cur = S.taste[f.t];
+      if(!cur) S.taste[f.t] = "loved";
+      else if(cur === "loved") S.taste[f.t] = "hated";
+      else delete S.taste[f.t];
+      save(); renderGrid(); renderChips(); renderBill();
+    });
+    wrap.appendChild(b);
+  });
+}
+
+function renderChips(){
+  const wrap = $("chips"); wrap.innerHTML = "";
+  const keys = Object.keys(S.taste);
+  keys.sort();
+  keys.forEach(function(t){
+    const kind = S.taste[t];
+    const c = el("span","chip " + (kind === "loved" ? "l" : "h"));
+    c.appendChild(el("span",null,(kind === "loved" ? "✓ " : "✕ ") + t));
+    const x = el("button",null,"×");
+    x.type = "button";
+    x.setAttribute("aria-label","Remove " + t);
+    x.addEventListener("click", function(){
+      delete S.taste[t]; save(); renderGrid(); renderChips(); renderBill();
+    });
+    c.appendChild(x);
+    wrap.appendChild(c);
+  });
+  const loved = keys.filter(function(t){ return S.taste[t] === "loved"; }).length;
+
+  const hated = keys.length - loved;
+  $("tastecount").textContent = keys.length
+    ? loved + " loved · " + hated + " missed"
+    : "nothing tagged yet";
+  $("nudge").style.display = keys.length >= 4 ? "none" : "flex";
+}
+
+/* ---------- what is actually constraining tonight ---------- */
+function renderFilterSummary(){
+  const wrap = $("filtersum"); wrap.innerHTML = "";
+  function chip(label, value, active){
+    const c = el("div","fchip" + (active ? " on" : ""));
+    c.appendChild(el("span","",label));
+    c.appendChild(el("b","",value));
+    wrap.appendChild(c);
+  }
+  chip("Room", room().n, false);
+  chip("Under", hm(S.time), false);
+  chip("Rating", S.rate === 0 ? "any" : floorName(S.rate) , S.rate !== 0);
+  chip("Critics", S.minRT === 0 ? "any" : S.minRT + "%+", S.minRT > 0);
+  if(S.genres.length) chip("Genre", S.genres.map(gLabel).join(", "), true);
+  const on = SERVICES.filter(function(s){ return S.svc[s.k]; }).length;
+  chip("Services", on + " of " + SERVICES.length, on < SERVICES.length);
+  const tagged = Object.keys(S.taste).length;
+  chip("Taste", tagged ? tagged + " tagged" : "not set", tagged > 0);
+}
+
+/* ---------- the bill ---------- */
+function renderBill(){
+  renderFilterSummary();
+  const out = scoreAll();
+  const bill = $("bill");
+  bill.innerHTML = "";
+
+  const LIMIT = 8;
+  const picks = out.picks.slice(0, LIMIT);
+
+  $("billcount").textContent = out.picks.length
+    ? out.picks.length + " title" + (out.picks.length===1?"":"s") + " clear every filter"
+    : "nothing clears the filters";
+
+  if(!picks.length){
+    const e = el("div","empty");
+    e.appendChild(el("h3","","Nothing clears the filters."));
+    const bits = ["the clock is at " + hm(S.time)];
+    if(S.rate !== 0) bits.push("nothing below " + floorName(S.rate).replace("+",""));
+    if(S.minRT > 0)   bits.push("critics at " + S.minRT + "% or better");
+    if(S.genres.length) bits.push(S.genres.map(gLabel).join(", ") + " only");
+    const p = el("p","", "For " + room().n.toLowerCase() + ", " + bits.join(", ") +
+      ". Loosen the runtime, drop the rating floor, lower the score bar, or switch a service on.");
+    e.appendChild(p);
+    bill.appendChild(e);
+  }
+
+  picks.forEach(function(rec,i){
+    const f = rec.f;
+    const card = el("div","pick" + (i===0 ? " top" : ""));
+
+    card.appendChild(el("div","rank mono", String(i+1).padStart(2,"0")));
+
+    const body = el("div","body");
+    const tl = el("div","title-line");
+    tl.appendChild(el("h3","",f.t));
+    tl.appendChild(el("span","yr mono",String(f.y)));
+    body.appendChild(tl);
+
+    const meta = el("div","meta");
+    meta.appendChild(el("span","",f.d));
+    meta.appendChild(el("span","sep","·"));
+    meta.appendChild(el("span","",f.g.map(gLabel).join(", ")));
+    meta.appendChild(el("span","sep","·"));
+    meta.appendChild(el("span","rate", f.mpaa));
+    meta.appendChild(el("span","sep","·"));
+    const rt = el("div","rt" + (f.rt < 60 ? " rotten" : ""));
+    rt.appendChild(el("i"));
+    rt.appendChild(el("span","mono", f.rt + "%"));
+    rt.title = "Approximate Tomatometer — not a live score";
+    meta.appendChild(rt);
+    body.appendChild(meta);
+
+    body.appendChild(el("p","hook",f.h));
+
+    const w = el("div","why"); w.innerHTML = why(rec);
+    body.appendChild(w);
+
+    const tags = el("div","tags");
+    f.a.slice(0,4).forEach(function(a){ tags.appendChild(el("span","tag",a)); });
+    body.appendChild(tags);
+    card.appendChild(body);
+
+    const aside = el("div","aside");
+    const pill = el("div","runtime-pill" + ((S.time - f.r) <= 12 ? " tight" : ""), hm(f.r));
+    aside.appendChild(pill);
+    const badge = el("div","svc-badge", SVC_NAME[f.s]);
+    aside.appendChild(badge);
+    const sc = el("div","score");
+    const num = el("div","num mono", String(Math.round(rec.score*100)));
+    sc.appendChild(num);
+    const m = el("div","meter"); const bar = el("span");
+    bar.style.width = Math.round(rec.score*100) + "%";
+    m.appendChild(bar); sc.appendChild(m);
+    sc.appendChild(el("div","lbl","Fit"));
+    aside.appendChild(sc);
+    card.appendChild(aside);
+
+    bill.appendChild(card);
+  });
+
+  /* what your subscriptions are costing you */
+  const lock = $("locked");
+  lock.innerHTML = "";
+  const strong = out.locked.filter(function(r){ return r.score >= (picks.length ? picks[picks.length-1].score : 0.5); });
+  if(strong.length){
+    const byS = {};
+    strong.forEach(function(r){ byS[r.f.s] = (byS[r.f.s]||0)+1; });
+    const parts = Object.keys(byS).map(function(k){ return byS[k] + " on " + SVC_NAME[k]; });
+    const top = strong.slice(0,3).map(function(r){ return r.f.t; }).join(", ");
+    lock.innerHTML = "<b>Behind a service you don’t have:</b> " + parts.join(", ") +
+      " would have placed on tonight’s bill — including " + top +
+      ". Flip the toggle if that changes.";
+  }
+  return out;
+}
+
+/* ---------- brief for handoff ---------- */
+function brief(){
+  const R = room();
+  const loved = [], hated = [];
+  Object.keys(S.taste).forEach(function(t){
+    (S.taste[t] === "loved" ? loved : hated).push(t);
+  });
+  const on = SERVICES.filter(function(s){ return S.svc[s.k]; }).map(function(s){ return s.n; });
+  const L = [];
+  L.push("Recommend me a movie for tonight. Here is my brief:");
+  L.push("");
+  L.push("WHO'S WATCHING: " + R.n);
+  L.push("TIME I HAVE: " + hm(S.time) + " (" + S.time + " minutes) — do not exceed it");
+  L.push("MINIMUM RATING: " + (S.rate === 0 ? "no minimum"
+        : floorName(S.rate).replace("+","") + " or more mature"));
+  if(S.minRT > 0) L.push("QUALITY BAR: broadly well reviewed — roughly " + S.minRT + "%+ on Rotten Tomatoes");
+  L.push("GENRES I WANT: " + (S.genres.length ? S.genres.map(gLabel).join(", ") : "open to anything"));
+  L.push("SERVICES I HAVE: " + (on.length ? on.join(", ") : "none — assume rental is fine"));
+  L.push("");
+  L.push("MOVIES I LOVED: " + (loved.length ? loved.join("; ") : "(none tagged)"));
+  L.push("MOVIES THAT MISSED: " + (hated.length ? hated.join("; ") : "(none tagged)"));
+  L.push("");
+  L.push("Infer what I respond to from those two lists — pace, tone, how much work the film asks of me — ");
+  L.push("not just genre. Give me 5 picks I have not already listed, each with the runtime, the service");
+  L.push("it is streaming on right now (verify, don't guess), and one sentence on why it follows from my");
+  L.push("taste. Flag anything that is a stretch and say why you took the risk.");
+  return L.join("\n");
+}
+
+/* ---------- theme ---------- */
+function applyTheme(mode){
+  const r = document.documentElement;
+  if(mode === "system") r.removeAttribute("data-theme");
+  else r.setAttribute("data-theme", mode);
+  const label = mode === "system" ? "Theme: Auto" : (mode === "dark" ? "Theme: Dark" : "Theme: Light");
+  $("themebtn").textContent = label;
+}
+
+/* ---------- wiring ---------- */
+function init(){
+  renderRooms(); renderGenres(); renderServices(); renderTime();
+  renderRating(); renderRT();
+  $("fitonly").setAttribute("aria-pressed", S.fitOnly ? "true" : "false");
+  renderBill(); renderGrid(); renderChips();
+
+  $("rt").value = S.minRT;
+  $("rt").addEventListener("input", function(e){
+    S.minRT = parseInt(e.target.value,10);
+    renderRT(); renderBill(); renderGrid();
+  });
+  $("rt").addEventListener("change", save);
+
+  $("time").value = S.time;
+  $("time").addEventListener("input", function(e){
+    S.time = parseInt(e.target.value,10);
+    renderTime(); renderBill(); renderGrid();
+  });
+  $("time").addEventListener("change", save);
+
+  $("search").addEventListener("input", function(e){
+    searchTerm = e.target.value; renderGrid();
+  });
+
+  $("run").addEventListener("click", function(){
+    const out = renderBill();
+    renderGrid();
+    const b = $("run"), n = out.picks.length;
+    b.textContent = n
+      ? "Programmed \u2014 " + Math.min(8,n) + " pick" + (Math.min(8,n)===1?"":"s") + " ready"
+      : "Nothing fits \u2014 loosen a filter";
+    setTimeout(function(){ b.textContent = "Program the evening"; }, 2400);
+    /* The bill sits at the top of the stage, and this page may be embedded in a
+       frame that owns scrolling, so never rely on scrollIntoView alone. */
+    const t = $("sec-bill");
+    if(t && t.scrollIntoView) { try{ t.scrollIntoView({behavior:"smooth", block:"start"}); }catch(e){} }
+  });
+
+  $("fitonly").addEventListener("click", function(){
+    S.fitOnly = !S.fitOnly;
+    $("fitonly").setAttribute("aria-pressed", S.fitOnly ? "true" : "false");
+    save(); renderGrid();
+  });
+
+  $("reset").addEventListener("click", function(){
+    S.room = "two"; S.time = 140; S.genres = []; S.taste = {};
+    S.rate = 0; S.minRT = 0; S.fitOnly = false;
+    $("fitonly").setAttribute("aria-pressed","false");
+    S.svc = Object.assign({}, svcDefault);
+    $("time").value = 140; $("rt").value = 0;
+    searchTerm = ""; $("search").value = "";
+    save();
+    renderRooms(); renderGenres(); renderServices(); renderTime();
+    renderRating(); renderRT();
+    renderGrid(); renderChips(); renderBill();
+  });
+
+  $("copy").addEventListener("click", function(){
+    const btn = $("copy"), txt = brief();
+    function done(ok){
+      btn.textContent = ok ? "Copied" : "Press ⌘C";
+      setTimeout(function(){ btn.textContent = "Copy brief"; }, 1900);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ done(true); }, function(){ fallback(); });
+    } else fallback();
+    function fallback(){
+      const ta = document.createElement("textarea");
+      ta.value = txt;
+      ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      let ok = false;
+      try{ ok = document.execCommand("copy"); }catch(e){ ok = false; }
+      document.body.removeChild(ta);
+      done(ok);
+    }
+  });
+
+  let theme = load("theme","system");
+  applyTheme(theme);
+  $("themebtn").addEventListener("click", function(){
+    theme = theme === "system" ? "light" : (theme === "light" ? "dark" : "system");
+    store("theme", theme); applyTheme(theme);
+  });
+
+  $("foot").innerHTML =
+    "Catalog: " + FILMS.length + " major releases, hand-tagged for pace, tone, and what a film asks of you. " +
+    "Two things here are snapshots rather than live data: streaming homes move as rights change, and the " +
+    "Tomatometer scores are approximate figures recalled from knowledge, not fetched from Rotten Tomatoes. " +
+    "Use the scores to separate the great from the mediocre, not to settle a bet. " +
+    "Content ratings are MPAA; titles that were never rated show NR and are filtered by audience instead. " +
+    (STORAGE_OK
+      ? "Your profile saves in this browser only \u2014 it is not synced anywhere."
+      : "Heads up: this viewer blocks local storage, so your profile lasts for this visit only. " +
+        "Open the standalone file directly if you want it remembered.");
+}
+
+if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+else init();
+
+})();
+</script>
