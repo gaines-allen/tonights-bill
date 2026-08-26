@@ -869,7 +869,10 @@ function applyEnrichment(payload){
     if(e.cert && RATE_RANK[e.cert] !== undefined)      f.mpaa = e.cert;
     if(typeof e.rt === "number")                        { f.rt = e.rt; f.rtSrc = "rt"; }
     else if(typeof e.tmdbScore === "number")            { f.rt = e.tmdbScore; f.rtSrc = "tmdb"; }
-    if(Array.isArray(e.providers) && e.providers.length) f.svcs = e.providers.slice();
+    if(Array.isArray(e.providers) && (e.providers.length || e.providersChecked)){
+      f.svcs = e.providers.slice();
+      f.svcChecked = true;      /* checked and empty means "on nothing", not "unknown" */
+    }
     if(e.poster) f.poster = e.poster;
     hit++;
   });
@@ -1006,7 +1009,7 @@ function scoreAll(){
   R.up.forEach(function(x){ upSet[x]=1; });
   R.down.forEach(function(x){ downSet[x]=1; });
 
-  const kept = [], lockedSvc = [];
+  const kept = [], lockedSvc = [], notStreaming = [];
 
   FILMS.forEach(function(f){
     if(S.taste[f.t]) return;                                  /* already seen */
@@ -1057,13 +1060,15 @@ function scoreAll(){
 
     const on = f.svcs.filter(function(c){ return S.svc[c]; });
     const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on};
-    if(!on.length){ lockedSvc.push(rec); return; }   /* carried, but not by you */
+    if(!f.svcs.length && f.svcChecked){ notStreaming.push(rec); return; }  /* rent or buy only */
+    if(!on.length){ lockedSvc.push(rec); return; }                        /* carried, not by you */
     kept.push(rec);
   });
 
   kept.sort(function(a,b){ return b.score - a.score; });
   lockedSvc.sort(function(a,b){ return b.score - a.score; });
-  return {picks:kept, locked:lockedSvc, T:T};
+  notStreaming.sort(function(a,b){ return b.score - a.score; });
+  return {picks:kept, locked:lockedSvc, notStreaming:notStreaming, T:T};
 }
 
 /* ---------- reasoning ---------- */
@@ -1417,16 +1422,25 @@ function renderBill(){
   /* what your subscriptions are costing you */
   const lock = $("locked");
   lock.innerHTML = "";
-  const strong = out.locked.filter(function(r){ return r.score >= (picks.length ? picks[picks.length-1].score : 0.5); });
+  const bar = picks.length ? picks[picks.length-1].score : 0.5;
+  const strong = out.locked.filter(function(r){ return r.score >= bar; });
+  const lines = [];
   if(strong.length){
     const byS = {};
     strong.forEach(function(r){ r.f.svcs.forEach(function(c){ byS[c] = (byS[c]||0)+1; }); });
     const parts = Object.keys(byS).map(function(k){ return byS[k] + " on " + SVC_NAME[k]; });
-    const top = strong.slice(0,3).map(function(r){ return r.f.t; }).join(", ");
-    lock.innerHTML = "<b>Behind a service you don’t have:</b> " + parts.join(", ") +
-      " would have placed on tonight’s bill — including " + top +
-      ". Flip the toggle if that changes.";
+    lines.push("<b>Behind a service you don’t have:</b> " + parts.join(", ") +
+      " would have placed tonight — including " +
+      strong.slice(0,3).map(function(r){ return r.f.t; }).join(", ") + ".");
   }
+  const gone = (out.notStreaming || []).filter(function(r){ return r.score >= bar; });
+  if(gone.length){
+    lines.push("<b>Not on any subscription service right now:</b> " + gone.length +
+      " strong match" + (gone.length===1?"":"es") + " — including " +
+      gone.slice(0,3).map(function(r){ return r.f.t; }).join(", ") +
+      " — are rent-or-buy only tonight, so they are left off.");
+  }
+  if(lines.length) lock.innerHTML = lines.join("<br><br>");
   return out;
 }
 

@@ -6,8 +6,8 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { serviceCode, parseCatalog, pickMatch, usCertification, flatrateCodes, rtFromOmdb }
-  from "./enrich.mjs";
+import { serviceCode, parseCatalog, pickMatch, usCertification, flatrateCodes, rtFromOmdb,
+         readOmdbPayload } from "./enrich.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 let pass = 0, fail = 0;
@@ -88,6 +88,28 @@ eq("reads the RT entry", rtFromOmdb({ Ratings: [
    { Source: "Metacritic", Value: "74/100" }]}), 87);
 eq("absent RT -> null", rtFromOmdb({ Ratings: [{ Source: "Metacritic", Value: "74/100" }] }), null);
 eq("no Ratings key -> null", rtFromOmdb({}), null);
+
+console.log("\nOMDb failure reporting (it returns errors in the BODY with HTTP 401)");
+eq("invalid key is reported, not swallowed",
+   (await readOmdbPayload({status:401}, JSON.stringify({Response:"False",Error:"Invalid API key!"}))).error,
+   "Invalid API key!");
+eq("unactivated key surfaces its reason",
+   (await readOmdbPayload({status:401}, JSON.stringify({Response:"False",Error:"No API key provided."}))).error,
+   "No API key provided.");
+eq("rate limit surfaces",
+   (await readOmdbPayload({status:401}, JSON.stringify({Response:"False",Error:"Request limit reached!"}))).error,
+   "Request limit reached!");
+eq("a good response yields the score",
+   (await readOmdbPayload({status:200}, JSON.stringify({Response:"True",
+      Ratings:[{Source:"Rotten Tomatoes",Value:"93%"}]}))).rt, 93);
+eq("a good response has no error",
+   (await readOmdbPayload({status:200}, JSON.stringify({Response:"True",
+      Ratings:[{Source:"Rotten Tomatoes",Value:"93%"}]}))).error, null);
+eq("title with no RT entry is explained",
+   (await readOmdbPayload({status:200}, JSON.stringify({Response:"True",Ratings:[]}))).error,
+   "no Rotten Tomatoes entry for this title");
+eq("non-JSON error page still reports",
+   (await readOmdbPayload({status:503}, "<html>down</html>")).error.startsWith("HTTP 503"), true);
 
 console.log("\ncatalog parsing from index.html");
 const html = await readFile(join(ROOT, "index.html"), "utf8");

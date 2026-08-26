@@ -193,15 +193,43 @@ async function enrichOne(film) {
   out.votes   = details?.vote_count ?? null;
   out.poster  = details?.poster_path || hit.poster_path || null;
   out.providers = flatrateCodes(prov);
+  /* Distinguishes "checked, and it is on nothing" from "never checked".
+     Without this the page would keep showing a hand-guessed service for a
+     film that is demonstrably not streaming anywhere. */
+  out.providersChecked = !!prov;
 
   if (OMDB && out.imdb) {
-    try {
-      const o = await getJSON(`https://www.omdbapi.com/?apikey=${encodeURIComponent(OMDB)}&i=${out.imdb}&tomatoes=true`);
-      out.rt = rtFromOmdb(o);
-    } catch { out.rt = null; }
+    const r = await fetchOmdb(out.imdb);
+    out.rt = r.rt;
+    if (r.error) out.omdbError = r.error;
   }
   out.ok = true;
   return out;
+}
+
+/**
+ * OMDb reports failures in the BODY with HTTP 401, so a plain !res.ok throw
+ * loses the actual reason ("Invalid API key!", "No API key provided.",
+ * "Request limit reached!"). Read the body either way and return the reason,
+ * so a misconfigured key is visible instead of silently yielding null scores.
+ */
+export async function readOmdbPayload(res, text) {
+  let body = null;
+  try { body = JSON.parse(text); } catch { /* non-JSON error page */ }
+  if (!body) return { rt: null, error: `HTTP ${res.status}: ${text.slice(0, 90)}` };
+  if (String(body.Response) === "False") return { rt: null, error: body.Error || "OMDb returned Response:False" };
+  const rt = rtFromOmdb(body);
+  return { rt, error: rt == null ? "no Rotten Tomatoes entry for this title" : null };
+}
+
+async function fetchOmdb(imdbId) {
+  const url = `https://www.omdbapi.com/?apikey=${encodeURIComponent(OMDB)}&i=${imdbId}&tomatoes=true`;
+  try {
+    const res = await fetch(url, { headers: { accept: "application/json" } });
+    return await readOmdbPayload(res, await res.text());
+  } catch (e) {
+    return { rt: null, error: "network: " + e.message };
+  }
 }
 
 /* ---------------- runner ---------------- */
@@ -253,6 +281,11 @@ async function main() {
       matched: ok.length,
       withProviders: ok.filter((r) => r.providers.length).length,
       withRT: ok.filter((r) => r.rt != null).length,
+      omdbErrors: (() => {
+        const tally = {};
+        ok.forEach((r) => { if (r.omdbError) tally[r.omdbError] = (tally[r.omdbError] || 0) + 1; });
+        return tally;
+      })(),
       unmatched: missed.map((r) => `${r.t} (${r.y}): ${r.error || "unknown"}`)
     },
     films: ok
@@ -264,6 +297,14 @@ async function main() {
   console.log(`\nmatched          ${ok.length}/${rows.length}`);
   console.log(`with providers   ${payload._meta.withProviders}`);
   console.log(`with RT score    ${payload._meta.withRT}`);
+  const errs = Object.entries(payload._meta.omdbErrors || {});
+  if (OMDB && errs.length) {
+    console.log(`\nOMDb did not return scores. Reasons:`);
+    errs.sort((a, b) => b[1] - a[1]).forEach(([msg, n]) => console.log(`  ${n}x  ${msg}`));
+    if (errs.some(([m]) => /api key/i.test(m))) {
+      console.log(`\n  -> An OMDb key only works after you click the activation link they email you.`);
+    }
+  }
   console.log(`with poster      ${ok.filter((r) => r.poster).length}`);
   if (missed.length) {
     console.log(`\nunmatched (${missed.length}) — check these by hand:`);
