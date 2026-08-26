@@ -78,16 +78,76 @@ After changing the catalog, sanity-check that a profile of *Knives Out*,
 *Ocean's Eleven* and *Hot Fuzz* still returns *Glass Onion* first. That case is
 the canary for the scoring regression described above.
 
+## Sourced data (optional)
+
+Out of the box the catalog is entirely hand-authored, including the streaming
+homes and critic scores — those are estimates, and the page says so. Running the
+enrichment script replaces them with sourced values.
+
+```bash
+export TMDB_TOKEN='<v4 read access token>'   # free: themoviedb.org/settings/api
+export OMDB_KEY='<key>'                      # optional: omdbapi.com — adds real RT scores
+node scripts/enrich.mjs                      # or --limit 10 to try it first
+```
+
+That writes `data/catalog.json`, which the page fetches on load and merges over
+its built-in data, replacing:
+
+| Field | Source |
+|---|---|
+| runtime | TMDB movie details |
+| MPAA certification | TMDB release dates, US theatrical |
+| critic score | **OMDb** (real Rotten Tomatoes) if `OMDB_KEY` is set, else TMDB user score |
+| streaming availability | TMDB watch providers (JustWatch), US, subscription only |
+| poster art | TMDB images — no API key needed to *display* them |
+
+The attribute tags, hooks, fame and audience calls stay hand-authored. No API
+knows how a film plays, and that is what the recommender actually scores on.
+
+**The key never reaches the page.** Enrichment happens ahead of time and only
+its output ships, so this stays a static site with nothing to leak. The included
+GitHub Action re-runs it daily from repository secrets.
+
+Three deliberate properties:
+
+- **The page works without it.** If `data/catalog.json` is missing or the fetch
+  is blocked, the built-in catalog stands and the footer says the numbers are
+  estimates. Opening `index.html` straight off disk still works.
+- **Provenance is per-film.** A title that matched shows "Rotten Tomatoes score,
+  via OMDb"; one that did not still says "estimated". Mixed states are normal
+  and are labelled honestly rather than averaged into a single claim.
+- **Bad rows cannot corrupt the catalog.** A row is only applied when both title
+  and year agree, and each field is validated before it overwrites anything.
+  `scripts/merge.test.mjs` covers the malformed cases.
+
+Posters are `<img>` tags pointed at TMDB's CDN. Some embedded viewers block
+external images; those elements remove themselves on error rather than leaving
+broken boxes, which is why posters appear on GitHub Pages or locally but not
+inside a sandboxed artifact frame.
+
+### Tests
+
+```bash
+node scripts/enrich.test.mjs   # transforms: service mapping, cert, providers, matching
+node scripts/merge.test.mjs    # merge safety against the real index.html catalog
+```
+
+Both run offline — no API key, no network.
+
 ## Known limitations
 
 These are deliberate, and the page states them in its own footer:
 
-- **Streaming locations are a snapshot.** Tagged from knowledge, not a live
-  feed. Rights move constantly. Verify before committing the evening.
-- **Tomatometer scores are approximate** figures recalled from memory, not
-  fetched from Rotten Tomatoes, and unaffiliated with it. Useful for separating
-  great from mediocre; not for settling an argument. The catalog also skews
-  acclaimed, so the score floor only really bites above 95%.
+- **Streaming locations are hand-tagged until you run the enrichment**, and
+  rights move constantly. Verify before committing the evening.
+- **Critic scores are estimates until you run the enrichment.** The built-in
+  numbers approximate critical consensus; they are not sourced from, affiliated
+  with, or endorsed by any review aggregator. Run `scripts/enrich.mjs` with an
+  OMDb key to replace them with real Rotten Tomatoes scores. Note the catalog
+  skews acclaimed either way, so the score floor only really bites above 95%.
+- **Availability is accurate to about a day, not the minute.** JustWatch pushes
+  to TMDB once per 24 hours, so a title that moved this morning may still show
+  yesterday's home.
 - **Profile persistence depends on the host.** It saves to `localStorage`, which
   some embedded viewers block. The page probes for this on load and tells you
   which case you're in rather than silently losing your settings.

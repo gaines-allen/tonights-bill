@@ -1,0 +1,59 @@
+# Re-pull runtimes, certifications, scores, posters and streaming availability.
+#
+# TMDB's availability data comes from JustWatch and refreshes once every 24
+# hours, so running more often than daily buys nothing. Set TMDB_TOKEN (and
+# optionally OMDB_KEY for real Rotten Tomatoes scores) in
+# Settings -> Secrets and variables -> Actions.
+name: Refresh catalog data
+
+on:
+  schedule:
+    - cron: "20 11 * * *"     # 11:20 UTC daily, after JustWatch's push to TMDB
+  workflow_dispatch:           # and on demand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Enrich from TMDB
+        env:
+          TMDB_TOKEN: ${{ secrets.TMDB_TOKEN }}
+          OMDB_KEY: ${{ secrets.OMDB_KEY }}
+        run: |
+          if [ -z "$TMDB_TOKEN" ]; then
+            echo "::error::TMDB_TOKEN secret is not set — nothing to refresh."
+            exit 1
+          fi
+          node scripts/enrich.mjs
+
+      - name: Verify the merge still holds
+        run: |
+          node scripts/enrich.test.mjs
+          node scripts/merge.test.mjs
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # ignore the timestamp-only diff; only commit when real data moved
+          if git diff --quiet -- data/catalog.json; then
+            echo "no change"; exit 0
+          fi
+          CHANGED=$(git diff -- data/catalog.json | grep -Ec '^[+-] +"(runtime|cert|rt|tmdbScore|poster|providers)' || true)
+          if [ "$CHANGED" -eq 0 ]; then
+            echo "only the generated timestamp moved — skipping commit"
+            git checkout -- data/catalog.json
+            exit 0
+          fi
+          git add data/catalog.json
+          git commit -m "Refresh catalog data from TMDB ($CHANGED field changes)"
+          git push

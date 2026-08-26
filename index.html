@@ -225,8 +225,18 @@ input[type=range]::-moz-range-thumb{
 
 /* ---- result cards ---- */
 .bill{display:flex; flex-direction:column; gap:10px}
+.poster{
+  width:58px; aspect-ratio:2/3; border-radius:5px; object-fit:cover; flex:none;
+  background:var(--surface-2); border:1px solid var(--line); display:block;
+}
+.tposter{
+  width:34px; aspect-ratio:2/3; border-radius:3px; object-fit:cover; flex:none;
+  background:var(--surface-2); border:1px solid var(--line);
+}
+.tcard.haspost{flex-direction:row; align-items:flex-start; gap:9px}
+.tcard.haspost .tbody{display:flex; flex-direction:column; gap:2px; min-width:0}
 .pick{
-  display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:16px; align-items:start;
+  display:grid; grid-template-columns:auto auto minmax(0,1fr) auto; gap:16px; align-items:start;
   background:var(--surface); border:1px solid var(--line); border-radius:11px;
   padding:15px 17px; box-shadow:var(--shadow); position:relative; overflow:hidden;
 }
@@ -325,6 +335,7 @@ input[type=range]::-moz-range-thumb{
   .stage{padding:20px 18px 60px}
   .masthead{padding:16px 18px 14px}
   .pick{grid-template-columns:auto minmax(0,1fr); row-gap:12px}
+  .poster{grid-row:span 2; width:46px}
   .aside{grid-column:2; flex-direction:row; align-items:center; justify-content:flex-start; flex-wrap:wrap}
   .brand h1{font-size:28px}
 }
@@ -379,8 +390,7 @@ input[type=range]::-moz-range-thumb{
         <span class="unit" id="rtunit">% and up &mdash; everything</span>
       </div>
       <input type="range" id="rt" min="0" max="95" step="5" value="0" aria-label="Minimum critic score">
-      <div class="score-note">Approximate Tomatometer scores, from memory rather than a live
-        feed. Good for sorting the great from the mediocre, not for settling an argument.</div>
+      <div class="score-note" id="scorenote"></div>
     </div>
 
     <div class="block">
@@ -460,15 +470,17 @@ input[type=range]::-moz-range-thumb{
 /* ============================================================================
    CATALOG
    Columns: [ title, year, runtime, genres, attributes, service, director, hook, audience,
-                fame, mpaa, tomatometer ]
+                fame, mpaa, critic score ]
      genres/attributes .... pipe-separated
      service .............. NFX Netflix | MAX Max | HUL Hulu | DIS Disney+
                             PRV Prime Video | APL Apple TV+ | PAR Paramount+ | PCK Peacock
      audience ............. all | teen | adult
      fame ................. 3 iconic, 2 well known, 1 for film people
      mpaa ................. G | PG | PG-13 | R | NR (NR falls back to the audience column)
-     tomatometer .......... APPROXIMATE critic score from knowledge, NOT a live feed.
-                            Treat as a rough quality signal only; verify anything that matters.
+     critic score ......... 0-100. Built in, these are ESTIMATES of critical consensus,
+                            not sourced from any aggregator. Running scripts/enrich.mjs
+                            replaces them with real Rotten Tomatoes scores (via OMDb),
+                            or TMDB user scores when no OMDb key is set.
    Availability is a snapshot, not a live feed. Verify before you commit the evening.
    ========================================================================== */
 const COLS = ["t","y","r","g","a","s","d","h","k","pop","mpaa","rt"];
@@ -741,6 +753,8 @@ const FILMS = RAW.map(function(row,i){
   const o = {id:i};
   COLS.forEach(function(c,j){ o[c] = row[j]; });
   o.g = o.g.split("|"); o.a = o.a.split("|");
+  o.svcs = [o.s];              /* enrichment can widen this to several services */
+  o.poster = null;             /* filled in by data/catalog.json when present */
   return o;
 });
 const BY_TITLE = {};
@@ -836,6 +850,42 @@ const ATTR_PHRASE = {
   romantic:"romance", scary:"real scares", weird:"strangeness", grounded:"a grounded feel",
   stylish:"style", epic:"epic scale", cozy:"warmth", uplifting:"a lift at the end"
 };
+
+/* ---------- sourced data ----------
+   data/catalog.json is produced by scripts/enrich.mjs from TMDB (and OMDb for
+   real Rotten Tomatoes scores). It is optional on purpose: opened as a bare
+   file, or served without it, the page falls back to its built-in catalog and
+   says so. Nothing here ever blocks first render. */
+const POSTER_BASE = "https://image.tmdb.org/t/p/w185";
+let ENRICHED = null;
+
+function applyEnrichment(payload){
+  if(!payload || !Array.isArray(payload.films)) return false;
+  let hit = 0;
+  payload.films.forEach(function(e){
+    const f = BY_TITLE[e.t];
+    if(!f || f.y !== e.y) return;                       /* title+year must both agree */
+    if(typeof e.runtime === "number" && e.runtime > 0) f.r = e.runtime;
+    if(e.cert && RATE_RANK[e.cert] !== undefined)      f.mpaa = e.cert;
+    if(typeof e.rt === "number")                        { f.rt = e.rt; f.rtSrc = "rt"; }
+    else if(typeof e.tmdbScore === "number")            { f.rt = e.tmdbScore; f.rtSrc = "tmdb"; }
+    if(Array.isArray(e.providers) && e.providers.length) f.svcs = e.providers.slice();
+    if(e.poster) f.poster = e.poster;
+    hit++;
+  });
+  ENRICHED = Object.assign({}, payload._meta, {applied: hit});
+  return hit > 0;
+}
+
+async function loadEnrichment(){
+  try{
+    const res = await fetch("data/catalog.json", {cache:"no-cache"});
+    if(!res.ok) return;
+    if(applyEnrichment(await res.json())){
+      renderBill(); renderGrid(); renderTime(); renderRating(); renderRT(); renderFoot();
+    }
+  }catch(e){ /* absent or blocked: built-in catalog stands */ }
+}
 
 /* ---------- storage ----------
    Some embedding contexts (sandboxed frames, data: URLs) block localStorage
@@ -1005,8 +1055,9 @@ function scoreAll(){
     const score = (0.46*tasteN + 0.22*genreN + 0.18*roomN + fameW*fameN) /
                   (0.46 + 0.22 + 0.18 + fameW);
 
-    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet};
-    if(!S.svc[f.s]){ lockedSvc.push(rec); return; }
+    const on = f.svcs.filter(function(c){ return S.svc[c]; });
+    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on};
+    if(!on.length){ lockedSvc.push(rec); return; }   /* carried, but not by you */
     kept.push(rec);
   });
 
@@ -1195,10 +1246,19 @@ function renderGrid(){
     const b = el("button","tcard" + (hardPass(f) ? "" : " unfit"));
     b.type = "button";
     if(state) b.setAttribute("data-state", state);
-    b.appendChild(el("span","tt",f.t));
-    const meta = el("span","ty", f.y + "  ·  " + hm(f.r) + "  ·  " + f.mpaa);
-    b.appendChild(meta);
-    if(state) b.appendChild(el("span","mark", state === "loved" ? "✓ Loved" : "✕ Missed"));
+    let host = b;
+    if(f.poster){
+      b.classList.add("haspost");
+      const img = document.createElement("img");
+      img.className = "tposter"; img.loading = "lazy"; img.alt = "";
+      img.src = POSTER_BASE + f.poster;
+      img.addEventListener("error", function(){ img.remove(); b.classList.remove("haspost"); });
+      b.appendChild(img);
+      host = el("span","tbody"); b.appendChild(host);
+    }
+    host.appendChild(el("span","tt",f.t));
+    host.appendChild(el("span","ty", f.y + "  ·  " + hm(f.r) + "  ·  " + f.mpaa));
+    if(state) host.appendChild(el("span","mark", state === "loved" ? "✓ Loved" : "✕ Missed"));
     b.setAttribute("aria-label", f.t + ", " + (state || "not rated") + ". Click to cycle.");
     b.addEventListener("click", function(){
       const cur = S.taste[f.t];
@@ -1290,6 +1350,19 @@ function renderBill(){
 
     card.appendChild(el("div","rank mono", String(i+1).padStart(2,"0")));
 
+    /* Poster art only exists once data/catalog.json has been generated, and the
+       image host is blocked in some embedded viewers — so it is added only when
+       present and removes itself if the request is refused. */
+    if(f.poster){
+      const img = document.createElement("img");
+      img.className = "poster";
+      img.loading = "lazy";
+      img.alt = "";
+      img.src = POSTER_BASE + f.poster;
+      img.addEventListener("error", function(){ img.remove(); });
+      card.appendChild(img);
+    }
+
     const body = el("div","body");
     const tl = el("div","title-line");
     tl.appendChild(el("h3","",f.t));
@@ -1306,7 +1379,9 @@ function renderBill(){
     const rt = el("div","rt" + (f.rt < 60 ? " rotten" : ""));
     rt.appendChild(el("i"));
     rt.appendChild(el("span","mono", f.rt + "%"));
-    rt.title = "Approximate Tomatometer — not a live score";
+    rt.title = f.rtSrc === "rt"  ? "Rotten Tomatoes score, via OMDb"
+             : f.rtSrc === "tmdb" ? "TMDB user score — not a critic aggregate"
+             : "Estimated critic score — not from any review aggregator";
     meta.appendChild(rt);
     body.appendChild(meta);
 
@@ -1323,8 +1398,9 @@ function renderBill(){
     const aside = el("div","aside");
     const pill = el("div","runtime-pill" + ((S.time - f.r) <= 12 ? " tight" : ""), hm(f.r));
     aside.appendChild(pill);
-    const badge = el("div","svc-badge", SVC_NAME[f.s]);
-    aside.appendChild(badge);
+    (rec.on && rec.on.length ? rec.on : [f.s]).slice(0,3).forEach(function(c){
+      aside.appendChild(el("div","svc-badge", SVC_NAME[c]));
+    });
     const sc = el("div","score");
     const num = el("div","num mono", String(Math.round(rec.score*100)));
     sc.appendChild(num);
@@ -1344,7 +1420,7 @@ function renderBill(){
   const strong = out.locked.filter(function(r){ return r.score >= (picks.length ? picks[picks.length-1].score : 0.5); });
   if(strong.length){
     const byS = {};
-    strong.forEach(function(r){ byS[r.f.s] = (byS[r.f.s]||0)+1; });
+    strong.forEach(function(r){ r.f.svcs.forEach(function(c){ byS[c] = (byS[c]||0)+1; }); });
     const parts = Object.keys(byS).map(function(k){ return byS[k] + " on " + SVC_NAME[k]; });
     const top = strong.slice(0,3).map(function(r){ return r.f.t; }).join(", ");
     lock.innerHTML = "<b>Behind a service you don’t have:</b> " + parts.join(", ") +
@@ -1352,6 +1428,55 @@ function renderBill(){
       ". Flip the toggle if that changes.";
   }
   return out;
+}
+
+/* ---------- provenance ----------
+   The page must never imply its numbers are sourced when they are not, so both
+   the footer and the critic-score caveat are written from whichever data is
+   actually loaded. */
+function renderFoot(){
+  const rtCount = FILMS.filter(function(f){ return f.rtSrc === "rt"; }).length;
+  const note = $("scorenote");
+  if(note){
+    note.textContent = ENRICHED
+      ? (rtCount
+          ? "Rotten Tomatoes scores via OMDb, refreshed " + when(ENRICHED.generatedAt) + "."
+          : "TMDB user scores, refreshed " + when(ENRICHED.generatedAt) + " \u2014 not a critic aggregate.")
+      : "Estimated critic scores \u2014 my own approximation of critical consensus, not sourced from "
+        + "any review aggregator. Fine for sorting great from mediocre, not for settling an argument.";
+  }
+
+  let txt = "Catalog: " + FILMS.length + " major releases, hand-tagged for pace, tone, and what a film "
+          + "asks of you \u2014 those tags are judgement calls, not data. ";
+  if(ENRICHED){
+    txt += "Runtimes, certifications, scores, posters and streaming availability come from "
+        +  ENRICHED.source + ", generated " + when(ENRICHED.generatedAt) + " for region "
+        +  (ENRICHED.region || "US") + " (" + ENRICHED.applied + " of " + FILMS.length + " titles matched). "
+        +  "Availability is JustWatch data via TMDB, which itself refreshes daily \u2014 accurate to about "
+        +  "a day, not to the minute. ";
+  } else {
+    txt += "Streaming homes and critic scores here are my own estimates, not sourced feeds: rights move, "
+        +  "and the scores approximate critical consensus rather than reporting it. They are not from, "
+        +  "affiliated with, or endorsed by any review aggregator. Run scripts/enrich.mjs to replace both "
+        +  "with sourced data. ";
+  }
+  txt += "Content ratings are MPAA; titles never rated show NR and are filtered by audience instead. ";
+  txt += STORAGE_OK
+    ? "Your profile saves in this browser only \u2014 it is not synced anywhere."
+    : "Heads up: this viewer blocks local storage, so your profile lasts for this visit only. "
+      + "Open the standalone file directly if you want it remembered.";
+  $("foot").innerHTML = txt;
+}
+
+function when(iso){
+  if(!iso) return "recently";
+  const d = new Date(iso);
+  if(isNaN(d)) return "recently";
+  const hrs = (Date.now() - d.getTime()) / 36e5;
+  if(hrs < 1)  return "less than an hour ago";
+  if(hrs < 24) return Math.round(hrs) + " hours ago";
+  const days = Math.round(hrs/24);
+  return days === 1 ? "yesterday" : days + " days ago";
 }
 
 /* ---------- brief for handoff ---------- */
@@ -1478,16 +1603,8 @@ function init(){
     store("theme", theme); applyTheme(theme);
   });
 
-  $("foot").innerHTML =
-    "Catalog: " + FILMS.length + " major releases, hand-tagged for pace, tone, and what a film asks of you. " +
-    "Two things here are snapshots rather than live data: streaming homes move as rights change, and the " +
-    "Tomatometer scores are approximate figures recalled from knowledge, not fetched from Rotten Tomatoes. " +
-    "Use the scores to separate the great from the mediocre, not to settle a bet. " +
-    "Content ratings are MPAA; titles that were never rated show NR and are filtered by audience instead. " +
-    (STORAGE_OK
-      ? "Your profile saves in this browser only \u2014 it is not synced anywhere."
-      : "Heads up: this viewer blocks local storage, so your profile lasts for this visit only. " +
-        "Open the standalone file directly if you want it remembered.");
+  renderFoot();
+  loadEnrichment();          /* upgrades the page in place if sourced data exists */
 }
 
 if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
