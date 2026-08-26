@@ -98,6 +98,7 @@ its built-in data, replacing:
 | runtime | TMDB movie details |
 | MPAA certification | TMDB release dates, US theatrical |
 | critic score | **OMDb** (real Rotten Tomatoes) if `OMDB_KEY` is set, else TMDB user score |
+| plot synopsis | TMDB overview, trimmed on sentence boundaries |
 | streaming availability | TMDB watch providers (JustWatch), US, subscription only |
 | poster art | TMDB images — no API key needed to *display* them |
 
@@ -124,6 +125,33 @@ Posters are `<img>` tags pointed at TMDB's CDN. Some embedded viewers block
 external images; those elements remove themselves on error rather than leaving
 broken boxes, which is why posters appear on GitHub Pages or locally but not
 inside a sandboxed artifact frame.
+
+### Reading the bill
+
+Dark is the default — this is a thing you use at night — with a light toggle
+that persists. There is no `prefers-color-scheme` switch: the dark palette is
+the stylesheet's base, so the page also paints dark on the first frame with no
+flash of the wrong theme.
+
+Each pick carries poster art, a real plot synopsis, the certification, the
+critic score, runtime, and where it streams. Posters shimmer at the correct
+2:3 aspect ratio while loading so nothing reflows under the reader, and remove
+themselves if the image is refused.
+
+**Keyboard:** `J`/`K` or arrows move through the bill, `C` compares the focused
+pick against the leader, `W` marks it watched, `/` jumps to search, `Esc`
+clears. Shortcuts are ignored while typing in a field.
+
+**Comparing two picks.** Fit scores sit close together, so "why is 73 above 68"
+is a fair question. `C` breaks it down into the same four components the score
+is built from — taste, genre, room, recognisability — and names the one that
+actually decided it, rather than restating the total.
+
+**Recent evenings.** Two separate memories doing two different jobs. *Watched*
+is explicit: mark a film and it stops being offered until you clear it.
+*Offered* is automatic: the last three bills carry a small, bounded penalty so
+tonight's list is not word-for-word yesterday's. The penalty reorders near-ties
+and never buries a genuinely better match.
 
 ### Why isn't this film showing up?
 

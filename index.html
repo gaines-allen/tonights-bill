@@ -273,6 +273,7 @@ input[type=range]::-moz-range-thumb{
 .tcard.haspost .tbody{display:flex; flex-direction:column; gap:2px; min-width:0}
 .pick{
   display:grid; grid-template-columns:auto auto minmax(0,1fr) auto; gap:16px; align-items:start;
+  grid-auto-flow:row;
   background:var(--surface); border:1px solid var(--line); border-radius:11px;
   padding:15px 17px; box-shadow:var(--shadow); position:relative; overflow:hidden;
 }
@@ -294,7 +295,14 @@ input[type=range]::-moz-range-thumb{
 .rank{
   font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--ink-3);
   padding-top:3px; width:22px; text-align:right;
+  grid-column:1;
 }
+/* Not every film has poster art, so the body claims the remaining span itself
+   rather than relying on auto-placement to guess. */
+.pick .poster{grid-column:2}
+.pick .body{grid-column:3}
+.pick .aside{grid-column:4}
+.pick:not(:has(.poster)) .body{grid-column:2 / 4}
 .pick.top .rank{color:var(--accent)}
 .body{min-width:0; display:flex; flex-direction:column; gap:6px}
 .title-line{display:flex; align-items:baseline; gap:9px; flex-wrap:wrap}
@@ -451,9 +459,20 @@ input[type=range]::-moz-range-thumb{
   .rail{position:static; max-height:none; border-right:none; border-bottom:1px solid var(--line)}
   .stage{padding:20px 18px 60px}
   .masthead{padding:16px 18px 14px}
-  .pick{grid-template-columns:auto minmax(0,1fr); row-gap:12px}
-  .poster{grid-row:span 2; width:46px}
-  .aside{grid-column:2; flex-direction:row; align-items:center; justify-content:flex-start; flex-wrap:wrap}
+  /* Three columns stay (rank, poster, body); the right rail drops beneath the
+     body and runs horizontally. Naming every child's placement explicitly —
+     auto-placement put the poster and the rail in the wrong cells once the
+     poster column was added. */
+  .pick{grid-template-columns:auto auto minmax(0,1fr); row-gap:12px; column-gap:12px}
+  .pick .rank  {grid-column:1; grid-row:1}
+  .pick .poster{grid-column:2; grid-row:1; width:52px}
+  .pick .body  {grid-column:3; grid-row:1}
+  .pick .aside {
+    grid-column:1 / -1; grid-row:2;
+    flex-direction:row; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:8px;
+  }
+  .pick .aside .score{flex-direction:row; align-items:center; gap:8px}
+  .pick .aside .meter{width:64px}
   .brand h1{font-size:28px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
