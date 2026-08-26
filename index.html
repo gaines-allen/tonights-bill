@@ -4,36 +4,29 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 :root{
-  --ground:#EEF0F4; --surface:#FFFFFF; --surface-2:#E6E9F0; --sunk:#DFE3EC;
+  /* Dark is the default here, deliberately: this is a thing you use at night,
+     in a dark room, deciding what to put on. Light is an explicit opt-in via
+     the toggle, which is why there is no prefers-color-scheme switch. */
+  --ground:#0D0F15; --surface:#151822; --surface-2:#1D212C; --surface-3:#262B38; --sunk:#090B10;
+  --ink:#EDEBE6; --ink-2:#A8ADBE; --ink-3:#6F7589;
+  --line:#252A36; --line-2:#343A4A;
+  --accent:#F2A64E; --accent-hot:#FFC078; --accent-soft:#2E2116; --accent-line:#5C4423;
+  --loved:#6FC49A; --loved-soft:#14261E;
+  --hated:#E38799; --hated-soft:#2A1720;
+  --fresh:#7BC48D; --rotten:#E08A72;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 32px -16px rgba(0,0,0,.85);
+  --glow:0 0 0 1px var(--accent-line), 0 10px 40px -20px rgba(242,166,78,.55);
+}
+:root[data-theme="light"]{
+  --ground:#EEF0F4; --surface:#FFFFFF; --surface-2:#E6E9F0; --surface-3:#DCE1EB; --sunk:#DFE3EC;
   --ink:#14161C; --ink-2:#4A4E5C; --ink-3:#787E92;
   --line:#D3D8E2; --line-2:#C2C8D5;
   --accent:#A85B08; --accent-hot:#8C4B05; --accent-soft:#F7E6CE; --accent-line:#E0BB86;
   --loved:#2C6B4E; --loved-soft:#DCEFE4;
   --hated:#8B3743; --hated-soft:#F6DDE0;
   --fresh:#3E7A4F; --rotten:#A8452F;
-  --shadow:0 1px 2px rgba(20,22,28,.06),0 8px 24px -12px rgba(20,22,28,.18);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --ground:#101219; --surface:#171A23; --surface-2:#1E222E; --sunk:#0B0D13;
-    --ink:#ECEAE5; --ink-2:#A9AEBF; --ink-3:#737990;
-    --line:#282D3A; --line-2:#353B4B;
-    --accent:#F0A249; --accent-hot:#FFBB6D; --accent-soft:#33251A; --accent-line:#5A421F;
-    --loved:#74C39A; --loved-soft:#16281F;
-    --hated:#E28695; --hated-soft:#2B171B;
-    --fresh:#79C08D; --rotten:#E08A72;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#101219; --surface:#171A23; --surface-2:#1E222E; --sunk:#0B0D13;
-  --ink:#ECEAE5; --ink-2:#A9AEBF; --ink-3:#737990;
-  --line:#282D3A; --line-2:#353B4B;
-  --accent:#F0A249; --accent-hot:#FFBB6D; --accent-soft:#33251A; --accent-line:#5A421F;
-  --loved:#74C39A; --loved-soft:#16281F;
-  --hated:#E28695; --hated-soft:#2B171B;
-  --fresh:#79C08D; --rotten:#E08A72;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+  --shadow:0 1px 2px rgba(20,22,28,.06), 0 8px 24px -12px rgba(20,22,28,.18);
+  --glow:0 0 0 1px var(--accent-line), 0 10px 30px -18px rgba(168,91,8,.35);
 }
 
 *{box-sizing:border-box}
@@ -44,7 +37,14 @@ body{
 }
 h1,h2,h3{margin:0; text-wrap:balance}
 button{font:inherit; color:inherit; cursor:pointer}
-:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px}
+.pick:focus-visible{outline-offset:3px}
+/* Keyboard cursor. Deliberately a ring rather than a glow, so it never reads
+   as "this is the lead pick" — that meaning belongs to .top alone. */
+.pick.cursor{
+  border-color:var(--accent);
+  box-shadow:var(--shadow), 0 0 0 3px var(--accent-soft);
+}
 
 .mono{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
 .eyebrow{
@@ -96,7 +96,7 @@ button{font:inherit; color:inherit; cursor:pointer}
 .opt[aria-pressed="true"]{
   background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot); font-weight:600;
 }
-:root:not([data-theme="dark"]) .opt[aria-pressed="true"]{color:var(--accent)}
+:root[data-theme="light"] .opt[aria-pressed="true"]{color:var(--accent)}
 
 /* runtime */
 .time-read{display:flex; align-items:baseline; gap:8px}
@@ -134,12 +134,14 @@ input[type=range]::-moz-range-thumb{
 .svc.off .svc-name{color:var(--ink-3)}
 
 .runbtn{
-  width:100%; border:1px solid var(--accent-line); background:var(--accent); color:var(--surface);
-  border-radius:8px; padding:12px; font-size:14px; font-weight:600; letter-spacing:.01em;
-  transition:filter .12s,transform .06s;
+  width:100%; border:1px solid var(--accent-line); border-radius:8px; padding:12px;
+  font-size:14px; font-weight:600; letter-spacing:.01em;
+  background:var(--accent);
+  color:#0D0F15;                     /* dark ink on the bright amber of dark mode */
+  transition:filter .12s, transform .06s, box-shadow .15s;
 }
-:root[data-theme="dark"] .runbtn{color:#14161C}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .runbtn{color:#14161C}}
+:root[data-theme="light"] .runbtn{ color:#FFFFFF; }   /* light mode's amber is dark */
+.runbtn:hover{box-shadow:var(--glow)}
 .runbtn:hover{filter:brightness(1.07)}
 .runbtn:active{transform:translateY(1px)}
 .resetbtn{
@@ -189,7 +191,7 @@ input[type=range]::-moz-range-thumb{
 }
 .fchip b{font-weight:600; color:var(--ink)}
 .fchip.on{background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot)}
-:root:not([data-theme="dark"]) .fchip.on{color:var(--accent)}
+:root[data-theme="light"] .fchip.on{color:var(--accent)}
 .verdict{
   border:1px solid var(--line); border-radius:10px; background:var(--surface);
   padding:13px 15px; margin-bottom:11px;
@@ -219,7 +221,7 @@ input[type=range]::-moz-range-thumb{
 .fitbtn[aria-pressed="true"]{
   background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot); font-weight:600;
 }
-:root:not([data-theme="dark"]) .fitbtn[aria-pressed="true"]{color:var(--accent)}
+:root[data-theme="light"] .fitbtn[aria-pressed="true"]{color:var(--accent)}
 .tcard.unfit{opacity:.42}
 .tcard.unfit:hover{opacity:.72}
 .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; min-height:0}
@@ -245,13 +247,27 @@ input[type=range]::-moz-range-thumb{
 
 /* ---- result cards ---- */
 .bill{display:flex; flex-direction:column; gap:10px}
-.poster{
-  width:58px; aspect-ratio:2/3; border-radius:5px; object-fit:cover; flex:none;
-  background:var(--surface-2); border:1px solid var(--line); display:block;
+/* Posters arrive over the network, so the box is drawn at the right aspect
+   ratio immediately and shimmers until the image lands. Reserving the space
+   is what stops the card reflowing under the reader's eye. */
+@keyframes shimmer{
+  0%   {background-position:-180% 0}
+  100% {background-position: 180% 0}
 }
-.tposter{
-  width:34px; aspect-ratio:2/3; border-radius:3px; object-fit:cover; flex:none;
-  background:var(--surface-2); border:1px solid var(--line);
+.poster, .tposter{
+  aspect-ratio:2/3; object-fit:cover; flex:none; display:block;
+  border:1px solid var(--line); background:var(--surface-2);
+}
+.poster{width:58px; border-radius:6px}
+.tposter{width:34px; border-radius:4px}
+.poster.ldg, .tposter.ldg{
+  background-image:linear-gradient(100deg,
+    var(--surface-2) 30%, var(--surface-3) 50%, var(--surface-2) 70%);
+  background-size:220% 100%;
+  animation:shimmer 1.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion:reduce){
+  .poster.ldg, .tposter.ldg{animation:none}
 }
 .tcard.haspost{flex-direction:row; align-items:flex-start; gap:9px}
 .tcard.haspost .tbody{display:flex; flex-direction:column; gap:2px; min-width:0}
@@ -260,10 +276,21 @@ input[type=range]::-moz-range-thumb{
   background:var(--surface); border:1px solid var(--line); border-radius:11px;
   padding:15px 17px; box-shadow:var(--shadow); position:relative; overflow:hidden;
 }
-.pick.top{border-color:var(--accent-line)}
+.pick.top{
+  border-color:var(--accent-line);
+  box-shadow:var(--shadow), var(--glow);
+}
 .pick.top::before{
   content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent);
 }
+/* a faint wash from the accent edge, so the lead pick reads as lit rather than
+   merely outlined — barely visible, but the eye lands there first */
+.pick.top::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(100deg, var(--accent-soft) 0%, transparent 42%);
+  opacity:.55;
+}
+.pick.top > *{position:relative; z-index:1}
 .rank{
   font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--ink-3);
   padding-top:3px; width:22px; text-align:right;
@@ -277,7 +304,7 @@ input[type=range]::-moz-range-thumb{
 .title-line .yr{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-3)}
 .meta{display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:12px; color:var(--ink-3)}
 .meta .sep{opacity:.4}
-.hook{font-size:13.5px; color:var(--ink-2); max-width:64ch; line-height:1.45}
+.hook{font-size:13.5px; color:var(--ink-2); max-width:70ch; line-height:1.55}
 .why{
   font-size:12.5px; color:var(--ink-2); background:var(--surface-2); border-left:2px solid var(--accent);
   padding:7px 11px; border-radius:0 6px 6px 0; max-width:64ch;
@@ -315,9 +342,79 @@ input[type=range]::-moz-range-thumb{
 .rt i{width:7px; height:7px; border-radius:50%; display:inline-block; background:var(--fresh)}
 .rt.rotten i{background:var(--rotten)}
 .score-note{font-size:11px; color:var(--ink-3); line-height:1.4; margin-top:-3px}
-:root:not([data-theme="dark"]) .runtime-pill.tight{color:var(--accent)}
+:root[data-theme="light"] .runtime-pill.tight{color:var(--accent)}
 
 /* ---- states ---- */
+/* ---- card actions ---- */
+.acts{display:flex; gap:7px; flex-wrap:wrap; margin-top:2px}
+.act{
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+  border-radius:6px; padding:5px 10px; font-size:11.5px; font-weight:500;
+  transition:border-color .12s, color .12s, background .12s;
+}
+.act:hover{border-color:var(--accent-line); color:var(--accent-hot); background:var(--accent-soft)}
+.act.on{border-color:var(--loved); color:var(--loved); background:var(--loved-soft)}
+.stale-tag{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--ink-3); align-self:center;
+}
+
+/* ---- compare ---- */
+.compare{
+  border:1px solid var(--accent-line); border-radius:12px; background:var(--surface);
+  padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow);
+}
+.compare-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:12px}
+.compare-head h3{font-family:'Instrument Serif',Georgia,serif; font-weight:400; font-size:19px}
+.cmp-grid{display:grid; grid-template-columns:1fr auto 1fr; gap:10px 16px; align-items:center}
+.cmp-side{display:flex; gap:10px; align-items:center; min-width:0}
+.cmp-side img{width:40px; aspect-ratio:2/3; object-fit:cover; border-radius:4px; border:1px solid var(--line); flex:none}
+.cmp-side .nm{font-size:13.5px; font-weight:600; line-height:1.25}
+.cmp-side .sub{font-size:11px; color:var(--ink-3); font-family:'IBM Plex Mono',monospace}
+.cmp-vs{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em;
+  color:var(--ink-3); text-transform:uppercase;
+}
+.cmp-rows{margin-top:13px; display:grid; gap:7px}
+.cmp-row{display:grid; grid-template-columns:1fr 92px 1fr; gap:10px; align-items:center; font-size:12px}
+.cmp-row .lab{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink-3); text-align:center;
+}
+.cmp-bar{height:5px; border-radius:99px; background:var(--sunk); border:1px solid var(--line); overflow:hidden}
+.cmp-bar span{display:block; height:100%; background:var(--ink-3); border-radius:99px}
+.cmp-bar.win span{background:var(--accent)}
+.cmp-bar.l{transform:scaleX(-1)}
+.cmp-why{
+  margin-top:12px; font-size:12.5px; color:var(--ink-2); line-height:1.5;
+  border-top:1px solid var(--line); padding-top:11px;
+}
+.cmp-why b{color:var(--ink)}
+
+/* ---- history ---- */
+.hist{display:flex; flex-direction:column; gap:6px}
+.hist-row{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  font-size:12px; color:var(--ink-2); padding:4px 0; border-bottom:1px solid var(--line);
+}
+.hist-row:last-child{border-bottom:none}
+.hist-row .t{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.hist-row button{
+  background:none; border:none; color:var(--ink-3); font-size:15px; line-height:1; padding:0 2px;
+}
+.hist-row button:hover{color:var(--hated)}
+.hist-empty{font-size:12px; color:var(--ink-3); line-height:1.45}
+
+/* ---- keyboard help ---- */
+.keys{
+  display:grid; grid-template-columns:auto 1fr; gap:5px 10px; font-size:12px;
+  color:var(--ink-2); margin-top:9px;
+}
+.keys kbd{
+  font-family:'IBM Plex Mono',monospace; font-size:10.5px; background:var(--surface-2);
+  border:1px solid var(--line-2); border-bottom-width:2px; border-radius:4px;
+  padding:2px 6px; color:var(--ink); white-space:nowrap;
+}
 .empty{
   border:1px dashed var(--line-2); border-radius:12px; padding:44px 30px; text-align:center;
   color:var(--ink-3); background:var(--surface);
@@ -346,7 +443,7 @@ input[type=range]::-moz-range-thumb{
   padding:10px 16px; font-size:13px; font-weight:600; white-space:nowrap;
 }
 .copybtn:hover{border-color:var(--accent-line); color:var(--accent-hot)}
-:root:not([data-theme="dark"]) .copybtn:hover{color:var(--accent)}
+:root[data-theme="light"] .copybtn:hover{color:var(--accent)}
 .foot{margin-top:30px; font-size:11.5px; color:var(--ink-3); line-height:1.55; max-width:70ch}
 
 @media (max-width:940px){
@@ -430,6 +527,26 @@ input[type=range]::-moz-range-thumb{
     </div>
 
     <div class="block">
+      <div class="block-head">
+        <span class="eyebrow">Recent evenings</span>
+        <span class="hint" id="histhint"></span>
+      </div>
+      <div class="hist" id="history"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><span class="eyebrow">Keyboard</span></div>
+      <div class="keys">
+        <kbd>J</kbd><span>next pick</span>
+        <kbd>K</kbd><span>previous pick</span>
+        <kbd>C</kbd><span>compare with the top pick</span>
+        <kbd>W</kbd><span>mark watched</span>
+        <kbd>/</kbd><span>search titles</span>
+        <kbd>Esc</kbd><span>clear</span>
+      </div>
+    </div>
+
+    <div class="block">
       <button class="runbtn" id="run" type="button">Program the evening</button>
       <button class="resetbtn" id="reset" type="button">Clear everything</button>
     </div>
@@ -444,6 +561,7 @@ input[type=range]::-moz-range-thumb{
         <span class="count" id="billcount"></span>
       </div>
       <div class="filtersum" id="filtersum"></div>
+      <div id="compare"></div>
       <div id="bill"></div>
       <div class="locked" id="locked"></div>
     </div>
@@ -895,6 +1013,7 @@ function applyEnrichment(payload){
       f.svcChecked = true;      /* checked and empty means "on nothing", not "unknown" */
     }
     if(e.poster) f.poster = e.poster;
+    if(e.overview){ f.h = e.overview; f.hSrc = "tmdb"; }   /* real synopsis beats the terse hook */
     hit++;
   });
   ENRICHED = Object.assign({}, payload._meta, {applied: hit});
@@ -944,6 +1063,8 @@ const S = {
   rate:    (function(v){ return (typeof v === "number" && v >= 0 && v <= 4) ? v : 0; })(load("rate",0)),
   fitOnly: load("fitOnly",false),
   minRT:   load("minRT",0),
+  watched: load("watched",{}),
+  offered: load("offered",[]),
   genres:  load("genres",[]),
   svc:     Object.assign({}, svcDefault, load("svc",{})),
   taste:   load("taste",{}),
@@ -954,6 +1075,34 @@ function save(){
   store("room",S.room); store("time",S.time); store("genres",S.genres);
   store("svc",S.svc);   store("taste",S.taste);
   store("rate",S.rate); store("minRT",S.minRT); store("fitOnly",S.fitOnly);
+  store("watched",S.watched); store("offered",S.offered);
+}
+
+/* ---------- evening history ----------
+   Two memories doing two different jobs:
+   watched  - you actually watched it, so never offer it again until cleared
+   offered  - the last few bills, so tonight's does not repeat yesterday's */
+const OFFER_MEMORY = 3;
+
+function recentlyOfferedIndex(title){
+  for(let i = 0; i < S.offered.length && i < OFFER_MEMORY; i++){
+    if(S.offered[i].titles.indexOf(title) > -1) return i;
+  }
+  return -1;
+}
+function rememberOffer(titles){
+  if(!titles.length) return;
+  S.offered.unshift({at: new Date().toISOString(), titles: titles.slice(0,8)});
+  S.offered = S.offered.slice(0, OFFER_MEMORY);
+  save();
+}
+function markWatched(title){
+  S.watched[title] = new Date().toISOString();
+  save(); renderBill(); renderGrid(); renderHistory();
+}
+function unmarkWatched(title){
+  delete S.watched[title];
+  save(); renderBill(); renderGrid(); renderHistory();
 }
 
 /* ---------- helpers ---------- */
@@ -1064,10 +1213,11 @@ function scoreAll(){
   R.up.forEach(function(x){ upSet[x]=1; });
   R.down.forEach(function(x){ downSet[x]=1; });
 
-  const kept = [], lockedSvc = [], notStreaming = [];
+  const kept = [], lockedSvc = [], notStreaming = [], watched = [];
 
   FILMS.forEach(function(f){
-    if(S.taste[f.t]) return;                                  /* already seen */
+    if(S.taste[f.t]) return;                                  /* rated, so already seen */
+    if(S.watched[f.t]){ watched.push(f); return; }            /* watched on a recent evening */
     if(!hardPass(f)) return;                                  /* clock, room, rating, score, genre */
 
     /* taste */
@@ -1110,11 +1260,21 @@ function scoreAll(){
                 : ((S.room === "friends" || S.room === "kids") ? 0.16 : 0.09)
                   / (1 + T.n * 0.35);
 
-    const score = (0.46*tasteN + 0.22*genreN + 0.18*roomN + fameW*fameN) /
-                  (0.46 + 0.22 + 0.18 + fameW);
+    const W = {taste:0.46, genre:0.22, room:0.18, fame:fameW};
+    let score = (W.taste*tasteN + W.genre*genreN + W.room*roomN + W.fame*fameN) /
+                (W.taste + W.genre + W.room + W.fame);
+
+    /* Shown on a recent evening? Nudge it down so the bill is not word-for-word
+       identical night after night. Small and bounded — this reorders near-ties,
+       it never buries a genuinely better match. */
+    const seenIdx = recentlyOfferedIndex(f.t);
+    const stale = seenIdx === -1 ? 0 : (0.05 - seenIdx * 0.015);
+    score = score * (1 - stale);
 
     const on = f.svcs.filter(function(c){ return S.svc[c]; });
-    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on};
+    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on,
+                 parts:{taste:tasteN, genre:genreN, room:roomN, fame:fameN},
+                 weights:W, stale:stale, seenIdx:seenIdx};
     if(!f.svcs.length && f.svcChecked){ notStreaming.push(rec); return; }  /* rent or buy only */
     if(!on.length){ lockedSvc.push(rec); return; }                        /* carried, not by you */
     kept.push(rec);
@@ -1123,7 +1283,7 @@ function scoreAll(){
   kept.sort(function(a,b){ return b.score - a.score; });
   lockedSvc.sort(function(a,b){ return b.score - a.score; });
   notStreaming.sort(function(a,b){ return b.score - a.score; });
-  return {picks:kept, locked:lockedSvc, notStreaming:notStreaming, T:T};
+  return {picks:kept, locked:lockedSvc, notStreaming:notStreaming, watched:watched, T:T};
 }
 
 /* ---------- reasoning ---------- */
@@ -1319,8 +1479,9 @@ function renderGrid(){
     if(f.poster){
       b.classList.add("haspost");
       const img = document.createElement("img");
-      img.className = "tposter"; img.loading = "lazy"; img.alt = "";
+      img.className = "tposter ldg"; img.loading = "lazy"; img.alt = "";
       img.src = POSTER_BASE + f.poster;
+      img.addEventListener("load",  function(){ img.classList.remove("ldg"); });
       img.addEventListener("error", function(){ img.remove(); b.classList.remove("haspost"); });
       b.appendChild(img);
       host = el("span","tbody"); b.appendChild(host);
@@ -1430,9 +1591,37 @@ function renderVerdict(list){
 function checks_(f){ return checkFilters(f); }
 
 /* ---------- the bill ---------- */
+let CURSOR = -1;
+
+/* The cursor highlight is a focus indicator and must not outlive focus, or it
+   sits on a card the reader clicked away from. Delegated to the container:
+   focusout bubbles, plain blur does not, and one listener survives re-renders
+   that replace every card. */
+(function bindCursorRelease(){
+  const bill = document.getElementById("bill");
+  if(!bill) return;
+  bill.addEventListener("focusout", function(e){
+    const next = e.relatedTarget;
+    if(!next || !next.closest || !next.closest("#bill .pick")){
+      CURSOR = -1; paintCursor();
+    }
+  });
+  document.addEventListener("pointerdown", function(e){
+    if(!e.target.closest || !e.target.closest("#bill .pick")){
+      CURSOR = -1; paintCursor();
+    }
+  });
+})();
+
+function paintCursor(){
+  const cards = document.querySelectorAll("#bill .pick");
+  cards.forEach(function(c,i){ c.classList.toggle("cursor", i === CURSOR); });
+}
+
 function renderBill(){
   renderFilterSummary();
   const out = scoreAll();
+  LAST = out;
   const bill = $("bill");
   bill.innerHTML = "";
 
@@ -1459,6 +1648,9 @@ function renderBill(){
   picks.forEach(function(rec,i){
     const f = rec.f;
     const card = el("div","pick" + (i===0 ? " top" : ""));
+    card.tabIndex = 0;
+    card.dataset.title = f.t;
+    card.addEventListener("focus", function(){ CURSOR = i; paintCursor(); });
 
     card.appendChild(el("div","rank mono", String(i+1).padStart(2,"0")));
 
@@ -1467,10 +1659,11 @@ function renderBill(){
        present and removes itself if the request is refused. */
     if(f.poster){
       const img = document.createElement("img");
-      img.className = "poster";
+      img.className = "poster ldg";
       img.loading = "lazy";
       img.alt = "";
       img.src = POSTER_BASE + f.poster;
+      img.addEventListener("load",  function(){ img.classList.remove("ldg"); });
       img.addEventListener("error", function(){ img.remove(); });
       card.appendChild(img);
     }
@@ -1505,6 +1698,27 @@ function renderBill(){
     const tags = el("div","tags");
     f.a.slice(0,4).forEach(function(a){ tags.appendChild(el("span","tag",a)); });
     body.appendChild(tags);
+
+    const acts = el("div","acts");
+    const wb = el("button","act","Watched it");
+    wb.type = "button";
+    wb.addEventListener("click", function(e){ e.stopPropagation(); markWatched(f.t); });
+    acts.appendChild(wb);
+    if(i > 0){
+      const cb = el("button","act", COMPARE === f.t ? "Hide comparison" : "Compare with #1");
+      cb.type = "button";
+      cb.addEventListener("click", function(e){
+        e.stopPropagation();
+        COMPARE = (COMPARE === f.t) ? null : f.t;
+        renderBill();
+      });
+      acts.appendChild(cb);
+    }
+    if(rec.seenIdx > -1){
+      acts.appendChild(el("span","stale-tag",
+        rec.seenIdx === 0 ? "on last night's bill" : "on a recent bill"));
+    }
+    body.appendChild(acts);
     card.appendChild(body);
 
     const aside = el("div","aside");
@@ -1526,6 +1740,9 @@ function renderBill(){
     bill.appendChild(card);
   });
 
+  renderCompare();
+  paintCursor();
+
   /* what your subscriptions are costing you */
   const lock = $("locked");
   lock.innerHTML = "";
@@ -1546,6 +1763,12 @@ function renderBill(){
       " strong match" + (gone.length===1?"":"es") + " — including " +
       gone.slice(0,3).map(function(r){ return r.f.t; }).join(", ") +
       " — are rent-or-buy only tonight, so they are left off.");
+  }
+  const seen = out.watched || [];
+  if(seen.length){
+    lines.push("<b>Already watched:</b> " + seen.length + " title" + (seen.length===1?"":"s") +
+      " held back because you marked " + (seen.length===1?"it":"them") +
+      " watched — clear any of them under Recent evenings.");
   }
   if(lines.length) lock.innerHTML = lines.join("<br><br>");
   return out;
@@ -1600,6 +1823,119 @@ function when(iso){
   return days === 1 ? "yesterday" : days + " days ago";
 }
 
+/* ---------- compare two picks ----------
+   The fit numbers are close together by design, so "why is 73 above 68" is a
+   fair question. This answers it from the same components the score is built
+   from, rather than restating the score. */
+let LAST = null;          /* the most recent scoring result, for keyboard actions */
+let COMPARE = null;       /* title currently being compared against the leader */
+
+const PART_LABEL = {taste:"Taste", genre:"Genre", room:"Room", fame:"Known"};
+
+function renderCompare(){
+  const wrap = $("compare");
+  wrap.innerHTML = "";
+  if(!COMPARE || !LAST || LAST.picks.length < 2) return;
+
+  const a = LAST.picks[0];
+  const b = LAST.picks.filter(function(r){ return r.f.t === COMPARE; })[0];
+  if(!b || b === a) return;
+
+  const box = el("div","compare");
+  const head = el("div","compare-head");
+  head.appendChild(el("h3","","Why " + a.f.t + " ranks above " + b.f.t));
+  const x = el("button","act","Close");
+  x.type = "button";
+  x.addEventListener("click", function(){ COMPARE = null; renderCompare(); });
+  head.appendChild(x);
+  box.appendChild(head);
+
+  function side(rec){
+    const d = el("div","cmp-side");
+    if(rec.f.poster){
+      const im = document.createElement("img");
+      im.src = POSTER_BASE + rec.f.poster; im.alt = "";
+      im.addEventListener("error", function(){ im.remove(); });
+      d.appendChild(im);
+    }
+    const t = el("div");
+    t.appendChild(el("div","nm",rec.f.t));
+    t.appendChild(el("div","sub", hm(rec.f.r) + " · " + rec.f.mpaa + " · " + rec.f.rt + "% · fit " +
+                                  Math.round(rec.score*100)));
+    d.appendChild(t);
+    return d;
+  }
+  const grid = el("div","cmp-grid");
+  grid.appendChild(side(a));
+  grid.appendChild(el("div","cmp-vs","versus"));
+  grid.appendChild(side(b));
+  box.appendChild(grid);
+
+  /* per-component bars, plus the weighted gap that actually decided it */
+  const rows = el("div","cmp-rows");
+  const gaps = [];
+  Object.keys(PART_LABEL).forEach(function(k){
+    const av = a.parts[k], bv = b.parts[k];
+    const w = a.weights[k] || 0;
+    gaps.push({k:k, gap:(av-bv)*w, av:av, bv:bv});
+    const row = el("div","cmp-row");
+    const lb = el("div","cmp-bar l" + (av >= bv ? " win" : ""));
+    const ls = el("span"); ls.style.width = Math.round(av*100) + "%"; lb.appendChild(ls);
+    row.appendChild(lb);
+    row.appendChild(el("div","lab", PART_LABEL[k]));
+    const rb = el("div","cmp-bar" + (bv > av ? " win" : ""));
+    const rs = el("span"); rs.style.width = Math.round(bv*100) + "%"; rb.appendChild(rs);
+    row.appendChild(rb);
+    rows.appendChild(row);
+  });
+  box.appendChild(rows);
+
+  gaps.sort(function(p,q){ return Math.abs(q.gap) - Math.abs(p.gap); });
+  const top = gaps[0];
+  const why = el("div","cmp-why");
+  const dir = top.gap >= 0 ? a : b;
+  const other = top.gap >= 0 ? b : a;
+  let txt = "<b>" + PART_LABEL[top.k].toLowerCase() + "</b> is what separates them: " +
+            "<b>" + dir.f.t + "</b> scores " + Math.round(Math.max(top.av,top.bv)*100) +
+            " there against " + Math.round(Math.min(top.av,top.bv)*100) + " for " + other.f.t + ".";
+  if(b.stale > 0){
+    txt += " " + b.f.t + " also carries a small freshness penalty — it was on a recent bill.";
+  }
+  if(Math.abs(a.score - b.score) < 0.02){
+    txt += " The two are within a couple of points overall, so treat this as a coin toss you can break on runtime or mood.";
+  }
+  why.innerHTML = txt;
+  box.appendChild(why);
+  wrap.appendChild(box);
+}
+
+/* ---------- recent evenings ---------- */
+function renderHistory(){
+  const wrap = $("history"); wrap.innerHTML = "";
+  const titles = Object.keys(S.watched).sort(function(a,b){
+    return (S.watched[b]||"").localeCompare(S.watched[a]||"");
+  });
+  $("histhint").textContent = titles.length ? titles.length + " watched" : "";
+  if(!titles.length){
+    const e = el("p","hist-empty");
+    e.innerHTML = "Nothing marked yet. Hit <b>Watched it</b> on a pick and it stops being offered, "
+                + "and the last few bills stay out of each other's way.";
+    wrap.appendChild(e);
+    return;
+  }
+  titles.slice(0,8).forEach(function(t){
+    const row = el("div","hist-row");
+    row.appendChild(el("span","t",t));
+    const u = el("button",null,"×");
+    u.type = "button";
+    u.title = "Put " + t + " back in the running";
+    u.setAttribute("aria-label","Un-watch " + t);
+    u.addEventListener("click", function(){ unmarkWatched(t); });
+    row.appendChild(u);
+    wrap.appendChild(row);
+  });
+}
+
 /* ---------- brief for handoff ---------- */
 function brief(){
   const R = room();
@@ -1630,12 +1966,14 @@ function brief(){
 }
 
 /* ---------- theme ---------- */
+/* Dark is the stylesheet's base, so "dark" simply means no attribute at all —
+   which also means the page paints dark on first frame with no flash. */
 function applyTheme(mode){
-  const r = document.documentElement;
-  if(mode === "system") r.removeAttribute("data-theme");
-  else r.setAttribute("data-theme", mode);
-  const label = mode === "system" ? "Theme: Auto" : (mode === "dark" ? "Theme: Dark" : "Theme: Light");
-  $("themebtn").textContent = label;
+  const r = document.documentElement, b = $("themebtn");
+  if(mode === "light") r.setAttribute("data-theme", "light");
+  else r.removeAttribute("data-theme");
+  b.textContent = mode === "light" ? "\u2600 Light" : "\u263D Dark";
+  b.setAttribute("aria-label", "Theme is " + (mode === "light" ? "light" : "dark") + ". Activate to switch.");
 }
 
 /* ---------- wiring ---------- */
@@ -1643,7 +1981,7 @@ function init(){
   renderRooms(); renderGenres(); renderServices(); renderTime();
   renderRating(); renderRT();
   $("fitonly").setAttribute("aria-pressed", S.fitOnly ? "true" : "false");
-  renderBill(); renderGrid(); renderChips();
+  renderBill(); renderGrid(); renderChips(); renderHistory();
 
   $("rt").value = S.minRT;
   $("rt").addEventListener("input", function(e){
@@ -1663,8 +2001,49 @@ function init(){
     searchTerm = e.target.value; renderGrid();
   });
 
+  /* ---------- keyboard ----------
+     Single keys only, and never while the reader is typing in a field. */
+  document.addEventListener("keydown", function(e){
+    const tag = (e.target.tagName || "").toLowerCase();
+    const typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+
+    if(e.key === "/" && !typing){ e.preventDefault(); $("search").focus(); return; }
+    if(e.key === "Escape"){
+      if(typing){ e.target.blur(); return; }
+      if(COMPARE){ COMPARE = null; renderBill(); return; }
+      CURSOR = -1; paintCursor(); return;
+    }
+    if(typing) return;
+
+    const cards = document.querySelectorAll("#bill .pick");
+    if(!cards.length) return;
+    const k = e.key.toLowerCase();
+
+    if(k === "j" || e.key === "ArrowDown"){
+      e.preventDefault();
+      CURSOR = Math.min(cards.length - 1, CURSOR + 1);
+      cards[CURSOR].focus({preventScroll:false});
+      paintCursor();
+    } else if(k === "k" || e.key === "ArrowUp"){
+      e.preventDefault();
+      CURSOR = CURSOR <= 0 ? 0 : CURSOR - 1;
+      cards[CURSOR].focus({preventScroll:false});
+      paintCursor();
+    } else if(k === "w" && CURSOR > -1){
+      e.preventDefault();
+      markWatched(cards[CURSOR].dataset.title);
+    } else if(k === "c" && CURSOR > 0){
+      e.preventDefault();
+      const t = cards[CURSOR].dataset.title;
+      COMPARE = (COMPARE === t) ? null : t;
+      renderBill();
+    }
+  });
+
   $("run").addEventListener("click", function(){
     const out = renderBill();
+    rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
     renderGrid();
     const b = $("run"), n = out.picks.length;
     b.textContent = n
@@ -1686,6 +2065,7 @@ function init(){
   $("reset").addEventListener("click", function(){
     S.room = "two"; S.time = 140; S.genres = []; S.taste = {};
     S.rate = 0; S.minRT = 0; S.fitOnly = false;
+    S.watched = {}; S.offered = []; COMPARE = null; CURSOR = -1;
     $("fitonly").setAttribute("aria-pressed","false");
     S.svc = Object.assign({}, svcDefault);
     $("time").value = 140; $("rt").value = 0;
@@ -1693,7 +2073,7 @@ function init(){
     save();
     renderRooms(); renderGenres(); renderServices(); renderTime();
     renderRating(); renderRT();
-    renderGrid(); renderChips(); renderBill();
+    renderGrid(); renderChips(); renderBill(); renderHistory();
   });
 
   $("copy").addEventListener("click", function(){
@@ -1717,10 +2097,10 @@ function init(){
     }
   });
 
-  let theme = load("theme","system");
+  let theme = load("theme","dark");
   applyTheme(theme);
   $("themebtn").addEventListener("click", function(){
-    theme = theme === "system" ? "light" : (theme === "light" ? "dark" : "system");
+    theme = theme === "light" ? "dark" : "light";
     store("theme", theme); applyTheme(theme);
   });
 

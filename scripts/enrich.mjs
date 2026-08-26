@@ -192,6 +192,10 @@ async function enrichOne(film) {
   out.tmdbScore = details?.vote_average ? Math.round(details.vote_average * 10) : null;
   out.votes   = details?.vote_count ?? null;
   out.poster  = details?.poster_path || hit.poster_path || null;
+  /* A real plot synopsis, in complete sentences. The hand-written hooks in
+     index.html are deliberately terse and often sentence fragments; this
+     replaces them wherever TMDB has something usable. */
+  out.overview = trimOverview(details?.overview || hit.overview || "");
   out.providers = flatrateCodes(prov);
   /* Distinguishes "checked, and it is on nothing" from "never checked".
      Without this the page would keep showing a hand-guessed service for a
@@ -230,6 +234,25 @@ async function fetchOmdb(imdbId) {
   } catch (e) {
     return { rt: null, error: "network: " + e.message };
   }
+}
+
+/**
+ * TMDB overviews run from one line to a full marketing paragraph. Keep whole
+ * sentences up to a readable length rather than cutting mid-clause, and drop
+ * anything too thin to be worth showing.
+ */
+export function trimOverview(text, max = 260) {
+  const t = String(text || "").replace(/\s+/g, " ").trim();
+  if (t.length < 40) return null;                 // stubs like "No overview found."
+  if (t.length <= max) return t;
+  const sentences = t.match(/[^.!?]+[.!?]+(\s|$)/g) || [];
+  let out = "";
+  for (const s of sentences) {
+    if ((out + s).trim().length > max) break;
+    out += s;
+  }
+  out = out.trim();
+  return out.length >= 60 ? out : t.slice(0, max).replace(/\s+\S*$/, "") + "\u2026";
 }
 
 /* ---------------- runner ---------------- */
@@ -281,6 +304,7 @@ async function main() {
       matched: ok.length,
       withProviders: ok.filter((r) => r.providers.length).length,
       withRT: ok.filter((r) => r.rt != null).length,
+      withOverview: ok.filter((r) => r.overview).length,
       omdbErrors: (() => {
         const tally = {};
         ok.forEach((r) => { if (r.omdbError) tally[r.omdbError] = (tally[r.omdbError] || 0) + 1; });
@@ -306,6 +330,7 @@ async function main() {
     }
   }
   console.log(`with poster      ${ok.filter((r) => r.poster).length}`);
+  console.log(`with synopsis    ${payload._meta.withOverview}`);
   if (missed.length) {
     console.log(`\nunmatched (${missed.length}) — check these by hand:`);
     missed.slice(0, 25).forEach((r) => console.log(`  - ${r.t} (${r.y}): ${r.error}`));
