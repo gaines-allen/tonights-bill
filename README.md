@@ -125,6 +125,22 @@ external images; those elements remove themselves on error rather than leaving
 broken boxes, which is why posters appear on GitHub Pages or locally but not
 inside a sandboxed artifact frame.
 
+### Why isn't this film showing up?
+
+Search any title in the taste grid and the page reports its verdict on every
+filter — runtime, room, rating floor, critic bar, genre, and where it streams —
+saying which ones it failed and by how much ("2h 25m runs past your 2h 20m —
+5m too long"). Dimmed grid cards carry the same explanation as a tooltip.
+
+The idea is borrowed from SuggestArr's `dry_run` mode, which returns every
+candidate with a per-filter pass/fail record instead of silently dropping the
+ones that lose. An unexplained absence is the hardest thing to debug in a
+recommender, because nothing appears to be wrong.
+
+`checkFilters()` is the single source of truth: `hardPass()` and `fitsTonight()`
+are both derived from it, so the explanation can never drift from the behaviour
+it describes.
+
 ### Tests
 
 ```bash

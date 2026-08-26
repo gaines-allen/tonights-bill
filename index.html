@@ -190,6 +190,26 @@ input[type=range]::-moz-range-thumb{
 .fchip b{font-weight:600; color:var(--ink)}
 .fchip.on{background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot)}
 :root:not([data-theme="dark"]) .fchip.on{color:var(--accent)}
+.verdict{
+  border:1px solid var(--line); border-radius:10px; background:var(--surface);
+  padding:13px 15px; margin-bottom:11px;
+}
+.verdict + .verdict{margin-top:-4px}
+.verdict h4{
+  font-family:'Instrument Serif',Georgia,serif; font-weight:400; font-size:17px;
+  margin:0 0 2px; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
+}
+.verdict .vsum{font-size:12px; color:var(--ink-3); margin:0 0 9px}
+.verdict .vsum.in{color:var(--loved)}
+.verdict .vsum.out{color:var(--hated)}
+.checks{display:grid; gap:4px}
+.chk{display:grid; grid-template-columns:15px 118px minmax(0,1fr); gap:8px; align-items:baseline; font-size:12.5px}
+.chk .mk{font-family:'IBM Plex Mono',monospace; font-weight:600; text-align:center}
+.chk.y .mk{color:var(--loved)}
+.chk.n .mk{color:var(--hated)}
+.chk .lb{color:var(--ink-3); font-size:11px; letter-spacing:.02em}
+.chk .dt{color:var(--ink-2)}
+.chk.n .dt{color:var(--ink); font-weight:500}
 .gridnote{margin:0 0 9px; font-size:12px; color:var(--ink-3); line-height:1.45; max-width:72ch}
 .fitbtn{
   border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
@@ -448,6 +468,7 @@ input[type=range]::-moz-range-thumb{
           <span class="key"><i style="background:var(--hated)"></i><b>Missed</b></span>
         </div>
       </div>
+      <div id="verdict"></div>
       <p class="gridnote" id="gridnote"></p>
       <div class="grid-titles" id="titlegrid"></div>
       <div class="chips" id="chips"></div>
@@ -992,13 +1013,47 @@ function mean(arr, fn){
 /* Single source of truth for "does this film fit tonight". The bill and the
    taste grid both call it, so the two can never disagree on screen again.
    Service is separate: it is reported rather than silently dropped. */
+function checkFilters(f){
+  const R = room();
+  const roomOK = FLOOR_RANK[f.k] <= FLOOR_RANK[R.floor];
+  const on = f.svcs.filter(function(c){ return S.svc[c]; });
+  const genreOK = !S.genres.length || f.g.some(function(g){ return S.genres.indexOf(g)>-1; });
+  return [
+    {k:"clock", label:"Runtime", pass: f.r <= S.time,
+     detail: f.r <= S.time
+       ? hm(f.r) + " fits inside " + hm(S.time)
+       : hm(f.r) + " runs past your " + hm(S.time) + " — " + hm(f.r - S.time) + " too long"},
+    {k:"room", label:"Who’s watching", pass: roomOK,
+     detail: roomOK
+       ? "rated " + f.k + ", fine for " + R.n.toLowerCase()
+       : "rated " + f.k + ", too old for " + R.n.toLowerCase()},
+    {k:"rating", label:"Minimum rating", pass: rateRank(f) >= S.rate,
+     detail: S.rate === 0 ? f.mpaa + ", no minimum set"
+       : (rateRank(f) >= S.rate ? f.mpaa + " meets " + floorName(S.rate)
+                                : f.mpaa + " is below your " + floorName(S.rate) + " floor")},
+    {k:"critics", label:"Critic score", pass: f.rt >= S.minRT,
+     detail: S.minRT === 0 ? f.rt + "%, no bar set"
+       : (f.rt >= S.minRT ? f.rt + "% clears " + S.minRT + "%"
+                          : f.rt + "% is under your " + S.minRT + "% bar")},
+    {k:"genre", label:"Genre", pass: genreOK,
+     detail: !S.genres.length ? f.g.map(gLabel).join(", ") + ", no genre filter"
+       : (genreOK ? "matches " + f.g.filter(function(g){ return S.genres.indexOf(g)>-1; }).map(gLabel).join(", ")
+                  : f.g.map(gLabel).join(", ") + " — none of them selected")},
+    {k:"service", label:"Where it streams", pass: on.length > 0,
+     detail: on.length ? "on " + on.map(function(c){ return SVC_NAME[c]; }).join(", ")
+       : (f.svcs.length ? "only on " + f.svcs.map(function(c){ return SVC_NAME[c]; }).join(", ") + ", which you don’t have"
+                        : (f.svcChecked ? "not on any subscription service right now — rent or buy only"
+                                        : "no availability recorded"))}
+  ];
+}
+
+/* Service is judged separately in scoreAll so it can report WHY a title is
+   missing rather than silently dropping it, so it is excluded here. */
 function hardPass(f){
-  if(f.r > S.time) return false;
-  if(FLOOR_RANK[f.k] > FLOOR_RANK[room().floor]) return false;
-  if(rateRank(f) < S.rate) return false;
-  if(f.rt < S.minRT) return false;
-  if(S.genres.length && !f.g.some(function(g){ return S.genres.indexOf(g)>-1; })) return false;
-  return true;
+  return checkFilters(f).every(function(c){ return c.k === "service" || c.pass; });
+}
+function fitsTonight(f){
+  return checkFilters(f).every(function(c){ return c.pass; });
 }
 
 function scoreAll(){
@@ -1225,7 +1280,7 @@ function renderGrid(){
   let offCount = 0;
   const list = FILMS.filter(function(f){
     if(q && f.t.toLowerCase().indexOf(q)===-1 && f.d.toLowerCase().indexOf(q)===-1) return false;
-    if(!hardPass(f)){ offCount++; if(S.fitOnly) return false; }
+    if(!fitsTonight(f)){ offCount++; if(S.fitOnly) return false; }
     return true;
   }).sort(function(a,b){
     return (b.pop - a.pop) || (b.y - a.y);
@@ -1238,18 +1293,27 @@ function renderGrid(){
     return;
   }
 
+  renderVerdict(list);
+
   const note = $("gridnote");
   note.innerHTML = S.fitOnly
     ? "Showing only titles that clear tonight&rsquo;s filters. " + offCount +
       " hidden. Turn the toggle off to rate anything."
     : "This is your permanent taste profile, not tonight&rsquo;s results &mdash; rate anything here, "
       + "including films you would never watch tonight. <b>" + offCount +
-      " of these do not fit tonight&rsquo;s filters</b> and are dimmed; they are excluded from the bill above.";
+      " of these do not fit tonight&rsquo;s filters</b> and are dimmed. "
+      + "Search a title to see exactly which filter left it off.";
 
   list.forEach(function(f){
     const state = S.taste[f.t] || "";
-    const b = el("button","tcard" + (hardPass(f) ? "" : " unfit"));
+    const fits = fitsTonight(f);
+    const b = el("button","tcard" + (fits ? "" : " unfit"));
     b.type = "button";
+    if(!fits){
+      b.title = "Left off tonight: " +
+        checkFilters(f).filter(function(c){ return !c.pass; })
+          .map(function(c){ return c.detail; }).join("; ");
+    }
     if(state) b.setAttribute("data-state", state);
     let host = b;
     if(f.poster){
@@ -1321,6 +1385,49 @@ function renderFilterSummary(){
   const tagged = Object.keys(S.taste).length;
   chip("Taste", tagged ? tagged + " tagged" : "not set", tagged > 0);
 }
+
+/* ---------- why isn't this one showing up? ----------
+   Search a title and get the verdict on every filter, so an absence is
+   explained rather than mysterious. */
+function renderVerdict(list){
+  const wrap = $("verdict");
+  wrap.innerHTML = "";
+  const q = searchTerm.trim();
+  if(!q || !list.length || list.length > 3) return;
+
+  list.slice(0,3).forEach(function(f){
+    const checks = checks_(f);
+    const failed = checks.filter(function(c){ return !c.pass; });
+    const tagged = S.taste[f.t];
+
+    const box = el("div","verdict");
+    const h = el("h4");
+    h.appendChild(el("span","",f.t));
+    h.appendChild(el("span","yr mono", String(f.y)));
+    box.appendChild(h);
+
+    const sum = el("p","vsum " + (failed.length ? "out" : "in"));
+    sum.textContent = tagged
+      ? (tagged === "loved" ? "You marked this loved, so it is never recommended back to you."
+                            : "You marked this a miss, so it is never recommended back to you.")
+      : (failed.length
+          ? "Left off tonight — " + failed.length + " filter" + (failed.length===1?"":"s") + " below"
+          : "Clears every filter, so it is in the running tonight.");
+    box.appendChild(sum);
+
+    const cl = el("div","checks");
+    checks.forEach(function(c){
+      const row = el("div","chk " + (c.pass ? "y" : "n"));
+      row.appendChild(el("span","mk", c.pass ? "\u2713" : "\u2715"));
+      row.appendChild(el("span","lb", c.label));
+      row.appendChild(el("span","dt", c.detail));
+      cl.appendChild(row);
+    });
+    box.appendChild(cl);
+    wrap.appendChild(box);
+  });
+}
+function checks_(f){ return checkFilters(f); }
 
 /* ---------- the bill ---------- */
 function renderBill(){
