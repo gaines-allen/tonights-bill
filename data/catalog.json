@@ -1,14 +1,14 @@
 {
  "_meta": {
-  "generatedAt": "2026-08-26T22:27:38.799Z",
+  "generatedAt": "2026-08-26T22:28:54.873Z",
   "region": "US",
   "source": "TMDB + OMDb",
   "total": 244,
   "matched": 244,
   "withProviders": 127,
-  "withRT": 0,
+  "withRT": 241,
   "omdbErrors": {
-   "Invalid API key!": 243
+   "no Rotten Tomatoes entry for this title": 2
   },
   "unmatched": []
  },
@@ -32,8 +32,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Goodfellas",
@@ -52,8 +51,7 @@
    "poster": "/9OkCLM73MIU2CrKZbqiT8Ln1wY2.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Pulp Fiction",
@@ -75,8 +73,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "The Departed",
@@ -95,8 +92,7 @@
    "poster": "/nT97ifVT2J1yMQmeq20Qblg61T.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "No Country for Old Men",
@@ -117,8 +113,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Heat",
@@ -137,8 +132,7 @@
    "poster": "/umSVjVdbVwtx5ryCA2QXL44Durm.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 84
   },
   {
    "t": "Se7en",
@@ -157,8 +151,7 @@
    "poster": "/191nKfP0ehp3uIvWqgPbFmI4lv9.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 84
   },
   {
    "t": "Zodiac",
@@ -179,8 +172,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 90
   },
   {
    "t": "Gone Girl",
@@ -201,8 +193,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "Prisoners",
@@ -221,8 +212,7 @@
    "poster": "/uhviyknTT5cEQXbn6vWIqfM4vGm.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 81
   },
   {
    "t": "Sicario",
@@ -243,8 +233,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "The Silence of the Lambs",
@@ -263,8 +252,7 @@
    "poster": "/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Parasite",
@@ -283,8 +271,7 @@
    "poster": "/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 99
   },
   {
    "t": "Memento",
@@ -307,8 +294,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Nightcrawler",
@@ -329,8 +315,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Uncut Gems",
@@ -349,8 +334,7 @@
    "poster": "/6XN1vxHc7kUSqNWtaQKN45J5x2v.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Blade Runner 2049",
@@ -371,8 +355,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "Blade Runner",
@@ -391,8 +374,7 @@
    "poster": "/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Arrival",
@@ -413,8 +395,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Dune",
@@ -435,8 +416,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 83
   },
   {
    "t": "Dune: Part Two",
@@ -457,8 +437,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Interstellar",
@@ -481,8 +460,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 73
   },
   {
    "t": "Inception",
@@ -501,8 +479,7 @@
    "poster": "/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 86
   },
   {
    "t": "The Matrix",
@@ -523,8 +500,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 83
   },
   {
    "t": "Alien",
@@ -543,8 +519,7 @@
    "poster": "/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Aliens",
@@ -563,8 +538,7 @@
    "poster": "/r1x5JGpyqZU8PYhbs4UcrO1Xb6x.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Ex Machina",
@@ -585,8 +559,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Everything Everywhere All at Once",
@@ -607,8 +580,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Children of Men",
@@ -627,8 +599,7 @@
    "poster": "/k9IAS4TehZFcKi4HVByxZNPfqex.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Mad Max: Fury Road",
@@ -647,8 +618,7 @@
    "poster": "/ulcAi4dKpAjHwYGS08vNyx9H6I9.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Edge of Tomorrow",
@@ -667,8 +637,7 @@
    "poster": "/nBM9MMa2WCwvMG4IJ3eiGUdbPe6.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Her",
@@ -687,8 +656,7 @@
    "poster": "/eCOtqtfvn7mxGl6nfmq4b1exJRc.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Annihilation",
@@ -707,8 +675,7 @@
    "poster": "/4YRplSk6BhH6PRuE9gfyw9byUJ6.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "Gravity",
@@ -729,8 +696,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "The Martian",
@@ -751,8 +717,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Looper",
@@ -771,8 +736,7 @@
    "poster": "/sNjL6SqErDBE8OUZlrDLkexfsCj.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "District 9",
@@ -791,8 +755,7 @@
    "poster": "/tuGlQkqLxnodDSk6mp5c2wvxUEd.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 90
   },
   {
    "t": "Minority Report",
@@ -813,8 +776,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Jurassic Park",
@@ -835,8 +797,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "E.T. the Extra-Terrestrial",
@@ -855,8 +816,7 @@
    "poster": "/an0nD6uq6byfxXCfk6lQBzdL2J1.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 99
   },
   {
    "t": "Back to the Future",
@@ -875,8 +835,7 @@
    "poster": "/vN5B5WgYscRGcQpVhHl6p9DDTP0.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Star Wars: A New Hope",
@@ -897,8 +856,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "The Empire Strikes Back",
@@ -919,8 +877,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Rogue One",
@@ -941,8 +898,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 84
   },
   {
    "t": "The Dark Knight",
@@ -963,8 +919,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Batman Begins",
@@ -985,8 +940,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 85
   },
   {
    "t": "Oppenheimer",
@@ -1007,8 +961,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Dunkirk",
@@ -1027,8 +980,7 @@
    "poster": "/b4Oe15CGLL61Ped0RAS9JpqdmCt.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Saving Private Ryan",
@@ -1049,8 +1001,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "1917",
@@ -1071,8 +1022,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "Inglourious Basterds",
@@ -1091,8 +1041,7 @@
    "poster": "/aupnPtagH9JVBuMrGEanf4iqXEQ.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Apocalypse Now",
@@ -1111,8 +1060,7 @@
    "poster": "/gQB8Y5RCMkv2zwzFHbUJX3kAhvA.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Full Metal Jacket",
@@ -1131,8 +1079,7 @@
    "poster": "/kMKyx1k8hWWscYFnPbnxxN4Eqo4.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 90
   },
   {
    "t": "The Shawshank Redemption",
@@ -1151,8 +1098,7 @@
    "poster": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Forrest Gump",
@@ -1173,8 +1119,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 75
   },
   {
    "t": "The Social Network",
@@ -1193,8 +1138,7 @@
    "poster": "/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "Whiplash",
@@ -1213,8 +1157,7 @@
    "poster": "/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "There Will Be Blood",
@@ -1235,8 +1178,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Moonlight",
@@ -1257,8 +1199,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "Manchester by the Sea",
@@ -1279,8 +1220,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "Marriage Story",
@@ -1301,8 +1241,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "The Banshees of Inisherin",
@@ -1321,8 +1260,7 @@
    "poster": "/4yFG6cSPaCaPhyJ1vtGOtMD1lgh.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "Little Women",
@@ -1343,8 +1281,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Lady Bird",
@@ -1366,8 +1303,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 99
   },
   {
    "t": "The Grand Budapest Hotel",
@@ -1386,8 +1322,7 @@
    "poster": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Knives Out",
@@ -1406,8 +1341,7 @@
    "poster": "/pThyQovXQrw2m0s9x82twj48Jq4.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "The Menu",
@@ -1426,8 +1360,7 @@
    "poster": "/fPtUgMcLIboqlTlPrq0bQpKK8eq.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "Glass Onion",
@@ -1448,8 +1381,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Get Out",
@@ -1468,8 +1400,7 @@
    "poster": "/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "Hereditary",
@@ -1490,8 +1421,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 90
   },
   {
    "t": "The Babadook",
@@ -1510,8 +1440,7 @@
    "poster": "/qt3fqapeo94TfvMyld8P7gkpXLz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "A Quiet Place",
@@ -1532,8 +1461,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "The Shining",
@@ -1552,8 +1480,7 @@
    "poster": "/uAR0AWqhQL1hQa69UDEbb2rE5Wx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 84
   },
   {
    "t": "The Thing",
@@ -1572,8 +1499,7 @@
    "poster": "/tzGY49kseSE9QAKk47uuDGwnSCu.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 85
   },
   {
    "t": "It Follows",
@@ -1592,8 +1518,7 @@
    "poster": "/iwnQ1JH1wdWrGYkgWySptJ5284A.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Sinners",
@@ -1614,8 +1539,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Nope",
@@ -1636,8 +1560,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 83
   },
   {
    "t": "28 Days Later",
@@ -1656,8 +1579,7 @@
    "poster": "/sQckQRt17VaWbo39GIu0TMOiszq.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 87
   },
   {
    "t": "Spirited Away",
@@ -1678,8 +1600,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "My Neighbor Totoro",
@@ -1700,8 +1621,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Princess Mononoke",
@@ -1722,8 +1642,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Spider-Man: Into the Spider-Verse",
@@ -1744,8 +1663,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Spider-Man: Across the Spider-Verse",
@@ -1767,8 +1685,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "The Incredibles",
@@ -1790,7 +1707,7 @@
    ],
    "providersChecked": true,
    "rt": null,
-   "omdbError": "Invalid API key!"
+   "omdbError": "no Rotten Tomatoes entry for this title"
   },
   {
    "t": "Ratatouille",
@@ -1812,8 +1729,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "WALL-E",
@@ -1834,8 +1750,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Toy Story",
@@ -1857,8 +1772,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 100
   },
   {
    "t": "Inside Out",
@@ -1879,8 +1793,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "Coco",
@@ -1901,8 +1814,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Up",
@@ -1923,8 +1835,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "Finding Nemo",
@@ -1946,8 +1857,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 99
   },
   {
    "t": "Zootopia",
@@ -1968,8 +1878,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "Moana",
@@ -1990,8 +1899,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "How to Train Your Dragon",
@@ -2012,8 +1920,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 99
   },
   {
    "t": "The Lion King",
@@ -2034,8 +1941,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Klaus",
@@ -2056,8 +1962,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Puss in Boots: The Last Wish",
@@ -2079,7 +1984,7 @@
    ],
    "providersChecked": true,
    "rt": null,
-   "omdbError": "Invalid API key!"
+   "omdbError": "no Rotten Tomatoes entry for this title"
   },
   {
    "t": "The Lord of the Rings: The Fellowship of the Ring",
@@ -2100,8 +2005,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "The Lord of the Rings: The Two Towers",
@@ -2122,8 +2026,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "The Lord of the Rings: The Return of the King",
@@ -2144,8 +2047,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Pan's Labyrinth",
@@ -2164,8 +2066,7 @@
    "poster": "/z7xXihu5wHuSMWymq5VAulPVuvg.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "The Princess Bride",
@@ -2186,8 +2087,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Harry Potter and the Prisoner of Azkaban",
@@ -2209,8 +2109,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 90
   },
   {
    "t": "Casablanca",
@@ -2231,8 +2130,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 99
   },
   {
    "t": "When Harry Met Sally",
@@ -2251,8 +2149,7 @@
    "poster": "/rFOiFUhTMtDetqCGClC9PIgnC1P.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 90
   },
   {
    "t": "Before Sunrise",
@@ -2271,8 +2168,7 @@
    "poster": "/kf1Jb1c2JAOqjuzA3H4oDM263uB.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 100
   },
   {
    "t": "Eternal Sunshine of the Spotless Mind",
@@ -2291,8 +2187,7 @@
    "poster": "/5MwkWH9tYHv3mV9OdYTMR5qreIz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "La La Land",
@@ -2311,8 +2206,7 @@
    "poster": "/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Notting Hill",
@@ -2331,8 +2225,7 @@
    "poster": "/hHRIf2XHeQMbyRb3HUx19SF5Ujw.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 84
   },
   {
    "t": "Crazy Rich Asians",
@@ -2351,8 +2244,7 @@
    "poster": "/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Past Lives",
@@ -2371,8 +2263,7 @@
    "poster": "/k3waqVXSnvCZWfJYNtdamTgTtTA.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Portrait of a Lady on Fire",
@@ -2393,8 +2284,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "Brokeback Mountain",
@@ -2413,8 +2303,7 @@
    "poster": "/aByfQOQBNa4CMFwIgq3QrqY2ZHh.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "Superbad",
@@ -2433,8 +2322,7 @@
    "poster": "/ek8e8txUyUwd2BNqj6lFEerJfbq.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "Bridesmaids",
@@ -2455,8 +2343,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Airplane!",
@@ -2477,8 +2364,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "The Big Lebowski",
@@ -2499,8 +2385,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 79
   },
   {
    "t": "Groundhog Day",
@@ -2519,8 +2404,7 @@
    "poster": "/gCgt1WARPZaXnq523ySQEUKinCs.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Hot Fuzz",
@@ -2539,8 +2423,7 @@
    "poster": "/zPib4ukTSdXvHP9pxGkFCe34f3y.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Shaun of the Dead",
@@ -2559,8 +2442,7 @@
    "poster": "/dgXPhzNJH8HFTBjXPB177yNx6RI.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Booksmart",
@@ -2579,8 +2461,7 @@
    "poster": "/2aSxRDmisJP90H3S0aocyuQIe4z.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "Palm Springs",
@@ -2601,8 +2482,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Game Night",
@@ -2623,8 +2503,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 85
   },
   {
    "t": "The Nice Guys",
@@ -2643,8 +2522,7 @@
    "poster": "/clq4So9spa9cXk3MZy2iMdqkxP2.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Jojo Rabbit",
@@ -2663,8 +2541,7 @@
    "poster": "/1mqL7VG4Ix8wmxwypmCA1HTHBky.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 81
   },
   {
    "t": "Mission: Impossible - Fallout",
@@ -2685,8 +2562,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "John Wick",
@@ -2705,8 +2581,7 @@
    "poster": "/wXqWR7dHncNRbxoEGybEy7QTe9h.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 87
   },
   {
    "t": "Top Gun: Maverick",
@@ -2727,8 +2602,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "Casino Royale",
@@ -2747,8 +2621,7 @@
    "poster": "/lMrxYKKhd4lqRzwUHAy5gcx9PSO.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Skyfall",
@@ -2767,8 +2640,7 @@
    "poster": "/d0IVecFQvsGdSbnMAHqiYsNYaJT.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Raiders of the Lost Ark",
@@ -2790,8 +2662,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Die Hard",
@@ -2812,8 +2683,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "The Raid: Redemption",
@@ -2834,8 +2704,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 87
   },
   {
    "t": "Mission: Impossible - Ghost Protocol",
@@ -2856,8 +2725,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Black Panther",
@@ -2879,8 +2747,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "The Avengers",
@@ -2902,8 +2769,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Avengers: Infinity War",
@@ -2924,8 +2790,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 85
   },
   {
    "t": "Avengers: Endgame",
@@ -2946,8 +2811,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Guardians of the Galaxy",
@@ -2968,8 +2832,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Thor: Ragnarok",
@@ -2990,8 +2853,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Logan",
@@ -3012,8 +2874,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Spider-Man: No Way Home",
@@ -3034,8 +2895,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Whale Rider",
@@ -3054,8 +2914,7 @@
    "poster": "/cVBZQZq091KtwBm2qObOv0JTFcH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Paddington 2",
@@ -3076,8 +2935,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 99
   },
   {
    "t": "School of Rock",
@@ -3099,8 +2957,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "The Sandlot",
@@ -3123,8 +2980,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 66
   },
   {
    "t": "Matilda",
@@ -3145,8 +3001,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Enola Holmes",
@@ -3167,8 +3022,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Jumanji: Welcome to the Jungle",
@@ -3187,8 +3041,7 @@
    "poster": "/pSgXKPU5h6U89ipF7HBYajvYt7j.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 76
   },
   {
    "t": "Wonder",
@@ -3207,8 +3060,7 @@
    "poster": "/sONh3LYGFcVDTy8pm1tbSOB13Li.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 86
   },
   {
    "t": "The Princess Diaries",
@@ -3229,8 +3081,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 50
   },
   {
    "t": "Sing Street",
@@ -3249,8 +3100,7 @@
    "poster": "/sUWpVlrvzU2SJbnVZqIeKulPKwk.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Hunt for the Wilderpeople",
@@ -3272,8 +3122,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Rear Window",
@@ -3292,8 +3141,7 @@
    "poster": "/ILVF0eJxHMddjxeQhswFtpMtqx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 99
   },
   {
    "t": "Psycho",
@@ -3312,8 +3160,7 @@
    "poster": "/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "12 Angry Men",
@@ -3332,8 +3179,7 @@
    "poster": "/ppd84D2i9W8jXmsyInGyihiSyqz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 100
   },
   {
    "t": "Dr. Strangelove",
@@ -3352,8 +3198,7 @@
    "poster": "/gHm96BRW4GoI339rF1vYoYTB6Qe.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "2001: A Space Odyssey",
@@ -3374,8 +3219,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 90
   },
   {
    "t": "Chinatown",
@@ -3394,8 +3238,7 @@
    "poster": "/kZRSP3FmOcq0xnBulqpUQngJUXY.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "Taxi Driver",
@@ -3414,8 +3257,7 @@
    "poster": "/ekstpH614fwDX8DUln1a2Opz0N8.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Jaws",
@@ -3434,8 +3276,7 @@
    "poster": "/lxM6kqilAdpdhqUl2biYp5frUxE.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Rocky",
@@ -3456,8 +3297,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Alien: Romulus",
@@ -3478,8 +3318,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 80
   },
   {
    "t": "Some Like It Hot",
@@ -3498,8 +3337,7 @@
    "poster": "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Singin' in the Rain",
@@ -3520,8 +3358,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 100
   },
   {
    "t": "The Apartment",
@@ -3540,8 +3377,7 @@
    "poster": "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Vertigo",
@@ -3560,8 +3396,7 @@
    "poster": "/15uOEfqBNTVtDUT7hGBVCka0rZz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "The Wolf of Wall Street",
@@ -3584,8 +3419,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 79
   },
   {
    "t": "Catch Me If You Can",
@@ -3606,8 +3440,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "Ocean's Eleven",
@@ -3626,8 +3459,7 @@
    "poster": "/hQQCdZrsHtZyR6NbKH2YyCqd2fR.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 83
   },
   {
    "t": "Spotlight",
@@ -3646,8 +3478,7 @@
    "poster": "/8DPGG400FgaFWaqcv11n8mRd2NG.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "The Big Short",
@@ -3669,8 +3500,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Michael Clayton",
@@ -3689,8 +3519,7 @@
    "poster": "/hhkW4yVIGo8Bee3UITKvqOvhNMG.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 90
   },
   {
    "t": "Drive",
@@ -3709,8 +3538,7 @@
    "poster": "/602vevIURmpDfzbnv5Ubi6wIkQm.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Baby Driver",
@@ -3731,8 +3559,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Collateral",
@@ -3753,8 +3580,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 86
   },
   {
    "t": "Training Day",
@@ -3773,8 +3599,7 @@
    "poster": "/bUeiwBQdupBLQthMCHKV7zv56uv.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 74
   },
   {
    "t": "A Few Good Men",
@@ -3793,8 +3618,7 @@
    "poster": "/rLOk4z9zL1tTukIYV56P94aZXKk.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 85
   },
   {
    "t": "Erin Brockovich",
@@ -3813,8 +3637,7 @@
    "poster": "/eMs20iUQyZVs05Ck7Q0LNnRsstr.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 87
   },
   {
    "t": "Coming to America",
@@ -3833,8 +3656,7 @@
    "poster": "/8YZiA1o264dk0cr1USyMdph6SZl.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 71
   },
   {
    "t": "Do the Right Thing",
@@ -3853,8 +3675,7 @@
    "poster": "/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Boyz n the Hood",
@@ -3873,8 +3694,7 @@
    "poster": "/v4ox4aSCNT5vyLXl4Q71JiWwCXW.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "The Farewell",
@@ -3893,8 +3713,7 @@
    "poster": "/7ht2IMGynDSVQGvAXhAb83DLET8.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Minari",
@@ -3913,8 +3732,7 @@
    "poster": "/6mPNdmjdbVKPITv3LLCmQoKs9Zw.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 98
   },
   {
    "t": "CODA",
@@ -3933,8 +3751,7 @@
    "poster": "/BzVjmm8l23rPsijLiNLUzuQtyd.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Killers of the Flower Moon",
@@ -3953,8 +3770,7 @@
    "poster": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Napoleon",
@@ -3973,8 +3789,7 @@
    "poster": "/ytFOXyghxLzAM4KZyazDdEkM66q.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 58
   },
   {
    "t": "Greyhound",
@@ -3993,8 +3808,7 @@
    "poster": "/kjMbDciooTbJPofVXgAoFjfX8Of.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 77
   },
   {
    "t": "The Beanie Bubble",
@@ -4013,8 +3827,7 @@
    "poster": "/9YDW8dCrQyRpppK5985hKY1Mc8X.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 46
   },
   {
    "t": "Wolfs",
@@ -4033,8 +3846,7 @@
    "poster": "/vOX1Zng472PC2KnS0B9nRfM8aaZ.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 66
   },
   {
    "t": "The Holdovers",
@@ -4055,8 +3867,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Nomadland",
@@ -4077,8 +3888,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "The Shape of Water",
@@ -4099,8 +3909,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Birdman",
@@ -4119,8 +3928,7 @@
    "poster": "/rHUg2AuIuLSIYMYFgavVwqt1jtc.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Roma",
@@ -4141,8 +3949,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "The Irishman",
@@ -4163,8 +3970,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Okja",
@@ -4185,8 +3991,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 87
   },
   {
    "t": "Athlete A",
@@ -4207,8 +4012,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 100
   },
   {
    "t": "The Truman Show",
@@ -4227,8 +4031,7 @@
    "poster": "/vuza0WqY239yBXOadKlGwJsZJFE.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 94
   },
   {
    "t": "Good Will Hunting",
@@ -4250,8 +4053,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Dead Poets Society",
@@ -4270,8 +4072,7 @@
    "poster": "/tNvKkSnnn4Z6RCBThyK1gfCSSvv.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 85
   },
   {
    "t": "Slumdog Millionaire",
@@ -4290,8 +4091,7 @@
    "poster": "/5leCCi7ZF0CawAfM5Qo2ECKPprc.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "The Prestige",
@@ -4310,8 +4110,7 @@
    "poster": "/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 77
   },
   {
    "t": "Shutter Island",
@@ -4330,8 +4129,7 @@
    "poster": "/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 69
   },
   {
    "t": "The Sixth Sense",
@@ -4350,8 +4148,7 @@
    "poster": "/vOyfUXNFSnaTk7Vk5AjpsKTUWsu.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 86
   },
   {
    "t": "Fight Club",
@@ -4370,8 +4167,7 @@
    "poster": "/jSziioSwPVrOy9Yow3XhWIBDjq1.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 81
   },
   {
    "t": "American Beauty",
@@ -4390,8 +4186,7 @@
    "poster": "/wby9315QzVKdW9BonAefg8jGTTb.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 87
   },
   {
    "t": "Lost in Translation",
@@ -4410,8 +4205,7 @@
    "poster": "/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Sideways",
@@ -4432,8 +4226,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Little Miss Sunshine",
@@ -4455,8 +4248,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Juno",
@@ -4475,8 +4267,7 @@
    "poster": "/jNIn2tVhpvFD6P9IojldI3mNYcn.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "500 Days of Summer",
@@ -4495,8 +4286,7 @@
    "poster": "/qXAuQ9hF30sQRsXf40OfRVl0MJZ.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 86
   },
   {
    "t": "The Perks of Being a Wallflower",
@@ -4515,8 +4305,7 @@
    "poster": "/aKCvdFFF5n80P2VdS7d8YBwbCjh.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 85
   },
   {
    "t": "Boyhood",
@@ -4537,8 +4326,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Coco Before Chanel",
@@ -4557,8 +4345,7 @@
    "poster": "/nNpP1P2EufA6TN7fQOBeHUIVmeH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 63
   },
   {
    "t": "The Zone of Interest",
@@ -4577,8 +4364,7 @@
    "poster": "/hUu9zyZmDd8VZegKi1iK1Vk0RYS.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Poor Things",
@@ -4599,8 +4385,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Anatomy of a Fall",
@@ -4621,8 +4406,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   },
   {
    "t": "Aftersun",
@@ -4641,8 +4425,7 @@
    "poster": "/evKz85EKouVbIr51zy5fOtpNRPg.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 95
   },
   {
    "t": "Everything Went Fine",
@@ -4661,8 +4444,7 @@
    "poster": "/hyNNufs7Ds8TuT2kv4Z1mEfPx0r.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Talk to Me",
@@ -4701,8 +4483,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Midsommar",
@@ -4723,8 +4504,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 83
   },
   {
    "t": "Bodies Bodies Bodies",
@@ -4745,8 +4525,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 85
   },
   {
    "t": "Nobody",
@@ -4767,8 +4546,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 83
   },
   {
    "t": "The Fall Guy",
@@ -4787,8 +4565,7 @@
    "poster": "/e7olqFmzcIX5c23kX4zSmLPJi8c.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 81
   },
   {
    "t": "Barbie",
@@ -4809,8 +4586,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "Air",
@@ -4831,8 +4607,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Ford v Ferrari",
@@ -4851,8 +4626,7 @@
    "poster": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 92
   },
   {
    "t": "Free Solo",
@@ -4874,8 +4648,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "Won't You Be My Neighbor?",
@@ -4894,8 +4667,7 @@
    "poster": "/8qE8NZjiP2M884baH0VoLF828Vp.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 97
   },
   {
    "t": "My Octopus Teacher",
@@ -4916,8 +4688,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 93
   },
   {
    "t": "Coraline",
@@ -4936,8 +4707,7 @@
    "poster": "/4jeFXQYytChdZYE9JYO7Un87IlW.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Gremlins",
@@ -4958,8 +4728,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 86
   },
   {
    "t": "Beetlejuice",
@@ -4978,8 +4747,7 @@
    "poster": "/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 83
   },
   {
    "t": "Poltergeist",
@@ -4998,8 +4766,7 @@
    "poster": "/4eMN3GANH5GG4kXdHkrTZEUuQ9M.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Signs",
@@ -5018,8 +4785,7 @@
    "poster": "/YtrIdrTxpRhvCnlw43dwOjfLqx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 76
   },
   {
    "t": "Tremors",
@@ -5038,8 +4804,7 @@
    "poster": "/cA4ggkZ3r1d5r9hOAUWC8x5ul2i.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 88
   },
   {
    "t": "ParaNorman",
@@ -5058,8 +4823,7 @@
    "poster": "/9DZPtuYTKYxt6vzHvZ5FLThG4fl.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 89
   },
   {
    "t": "Hocus Pocus",
@@ -5080,8 +4844,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 42
   },
   {
    "t": "Warm Bodies",
@@ -5102,8 +4865,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 81
   },
   {
    "t": "A Quiet Place Part II",
@@ -5125,8 +4887,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 91
   },
   {
    "t": "Jumanji",
@@ -5147,8 +4908,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 56
   },
   {
    "t": "The Iron Giant",
@@ -5167,8 +4927,7 @@
    "poster": "/ct04FCFLPImNG5thcPLRnVsZlmS.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Invalid API key!"
+   "rt": 96
   }
  ]
 }
