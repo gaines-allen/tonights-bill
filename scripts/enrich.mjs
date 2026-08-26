@@ -196,6 +196,7 @@ async function enrichOne(film) {
      index.html are deliberately terse and often sentence fragments; this
      replaces them wherever TMDB has something usable. */
   out.overview = trimOverview(details?.overview || hit.overview || "");
+  out.backdrop = details?.backdrop_path || hit.backdrop_path || null;
   out.providers = flatrateCodes(prov);
   /* Distinguishes "checked, and it is on nothing" from "never checked".
      Without this the page would keep showing a hand-guessed service for a

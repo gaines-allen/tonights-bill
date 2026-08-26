@@ -1,630 +1,611 @@
 <title>Tonight's Bill</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
+/* ============================================================
+   Tonight's Bill — a black-box theatre, not a dashboard.
+   Dark ground, cream type, one loud accent. Posters carry the colour.
+   ============================================================ */
 :root{
-  /* Dark is the default here, deliberately: this is a thing you use at night,
-     in a dark room, deciding what to put on. Light is an explicit opt-in via
-     the toggle, which is why there is no prefers-color-scheme switch. */
-  --ground:#0D0F15; --surface:#151822; --surface-2:#1D212C; --surface-3:#262B38; --sunk:#090B10;
-  --ink:#EDEBE6; --ink-2:#A8ADBE; --ink-3:#6F7589;
-  --line:#252A36; --line-2:#343A4A;
-  --accent:#F2A64E; --accent-hot:#FFC078; --accent-soft:#2E2116; --accent-line:#5C4423;
-  --loved:#6FC49A; --loved-soft:#14261E;
-  --hated:#E38799; --hated-soft:#2A1720;
-  --fresh:#7BC48D; --rotten:#E08A72;
-  --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 32px -16px rgba(0,0,0,.85);
-  --glow:0 0 0 1px var(--accent-line), 0 10px 40px -20px rgba(242,166,78,.55);
+  /* colour */
+  --black:#0A0A09;
+  --stage:#111110;          /* raised surface */
+  --stage-2:#1A1A18;        /* raised twice */
+  --sunk:#060605;
+  --cream:#F3EBDD;
+  --cream-2:#C8C2B6;
+  --dim:#898780;
+  --red:#E54535;            /* marquee red — the primary accent */
+  --red-deep:#B82E20;
+  --yellow:#F5C451;         /* used sparingly: scores, times, marks */
+  --line:rgba(243,235,221,.10);
+  --line-2:rgba(243,235,221,.20);
+  --good:#7FBF8E;
+  --bad:#E07A6B;
+
+  /* type */
+  --display:'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --sans:'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* spacing */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+
+  /* shape + motion */
+  --r1:6px; --r2:10px; --r3:16px; --r4:24px;
+  --t-fast:120ms cubic-bezier(.2,.7,.3,1);
+  --t-med:260ms cubic-bezier(.2,.7,.3,1);
+  --t-slow:460ms cubic-bezier(.16,.84,.28,1);
+  --wide:1280px; --mid:920px; --narrow:660px;
+  --lift:0 18px 50px -24px rgba(0,0,0,.9);
 }
 :root[data-theme="light"]{
-  --ground:#EEF0F4; --surface:#FFFFFF; --surface-2:#E6E9F0; --surface-3:#DCE1EB; --sunk:#DFE3EC;
-  --ink:#14161C; --ink-2:#4A4E5C; --ink-3:#787E92;
-  --line:#D3D8E2; --line-2:#C2C8D5;
-  --accent:#A85B08; --accent-hot:#8C4B05; --accent-soft:#F7E6CE; --accent-line:#E0BB86;
-  --loved:#2C6B4E; --loved-soft:#DCEFE4;
-  --hated:#8B3743; --hated-soft:#F6DDE0;
-  --fresh:#3E7A4F; --rotten:#A8452F;
-  --shadow:0 1px 2px rgba(20,22,28,.06), 0 8px 24px -12px rgba(20,22,28,.18);
-  --glow:0 0 0 1px var(--accent-line), 0 10px 30px -18px rgba(168,91,8,.35);
+  --black:#F3EBDD; --stage:#FFFDF8; --stage-2:#F7F1E6; --sunk:#E9E0D0;
+  --cream:#14130F; --cream-2:#4A473F; --dim:#6E6B63;
+  --line:rgba(20,19,15,.12); --line-2:rgba(20,19,15,.24);
+  --red:#C23325; --red-deep:#94231A; --yellow:#9A6B12;
+  --lift:0 14px 40px -22px rgba(0,0,0,.35);
 }
 
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
 body{
-  margin:0; background:var(--ground); color:var(--ink);
-  font-family:'Archivo',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
-  font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  margin:0; background:var(--black); color:var(--cream);
+  font-family:var(--sans); font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
 }
-h1,h2,h3{margin:0; text-wrap:balance}
-button{font:inherit; color:inherit; cursor:pointer}
-:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px}
-.pick:focus-visible{outline-offset:3px}
-/* Keyboard cursor. Deliberately a ring rather than a glow, so it never reads
-   as "this is the lead pick" — that meaning belongs to .top alone. */
-.pick.cursor{
-  border-color:var(--accent);
-  box-shadow:var(--shadow), 0 0 0 3px var(--accent-soft);
-}
+h1,h2,h3,h4{margin:0; font-weight:400; text-wrap:balance}
+p{margin:0}
+button{font:inherit; color:inherit; background:none; border:none; cursor:pointer}
+a{color:inherit}
+img{display:block; max-width:100%}
+:focus-visible{outline:2px solid var(--yellow); outline-offset:3px; border-radius:var(--r1)}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-.mono{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
+.wrap{max-width:var(--wide); margin:0 auto; padding:0 var(--s5)}
+.wrap-mid{max-width:var(--mid); margin:0 auto; padding:0 var(--s5)}
+
+/* ---------------- masthead ---------------- */
+.top{
+  position:sticky; top:0; z-index:40; background:rgba(10,10,9,.82);
+  backdrop-filter:blur(14px); border-bottom:1px solid var(--line);
+}
+:root[data-theme="light"] .top{background:rgba(243,235,221,.85)}
+.top-in{
+  max-width:var(--wide); margin:0 auto; padding:var(--s3) var(--s5);
+  display:flex; align-items:center; justify-content:space-between; gap:var(--s4);
+}
+.brand{
+  font-family:var(--display); font-size:21px; letter-spacing:.01em;
+  display:flex; align-items:center; gap:var(--s2); white-space:nowrap;
+}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--red);flex:none}
+.nav{display:flex; gap:var(--s1)}
+.nav button{
+  padding:7px 14px; border-radius:99px; font-size:14px; color:var(--dim);
+  transition:color var(--t-fast), background var(--t-fast);
+}
+.nav button:hover{color:var(--cream)}
+.nav button[aria-current="page"]{color:var(--black); background:var(--cream)}
+.icon-btn{
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  display:grid;place-items:center;font-size:14px;color:var(--dim);
+  transition:border-color var(--t-fast), color var(--t-fast);
+}
+.icon-btn:hover{border-color:var(--line-2); color:var(--cream)}
+
+/* ---------------- screens ---------------- */
+.screen{display:none; animation:rise var(--t-slow) both}
+.screen.on{display:block}
+@keyframes rise{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+
+/* ---------------- the ask ---------------- */
+.hero{padding:var(--s9) 0 var(--s7); text-align:center}
 .eyebrow{
-  font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:10.5px; font-weight:500;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  font-family:var(--mono); font-size:11px; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--red); margin-bottom:var(--s5);
+}
+.hero h1{
+  font-family:var(--display); line-height:.98; letter-spacing:-.015em;
+  font-size:clamp(46px, 8.5vw, 96px);
+}
+.hero .sub{
+  margin-top:var(--s4); color:var(--dim); font-size:clamp(16px,1.6vw,20px);
+  max-width:36ch; margin-left:auto; margin-right:auto;
 }
 
-/* ---- masthead ---- */
-.masthead{
-  border-bottom:1px solid var(--line); background:var(--surface);
-  padding:18px 26px 16px; display:flex; align-items:flex-end;
-  justify-content:space-between; gap:20px; flex-wrap:wrap;
+.q{margin-bottom:var(--s8)}
+.q-head{
+  display:flex; align-items:baseline; gap:var(--s3); margin-bottom:var(--s4); flex-wrap:wrap;
 }
-.brand{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
-.brand h1{
-  font-family:'Instrument Serif',Georgia,'Times New Roman',serif;
-  font-size:34px; font-weight:400; letter-spacing:-.01em; line-height:1;
+.q-num{
+  font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--red);
 }
-.brand .sub{color:var(--ink-3); font-size:13px; max-width:46ch}
-.mast-right{display:flex; align-items:center; gap:10px}
-.themebtn{
-  background:var(--surface-2); border:1px solid var(--line); border-radius:999px;
-  padding:7px 13px; font-size:12px; font-weight:500; color:var(--ink-2);
-}
-.themebtn:hover{border-color:var(--line-2); color:var(--ink)}
+.q-head h2{font-family:var(--display); font-size:clamp(26px,3.4vw,38px); line-height:1.1}
+.q-note{color:var(--dim); font-size:14px; margin-left:auto}
 
-/* ---- shell ---- */
-.shell{display:grid; grid-template-columns:352px minmax(0,1fr); align-items:start; gap:0}
-.rail{
-  border-right:1px solid var(--line); background:var(--surface);
-  padding:22px; position:sticky; top:0; max-height:100vh; overflow-y:auto;
-  display:flex; flex-direction:column; gap:24px;
+/* selection cards */
+.cards{display:grid; gap:var(--s3); grid-template-columns:repeat(4,1fr)}
+.card{
+  position:relative; text-align:left; padding:var(--s5) var(--s4) var(--s4);
+  background:var(--stage); border:1px solid var(--line); border-radius:var(--r3);
+  transition:transform var(--t-fast), border-color var(--t-fast), background var(--t-fast);
 }
-.stage{padding:24px 26px 72px; min-width:0}
+.card:hover{transform:translateY(-3px); border-color:var(--line-2)}
+.card .k{display:block; font-family:var(--display); font-size:25px; line-height:1.15}
+.card .d{display:block; margin-top:var(--s1); font-size:13.5px; color:var(--dim)}
+.card[aria-pressed="true"]{
+  background:var(--stage-2); border-color:var(--red);
+  box-shadow:inset 0 0 0 1px var(--red);
+}
+.card[aria-pressed="true"] .k{color:var(--red)}
 
-/* ---- rail blocks ---- */
-.block{display:flex; flex-direction:column; gap:11px}
-.block-head{display:flex; align-items:baseline; justify-content:space-between; gap:8px}
-.block-head .hint{font-size:11px; color:var(--ink-3)}
+/* time */
+.times{display:grid; gap:var(--s3); grid-template-columns:repeat(3,1fr)}
+.exact-link{
+  margin-top:var(--s4); font-size:14px; color:var(--dim);
+  text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--line-2);
+}
+.exact-link:hover{color:var(--cream)}
+.exact{margin-top:var(--s4); padding:var(--s4); border:1px solid var(--line); border-radius:var(--r2); background:var(--stage)}
+.exact.hide{display:none}
 
-.seg{display:grid; gap:6px}
-.seg-row{display:flex; gap:6px; flex-wrap:wrap}
-.opt{
-  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
-  border-radius:7px; padding:7px 11px; font-size:12.5px; font-weight:500;
-  transition:background .12s,border-color .12s,color .12s;
+/* moods */
+.moods{display:grid; gap:var(--s3); grid-template-columns:repeat(4,1fr)}
+.mood{
+  text-align:left; padding:var(--s4); border-radius:var(--r2);
+  background:var(--stage); border:1px solid var(--line);
+  transition:transform var(--t-fast), border-color var(--t-fast), background var(--t-fast);
 }
-.opt:hover{border-color:var(--accent-line); color:var(--ink)}
-.opt[aria-pressed="true"]{
-  background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot); font-weight:600;
-}
-:root[data-theme="light"] .opt[aria-pressed="true"]{color:var(--accent)}
+.mood:hover{transform:translateY(-2px); border-color:var(--line-2)}
+.mood .k{display:block; font-size:16.5px; font-weight:600}
+.mood .d{display:block; font-size:12.5px; color:var(--dim); margin-top:2px}
+.mood[aria-pressed="true"]{background:var(--red); border-color:var(--red)}
+.mood[aria-pressed="true"] .k,.mood[aria-pressed="true"] .d{color:#0A0A09}
 
-/* runtime */
-.time-read{display:flex; align-items:baseline; gap:8px}
-.time-read .big{font-family:'IBM Plex Mono',monospace; font-size:26px; font-weight:600; letter-spacing:-.02em}
-.time-read .unit{font-size:12px; color:var(--ink-3)}
-input[type=range]{
-  -webkit-appearance:none; appearance:none; width:100%; height:22px; background:transparent; cursor:pointer;
+/* the big call to action */
+.cta-wrap{text-align:center; padding:var(--s5) 0 var(--s9)}
+.cta{
+  display:inline-flex; align-items:center; gap:var(--s3);
+  font-family:var(--display); font-size:clamp(24px,3.4vw,34px); line-height:1;
+  padding:var(--s5) var(--s8); border-radius:99px;
+  background:var(--red); color:#0A0A09; border:1px solid var(--red);
+  transition:transform var(--t-fast), box-shadow var(--t-med), background var(--t-fast);
+  box-shadow:0 14px 40px -18px var(--red);
 }
-input[type=range]::-webkit-slider-runnable-track{height:4px; background:var(--sunk); border-radius:99px; border:1px solid var(--line)}
-input[type=range]::-moz-range-track{height:4px; background:var(--sunk); border-radius:99px; border:1px solid var(--line)}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none; width:16px; height:16px; margin-top:-7px; border-radius:50%;
-  background:var(--accent); border:2px solid var(--surface); box-shadow:0 0 0 1px var(--accent-line);
+.cta:hover{transform:translateY(-2px); box-shadow:0 20px 54px -18px var(--red)}
+.cta:active{transform:translateY(0)}
+.cta[disabled]{background:var(--stage-2); color:var(--dim); border-color:var(--line); box-shadow:none; cursor:not-allowed; transform:none}
+.cta .arw{font-family:var(--sans); font-size:.62em}
+.cta-note{margin-top:var(--s4); color:var(--dim); font-size:14px}
+.ghost{
+  border:1px solid var(--line-2); border-radius:99px; padding:12px 22px;
+  font-size:14.5px; color:var(--cream-2);
+  transition:border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
 }
-input[type=range]::-moz-range-thumb{
-  width:14px; height:14px; border-radius:50%; background:var(--accent);
-  border:2px solid var(--surface); box-shadow:0 0 0 1px var(--accent-line);
-}
-.ticks{display:flex; justify-content:space-between; font-size:10px; color:var(--ink-3); margin-top:-4px}
+.ghost:hover{border-color:var(--cream); color:var(--cream)}
 
-/* services */
-.svc{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:5px 0}
-.svc-name{display:flex; align-items:center; gap:8px; font-size:13px}
-.dot{width:8px; height:8px; border-radius:2px; flex:none}
-.sw{
-  width:36px; height:20px; border-radius:999px; border:1px solid var(--line);
-  background:var(--sunk); position:relative; flex:none; transition:background .15s,border-color .15s;
+/* fine tune */
+.fine{border-top:1px solid var(--line); padding-top:var(--s5); margin-bottom:var(--s9)}
+.fine summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; gap:var(--s2);
+  font-size:15px; color:var(--dim); width:max-content;
 }
-.sw::after{
-  content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%;
-  background:var(--ink-3); transition:transform .15s,background .15s;
+.fine summary::-webkit-details-marker{display:none}
+.fine summary:hover{color:var(--cream)}
+.fine summary .chev{transition:transform var(--t-fast); display:inline-block}
+.fine[open] summary .chev{transform:rotate(90deg)}
+.fine-body{
+  margin-top:var(--s5); display:grid; gap:var(--s6);
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 }
-.sw[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent-line)}
-.sw[aria-pressed="true"]::after{transform:translateX(16px); background:var(--accent)}
-.svc.off .svc-name{color:var(--ink-3)}
-
-.runbtn{
-  width:100%; border:1px solid var(--accent-line); border-radius:8px; padding:12px;
-  font-size:14px; font-weight:600; letter-spacing:.01em;
-  background:var(--accent);
-  color:#0D0F15;                     /* dark ink on the bright amber of dark mode */
-  transition:filter .12s, transform .06s, box-shadow .15s;
+.fine-block h3{
+  font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--dim); margin-bottom:var(--s3);
 }
-:root[data-theme="light"] .runbtn{ color:#FFFFFF; }   /* light mode's amber is dark */
-.runbtn:hover{box-shadow:var(--glow)}
-.runbtn:hover{filter:brightness(1.07)}
-.runbtn:active{transform:translateY(1px)}
-.resetbtn{
-  width:100%; background:none; border:1px solid var(--line); border-radius:8px;
-  padding:9px; font-size:12.5px; color:var(--ink-3);
-}
-.resetbtn:hover{color:var(--ink); border-color:var(--line-2)}
-</style>
-<style>
-/* ---- taste picker ---- */
-.taste-bar{display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap}
-.search{
-  flex:1 1 220px; min-width:0; background:var(--surface); border:1px solid var(--line);
-  border-radius:8px; padding:9px 12px; font:inherit; font-size:13.5px; color:var(--ink);
-}
-.search::placeholder{color:var(--ink-3)}
-.search:focus{outline:none; border-color:var(--accent-line); box-shadow:0 0 0 3px var(--accent-soft)}
-.legend{display:flex; gap:12px; font-size:11.5px; color:var(--ink-3); align-items:center}
-.legend b{font-weight:500}
-.key{display:inline-flex; align-items:center; gap:5px}
-.key i{width:9px; height:9px; border-radius:2px; display:inline-block}
-
-.grid-titles{
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(178px,1fr)); gap:7px;
-  max-height:330px; overflow-y:auto; padding:3px; border:1px solid var(--line);
-  border-radius:10px; background:var(--sunk);
-}
-.tcard{
-  text-align:left; background:var(--surface); border:1px solid var(--line);
-  border-radius:7px; padding:8px 10px; display:flex; flex-direction:column; gap:2px;
-  transition:border-color .12s,background .12s;
-}
-.tcard:hover{border-color:var(--line-2)}
-.tcard .tt{font-size:12.5px; font-weight:600; line-height:1.25}
-.tcard .ty{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-3)}
-.tcard[data-state="loved"]{background:var(--loved-soft); border-color:var(--loved)}
-.tcard[data-state="loved"] .tt{color:var(--loved)}
-.tcard[data-state="hated"]{background:var(--hated-soft); border-color:var(--hated)}
-.tcard[data-state="hated"] .tt{color:var(--hated); text-decoration:line-through; text-decoration-thickness:1px}
-.tcard .mark{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase}
-
-.filtersum{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:13px}
-.fchip{
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:11.5px; font-weight:500; color:var(--ink-2);
-  background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:4px 10px;
-}
-.fchip b{font-weight:600; color:var(--ink)}
-.fchip.on{background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot)}
-:root[data-theme="light"] .fchip.on{color:var(--accent)}
-.verdict{
-  border:1px solid var(--line); border-radius:10px; background:var(--surface);
-  padding:13px 15px; margin-bottom:11px;
-}
-.verdict + .verdict{margin-top:-4px}
-.verdict h4{
-  font-family:'Instrument Serif',Georgia,serif; font-weight:400; font-size:17px;
-  margin:0 0 2px; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
-}
-.verdict .vsum{font-size:12px; color:var(--ink-3); margin:0 0 9px}
-.verdict .vsum.in{color:var(--loved)}
-.verdict .vsum.out{color:var(--hated)}
-.checks{display:grid; gap:4px}
-.chk{display:grid; grid-template-columns:15px 118px minmax(0,1fr); gap:8px; align-items:baseline; font-size:12.5px}
-.chk .mk{font-family:'IBM Plex Mono',monospace; font-weight:600; text-align:center}
-.chk.y .mk{color:var(--loved)}
-.chk.n .mk{color:var(--hated)}
-.chk .lb{color:var(--ink-3); font-size:11px; letter-spacing:.02em}
-.chk .dt{color:var(--ink-2)}
-.chk.n .dt{color:var(--ink); font-weight:500}
-.gridnote{margin:0 0 9px; font-size:12px; color:var(--ink-3); line-height:1.45; max-width:72ch}
-.fitbtn{
-  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
-  border-radius:7px; padding:8px 12px; font-size:12.5px; font-weight:500; white-space:nowrap;
-}
-.fitbtn:hover{border-color:var(--accent-line); color:var(--ink)}
-.fitbtn[aria-pressed="true"]{
-  background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-hot); font-weight:600;
-}
-:root[data-theme="light"] .fitbtn[aria-pressed="true"]{color:var(--accent)}
-.tcard.unfit{opacity:.42}
-.tcard.unfit:hover{opacity:.72}
-.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; min-height:0}
+.chipset{display:flex; flex-wrap:wrap; gap:var(--s2)}
 .chip{
-  display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:4px 6px 4px 11px;
-  font-size:12px; font-weight:500; border:1px solid;
+  padding:7px 13px; border-radius:99px; font-size:13px; color:var(--cream-2);
+  border:1px solid var(--line); transition:all var(--t-fast);
 }
-.chip.l{background:var(--loved-soft); border-color:var(--loved); color:var(--loved)}
-.chip.h{background:var(--hated-soft); border-color:var(--hated); color:var(--hated)}
-.chip button{background:none; border:none; padding:0 3px; font-size:14px; line-height:1; opacity:.6}
-.chip button:hover{opacity:1}
+.chip:hover{border-color:var(--line-2); color:var(--cream)}
+.chip[aria-pressed="true"]{background:var(--cream); color:var(--black); border-color:var(--cream)}
+.svc-row{display:flex; align-items:center; justify-content:space-between; gap:var(--s3); padding:6px 0}
+.svc-row .n{font-size:14px}
+.svc-row.off .n{color:var(--dim)}
+.sw{width:38px;height:22px;border-radius:99px;border:1px solid var(--line);background:var(--sunk);position:relative;flex:none;transition:all var(--t-fast)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--dim);transition:all var(--t-fast)}
+.sw[aria-pressed="true"]{background:var(--red);border-color:var(--red)}
+.sw[aria-pressed="true"]::after{transform:translateX(16px);background:#0A0A09}
+.range{width:100%;-webkit-appearance:none;appearance:none;height:22px;background:none;cursor:pointer}
+.range::-webkit-slider-runnable-track{height:3px;background:var(--line-2);border-radius:99px}
+.range::-moz-range-track{height:3px;background:var(--line-2);border-radius:99px}
+.range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;margin-top:-7px;border-radius:50%;background:var(--red)}
+.range::-moz-range-thumb{width:14px;height:14px;border:none;border-radius:50%;background:var(--red)}
+.readout{font-family:var(--mono);font-size:22px;font-weight:600}
+.readout small{font-family:var(--sans);font-size:13px;color:var(--dim);font-weight:400;margin-left:6px}
 
-/* ---- section headers ---- */
-.sec{margin-bottom:26px}
-.sec-head{
-  display:flex; align-items:baseline; gap:12px; padding-bottom:9px;
-  border-bottom:1px solid var(--line); margin-bottom:14px; flex-wrap:wrap;
-}
-.sec-head h2{
-  font-family:'Instrument Serif',Georgia,serif; font-size:23px; font-weight:400; letter-spacing:-.005em;
-}
-.sec-head .count{margin-left:auto; font-size:11.5px; color:var(--ink-3)}
+/* ---------------- the bill ---------------- */
+.bill-head{padding:var(--s7) 0 var(--s5); display:flex; align-items:flex-end; justify-content:space-between; gap:var(--s4); flex-wrap:wrap}
+.bill-head .eyebrow{margin:0}
+.bill-head h2{font-family:var(--display); font-size:clamp(30px,4vw,44px); line-height:1}
+.recap{display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center}
+.recap span{font-size:13px; color:var(--dim); border:1px solid var(--line); border-radius:99px; padding:5px 12px}
+.recap b{color:var(--cream); font-weight:500}
 
-/* ---- result cards ---- */
-.bill{display:flex; flex-direction:column; gap:10px}
-/* Posters arrive over the network, so the box is drawn at the right aspect
-   ratio immediately and shimmers until the image lands. Reserving the space
-   is what stops the card reflowing under the reader's eye. */
-@keyframes shimmer{
-  0%   {background-position:-180% 0}
-  100% {background-position: 180% 0}
+/* headliner: the whole point of the app */
+.headliner{
+  display:grid; grid-template-columns:minmax(300px,40%) 1fr; gap:var(--s7);
+  align-items:start; padding-bottom:var(--s8); position:relative;
 }
-.poster, .tposter{
-  aspect-ratio:2/3; object-fit:cover; flex:none; display:block;
-  border:1px solid var(--line); background:var(--surface-2);
+.backdrop{
+  position:absolute; inset:-40px -50vw auto; height:520px; z-index:-1;
+  background-size:cover; background-position:center 22%; opacity:.16;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 88%);
+  mask-image:linear-gradient(180deg,#000 0%,transparent 88%);
+  filter:saturate(.7);
 }
-.poster{width:58px; border-radius:6px}
-.tposter{width:34px; border-radius:4px}
-.poster.ldg, .tposter.ldg{
-  background-image:linear-gradient(100deg,
-    var(--surface-2) 30%, var(--surface-3) 50%, var(--surface-2) 70%);
-  background-size:220% 100%;
-  animation:shimmer 1.4s ease-in-out infinite;
+.poster-frame{
+  position:relative; border-radius:var(--r3); overflow:hidden; background:var(--stage-2);
+  aspect-ratio:2/3; box-shadow:var(--lift); border:1px solid var(--line);
+}
+.poster-frame img{width:100%; height:100%; object-fit:cover}
+.poster-frame.ldg::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(100deg,var(--stage-2) 30%,var(--stage) 50%,var(--stage-2) 70%);
+  background-size:220% 100%; animation:sh 1.5s ease-in-out infinite;
+}
+@keyframes sh{0%{background-position:-180% 0}100%{background-position:180% 0}}
+.poster-fallback{
+  position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:var(--s4); background:linear-gradient(160deg,var(--stage-2),var(--sunk));
+  font-family:var(--display); line-height:1.1;
+}
+.poster-fallback .pt{font-size:26px}
+.poster-fallback .py{font-family:var(--mono); font-size:12px; color:var(--dim); margin-top:6px}
+
+.hl-body{min-width:0; padding-top:var(--s2)}
+.hl-body h3{
+  font-family:var(--display); font-size:clamp(38px,5.6vw,68px); line-height:.98;
+  letter-spacing:-.015em; margin-bottom:var(--s3);
+}
+.meta{
+  font-family:var(--mono); font-size:14px; color:var(--cream-2);
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:var(--s5);
+}
+.meta i{font-style:normal; color:var(--dim)}
+.match{display:flex; align-items:baseline; gap:var(--s3); margin-bottom:var(--s5)}
+.match .n{font-family:var(--mono); font-size:40px; font-weight:600; color:var(--yellow); line-height:1}
+.match .l{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+.pitch{font-size:19px; line-height:1.55; color:var(--cream-2); max-width:52ch; margin-bottom:var(--s4)}
+.pitch b{color:var(--cream); font-weight:500}
+.synopsis{font-size:15.5px; line-height:1.6; color:var(--dim); max-width:56ch; margin-bottom:var(--s6)}
+.where{
+  display:inline-flex; align-items:center; gap:var(--s2); margin-bottom:var(--s6);
+  font-size:14px; color:var(--cream-2);
+}
+.where .tag{
+  border:1px solid var(--line-2); border-radius:99px; padding:5px 13px; font-size:13px; font-weight:500;
+}
+.acts{display:flex; flex-wrap:wrap; gap:var(--s3); align-items:center}
+.btn-primary{
+  background:var(--cream); color:var(--black); border-radius:99px; padding:15px 32px;
+  font-size:15px; font-weight:600; letter-spacing:.02em;
+  transition:transform var(--t-fast), background var(--t-fast);
+}
+.btn-primary:hover{transform:translateY(-2px); background:#fff}
+:root[data-theme="light"] .btn-primary:hover{background:var(--black); color:var(--cream)}
+
+/* also playing */
+.strip-head{
+  font-family:var(--mono); font-size:11px; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--dim); padding-bottom:var(--s4); border-bottom:1px solid var(--line); margin-bottom:var(--s5);
+}
+.also{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s5); padding-bottom:var(--s8)}
+.alt{text-align:left; display:flex; flex-direction:column; gap:var(--s3); transition:transform var(--t-fast)}
+.alt:hover{transform:translateY(-4px)}
+.alt .poster-frame{aspect-ratio:2/3}
+.alt h4{font-family:var(--display); font-size:24px; line-height:1.05}
+.alt .m{font-family:var(--mono); font-size:12px; color:var(--dim)}
+.alt .why-line{font-size:13.5px; color:var(--cream-2); line-height:1.45}
+.alt.wild .badge{
+  align-self:flex-start; font-family:var(--mono); font-size:10px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--yellow); border:1px solid var(--yellow);
+  border-radius:99px; padding:3px 10px;
+}
+
+/* why panel */
+.why-panel{
+  border:1px solid var(--line-2); border-radius:var(--r3); background:var(--stage);
+  padding:var(--s6); margin-bottom:var(--s8);
+}
+.why-panel.hide{display:none}
+.why-cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:var(--s6)}
+.why-col h4{
+  font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--red); margin-bottom:var(--s3);
+}
+.why-col ul{margin:0; padding:0; list-style:none; display:grid; gap:var(--s2)}
+.why-col li{font-size:14.5px; color:var(--cream-2); display:flex; gap:var(--s2); align-items:baseline}
+.why-col li::before{content:"—"; color:var(--dim); flex:none}
+.seeds{display:flex; gap:var(--s3); flex-wrap:wrap}
+.seed{width:56px}
+.seed .poster-frame{aspect-ratio:2/3; border-radius:var(--r1)}
+.seed .sn{font-size:11px; color:var(--dim); margin-top:6px; line-height:1.3}
+
+/* lock the bill */
+.locked-card{
+  border:1px solid var(--yellow); border-radius:var(--r3); background:var(--stage);
+  padding:var(--s6); margin-bottom:var(--s8);
+  display:grid; grid-template-columns:110px 1fr; gap:var(--s5); align-items:center;
+}
+.locked-card .eyebrow{color:var(--yellow); margin-bottom:var(--s2)}
+.locked-card h3{font-family:var(--display); font-size:34px; line-height:1.05}
+.showtimes{display:flex; gap:var(--s5); margin-top:var(--s4); flex-wrap:wrap}
+.showtime .l{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim)}
+.showtime .v{font-family:var(--mono); font-size:20px; color:var(--yellow)}
+
+/* double feature */
+.dbl{border:1px solid var(--line); border-radius:var(--r3); padding:var(--s5); margin-bottom:var(--s8); background:var(--stage)}
+.dbl-films{display:grid; grid-template-columns:1fr auto 1fr; gap:var(--s4); align-items:center; margin-top:var(--s4)}
+.dbl-film{display:flex; gap:var(--s3); align-items:center; min-width:0}
+.dbl-film .poster-frame{width:52px; aspect-ratio:2/3; flex:none}
+.dbl-film .t{font-family:var(--display); font-size:20px; line-height:1.1}
+.dbl-film .s{font-family:var(--mono); font-size:12px; color:var(--yellow)}
+.dbl-then{font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--dim); text-transform:uppercase}
+
+/* taste */
+.taste-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:var(--s4)}
+.tcard{position:relative; text-align:left}
+.tcard .poster-frame{aspect-ratio:2/3; transition:transform var(--t-fast)}
+.tcard:hover .poster-frame{transform:translateY(-4px)}
+.tcard .tt{display:block; font-size:13.5px; margin-top:var(--s2); line-height:1.3}
+.tcard .ty{display:block; font-family:var(--mono); font-size:11px; color:var(--dim)}
+.tcard-acts{
+  position:absolute; inset:auto 0 auto 0; top:0; height:100%;
+  display:flex; align-items:flex-end; gap:6px; padding:8px; opacity:0;
+  background:linear-gradient(0deg,rgba(6,6,5,.92),transparent 55%);
+  transition:opacity var(--t-fast); border-radius:var(--r3);
+}
+.tcard:hover .tcard-acts, .tcard:focus-within .tcard-acts{opacity:1}
+.mini{
+  flex:1; padding:7px 0; border-radius:var(--r1); font-size:12px; font-weight:600;
+  border:1px solid var(--line-2); background:rgba(10,10,9,.7); color:var(--cream);
+  transition:all var(--t-fast);
+}
+.mini.love:hover{background:var(--good); color:#0A0A09; border-color:var(--good)}
+.mini.nope:hover{background:var(--bad); color:#0A0A09; border-color:var(--bad)}
+.tcard[data-state="loved"] .poster-frame{outline:2px solid var(--good); outline-offset:2px}
+.tcard[data-state="hated"] .poster-frame{outline:2px solid var(--bad); outline-offset:2px; filter:grayscale(.85) brightness(.6)}
+.state-flag{
+  position:absolute; top:8px; left:8px; font-family:var(--mono); font-size:10px;
+  letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border-radius:99px;
+  background:var(--good); color:#0A0A09; font-weight:600;
+}
+.tcard[data-state="hated"] .state-flag{background:var(--bad)}
+.progress{display:flex; align-items:center; gap:var(--s3); flex-wrap:wrap}
+.pips{display:flex; gap:7px}
+.pip{width:10px;height:10px;border-radius:50%;border:1px solid var(--line-2)}
+.pip.on{background:var(--red); border-color:var(--red)}
+.progress .msg{font-size:15px; color:var(--cream-2)}
+.taste-profile{display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s4)}
+.trait{border:1px solid var(--yellow); color:var(--yellow); border-radius:99px; padding:5px 13px; font-size:13px}
+
+/* past bills */
+.bills-list{display:grid; gap:var(--s3)}
+.bill-row{
+  display:grid; grid-template-columns:48px 1fr auto; gap:var(--s4); align-items:center;
+  padding:var(--s3); border:1px solid var(--line); border-radius:var(--r2); background:var(--stage);
+}
+.bill-row .poster-frame{aspect-ratio:2/3; border-radius:var(--r1)}
+.bill-row .t{font-family:var(--display); font-size:20px; line-height:1.1}
+.bill-row .d{font-family:var(--mono); font-size:11.5px; color:var(--dim)}
+
+/* empty + notices */
+.empty{
+  border:1px dashed var(--line-2); border-radius:var(--r3); padding:var(--s8) var(--s5);
+  text-align:center; margin-bottom:var(--s8);
+}
+.empty h3{font-family:var(--display); font-size:32px; margin-bottom:var(--s3)}
+.empty p{color:var(--dim); max-width:44ch; margin:0 auto var(--s5); font-size:16px}
+.notice{font-size:13.5px; color:var(--dim); line-height:1.6; border-top:1px solid var(--line); padding-top:var(--s4)}
+.notice b{color:var(--cream-2); font-weight:500}
+.foot{padding:var(--s7) 0 var(--s9); color:var(--dim); font-size:12.5px; line-height:1.7; max-width:78ch}
+
+/* reveal */
+@keyframes curtain{from{clip-path:inset(0 0 100% 0); opacity:0} to{clip-path:inset(0 0 0 0); opacity:1}}
+.reveal{animation:curtain 520ms cubic-bezier(.16,.84,.28,1) both}
+.reveal-2{animation:rise 420ms cubic-bezier(.16,.84,.28,1) 120ms both}
+.reveal-3{animation:rise 420ms cubic-bezier(.16,.84,.28,1) 220ms both}
+
+/* ---------------- responsive ---------------- */
+@media (max-width:1024px){
+  .headliner{grid-template-columns:minmax(240px,38%) 1fr; gap:var(--s5)}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .moods{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .wrap,.wrap-mid{padding:0 var(--s4)}
+  .hero{padding:var(--s7) 0 var(--s6)}
+  .q{margin-bottom:var(--s7)}
+  .cards,.times{grid-template-columns:1fr}
+  .card{padding:var(--s4)}
+  .moods{grid-template-columns:repeat(2,1fr)}
+  .headliner{grid-template-columns:1fr; gap:var(--s5)}
+  .poster-frame{max-width:260px}
+  .hl-body h3{font-size:clamp(32px,9vw,44px)}
+  .also{grid-template-columns:1fr; gap:var(--s6)}
+  .alt{flex-direction:row; gap:var(--s4)}
+  .alt .poster-frame{width:96px; flex:none}
+  .locked-card{grid-template-columns:80px 1fr; padding:var(--s4)}
+  .dbl-films{grid-template-columns:1fr; gap:var(--s3)}
+  .dbl-then{justify-self:start}
+  .cta{width:100%; justify-content:center; padding:var(--s5) var(--s4)}
+  .nav button{padding:7px 10px; font-size:13px}
+  .brand{font-size:18px}
+  .taste-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+  .tcard-acts{opacity:1; background:linear-gradient(0deg,rgba(6,6,5,.9),transparent 60%)}
+  .match .n{font-size:34px}
 }
 @media (prefers-reduced-motion:reduce){
-  .poster.ldg, .tposter.ldg{animation:none}
-}
-.tcard.haspost{flex-direction:row; align-items:flex-start; gap:9px}
-.tcard.haspost .tbody{display:flex; flex-direction:column; gap:2px; min-width:0}
-.pick{
-  display:grid; grid-template-columns:auto auto minmax(0,1fr) auto; gap:16px; align-items:start;
-  grid-auto-flow:row;
-  background:var(--surface); border:1px solid var(--line); border-radius:11px;
-  padding:15px 17px; box-shadow:var(--shadow); position:relative; overflow:hidden;
-}
-.pick.top{
-  border-color:var(--accent-line);
-  box-shadow:var(--shadow), var(--glow);
-}
-.pick.top::before{
-  content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent);
-}
-/* a faint wash from the accent edge, so the lead pick reads as lit rather than
-   merely outlined — barely visible, but the eye lands there first */
-.pick.top::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background:linear-gradient(100deg, var(--accent-soft) 0%, transparent 42%);
-  opacity:.55;
-}
-.pick.top > *{position:relative; z-index:1}
-.rank{
-  font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--ink-3);
-  padding-top:3px; width:22px; text-align:right;
-  grid-column:1;
-}
-/* Not every film has poster art, so the body claims the remaining span itself
-   rather than relying on auto-placement to guess. */
-.pick .poster{grid-column:2}
-.pick .body{grid-column:3}
-.pick .aside{grid-column:4}
-.pick:not(:has(.poster)) .body{grid-column:2 / 4}
-.pick.top .rank{color:var(--accent)}
-.body{min-width:0; display:flex; flex-direction:column; gap:6px}
-.title-line{display:flex; align-items:baseline; gap:9px; flex-wrap:wrap}
-.title-line h3{
-  font-family:'Instrument Serif',Georgia,serif; font-size:21px; font-weight:400; line-height:1.15;
-}
-.title-line .yr{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-3)}
-.meta{display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:12px; color:var(--ink-3)}
-.meta .sep{opacity:.4}
-.hook{font-size:13.5px; color:var(--ink-2); max-width:70ch; line-height:1.55}
-.why{
-  font-size:12.5px; color:var(--ink-2); background:var(--surface-2); border-left:2px solid var(--accent);
-  padding:7px 11px; border-radius:0 6px 6px 0; max-width:64ch;
-}
-.why b{color:var(--ink); font-weight:600}
-.tags{display:flex; gap:5px; flex-wrap:wrap}
-.tag{
-  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase;
-  border:1px solid var(--line); border-radius:4px; padding:2px 6px; color:var(--ink-3);
+  *{animation:none !important; transition:none !important}
+  .card:hover,.mood:hover,.alt:hover,.cta:hover,.btn-primary:hover{transform:none}
 }
 
-.aside{display:flex; flex-direction:column; align-items:flex-end; gap:8px; flex:none}
-.svc-badge{
-  font-size:11px; font-weight:600; border-radius:5px; padding:3px 8px; white-space:nowrap;
-  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
-}
-.score{display:flex; flex-direction:column; align-items:flex-end; gap:4px}
-.score .num{font-family:'IBM Plex Mono',monospace; font-size:19px; font-weight:600; letter-spacing:-.02em}
-.score .lbl{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3)}
-.meter{width:78px; height:4px; border-radius:99px; background:var(--sunk); overflow:hidden; border:1px solid var(--line)}
-.meter span{display:block; height:100%; background:var(--accent); border-radius:99px}
-.runtime-pill{
-  font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--ink);
-  background:var(--surface-2); border:1px solid var(--line); border-radius:5px; padding:3px 8px; white-space:nowrap;
-}
-.runtime-pill.tight{border-color:var(--accent-line); color:var(--accent-hot); background:var(--accent-soft)}
-.rate{
-  font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.04em;
-  border:1px solid var(--line-2); border-radius:3px; padding:1px 5px; color:var(--ink-2);
-}
-.rt{
-  font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
-  display:inline-flex; align-items:center; gap:4px; color:var(--ink-2);
-}
-.rt i{width:7px; height:7px; border-radius:50%; display:inline-block; background:var(--fresh)}
-.rt.rotten i{background:var(--rotten)}
-.score-note{font-size:11px; color:var(--ink-3); line-height:1.4; margin-top:-3px}
-:root[data-theme="light"] .runtime-pill.tight{color:var(--accent)}
-
-/* ---- states ---- */
-/* ---- card actions ---- */
-.acts{display:flex; gap:7px; flex-wrap:wrap; margin-top:2px}
-.act{
-  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
-  border-radius:6px; padding:5px 10px; font-size:11.5px; font-weight:500;
-  transition:border-color .12s, color .12s, background .12s;
-}
-.act:hover{border-color:var(--accent-line); color:var(--accent-hot); background:var(--accent-soft)}
-.act.on{border-color:var(--loved); color:var(--loved); background:var(--loved-soft)}
-.stale-tag{
-  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em;
-  text-transform:uppercase; color:var(--ink-3); align-self:center;
-}
-
-/* ---- compare ---- */
-.compare{
-  border:1px solid var(--accent-line); border-radius:12px; background:var(--surface);
-  padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow);
-}
-.compare-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:12px}
-.compare-head h3{font-family:'Instrument Serif',Georgia,serif; font-weight:400; font-size:19px}
-.cmp-grid{display:grid; grid-template-columns:1fr auto 1fr; gap:10px 16px; align-items:center}
-.cmp-side{display:flex; gap:10px; align-items:center; min-width:0}
-.cmp-side img{width:40px; aspect-ratio:2/3; object-fit:cover; border-radius:4px; border:1px solid var(--line); flex:none}
-.cmp-side .nm{font-size:13.5px; font-weight:600; line-height:1.25}
-.cmp-side .sub{font-size:11px; color:var(--ink-3); font-family:'IBM Plex Mono',monospace}
-.cmp-vs{
-  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em;
-  color:var(--ink-3); text-transform:uppercase;
-}
-.cmp-rows{margin-top:13px; display:grid; gap:7px}
-.cmp-row{display:grid; grid-template-columns:1fr 92px 1fr; gap:10px; align-items:center; font-size:12px}
-.cmp-row .lab{
-  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em;
-  text-transform:uppercase; color:var(--ink-3); text-align:center;
-}
-.cmp-bar{height:5px; border-radius:99px; background:var(--sunk); border:1px solid var(--line); overflow:hidden}
-.cmp-bar span{display:block; height:100%; background:var(--ink-3); border-radius:99px}
-.cmp-bar.win span{background:var(--accent)}
-.cmp-bar.l{transform:scaleX(-1)}
-.cmp-why{
-  margin-top:12px; font-size:12.5px; color:var(--ink-2); line-height:1.5;
-  border-top:1px solid var(--line); padding-top:11px;
-}
-.cmp-why b{color:var(--ink)}
-
-/* ---- history ---- */
-.hist{display:flex; flex-direction:column; gap:6px}
-.hist-row{
-  display:flex; align-items:center; justify-content:space-between; gap:8px;
-  font-size:12px; color:var(--ink-2); padding:4px 0; border-bottom:1px solid var(--line);
-}
-.hist-row:last-child{border-bottom:none}
-.hist-row .t{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.hist-row button{
-  background:none; border:none; color:var(--ink-3); font-size:15px; line-height:1; padding:0 2px;
-}
-.hist-row button:hover{color:var(--hated)}
-.hist-empty{font-size:12px; color:var(--ink-3); line-height:1.45}
-
-/* ---- keyboard help ---- */
-.keys{
-  display:grid; grid-template-columns:auto 1fr; gap:5px 10px; font-size:12px;
-  color:var(--ink-2); margin-top:9px;
-}
-.keys kbd{
-  font-family:'IBM Plex Mono',monospace; font-size:10.5px; background:var(--surface-2);
-  border:1px solid var(--line-2); border-bottom-width:2px; border-radius:4px;
-  padding:2px 6px; color:var(--ink); white-space:nowrap;
-}
-.empty{
-  border:1px dashed var(--line-2); border-radius:12px; padding:44px 30px; text-align:center;
-  color:var(--ink-3); background:var(--surface);
-}
-.empty h3{font-family:'Instrument Serif',Georgia,serif; font-size:22px; font-weight:400; color:var(--ink-2); margin-bottom:7px}
-.empty p{margin:0 auto; max-width:44ch; font-size:13.5px; line-height:1.5}
-.nudge{
-  display:flex; gap:11px; align-items:flex-start; background:var(--accent-soft);
-  border:1px solid var(--accent-line); border-radius:9px; padding:11px 14px; font-size:12.5px;
-  color:var(--ink-2); margin-bottom:16px; line-height:1.45;
-}
-.nudge b{color:var(--ink)}
-.locked{
-  font-size:12px; color:var(--ink-3); border-top:1px solid var(--line);
-  padding-top:12px; margin-top:16px; line-height:1.5;
-}
-.locked b{color:var(--ink-2); font-weight:600}
-.handoff{
-  margin-top:26px; border:1px solid var(--line); border-radius:11px; background:var(--surface);
-  padding:17px 19px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
-}
-.handoff p{margin:4px 0 0; font-size:12.5px; color:var(--ink-3); max-width:56ch; line-height:1.45}
-.handoff h3{font-family:'Instrument Serif',Georgia,serif; font-size:19px; font-weight:400}
-.copybtn{
-  border:1px solid var(--line-2); background:var(--surface-2); border-radius:8px;
-  padding:10px 16px; font-size:13px; font-weight:600; white-space:nowrap;
-}
-.copybtn:hover{border-color:var(--accent-line); color:var(--accent-hot)}
-:root[data-theme="light"] .copybtn:hover{color:var(--accent)}
-.foot{margin-top:30px; font-size:11.5px; color:var(--ink-3); line-height:1.55; max-width:70ch}
-
-@media (max-width:940px){
-  .shell{grid-template-columns:1fr}
-  .rail{position:static; max-height:none; border-right:none; border-bottom:1px solid var(--line)}
-  .stage{padding:20px 18px 60px}
-  .masthead{padding:16px 18px 14px}
-  /* Three columns stay (rank, poster, body); the right rail drops beneath the
-     body and runs horizontally. Naming every child's placement explicitly —
-     auto-placement put the poster and the rail in the wrong cells once the
-     poster column was added. */
-  .pick{grid-template-columns:auto auto minmax(0,1fr); row-gap:12px; column-gap:12px}
-  .pick .rank  {grid-column:1; grid-row:1}
-  .pick .poster{grid-column:2; grid-row:1; width:52px}
-  .pick .body  {grid-column:3; grid-row:1}
-  .pick .aside {
-    grid-column:1 / -1; grid-row:2;
-    flex-direction:row; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:8px;
-  }
-  .pick .aside .score{flex-direction:row; align-items:center; gap:8px}
-  .pick .aside .meter{width:64px}
-  .brand h1{font-size:28px}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
 </style>
-<div class="masthead">
-  <div class="brand">
-    <h1>Tonight&rsquo;s Bill</h1>
-    <span class="sub">Set the room, the clock, and the taste. The engine programs the evening.</span>
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><span class="dot"></span>Tonight&rsquo;s Bill</div>
+    <nav class="nav" aria-label="Sections">
+      <button type="button" data-go="tonight" aria-current="page">Tonight</button>
+      <button type="button" data-go="taste">Taste</button>
+      <button type="button" data-go="bills">Past Bills</button>
+    </nav>
+    <button class="icon-btn" id="themebtn" type="button" aria-label="Switch theme">&#9789;</button>
   </div>
-  <div class="mast-right">
-    <button class="themebtn" id="themebtn" type="button">Theme</button>
-  </div>
-</div>
+</header>
 
-<div class="shell">
-  <aside class="rail">
-
-    <div class="block">
-      <div class="block-head"><span class="eyebrow">Who&rsquo;s watching</span></div>
-      <div class="seg-row" id="room"></div>
+<main>
+<!-- ============ TONIGHT ============ -->
+<section class="screen on" id="s-tonight">
+  <div class="wrap">
+    <div class="hero">
+      <p class="eyebrow">One screen, one night</p>
+      <h1>What are we watching tonight?</h1>
+      <p class="sub">Movie night without the 45-minute argument.</p>
     </div>
 
-    <div class="block">
-      <div class="block-head">
-        <span class="eyebrow">Time on the clock</span>
-        <span class="hint" id="timehint"></span>
+    <div class="q">
+      <div class="q-head">
+        <span class="q-num">01</span>
+        <h2>Who&rsquo;s on the couch?</h2>
       </div>
-      <div class="time-read">
-        <span class="big" id="timebig">140</span>
-        <span class="unit" id="timeunit">min &mdash; 2h 20m</span>
-      </div>
-      <input type="range" id="time" min="80" max="240" step="5" value="140" aria-label="Maximum runtime in minutes">
-      <div class="ticks"><span>1h 20m</span><span>2h 40m</span><span>4h</span></div>
+      <div class="cards" id="q-who"></div>
     </div>
 
-    <div class="block">
-      <div class="block-head">
-        <span class="eyebrow">Minimum rating</span>
-        <span class="hint" id="ratehint"></span>
+    <div class="q">
+      <div class="q-head">
+        <span class="q-num">02</span>
+        <h2>How much time have we got?</h2>
       </div>
-      <div class="seg-row" id="rating"></div>
-    </div>
-
-    <div class="block">
-      <div class="block-head">
-        <span class="eyebrow">Critic score</span>
-        <span class="hint" id="rthint"></span>
-      </div>
-      <div class="time-read">
-        <span class="big" id="rtbig">0</span>
-        <span class="unit" id="rtunit">% and up &mdash; everything</span>
-      </div>
-      <input type="range" id="rt" min="0" max="95" step="5" value="0" aria-label="Minimum critic score">
-      <div class="score-note" id="scorenote"></div>
-    </div>
-
-    <div class="block">
-      <div class="block-head">
-        <span class="eyebrow">Genres you&rsquo;re after</span>
-        <span class="hint">optional</span>
-      </div>
-      <div class="seg-row" id="genres"></div>
-    </div>
-
-    <div class="block">
-      <div class="block-head">
-        <span class="eyebrow">Your services</span>
-        <span class="hint" id="svchint"></span>
-      </div>
-      <div id="services"></div>
-    </div>
-
-    <div class="block">
-      <div class="block-head">
-        <span class="eyebrow">Recent evenings</span>
-        <span class="hint" id="histhint"></span>
-      </div>
-      <div class="hist" id="history"></div>
-    </div>
-
-    <div class="block">
-      <div class="block-head"><span class="eyebrow">Keyboard</span></div>
-      <div class="keys">
-        <kbd>J</kbd><span>next pick</span>
-        <kbd>K</kbd><span>previous pick</span>
-        <kbd>C</kbd><span>compare with the top pick</span>
-        <kbd>W</kbd><span>mark watched</span>
-        <kbd>/</kbd><span>search titles</span>
-        <kbd>Esc</kbd><span>clear</span>
+      <div class="times" id="q-time"></div>
+      <button class="exact-link" id="exact-toggle" type="button" aria-expanded="false">Set an exact runtime</button>
+      <div class="exact hide" id="exact-panel">
+        <div class="readout"><span id="time-read">140</span><small id="time-hm"></small></div>
+        <input class="range" id="time-range" type="range" min="70" max="240" step="5" value="140"
+               aria-label="Maximum runtime in minutes">
       </div>
     </div>
 
-    <div class="block">
-      <button class="runbtn" id="run" type="button">Program the evening</button>
-      <button class="resetbtn" id="reset" type="button">Clear everything</button>
+    <div class="q">
+      <div class="q-head">
+        <span class="q-num">03</span>
+        <h2>What sounds good?</h2>
+        <span class="q-note">Pick as many as you like</span>
+      </div>
+      <div class="moods" id="q-mood"></div>
     </div>
 
-  </aside>
-
-  <main class="stage">
-
-    <div class="sec" id="sec-bill">
-      <div class="sec-head">
-        <h2>The bill</h2>
-        <span class="count" id="billcount"></span>
-      </div>
-      <div class="filtersum" id="filtersum"></div>
-      <div id="compare"></div>
-      <div id="bill"></div>
-      <div class="locked" id="locked"></div>
+    <div class="cta-wrap">
+      <button class="cta" id="show-bill" type="button">Show me the bill <span class="arw">&rarr;</span></button>
+      <p class="cta-note" id="cta-note"></p>
+      <p class="cta-note"><button class="ghost" id="dealer" type="button">Dealer&rsquo;s Choice &mdash; we&rsquo;ll make the call</button></p>
     </div>
 
-    <div class="sec" id="sec-taste">
-      <div class="sec-head">
-        <h2>Calibrate your taste</h2>
-        <span class="count" id="tastecount"></span>
-      </div>
-      <div class="nudge" id="nudge">
-        <div>
-          <b>Click once to love it. Click again to mark it a miss.</b> Every title you tag teaches the
-          engine what you respond to &mdash; pace, tone, how much work a film asks of you &mdash; not just
-          genre. Five or six tags is enough to get sharp. Marking misses matters as much as marking loves.
+    <details class="fine" id="fine">
+      <summary><span class="chev">&rsaquo;</span> Fine tune tonight</summary>
+      <div class="fine-body">
+        <div class="fine-block">
+          <h3>Age range</h3>
+          <div class="chipset" id="f-audience"></div>
+        </div>
+        <div class="fine-block">
+          <h3>Rating floor</h3>
+          <div class="chipset" id="f-rating"></div>
+        </div>
+        <div class="fine-block">
+          <h3>Critics at least</h3>
+          <div class="readout"><span id="rt-read">0</span><small>%</small></div>
+          <input class="range" id="rt-range" type="range" min="0" max="95" step="5" value="0"
+                 aria-label="Minimum critic score">
+        </div>
+        <div class="fine-block">
+          <h3>Genres</h3>
+          <div class="chipset" id="f-genres"></div>
+        </div>
+        <div class="fine-block">
+          <h3>Your services</h3>
+          <div id="f-services"></div>
+          <p class="notice" style="margin-top:12px">Saved between visits, so you only set this once.</p>
         </div>
       </div>
-      <div class="taste-bar">
-        <input class="search" id="search" type="search" placeholder="Search the catalog by title or director&hellip;" aria-label="Search titles">
-        <button class="fitbtn" id="fitonly" type="button" aria-pressed="false">Only what fits tonight</button>
-        <div class="legend">
-          <span class="key"><i style="background:var(--loved)"></i><b>Loved</b></span>
-          <span class="key"><i style="background:var(--hated)"></i><b>Missed</b></span>
-        </div>
-      </div>
-      <div id="verdict"></div>
-      <p class="gridnote" id="gridnote"></p>
-      <div class="grid-titles" id="titlegrid"></div>
-      <div class="chips" id="chips"></div>
-    </div>
+    </details>
+  </div>
+</section>
 
-    <div class="handoff">
+<!-- ============ THE BILL ============ -->
+<section class="screen" id="s-bill">
+  <div class="wrap">
+    <div class="bill-head">
       <div>
-        <h3>Nothing here tonight?</h3>
-        <p>Copy your brief and hand it to Claude in chat. That covers new releases and anything
-          outside this catalog, with live availability instead of a baked-in snapshot.</p>
+        <p class="eyebrow" id="bill-eyebrow">Tonight&rsquo;s pick</p>
+        <h2 id="bill-title">The bill</h2>
       </div>
-      <button class="copybtn" id="copy" type="button">Copy brief</button>
+      <div class="recap" id="bill-recap"></div>
     </div>
+    <div id="locked-slot"></div>
+    <div id="headliner-slot"></div>
+    <div class="why-panel hide" id="why-panel"></div>
+    <div id="double-slot"></div>
+    <div id="also-slot"></div>
+    <div class="notice" id="bill-notice"></div>
+    <div class="cta-wrap" style="padding-top:var(--s6)">
+      <button class="ghost" id="back-tonight" type="button">&larr; Change tonight&rsquo;s answers</button>
+    </div>
+  </div>
+</section>
 
-    <div class="foot" id="foot"></div>
+<!-- ============ TASTE ============ -->
+<section class="screen" id="s-taste">
+  <div class="wrap">
+    <div class="hero" style="text-align:left;padding-bottom:var(--s5)">
+      <p class="eyebrow">Teach us your taste</p>
+      <h1 style="font-size:clamp(38px,6vw,64px)">Pick five you love.</h1>
+      <p class="sub" style="margin-left:0">Hover a poster and tell us. The more we know, the less we guess.</p>
+    </div>
+    <div class="progress" style="margin-bottom:var(--s5)">
+      <div class="pips" id="pips"></div>
+      <span class="msg" id="taste-msg"></span>
+    </div>
+    <div class="taste-profile" id="taste-profile"></div>
+    <div style="margin:var(--s6) 0 var(--s4)">
+      <input class="chip" id="taste-search" type="search" placeholder="Search 244 films&hellip;"
+             style="padding:11px 18px;font-size:14px;min-width:260px" aria-label="Search films">
+    </div>
+    <div class="taste-grid" id="taste-grid"></div>
+  </div>
+</section>
 
-  </main>
-</div>
+<!-- ============ PAST BILLS ============ -->
+<section class="screen" id="s-bills">
+  <div class="wrap">
+    <div class="hero" style="text-align:left;padding-bottom:var(--s5)">
+      <p class="eyebrow">The back catalogue</p>
+      <h1 style="font-size:clamp(38px,6vw,64px)">Past bills</h1>
+    </div>
+    <div id="bills-slot"></div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap"><p class="foot" id="foot"></p></footer>
+
 <script>
+
 /* ============================================================================
    CATALOG
    Columns: [ title, year, runtime, genres, attributes, service, director, hook, audience,
@@ -901,6 +882,7 @@ const RAW = [
 ["Jumanji",1995,104,"adventure|fantasy|family","spectacle|scary|comic|practical|brisk","PCK","Joe Johnston","A board game that plays back, twenty-six years late.","all",3,"PG",55],
 ["The Iron Giant",1999,86,"animation|scifi|family","earnest|melancholy|uplifting|visual|cozy","MAX","Brad Bird","A boy hides a war machine that would rather be Superman.","all",2,"PG",96]
 ];
+
 </script>
 <script>
 (function(){
@@ -912,7 +894,7 @@ const FILMS = RAW.map(function(row,i){
   COLS.forEach(function(c,j){ o[c] = row[j]; });
   o.g = o.g.split("|"); o.a = o.a.split("|");
   o.svcs = [o.s];              /* enrichment can widen this to several services */
-  o.poster = null;             /* filled in by data/catalog.json when present */
+  o.poster = null; o.backdrop = null;   /* filled in by data/catalog.json when present */
   return o;
 });
 const BY_TITLE = {};
@@ -993,6 +975,52 @@ function rateRank(f){
   return (r === undefined) ? NR_FALLBACK[f.k] : r;
 }
 
+/* Moods are the consumer-facing way in. Each one is just a bundle of the
+   attribute tags the scorer already understands, so nothing about the taste
+   maths changes — a mood simply adds a second thing to match against. */
+const MOODS = [
+  {k:"easy",    n:"Easy win",        sub:"Nothing heavy",
+   up:["brisk","comic","uplifting","cozy","propulsive"], down:["slowburn","bleak","cerebral"]},
+  {k:"laugh",   n:"Make me laugh",   sub:"Actually funny",
+   up:["comic","ironic","brisk","ensemble"],             down:["bleak","slowburn"]},
+  {k:"guess",   n:"Keep me guessing",sub:"Twists and turns",
+   up:["twisty","cerebral","propulsive","mystery"],      down:["cozy"]},
+  {k:"big",     n:"Big movie",       sub:"Scale and spectacle",
+   up:["spectacle","epic","practical","propulsive","visual"], down:["dialogue"]},
+  {k:"weird",   n:"Something weird", sub:"Off the beaten path",
+   up:["weird","auteur","visual","stylish"],             down:["grounded"]},
+  {k:"acting",  n:"Great acting",    sub:"People, not plot",
+   up:["characterstudy","dialogue","ensemble","earnest"],down:["spectacle"]},
+  {k:"dark",    n:"Dark & intense",  sub:"Turn the lights off",
+   up:["bleak","visceral","violent","slowburn","scary"], down:["comic","cozy","uplifting"]},
+  {k:"comfort", n:"Comfort movie",   sub:"Something kind",
+   up:["cozy","uplifting","earnest","romantic","hopeful"],down:["bleak","violent","scary"]}
+];
+const MOOD_BY = {}; MOODS.forEach(function(m){ MOOD_BY[m.k] = m; });
+
+function moodVector(){
+  const v = {};
+  S.moods.forEach(function(k){
+    const m = MOOD_BY[k]; if(!m) return;
+    m.up.forEach(function(a){   v[a] = (v[a]||0) + 1; });
+    m.down.forEach(function(a){ v[a] = (v[a]||0) - 0.8; });
+  });
+  return v;
+}
+
+/* Same rarity-weighted coverage idea the taste profile uses: how much of what
+   tonight is asking for does this film actually carry? */
+function moodScore(f, v){
+  const keys = Object.keys(v);
+  if(!keys.length) return 0.5;
+  let mass = 0, hit = 0;
+  keys.forEach(function(a){ if(v[a] > 0) mass += v[a] * idfA(a); });
+  f.a.forEach(function(a){ if(v[a]) hit += v[a] * idfA(a); });
+  f.g.forEach(function(g){ if(v[g]) hit += v[g] * idfA(g) * 0.6; });
+  const cov = mass ? hit / mass : 0;
+  return clamp((cov * 1.6 + 1) / 2, 0, 1);
+}
+
 const GENRES = ["action","adventure","animation","comedy","crime","documentary","drama","fantasy",
                 "horror","musical","mystery","romance","scifi","thriller","war","family"];
 const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
@@ -1014,7 +1042,8 @@ const ATTR_PHRASE = {
    real Rotten Tomatoes scores). It is optional on purpose: opened as a bare
    file, or served without it, the page falls back to its built-in catalog and
    says so. Nothing here ever blocks first render. */
-const POSTER_BASE = "https://image.tmdb.org/t/p/w185";
+const POSTER_BASE   = "https://image.tmdb.org/t/p/w342";
+const BACKDROP_BASE = "https://image.tmdb.org/t/p/w1280";
 let ENRICHED = null;
 
 function applyEnrichment(payload){
@@ -1032,6 +1061,7 @@ function applyEnrichment(payload){
       f.svcChecked = true;      /* checked and empty means "on nothing", not "unknown" */
     }
     if(e.poster) f.poster = e.poster;
+    if(e.backdrop) f.backdrop = e.backdrop;
     if(e.overview){ f.h = e.overview; f.hSrc = "tmdb"; }   /* real synopsis beats the terse hook */
     hit++;
   });
@@ -1043,9 +1073,7 @@ async function loadEnrichment(){
   try{
     const res = await fetch("data/catalog.json", {cache:"no-cache"});
     if(!res.ok) return;
-    if(applyEnrichment(await res.json())){
-      renderBill(); renderGrid(); renderTime(); renderRating(); renderRT(); renderFoot();
-    }
+    if(applyEnrichment(await res.json())) afterEnrichment();
   }catch(e){ /* absent or blocked: built-in catalog stands */ }
 }
 
@@ -1082,7 +1110,11 @@ const S = {
   rate:    (function(v){ return (typeof v === "number" && v >= 0 && v <= 4) ? v : 0; })(load("rate",0)),
   fitOnly: load("fitOnly",false),
   minRT:   load("minRT",0),
+  moods:   load("moods",[]),
+  timePreset: load("timePreset",""),
   watched: load("watched",{}),
+  bills:   load("bills",[]),
+  locked:  load("locked",null),
   offered: load("offered",[]),
   genres:  load("genres",[]),
   svc:     Object.assign({}, svcDefault, load("svc",{})),
@@ -1095,6 +1127,8 @@ function save(){
   store("svc",S.svc);   store("taste",S.taste);
   store("rate",S.rate); store("minRT",S.minRT); store("fitOnly",S.fitOnly);
   store("watched",S.watched); store("offered",S.offered);
+  store("moods",S.moods); store("bills",S.bills); store("locked",S.locked);
+  store("timePreset",S.timePreset);
 }
 
 /* ---------- evening history ----------
@@ -1233,6 +1267,7 @@ function scoreAll(){
   R.down.forEach(function(x){ downSet[x]=1; });
 
   const kept = [], lockedSvc = [], notStreaming = [], watched = [];
+  const MV = moodVector();
 
   FILMS.forEach(function(f){
     if(S.taste[f.t]) return;                                  /* rated, so already seen */
@@ -1279,9 +1314,10 @@ function scoreAll(){
                 : ((S.room === "friends" || S.room === "kids") ? 0.16 : 0.09)
                   / (1 + T.n * 0.35);
 
-    const W = {taste:0.46, genre:0.22, room:0.18, fame:fameW};
-    let score = (W.taste*tasteN + W.genre*genreN + W.room*roomN + W.fame*fameN) /
-                (W.taste + W.genre + W.room + W.fame);
+    const moodN = moodScore(f, MV);
+    const W = {taste:0.46, genre:0.22, room:0.18, fame:fameW, mood: S.moods.length ? 0.40 : 0};
+    let score = (W.taste*tasteN + W.genre*genreN + W.room*roomN + W.fame*fameN + W.mood*moodN) /
+                (W.taste + W.genre + W.room + W.fame + W.mood);
 
     /* Shown on a recent evening? Nudge it down so the bill is not word-for-word
        identical night after night. Small and bounded — this reorders near-ties,
@@ -1292,7 +1328,7 @@ function scoreAll(){
 
     const on = f.svcs.filter(function(c){ return S.svc[c]; });
     const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on,
-                 parts:{taste:tasteN, genre:genreN, room:roomN, fame:fameN},
+                 parts:{taste:tasteN, genre:genreN, room:roomN, fame:fameN, mood:moodN},
                  weights:W, stale:stale, seenIdx:seenIdx};
     if(!f.svcs.length && f.svcChecked){ notStreaming.push(rec); return; }  /* rent or buy only */
     if(!on.length){ lockedSvc.push(rec); return; }                        /* carried, not by you */
@@ -1303,6 +1339,33 @@ function scoreAll(){
   lockedSvc.sort(function(a,b){ return b.score - a.score; });
   notStreaming.sort(function(a,b){ return b.score - a.score; });
   return {picks:kept, locked:lockedSvc, notStreaming:notStreaming, watched:watched, T:T};
+}
+
+/* A good film the profile would not have surfaced: strong on its own merits,
+   weak on taste overlap. Deliberately drawn from outside the leading group. */
+function wildCard(picks){
+  if(picks.length < 6) return null;
+  const tail = picks.slice(4);
+  const scored = tail
+    .filter(function(r){ return r.f.rt >= 82; })
+    .map(function(r){ return {r:r, off: (r.f.rt/100) - r.parts.taste}; })
+    .sort(function(a,b){ return b.off - a.off; });
+  return scored.length ? scored[0].r : null;
+}
+
+/* Two films that both fit inside the evening, with a change of pace between
+   them — a second helping of the same thing is not a double feature. */
+function doubleFeature(picks, budget){
+  for(let i = 0; i < picks.length && i < 6; i++){
+    for(let j = i + 1; j < picks.length && j < 10; j++){
+      const a = picks[i].f, b = picks[j].f;
+      if(a.r + b.r + 15 > budget) continue;
+      const shared = a.a.filter(function(x){ return b.a.indexOf(x) > -1; }).length;
+      if(shared > 2) continue;
+      return [picks[i], picks[j]];
+    }
+  }
+  return null;
 }
 
 /* ---------- reasoning ---------- */
@@ -1365,755 +1428,673 @@ function why(rec){
   return bits.slice(0,3).join(" ");
 }
 
-/* ---------- rail: rooms ---------- */
-function renderRooms(){
-  const wrap = $("room"); wrap.innerHTML = "";
+
+/* ============================================================
+   Presentation. The engine above decides what to watch; nothing
+   down here changes a score, it only stages the result.
+   ============================================================ */
+
+const AUDIENCES = [
+  {k:"solo",    n:"Just me",    d:"Anything goes"},
+  {k:"two",     n:"Date night", d:"Two on the couch"},
+  {k:"friends", n:"Friends",    d:"A room to please"},
+  {k:"teens",   n:"Family",     d:"Nothing too grown-up"}
+];
+const TIMES = [
+  {k:"short", n:"Under 90",          d:"In and out",        mins:100},
+  {k:"two",   n:"About two hours",   d:"The usual",         mins:135},
+  {k:"long",  n:"We've got all night", d:"Bring something big", mins:240}
+];
+
+let SCREEN = "tonight";
+let LAST = null;          /* most recent scoring run */
+let HEAD = null;          /* the headliner currently on screen */
+let WHY_OPEN = false;
+let REROLLS = 0;          /* how deep into the ranking a reroll has gone */
+
+/* ---------- small builders ---------- */
+function posterFrame(f, cls){
+  const box = el("div", "poster-frame" + (cls ? " " + cls : ""));
+  if(f.poster){
+    box.classList.add("ldg");
+    const img = document.createElement("img");
+    img.loading = "lazy";
+    img.alt = "Poster for " + f.t;
+    img.src = POSTER_BASE + f.poster;
+    img.addEventListener("load",  function(){ box.classList.remove("ldg"); });
+    img.addEventListener("error", function(){ box.classList.remove("ldg"); img.remove(); fallback(); });
+    box.appendChild(img);
+  } else { fallback(); }
+  function fallback(){
+    const fb = el("div","poster-fallback");
+    fb.appendChild(el("span","pt", f.t));
+    fb.appendChild(el("span","py", String(f.y)));
+    box.appendChild(fb);
+  }
+  return box;
+}
+function pct(rec){ return Math.round(rec.score * 100); }
+function clock(mins){
+  const d = new Date(Date.now() + mins * 60000);
+  return d.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+}
+function svcLine(rec){
+  const on = rec.on && rec.on.length ? rec.on : rec.f.svcs;
+  return on.map(function(c){ return SVC_NAME[c]; }).filter(Boolean);
+}
+
+/* ---------- screens ---------- */
+function showScreen(name){
+  SCREEN = name;
+  ["tonight","bill","taste","bills"].forEach(function(s){
+    $("s-" + s).classList.toggle("on", s === name);
+  });
+  document.querySelectorAll(".nav button").forEach(function(b){
+    const target = b.dataset.go === "tonight" && name === "bill" ? "tonight" : b.dataset.go;
+    if(target === b.dataset.go) b.setAttribute("aria-current", b.dataset.go === (name === "bill" ? "tonight" : name) ? "page" : "false");
+  });
+  if(name === "taste") renderTaste();
+  if(name === "bills") renderPastBills();
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+/* ---------- question one ---------- */
+function renderWho(){
+  const w = $("q-who"); w.innerHTML = "";
+  AUDIENCES.forEach(function(a){
+    const b = el("button","card"); b.type = "button";
+    b.setAttribute("aria-pressed", S.room === a.k ? "true" : "false");
+    b.appendChild(el("span","k", a.n));
+    b.appendChild(el("span","d", a.d));
+    b.addEventListener("click", function(){ S.room = a.k; save(); renderWho(); renderAudienceChips(); gate(); });
+    w.appendChild(b);
+  });
+}
+
+/* ---------- question two ---------- */
+function renderTime(){
+  const w = $("q-time"); w.innerHTML = "";
+  TIMES.forEach(function(t){
+    const b = el("button","card"); b.type = "button";
+    b.setAttribute("aria-pressed", S.timePreset === t.k ? "true" : "false");
+    b.appendChild(el("span","k", t.n));
+    b.appendChild(el("span","d", t.d));
+    b.addEventListener("click", function(){
+      S.timePreset = t.k; S.time = t.mins; save();
+      $("time-range").value = t.mins; syncExact(); renderTime(); gate();
+    });
+    w.appendChild(b);
+  });
+}
+function syncExact(){
+  $("time-read").textContent = S.time;
+  $("time-hm").textContent = "min · " + hm(S.time);
+}
+
+/* ---------- question three ---------- */
+function renderMoods(){
+  const w = $("q-mood"); w.innerHTML = "";
+  MOODS.forEach(function(m){
+    const b = el("button","mood"); b.type = "button";
+    b.setAttribute("aria-pressed", S.moods.indexOf(m.k) > -1 ? "true" : "false");
+    b.appendChild(el("span","k", m.n));
+    b.appendChild(el("span","d", m.sub));
+    b.addEventListener("click", function(){
+      const i = S.moods.indexOf(m.k);
+      if(i > -1) S.moods.splice(i,1); else S.moods.push(m.k);
+      save(); renderMoods(); gate();
+    });
+    w.appendChild(b);
+  });
+}
+
+function gate(){
+  const ready = !!S.room && !!S.timePreset;
+  $("show-bill").disabled = !ready;
+  const tagged = Object.keys(S.taste).length;
+  $("cta-note").textContent = !ready
+    ? "Answer the first two and we'll take it from there."
+    : (tagged ? "" : "Tip: teach us five films you love and this gets a lot sharper.");
+  $("dealer").style.display = tagged >= 3 ? "" : "none";
+}
+
+/* ---------- fine tune ---------- */
+function renderAudienceChips(){
+  const w = $("f-audience"); if(!w) return;
+  w.innerHTML = "";
   ROOMS.forEach(function(r){
-    const b = el("button","opt",r.n);
-    b.type = "button";
+    const b = el("button","chip", r.n); b.type = "button";
     b.setAttribute("aria-pressed", S.room === r.k ? "true" : "false");
-    b.addEventListener("click", function(){
-      S.room = r.k; save(); renderRooms(); renderBill(); renderGrid();
-    });
-    wrap.appendChild(b);
+    b.addEventListener("click", function(){ S.room = r.k; save(); renderAudienceChips(); renderWho(); gate(); });
+    w.appendChild(b);
   });
 }
-
-/* ---------- rail: content rating ---------- */
-function renderRating(){
-  const wrap = $("rating"); wrap.innerHTML = "";
+function renderRatingChips(){
+  const w = $("f-rating"); w.innerHTML = "";
   RATE_FLOORS.forEach(function(c){
-    const b = el("button","opt", c.n);
-    b.type = "button";
+    const b = el("button","chip", c.n); b.type = "button";
     b.setAttribute("aria-pressed", S.rate === c.k ? "true" : "false");
-    b.setAttribute("aria-label", c.k === 0 ? "Any rating" : c.n.replace("+"," and above"));
-    b.addEventListener("click", function(){
-      S.rate = c.k; save(); renderRating(); renderBill(); renderGrid();
-    });
-    wrap.appendChild(b);
+    b.addEventListener("click", function(){ S.rate = c.k; save(); renderRatingChips(); });
+    w.appendChild(b);
   });
-  const fits = FILMS.filter(function(f){ return rateRank(f) >= S.rate; }).length;
-  $("ratehint").textContent = S.rate === 0 ? "no minimum" : fits + " qualify";
 }
-
-/* ---------- rail: critic score floor ---------- */
-function renderRT(){
-  $("rtbig").textContent = S.minRT;
-  $("rtunit").innerHTML = S.minRT === 0
-    ? "% and up &mdash; everything"
-    : "% and up &mdash; " + FILMS.filter(function(f){ return f.rt >= S.minRT; }).length + " qualify";
-  $("rthint").textContent = S.minRT >= 90 ? "the best only" : (S.minRT >= 75 ? "well reviewed" : "");
-}
-
-/* ---------- rail: genres ---------- */
-function renderGenres(){
-  const wrap = $("genres"); wrap.innerHTML = "";
+function renderGenreChips(){
+  const w = $("f-genres"); w.innerHTML = "";
   GENRES.forEach(function(g){
-    const b = el("button","opt",gLabel(g));
-    b.type = "button";
-    b.setAttribute("aria-pressed", S.genres.indexOf(g)>-1 ? "true" : "false");
+    const b = el("button","chip", gLabel(g)); b.type = "button";
+    b.setAttribute("aria-pressed", S.genres.indexOf(g) > -1 ? "true" : "false");
     b.addEventListener("click", function(){
       const i = S.genres.indexOf(g);
-      if(i>-1) S.genres.splice(i,1); else S.genres.push(g);
-      save(); renderGenres(); renderBill(); renderGrid();
+      if(i > -1) S.genres.splice(i,1); else S.genres.push(g);
+      save(); renderGenreChips();
     });
-    wrap.appendChild(b);
+    w.appendChild(b);
   });
 }
-
-/* ---------- rail: services ---------- */
-function renderServices(){
-  const wrap = $("services"); wrap.innerHTML = "";
+function renderServiceRows(){
+  const w = $("f-services"); w.innerHTML = "";
   SERVICES.forEach(function(s){
-    const row = el("div","svc" + (S.svc[s.k] ? "" : " off"));
-    const name = el("div","svc-name");
-    const dot = el("span","dot"); dot.style.background = s.c;
-    name.appendChild(dot); name.appendChild(el("span",null,s.n));
-    const sw = el("button","sw");
-    sw.type = "button";
+    const row = el("div","svc-row" + (S.svc[s.k] ? "" : " off"));
+    row.appendChild(el("span","n", s.n));
+    const sw = el("button","sw"); sw.type = "button";
     sw.setAttribute("aria-pressed", S.svc[s.k] ? "true" : "false");
     sw.setAttribute("aria-label", s.n);
-    sw.addEventListener("click", function(){
-      S.svc[s.k] = !S.svc[s.k]; save(); renderServices(); renderBill();
-    });
-    row.appendChild(name); row.appendChild(sw);
-    wrap.appendChild(row);
-  });
-  const n = SERVICES.filter(function(s){ return S.svc[s.k]; }).length;
-  $("svchint").textContent = n + " on";
-}
-
-/* ---------- rail: time ---------- */
-function renderTime(){
-  $("timebig").textContent = S.time;
-  $("timeunit").innerHTML = "min &mdash; " + hm(S.time);
-  const fits = FILMS.filter(function(f){ return f.r <= S.time; }).length;
-  $("timehint").textContent = fits + " of " + FILMS.length + " fit";
-}
-
-/* ---------- taste picker ---------- */
-let searchTerm = "";
-function renderGrid(){
-  const wrap = $("titlegrid"); wrap.innerHTML = "";
-  const q = searchTerm.trim().toLowerCase();
-  let offCount = 0;
-  const list = FILMS.filter(function(f){
-    if(q && f.t.toLowerCase().indexOf(q)===-1 && f.d.toLowerCase().indexOf(q)===-1) return false;
-    if(!fitsTonight(f)){ offCount++; if(S.fitOnly) return false; }
-    return true;
-  }).sort(function(a,b){
-    return (b.pop - a.pop) || (b.y - a.y);
-  });
-
-  if(!list.length){
-    const e = el("div",null,"No title matches “" + searchTerm + "”.");
-    e.style.cssText = "padding:26px;color:var(--ink-3);font-size:13px;grid-column:1/-1;text-align:center";
-    wrap.appendChild(e);
-    return;
-  }
-
-  renderVerdict(list);
-
-  const note = $("gridnote");
-  note.innerHTML = S.fitOnly
-    ? "Showing only titles that clear tonight&rsquo;s filters. " + offCount +
-      " hidden. Turn the toggle off to rate anything."
-    : "This is your permanent taste profile, not tonight&rsquo;s results &mdash; rate anything here, "
-      + "including films you would never watch tonight. <b>" + offCount +
-      " of these do not fit tonight&rsquo;s filters</b> and are dimmed. "
-      + "Search a title to see exactly which filter left it off.";
-
-  list.forEach(function(f){
-    const state = S.taste[f.t] || "";
-    const fits = fitsTonight(f);
-    const b = el("button","tcard" + (fits ? "" : " unfit"));
-    b.type = "button";
-    if(!fits){
-      b.title = "Left off tonight: " +
-        checkFilters(f).filter(function(c){ return !c.pass; })
-          .map(function(c){ return c.detail; }).join("; ");
-    }
-    if(state) b.setAttribute("data-state", state);
-    let host = b;
-    if(f.poster){
-      b.classList.add("haspost");
-      const img = document.createElement("img");
-      img.className = "tposter ldg"; img.loading = "lazy"; img.alt = "";
-      img.src = POSTER_BASE + f.poster;
-      img.addEventListener("load",  function(){ img.classList.remove("ldg"); });
-      img.addEventListener("error", function(){ img.remove(); b.classList.remove("haspost"); });
-      b.appendChild(img);
-      host = el("span","tbody"); b.appendChild(host);
-    }
-    host.appendChild(el("span","tt",f.t));
-    host.appendChild(el("span","ty", f.y + "  ·  " + hm(f.r) + "  ·  " + f.mpaa));
-    if(state) host.appendChild(el("span","mark", state === "loved" ? "✓ Loved" : "✕ Missed"));
-    b.setAttribute("aria-label", f.t + ", " + (state || "not rated") + ". Click to cycle.");
-    b.addEventListener("click", function(){
-      const cur = S.taste[f.t];
-      if(!cur) S.taste[f.t] = "loved";
-      else if(cur === "loved") S.taste[f.t] = "hated";
-      else delete S.taste[f.t];
-      save(); renderGrid(); renderChips(); renderBill();
-    });
-    wrap.appendChild(b);
+    sw.addEventListener("click", function(){ S.svc[s.k] = !S.svc[s.k]; save(); renderServiceRows(); });
+    row.appendChild(sw);
+    w.appendChild(row);
   });
 }
 
-function renderChips(){
-  const wrap = $("chips"); wrap.innerHTML = "";
-  const keys = Object.keys(S.taste);
-  keys.sort();
-  keys.forEach(function(t){
-    const kind = S.taste[t];
-    const c = el("span","chip " + (kind === "loved" ? "l" : "h"));
-    c.appendChild(el("span",null,(kind === "loved" ? "✓ " : "✕ ") + t));
-    const x = el("button",null,"×");
-    x.type = "button";
-    x.setAttribute("aria-label","Remove " + t);
-    x.addEventListener("click", function(){
-      delete S.taste[t]; save(); renderGrid(); renderChips(); renderBill();
-    });
-    c.appendChild(x);
-    wrap.appendChild(c);
-  });
-  const loved = keys.filter(function(t){ return S.taste[t] === "loved"; }).length;
-
-  const hated = keys.length - loved;
-  $("tastecount").textContent = keys.length
-    ? loved + " loved · " + hated + " missed"
-    : "nothing tagged yet";
-  $("nudge").style.display = keys.length >= 4 ? "none" : "flex";
-}
-
-/* ---------- what is actually constraining tonight ---------- */
-function renderFilterSummary(){
-  const wrap = $("filtersum"); wrap.innerHTML = "";
-  function chip(label, value, active){
-    const c = el("div","fchip" + (active ? " on" : ""));
-    c.appendChild(el("span","",label));
-    c.appendChild(el("b","",value));
-    wrap.appendChild(c);
-  }
-  chip("Room", room().n, false);
-  chip("Under", hm(S.time), false);
-  chip("Rating", S.rate === 0 ? "any" : floorName(S.rate) , S.rate !== 0);
-  chip("Critics", S.minRT === 0 ? "any" : S.minRT + "%+", S.minRT > 0);
-  if(S.genres.length) chip("Genre", S.genres.map(gLabel).join(", "), true);
-  const on = SERVICES.filter(function(s){ return S.svc[s.k]; }).length;
-  chip("Services", on + " of " + SERVICES.length, on < SERVICES.length);
-  const tagged = Object.keys(S.taste).length;
-  chip("Taste", tagged ? tagged + " tagged" : "not set", tagged > 0);
-}
-
-/* ---------- why isn't this one showing up? ----------
-   Search a title and get the verdict on every filter, so an absence is
-   explained rather than mysterious. */
-function renderVerdict(list){
-  const wrap = $("verdict");
-  wrap.innerHTML = "";
-  const q = searchTerm.trim();
-  if(!q || !list.length || list.length > 3) return;
-
-  list.slice(0,3).forEach(function(f){
-    const checks = checks_(f);
-    const failed = checks.filter(function(c){ return !c.pass; });
-    const tagged = S.taste[f.t];
-
-    const box = el("div","verdict");
-    const h = el("h4");
-    h.appendChild(el("span","",f.t));
-    h.appendChild(el("span","yr mono", String(f.y)));
-    box.appendChild(h);
-
-    const sum = el("p","vsum " + (failed.length ? "out" : "in"));
-    sum.textContent = tagged
-      ? (tagged === "loved" ? "You marked this loved, so it is never recommended back to you."
-                            : "You marked this a miss, so it is never recommended back to you.")
-      : (failed.length
-          ? "Left off tonight — " + failed.length + " filter" + (failed.length===1?"":"s") + " below"
-          : "Clears every filter, so it is in the running tonight.");
-    box.appendChild(sum);
-
-    const cl = el("div","checks");
-    checks.forEach(function(c){
-      const row = el("div","chk " + (c.pass ? "y" : "n"));
-      row.appendChild(el("span","mk", c.pass ? "\u2713" : "\u2715"));
-      row.appendChild(el("span","lb", c.label));
-      row.appendChild(el("span","dt", c.detail));
-      cl.appendChild(row);
-    });
-    box.appendChild(cl);
-    wrap.appendChild(box);
-  });
-}
-function checks_(f){ return checkFilters(f); }
-
-/* ---------- the bill ---------- */
-let CURSOR = -1;
-
-/* The cursor highlight is a focus indicator and must not outlive focus, or it
-   sits on a card the reader clicked away from. Delegated to the container:
-   focusout bubbles, plain blur does not, and one listener survives re-renders
-   that replace every card. */
-(function bindCursorRelease(){
-  const bill = document.getElementById("bill");
-  if(!bill) return;
-  bill.addEventListener("focusout", function(e){
-    const next = e.relatedTarget;
-    if(!next || !next.closest || !next.closest("#bill .pick")){
-      CURSOR = -1; paintCursor();
-    }
-  });
-  document.addEventListener("pointerdown", function(e){
-    if(!e.target.closest || !e.target.closest("#bill .pick")){
-      CURSOR = -1; paintCursor();
-    }
-  });
-})();
-
-function paintCursor(){
-  const cards = document.querySelectorAll("#bill .pick");
-  cards.forEach(function(c,i){ c.classList.toggle("cursor", i === CURSOR); });
-}
-
-function renderBill(){
-  renderFilterSummary();
+/* ---------- the reveal ---------- */
+function programEvening(opts){
+  opts = opts || {};
+  REROLLS = opts.keepDepth ? REROLLS : 0;
   const out = scoreAll();
   LAST = out;
-  const bill = $("bill");
-  bill.innerHTML = "";
-
-  const LIMIT = 8;
-  const picks = out.picks.slice(0, LIMIT);
-
-  $("billcount").textContent = out.picks.length
-    ? out.picks.length + " title" + (out.picks.length===1?"":"s") + " clear every filter"
-    : "nothing clears the filters";
-
-  if(!picks.length){
-    const e = el("div","empty");
-    e.appendChild(el("h3","","Nothing clears the filters."));
-    const bits = ["the clock is at " + hm(S.time)];
-    if(S.rate !== 0) bits.push("nothing below " + floorName(S.rate).replace("+",""));
-    if(S.minRT > 0)   bits.push("critics at " + S.minRT + "% or better");
-    if(S.genres.length) bits.push(S.genres.map(gLabel).join(", ") + " only");
-    const p = el("p","", "For " + room().n.toLowerCase() + ", " + bits.join(", ") +
-      ". Loosen the runtime, drop the rating floor, lower the score bar, or switch a service on.");
-    e.appendChild(p);
-    bill.appendChild(e);
+  showScreen("bill");
+  renderBill(out);
+  if(!opts.silent && out.picks.length){
+    rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
   }
+}
 
-  picks.forEach(function(rec,i){
-    const f = rec.f;
-    const card = el("div","pick" + (i===0 ? " top" : ""));
-    card.tabIndex = 0;
-    card.dataset.title = f.t;
-    card.addEventListener("focus", function(){ CURSOR = i; paintCursor(); });
-
-    card.appendChild(el("div","rank mono", String(i+1).padStart(2,"0")));
-
-    /* Poster art only exists once data/catalog.json has been generated, and the
-       image host is blocked in some embedded viewers — so it is added only when
-       present and removes itself if the request is refused. */
-    if(f.poster){
-      const img = document.createElement("img");
-      img.className = "poster ldg";
-      img.loading = "lazy";
-      img.alt = "";
-      img.src = POSTER_BASE + f.poster;
-      img.addEventListener("load",  function(){ img.classList.remove("ldg"); });
-      img.addEventListener("error", function(){ img.remove(); });
-      card.appendChild(img);
-    }
-
-    const body = el("div","body");
-    const tl = el("div","title-line");
-    tl.appendChild(el("h3","",f.t));
-    tl.appendChild(el("span","yr mono",String(f.y)));
-    body.appendChild(tl);
-
-    const meta = el("div","meta");
-    meta.appendChild(el("span","",f.d));
-    meta.appendChild(el("span","sep","·"));
-    meta.appendChild(el("span","",f.g.map(gLabel).join(", ")));
-    meta.appendChild(el("span","sep","·"));
-    meta.appendChild(el("span","rate", f.mpaa));
-    meta.appendChild(el("span","sep","·"));
-    const rt = el("div","rt" + (f.rt < 60 ? " rotten" : ""));
-    rt.appendChild(el("i"));
-    rt.appendChild(el("span","mono", f.rt + "%"));
-    rt.title = f.rtSrc === "rt"  ? "Rotten Tomatoes score, via OMDb"
-             : f.rtSrc === "tmdb" ? "TMDB user score — not a critic aggregate"
-             : "Estimated critic score — not from any review aggregator";
-    meta.appendChild(rt);
-    body.appendChild(meta);
-
-    body.appendChild(el("p","hook",f.h));
-
-    const w = el("div","why"); w.innerHTML = why(rec);
-    body.appendChild(w);
-
-    const tags = el("div","tags");
-    f.a.slice(0,4).forEach(function(a){ tags.appendChild(el("span","tag",a)); });
-    body.appendChild(tags);
-
-    const acts = el("div","acts");
-    const wb = el("button","act","Watched it");
-    wb.type = "button";
-    wb.addEventListener("click", function(e){ e.stopPropagation(); markWatched(f.t); });
-    acts.appendChild(wb);
-    if(i > 0){
-      const cb = el("button","act", COMPARE === f.t ? "Hide comparison" : "Compare with #1");
-      cb.type = "button";
-      cb.addEventListener("click", function(e){
-        e.stopPropagation();
-        COMPARE = (COMPARE === f.t) ? null : f.t;
-        renderBill();
-      });
-      acts.appendChild(cb);
-    }
-    if(rec.seenIdx > -1){
-      acts.appendChild(el("span","stale-tag",
-        rec.seenIdx === 0 ? "on last night's bill" : "on a recent bill"));
-    }
-    body.appendChild(acts);
-    card.appendChild(body);
-
-    const aside = el("div","aside");
-    const pill = el("div","runtime-pill" + ((S.time - f.r) <= 12 ? " tight" : ""), hm(f.r));
-    aside.appendChild(pill);
-    (rec.on && rec.on.length ? rec.on : [f.s]).slice(0,3).forEach(function(c){
-      aside.appendChild(el("div","svc-badge", SVC_NAME[c]));
-    });
-    const sc = el("div","score");
-    const num = el("div","num mono", String(Math.round(rec.score*100)));
-    sc.appendChild(num);
-    const m = el("div","meter"); const bar = el("span");
-    bar.style.width = Math.round(rec.score*100) + "%";
-    m.appendChild(bar); sc.appendChild(m);
-    sc.appendChild(el("div","lbl","Fit"));
-    aside.appendChild(sc);
-    card.appendChild(aside);
-
-    bill.appendChild(card);
+function renderBill(out){
+  const picks = out.picks;
+  $("bill-recap").innerHTML = "";
+  [["Room", (ROOMS.filter(function(r){return r.k===S.room;})[0]||{}).n || "—"],
+   ["Under", hm(S.time)],
+   S.moods.length ? ["Mood", S.moods.map(function(k){ return MOOD_BY[k].n; }).join(", ")] : null,
+   ["On", SERVICES.filter(function(s){ return S.svc[s.k]; }).length + " services"]
+  ].filter(Boolean).forEach(function(pair){
+    const c = el("span"); c.innerHTML = pair[0] + " <b>" + pair[1] + "</b>";
+    $("bill-recap").appendChild(c);
   });
 
-  renderCompare();
-  paintCursor();
+  const head = $("headliner-slot"); head.innerHTML = "";
+  const also = $("also-slot");      also.innerHTML = "";
+  const dbl  = $("double-slot");    dbl.innerHTML  = "";
+  $("why-panel").classList.add("hide"); WHY_OPEN = false;
+  renderLocked();
 
-  /* what your subscriptions are costing you */
-  const lock = $("locked");
-  lock.innerHTML = "";
-  const bar = picks.length ? picks[picks.length-1].score : 0.5;
-  const strong = out.locked.filter(function(r){ return r.score >= bar; });
-  const lines = [];
-  if(strong.length){
-    const byS = {};
-    strong.forEach(function(r){ r.f.svcs.forEach(function(c){ byS[c] = (byS[c]||0)+1; }); });
-    const parts = Object.keys(byS).map(function(k){ return byS[k] + " on " + SVC_NAME[k]; });
-    lines.push("<b>Behind a service you don’t have:</b> " + parts.join(", ") +
-      " would have placed tonight — including " +
-      strong.slice(0,3).map(function(r){ return r.f.t; }).join(", ") + ".");
+  if(!picks.length){ renderNothing(head); renderNotice(out); return; }
+
+  const idx = Math.min(REROLLS, Math.max(0, picks.length - 1));
+  HEAD = picks[idx];
+  head.appendChild(headliner(HEAD));
+
+  const rest = picks.filter(function(r){ return r !== HEAD; });
+  const alts = rest.slice(0, 2);
+  const wild = wildCard(rest);
+  if(alts.length){
+    also.appendChild(el("p","strip-head","Also playing"));
+    const g = el("div","also");
+    alts.forEach(function(r){ g.appendChild(altCard(r)); });
+    if(wild && alts.indexOf(wild) === -1) g.appendChild(altCard(wild, true));
+    also.appendChild(g);
   }
-  const gone = (out.notStreaming || []).filter(function(r){ return r.score >= bar; });
-  if(gone.length){
-    lines.push("<b>Not on any subscription service right now:</b> " + gone.length +
-      " strong match" + (gone.length===1?"":"es") + " — including " +
-      gone.slice(0,3).map(function(r){ return r.f.t; }).join(", ") +
-      " — are rent-or-buy only tonight, so they are left off.");
-  }
-  const seen = out.watched || [];
-  if(seen.length){
-    lines.push("<b>Already watched:</b> " + seen.length + " title" + (seen.length===1?"":"s") +
-      " held back because you marked " + (seen.length===1?"it":"them") +
-      " watched — clear any of them under Recent evenings.");
-  }
-  if(lines.length) lock.innerHTML = lines.join("<br><br>");
-  return out;
+
+  const pair = doubleFeature(picks, S.time);
+  if(S.timePreset === "long" && pair) dbl.appendChild(doubleCard(pair));
+
+  renderNotice(out);
 }
 
-/* ---------- provenance ----------
-   The page must never imply its numbers are sourced when they are not, so both
-   the footer and the critic-score caveat are written from whichever data is
-   actually loaded. */
-function renderFoot(){
-  const rtCount = FILMS.filter(function(f){ return f.rtSrc === "rt"; }).length;
-  const note = $("scorenote");
-  if(note){
-    note.textContent = ENRICHED
-      ? (rtCount
-          ? "Rotten Tomatoes scores via OMDb, refreshed " + when(ENRICHED.generatedAt) + "."
-          : "TMDB user scores, refreshed " + when(ENRICHED.generatedAt) + " \u2014 not a critic aggregate.")
-      : "Estimated critic scores \u2014 my own approximation of critical consensus, not sourced from "
-        + "any review aggregator. Fine for sorting great from mediocre, not for settling an argument.";
+function headliner(rec){
+  const f = rec.f;
+  const box = el("div","headliner reveal");
+  if(f.backdrop){
+    const bd = el("div","backdrop");
+    bd.style.backgroundImage = "url(" + BACKDROP_BASE + f.backdrop + ")";
+    box.appendChild(bd);
+  }
+  box.appendChild(posterFrame(f));
+
+  const b = el("div","hl-body reveal-2");
+  b.appendChild(el("h3","",f.t));
+
+  const meta = el("div","meta");
+  [String(f.y), f.mpaa, hm(f.r)].forEach(function(v,i){
+    if(i) meta.appendChild(el("i","","·"));
+    meta.appendChild(el("span","",v));
+  });
+  meta.appendChild(el("i","","·"));
+  meta.appendChild(el("span","", f.rt + "% critics"));
+  b.appendChild(meta);
+
+  const m = el("div","match");
+  m.appendChild(el("span","n mono", pct(rec) + "%"));
+  m.appendChild(el("span","l","Tonight match"));
+  b.appendChild(m);
+
+  const pitch = el("p","pitch");
+  pitch.innerHTML = why(rec);
+  b.appendChild(pitch);
+
+  if(f.hSrc === "tmdb") b.appendChild(el("p","synopsis", f.h));
+
+  const names = svcLine(rec);
+  if(names.length){
+    const w = el("div","where");
+    w.appendChild(el("span","","Streaming on"));
+    names.slice(0,3).forEach(function(n){ w.appendChild(el("span","tag",n)); });
+    b.appendChild(w);
   }
 
-  let txt = "Catalog: " + FILMS.length + " major releases, hand-tagged for pace, tone, and what a film "
-          + "asks of you \u2014 those tags are judgement calls, not data. ";
-  if(ENRICHED){
-    txt += "Runtimes, certifications, scores, posters and streaming availability come from "
-        +  ENRICHED.source + ", generated " + when(ENRICHED.generatedAt) + " for region "
-        +  (ENRICHED.region || "US") + " (" + ENRICHED.applied + " of " + FILMS.length + " titles matched). "
-        +  "Availability is JustWatch data via TMDB, which itself refreshes daily \u2014 accurate to about "
-        +  "a day, not to the minute. ";
-  } else {
-    txt += "Streaming homes and critic scores here are my own estimates, not sourced feeds: rights move, "
-        +  "and the scores approximate critical consensus rather than reporting it. They are not from, "
-        +  "affiliated with, or endorsed by any review aggregator. Run scripts/enrich.mjs to replace both "
-        +  "with sourced data. ";
-  }
-  txt += "Content ratings are MPAA; titles never rated show NR and are filtered by audience instead. ";
-  txt += STORAGE_OK
-    ? "Your profile saves in this browser only \u2014 it is not synced anywhere."
-    : "Heads up: this viewer blocks local storage, so your profile lasts for this visit only. "
-      + "Open the standalone file directly if you want it remembered.";
-  $("foot").innerHTML = txt;
+  const acts = el("div","acts");
+  const watch = el("button","btn-primary","Watch this"); watch.type = "button";
+  watch.addEventListener("click", function(){ lockBill(rec); });
+  acts.appendChild(watch);
+
+  const again = el("button","ghost","Give me another"); again.type = "button";
+  again.addEventListener("click", function(){
+    REROLLS++;
+    if(REROLLS >= LAST.picks.length) REROLLS = 0;
+    renderBill(LAST);
+    $("headliner-slot").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+  acts.appendChild(again);
+
+  const whyBtn = el("button","ghost","Why this?"); whyBtn.type = "button";
+  whyBtn.addEventListener("click", function(){ toggleWhy(rec); });
+  acts.appendChild(whyBtn);
+  b.appendChild(acts);
+
+  box.appendChild(b);
+  return box;
 }
 
-function when(iso){
-  if(!iso) return "recently";
-  const d = new Date(iso);
-  if(isNaN(d)) return "recently";
-  const hrs = (Date.now() - d.getTime()) / 36e5;
-  if(hrs < 1)  return "less than an hour ago";
-  if(hrs < 24) return Math.round(hrs) + " hours ago";
-  const days = Math.round(hrs/24);
-  return days === 1 ? "yesterday" : days + " days ago";
+function altCard(rec, isWild){
+  const f = rec.f;
+  const c = el("button","alt" + (isWild ? " wild" : "")); c.type = "button";
+  c.setAttribute("aria-label", "Make " + f.t + " tonight's pick");
+  if(isWild) c.appendChild(el("span","badge","Wild card"));
+  c.appendChild(posterFrame(f));
+  c.appendChild(el("h4","",f.t));
+  c.appendChild(el("p","m mono", f.y + " · " + hm(f.r) + " · " + f.rt + "%"));
+  const names = svcLine(rec);
+  c.appendChild(el("p","why-line", names.length ? "On " + names[0] : "Rent or buy"));
+  c.addEventListener("click", function(){
+    const i = LAST.picks.indexOf(rec);
+    if(i > -1){ REROLLS = i; renderBill(LAST); }
+    $("headliner-slot").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+  return c;
 }
 
-/* ---------- compare two picks ----------
-   The fit numbers are close together by design, so "why is 73 above 68" is a
-   fair question. This answers it from the same components the score is built
-   from, rather than restating the score. */
-let LAST = null;          /* the most recent scoring result, for keyboard actions */
-let COMPARE = null;       /* title currently being compared against the leader */
-
-const PART_LABEL = {taste:"Taste", genre:"Genre", room:"Room", fame:"Known"};
-
-function renderCompare(){
-  const wrap = $("compare");
-  wrap.innerHTML = "";
-  if(!COMPARE || !LAST || LAST.picks.length < 2) return;
-
-  const a = LAST.picks[0];
-  const b = LAST.picks.filter(function(r){ return r.f.t === COMPARE; })[0];
-  if(!b || b === a) return;
-
-  const box = el("div","compare");
-  const head = el("div","compare-head");
-  head.appendChild(el("h3","","Why " + a.f.t + " ranks above " + b.f.t));
-  const x = el("button","act","Close");
-  x.type = "button";
-  x.addEventListener("click", function(){ COMPARE = null; renderCompare(); });
-  head.appendChild(x);
-  box.appendChild(head);
-
-  function side(rec){
-    const d = el("div","cmp-side");
-    if(rec.f.poster){
-      const im = document.createElement("img");
-      im.src = POSTER_BASE + rec.f.poster; im.alt = "";
-      im.addEventListener("error", function(){ im.remove(); });
-      d.appendChild(im);
-    }
+function doubleCard(pair){
+  const box = el("div","dbl reveal-3");
+  box.appendChild(el("p","strip-head","Double feature — you said all night"));
+  const row = el("div","dbl-films");
+  const a = pair[0].f, b = pair[1].f;
+  row.appendChild(filmSlot(a, clock(0)));
+  row.appendChild(el("div","dbl-then","then"));
+  row.appendChild(filmSlot(b, clock(a.r + 15)));
+  box.appendChild(row);
+  function filmSlot(f, at){
+    const d = el("div","dbl-film");
+    d.appendChild(posterFrame(f));
     const t = el("div");
-    t.appendChild(el("div","nm",rec.f.t));
-    t.appendChild(el("div","sub", hm(rec.f.r) + " · " + rec.f.mpaa + " · " + rec.f.rt + "% · fit " +
-                                  Math.round(rec.score*100)));
+    t.appendChild(el("div","t",f.t));
+    t.appendChild(el("div","s mono", at + " · " + hm(f.r)));
     d.appendChild(t);
     return d;
   }
-  const grid = el("div","cmp-grid");
-  grid.appendChild(side(a));
-  grid.appendChild(el("div","cmp-vs","versus"));
-  grid.appendChild(side(b));
-  box.appendChild(grid);
-
-  /* per-component bars, plus the weighted gap that actually decided it */
-  const rows = el("div","cmp-rows");
-  const gaps = [];
-  Object.keys(PART_LABEL).forEach(function(k){
-    const av = a.parts[k], bv = b.parts[k];
-    const w = a.weights[k] || 0;
-    gaps.push({k:k, gap:(av-bv)*w, av:av, bv:bv});
-    const row = el("div","cmp-row");
-    const lb = el("div","cmp-bar l" + (av >= bv ? " win" : ""));
-    const ls = el("span"); ls.style.width = Math.round(av*100) + "%"; lb.appendChild(ls);
-    row.appendChild(lb);
-    row.appendChild(el("div","lab", PART_LABEL[k]));
-    const rb = el("div","cmp-bar" + (bv > av ? " win" : ""));
-    const rs = el("span"); rs.style.width = Math.round(bv*100) + "%"; rb.appendChild(rs);
-    row.appendChild(rb);
-    rows.appendChild(row);
-  });
-  box.appendChild(rows);
-
-  gaps.sort(function(p,q){ return Math.abs(q.gap) - Math.abs(p.gap); });
-  const top = gaps[0];
-  const why = el("div","cmp-why");
-  const dir = top.gap >= 0 ? a : b;
-  const other = top.gap >= 0 ? b : a;
-  let txt = "<b>" + PART_LABEL[top.k].toLowerCase() + "</b> is what separates them: " +
-            "<b>" + dir.f.t + "</b> scores " + Math.round(Math.max(top.av,top.bv)*100) +
-            " there against " + Math.round(Math.min(top.av,top.bv)*100) + " for " + other.f.t + ".";
-  if(b.stale > 0){
-    txt += " " + b.f.t + " also carries a small freshness penalty — it was on a recent bill.";
-  }
-  if(Math.abs(a.score - b.score) < 0.02){
-    txt += " The two are within a couple of points overall, so treat this as a coin toss you can break on runtime or mood.";
-  }
-  why.innerHTML = txt;
-  box.appendChild(why);
-  wrap.appendChild(box);
+  return box;
 }
 
-/* ---------- recent evenings ---------- */
-function renderHistory(){
-  const wrap = $("history"); wrap.innerHTML = "";
-  const titles = Object.keys(S.watched).sort(function(a,b){
-    return (S.watched[b]||"").localeCompare(S.watched[a]||"");
+/* ---------- why this? ---------- */
+function toggleWhy(rec){
+  const p = $("why-panel");
+  WHY_OPEN = !WHY_OPEN;
+  p.classList.toggle("hide", !WHY_OPEN);
+  if(!WHY_OPEN) return;
+  p.innerHTML = "";
+  const T = rec.T;
+
+  const cols = el("div","why-cols");
+
+  /* what we think you like */
+  const likes = el("div","why-col");
+  likes.appendChild(el("h4","","You tend to like"));
+  const ul1 = document.createElement("ul");
+  tasteTraits(T, 4).forEach(function(t){ const li=document.createElement("li"); li.textContent=t; ul1.appendChild(li); });
+  if(!ul1.children.length){
+    const li=document.createElement("li");
+    li.textContent = "Nothing taught yet — this pick is running on tonight's answers alone.";
+    ul1.appendChild(li);
+  }
+  likes.appendChild(ul1);
+  cols.appendChild(likes);
+
+  /* how tonight's constraints played out */
+  const fits = el("div","why-col");
+  fits.appendChild(el("h4","","Tonight"));
+  const ul2 = document.createElement("ul");
+  checkFilters(rec.f).forEach(function(c){
+    if(!c.pass) return;
+    const li = document.createElement("li");
+    li.textContent = c.detail;
+    ul2.appendChild(li);
   });
-  $("histhint").textContent = titles.length ? titles.length + " watched" : "";
-  if(!titles.length){
-    const e = el("p","hist-empty");
-    e.innerHTML = "Nothing marked yet. Hit <b>Watched it</b> on a pick and it stops being offered, "
-                + "and the last few bills stay out of each other's way.";
-    wrap.appendChild(e);
+  fits.appendChild(ul2);
+  cols.appendChild(fits);
+
+  /* the films that pulled it in */
+  const seedFilms = seeds(rec, T, 3);
+  if(seedFilms.length){
+    const sc = el("div","why-col");
+    sc.appendChild(el("h4","","Feels closest to"));
+    const row = el("div","seeds");
+    seedFilms.forEach(function(L){
+      const s = el("div","seed");
+      s.appendChild(posterFrame(L));
+      s.appendChild(el("div","sn", L.t));
+      row.appendChild(s);
+    });
+    sc.appendChild(row);
+    cols.appendChild(sc);
+  }
+  p.appendChild(cols);
+  p.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+/* Plain-English read of the taste profile, strongest and rarest first. */
+function tasteTraits(T, n){
+  if(!T || !T.n) return [];
+  return Object.keys(T.aw)
+    .filter(function(a){ return T.aw[a] > 0.25 && ATTR_PHRASE[a]; })
+    .sort(function(a,b){ return (T.aw[b]*idfA(b)) - (T.aw[a]*idfA(a)); })
+    .slice(0, n)
+    .map(function(a){ return ATTR_PHRASE[a]; });
+}
+function seeds(rec, T, n){
+  if(!T || !T.loved.length) return [];
+  return T.loved.map(function(L){
+      let mass = 0;
+      rec.f.a.forEach(function(x){ if(L.a.indexOf(x) > -1) mass += idfA(x); });
+      return {L:L, mass:mass};
+    })
+    .filter(function(x){ return x.mass > 0; })
+    .sort(function(a,b){ return b.mass - a.mass; })
+    .slice(0, n)
+    .map(function(x){ return x.L; });
+}
+
+/* ---------- lock the bill ---------- */
+function lockBill(rec){
+  const f = rec.f;
+  S.locked = {t:f.t, at:new Date().toISOString(), mins:f.r};
+  S.bills = (S.bills || []).filter(function(b){ return b.t !== f.t; });
+  S.bills.unshift({t:f.t, at:S.locked.at});
+  S.bills = S.bills.slice(0, 24);
+  markWatched(f.t);
+  save();
+  renderLocked();
+  $("locked-slot").scrollIntoView({behavior:"smooth", block:"start"});
+}
+function renderLocked(){
+  const w = $("locked-slot"); w.innerHTML = "";
+  if(!S.locked) return;
+  const f = BY_TITLE[S.locked.t];
+  if(!f){ S.locked = null; return; }
+  const card = el("div","locked-card reveal");
+  card.appendChild(posterFrame(f));
+  const b = el("div");
+  b.appendChild(el("p","eyebrow","Tonight's bill is set"));
+  b.appendChild(el("h3","",f.t));
+  const times = el("div","showtimes");
+  [["Start","now"], ["Feature ends", clock(f.r)], ["Running", hm(f.r)],
+   ["Where", (f.svcs.map(function(c){return SVC_NAME[c];})[0] || "rent or buy")]
+  ].forEach(function(p){
+    const s = el("div","showtime");
+    s.appendChild(el("div","l",p[0]));
+    s.appendChild(el("div","v",p[1]));
+    times.appendChild(s);
+  });
+  b.appendChild(times);
+  const un = el("button","ghost","Change my mind"); un.type = "button";
+  un.style.marginTop = "20px";
+  un.addEventListener("click", function(){
+    unmarkWatched(S.locked.t); S.locked = null; save();
+    renderLocked(); if(LAST) renderBill(scoreAll());
+  });
+  b.appendChild(un);
+  card.appendChild(b);
+  w.appendChild(card);
+}
+
+/* ---------- nothing made the cut ---------- */
+function renderNothing(host){
+  const e = el("div","empty");
+  e.appendChild(el("h3","","Nothing made the cut."));
+  e.appendChild(el("p","","Tonight's answers rule out everything we have. Loosen one and we'll find something worth watching."));
+  const acts = el("div","acts"); acts.style.justifyContent = "center";
+  const relax = el("button","btn-primary","Relax the filters"); relax.type = "button";
+  relax.addEventListener("click", function(){
+    S.genres = []; S.rate = 0; S.minRT = 0;
+    if(S.time < 150){ S.time = 150; S.timePreset = "long"; $("time-range").value = 150; syncExact(); }
+    save(); renderRatingChips(); renderGenreChips(); $("rt-range").value = 0; $("rt-read").textContent = "0";
+    renderTime(); programEvening({silent:true});
+  });
+  acts.appendChild(relax);
+  const back = el("button","ghost","Change my answers"); back.type = "button";
+  back.addEventListener("click", function(){ showScreen("tonight"); });
+  acts.appendChild(back);
+  e.appendChild(acts);
+  host.appendChild(e);
+}
+
+function renderNotice(out){
+  const n = $("bill-notice"); n.innerHTML = "";
+  const bits = [];
+  const bar = out.picks.length ? out.picks[out.picks.length-1].score : 0.5;
+  const locked = (out.locked||[]).filter(function(r){ return r.score >= bar; });
+  const gone   = (out.notStreaming||[]).filter(function(r){ return r.score >= bar; });
+  if(locked.length) bits.push("<b>" + locked.length + "</b> would have made it but sit on a service you don't have.");
+  if(gone.length)   bits.push("<b>" + gone.length + "</b> are rent-or-buy only tonight.");
+  if((out.watched||[]).length) bits.push("<b>" + out.watched.length + "</b> held back because you've already seen them.");
+  if(bits.length) n.innerHTML = bits.join(" ");
+}
+
+/* ---------- teach us your taste ---------- */
+let tasteQ = "";
+const TASTE_TARGET = 5;
+
+function renderTaste(){
+  const loved = Object.keys(S.taste).filter(function(t){ return S.taste[t] === "loved"; });
+  const pipRow = $("pips"); pipRow.innerHTML = "";
+  for(let i = 0; i < TASTE_TARGET; i++){
+    pipRow.appendChild(el("span","pip" + (i < loved.length ? " on" : "")));
+  }
+  const msgs = [
+    "Pick one you love and we'll start guessing less.",
+    "One down. Keep going.",
+    "Two in. We're getting a shape.",
+    "Three down. Two more and we're dangerous.",
+    "One more and we'll stop guessing.",
+    "That'll do it. We know you."
+  ];
+  $("taste-msg").textContent = msgs[Math.min(loved.length, msgs.length - 1)];
+
+  const prof = $("taste-profile"); prof.innerHTML = "";
+  const T = buildTaste();
+  tasteTraits(T, 6).forEach(function(t){ prof.appendChild(el("span","trait", t)); });
+
+  const g = $("taste-grid"); g.innerHTML = "";
+  const q = tasteQ.trim().toLowerCase();
+  const list = FILMS.filter(function(f){
+      if(!q) return true;
+      return f.t.toLowerCase().indexOf(q) > -1 || f.d.toLowerCase().indexOf(q) > -1;
+    })
+    .sort(function(a,b){
+      const sa = S.taste[a.t] ? 1 : 0, sb = S.taste[b.t] ? 1 : 0;
+      return (sb - sa) || (b.pop - a.pop) || (b.y - a.y);
+    })
+    .slice(0, q ? 60 : 60);
+
+  if(!list.length){
+    g.appendChild(el("p","", "Nothing matches “" + tasteQ + "”."));
     return;
   }
-  titles.slice(0,8).forEach(function(t){
-    const row = el("div","hist-row");
-    row.appendChild(el("span","t",t));
-    const u = el("button",null,"×");
-    u.type = "button";
-    u.title = "Put " + t + " back in the running";
-    u.setAttribute("aria-label","Un-watch " + t);
-    u.addEventListener("click", function(){ unmarkWatched(t); });
-    row.appendChild(u);
-    wrap.appendChild(row);
-  });
+  list.forEach(function(f){ g.appendChild(tasteCard(f)); });
 }
 
-/* ---------- brief for handoff ---------- */
-function brief(){
-  const R = room();
-  const loved = [], hated = [];
-  Object.keys(S.taste).forEach(function(t){
-    (S.taste[t] === "loved" ? loved : hated).push(t);
+function tasteCard(f){
+  const state = S.taste[f.t] || "";
+  const c = el("div","tcard");
+  if(state) c.setAttribute("data-state", state);
+  const frame = posterFrame(f);
+  if(state) frame.appendChild(el("span","state-flag", state === "loved" ? "Loved" : "Not for me"));
+  const acts = el("div","tcard-acts");
+  const love = el("button","mini love", state === "loved" ? "Loved" : "Love it"); love.type = "button";
+  love.setAttribute("aria-label", "Mark " + f.t + " as loved");
+  love.addEventListener("click", function(e){
+    e.stopPropagation();
+    if(S.taste[f.t] === "loved") delete S.taste[f.t]; else S.taste[f.t] = "loved";
+    save(); renderTaste(); gate();
   });
-  const on = SERVICES.filter(function(s){ return S.svc[s.k]; }).map(function(s){ return s.n; });
-  const L = [];
-  L.push("Recommend me a movie for tonight. Here is my brief:");
-  L.push("");
-  L.push("WHO'S WATCHING: " + R.n);
-  L.push("TIME I HAVE: " + hm(S.time) + " (" + S.time + " minutes) — do not exceed it");
-  L.push("MINIMUM RATING: " + (S.rate === 0 ? "no minimum"
-        : floorName(S.rate).replace("+","") + " or more mature"));
-  if(S.minRT > 0) L.push("QUALITY BAR: broadly well reviewed — roughly " + S.minRT + "%+ on Rotten Tomatoes");
-  L.push("GENRES I WANT: " + (S.genres.length ? S.genres.map(gLabel).join(", ") : "open to anything"));
-  L.push("SERVICES I HAVE: " + (on.length ? on.join(", ") : "none — assume rental is fine"));
-  L.push("");
-  L.push("MOVIES I LOVED: " + (loved.length ? loved.join("; ") : "(none tagged)"));
-  L.push("MOVIES THAT MISSED: " + (hated.length ? hated.join("; ") : "(none tagged)"));
-  L.push("");
-  L.push("Infer what I respond to from those two lists — pace, tone, how much work the film asks of me — ");
-  L.push("not just genre. Give me 5 picks I have not already listed, each with the runtime, the service");
-  L.push("it is streaming on right now (verify, don't guess), and one sentence on why it follows from my");
-  L.push("taste. Flag anything that is a stretch and say why you took the risk.");
-  return L.join("\n");
+  const nope = el("button","mini nope", state === "hated" ? "Nope" : "Not for me"); nope.type = "button";
+  nope.setAttribute("aria-label", "Mark " + f.t + " as not for me");
+  nope.addEventListener("click", function(e){
+    e.stopPropagation();
+    if(S.taste[f.t] === "hated") delete S.taste[f.t]; else S.taste[f.t] = "hated";
+    save(); renderTaste(); gate();
+  });
+  acts.appendChild(love); acts.appendChild(nope);
+  frame.appendChild(acts);
+  c.appendChild(frame);
+  c.appendChild(el("span","tt", f.t));
+  c.appendChild(el("span","ty mono", f.y + " · " + hm(f.r)));
+  return c;
+}
+
+/* ---------- past bills ---------- */
+function renderPastBills(){
+  const w = $("bills-slot"); w.innerHTML = "";
+  const bills = (S.bills || []).filter(function(b){ return BY_TITLE[b.t]; });
+  if(!bills.length){
+    const e = el("div","empty");
+    e.appendChild(el("h3","","No bills yet."));
+    e.appendChild(el("p","","Once you lock something in, it lands here. Consider this the stub drawer."));
+    const go = el("button","btn-primary","Programme tonight"); go.type = "button";
+    go.addEventListener("click", function(){ showScreen("tonight"); });
+    e.appendChild(go);
+    w.appendChild(e);
+    return;
+  }
+  const list = el("div","bills-list");
+  bills.forEach(function(b){
+    const f = BY_TITLE[b.t];
+    const row = el("div","bill-row");
+    row.appendChild(posterFrame(f));
+    const mid = el("div");
+    mid.appendChild(el("div","t", f.t));
+    mid.appendChild(el("div","d mono",
+      new Date(b.at).toLocaleDateString([], {month:"short", day:"numeric"}) + " · " + hm(f.r) + " · " + f.mpaa));
+    row.appendChild(mid);
+    const rm = el("button","ghost","Remove"); rm.type = "button";
+    rm.addEventListener("click", function(){
+      S.bills = S.bills.filter(function(x){ return x.t !== b.t; });
+      unmarkWatched(b.t);
+      if(S.locked && S.locked.t === b.t) S.locked = null;
+      save(); renderPastBills();
+    });
+    row.appendChild(rm);
+    list.appendChild(row);
+  });
+  w.appendChild(list);
+}
+
+/* ---------- provenance ---------- */
+function renderFoot(){
+  const rtCount = FILMS.filter(function(f){ return f.rtSrc === "rt"; }).length;
+  let t = "244 films, hand-tagged for pace, tone and how much a night they ask of you. ";
+  t += ENRICHED
+    ? ("Runtimes, ratings, posters, synopses and streaming availability from " + ENRICHED.source +
+       ", refreshed daily. " + (rtCount ? "Critic scores are Rotten Tomatoes, via OMDb. " : "") +
+       "Availability is accurate to about a day, not the minute. ")
+    : "Streaming homes and critic scores here are our own estimates, not sourced feeds. ";
+  t += STORAGE_OK ? "Your taste is saved in this browser only." : "This viewer blocks storage, so tonight's answers last for this visit.";
+  $("foot").textContent = t;
+}
+
+/* Sourced data lands after first paint; repaint whatever is on screen. */
+function afterEnrichment(){
+  renderFoot(); renderLocked();
+  if(SCREEN === "taste") renderTaste();
+  if(SCREEN === "bills") renderPastBills();
+  if(SCREEN === "bill"){ const out = scoreAll(); LAST = out; renderBill(out); }
 }
 
 /* ---------- theme ---------- */
-/* Dark is the stylesheet's base, so "dark" simply means no attribute at all —
-   which also means the page paints dark on first frame with no flash. */
 function applyTheme(mode){
   const r = document.documentElement, b = $("themebtn");
-  if(mode === "light") r.setAttribute("data-theme", "light");
-  else r.removeAttribute("data-theme");
-  b.textContent = mode === "light" ? "\u2600 Light" : "\u263D Dark";
+  if(mode === "light") r.setAttribute("data-theme","light"); else r.removeAttribute("data-theme");
+  b.textContent = mode === "light" ? "☀" : "☽";
   b.setAttribute("aria-label", "Theme is " + (mode === "light" ? "light" : "dark") + ". Activate to switch.");
 }
 
-/* ---------- wiring ---------- */
+/* ---------- boot ---------- */
 function init(){
-  renderRooms(); renderGenres(); renderServices(); renderTime();
-  renderRating(); renderRT();
-  $("fitonly").setAttribute("aria-pressed", S.fitOnly ? "true" : "false");
-  renderBill(); renderGrid(); renderChips(); renderHistory();
+  renderWho(); renderTime(); renderMoods();
+  renderRatingChips(); renderGenreChips(); renderServiceRows(); renderAudienceChips();
+  syncExact(); gate(); renderFoot(); renderLocked();
 
-  $("rt").value = S.minRT;
-  $("rt").addEventListener("input", function(e){
-    S.minRT = parseInt(e.target.value,10);
-    renderRT(); renderBill(); renderGrid();
+  $("time-range").value = S.time;
+  $("time-range").addEventListener("input", function(e){
+    S.time = parseInt(e.target.value,10); S.timePreset = "exact";
+    syncExact(); renderTime(); gate();
   });
-  $("rt").addEventListener("change", save);
+  $("time-range").addEventListener("change", save);
 
-  $("time").value = S.time;
-  $("time").addEventListener("input", function(e){
-    S.time = parseInt(e.target.value,10);
-    renderTime(); renderBill(); renderGrid();
+  $("rt-range").value = S.minRT;
+  $("rt-read").textContent = S.minRT;
+  $("rt-range").addEventListener("input", function(e){
+    S.minRT = parseInt(e.target.value,10); $("rt-read").textContent = S.minRT;
   });
-  $("time").addEventListener("change", save);
+  $("rt-range").addEventListener("change", save);
 
-  $("search").addEventListener("input", function(e){
-    searchTerm = e.target.value; renderGrid();
-  });
-
-  /* ---------- keyboard ----------
-     Single keys only, and never while the reader is typing in a field. */
-  document.addEventListener("keydown", function(e){
-    const tag = (e.target.tagName || "").toLowerCase();
-    const typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;
-    if(e.metaKey || e.ctrlKey || e.altKey) return;
-
-    if(e.key === "/" && !typing){ e.preventDefault(); $("search").focus(); return; }
-    if(e.key === "Escape"){
-      if(typing){ e.target.blur(); return; }
-      if(COMPARE){ COMPARE = null; renderBill(); return; }
-      CURSOR = -1; paintCursor(); return;
-    }
-    if(typing) return;
-
-    const cards = document.querySelectorAll("#bill .pick");
-    if(!cards.length) return;
-    const k = e.key.toLowerCase();
-
-    if(k === "j" || e.key === "ArrowDown"){
-      e.preventDefault();
-      CURSOR = Math.min(cards.length - 1, CURSOR + 1);
-      cards[CURSOR].focus({preventScroll:false});
-      paintCursor();
-    } else if(k === "k" || e.key === "ArrowUp"){
-      e.preventDefault();
-      CURSOR = CURSOR <= 0 ? 0 : CURSOR - 1;
-      cards[CURSOR].focus({preventScroll:false});
-      paintCursor();
-    } else if(k === "w" && CURSOR > -1){
-      e.preventDefault();
-      markWatched(cards[CURSOR].dataset.title);
-    } else if(k === "c" && CURSOR > 0){
-      e.preventDefault();
-      const t = cards[CURSOR].dataset.title;
-      COMPARE = (COMPARE === t) ? null : t;
-      renderBill();
-    }
+  $("exact-toggle").addEventListener("click", function(){
+    const p = $("exact-panel"), open = p.classList.toggle("hide");
+    $("exact-toggle").setAttribute("aria-expanded", open ? "false" : "true");
   });
 
-  $("run").addEventListener("click", function(){
-    const out = renderBill();
-    rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
-    renderGrid();
-    const b = $("run"), n = out.picks.length;
-    b.textContent = n
-      ? "Programmed \u2014 " + Math.min(8,n) + " pick" + (Math.min(8,n)===1?"":"s") + " ready"
-      : "Nothing fits \u2014 loosen a filter";
-    setTimeout(function(){ b.textContent = "Program the evening"; }, 2400);
-    /* The bill sits at the top of the stage, and this page may be embedded in a
-       frame that owns scrolling, so never rely on scrollIntoView alone. */
-    const t = $("sec-bill");
-    if(t && t.scrollIntoView) { try{ t.scrollIntoView({behavior:"smooth", block:"start"}); }catch(e){} }
+  $("show-bill").addEventListener("click", function(){ programEvening(); });
+  $("back-tonight").addEventListener("click", function(){ showScreen("tonight"); });
+
+  $("dealer").addEventListener("click", function(){
+    if(!S.room) S.room = "two";
+    if(!S.timePreset){ S.timePreset = "two"; S.time = 135; }
+    S.moods = [];
+    save(); renderWho(); renderTime(); renderMoods(); gate();
+    programEvening();
+    $("bill-eyebrow").textContent = "Dealer's choice — no backsies";
   });
 
-  $("fitonly").addEventListener("click", function(){
-    S.fitOnly = !S.fitOnly;
-    $("fitonly").setAttribute("aria-pressed", S.fitOnly ? "true" : "false");
-    save(); renderGrid();
-  });
+  $("taste-search").addEventListener("input", function(e){ tasteQ = e.target.value; renderTaste(); });
 
-  $("reset").addEventListener("click", function(){
-    S.room = "two"; S.time = 140; S.genres = []; S.taste = {};
-    S.rate = 0; S.minRT = 0; S.fitOnly = false;
-    S.watched = {}; S.offered = []; COMPARE = null; CURSOR = -1;
-    $("fitonly").setAttribute("aria-pressed","false");
-    S.svc = Object.assign({}, svcDefault);
-    $("time").value = 140; $("rt").value = 0;
-    searchTerm = ""; $("search").value = "";
-    save();
-    renderRooms(); renderGenres(); renderServices(); renderTime();
-    renderRating(); renderRT();
-    renderGrid(); renderChips(); renderBill(); renderHistory();
-  });
-
-  $("copy").addEventListener("click", function(){
-    const btn = $("copy"), txt = brief();
-    function done(ok){
-      btn.textContent = ok ? "Copied" : "Press ⌘C";
-      setTimeout(function(){ btn.textContent = "Copy brief"; }, 1900);
-    }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(txt).then(function(){ done(true); }, function(){ fallback(); });
-    } else fallback();
-    function fallback(){
-      const ta = document.createElement("textarea");
-      ta.value = txt;
-      ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
-      document.body.appendChild(ta); ta.focus(); ta.select();
-      let ok = false;
-      try{ ok = document.execCommand("copy"); }catch(e){ ok = false; }
-      document.body.removeChild(ta);
-      done(ok);
-    }
+  document.querySelectorAll(".nav button").forEach(function(b){
+    b.addEventListener("click", function(){ showScreen(b.dataset.go); });
   });
 
   let theme = load("theme","dark");
@@ -2123,10 +2104,18 @@ function init(){
     store("theme", theme); applyTheme(theme);
   });
 
-  renderFoot();
-  loadEnrichment();          /* upgrades the page in place if sourced data exists */
-}
+  document.addEventListener("keydown", function(e){
+    const tag = (e.target.tagName||"").toLowerCase();
+    if(tag === "input" || tag === "textarea" || e.metaKey || e.ctrlKey || e.altKey) return;
+    if(e.key === "Enter" && SCREEN === "tonight" && !$("show-bill").disabled){ programEvening(); }
+    if(e.key.toLowerCase() === "r" && SCREEN === "bill" && LAST){
+      REROLLS++; if(REROLLS >= LAST.picks.length) REROLLS = 0; renderBill(LAST);
+    }
+    if(e.key === "Escape" && SCREEN === "bill") showScreen("tonight");
+  });
 
+  loadEnrichment();
+}
 if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
 else init();
 
