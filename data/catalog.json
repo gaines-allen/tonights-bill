@@ -1,12 +1,13 @@
 {
  "_meta": {
-  "generatedAt": "2026-08-26T22:28:54.873Z",
+  "generatedAt": "2026-08-26T23:16:41.484Z",
   "region": "US",
   "source": "TMDB + OMDb",
   "total": 244,
   "matched": 244,
   "withProviders": 127,
   "withRT": 241,
+  "withOverview": 244,
   "omdbErrors": {
    "no Rotten Tomatoes entry for this title": 2
   },
@@ -28,6 +29,7 @@
    "tmdbScore": 87,
    "votes": 23427,
    "poster": "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+   "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.",
    "providers": [
     "PAR"
    ],
@@ -49,6 +51,7 @@
    "tmdbScore": 85,
    "votes": 14670,
    "poster": "/9OkCLM73MIU2CrKZbqiT8Ln1wY2.jpg",
+   "overview": "The true story of Henry Hill, a half-Irish, half-Sicilian Brooklyn kid who is adopted by neighbourhood gangsters at an early age and climbs the ranks of a Mafia family under the guidance of Jimmy Conway.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -68,6 +71,7 @@
    "tmdbScore": 85,
    "votes": 30727,
    "poster": "/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg",
+   "overview": "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.",
    "providers": [
     "PRV",
     "PAR"
@@ -90,6 +94,7 @@
    "tmdbScore": 82,
    "votes": 16535,
    "poster": "/nT97ifVT2J1yMQmeq20Qblg61T.jpg",
+   "overview": "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -109,6 +114,7 @@
    "tmdbScore": 79,
    "votes": 13670,
    "poster": "/6d5XOczc226jECq0LIX0siKtgHR.jpg",
+   "overview": "Llewelyn Moss stumbles upon dead bodies, $2 million and a hoard of heroin in a Texas desert, but methodical killer Anton Chigurh comes looking for it, with local sheriff Ed Tom Bell hot on his trail.",
    "providers": [
     "PAR"
    ],
@@ -130,6 +136,7 @@
    "tmdbScore": 79,
    "votes": 8602,
    "poster": "/umSVjVdbVwtx5ryCA2QXL44Durm.jpg",
+   "overview": "Obsessive master thief Neil McCauley leads a top-notch crew on various daring heists throughout Los Angeles while determined detective Vincent Hanna pursues him without rest.",
    "providers": [],
    "providersChecked": true,
    "rt": 84
@@ -149,6 +156,7 @@
    "tmdbScore": 84,
    "votes": 23634,
    "poster": "/191nKfP0ehp3uIvWqgPbFmI4lv9.jpg",
+   "overview": "Two homicide detectives are on a desperate hunt for a serial killer whose crimes are based on the \"seven deadly sins\" in this dark and haunting film that takes viewers from the tortured remains of one victim to the next. The seasoned Det.",
    "providers": [],
    "providersChecked": true,
    "rt": 84
@@ -168,6 +176,7 @@
    "tmdbScore": 75,
    "votes": 11808,
    "poster": "/6YmeO4pB7XTh8P8F960O1uA14JO.jpg",
+   "overview": "Over the course of a decade, editors of the San Francisco Chronicle entice themselves in the murders of the Zodiac Killer. However, as time runs its course, interest in the case dwindles in the eyes of the professionals.",
    "providers": [
     "PAR"
    ],
@@ -189,6 +198,7 @@
    "tmdbScore": 79,
    "votes": 20297,
    "poster": "/ts996lKsxvjkO2yiYG0ht4qAicO.jpg",
+   "overview": "With his wife's disappearance having become the focus of an intense media circus, a man sees the spotlight turned on him when it's suspected that he may not be innocent.",
    "providers": [
     "NFX"
    ],
@@ -210,6 +220,7 @@
    "tmdbScore": 81,
    "votes": 13393,
    "poster": "/uhviyknTT5cEQXbn6vWIqfM4vGm.jpg",
+   "overview": "After his six-year-old daughter is abducted, a desperate father takes justice into his own hands when he loses faith in the detective leading the investigation, setting both men on a collision course as the search descends into obsession and moral compromise.",
    "providers": [],
    "providersChecked": true,
    "rt": 81
@@ -229,6 +240,7 @@
    "tmdbScore": 74,
    "votes": 9793,
    "poster": "/lz8vNyXeidqqOdJW9ZjnDAMb5Vr.jpg",
+   "overview": "An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.",
    "providers": [
     "MAX"
    ],
@@ -250,6 +262,7 @@
    "tmdbScore": 83,
    "votes": 18376,
    "poster": "/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg",
+   "overview": "Clarice Starling is a top student at the FBI's training academy. Jack Crawford wants Clarice to interview Dr. Hannibal Lecter, a brilliant psychiatrist who is also a violent psychopath, serving life behind bars for various acts of murder and cannibalism.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -269,6 +282,7 @@
    "tmdbScore": 85,
    "votes": 21175,
    "poster": "/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+   "overview": "All unemployed, Ki-taek's family takes peculiar interest in the wealthy and glamorous Parks for their livelihood until they get entangled in an unexpected incident.",
    "providers": [],
    "providersChecked": true,
    "rt": 99
@@ -288,6 +302,7 @@
    "tmdbScore": 82,
    "votes": 16642,
    "poster": "/nzlv62aC0octS5AklAiWpXLX9Z0.jpg",
+   "overview": "Leonard Shelby is tracking down the man who raped and murdered his wife. The difficulty of locating his wife's killer, however, is compounded by the fact that he suffers from a rare, untreatable form of short-term memory loss.",
    "providers": [
     "NFX",
     "HUL",
@@ -311,6 +326,7 @@
    "tmdbScore": 77,
    "votes": 11972,
    "poster": "/j9HrX8f7GbZQm1BrBiR40uFQZSb.jpg",
+   "overview": "When Lou Bloom, desperate for work, muscles into the world of L.A. crime journalism, he blurs the line between observer and participant to become the star of his own story. Aiding him in his effort is Nina, a TV-news veteran.",
    "providers": [
     "NFX"
    ],
@@ -332,6 +348,7 @@
    "tmdbScore": 72,
    "votes": 5532,
    "poster": "/6XN1vxHc7kUSqNWtaQKN45J5x2v.jpg",
+   "overview": "A charismatic New York City jeweler always on the lookout for the next big score makes a series of high-stakes bets that could lead to the windfall of a lifetime.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -351,6 +368,7 @@
    "tmdbScore": 76,
    "votes": 15556,
    "poster": "/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+   "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos.",
    "providers": [
     "PAR"
    ],
@@ -372,6 +390,7 @@
    "tmdbScore": 79,
    "votes": 15315,
    "poster": "/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg",
+   "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
    "providers": [],
    "providersChecked": true,
    "rt": 89
@@ -391,6 +410,7 @@
    "tmdbScore": 76,
    "votes": 19762,
    "poster": "/pEzNVQfdzYDzVK0XqxERIw2x2se.jpg",
+   "overview": "Taking place after alien crafts land around the world, an expert linguist is recruited by the military to determine whether they come in peace or are a threat.",
    "providers": [
     "PAR"
    ],
@@ -412,6 +432,7 @@
    "tmdbScore": 78,
    "votes": 15413,
    "poster": "/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+   "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people.",
    "providers": [
     "MAX"
    ],
@@ -431,8 +452,9 @@
    "runtime": 167,
    "cert": "PG-13",
    "tmdbScore": 81,
-   "votes": 8441,
+   "votes": 8442,
    "poster": "/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg",
+   "overview": "Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while on a path of revenge against the conspirators who destroyed his family.",
    "providers": [
     "MAX"
    ],
@@ -454,6 +476,7 @@
    "tmdbScore": 85,
    "votes": 40908,
    "poster": "/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+   "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
    "providers": [
     "PRV",
     "HUL",
@@ -477,6 +500,7 @@
    "tmdbScore": 84,
    "votes": 39996,
    "poster": "/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
+   "overview": "Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life as payment for a task considered to be impossible: \"inception\", the implantation of another person's idea into a…",
    "providers": [],
    "providersChecked": true,
    "rt": 86
@@ -496,6 +520,7 @@
    "tmdbScore": 83,
    "votes": 28562,
    "poster": "/dXNAPwY7VrqMAo51EKhhCJfaGb5.jpg",
+   "overview": "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.",
    "providers": [
     "PCK"
    ],
@@ -517,6 +542,7 @@
    "tmdbScore": 82,
    "votes": 16734,
    "poster": "/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg",
+   "overview": "During its return to the earth, commercial spaceship Nostromo intercepts a distress signal from a distant planet.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -536,6 +562,7 @@
    "tmdbScore": 80,
    "votes": 11102,
    "poster": "/r1x5JGpyqZU8PYhbs4UcrO1Xb6x.jpg",
+   "overview": "Ripley, the sole survivor of the Nostromo's deadly encounter with the monstrous Alien, returns to Earth after drifting through space in hypersleep for 57 years.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -555,6 +582,7 @@
    "tmdbScore": 76,
    "votes": 14509,
    "poster": "/dmJW8IAKHKxFNiUnoDR7JfsK7Rp.jpg",
+   "overview": "Caleb, a coder at the world's largest internet company, wins a competition to spend a week at a private mountain retreat belonging to Nathan, the reclusive CEO of the company.",
    "providers": [
     "HUL"
    ],
@@ -576,6 +604,7 @@
    "tmdbScore": 77,
    "votes": 8318,
    "poster": "/u68AjlvlutfEIcpmbYpKcdi09ut.jpg",
+   "overview": "An aging Chinese immigrant is swept up in an insane adventure, where she alone can save what's important to her by connecting with the lives she could have led in other universes.",
    "providers": [
     "HUL"
    ],
@@ -597,6 +626,7 @@
    "tmdbScore": 76,
    "votes": 8045,
    "poster": "/k9IAS4TehZFcKi4HVByxZNPfqex.jpg",
+   "overview": "In 2027, in a chaotic world in which humans can no longer procreate, a former activist agrees to help transport a miraculously pregnant woman to a sanctuary at sea, where her child's birth may help scientists save the future of humankind.",
    "providers": [],
    "providersChecked": true,
    "rt": 92
@@ -614,8 +644,9 @@
    "runtime": 121,
    "cert": "R",
    "tmdbScore": 76,
-   "votes": 24477,
+   "votes": 24480,
    "poster": "/ulcAi4dKpAjHwYGS08vNyx9H6I9.jpg",
+   "overview": "An apocalyptic story set in the furthest reaches of our planet, in a stark desert landscape where humanity is broken, and most everyone is crazed fighting for the necessities of life.",
    "providers": [],
    "providersChecked": true,
    "rt": 97
@@ -635,6 +666,7 @@
    "tmdbScore": 76,
    "votes": 15412,
    "poster": "/nBM9MMa2WCwvMG4IJ3eiGUdbPe6.jpg",
+   "overview": "Major Bill Cage is an officer who has never seen a day of combat when he is unceremoniously demoted and dropped into combat. Cage is killed within minutes, managing to take an alpha alien down with him.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -654,6 +686,7 @@
    "tmdbScore": 78,
    "votes": 15556,
    "poster": "/eCOtqtfvn7mxGl6nfmq4b1exJRc.jpg",
+   "overview": "In the not so distant future, Theodore, a lonely writer, purchases a newly developed operating system designed to meet the user's every need. To Theodore's surprise, a romantic relationship develops between him and his operating system.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -673,6 +706,7 @@
    "tmdbScore": 64,
    "votes": 9558,
    "poster": "/4YRplSk6BhH6PRuE9gfyw9byUJ6.jpg",
+   "overview": "A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature don't apply.",
    "providers": [],
    "providersChecked": true,
    "rt": 88
@@ -692,6 +726,7 @@
    "tmdbScore": 72,
    "votes": 16585,
    "poster": "/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
+   "overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
    "providers": [
     "PAR"
    ],
@@ -713,6 +748,7 @@
    "tmdbScore": 77,
    "votes": 21697,
    "poster": "/fASz8A0yFE3QB6LgGoOfwvFSseV.jpg",
+   "overview": "During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet.",
    "providers": [
     "PRV"
    ],
@@ -734,6 +770,7 @@
    "tmdbScore": 69,
    "votes": 11128,
    "poster": "/sNjL6SqErDBE8OUZlrDLkexfsCj.jpg",
+   "overview": "In the year 2044, time travel has not yet been invented but in 30 years it will have been. When the mob wants to get rid of someone, they will send their target into the past where a looper, a hired gun, like Joe is waiting to mop up.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -753,6 +790,7 @@
    "tmdbScore": 75,
    "votes": 10575,
    "poster": "/tuGlQkqLxnodDSk6mp5c2wvxUEd.jpg",
+   "overview": "Thirty years ago, aliens arrive on Earth. Not to conquer or give aid, but to find refuge from their dying planet.",
    "providers": [],
    "providersChecked": true,
    "rt": 90
@@ -772,6 +810,7 @@
    "tmdbScore": 74,
    "votes": 9863,
    "poster": "/qtgFcnwh9dAFLocsDk2ySDVS8UF.jpg",
+   "overview": "John Anderton is a top 'Precrime' cop in the late-21st century, when technology can predict crimes before they're committed. But Anderton becomes the quarry when another investigator targets him for a murder charge.",
    "providers": [
     "PAR"
    ],
@@ -793,6 +832,7 @@
    "tmdbScore": 80,
    "votes": 18242,
    "poster": "/63viWuPfYQjRYLSZSZNq7dglJP5.jpg",
+   "overview": "A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA. Before opening day, he invites a team of experts and his two eager grandchildren to experience the park and help calm anxious investors.",
    "providers": [
     "HUL"
    ],
@@ -814,6 +854,7 @@
    "tmdbScore": 75,
    "votes": 12198,
    "poster": "/an0nD6uq6byfxXCfk6lQBzdL2J1.jpg",
+   "overview": "An alien is left behind on Earth and saved by the 10-year-old Elliott who decides to keep him hidden in his home.",
    "providers": [],
    "providersChecked": true,
    "rt": 99
@@ -833,6 +874,7 @@
    "tmdbScore": 83,
    "votes": 22258,
    "poster": "/vN5B5WgYscRGcQpVhHl6p9DDTP0.jpg",
+   "overview": "Eighties teenager Marty McFly is accidentally sent back in time to 1955, inadvertently disrupting his parents' first meeting and attracting his mother's romantic interest.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -852,6 +894,7 @@
    "tmdbScore": 82,
    "votes": 22731,
    "poster": "/fai0rspsNeJCS69wHNjOdWxcI7P.jpg",
+   "overview": "Princess Leia is captured and held hostage by the evil Imperial forces in their effort to take over the galactic Empire.",
    "providers": [
     "DIS"
    ],
@@ -873,6 +916,7 @@
    "tmdbScore": 84,
    "votes": 18742,
    "poster": "/nNAeTmF4CtdSgMDplXTDPOpYzsX.jpg",
+   "overview": "The epic saga continues as Luke Skywalker, in hopes of defeating the evil Galactic Empire, learns the ways of the Jedi from aging master Yoda. But Darth Vader is more determined than ever to capture Luke.",
    "providers": [
     "DIS"
    ],
@@ -894,6 +938,7 @@
    "tmdbScore": 75,
    "votes": 16674,
    "poster": "/i0yw1mFbB7sNGHCs7EXZPzFkdA1.jpg",
+   "overview": "A rogue band of resistance fighters unite for a mission to steal the Death Star plans and bring a new hope to the galaxy.",
    "providers": [
     "DIS"
    ],
@@ -915,6 +960,7 @@
    "tmdbScore": 85,
    "votes": 36509,
    "poster": "/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+   "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets.",
    "providers": [
     "MAX"
    ],
@@ -936,6 +982,7 @@
    "tmdbScore": 77,
    "votes": 23036,
    "poster": "/sPX89Td70IDDjVr85jdSBb4rWGr.jpg",
+   "overview": "Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the corruption that plagues his home, Gotham City.",
    "providers": [
     "MAX"
    ],
@@ -957,6 +1004,7 @@
    "tmdbScore": 80,
    "votes": 12323,
    "poster": "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+   "overview": "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II.",
    "providers": [
     "PCK"
    ],
@@ -978,6 +1026,7 @@
    "tmdbScore": 74,
    "votes": 17865,
    "poster": "/b4Oe15CGLL61Ped0RAS9JpqdmCt.jpg",
+   "overview": "The story of the miraculous evacuation of Allied soldiers from Belgium, Britain, Canada and France, who were cut off and surrounded by the German army from the beaches and harbour of Dunkirk between May 26th and June 4th 1940 during World War II.",
    "providers": [],
    "providersChecked": true,
    "rt": 92
@@ -997,6 +1046,7 @@
    "tmdbScore": 82,
    "votes": 17664,
    "poster": "/uqx37cS8cpHg8U35f9U5IBlrCV3.jpg",
+   "overview": "As U.S. troops storm the beaches of Normandy, three brothers lie dead on the battlefield, with a fourth trapped behind enemy lines. Ranger captain John Miller and seven men are tasked with penetrating German-held territory and bringing the boy home.",
    "providers": [
     "PAR"
    ],
@@ -1018,6 +1068,7 @@
    "tmdbScore": 80,
    "votes": 13811,
    "poster": "/iZf0KyrE25z1sage4SYFLCCrMi9.jpg",
+   "overview": "At the height of the First World War, two young British soldiers must cross enemy territory and deliver a message that will stop a deadly attack on hundreds of soldiers.",
    "providers": [
     "NFX"
    ],
@@ -1037,8 +1088,9 @@
    "runtime": 153,
    "cert": "R",
    "tmdbScore": 82,
-   "votes": 24638,
+   "votes": 24639,
    "poster": "/aupnPtagH9JVBuMrGEanf4iqXEQ.jpg",
+   "overview": "In Nazi-occupied France during World War II, a group of Jewish-American soldiers known as \"The Basterds\" are chosen specifically to spread fear throughout the Third Reich by scalping and brutally killing Nazis. The Basterds, lead by Lt.",
    "providers": [],
    "providersChecked": true,
    "rt": 89
@@ -1058,6 +1110,7 @@
    "tmdbScore": 83,
    "votes": 9303,
    "poster": "/gQB8Y5RCMkv2zwzFHbUJX3kAhvA.jpg",
+   "overview": "\" His goal is to locate - and eliminate - a mysterious Green Beret Colonel named Walter Kurtz, who has been leading his personal army on illegal guerrilla missions into enemy territory.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -1077,6 +1130,7 @@
    "tmdbScore": 81,
    "votes": 11682,
    "poster": "/kMKyx1k8hWWscYFnPbnxxN4Eqo4.jpg",
+   "overview": "A pragmatic U.S. Marine observes the dehumanizing effects the U.S.-Vietnam War has on his fellow recruits from their brutal boot camp training to the bloody street fighting in Hue.",
    "providers": [],
    "providersChecked": true,
    "rt": 90
@@ -1096,6 +1150,7 @@
    "tmdbScore": 87,
    "votes": 31141,
    "poster": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+   "overview": "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden.",
    "providers": [],
    "providersChecked": true,
    "rt": 89
@@ -1115,6 +1170,7 @@
    "tmdbScore": 85,
    "votes": 30303,
    "poster": "/Cw4hIUIAmSYfK9QfaUW5igp9La.jpg",
+   "overview": "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
    "providers": [
     "PAR"
    ],
@@ -1136,6 +1192,7 @@
    "tmdbScore": 74,
    "votes": 13421,
    "poster": "/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg",
+   "overview": "In 2003, Harvard undergrad and computer programmer Mark Zuckerberg begins work on a new concept that eventually turns into the global social network known as Facebook.",
    "providers": [],
    "providersChecked": true,
    "rt": 96
@@ -1155,6 +1212,7 @@
    "tmdbScore": 84,
    "votes": 16985,
    "poster": "/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
+   "overview": "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
    "providers": [],
    "providersChecked": true,
    "rt": 94
@@ -1174,6 +1232,7 @@
    "tmdbScore": 81,
    "votes": 7641,
    "poster": "/fa0RDkAlCec0STeMNAhPaF89q6U.jpg",
+   "overview": "Ruthless silver miner, turned oil prospector, Daniel Plainview, moves to oil-rich California. Using his son to project a trustworthy, family-man image, Plainview cons local landowners into selling him their valuable properties for a pittance.",
    "providers": [
     "PAR"
    ],
@@ -1195,6 +1254,7 @@
    "tmdbScore": 74,
    "votes": 7650,
    "poster": "/qLnfEmPrDjJfPyyddLJPkXmshkp.jpg",
+   "overview": "The tender, heartbreaking story of a young man’s struggle to find himself, told across three defining chapters in his life as he experiences the ecstasy, pain, and beauty of falling in love, while grappling with his own sexuality.",
    "providers": [
     "HUL"
    ],
@@ -1216,6 +1276,7 @@
    "tmdbScore": 76,
    "votes": 6524,
    "poster": "/o9VXYOuaJxCEKOxbA86xqtwmqYn.jpg",
+   "overview": "After his older brother passes away, Lee Chandler is forced to return home to care for his 16-year-old nephew. There he is compelled to deal with a tragic past that separated him from his family and the community where he was born and raised.",
    "providers": [
     "PRV"
    ],
@@ -1237,6 +1298,7 @@
    "tmdbScore": 77,
    "votes": 7526,
    "poster": "/2JRyCKaRKyJAVpsIHeLvPw5nHmw.jpg",
+   "overview": "A stage director and an actress struggle through a grueling, coast-to-coast divorce that pushes them to their personal extremes.",
    "providers": [
     "NFX"
    ],
@@ -1258,6 +1320,7 @@
    "tmdbScore": 75,
    "votes": 3493,
    "poster": "/4yFG6cSPaCaPhyJ1vtGOtMD1lgh.jpg",
+   "overview": "Two lifelong friends find themselves at an impasse when one abruptly ends their relationship, with alarming consequences for both of them.",
    "providers": [],
    "providersChecked": true,
    "rt": 96
@@ -1277,6 +1340,7 @@
    "tmdbScore": 78,
    "votes": 6970,
    "poster": "/yn5ihODtZ7ofn8pDYfxCmxh8AXI.jpg",
+   "overview": "Four sisters come of age in America in the aftermath of the Civil War.",
    "providers": [
     "HUL"
    ],
@@ -1298,6 +1362,7 @@
    "tmdbScore": 72,
    "votes": 9130,
    "poster": "/gl66K7zRdtNYGrxyS2YDUP5ASZd.jpg",
+   "overview": "Lady Bird McPherson, a strong willed, deeply opinionated, artistic 17 year old comes of age in Sacramento. Her relationship with her mother and her upbringing are questioned and tested as she plans to head off to college.",
    "providers": [
     "HUL",
     "MAX"
@@ -1320,6 +1385,7 @@
    "tmdbScore": 80,
    "votes": 16415,
    "poster": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
+   "overview": "The Grand Budapest Hotel tells of a legendary concierge at a famous European hotel between the wars and his friendship with a young employee who becomes his trusted protégé.",
    "providers": [],
    "providersChecked": true,
    "rt": 92
@@ -1339,6 +1405,7 @@
    "tmdbScore": 78,
    "votes": 14385,
    "poster": "/pThyQovXQrw2m0s9x82twj48Jq4.jpg",
+   "overview": "When renowned crime novelist Harlan Thrombey is found dead at his estate just after his 85th birthday, the inquisitive and debonair Detective Benoit Blanc is mysteriously enlisted to investigate.",
    "providers": [],
    "providersChecked": true,
    "rt": 97
@@ -1358,6 +1425,7 @@
    "tmdbScore": 72,
    "votes": 6551,
    "poster": "/fPtUgMcLIboqlTlPrq0bQpKK8eq.jpg",
+   "overview": "A young couple travels to a remote island to eat at an exclusive restaurant where the chef has prepared a lavish menu, with some shocking surprises.",
    "providers": [],
    "providersChecked": true,
    "rt": 88
@@ -1377,6 +1445,7 @@
    "tmdbScore": 70,
    "votes": 7086,
    "poster": "/vDGr1YdrlfbU9wxTOdpf3zChmv9.jpg",
+   "overview": "World-famous detective Benoit Blanc heads to Greece to peel back the layers of a mystery surrounding a tech billionaire and his eclectic crew of friends.",
    "providers": [
     "NFX"
    ],
@@ -1398,6 +1467,7 @@
    "tmdbScore": 76,
    "votes": 19236,
    "poster": "/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg",
+   "overview": "Chris and his girlfriend Rose go upstate to visit her parents for the weekend.",
    "providers": [],
    "providersChecked": true,
    "rt": 98
@@ -1417,6 +1487,7 @@
    "tmdbScore": 73,
    "votes": 8829,
    "poster": "/4GFPuL14eXi66V96xBWY73Y9PfR.jpg",
+   "overview": "Following the death of the Leigh family matriarch, Annie and her children uncover disturbing secrets about their heritage.",
    "providers": [
     "MAX"
    ],
@@ -1438,6 +1509,7 @@
    "tmdbScore": 65,
    "votes": 6529,
    "poster": "/qt3fqapeo94TfvMyld8P7gkpXLz.jpg",
+   "overview": "A grieving single mother and her child fall into a deep well of paranoia when an eerie children's book manifests in their home.",
    "providers": [],
    "providersChecked": true,
    "rt": 98
@@ -1457,6 +1529,7 @@
    "tmdbScore": 74,
    "votes": 15637,
    "poster": "/nAU74GmpUk7t5iklEp3bufwDq4n.jpg",
+   "overview": "A family is forced to live in silence while hiding from creatures that hunt by sound.",
    "providers": [
     "PAR"
    ],
@@ -1478,6 +1551,7 @@
    "tmdbScore": 82,
    "votes": 19267,
    "poster": "/uAR0AWqhQL1hQa69UDEbb2rE5Wx.jpg",
+   "overview": "Jack Torrance accepts a caretaker job at the Overlook Hotel, where he, along with his wife Wendy and their son Danny, must live isolated from the rest of the world for the winter. But they aren't prepared for the madness that lurks within.",
    "providers": [],
    "providersChecked": true,
    "rt": 84
@@ -1497,6 +1571,7 @@
    "tmdbScore": 81,
    "votes": 8181,
    "poster": "/tzGY49kseSE9QAKk47uuDGwnSCu.jpg",
+   "overview": "A research team in Antarctica is hunted by a shape-shifting alien that assumes the appearance of its victims.",
    "providers": [],
    "providersChecked": true,
    "rt": 85
@@ -1516,6 +1591,7 @@
    "tmdbScore": 66,
    "votes": 7097,
    "poster": "/iwnQ1JH1wdWrGYkgWySptJ5284A.jpg",
+   "overview": "A young woman is followed by an unknown supernatural force after a sexual encounter.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -1535,6 +1611,7 @@
    "tmdbScore": 75,
    "votes": 5071,
    "poster": "/fWPgbnt2LSqkQ6cdQc0SZN9CpLm.jpg",
+   "overview": "Trying to leave their troubled lives behind, twin brothers return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back.",
    "providers": [
     "MAX"
    ],
@@ -1556,6 +1633,7 @@
    "tmdbScore": 68,
    "votes": 5119,
    "poster": "/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg",
+   "overview": "Residents in a lonely gulch of inland California bear witness to an uncanny, chilling discovery.",
    "providers": [
     "NFX"
    ],
@@ -1577,6 +1655,7 @@
    "tmdbScore": 72,
    "votes": 8787,
    "poster": "/sQckQRt17VaWbo39GIu0TMOiszq.jpg",
+   "overview": "Twenty-eight days after a killer virus was accidentally unleashed from a British research facility, a small group of London survivors are caught in a desperate struggle to protect themselves from the infected.",
    "providers": [],
    "providersChecked": true,
    "rt": 87
@@ -1596,6 +1675,7 @@
    "tmdbScore": 85,
    "votes": 18770,
    "poster": "/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+   "overview": "A young girl, Chihiro, becomes trapped in a strange new world of spirits. When her parents undergo a mysterious transformation, she must call upon the courage she never knew she had to free her family.",
    "providers": [
     "MAX"
    ],
@@ -1617,6 +1697,7 @@
    "tmdbScore": 81,
    "votes": 9009,
    "poster": "/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg",
+   "overview": "Two sisters move to the country with their father in order to be closer to their hospitalized mother, and discover the surrounding trees are inhabited by Totoros, magical spirits of the forest.",
    "providers": [
     "MAX"
    ],
@@ -1638,6 +1719,7 @@
    "tmdbScore": 83,
    "votes": 9211,
    "poster": "/cMYCDADoLKLbB83g4WnJegaZimC.jpg",
+   "overview": "Ashitaka, a prince of the disappearing Emishi people, is cursed by a demonized boar god and must journey to the west to find a cure.",
    "providers": [
     "MAX"
    ],
@@ -1657,8 +1739,9 @@
    "runtime": 117,
    "cert": "PG",
    "tmdbScore": 84,
-   "votes": 17731,
+   "votes": 17734,
    "poster": "/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg",
+   "overview": "Struggling to find his place in the world while juggling school and family, Brooklyn teenager Miles Morales is unexpectedly bitten by a radioactive spider and develops unfathomable powers just like the one and only Spider-Man.",
    "providers": [
     "NFX"
    ],
@@ -1680,6 +1763,7 @@
    "tmdbScore": 83,
    "votes": 9109,
    "poster": "/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+   "overview": "After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence.",
    "providers": [
     "DIS",
     "MAX"
@@ -1700,8 +1784,9 @@
    "runtime": 115,
    "cert": "PG",
    "tmdbScore": 77,
-   "votes": 19203,
+   "votes": 19204,
    "poster": "/2LqaLgk4Z226KkgPJuiOQ58wvrm.jpg",
+   "overview": "Bob Parr has given up his superhero days to log in time as an insurance adjuster and raise his three children with his formerly heroic wife in suburbia. But when he receives a mysterious assignment, it's time to get back into costume.",
    "providers": [
     "DIS"
    ],
@@ -1724,6 +1809,7 @@
    "tmdbScore": 78,
    "votes": 18840,
    "poster": "/t3vaWRPSf6WjDSamIkKDs1iQWna.jpg",
+   "overview": "In one of Paris's finest restaurants, Remy, a determined young rat, dreams of becoming a renowned French chef.",
    "providers": [
     "DIS",
     "HUL"
@@ -1746,6 +1832,7 @@
    "tmdbScore": 81,
    "votes": 20735,
    "poster": "/hbhFnRzzg6ZDmm8YAmxBnQpQIPh.jpg",
+   "overview": "After hundreds of years doing what he was built for, WALL•E— a robot designed to clean up the earth—discovers a new purpose in life when he meets a sleek search robot named EVE.",
    "providers": [
     "DIS"
    ],
@@ -1767,6 +1854,7 @@
    "tmdbScore": 80,
    "votes": 20406,
    "poster": "/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg",
+   "overview": "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz.",
    "providers": [
     "DIS",
     "HUL"
@@ -1787,8 +1875,9 @@
    "runtime": 95,
    "cert": "PG",
    "tmdbScore": 79,
-   "votes": 23792,
+   "votes": 23795,
    "poster": "/2H1TmgdfNtsKlU9jKdeNyYL5y8T.jpg",
+   "overview": "When 11-year-old Riley moves to a new city, her Emotions team up to help her through the transition. Joy, Fear, Anger, Disgust and Sadness work together, but when Joy and Sadness get lost, they must journey through unfamiliar places to get back home.",
    "providers": [
     "DIS"
    ],
@@ -1808,8 +1897,9 @@
    "runtime": 105,
    "cert": "PG",
    "tmdbScore": 82,
-   "votes": 21306,
+   "votes": 21307,
    "poster": "/6Ryitt95xrO8KXuqRGm1fUuNwqF.jpg",
+   "overview": "Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz.",
    "providers": [
     "DIS"
    ],
@@ -1831,6 +1921,7 @@
    "tmdbScore": 80,
    "votes": 22001,
    "poster": "/mFvoEwSfLqbcWwFsDjQebn9bzFe.jpg",
+   "overview": "Carl Fredricksen spent his entire life dreaming of exploring the globe and experiencing life to its fullest.",
    "providers": [
     "DIS"
    ],
@@ -1852,6 +1943,7 @@
    "tmdbScore": 78,
    "votes": 20873,
    "poster": "/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg",
+   "overview": "Nemo, an adventurous young clownfish, is unexpectedly taken from his Great Barrier Reef home to a dentist's office aquarium.",
    "providers": [
     "DIS",
     "HUL"
@@ -1874,6 +1966,7 @@
    "tmdbScore": 78,
    "votes": 18439,
    "poster": "/hlK0e0wAQ3VLuJcsfIYPvb4JVud.jpg",
+   "overview": "Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopia's police force, jumps at the chance to crack her first case - even if it means partnering with scam-artist fox Nick Wilde to solve the mystery.",
    "providers": [
     "DIS"
    ],
@@ -1895,6 +1988,7 @@
    "tmdbScore": 76,
    "votes": 13953,
    "poster": "/m5MDZOIFEFlxGiLuAzWzFSsWcye.jpg",
+   "overview": "In Ancient Polynesia, when a terrible curse incurred by Maui reaches an impetuous Chieftain's daughter's island, she answers the Ocean's call to seek out the demigod to set things right.",
    "providers": [
     "DIS"
    ],
@@ -1916,6 +2010,7 @@
    "tmdbScore": 79,
    "votes": 14637,
    "poster": "/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg",
+   "overview": "As the son of a Viking leader on the cusp of manhood, shy Hiccup Horrendous Haddock III faces a rite of passage: he must kill a dragon to prove his warrior mettle.",
    "providers": [
     "PRV"
    ],
@@ -1937,6 +2032,7 @@
    "tmdbScore": 83,
    "votes": 20043,
    "poster": "/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg",
+   "overview": "Young lion prince Simba, eager to one day become king of the Pride Lands, grows up under the watchful eye of his father Mufasa; all the while his villainous uncle Scar conspires to take the throne for himself.",
    "providers": [
     "DIS"
    ],
@@ -1958,6 +2054,7 @@
    "tmdbScore": 82,
    "votes": 4788,
    "poster": "/q125RHUDgR4gjwh1QkfYuJLYkL.jpg",
+   "overview": "A selfish postman and a reclusive toymaker form an unlikely friendship, delivering joy to a cold, dark town that desperately needs it.",
    "providers": [
     "NFX"
    ],
@@ -1979,6 +2076,7 @@
    "tmdbScore": 82,
    "votes": 9159,
    "poster": "/kuf6dutpsT0vSVehic3EZIqkOBt.jpg",
+   "overview": "Puss in Boots discovers that his passion for adventure has taken its toll: He has burned through eight of his nine lives, leaving him with only one life left. Puss sets out on an epic journey to find the mythical Last Wish and restore his nine lives.",
    "providers": [
     "PCK"
    ],
@@ -2001,6 +2099,7 @@
    "tmdbScore": 84,
    "votes": 28200,
    "poster": "/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
+   "overview": "Young hobbit Frodo Baggins, after inheriting a mysterious ring from his uncle Bilbo, must leave his home in order to keep it from falling into the hands of its evil creator.",
    "providers": [
     "MAX"
    ],
@@ -2022,6 +2121,7 @@
    "tmdbScore": 84,
    "votes": 24434,
    "poster": "/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg",
+   "overview": "Frodo Baggins and the other members of the Fellowship continue on their sacred quest to destroy the One Ring--but on separate paths.",
    "providers": [
     "MAX"
    ],
@@ -2043,6 +2143,7 @@
    "tmdbScore": 85,
    "votes": 27184,
    "poster": "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+   "overview": "As armies mass for a final battle that will decide the fate of the world--and powerful, ancient forces of Light and Dark compete to determine the outcome--one member of the Fellowship of the Ring is revealed as the noble heir to the throne of the Kings of Men.",
    "providers": [
     "MAX"
    ],
@@ -2064,6 +2165,7 @@
    "tmdbScore": 78,
    "votes": 11667,
    "poster": "/z7xXihu5wHuSMWymq5VAulPVuvg.jpg",
+   "overview": "In post–civil war Spain, 10-year-old Ofelia moves with her pregnant mother to live under the control of her cruel stepfather. Drawn into a mysterious labyrinth, she meets a faun who reveals that she may be a lost princess from an underground kingdom.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -2083,6 +2185,7 @@
    "tmdbScore": 77,
    "votes": 5247,
    "poster": "/2FC9L9MrjBoGHYjYZjdWQdopVYb.jpg",
+   "overview": "In this enchantingly cracked fairy tale, the beautiful Princess Buttercup and the dashing Westley must overcome staggering odds to find happiness amid six-fingered swordsmen, murderous princes, Sicilians and rodents of unusual size.",
    "providers": [
     "HUL"
    ],
@@ -2104,6 +2207,7 @@
    "tmdbScore": 80,
    "votes": 23532,
    "poster": "/aWxwnYoe8p2d2fcxOqtvAtJ72Rw.jpg",
+   "overview": "Harry Potter's life is in danger once more as dangerous wizard Sirius Black has escaped from Azkaban Prison and is heading to Hogwarts.",
    "providers": [
     "MAX",
     "PCK"
@@ -2126,6 +2230,7 @@
    "tmdbScore": 81,
    "votes": 6179,
    "poster": "/lGCEKlJo2CnWydQj7aamY7s1S7Q.jpg",
+   "overview": "In Casablanca, Morocco in December 1941, a cynical American expatriate meets a former lover, with unforeseen complications.",
    "providers": [
     "MAX"
    ],
@@ -2147,6 +2252,7 @@
    "tmdbScore": 74,
    "votes": 4698,
    "poster": "/rFOiFUhTMtDetqCGClC9PIgnC1P.jpg",
+   "overview": "Sex always gets in the way of friendships between men and women. At least, that's what Harry Burns believes. So when Harry meets Sally Albright and a deep friendship blossoms between them, Harry's determined not to let his attraction to Sally destroy it.",
    "providers": [],
    "providersChecked": true,
    "rt": 90
@@ -2166,6 +2272,7 @@
    "tmdbScore": 80,
    "votes": 4823,
    "poster": "/kf1Jb1c2JAOqjuzA3H4oDM263uB.jpg",
+   "overview": "An unexpected meeting on a train leads two travelers to spend an evening wandering through Vienna.",
    "providers": [],
    "providersChecked": true,
    "rt": 100
@@ -2185,6 +2292,7 @@
    "tmdbScore": 81,
    "votes": 16639,
    "poster": "/5MwkWH9tYHv3mV9OdYTMR5qreIz.jpg",
+   "overview": "Joel Barish, heartbroken that his girlfriend underwent a procedure to erase him from her memory, decides to do the same. However, as he watches his memories of her fade away, he realises that he still loves her, and may be too late to correct his mistake.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -2204,6 +2312,7 @@
    "tmdbScore": 79,
    "votes": 18390,
    "poster": "/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
+   "overview": "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of…",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -2223,6 +2332,7 @@
    "tmdbScore": 73,
    "votes": 6848,
    "poster": "/hHRIf2XHeQMbyRb3HUx19SF5Ujw.jpg",
+   "overview": "London bookstore owner William Thacker's quiet life turns upside down when a chance encounter with famous actress Anna Scott sparks an unlikely romance challenged by their vastly different worlds.",
    "providers": [],
    "providersChecked": true,
    "rt": 84
@@ -2242,6 +2352,7 @@
    "tmdbScore": 70,
    "votes": 4028,
    "poster": "/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg",
+   "overview": "An American-born Chinese economics professor accompanies her boyfriend to Singapore for his best friend's wedding, only to get thrust into the lives of Asia's rich and famous.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -2261,6 +2372,7 @@
    "tmdbScore": 77,
    "votes": 2429,
    "poster": "/k3waqVXSnvCZWfJYNtdamTgTtTA.jpg",
+   "overview": "After decades apart, childhood friends Nora and Hae Sung are reunited in New York for one fateful weekend as they confront notions of destiny, love, and the choices that make a life.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -2280,6 +2392,7 @@
    "tmdbScore": 81,
    "votes": 3012,
    "poster": "/rUDuOKpkKBHxx41BScqKej72iT3.jpg",
+   "overview": "On an isolated island in Brittany at the end of the eighteenth century, a female painter is obliged to paint a wedding portrait of a young woman.",
    "providers": [
     "MAX"
    ],
@@ -2301,6 +2414,7 @@
    "tmdbScore": 78,
    "votes": 7682,
    "poster": "/aByfQOQBNa4CMFwIgq3QrqY2ZHh.jpg",
+   "overview": "In 1960s Wyoming, two men develop a strong emotional and sexual relationship that endures as a lifelong connection complicating their lives as they get married and start families of their own.",
    "providers": [],
    "providersChecked": true,
    "rt": 88
@@ -2320,6 +2434,7 @@
    "tmdbScore": 73,
    "votes": 8305,
    "poster": "/ek8e8txUyUwd2BNqj6lFEerJfbq.jpg",
+   "overview": "Two co-dependent high school seniors are forced to deal with separation anxiety after their plan to stage a booze-soaked party goes awry.",
    "providers": [],
    "providersChecked": true,
    "rt": 88
@@ -2339,6 +2454,7 @@
    "tmdbScore": 65,
    "votes": 4748,
    "poster": "/gJtA7hYsBMQ7EM3sPBMUdBfU7a0.jpg",
+   "overview": "Annie's life is a mess. But when she finds out her lifetime best friend is engaged, she simply must serve as Lillian's maid of honor. Though lovelorn and broke, Annie bluffs her way through the expensive and bizarre rituals.",
    "providers": [
     "PRV"
    ],
@@ -2360,6 +2476,7 @@
    "tmdbScore": 73,
    "votes": 5200,
    "poster": "/7Q3efxd3AF1vQjlSxnlerSA7RzN.jpg",
+   "overview": "An ex-fighter pilot forced to take over the controls of an airliner when the flight crew succumbs to food poisoning.",
    "providers": [
     "PAR"
    ],
@@ -2381,6 +2498,7 @@
    "tmdbScore": 78,
    "votes": 12417,
    "poster": "/3bv6WAp6BSxxYvB5ozKFUYuRA8C.jpg",
+   "overview": "Jeffrey 'The Dude' Lebowski, a Los Angeles slacker who only wants to bowl and drink White Russians, is mistaken for another Jeffrey Lebowski, a wheelchair-bound millionaire, and finds himself dragged into a strange series of events involving nihilists, adult…",
    "providers": [
     "NFX"
    ],
@@ -2402,6 +2520,7 @@
    "tmdbScore": 76,
    "votes": 9095,
    "poster": "/gCgt1WARPZaXnq523ySQEUKinCs.jpg",
+   "overview": "A cynical TV weatherman, along with his idealistic producer and his sardonic cameraman, is sent to report on Groundhog Day in the small town of Punxsutawney, where he finds himself repeating the same day over and over.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -2421,6 +2540,7 @@
    "tmdbScore": 76,
    "votes": 8536,
    "poster": "/zPib4ukTSdXvHP9pxGkFCe34f3y.jpg",
+   "overview": "Former London constable Nicholas Angel finds it difficult to adapt to his new assignment in the sleepy British village of Sandford. Not only does he miss the excitement of the big city, but he also has a well-meaning oaf for a partner.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -2440,6 +2560,7 @@
    "tmdbScore": 75,
    "votes": 9555,
    "poster": "/dgXPhzNJH8HFTBjXPB177yNx6RI.jpg",
+   "overview": "Shaun lives a supremely uneventful life, which revolves around his girlfriend, his mother, and, above all, his local pub. This gentle routine is threatened when the dead return to life and make strenuous attempts to snack on ordinary Londoners.",
    "providers": [],
    "providersChecked": true,
    "rt": 92
@@ -2459,6 +2580,7 @@
    "tmdbScore": 70,
    "votes": 2900,
    "poster": "/2aSxRDmisJP90H3S0aocyuQIe4z.jpg",
+   "overview": "Two academic teenage superstars realize, on the eve of their high school graduation, that they should have worked less and played more. Determined to never fall short of their peers, the girls set out on a mission to cram four years of fun into one night.",
    "providers": [],
    "providersChecked": true,
    "rt": 96
@@ -2478,6 +2600,7 @@
    "tmdbScore": 73,
    "votes": 3830,
    "poster": "/gnAfqiV7yO3Jq9IntTmwkcaICqc.jpg",
+   "overview": "When carefree Nyles and reluctant maid of honor Sarah have a chance encounter at a Palm Springs wedding, things get complicated when they find themselves unable to escape the venue, themselves, or each other.",
    "providers": [
     "HUL"
    ],
@@ -2499,6 +2622,7 @@
    "tmdbScore": 68,
    "votes": 6430,
    "poster": "/85R8LMyn9f2Lev2YPBF8Nughrkv.jpg",
+   "overview": "Max and Annie's weekly game night gets kicked up a notch when Max's brother Brooks arranges a murder mystery party -- complete with fake thugs and federal agents. So when Brooks gets kidnapped, it's all supposed to be part of the game.",
    "providers": [
     "MAX"
    ],
@@ -2520,6 +2644,7 @@
    "tmdbScore": 71,
    "votes": 8849,
    "poster": "/clq4So9spa9cXk3MZy2iMdqkxP2.jpg",
+   "overview": "A private eye investigates the apparent suicide of a fading porn star in 1970s Los Angeles and uncovers a conspiracy.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -2539,6 +2664,7 @@
    "tmdbScore": 80,
    "votes": 10622,
    "poster": "/1mqL7VG4Ix8wmxwypmCA1HTHBky.jpg",
+   "overview": "Jojo, a lonely German boy during World War II has his world shaken when he learns that his single mother is hiding a Jewish girl in their home.",
    "providers": [],
    "providersChecked": true,
    "rt": 81
@@ -2558,6 +2684,7 @@
    "tmdbScore": 75,
    "votes": 9313,
    "poster": "/AkJQpZp9WoNdj7pLYSj1L0RcMMN.jpg",
+   "overview": "When an IMF mission ends badly, the world is faced with dire consequences. As Ethan Hunt takes it upon himself to fulfill his original briefing, the CIA begin to question his loyalty and his motives.",
    "providers": [
     "PAR"
    ],
@@ -2579,6 +2706,7 @@
    "tmdbScore": 75,
    "votes": 21227,
    "poster": "/wXqWR7dHncNRbxoEGybEy7QTe9h.jpg",
+   "overview": "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.",
    "providers": [],
    "providersChecked": true,
    "rt": 87
@@ -2598,6 +2726,7 @@
    "tmdbScore": 82,
    "votes": 11421,
    "poster": "/n0YuM4f5lvGAP6MAW2kBIzugXnc.jpg",
+   "overview": "After more than thirty years of service as one of the Navy’s top aviators, and dodging the advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of…",
    "providers": [
     "PAR"
    ],
@@ -2619,6 +2748,7 @@
    "tmdbScore": 76,
    "votes": 11931,
    "poster": "/lMrxYKKhd4lqRzwUHAy5gcx9PSO.jpg",
+   "overview": "Le Chiffre, a banker to the world's terrorists, is scheduled to participate in a high-stakes poker game in Montenegro, where he intends to use his winnings to establish his financial grip on the terrorist market.",
    "providers": [],
    "providersChecked": true,
    "rt": 94
@@ -2638,6 +2768,7 @@
    "tmdbScore": 73,
    "votes": 16341,
    "poster": "/d0IVecFQvsGdSbnMAHqiYsNYaJT.jpg",
+   "overview": "When Bond's latest assignment goes gravely wrong, agents around the world are exposed and MI6 headquarters is attacked.",
    "providers": [],
    "providersChecked": true,
    "rt": 92
@@ -2657,6 +2788,7 @@
    "tmdbScore": 79,
    "votes": 13898,
    "poster": "/ceG9VzoRAVGwivFU403Wc3AHRys.jpg",
+   "overview": "When Dr. Indiana Jones – the tweed-suited professor who just happens to be a celebrated archaeologist – is hired by the government to locate the legendary Ark of the Covenant, he finds himself up against the entire Nazi regime.",
    "providers": [
     "DIS",
     "PAR"
@@ -2677,8 +2809,9 @@
    "runtime": 132,
    "cert": "R",
    "tmdbScore": 78,
-   "votes": 12543,
+   "votes": 12544,
    "poster": "/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg",
+   "overview": "High above the city of L.A. a team of terrorists has seized a building, taken hostages, and declared war. One man has manages to escape... An off-duty cop hiding somewhere inside. He's alone, tired... and the only chance anyone has got.",
    "providers": [
     "PRV"
    ],
@@ -2700,6 +2833,7 @@
    "tmdbScore": 74,
    "votes": 3996,
    "poster": "/Abnm1Ws3JH0ReCfEhLMPwPcMcGO.jpg",
+   "overview": "Deep in the heart of Jakarta's slums lies an impenetrable safe house for the world's most dangerous killers and gangsters. Until now, the run-down apartment block has been considered untouchable to even the bravest of police.",
    "providers": [
     "HUL"
    ],
@@ -2721,6 +2855,7 @@
    "tmdbScore": 71,
    "votes": 10944,
    "poster": "/eRZTGx7GsiKqPch96k27LK005ZL.jpg",
+   "overview": "Ethan Hunt and his team are racing against time to track down a dangerous terrorist named Hendricks, who has gained access to Russian nuclear launch codes and is planning a strike on the United States.",
    "providers": [
     "PAR"
    ],
@@ -2740,8 +2875,9 @@
    "runtime": 135,
    "cert": "PG-13",
    "tmdbScore": 74,
-   "votes": 23847,
+   "votes": 23848,
    "poster": "/uxzzxijgPIY7slzFvMotPv8wjKA.jpg",
+   "overview": "King T'Challa returns home to the reclusive, technologically advanced African nation of Wakanda to serve as his country's new leader. However, T'Challa soon finds that he is challenged for the throne by factions within his own country as well as without.",
    "providers": [
     "DIS",
     "HUL"
@@ -2764,6 +2900,7 @@
    "tmdbScore": 81,
    "votes": 39426,
    "poster": "/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
+   "overview": ", finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
    "providers": [
     "DIS",
     "HUL"
@@ -2786,6 +2923,7 @@
    "tmdbScore": 82,
    "votes": 32707,
    "poster": "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+   "overview": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos.",
    "providers": [
     "DIS"
    ],
@@ -2807,6 +2945,7 @@
    "tmdbScore": 82,
    "votes": 28451,
    "poster": "/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+   "overview": "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos.",
    "providers": [
     "DIS"
    ],
@@ -2828,6 +2967,7 @@
    "tmdbScore": 79,
    "votes": 30185,
    "poster": "/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg",
+   "overview": "Light years from Earth, 26 years after being abducted, Peter Quill finds himself the prime target of a manhunt after discovering an orb wanted by Ronan the Accuser.",
    "providers": [
     "DIS"
    ],
@@ -2849,6 +2989,7 @@
    "tmdbScore": 76,
    "votes": 22385,
    "poster": "/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg",
+   "overview": "Thor is imprisoned on the other side of the universe and finds himself in a race against time to get back to Asgard to stop Ragnarok, the destruction of his home-world and the end of Asgardian civilization, at the hands of a powerful new threat, the ruthless…",
    "providers": [
     "DIS"
    ],
@@ -2870,6 +3011,7 @@
    "tmdbScore": 78,
    "votes": 20737,
    "poster": "/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg",
+   "overview": "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.",
    "providers": [
     "DIS"
    ],
@@ -2891,6 +3033,7 @@
    "tmdbScore": 79,
    "votes": 22854,
    "poster": "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+   "overview": "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
    "providers": [
     "DIS"
    ],
@@ -2912,6 +3055,7 @@
    "tmdbScore": 70,
    "votes": 458,
    "poster": "/cVBZQZq091KtwBm2qObOv0JTFcH.jpg",
+   "overview": "A contemporary story of love, rejection, and triumph as a young Māori girl fights to fulfill a destiny her grandfather refuses to recognize.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -2931,6 +3075,7 @@
    "tmdbScore": 75,
    "votes": 2877,
    "poster": "/1OJ9vkD5xPt3skC6KguyXAgagRZ.jpg",
+   "overview": "Paddington, now happily settled with the Browns, picks up a series of odd jobs to buy the perfect present for his Aunt Lucy, but it is stolen.",
    "providers": [
     "MAX"
    ],
@@ -2952,6 +3097,7 @@
    "tmdbScore": 71,
    "votes": 6330,
    "poster": "/zXLXaepIBvFVLU25DH3wv4IPSbe.jpg",
+   "overview": "Fired from his band and hard up for cash, guitarist and vocalist Dewey Finn finagles his way into a job as a fifth-grade substitute teacher at a private school, where he secretly begins teaching his straight-A students the finer points of rock 'n' roll and…",
    "providers": [
     "PAR",
     "PCK"
@@ -2974,6 +3120,7 @@
    "tmdbScore": 76,
    "votes": 1368,
    "poster": "/7PYqz0viEuW8qTvuGinUMjDWMnj.jpg",
+   "overview": "During a summer of friendship and adventure, one boy becomes a part of the gang, nine boys become a team and their leader becomes a legend by confronting the terrifying mystery beyond the right field wall.",
    "providers": [
     "DIS",
     "HUL",
@@ -2997,6 +3144,7 @@
    "tmdbScore": 72,
    "votes": 4906,
    "poster": "/wYoDpWInsBEVSmWStnRH06ddoyk.jpg",
+   "overview": "Matilda Wormwood is an brilliant and intelligent little girl. Unfortunately, her parents, Harry and Zinnia, fail to see that fact. As time passes, she finally starts school and has a kind teacher, loyal friends, and a terrifying, sadistic headmistress.",
    "providers": [
     "NFX"
    ],
@@ -3018,6 +3166,7 @@
    "tmdbScore": 72,
    "votes": 6780,
    "poster": "/riYInlsq2kf1AWoGm80JQW5dLKp.jpg",
+   "overview": "While searching for her missing mother, intrepid teen Enola Holmes uses her sleuthing skills to outsmart big brother Sherlock and help a runaway lord.",
    "providers": [
     "NFX"
    ],
@@ -3039,6 +3188,7 @@
    "tmdbScore": 68,
    "votes": 14739,
    "poster": "/pSgXKPU5h6U89ipF7HBYajvYt7j.jpg",
+   "overview": "Four teenagers in detention discover an old video game console with a game they’ve never heard of. When they decide to play, they are immediately sucked into the jungle world of Jumanji in the bodies of their avatars.",
    "providers": [],
    "providersChecked": true,
    "rt": 76
@@ -3058,6 +3208,7 @@
    "tmdbScore": 81,
    "votes": 8371,
    "poster": "/sONh3LYGFcVDTy8pm1tbSOB13Li.jpg",
+   "overview": "The story of August Pullman – a boy with facial differences – who enters fifth grade, attending a mainstream elementary school for the first time.",
    "providers": [],
    "providersChecked": true,
    "rt": 86
@@ -3077,6 +3228,7 @@
    "tmdbScore": 70,
    "votes": 5341,
    "poster": "/7axhsbEzFan6HQQ1aMOy7w3CFRx.jpg",
+   "overview": "A socially awkward but very bright 15-year-old girl being raised by a single mom discovers that she is the princess of a small European country because of the recent death of her long-absent father, who, unknown to her, was the crown prince of Genovia.",
    "providers": [
     "DIS"
    ],
@@ -3098,6 +3250,7 @@
    "tmdbScore": 79,
    "votes": 2495,
    "poster": "/sUWpVlrvzU2SJbnVZqIeKulPKwk.jpg",
+   "overview": "A boy growing up in Dublin during the 1980s escapes his strained family life by starting a band to impress the mysterious girl he likes.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -3117,6 +3270,7 @@
    "tmdbScore": 76,
    "votes": 2370,
    "poster": "/hkmz9rxgcweizXNElozGeKwmAJE.jpg",
+   "overview": "Ricky is a defiant young city kid who finds himself on the run with his cantankerous foster uncle in the wild New Zealand bush. A national manhunt ensues, and the two are forced to put aside their differences and work together to survive.",
    "providers": [
     "PRV",
     "PCK"
@@ -3139,6 +3293,7 @@
    "tmdbScore": 83,
    "votes": 7317,
    "poster": "/ILVF0eJxHMddjxeQhswFtpMtqx.jpg",
+   "overview": "A wheelchair-bound photographer spies on his neighbors from his apartment window and becomes convinced one of them has committed murder.",
    "providers": [],
    "providersChecked": true,
    "rt": 99
@@ -3158,6 +3313,7 @@
    "tmdbScore": 84,
    "votes": 11200,
    "poster": "/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg",
+   "overview": "When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother.",
    "providers": [],
    "providersChecked": true,
    "rt": 97
@@ -3177,6 +3333,7 @@
    "tmdbScore": 86,
    "votes": 10280,
    "poster": "/ppd84D2i9W8jXmsyInGyihiSyqz.jpg",
+   "overview": "The defense and the prosecution have rested and the jury is filing into the jury room to decide if a young Spanish-American is guilty or innocent of murdering his father.",
    "providers": [],
    "providersChecked": true,
    "rt": 100
@@ -3196,6 +3353,7 @@
    "tmdbScore": 81,
    "votes": 6278,
    "poster": "/gHm96BRW4GoI339rF1vYoYTB6Qe.jpg",
+   "overview": "After the insane General Jack D. Ripper initiates a nuclear strike on the Soviet Union, a war room full of politicians, generals and a Russian diplomat all frantically try to stop it.",
    "providers": [],
    "providersChecked": true,
    "rt": 98
@@ -3215,6 +3373,7 @@
    "tmdbScore": 80,
    "votes": 12861,
    "poster": "/ve72VxNqjGM69Uky4WTo2bK6rfq.jpg",
+   "overview": "Humanity finds a mysterious object buried beneath the lunar surface and sets off to find its origins with the help of HAL 9000, the world's most advanced super computer.",
    "providers": [
     "MAX"
    ],
@@ -3236,6 +3395,7 @@
    "tmdbScore": 79,
    "votes": 4365,
    "poster": "/kZRSP3FmOcq0xnBulqpUQngJUXY.jpg",
+   "overview": "Private eye Jake Gittes lives off of the murky moral climate of sunbaked, pre-World War II Southern California.",
    "providers": [],
    "providersChecked": true,
    "rt": 98
@@ -3255,6 +3415,7 @@
    "tmdbScore": 81,
    "votes": 13710,
    "poster": "/ekstpH614fwDX8DUln1a2Opz0N8.jpg",
+   "overview": "Suffering from insomnia, disturbed loner Travis Bickle takes a job as a New York City cabbie, haunting the streets nightly, growing increasingly detached from reality as he dreams of cleaning up the filthy city.",
    "providers": [],
    "providersChecked": true,
    "rt": 89
@@ -3274,6 +3435,7 @@
    "tmdbScore": 77,
    "votes": 11777,
    "poster": "/lxM6kqilAdpdhqUl2biYp5frUxE.jpg",
+   "overview": "When the seaside community of Amity finds itself under attack by a dangerous great white shark, the town's chief of police, a young marine biologist, and a grizzled shark hunter embark on a desperate quest to kill the beast before it strikes again.",
    "providers": [],
    "providersChecked": true,
    "rt": 97
@@ -3293,6 +3455,7 @@
    "tmdbScore": 78,
    "votes": 8829,
    "poster": "/xSI0dbKLDETwhiVUy6hGE8KXUln.jpg",
+   "overview": "Rocky Balboa is a Philadelphia club fighter who seems to be going nowhere.",
    "providers": [
     "NFX"
    ],
@@ -3314,6 +3477,7 @@
    "tmdbScore": 72,
    "votes": 4818,
    "poster": "/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+   "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
    "providers": [
     "HUL"
    ],
@@ -3335,6 +3499,7 @@
    "tmdbScore": 81,
    "votes": 3970,
    "poster": "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg",
+   "overview": "In Prohibition-era Chicago, musicians Joe and Jerry witness a mob hit, and flee the state in an all-female band disguised as Josephine and Daphne, but further complications set in.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -3354,6 +3519,7 @@
    "tmdbScore": 81,
    "votes": 3584,
    "poster": "/w03EiJVHP8Un77boQeE7hg9DVdU.jpg",
+   "overview": "In 1927 Hollywood, a silent film star falls for a chorus girl just as he and his paranoid screen partner struggle to make the difficult transition to talking pictures.",
    "providers": [
     "MAX"
    ],
@@ -3375,6 +3541,7 @@
    "tmdbScore": 82,
    "votes": 2753,
    "poster": "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg",
+   "overview": "Bud Baxter is a minor clerk in a huge New York insurance company, until he discovers a quick way to climb the corporate ladder. He lends out his apartment to the executives as a place to take their mistresses.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -3394,6 +3561,7 @@
    "tmdbScore": 81,
    "votes": 6463,
    "poster": "/15uOEfqBNTVtDUT7hGBVCka0rZz.jpg",
+   "overview": "A retired San Francisco detective suffering from acrophobia investigates the strange activities of an old friend's wife, all the while becoming dangerously obsessed with her.",
    "providers": [],
    "providersChecked": true,
    "rt": 94
@@ -3413,6 +3581,7 @@
    "tmdbScore": 80,
    "votes": 26385,
    "poster": "/kW9LmvYHAaS9iA0tHmZVq8hQYoq.jpg",
+   "overview": "A New York stockbroker refuses to cooperate in a large securities fraud case involving corruption on Wall Street, corporate banking world and mob infiltration. Based on Jordan Belfort's autobiography.",
    "providers": [
     "PRV",
     "HUL",
@@ -3436,6 +3605,7 @@
    "tmdbScore": 80,
    "votes": 17444,
    "poster": "/ctjEj2xM32OvBXCq8zAdK3ZrsAj.jpg",
+   "overview": "A true story about Frank Abagnale Jr. who, before his 19th birthday, successfully conned millions of dollars worth of checks as a Pan Am pilot, doctor, and legal prosecutor. An FBI agent makes it his mission to put him behind bars.",
    "providers": [
     "PAR"
    ],
@@ -3457,6 +3627,7 @@
    "tmdbScore": 75,
    "votes": 12804,
    "poster": "/hQQCdZrsHtZyR6NbKH2YyCqd2fR.jpg",
+   "overview": "Less than 24 hours into his parole, charismatic thief Danny Ocean is already rolling out his next plan: In one night, Danny's hand-picked crew of specialists will attempt to steal more than $150 million from three Las Vegas casinos.",
    "providers": [],
    "providersChecked": true,
    "rt": 83
@@ -3476,6 +3647,7 @@
    "tmdbScore": 78,
    "votes": 8930,
    "poster": "/8DPGG400FgaFWaqcv11n8mRd2NG.jpg",
+   "overview": "The true story of how the Boston Globe uncovered the massive scandal of child molestation and cover-up within the local Catholic Archdiocese, shaking the entire Catholic Church to its core.",
    "providers": [],
    "providersChecked": true,
    "rt": 97
@@ -3495,6 +3667,7 @@
    "tmdbScore": 74,
    "votes": 10020,
    "poster": "/scVEaJEwP8zUix8vgmMoJJ9Nq0w.jpg",
+   "overview": "The men who made millions from a global economic meltdown.",
    "providers": [
     "PAR",
     "PCK"
@@ -3517,6 +3690,7 @@
    "tmdbScore": 68,
    "votes": 2041,
    "poster": "/hhkW4yVIGo8Bee3UITKvqOvhNMG.jpg",
+   "overview": "A law firm brings in its \"fixer\" to remedy the situation after a lawyer has a breakdown while representing a chemical company that he knows is guilty in a multi-billion dollar class action suit.",
    "providers": [],
    "providersChecked": true,
    "rt": 90
@@ -3536,6 +3710,7 @@
    "tmdbScore": 76,
    "votes": 13911,
    "poster": "/602vevIURmpDfzbnv5Ubi6wIkQm.jpg",
+   "overview": "Driver is a skilled Hollywood stuntman who moonlights as a getaway driver for criminals. Though he projects an icy exterior, lately he's been warming up to a pretty neighbor named Irene and her young son, Benicio.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -3555,6 +3730,7 @@
    "tmdbScore": 74,
    "votes": 17106,
    "poster": "/tYzFuYXmT8LOYASlFCkaPiAFAl0.jpg",
+   "overview": "After being coerced into working for a crime boss, a young getaway driver finds himself taking part in a heist doomed to fail.",
    "providers": [
     "PAR"
    ],
@@ -3576,6 +3752,7 @@
    "tmdbScore": 72,
    "votes": 6431,
    "poster": "/nV5316WUsVij8sVXLCF1g7TFitg.jpg",
+   "overview": "Cab driver Max picks up a man who offers him $600 to drive him around. But the promise of easy money sours when Max realizes his fare is an assassin.",
    "providers": [
     "PAR"
    ],
@@ -3597,6 +3774,7 @@
    "tmdbScore": 75,
    "votes": 6772,
    "poster": "/bUeiwBQdupBLQthMCHKV7zv56uv.jpg",
+   "overview": "On his first day on the job as a narcotics officer, a rookie cop works with a rogue detective who isn't what he appears.",
    "providers": [],
    "providersChecked": true,
    "rt": 74
@@ -3616,6 +3794,7 @@
    "tmdbScore": 76,
    "votes": 4282,
    "poster": "/rLOk4z9zL1tTukIYV56P94aZXKk.jpg",
+   "overview": "When cocky military lawyer Lt. Daniel Kaffee and his co-counsel, Lt. Cmdr. JoAnne Galloway, are assigned to a murder case, they uncover a hazing ritual that could implicate high-ranking officials such as shady Col. Nathan Jessep.",
    "providers": [],
    "providersChecked": true,
    "rt": 85
@@ -3635,6 +3814,7 @@
    "tmdbScore": 74,
    "votes": 3725,
    "poster": "/eMs20iUQyZVs05Ck7Q0LNnRsstr.jpg",
+   "overview": "A twice-divorced mother of three who sees an injustice, takes on the bad guy and wins -- with a little help from her push-up bra. Erin goes to work for an attorney and comes across medical records describing illnesses clustered in one nearby town.",
    "providers": [],
    "providersChecked": true,
    "rt": 87
@@ -3654,6 +3834,7 @@
    "tmdbScore": 69,
    "votes": 4844,
    "poster": "/8YZiA1o264dk0cr1USyMdph6SZl.jpg",
+   "overview": "An African prince decides it’s time for him to find a princess... and his mission leads him and his most loyal friend to Queens, New York.",
    "providers": [],
    "providersChecked": true,
    "rt": 71
@@ -3673,6 +3854,7 @@
    "tmdbScore": 78,
    "votes": 2059,
    "poster": "/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
+   "overview": "Sal is the Italian owner of a pizzeria in Brooklyn. A neighborhood local, Buggin' Out, becomes upset when he sees that the pizzeria's Wall of Fame exhibits only Italian actors.",
    "providers": [],
    "providersChecked": true,
    "rt": 92
@@ -3692,6 +3874,7 @@
    "tmdbScore": 76,
    "votes": 2329,
    "poster": "/v4ox4aSCNT5vyLXl4Q71JiWwCXW.jpg",
+   "overview": "In the middle of the Los Angeles ghetto, drugs, robberies and shootings dominate everyday life. During these times, Furious tries to raise his son Tre to be a decent person.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -3711,6 +3894,7 @@
    "tmdbScore": 74,
    "votes": 1575,
    "poster": "/7ht2IMGynDSVQGvAXhAb83DLET8.jpg",
+   "overview": "A headstrong Chinese-American woman returns to China when her beloved grandmother is given a terminal diagnosis.",
    "providers": [],
    "providersChecked": true,
    "rt": 97
@@ -3730,6 +3914,7 @@
    "tmdbScore": 73,
    "votes": 1907,
    "poster": "/6mPNdmjdbVKPITv3LLCmQoKs9Zw.jpg",
+   "overview": "A Korean American family moves to an Arkansas farm in search of its own American dream. Amidst the challenges of this new life in the strange and rugged Ozarks, they discover the undeniable resilience of family and what really makes a home.",
    "providers": [],
    "providersChecked": true,
    "rt": 98
@@ -3749,6 +3934,7 @@
    "tmdbScore": 79,
    "votes": 2677,
    "poster": "/BzVjmm8l23rPsijLiNLUzuQtyd.jpg",
+   "overview": "As a CODA (Child of Deaf Adults), Ruby is the only hearing person in her deaf family. When the family's fishing business is threatened, Ruby finds herself torn between pursuing her love of music and her fear of abandoning her parents.",
    "providers": [],
    "providersChecked": true,
    "rt": 94
@@ -3768,6 +3954,7 @@
    "tmdbScore": 74,
    "votes": 4291,
    "poster": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg",
+   "overview": "When oil is discovered in 1920s Oklahoma under Osage Nation land, the Osage people are murdered one by one—until the FBI steps in to unravel the mystery.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -3787,6 +3974,7 @@
    "tmdbScore": 63,
    "votes": 3224,
    "poster": "/ytFOXyghxLzAM4KZyazDdEkM66q.jpg",
+   "overview": "An epic that details the checkered rise and fall of French Emperor Napoleon Bonaparte and his relentless journey to power through the prism of his addictive, volatile relationship with his wife, Josephine.",
    "providers": [],
    "providersChecked": true,
    "rt": 58
@@ -3804,8 +3992,9 @@
    "runtime": 92,
    "cert": "PG-13",
    "tmdbScore": 74,
-   "votes": 3426,
+   "votes": 3427,
    "poster": "/kjMbDciooTbJPofVXgAoFjfX8Of.jpg",
+   "overview": "A first-time captain leads a convoy of allied ships carrying thousands of soldiers across the treacherous waters of the \"Black Pit\" to the front lines of WWII.",
    "providers": [],
    "providersChecked": true,
    "rt": 77
@@ -3825,6 +4014,7 @@
    "tmdbScore": 64,
    "votes": 162,
    "poster": "/9YDW8dCrQyRpppK5985hKY1Mc8X.jpg",
+   "overview": "Ty was a frustrated toy salesman until his collaboration with three women turned his stuffed animals into a defining '90s trend. This behind-the-scenes look at history's biggest toy craze is a wild story about what—and who—is valued in this world.",
    "providers": [],
    "providersChecked": true,
    "rt": 46
@@ -3844,6 +4034,7 @@
    "tmdbScore": 65,
    "votes": 1535,
    "poster": "/vOX1Zng472PC2KnS0B9nRfM8aaZ.jpg",
+   "overview": "Hired to cover up a high-profile crime, a fixer soon finds his night spiralling out of control when he's forced to work with an unexpected counterpart.",
    "providers": [],
    "providersChecked": true,
    "rt": 66
@@ -3863,6 +4054,7 @@
    "tmdbScore": 76,
    "votes": 2625,
    "poster": "/VHSzNBTwxV8vh7wylo7O9CLdac.jpg",
+   "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go.",
    "providers": [
     "PCK"
    ],
@@ -3884,6 +4076,7 @@
    "tmdbScore": 72,
    "votes": 3452,
    "poster": "/8Vc5EOUEIF1EUXuX9eLFf7BvN3P.jpg",
+   "overview": "A woman in her sixties embarks on a journey through the western United States after losing everything in the Great Recession, living as a van-dwelling modern-day nomad.",
    "providers": [
     "NFX"
    ],
@@ -3905,6 +4098,7 @@
    "tmdbScore": 72,
    "votes": 13028,
    "poster": "/9zfwPffUXpBrEP26yp0q1ckXDcj.jpg",
+   "overview": "An other-worldly story, set against the backdrop of Cold War era America circa 1962, where a mute janitor working at a lab falls in love with an amphibious man being held captive there and devises a plan to help him escape.",
    "providers": [
     "MAX"
    ],
@@ -3926,6 +4120,7 @@
    "tmdbScore": 74,
    "votes": 13768,
    "poster": "/rHUg2AuIuLSIYMYFgavVwqt1jtc.jpg",
+   "overview": "A fading actor best known for his portrayal of a popular superhero attempts to mount a comeback by appearing in a Broadway play.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -3945,6 +4140,7 @@
    "tmdbScore": 76,
    "votes": 4171,
    "poster": "/dtIIyQyALk57ko5bjac7hi01YQ.jpg",
+   "overview": "In 1970s Mexico City, two domestic workers help a mother of four while her husband is away for an extended period of time.",
    "providers": [
     "NFX"
    ],
@@ -3966,6 +4162,7 @@
    "tmdbScore": 76,
    "votes": 7664,
    "poster": "/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg",
+   "overview": "Pennsylvania, 1956. Frank Sheeran, a war veteran of Irish origin who works as a truck driver, accidentally meets mobster Russell Bufalino.",
    "providers": [
     "NFX"
    ],
@@ -3987,6 +4184,7 @@
    "tmdbScore": 73,
    "votes": 4614,
    "poster": "/pHlRr2MfjK77VIIAO7p0R4jhsJI.jpg",
+   "overview": "A young girl named Mija risks everything to prevent a powerful, multi-national company from kidnapping her best friend - a massive animal named Okja.",
    "providers": [
     "NFX"
    ],
@@ -4008,6 +4206,7 @@
    "tmdbScore": 75,
    "votes": 289,
    "poster": "/jUVbqKcDgcLSS5s4UV82XUkMKlU.jpg",
+   "overview": "Follow the Indianapolis Star reporters that broke the story about USA Gymnastics doctor Larry Nassar's abuse and hear from gymnasts.",
    "providers": [
     "NFX"
    ],
@@ -4029,6 +4228,7 @@
    "tmdbScore": 82,
    "votes": 20700,
    "poster": "/vuza0WqY239yBXOadKlGwJsZJFE.jpg",
+   "overview": "In a picture-perfect seaside town, an insurance salesman begins to realize that his entire existence may be staged and observed by a vast unseen audience as part of a long-running real-time reality TV show.",
    "providers": [],
    "providersChecked": true,
    "rt": 94
@@ -4048,6 +4248,7 @@
    "tmdbScore": 82,
    "votes": 14202,
    "poster": "/j9Z7P7BGHXn0I0uPiiyalC6efwe.jpg",
+   "overview": "Will Hunting is a headstrong, working-class genius who is failing the lessons of life. After one too many run-ins with the law, Will's last chance is a psychology professor, who might be the only man who can reach him.",
    "providers": [
     "PAR",
     "PCK"
@@ -4070,6 +4271,7 @@
    "tmdbScore": 83,
    "votes": 12880,
    "poster": "/tNvKkSnnn4Z6RCBThyK1gfCSSvv.jpg",
+   "overview": "At an elite, old-fashioned boarding school in New England, a passionate English teacher inspires his students to rebel against convention and seize the potential of every day, courting the disdain of the stern headmaster.",
    "providers": [],
    "providersChecked": true,
    "rt": 85
@@ -4089,6 +4291,7 @@
    "tmdbScore": 77,
    "votes": 11520,
    "poster": "/5leCCi7ZF0CawAfM5Qo2ECKPprc.jpg",
+   "overview": "A teenager reflects on his life after being accused of cheating on the Indian version of \"Who Wants to be a Millionaire?\".",
    "providers": [],
    "providersChecked": true,
    "rt": 92
@@ -4108,6 +4311,7 @@
    "tmdbScore": 82,
    "votes": 18002,
    "poster": "/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
+   "overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
    "providers": [],
    "providersChecked": true,
    "rt": 77
@@ -4127,6 +4331,7 @@
    "tmdbScore": 82,
    "votes": 26302,
    "poster": "/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg",
+   "overview": "World War II soldier-turned-U.S. Marshal Teddy Daniels investigates the disappearance of a patient from a hospital for the criminally insane, but his efforts are compromised by troubling visions and a mysterious doctor.",
    "providers": [],
    "providersChecked": true,
    "rt": 69
@@ -4146,6 +4351,7 @@
    "tmdbScore": 80,
    "votes": 13170,
    "poster": "/vOyfUXNFSnaTk7Vk5AjpsKTUWsu.jpg",
+   "overview": "Following an unexpected tragedy, child psychologist Malcolm Crowe meets a nine year old boy named Cole Sear, who is hiding a dark secret.",
    "providers": [],
    "providersChecked": true,
    "rt": 86
@@ -4165,6 +4371,7 @@
    "tmdbScore": 84,
    "votes": 32711,
    "poster": "/jSziioSwPVrOy9Yow3XhWIBDjq1.jpg",
+   "overview": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.",
    "providers": [],
    "providersChecked": true,
    "rt": 81
@@ -4184,6 +4391,7 @@
    "tmdbScore": 80,
    "votes": 13271,
    "poster": "/wby9315QzVKdW9BonAefg8jGTTb.jpg",
+   "overview": "Lester Burnham, a depressed suburban father in a mid-life crisis, decides to turn his hectic life around after developing an infatuation with his daughter's attractive friend.",
    "providers": [],
    "providersChecked": true,
    "rt": 87
@@ -4203,6 +4411,7 @@
    "tmdbScore": 74,
    "votes": 8261,
    "poster": "/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg",
+   "overview": "Two lost souls visiting Tokyo -- the young, neglected wife of a photographer and a washed-up movie star shooting a TV commercial -- find an odd solace and pensive freedom to be real in each other's company, away from their lives in America.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -4222,6 +4431,7 @@
    "tmdbScore": 71,
    "votes": 1944,
    "poster": "/zOsaxYLgvZVU7cJBpPn8CuE0MrP.jpg",
+   "overview": "Two middle-aged men embark on a spiritual journey through Californian wine country. One is an unpublished novelist suffering from depression, and the other is only days away from walking down the aisle.",
    "providers": [
     "PCK"
    ],
@@ -4243,6 +4453,7 @@
    "tmdbScore": 77,
    "votes": 8010,
    "poster": "/niNdhTpPHSgw22tK0PLjQMV640v.jpg",
+   "overview": "A family loaded with quirky, colorful characters piles into an old van and road trips to California for little Olive to compete in a beauty pageant.",
    "providers": [
     "NFX",
     "PCK"
@@ -4265,6 +4476,7 @@
    "tmdbScore": 71,
    "votes": 7771,
    "poster": "/jNIn2tVhpvFD6P9IojldI3mNYcn.jpg",
+   "overview": "Faced with an unplanned pregnancy, sixteen year old high-schooler, Juno MacGuff, makes an unusual decision regarding her unborn child.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -4284,6 +4496,7 @@
    "tmdbScore": 73,
    "votes": 11229,
    "poster": "/qXAuQ9hF30sQRsXf40OfRVl0MJZ.jpg",
+   "overview": "Tom, greeting-card writer and hopeless romantic, is caught completely off-guard when his girlfriend, Summer, suddenly dumps him.",
    "providers": [],
    "providersChecked": true,
    "rt": 86
@@ -4303,6 +4516,7 @@
    "tmdbScore": 78,
    "votes": 11396,
    "poster": "/aKCvdFFF5n80P2VdS7d8YBwbCjh.jpg",
+   "overview": "Pittsburgh, Pennsylvania, 1991. High school freshman Charlie is a wallflower, always watching life from the sidelines, until two senior students, Sam and her stepbrother Patrick, become his mentors, helping him discover the joys of friendship, music and love.",
    "providers": [],
    "providersChecked": true,
    "rt": 85
@@ -4322,6 +4536,7 @@
    "tmdbScore": 75,
    "votes": 5608,
    "poster": "/2BvtvDUyxiMJ4dmKfiQf4qdOHQN.jpg",
+   "overview": "The film tells a story of a divorced couple trying to raise their young son. The story follows the boy for twelve years, from first grade at age 6 through 12th grade at age 17-18, and examines his relationship with his parents as he grows.",
    "providers": [
     "NFX"
    ],
@@ -4343,6 +4558,7 @@
    "tmdbScore": 69,
    "votes": 1049,
    "poster": "/nNpP1P2EufA6TN7fQOBeHUIVmeH.jpg",
+   "overview": "Several years after leaving the orphanage, to which her father never returned for her, Gabrielle Chanel finds herself working in a provincial bar.",
    "providers": [],
    "providersChecked": true,
    "rt": 63
@@ -4362,6 +4578,7 @@
    "tmdbScore": 70,
    "votes": 2720,
    "poster": "/hUu9zyZmDd8VZegKi1iK1Vk0RYS.jpg",
+   "overview": "The commandant of Auschwitz, Rudolf Höss, and his wife Hedwig, strive to build a dream life for their family in a house and garden next to the camp.",
    "providers": [],
    "providersChecked": true,
    "rt": 93
@@ -4381,6 +4598,7 @@
    "tmdbScore": 76,
    "votes": 5686,
    "poster": "/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg",
+   "overview": "Brought back to life by an unorthodox scientist, a young woman runs off with a lawyer on a whirlwind adventure across the continents. Free from the prejudices of her times, she grows steadfast in her purpose to stand for equality and liberation.",
    "providers": [
     "NFX"
    ],
@@ -4402,6 +4620,7 @@
    "tmdbScore": 75,
    "votes": 3429,
    "poster": "/1ho0d4LNZw3Y0voeKmSvPSgJOJ2.jpg",
+   "overview": "A woman is suspected of her husband's murder, and their blind son faces a moral dilemma as the sole witness.",
    "providers": [
     "NFX"
    ],
@@ -4423,6 +4642,7 @@
    "tmdbScore": 76,
    "votes": 1942,
    "poster": "/evKz85EKouVbIr51zy5fOtpNRPg.jpg",
+   "overview": "Sophie reflects on the shared joy and private melancholy of a holiday she took with her father twenty years earlier. Memories fill the gaps between camcorder footages as she tries to reconcile the father she knew with the troubled man she didn't.",
    "providers": [],
    "providersChecked": true,
    "rt": 95
@@ -4442,6 +4662,7 @@
    "tmdbScore": 66,
    "votes": 169,
    "poster": "/hyNNufs7Ds8TuT2kv4Z1mEfPx0r.jpg",
+   "overview": "When her elderly father has a stroke, Emmanuelle rushes to his bedside. Sick and half-paralysed in his hospital bed, he asks Emmanuelle to help him end his life.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -4461,6 +4682,7 @@
    "tmdbScore": null,
    "votes": 0,
    "poster": "/9t7gUKSxXjvQpgHdC7VUhJ1BTBK.jpg",
+   "overview": "Farid, who works abroad, locks himself on the last day of his stay in Beirut in his son Rawad's room, to find what he is hiding there. Separated by a locked door, the dysfunctional dynamic between them intensifies, and the past resurfaces.",
    "providers": [],
    "providersChecked": true
   },
@@ -4479,6 +4701,7 @@
    "tmdbScore": 69,
    "votes": 3440,
    "poster": "/idT5mnqPcJgSkvpDX7pJffBzdVH.jpg",
+   "overview": "In town for a job interview, a young woman arrives at her Airbnb late at night only to find that it has been mistakenly double-booked and a strange man is already staying there. Against her better judgement, she decides to stay the night anyway.",
    "providers": [
     "MAX"
    ],
@@ -4500,6 +4723,7 @@
    "tmdbScore": 71,
    "votes": 8342,
    "poster": "/7LEI8ulZzO5gy9Ww2NVCrKmHeDZ.jpg",
+   "overview": "Several friends travel to Sweden to study as anthropologists a summer festival that is held every ninety years in the remote hometown of one of them.",
    "providers": [
     "MAX"
    ],
@@ -4521,6 +4745,7 @@
    "tmdbScore": 61,
    "votes": 1520,
    "poster": "/hSuTjDmqRdy7Dii8ymnF2WILTeP.jpg",
+   "overview": "In an isolated family mansion, a group of rich 20-somethings decides to play Bodies Bodies Bodies, a game where one of them is secretly a \"killer\" while the rest tries to \"escape\".",
    "providers": [
     "HUL"
    ],
@@ -4542,6 +4767,7 @@
    "tmdbScore": 79,
    "votes": 8617,
    "poster": "/oBgWY00bEFeZ9N25wWVyuQddbAo.jpg",
+   "overview": "\" When two thieves break into his home one night, Hutch's unknown long-simmering rage is ignited and propels him on a brutal path that will uncover dark secrets he fought to leave behind.",
    "providers": [
     "PCK"
    ],
@@ -4563,6 +4789,7 @@
    "tmdbScore": 70,
    "votes": 3982,
    "poster": "/e7olqFmzcIX5c23kX4zSmLPJi8c.jpg",
+   "overview": "Fresh off an almost career-ending accident, stuntman Colt Seavers has to track down a missing movie star, solve a conspiracy and try to win back the love of his life while still doing his day job.",
    "providers": [],
    "providersChecked": true,
    "rt": 81
@@ -4582,6 +4809,7 @@
    "tmdbScore": 69,
    "votes": 11458,
    "poster": "/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",
+   "overview": "Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land. However, when they get a chance to go to the real world, they soon discover the joys and perils of living among humans.",
    "providers": [
     "MAX"
    ],
@@ -4603,6 +4831,7 @@
    "tmdbScore": 73,
    "votes": 2401,
    "poster": "/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg",
+   "overview": "Discover the game-changing partnership between a then undiscovered Michael Jordan and Nike's fledgling basketball division which revolutionized the world of sports and culture with the Air Jordan brand.",
    "providers": [
     "PRV"
    ],
@@ -4624,6 +4853,7 @@
    "tmdbScore": 80,
    "votes": 9223,
    "poster": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg",
+   "overview": "American car designer Carroll Shelby and the British-born driver Ken Miles work together to battle corporate interference, the laws of physics, and their own personal demons to build a revolutionary race car for Ford Motor Company and take on the dominating…",
    "providers": [],
    "providersChecked": true,
    "rt": 92
@@ -4643,6 +4873,7 @@
    "tmdbScore": 79,
    "votes": 1556,
    "poster": "/v4QfYZMACODlWul9doN9RxE99ag.jpg",
+   "overview": "Follow Alex Honnold as he attempts to become the first person to ever free solo climb Yosemite's 3,000 foot high El Capitan wall. With no ropes or safety gear, this would arguably be the greatest feat in rock climbing history.",
    "providers": [
     "DIS",
     "HUL"
@@ -4665,6 +4896,7 @@
    "tmdbScore": 80,
    "votes": 610,
    "poster": "/8qE8NZjiP2M884baH0VoLF828Vp.jpg",
+   "overview": "For more than thirty years, and through his television program, Fred Rogers (1928-2003), host, producer, writer and pianist, accompanied by his puppets and his many friends, spoke directly to young children about some of life's most important issues.",
    "providers": [],
    "providersChecked": true,
    "rt": 97
@@ -4684,6 +4916,7 @@
    "tmdbScore": 79,
    "votes": 1074,
    "poster": "/hvTVZb7hBC8tZAGoEhH5eiMJu2B.jpg",
+   "overview": "After years of swimming every day in the freezing ocean at the tip of Africa, Craig Foster meets an unlikely teacher: a young octopus who displays remarkable curiosity.",
    "providers": [
     "NFX"
    ],
@@ -4703,8 +4936,9 @@
    "runtime": 100,
    "cert": "PG",
    "tmdbScore": 79,
-   "votes": 9341,
+   "votes": 9342,
    "poster": "/4jeFXQYytChdZYE9JYO7Un87IlW.jpg",
+   "overview": "Wandering her rambling old house in her boring new town, 11-year-old Coraline discovers a hidden door to a strangely idealized version of her life. In order to stay in the fantasy, she must make a frighteningly real sacrifice.",
    "providers": [],
    "providersChecked": true,
    "rt": 91
@@ -4724,6 +4958,7 @@
    "tmdbScore": 71,
    "votes": 7109,
    "poster": "/6m0F7fsXjQvUbCZrPWcJNrjvIui.jpg",
+   "overview": "After receiving an exotic small animal as a Christmas gift, a young man inadvertently breaks three important rules concerning his new pet, which unleashes a horde of malevolently mischievous creatures on a small town.",
    "providers": [
     "PCK"
    ],
@@ -4745,6 +4980,7 @@
    "tmdbScore": 74,
    "votes": 8609,
    "poster": "/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg",
+   "overview": "A newly dead New England couple seeks help from a deranged demon exorcist to scare an affluent New York family out of their home.",
    "providers": [],
    "providersChecked": true,
    "rt": 83
@@ -4764,6 +5000,7 @@
    "tmdbScore": 72,
    "votes": 3419,
    "poster": "/4eMN3GANH5GG4kXdHkrTZEUuQ9M.jpg",
+   "overview": "The Freelings' suburban home becomes the center of paranormal activity that opens a portal to the 'other side'. With help, they must cross over to get their daughter back.",
    "providers": [],
    "providersChecked": true,
    "rt": 89
@@ -4783,6 +5020,7 @@
    "tmdbScore": 67,
    "votes": 6493,
    "poster": "/YtrIdrTxpRhvCnlw43dwOjfLqx.jpg",
+   "overview": "A family living on a farm finds mysterious crop circles in their fields which suggests something more frightening to come.",
    "providers": [],
    "providersChecked": true,
    "rt": 76
@@ -4802,6 +5040,7 @@
    "tmdbScore": 69,
    "votes": 3670,
    "poster": "/cA4ggkZ3r1d5r9hOAUWC8x5ul2i.jpg",
+   "overview": "Val McKee and Earl Bassett are in a fight for their lives when they discover that their desolate town has been infested with gigantic, man-eating creatures that live below the ground.",
    "providers": [],
    "providersChecked": true,
    "rt": 88
@@ -4821,6 +5060,7 @@
    "tmdbScore": 71,
    "votes": 2845,
    "poster": "/9DZPtuYTKYxt6vzHvZ5FLThG4fl.jpg",
+   "overview": "In the town of Blithe Hollow, Norman Babcock can speak to the dead, but no one other than his eccentric new friend believes his ability is real.",
    "providers": [],
    "providersChecked": true,
    "rt": 89
@@ -4840,6 +5080,7 @@
    "tmdbScore": 70,
    "votes": 3360,
    "poster": "/by4D4Q9NlUjFSEUA1yrxq6ksXmk.jpg",
+   "overview": "After 300 years of slumber, three sister witches are accidentally resurrected in Salem on Halloween night, and it is up to three kids and their newfound feline friend to put an end to the witches' reign of terror once and for all.",
    "providers": [
     "DIS"
    ],
@@ -4861,6 +5102,7 @@
    "tmdbScore": 65,
    "votes": 6472,
    "poster": "/pvVpl38YOBDOANb0pWbXFb8X3iZ.jpg",
+   "overview": "After a zombie becomes involved with the girlfriend of one of his victims, their romance sets in motion a sequence of events that might transform the entire lifeless world.",
    "providers": [
     "PRV"
    ],
@@ -4882,6 +5124,7 @@
    "tmdbScore": 74,
    "votes": 7581,
    "poster": "/4q2hz2m8hubgvijz8Ez0T2Os2Yv.jpg",
+   "overview": "Following the events at home, the Abbott family now face the terrors of the outside world. Forced to venture into the unknown, they realize that the creatures that hunt by sound are not the only threats that lurk beyond the sand path.",
    "providers": [
     "NFX",
     "PAR"
@@ -4904,6 +5147,7 @@
    "tmdbScore": 72,
    "votes": 11489,
    "poster": "/bdHG5Mo83VPobeZZdlSz0Y7HQHB.jpg",
+   "overview": "When siblings Judy and Peter discover an enchanted board game that opens the door to a magical world, they unwittingly invite Alan -- an adult who's been trapped inside the game for 26 years -- into their living room.",
    "providers": [
     "NFX"
    ],
@@ -4925,6 +5169,7 @@
    "tmdbScore": 80,
    "votes": 6323,
    "poster": "/ct04FCFLPImNG5thcPLRnVsZlmS.jpg",
+   "overview": "In the small town of Rockwell, Maine in October 1957, a giant metal machine befriends a nine-year-old boy and ultimately finds its humanity by unselfishly saving people from their own fears and prejudices.",
    "providers": [],
    "providersChecked": true,
    "rt": 96
