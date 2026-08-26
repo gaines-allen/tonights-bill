@@ -1,0 +1,4684 @@
+{
+ "_meta": {
+  "generatedAt": "2026-08-26T22:24:53.665Z",
+  "region": "US",
+  "source": "TMDB + OMDb",
+  "total": 244,
+  "matched": 244,
+  "withProviders": 127,
+  "withRT": 0,
+  "unmatched": []
+ },
+ "films": [
+  {
+   "t": "The Godfather",
+   "y": 1972,
+   "ok": true,
+   "tmdb": 238,
+   "imdb": "tt0068646",
+   "matched": {
+    "title": "The Godfather",
+    "year": 1972
+   },
+   "runtime": 175,
+   "cert": "R",
+   "tmdbScore": 87,
+   "votes": 23427,
+   "poster": "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Goodfellas",
+   "y": 1990,
+   "ok": true,
+   "tmdb": 769,
+   "imdb": "tt0099685",
+   "matched": {
+    "title": "GoodFellas",
+    "year": 1990
+   },
+   "runtime": 145,
+   "cert": "R",
+   "tmdbScore": 85,
+   "votes": 14670,
+   "poster": "/9OkCLM73MIU2CrKZbqiT8Ln1wY2.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Pulp Fiction",
+   "y": 1994,
+   "ok": true,
+   "tmdb": 680,
+   "imdb": "tt0110912",
+   "matched": {
+    "title": "Pulp Fiction",
+    "year": 1994
+   },
+   "runtime": 154,
+   "cert": "R",
+   "tmdbScore": 85,
+   "votes": 30727,
+   "poster": "/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg",
+   "providers": [
+    "PRV",
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Departed",
+   "y": 2006,
+   "ok": true,
+   "tmdb": 1422,
+   "imdb": "tt0407887",
+   "matched": {
+    "title": "The Departed",
+    "year": 2006
+   },
+   "runtime": 151,
+   "cert": "R",
+   "tmdbScore": 82,
+   "votes": 16535,
+   "poster": "/nT97ifVT2J1yMQmeq20Qblg61T.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "No Country for Old Men",
+   "y": 2007,
+   "ok": true,
+   "tmdb": 6977,
+   "imdb": "tt0477348",
+   "matched": {
+    "title": "No Country for Old Men",
+    "year": 2007
+   },
+   "runtime": 122,
+   "cert": "R",
+   "tmdbScore": 79,
+   "votes": 13670,
+   "poster": "/6d5XOczc226jECq0LIX0siKtgHR.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Heat",
+   "y": 1995,
+   "ok": true,
+   "tmdb": 949,
+   "imdb": "tt0113277",
+   "matched": {
+    "title": "Heat",
+    "year": 1995
+   },
+   "runtime": 170,
+   "cert": "R",
+   "tmdbScore": 79,
+   "votes": 8602,
+   "poster": "/umSVjVdbVwtx5ryCA2QXL44Durm.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Se7en",
+   "y": 1995,
+   "ok": true,
+   "tmdb": 807,
+   "imdb": "tt0114369",
+   "matched": {
+    "title": "Se7en",
+    "year": 1995
+   },
+   "runtime": 127,
+   "cert": "R",
+   "tmdbScore": 84,
+   "votes": 23634,
+   "poster": "/191nKfP0ehp3uIvWqgPbFmI4lv9.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Zodiac",
+   "y": 2007,
+   "ok": true,
+   "tmdb": 1949,
+   "imdb": "tt0443706",
+   "matched": {
+    "title": "Zodiac",
+    "year": 2007
+   },
+   "runtime": 157,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 11808,
+   "poster": "/6YmeO4pB7XTh8P8F960O1uA14JO.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Gone Girl",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 210577,
+   "imdb": "tt2267998",
+   "matched": {
+    "title": "Gone Girl",
+    "year": 2014
+   },
+   "runtime": 149,
+   "cert": "R",
+   "tmdbScore": 79,
+   "votes": 20297,
+   "poster": "/ts996lKsxvjkO2yiYG0ht4qAicO.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Prisoners",
+   "y": 2013,
+   "ok": true,
+   "tmdb": 146233,
+   "imdb": "tt1392214",
+   "matched": {
+    "title": "Prisoners",
+    "year": 2013
+   },
+   "runtime": 153,
+   "cert": "R",
+   "tmdbScore": 81,
+   "votes": 13393,
+   "poster": "/uhviyknTT5cEQXbn6vWIqfM4vGm.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Sicario",
+   "y": 2015,
+   "ok": true,
+   "tmdb": 273481,
+   "imdb": "tt3397884",
+   "matched": {
+    "title": "Sicario",
+    "year": 2015
+   },
+   "runtime": 122,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 9793,
+   "poster": "/lz8vNyXeidqqOdJW9ZjnDAMb5Vr.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Silence of the Lambs",
+   "y": 1991,
+   "ok": true,
+   "tmdb": 274,
+   "imdb": "tt0102926",
+   "matched": {
+    "title": "The Silence of the Lambs",
+    "year": 1991
+   },
+   "runtime": 119,
+   "cert": "R",
+   "tmdbScore": 83,
+   "votes": 18376,
+   "poster": "/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Parasite",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 496243,
+   "imdb": "tt6751668",
+   "matched": {
+    "title": "Parasite",
+    "year": 2019
+   },
+   "runtime": 133,
+   "cert": "R",
+   "tmdbScore": 85,
+   "votes": 21175,
+   "poster": "/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Memento",
+   "y": 2000,
+   "ok": true,
+   "tmdb": 77,
+   "imdb": "tt0209144",
+   "matched": {
+    "title": "Memento",
+    "year": 2000
+   },
+   "runtime": 113,
+   "cert": "R",
+   "tmdbScore": 82,
+   "votes": 16642,
+   "poster": "/nzlv62aC0octS5AklAiWpXLX9Z0.jpg",
+   "providers": [
+    "NFX",
+    "HUL",
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Nightcrawler",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 242582,
+   "imdb": "tt2872718",
+   "matched": {
+    "title": "Nightcrawler",
+    "year": 2014
+   },
+   "runtime": 118,
+   "cert": "R",
+   "tmdbScore": 77,
+   "votes": 11972,
+   "poster": "/j9HrX8f7GbZQm1BrBiR40uFQZSb.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Uncut Gems",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 473033,
+   "imdb": "tt5727208",
+   "matched": {
+    "title": "Uncut Gems",
+    "year": 2019
+   },
+   "runtime": 136,
+   "cert": "R",
+   "tmdbScore": 72,
+   "votes": 5532,
+   "poster": "/6XN1vxHc7kUSqNWtaQKN45J5x2v.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Blade Runner 2049",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 335984,
+   "imdb": "tt1856101",
+   "matched": {
+    "title": "Blade Runner 2049",
+    "year": 2017
+   },
+   "runtime": 164,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 15556,
+   "poster": "/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Blade Runner",
+   "y": 1982,
+   "ok": true,
+   "tmdb": 78,
+   "imdb": "tt0083658",
+   "matched": {
+    "title": "Blade Runner",
+    "year": 1982
+   },
+   "runtime": 118,
+   "cert": "R",
+   "tmdbScore": 79,
+   "votes": 15315,
+   "poster": "/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Arrival",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 329865,
+   "imdb": "tt2543164",
+   "matched": {
+    "title": "Arrival",
+    "year": 2016
+   },
+   "runtime": 116,
+   "cert": "PG-13",
+   "tmdbScore": 76,
+   "votes": 19762,
+   "poster": "/pEzNVQfdzYDzVK0XqxERIw2x2se.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Dune",
+   "y": 2021,
+   "ok": true,
+   "tmdb": 438631,
+   "imdb": "tt1160419",
+   "matched": {
+    "title": "Dune",
+    "year": 2021
+   },
+   "runtime": 155,
+   "cert": "PG-13",
+   "tmdbScore": 78,
+   "votes": 15413,
+   "poster": "/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Dune: Part Two",
+   "y": 2024,
+   "ok": true,
+   "tmdb": 693134,
+   "imdb": "tt15239678",
+   "matched": {
+    "title": "Dune: Part Two",
+    "year": 2024
+   },
+   "runtime": 167,
+   "cert": "PG-13",
+   "tmdbScore": 81,
+   "votes": 8441,
+   "poster": "/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Interstellar",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 157336,
+   "imdb": "tt0816692",
+   "matched": {
+    "title": "Interstellar",
+    "year": 2014
+   },
+   "runtime": 169,
+   "cert": "PG-13",
+   "tmdbScore": 85,
+   "votes": 40908,
+   "poster": "/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+   "providers": [
+    "PRV",
+    "HUL",
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Inception",
+   "y": 2010,
+   "ok": true,
+   "tmdb": 27205,
+   "imdb": "tt1375666",
+   "matched": {
+    "title": "Inception",
+    "year": 2010
+   },
+   "runtime": 148,
+   "cert": "PG-13",
+   "tmdbScore": 84,
+   "votes": 39996,
+   "poster": "/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Matrix",
+   "y": 1999,
+   "ok": true,
+   "tmdb": 603,
+   "imdb": "tt0133093",
+   "matched": {
+    "title": "The Matrix",
+    "year": 1999
+   },
+   "runtime": 136,
+   "cert": "R",
+   "tmdbScore": 83,
+   "votes": 28562,
+   "poster": "/dXNAPwY7VrqMAo51EKhhCJfaGb5.jpg",
+   "providers": [
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Alien",
+   "y": 1979,
+   "ok": true,
+   "tmdb": 348,
+   "imdb": "tt0078748",
+   "matched": {
+    "title": "Alien",
+    "year": 1979
+   },
+   "runtime": 117,
+   "cert": "R",
+   "tmdbScore": 82,
+   "votes": 16734,
+   "poster": "/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Aliens",
+   "y": 1986,
+   "ok": true,
+   "tmdb": 679,
+   "imdb": "tt0090605",
+   "matched": {
+    "title": "Aliens",
+    "year": 1986
+   },
+   "runtime": 137,
+   "cert": "R",
+   "tmdbScore": 80,
+   "votes": 11102,
+   "poster": "/r1x5JGpyqZU8PYhbs4UcrO1Xb6x.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Ex Machina",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 264660,
+   "imdb": "tt0470752",
+   "matched": {
+    "title": "Ex Machina",
+    "year": 2015
+   },
+   "runtime": 108,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 14509,
+   "poster": "/dmJW8IAKHKxFNiUnoDR7JfsK7Rp.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Everything Everywhere All at Once",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 545611,
+   "imdb": "tt6710474",
+   "matched": {
+    "title": "Everything Everywhere All at Once",
+    "year": 2022
+   },
+   "runtime": 140,
+   "cert": "R",
+   "tmdbScore": 77,
+   "votes": 8318,
+   "poster": "/u68AjlvlutfEIcpmbYpKcdi09ut.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Children of Men",
+   "y": 2006,
+   "ok": true,
+   "tmdb": 9693,
+   "imdb": "tt0206634",
+   "matched": {
+    "title": "Children of Men",
+    "year": 2006
+   },
+   "runtime": 109,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 8045,
+   "poster": "/k9IAS4TehZFcKi4HVByxZNPfqex.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Mad Max: Fury Road",
+   "y": 2015,
+   "ok": true,
+   "tmdb": 76341,
+   "imdb": "tt1392190",
+   "matched": {
+    "title": "Mad Max: Fury Road",
+    "year": 2015
+   },
+   "runtime": 121,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 24477,
+   "poster": "/ulcAi4dKpAjHwYGS08vNyx9H6I9.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Edge of Tomorrow",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 137113,
+   "imdb": "tt1631867",
+   "matched": {
+    "title": "Edge of Tomorrow",
+    "year": 2014
+   },
+   "runtime": 114,
+   "cert": "PG-13",
+   "tmdbScore": 76,
+   "votes": 15412,
+   "poster": "/nBM9MMa2WCwvMG4IJ3eiGUdbPe6.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Her",
+   "y": 2013,
+   "ok": true,
+   "tmdb": 152601,
+   "imdb": "tt1798709",
+   "matched": {
+    "title": "Her",
+    "year": 2013
+   },
+   "runtime": 126,
+   "cert": "R",
+   "tmdbScore": 78,
+   "votes": 15556,
+   "poster": "/eCOtqtfvn7mxGl6nfmq4b1exJRc.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Annihilation",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 300668,
+   "imdb": "tt2798920",
+   "matched": {
+    "title": "Annihilation",
+    "year": 2018
+   },
+   "runtime": 115,
+   "cert": "R",
+   "tmdbScore": 64,
+   "votes": 9558,
+   "poster": "/4YRplSk6BhH6PRuE9gfyw9byUJ6.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Gravity",
+   "y": 2013,
+   "ok": true,
+   "tmdb": 49047,
+   "imdb": "tt1454468",
+   "matched": {
+    "title": "Gravity",
+    "year": 2013
+   },
+   "runtime": 91,
+   "cert": "PG-13",
+   "tmdbScore": 72,
+   "votes": 16585,
+   "poster": "/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Martian",
+   "y": 2015,
+   "ok": true,
+   "tmdb": 286217,
+   "imdb": "tt3659388",
+   "matched": {
+    "title": "The Martian",
+    "year": 2015
+   },
+   "runtime": 141,
+   "cert": "PG-13",
+   "tmdbScore": 77,
+   "votes": 21697,
+   "poster": "/fASz8A0yFE3QB6LgGoOfwvFSseV.jpg",
+   "providers": [
+    "PRV"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Looper",
+   "y": 2012,
+   "ok": true,
+   "tmdb": 59967,
+   "imdb": "tt1276104",
+   "matched": {
+    "title": "Looper",
+    "year": 2012
+   },
+   "runtime": 118,
+   "cert": "R",
+   "tmdbScore": 69,
+   "votes": 11128,
+   "poster": "/sNjL6SqErDBE8OUZlrDLkexfsCj.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "District 9",
+   "y": 2009,
+   "ok": true,
+   "tmdb": 17654,
+   "imdb": "tt1136608",
+   "matched": {
+    "title": "District 9",
+    "year": 2009
+   },
+   "runtime": 112,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 10575,
+   "poster": "/tuGlQkqLxnodDSk6mp5c2wvxUEd.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Minority Report",
+   "y": 2002,
+   "ok": true,
+   "tmdb": 180,
+   "imdb": "tt0181689",
+   "matched": {
+    "title": "Minority Report",
+    "year": 2002
+   },
+   "runtime": 145,
+   "cert": "PG-13",
+   "tmdbScore": 74,
+   "votes": 9863,
+   "poster": "/qtgFcnwh9dAFLocsDk2ySDVS8UF.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Jurassic Park",
+   "y": 1993,
+   "ok": true,
+   "tmdb": 329,
+   "imdb": "tt0107290",
+   "matched": {
+    "title": "Jurassic Park",
+    "year": 1993
+   },
+   "runtime": 127,
+   "cert": "PG-13",
+   "tmdbScore": 80,
+   "votes": 18242,
+   "poster": "/63viWuPfYQjRYLSZSZNq7dglJP5.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "E.T. the Extra-Terrestrial",
+   "y": 1982,
+   "ok": true,
+   "tmdb": 601,
+   "imdb": "tt0083866",
+   "matched": {
+    "title": "E.T. the Extra-Terrestrial",
+    "year": 1982
+   },
+   "runtime": 115,
+   "cert": "PG",
+   "tmdbScore": 75,
+   "votes": 12198,
+   "poster": "/an0nD6uq6byfxXCfk6lQBzdL2J1.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Back to the Future",
+   "y": 1985,
+   "ok": true,
+   "tmdb": 105,
+   "imdb": "tt0088763",
+   "matched": {
+    "title": "Back to the Future",
+    "year": 1985
+   },
+   "runtime": 116,
+   "cert": "PG",
+   "tmdbScore": 83,
+   "votes": 22258,
+   "poster": "/vN5B5WgYscRGcQpVhHl6p9DDTP0.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Star Wars: A New Hope",
+   "y": 1977,
+   "ok": true,
+   "tmdb": 11,
+   "imdb": "tt0076759",
+   "matched": {
+    "title": "Star Wars",
+    "year": 1977
+   },
+   "runtime": 121,
+   "cert": "PG",
+   "tmdbScore": 82,
+   "votes": 22731,
+   "poster": "/fai0rspsNeJCS69wHNjOdWxcI7P.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Empire Strikes Back",
+   "y": 1980,
+   "ok": true,
+   "tmdb": 1891,
+   "imdb": "tt0080684",
+   "matched": {
+    "title": "The Empire Strikes Back",
+    "year": 1980
+   },
+   "runtime": 124,
+   "cert": "PG",
+   "tmdbScore": 84,
+   "votes": 18742,
+   "poster": "/nNAeTmF4CtdSgMDplXTDPOpYzsX.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Rogue One",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 330459,
+   "imdb": "tt3748528",
+   "matched": {
+    "title": "Rogue One: A Star Wars Story",
+    "year": 2016
+   },
+   "runtime": 133,
+   "cert": "PG-13",
+   "tmdbScore": 75,
+   "votes": 16674,
+   "poster": "/i0yw1mFbB7sNGHCs7EXZPzFkdA1.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Dark Knight",
+   "y": 2008,
+   "ok": true,
+   "tmdb": 155,
+   "imdb": "tt0468569",
+   "matched": {
+    "title": "The Dark Knight",
+    "year": 2008
+   },
+   "runtime": 152,
+   "cert": "PG-13",
+   "tmdbScore": 85,
+   "votes": 36509,
+   "poster": "/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Batman Begins",
+   "y": 2005,
+   "ok": true,
+   "tmdb": 272,
+   "imdb": "tt0372784",
+   "matched": {
+    "title": "Batman Begins",
+    "year": 2005
+   },
+   "runtime": 140,
+   "cert": "PG-13",
+   "tmdbScore": 77,
+   "votes": 23036,
+   "poster": "/sPX89Td70IDDjVr85jdSBb4rWGr.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Oppenheimer",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 872585,
+   "imdb": "tt15398776",
+   "matched": {
+    "title": "Oppenheimer",
+    "year": 2023
+   },
+   "runtime": 181,
+   "cert": "R",
+   "tmdbScore": 80,
+   "votes": 12323,
+   "poster": "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+   "providers": [
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Dunkirk",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 374720,
+   "imdb": "tt5013056",
+   "matched": {
+    "title": "Dunkirk",
+    "year": 2017
+   },
+   "runtime": 107,
+   "cert": "PG-13",
+   "tmdbScore": 74,
+   "votes": 17865,
+   "poster": "/b4Oe15CGLL61Ped0RAS9JpqdmCt.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Saving Private Ryan",
+   "y": 1998,
+   "ok": true,
+   "tmdb": 857,
+   "imdb": "tt0120815",
+   "matched": {
+    "title": "Saving Private Ryan",
+    "year": 1998
+   },
+   "runtime": 169,
+   "cert": "R",
+   "tmdbScore": 82,
+   "votes": 17664,
+   "poster": "/uqx37cS8cpHg8U35f9U5IBlrCV3.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "1917",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 530915,
+   "imdb": "tt8579674",
+   "matched": {
+    "title": "1917",
+    "year": 2019
+   },
+   "runtime": 119,
+   "cert": "R",
+   "tmdbScore": 80,
+   "votes": 13811,
+   "poster": "/iZf0KyrE25z1sage4SYFLCCrMi9.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Inglourious Basterds",
+   "y": 2009,
+   "ok": true,
+   "tmdb": 16869,
+   "imdb": "tt0361748",
+   "matched": {
+    "title": "Inglourious Basterds",
+    "year": 2009
+   },
+   "runtime": 153,
+   "cert": "R",
+   "tmdbScore": 82,
+   "votes": 24638,
+   "poster": "/aupnPtagH9JVBuMrGEanf4iqXEQ.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Apocalypse Now",
+   "y": 1979,
+   "ok": true,
+   "tmdb": 28,
+   "imdb": "tt0078788",
+   "matched": {
+    "title": "Apocalypse Now",
+    "year": 1979
+   },
+   "runtime": 147,
+   "cert": "R",
+   "tmdbScore": 83,
+   "votes": 9303,
+   "poster": "/gQB8Y5RCMkv2zwzFHbUJX3kAhvA.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Full Metal Jacket",
+   "y": 1987,
+   "ok": true,
+   "tmdb": 600,
+   "imdb": "tt0093058",
+   "matched": {
+    "title": "Full Metal Jacket",
+    "year": 1987
+   },
+   "runtime": 117,
+   "cert": "R",
+   "tmdbScore": 81,
+   "votes": 11682,
+   "poster": "/kMKyx1k8hWWscYFnPbnxxN4Eqo4.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Shawshank Redemption",
+   "y": 1994,
+   "ok": true,
+   "tmdb": 278,
+   "imdb": "tt0111161",
+   "matched": {
+    "title": "The Shawshank Redemption",
+    "year": 1994
+   },
+   "runtime": 142,
+   "cert": "R",
+   "tmdbScore": 87,
+   "votes": 31141,
+   "poster": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Forrest Gump",
+   "y": 1994,
+   "ok": true,
+   "tmdb": 13,
+   "imdb": "tt0109830",
+   "matched": {
+    "title": "Forrest Gump",
+    "year": 1994
+   },
+   "runtime": 142,
+   "cert": "PG-13",
+   "tmdbScore": 85,
+   "votes": 30303,
+   "poster": "/Cw4hIUIAmSYfK9QfaUW5igp9La.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Social Network",
+   "y": 2010,
+   "ok": true,
+   "tmdb": 37799,
+   "imdb": "tt1285016",
+   "matched": {
+    "title": "The Social Network",
+    "year": 2010
+   },
+   "runtime": 121,
+   "cert": "PG-13",
+   "tmdbScore": 74,
+   "votes": 13421,
+   "poster": "/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Whiplash",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 244786,
+   "imdb": "tt2582802",
+   "matched": {
+    "title": "Whiplash",
+    "year": 2014
+   },
+   "runtime": 107,
+   "cert": "R",
+   "tmdbScore": 84,
+   "votes": 16985,
+   "poster": "/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "There Will Be Blood",
+   "y": 2007,
+   "ok": true,
+   "tmdb": 7345,
+   "imdb": "tt0469494",
+   "matched": {
+    "title": "There Will Be Blood",
+    "year": 2007
+   },
+   "runtime": 158,
+   "cert": "R",
+   "tmdbScore": 81,
+   "votes": 7641,
+   "poster": "/fa0RDkAlCec0STeMNAhPaF89q6U.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Moonlight",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 376867,
+   "imdb": "tt4975722",
+   "matched": {
+    "title": "Moonlight",
+    "year": 2016
+   },
+   "runtime": 111,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 7650,
+   "poster": "/qLnfEmPrDjJfPyyddLJPkXmshkp.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Manchester by the Sea",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 334541,
+   "imdb": "tt4034228",
+   "matched": {
+    "title": "Manchester by the Sea",
+    "year": 2016
+   },
+   "runtime": 138,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 6524,
+   "poster": "/o9VXYOuaJxCEKOxbA86xqtwmqYn.jpg",
+   "providers": [
+    "PRV"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Marriage Story",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 492188,
+   "imdb": "tt7653254",
+   "matched": {
+    "title": "Marriage Story",
+    "year": 2019
+   },
+   "runtime": 137,
+   "cert": "R",
+   "tmdbScore": 77,
+   "votes": 7526,
+   "poster": "/2JRyCKaRKyJAVpsIHeLvPw5nHmw.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Banshees of Inisherin",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 674324,
+   "imdb": "tt11813216",
+   "matched": {
+    "title": "The Banshees of Inisherin",
+    "year": 2022
+   },
+   "runtime": 114,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 3493,
+   "poster": "/4yFG6cSPaCaPhyJ1vtGOtMD1lgh.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Little Women",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 331482,
+   "imdb": "tt3281548",
+   "matched": {
+    "title": "Little Women",
+    "year": 2019
+   },
+   "runtime": 135,
+   "cert": "PG",
+   "tmdbScore": 78,
+   "votes": 6970,
+   "poster": "/yn5ihODtZ7ofn8pDYfxCmxh8AXI.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Lady Bird",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 391713,
+   "imdb": "tt4925292",
+   "matched": {
+    "title": "Lady Bird",
+    "year": 2017
+   },
+   "runtime": 94,
+   "cert": "R",
+   "tmdbScore": 72,
+   "votes": 9130,
+   "poster": "/gl66K7zRdtNYGrxyS2YDUP5ASZd.jpg",
+   "providers": [
+    "HUL",
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Grand Budapest Hotel",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 120467,
+   "imdb": "tt2278388",
+   "matched": {
+    "title": "The Grand Budapest Hotel",
+    "year": 2014
+   },
+   "runtime": 100,
+   "cert": "R",
+   "tmdbScore": 80,
+   "votes": 16415,
+   "poster": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Knives Out",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 546554,
+   "imdb": "tt8946378",
+   "matched": {
+    "title": "Knives Out",
+    "year": 2019
+   },
+   "runtime": 131,
+   "cert": "PG-13",
+   "tmdbScore": 78,
+   "votes": 14385,
+   "poster": "/pThyQovXQrw2m0s9x82twj48Jq4.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Menu",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 593643,
+   "imdb": "tt9764362",
+   "matched": {
+    "title": "The Menu",
+    "year": 2022
+   },
+   "runtime": 107,
+   "cert": "R",
+   "tmdbScore": 72,
+   "votes": 6551,
+   "poster": "/fPtUgMcLIboqlTlPrq0bQpKK8eq.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Glass Onion",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 661374,
+   "imdb": "tt11564570",
+   "matched": {
+    "title": "Glass Onion: A Knives Out Mystery",
+    "year": 2022
+   },
+   "runtime": 140,
+   "cert": "PG-13",
+   "tmdbScore": 70,
+   "votes": 7086,
+   "poster": "/vDGr1YdrlfbU9wxTOdpf3zChmv9.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Get Out",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 419430,
+   "imdb": "tt5052448",
+   "matched": {
+    "title": "Get Out",
+    "year": 2017
+   },
+   "runtime": 104,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 19236,
+   "poster": "/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Hereditary",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 493922,
+   "imdb": "tt7784604",
+   "matched": {
+    "title": "Hereditary",
+    "year": 2018
+   },
+   "runtime": 128,
+   "cert": "R",
+   "tmdbScore": 73,
+   "votes": 8829,
+   "poster": "/4GFPuL14eXi66V96xBWY73Y9PfR.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Babadook",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 242224,
+   "imdb": "tt2321549",
+   "matched": {
+    "title": "The Babadook",
+    "year": 2014
+   },
+   "runtime": 94,
+   "cert": "NR",
+   "tmdbScore": 65,
+   "votes": 6529,
+   "poster": "/qt3fqapeo94TfvMyld8P7gkpXLz.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "A Quiet Place",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 447332,
+   "imdb": "tt6644200",
+   "matched": {
+    "title": "A Quiet Place",
+    "year": 2018
+   },
+   "runtime": 91,
+   "cert": "PG-13",
+   "tmdbScore": 74,
+   "votes": 15637,
+   "poster": "/nAU74GmpUk7t5iklEp3bufwDq4n.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Shining",
+   "y": 1980,
+   "ok": true,
+   "tmdb": 694,
+   "imdb": "tt0081505",
+   "matched": {
+    "title": "The Shining",
+    "year": 1980
+   },
+   "runtime": 144,
+   "cert": "R",
+   "tmdbScore": 82,
+   "votes": 19267,
+   "poster": "/uAR0AWqhQL1hQa69UDEbb2rE5Wx.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Thing",
+   "y": 1982,
+   "ok": true,
+   "tmdb": 1091,
+   "imdb": "tt0084787",
+   "matched": {
+    "title": "The Thing",
+    "year": 1982
+   },
+   "runtime": 109,
+   "cert": "R",
+   "tmdbScore": 81,
+   "votes": 8181,
+   "poster": "/tzGY49kseSE9QAKk47uuDGwnSCu.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "It Follows",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 270303,
+   "imdb": "tt3235888",
+   "matched": {
+    "title": "It Follows",
+    "year": 2015
+   },
+   "runtime": 101,
+   "cert": "R",
+   "tmdbScore": 66,
+   "votes": 7097,
+   "poster": "/iwnQ1JH1wdWrGYkgWySptJ5284A.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Sinners",
+   "y": 2025,
+   "ok": true,
+   "tmdb": 1233413,
+   "imdb": "tt31193180",
+   "matched": {
+    "title": "Sinners",
+    "year": 2025
+   },
+   "runtime": 138,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 5071,
+   "poster": "/fWPgbnt2LSqkQ6cdQc0SZN9CpLm.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Nope",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 762504,
+   "imdb": "tt10954984",
+   "matched": {
+    "title": "Nope",
+    "year": 2022
+   },
+   "runtime": 130,
+   "cert": "R",
+   "tmdbScore": 68,
+   "votes": 5119,
+   "poster": "/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "28 Days Later",
+   "y": 2002,
+   "ok": true,
+   "tmdb": 170,
+   "imdb": "tt0289043",
+   "matched": {
+    "title": "28 Days Later",
+    "year": 2002
+   },
+   "runtime": 113,
+   "cert": "R",
+   "tmdbScore": 72,
+   "votes": 8787,
+   "poster": "/sQckQRt17VaWbo39GIu0TMOiszq.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Spirited Away",
+   "y": 2001,
+   "ok": true,
+   "tmdb": 129,
+   "imdb": "tt0245429",
+   "matched": {
+    "title": "Spirited Away",
+    "year": 2001
+   },
+   "runtime": 125,
+   "cert": "PG",
+   "tmdbScore": 85,
+   "votes": 18770,
+   "poster": "/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "My Neighbor Totoro",
+   "y": 1988,
+   "ok": true,
+   "tmdb": 8392,
+   "imdb": "tt0096283",
+   "matched": {
+    "title": "My Neighbor Totoro",
+    "year": 1988
+   },
+   "runtime": 86,
+   "cert": "G",
+   "tmdbScore": 81,
+   "votes": 9009,
+   "poster": "/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Princess Mononoke",
+   "y": 1997,
+   "ok": true,
+   "tmdb": 128,
+   "imdb": "tt0119698",
+   "matched": {
+    "title": "Princess Mononoke",
+    "year": 1997
+   },
+   "runtime": 134,
+   "cert": "PG-13",
+   "tmdbScore": 83,
+   "votes": 9211,
+   "poster": "/cMYCDADoLKLbB83g4WnJegaZimC.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Spider-Man: Into the Spider-Verse",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 324857,
+   "imdb": "tt4633694",
+   "matched": {
+    "title": "Spider-Man: Into the Spider-Verse",
+    "year": 2018
+   },
+   "runtime": 117,
+   "cert": "PG",
+   "tmdbScore": 84,
+   "votes": 17731,
+   "poster": "/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Spider-Man: Across the Spider-Verse",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 569094,
+   "imdb": "tt9362722",
+   "matched": {
+    "title": "Spider-Man: Across the Spider-Verse",
+    "year": 2023
+   },
+   "runtime": 140,
+   "cert": "PG",
+   "tmdbScore": 83,
+   "votes": 9109,
+   "poster": "/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+   "providers": [
+    "DIS",
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Incredibles",
+   "y": 2004,
+   "ok": true,
+   "tmdb": 9806,
+   "imdb": "tt0317705",
+   "matched": {
+    "title": "The Incredibles",
+    "year": 2004
+   },
+   "runtime": 115,
+   "cert": "PG",
+   "tmdbScore": 77,
+   "votes": 19203,
+   "poster": "/2LqaLgk4Z226KkgPJuiOQ58wvrm.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Ratatouille",
+   "y": 2007,
+   "ok": true,
+   "tmdb": 2062,
+   "imdb": "tt0382932",
+   "matched": {
+    "title": "Ratatouille",
+    "year": 2007
+   },
+   "runtime": 111,
+   "cert": "G",
+   "tmdbScore": 78,
+   "votes": 18840,
+   "poster": "/t3vaWRPSf6WjDSamIkKDs1iQWna.jpg",
+   "providers": [
+    "DIS",
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "WALL-E",
+   "y": 2008,
+   "ok": true,
+   "tmdb": 10681,
+   "imdb": "tt0910970",
+   "matched": {
+    "title": "WALL·E",
+    "year": 2008
+   },
+   "runtime": 98,
+   "cert": "G",
+   "tmdbScore": 81,
+   "votes": 20735,
+   "poster": "/hbhFnRzzg6ZDmm8YAmxBnQpQIPh.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Toy Story",
+   "y": 1995,
+   "ok": true,
+   "tmdb": 862,
+   "imdb": "tt0114709",
+   "matched": {
+    "title": "Toy Story",
+    "year": 1995
+   },
+   "runtime": 81,
+   "cert": "G",
+   "tmdbScore": 80,
+   "votes": 20406,
+   "poster": "/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg",
+   "providers": [
+    "DIS",
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Inside Out",
+   "y": 2015,
+   "ok": true,
+   "tmdb": 150540,
+   "imdb": "tt2096673",
+   "matched": {
+    "title": "Inside Out",
+    "year": 2015
+   },
+   "runtime": 95,
+   "cert": "PG",
+   "tmdbScore": 79,
+   "votes": 23792,
+   "poster": "/2H1TmgdfNtsKlU9jKdeNyYL5y8T.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Coco",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 354912,
+   "imdb": "tt2380307",
+   "matched": {
+    "title": "Coco",
+    "year": 2017
+   },
+   "runtime": 105,
+   "cert": "PG",
+   "tmdbScore": 82,
+   "votes": 21306,
+   "poster": "/6Ryitt95xrO8KXuqRGm1fUuNwqF.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Up",
+   "y": 2009,
+   "ok": true,
+   "tmdb": 14160,
+   "imdb": "tt1049413",
+   "matched": {
+    "title": "Up",
+    "year": 2009
+   },
+   "runtime": 96,
+   "cert": "PG",
+   "tmdbScore": 80,
+   "votes": 22001,
+   "poster": "/mFvoEwSfLqbcWwFsDjQebn9bzFe.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Finding Nemo",
+   "y": 2003,
+   "ok": true,
+   "tmdb": 12,
+   "imdb": "tt0266543",
+   "matched": {
+    "title": "Finding Nemo",
+    "year": 2003
+   },
+   "runtime": 100,
+   "cert": "G",
+   "tmdbScore": 78,
+   "votes": 20873,
+   "poster": "/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg",
+   "providers": [
+    "DIS",
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Zootopia",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 269149,
+   "imdb": "tt2948356",
+   "matched": {
+    "title": "Zootopia",
+    "year": 2016
+   },
+   "runtime": 109,
+   "cert": "PG",
+   "tmdbScore": 78,
+   "votes": 18439,
+   "poster": "/hlK0e0wAQ3VLuJcsfIYPvb4JVud.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Moana",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 277834,
+   "imdb": "tt3521164",
+   "matched": {
+    "title": "Moana",
+    "year": 2016
+   },
+   "runtime": 107,
+   "cert": "PG",
+   "tmdbScore": 76,
+   "votes": 13953,
+   "poster": "/m5MDZOIFEFlxGiLuAzWzFSsWcye.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "How to Train Your Dragon",
+   "y": 2010,
+   "ok": true,
+   "tmdb": 10191,
+   "imdb": "tt0892769",
+   "matched": {
+    "title": "How to Train Your Dragon",
+    "year": 2010
+   },
+   "runtime": 98,
+   "cert": "PG",
+   "tmdbScore": 79,
+   "votes": 14637,
+   "poster": "/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg",
+   "providers": [
+    "PRV"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Lion King",
+   "y": 1994,
+   "ok": true,
+   "tmdb": 8587,
+   "imdb": "tt0110357",
+   "matched": {
+    "title": "The Lion King",
+    "year": 1994
+   },
+   "runtime": 89,
+   "cert": "G",
+   "tmdbScore": 83,
+   "votes": 20043,
+   "poster": "/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Klaus",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 508965,
+   "imdb": "tt4729430",
+   "matched": {
+    "title": "Klaus",
+    "year": 2019
+   },
+   "runtime": 97,
+   "cert": "PG",
+   "tmdbScore": 82,
+   "votes": 4788,
+   "poster": "/q125RHUDgR4gjwh1QkfYuJLYkL.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Puss in Boots: The Last Wish",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 315162,
+   "imdb": "tt3915174",
+   "matched": {
+    "title": "Puss in Boots: The Last Wish",
+    "year": 2022
+   },
+   "runtime": 103,
+   "cert": "PG",
+   "tmdbScore": 82,
+   "votes": 9159,
+   "poster": "/kuf6dutpsT0vSVehic3EZIqkOBt.jpg",
+   "providers": [
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Lord of the Rings: The Fellowship of the Ring",
+   "y": 2001,
+   "ok": true,
+   "tmdb": 120,
+   "imdb": "tt0120737",
+   "matched": {
+    "title": "The Lord of the Rings: The Fellowship of the Ring",
+    "year": 2001
+   },
+   "runtime": 179,
+   "cert": "PG-13",
+   "tmdbScore": 84,
+   "votes": 28200,
+   "poster": "/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Lord of the Rings: The Two Towers",
+   "y": 2002,
+   "ok": true,
+   "tmdb": 121,
+   "imdb": "tt0167261",
+   "matched": {
+    "title": "The Lord of the Rings: The Two Towers",
+    "year": 2002
+   },
+   "runtime": 179,
+   "cert": "PG-13",
+   "tmdbScore": 84,
+   "votes": 24434,
+   "poster": "/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Lord of the Rings: The Return of the King",
+   "y": 2003,
+   "ok": true,
+   "tmdb": 122,
+   "imdb": "tt0167260",
+   "matched": {
+    "title": "The Lord of the Rings: The Return of the King",
+    "year": 2003
+   },
+   "runtime": 201,
+   "cert": "PG-13",
+   "tmdbScore": 85,
+   "votes": 27184,
+   "poster": "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Pan's Labyrinth",
+   "y": 2006,
+   "ok": true,
+   "tmdb": 1417,
+   "imdb": "tt0457430",
+   "matched": {
+    "title": "Pan's Labyrinth",
+    "year": 2006
+   },
+   "runtime": 118,
+   "cert": "R",
+   "tmdbScore": 78,
+   "votes": 11667,
+   "poster": "/z7xXihu5wHuSMWymq5VAulPVuvg.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Princess Bride",
+   "y": 1987,
+   "ok": true,
+   "tmdb": 2493,
+   "imdb": "tt0093779",
+   "matched": {
+    "title": "The Princess Bride",
+    "year": 1987
+   },
+   "runtime": 99,
+   "cert": "PG",
+   "tmdbScore": 77,
+   "votes": 5247,
+   "poster": "/2FC9L9MrjBoGHYjYZjdWQdopVYb.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Harry Potter and the Prisoner of Azkaban",
+   "y": 2004,
+   "ok": true,
+   "tmdb": 673,
+   "imdb": "tt0304141",
+   "matched": {
+    "title": "Harry Potter and the Prisoner of Azkaban",
+    "year": 2004
+   },
+   "runtime": 141,
+   "cert": "PG",
+   "tmdbScore": 80,
+   "votes": 23532,
+   "poster": "/aWxwnYoe8p2d2fcxOqtvAtJ72Rw.jpg",
+   "providers": [
+    "MAX",
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Casablanca",
+   "y": 1942,
+   "ok": true,
+   "tmdb": 289,
+   "imdb": "tt0034583",
+   "matched": {
+    "title": "Casablanca",
+    "year": 1943
+   },
+   "runtime": 102,
+   "cert": "PG",
+   "tmdbScore": 81,
+   "votes": 6179,
+   "poster": "/lGCEKlJo2CnWydQj7aamY7s1S7Q.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "When Harry Met Sally",
+   "y": 1989,
+   "ok": true,
+   "tmdb": 639,
+   "imdb": "tt0098635",
+   "matched": {
+    "title": "When Harry Met Sally...",
+    "year": 1989
+   },
+   "runtime": 96,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 4698,
+   "poster": "/rFOiFUhTMtDetqCGClC9PIgnC1P.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Before Sunrise",
+   "y": 1995,
+   "ok": true,
+   "tmdb": 76,
+   "imdb": "tt0112471",
+   "matched": {
+    "title": "Before Sunrise",
+    "year": 1995
+   },
+   "runtime": 101,
+   "cert": "R",
+   "tmdbScore": 80,
+   "votes": 4823,
+   "poster": "/kf1Jb1c2JAOqjuzA3H4oDM263uB.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Eternal Sunshine of the Spotless Mind",
+   "y": 2004,
+   "ok": true,
+   "tmdb": 38,
+   "imdb": "tt0338013",
+   "matched": {
+    "title": "Eternal Sunshine of the Spotless Mind",
+    "year": 2004
+   },
+   "runtime": 108,
+   "cert": "R",
+   "tmdbScore": 81,
+   "votes": 16639,
+   "poster": "/5MwkWH9tYHv3mV9OdYTMR5qreIz.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "La La Land",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 313369,
+   "imdb": "tt3783958",
+   "matched": {
+    "title": "La La Land",
+    "year": 2016
+   },
+   "runtime": 129,
+   "cert": "PG-13",
+   "tmdbScore": 79,
+   "votes": 18390,
+   "poster": "/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Notting Hill",
+   "y": 1999,
+   "ok": true,
+   "tmdb": 509,
+   "imdb": "tt0125439",
+   "matched": {
+    "title": "Notting Hill",
+    "year": 1999
+   },
+   "runtime": 124,
+   "cert": "PG-13",
+   "tmdbScore": 73,
+   "votes": 6848,
+   "poster": "/hHRIf2XHeQMbyRb3HUx19SF5Ujw.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Crazy Rich Asians",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 455207,
+   "imdb": "tt3104988",
+   "matched": {
+    "title": "Crazy Rich Asians",
+    "year": 2018
+   },
+   "runtime": 121,
+   "cert": "PG-13",
+   "tmdbScore": 70,
+   "votes": 4028,
+   "poster": "/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Past Lives",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 666277,
+   "imdb": "tt13238346",
+   "matched": {
+    "title": "Past Lives",
+    "year": 2023
+   },
+   "runtime": 106,
+   "cert": "PG-13",
+   "tmdbScore": 77,
+   "votes": 2429,
+   "poster": "/k3waqVXSnvCZWfJYNtdamTgTtTA.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Portrait of a Lady on Fire",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 531428,
+   "imdb": "tt8613070",
+   "matched": {
+    "title": "Portrait of a Lady on Fire",
+    "year": 2019
+   },
+   "runtime": 121,
+   "cert": "R",
+   "tmdbScore": 81,
+   "votes": 3012,
+   "poster": "/rUDuOKpkKBHxx41BScqKej72iT3.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Brokeback Mountain",
+   "y": 2005,
+   "ok": true,
+   "tmdb": 142,
+   "imdb": "tt0388795",
+   "matched": {
+    "title": "Brokeback Mountain",
+    "year": 2005
+   },
+   "runtime": 134,
+   "cert": "R",
+   "tmdbScore": 78,
+   "votes": 7682,
+   "poster": "/aByfQOQBNa4CMFwIgq3QrqY2ZHh.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Superbad",
+   "y": 2007,
+   "ok": true,
+   "tmdb": 8363,
+   "imdb": "tt0829482",
+   "matched": {
+    "title": "Superbad",
+    "year": 2007
+   },
+   "runtime": 113,
+   "cert": "R",
+   "tmdbScore": 73,
+   "votes": 8305,
+   "poster": "/ek8e8txUyUwd2BNqj6lFEerJfbq.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Bridesmaids",
+   "y": 2011,
+   "ok": true,
+   "tmdb": 55721,
+   "imdb": "tt1478338",
+   "matched": {
+    "title": "Bridesmaids",
+    "year": 2011
+   },
+   "runtime": 125,
+   "cert": "R",
+   "tmdbScore": 65,
+   "votes": 4748,
+   "poster": "/gJtA7hYsBMQ7EM3sPBMUdBfU7a0.jpg",
+   "providers": [
+    "PRV"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Airplane!",
+   "y": 1980,
+   "ok": true,
+   "tmdb": 813,
+   "imdb": "tt0080339",
+   "matched": {
+    "title": "Airplane!",
+    "year": 1980
+   },
+   "runtime": 88,
+   "cert": "PG",
+   "tmdbScore": 73,
+   "votes": 5200,
+   "poster": "/7Q3efxd3AF1vQjlSxnlerSA7RzN.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Big Lebowski",
+   "y": 1998,
+   "ok": true,
+   "tmdb": 115,
+   "imdb": "tt0118715",
+   "matched": {
+    "title": "The Big Lebowski",
+    "year": 1998
+   },
+   "runtime": 117,
+   "cert": "R",
+   "tmdbScore": 78,
+   "votes": 12417,
+   "poster": "/3bv6WAp6BSxxYvB5ozKFUYuRA8C.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Groundhog Day",
+   "y": 1993,
+   "ok": true,
+   "tmdb": 137,
+   "imdb": "tt0107048",
+   "matched": {
+    "title": "Groundhog Day",
+    "year": 1993
+   },
+   "runtime": 101,
+   "cert": "PG",
+   "tmdbScore": 76,
+   "votes": 9095,
+   "poster": "/gCgt1WARPZaXnq523ySQEUKinCs.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Hot Fuzz",
+   "y": 2007,
+   "ok": true,
+   "tmdb": 4638,
+   "imdb": "tt0425112",
+   "matched": {
+    "title": "Hot Fuzz",
+    "year": 2007
+   },
+   "runtime": 121,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 8536,
+   "poster": "/zPib4ukTSdXvHP9pxGkFCe34f3y.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Shaun of the Dead",
+   "y": 2004,
+   "ok": true,
+   "tmdb": 747,
+   "imdb": "tt0365748",
+   "matched": {
+    "title": "Shaun of the Dead",
+    "year": 2004
+   },
+   "runtime": 99,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 9555,
+   "poster": "/dgXPhzNJH8HFTBjXPB177yNx6RI.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Booksmart",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 505600,
+   "imdb": "tt1489887",
+   "matched": {
+    "title": "Booksmart",
+    "year": 2019
+   },
+   "runtime": 102,
+   "cert": "R",
+   "tmdbScore": 70,
+   "votes": 2900,
+   "poster": "/2aSxRDmisJP90H3S0aocyuQIe4z.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Palm Springs",
+   "y": 2020,
+   "ok": true,
+   "tmdb": 587792,
+   "imdb": "tt9484998",
+   "matched": {
+    "title": "Palm Springs",
+    "year": 2020
+   },
+   "runtime": 90,
+   "cert": "R",
+   "tmdbScore": 73,
+   "votes": 3830,
+   "poster": "/gnAfqiV7yO3Jq9IntTmwkcaICqc.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Game Night",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 445571,
+   "imdb": "tt2704998",
+   "matched": {
+    "title": "Game Night",
+    "year": 2018
+   },
+   "runtime": 100,
+   "cert": "R",
+   "tmdbScore": 68,
+   "votes": 6430,
+   "poster": "/85R8LMyn9f2Lev2YPBF8Nughrkv.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Nice Guys",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 290250,
+   "imdb": "tt3799694",
+   "matched": {
+    "title": "The Nice Guys",
+    "year": 2016
+   },
+   "runtime": 116,
+   "cert": "R",
+   "tmdbScore": 71,
+   "votes": 8849,
+   "poster": "/clq4So9spa9cXk3MZy2iMdqkxP2.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Jojo Rabbit",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 515001,
+   "imdb": "tt2584384",
+   "matched": {
+    "title": "Jojo Rabbit",
+    "year": 2019
+   },
+   "runtime": 108,
+   "cert": "PG-13",
+   "tmdbScore": 80,
+   "votes": 10622,
+   "poster": "/1mqL7VG4Ix8wmxwypmCA1HTHBky.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Mission: Impossible - Fallout",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 353081,
+   "imdb": "tt4912910",
+   "matched": {
+    "title": "Mission: Impossible - Fallout",
+    "year": 2018
+   },
+   "runtime": 147,
+   "cert": "PG-13",
+   "tmdbScore": 75,
+   "votes": 9313,
+   "poster": "/AkJQpZp9WoNdj7pLYSj1L0RcMMN.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "John Wick",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 245891,
+   "imdb": "tt2911666",
+   "matched": {
+    "title": "John Wick",
+    "year": 2014
+   },
+   "runtime": 101,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 21227,
+   "poster": "/wXqWR7dHncNRbxoEGybEy7QTe9h.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Top Gun: Maverick",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 361743,
+   "imdb": "tt1745960",
+   "matched": {
+    "title": "Top Gun: Maverick",
+    "year": 2022
+   },
+   "runtime": 131,
+   "cert": "PG-13",
+   "tmdbScore": 82,
+   "votes": 11421,
+   "poster": "/n0YuM4f5lvGAP6MAW2kBIzugXnc.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Casino Royale",
+   "y": 2006,
+   "ok": true,
+   "tmdb": 36557,
+   "imdb": "tt0381061",
+   "matched": {
+    "title": "Casino Royale",
+    "year": 2006
+   },
+   "runtime": 144,
+   "cert": "PG-13",
+   "tmdbScore": 76,
+   "votes": 11931,
+   "poster": "/lMrxYKKhd4lqRzwUHAy5gcx9PSO.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Skyfall",
+   "y": 2012,
+   "ok": true,
+   "tmdb": 37724,
+   "imdb": "tt1074638",
+   "matched": {
+    "title": "Skyfall",
+    "year": 2012
+   },
+   "runtime": 143,
+   "cert": "PG-13",
+   "tmdbScore": 73,
+   "votes": 16341,
+   "poster": "/d0IVecFQvsGdSbnMAHqiYsNYaJT.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Raiders of the Lost Ark",
+   "y": 1981,
+   "ok": true,
+   "tmdb": 85,
+   "imdb": "tt0082971",
+   "matched": {
+    "title": "Raiders of the Lost Ark",
+    "year": 1981
+   },
+   "runtime": 115,
+   "cert": "PG",
+   "tmdbScore": 79,
+   "votes": 13898,
+   "poster": "/ceG9VzoRAVGwivFU403Wc3AHRys.jpg",
+   "providers": [
+    "DIS",
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Die Hard",
+   "y": 1988,
+   "ok": true,
+   "tmdb": 562,
+   "imdb": "tt0095016",
+   "matched": {
+    "title": "Die Hard",
+    "year": 1988
+   },
+   "runtime": 132,
+   "cert": "R",
+   "tmdbScore": 78,
+   "votes": 12543,
+   "poster": "/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg",
+   "providers": [
+    "PRV"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Raid: Redemption",
+   "y": 2011,
+   "ok": true,
+   "tmdb": 94329,
+   "imdb": "tt1899353",
+   "matched": {
+    "title": "The Raid",
+    "year": 2012
+   },
+   "runtime": 101,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 3996,
+   "poster": "/Abnm1Ws3JH0ReCfEhLMPwPcMcGO.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Mission: Impossible - Ghost Protocol",
+   "y": 2011,
+   "ok": true,
+   "tmdb": 56292,
+   "imdb": "tt1229238",
+   "matched": {
+    "title": "Mission: Impossible - Ghost Protocol",
+    "year": 2011
+   },
+   "runtime": 133,
+   "cert": "PG-13",
+   "tmdbScore": 71,
+   "votes": 10944,
+   "poster": "/eRZTGx7GsiKqPch96k27LK005ZL.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Black Panther",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 284054,
+   "imdb": "tt1825683",
+   "matched": {
+    "title": "Black Panther",
+    "year": 2018
+   },
+   "runtime": 135,
+   "cert": "PG-13",
+   "tmdbScore": 74,
+   "votes": 23847,
+   "poster": "/uxzzxijgPIY7slzFvMotPv8wjKA.jpg",
+   "providers": [
+    "DIS",
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Avengers",
+   "y": 2012,
+   "ok": true,
+   "tmdb": 24428,
+   "imdb": "tt0848228",
+   "matched": {
+    "title": "The Avengers",
+    "year": 2012
+   },
+   "runtime": 143,
+   "cert": "PG-13",
+   "tmdbScore": 81,
+   "votes": 39426,
+   "poster": "/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
+   "providers": [
+    "DIS",
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Avengers: Infinity War",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 299536,
+   "imdb": "tt4154756",
+   "matched": {
+    "title": "Avengers: Infinity War",
+    "year": 2018
+   },
+   "runtime": 149,
+   "cert": "PG-13",
+   "tmdbScore": 82,
+   "votes": 32707,
+   "poster": "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Avengers: Endgame",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 299534,
+   "imdb": "tt4154796",
+   "matched": {
+    "title": "Avengers: Endgame",
+    "year": 2019
+   },
+   "runtime": 181,
+   "cert": "PG-13",
+   "tmdbScore": 82,
+   "votes": 28451,
+   "poster": "/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Guardians of the Galaxy",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 118340,
+   "imdb": "tt2015381",
+   "matched": {
+    "title": "Guardians of the Galaxy",
+    "year": 2014
+   },
+   "runtime": 121,
+   "cert": "PG-13",
+   "tmdbScore": 79,
+   "votes": 30185,
+   "poster": "/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Thor: Ragnarok",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 284053,
+   "imdb": "tt3501632",
+   "matched": {
+    "title": "Thor: Ragnarok",
+    "year": 2017
+   },
+   "runtime": 131,
+   "cert": "PG-13",
+   "tmdbScore": 76,
+   "votes": 22385,
+   "poster": "/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Logan",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 263115,
+   "imdb": "tt3315342",
+   "matched": {
+    "title": "Logan",
+    "year": 2017
+   },
+   "runtime": 137,
+   "cert": "R",
+   "tmdbScore": 78,
+   "votes": 20737,
+   "poster": "/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Spider-Man: No Way Home",
+   "y": 2021,
+   "ok": true,
+   "tmdb": 634649,
+   "imdb": "tt10872600",
+   "matched": {
+    "title": "Spider-Man: No Way Home",
+    "year": 2021
+   },
+   "runtime": 148,
+   "cert": "PG-13",
+   "tmdbScore": 79,
+   "votes": 22854,
+   "poster": "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Whale Rider",
+   "y": 2002,
+   "ok": true,
+   "tmdb": 1088,
+   "imdb": "tt0298228",
+   "matched": {
+    "title": "Whale Rider",
+    "year": 2003
+   },
+   "runtime": 101,
+   "cert": "PG-13",
+   "tmdbScore": 70,
+   "votes": 458,
+   "poster": "/cVBZQZq091KtwBm2qObOv0JTFcH.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Paddington 2",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 346648,
+   "imdb": "tt4468740",
+   "matched": {
+    "title": "Paddington 2",
+    "year": 2017
+   },
+   "runtime": 104,
+   "cert": "PG",
+   "tmdbScore": 75,
+   "votes": 2877,
+   "poster": "/1OJ9vkD5xPt3skC6KguyXAgagRZ.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "School of Rock",
+   "y": 2003,
+   "ok": true,
+   "tmdb": 1584,
+   "imdb": "tt0332379",
+   "matched": {
+    "title": "The School of Rock",
+    "year": 2003
+   },
+   "runtime": 110,
+   "cert": "PG-13",
+   "tmdbScore": 71,
+   "votes": 6330,
+   "poster": "/zXLXaepIBvFVLU25DH3wv4IPSbe.jpg",
+   "providers": [
+    "PAR",
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Sandlot",
+   "y": 1993,
+   "ok": true,
+   "tmdb": 11528,
+   "imdb": "tt0108037",
+   "matched": {
+    "title": "The Sandlot",
+    "year": 1993
+   },
+   "runtime": 101,
+   "cert": "PG",
+   "tmdbScore": 76,
+   "votes": 1368,
+   "poster": "/7PYqz0viEuW8qTvuGinUMjDWMnj.jpg",
+   "providers": [
+    "DIS",
+    "HUL",
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Matilda",
+   "y": 1996,
+   "ok": true,
+   "tmdb": 10830,
+   "imdb": "tt0117008",
+   "matched": {
+    "title": "Matilda",
+    "year": 1996
+   },
+   "runtime": 98,
+   "cert": "PG",
+   "tmdbScore": 72,
+   "votes": 4906,
+   "poster": "/wYoDpWInsBEVSmWStnRH06ddoyk.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Enola Holmes",
+   "y": 2020,
+   "ok": true,
+   "tmdb": 497582,
+   "imdb": "tt7846844",
+   "matched": {
+    "title": "Enola Holmes",
+    "year": 2020
+   },
+   "runtime": 124,
+   "cert": "PG-13",
+   "tmdbScore": 72,
+   "votes": 6780,
+   "poster": "/riYInlsq2kf1AWoGm80JQW5dLKp.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Jumanji: Welcome to the Jungle",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 353486,
+   "imdb": "tt2283362",
+   "matched": {
+    "title": "Jumanji: Welcome to the Jungle",
+    "year": 2017
+   },
+   "runtime": 119,
+   "cert": "PG-13",
+   "tmdbScore": 68,
+   "votes": 14739,
+   "poster": "/pSgXKPU5h6U89ipF7HBYajvYt7j.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Wonder",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 406997,
+   "imdb": "tt2543472",
+   "matched": {
+    "title": "Wonder",
+    "year": 2017
+   },
+   "runtime": 113,
+   "cert": "PG",
+   "tmdbScore": 81,
+   "votes": 8371,
+   "poster": "/sONh3LYGFcVDTy8pm1tbSOB13Li.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Princess Diaries",
+   "y": 2001,
+   "ok": true,
+   "tmdb": 9880,
+   "imdb": "tt0247638",
+   "matched": {
+    "title": "The Princess Diaries",
+    "year": 2001
+   },
+   "runtime": 115,
+   "cert": "G",
+   "tmdbScore": 70,
+   "votes": 5341,
+   "poster": "/7axhsbEzFan6HQQ1aMOy7w3CFRx.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Sing Street",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 369557,
+   "imdb": "tt3544112",
+   "matched": {
+    "title": "Sing Street",
+    "year": 2016
+   },
+   "runtime": 105,
+   "cert": "PG-13",
+   "tmdbScore": 79,
+   "votes": 2495,
+   "poster": "/sUWpVlrvzU2SJbnVZqIeKulPKwk.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Hunt for the Wilderpeople",
+   "y": 2016,
+   "ok": true,
+   "tmdb": 371645,
+   "imdb": "tt4698684",
+   "matched": {
+    "title": "Hunt for the Wilderpeople",
+    "year": 2016
+   },
+   "runtime": 101,
+   "cert": "PG-13",
+   "tmdbScore": 76,
+   "votes": 2370,
+   "poster": "/hkmz9rxgcweizXNElozGeKwmAJE.jpg",
+   "providers": [
+    "PRV",
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Rear Window",
+   "y": 1954,
+   "ok": true,
+   "tmdb": 567,
+   "imdb": "tt0047396",
+   "matched": {
+    "title": "Rear Window",
+    "year": 1954
+   },
+   "runtime": 113,
+   "cert": "PG",
+   "tmdbScore": 83,
+   "votes": 7317,
+   "poster": "/ILVF0eJxHMddjxeQhswFtpMtqx.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Psycho",
+   "y": 1960,
+   "ok": true,
+   "tmdb": 539,
+   "imdb": "tt0054215",
+   "matched": {
+    "title": "Psycho",
+    "year": 1960
+   },
+   "runtime": 109,
+   "cert": "R",
+   "tmdbScore": 84,
+   "votes": 11200,
+   "poster": "/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "12 Angry Men",
+   "y": 1957,
+   "ok": true,
+   "tmdb": 389,
+   "imdb": "tt0050083",
+   "matched": {
+    "title": "12 Angry Men",
+    "year": 1957
+   },
+   "runtime": 97,
+   "cert": "NR",
+   "tmdbScore": 86,
+   "votes": 10280,
+   "poster": "/ppd84D2i9W8jXmsyInGyihiSyqz.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Dr. Strangelove",
+   "y": 1964,
+   "ok": true,
+   "tmdb": 935,
+   "imdb": "tt0057012",
+   "matched": {
+    "title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+    "year": 1964
+   },
+   "runtime": 95,
+   "cert": "PG",
+   "tmdbScore": 81,
+   "votes": 6278,
+   "poster": "/gHm96BRW4GoI339rF1vYoYTB6Qe.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "2001: A Space Odyssey",
+   "y": 1968,
+   "ok": true,
+   "tmdb": 62,
+   "imdb": "tt0062622",
+   "matched": {
+    "title": "2001: A Space Odyssey",
+    "year": 1968
+   },
+   "runtime": 149,
+   "cert": "G",
+   "tmdbScore": 80,
+   "votes": 12861,
+   "poster": "/ve72VxNqjGM69Uky4WTo2bK6rfq.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Chinatown",
+   "y": 1974,
+   "ok": true,
+   "tmdb": 829,
+   "imdb": "tt0071315",
+   "matched": {
+    "title": "Chinatown",
+    "year": 1974
+   },
+   "runtime": 130,
+   "cert": "R",
+   "tmdbScore": 79,
+   "votes": 4365,
+   "poster": "/kZRSP3FmOcq0xnBulqpUQngJUXY.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Taxi Driver",
+   "y": 1976,
+   "ok": true,
+   "tmdb": 103,
+   "imdb": "tt0075314",
+   "matched": {
+    "title": "Taxi Driver",
+    "year": 1976
+   },
+   "runtime": 114,
+   "cert": "R",
+   "tmdbScore": 81,
+   "votes": 13710,
+   "poster": "/ekstpH614fwDX8DUln1a2Opz0N8.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Jaws",
+   "y": 1975,
+   "ok": true,
+   "tmdb": 578,
+   "imdb": "tt0073195",
+   "matched": {
+    "title": "Jaws",
+    "year": 1975
+   },
+   "runtime": 124,
+   "cert": "PG",
+   "tmdbScore": 77,
+   "votes": 11777,
+   "poster": "/lxM6kqilAdpdhqUl2biYp5frUxE.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Rocky",
+   "y": 1976,
+   "ok": true,
+   "tmdb": 1366,
+   "imdb": "tt0075148",
+   "matched": {
+    "title": "Rocky",
+    "year": 1976
+   },
+   "runtime": 120,
+   "cert": "PG",
+   "tmdbScore": 78,
+   "votes": 8829,
+   "poster": "/xSI0dbKLDETwhiVUy6hGE8KXUln.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Alien: Romulus",
+   "y": 2024,
+   "ok": true,
+   "tmdb": 945961,
+   "imdb": "tt18412256",
+   "matched": {
+    "title": "Alien: Romulus",
+    "year": 2024
+   },
+   "runtime": 119,
+   "cert": "R",
+   "tmdbScore": 72,
+   "votes": 4818,
+   "poster": "/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Some Like It Hot",
+   "y": 1959,
+   "ok": true,
+   "tmdb": 239,
+   "imdb": "tt0053291",
+   "matched": {
+    "title": "Some Like It Hot",
+    "year": 1959
+   },
+   "runtime": 123,
+   "cert": null,
+   "tmdbScore": 81,
+   "votes": 3970,
+   "poster": "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Singin' in the Rain",
+   "y": 1952,
+   "ok": true,
+   "tmdb": 872,
+   "imdb": "tt0045152",
+   "matched": {
+    "title": "Singin' in the Rain",
+    "year": 1952
+   },
+   "runtime": 103,
+   "cert": "G",
+   "tmdbScore": 81,
+   "votes": 3584,
+   "poster": "/w03EiJVHP8Un77boQeE7hg9DVdU.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Apartment",
+   "y": 1960,
+   "ok": true,
+   "tmdb": 284,
+   "imdb": "tt0053604",
+   "matched": {
+    "title": "The Apartment",
+    "year": 1960
+   },
+   "runtime": 126,
+   "cert": null,
+   "tmdbScore": 82,
+   "votes": 2753,
+   "poster": "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Vertigo",
+   "y": 1958,
+   "ok": true,
+   "tmdb": 426,
+   "imdb": "tt0052357",
+   "matched": {
+    "title": "Vertigo",
+    "year": 1958
+   },
+   "runtime": 128,
+   "cert": "PG",
+   "tmdbScore": 81,
+   "votes": 6463,
+   "poster": "/15uOEfqBNTVtDUT7hGBVCka0rZz.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Wolf of Wall Street",
+   "y": 2013,
+   "ok": true,
+   "tmdb": 106646,
+   "imdb": "tt0993846",
+   "matched": {
+    "title": "The Wolf of Wall Street",
+    "year": 2013
+   },
+   "runtime": 180,
+   "cert": "R",
+   "tmdbScore": 80,
+   "votes": 26385,
+   "poster": "/kW9LmvYHAaS9iA0tHmZVq8hQYoq.jpg",
+   "providers": [
+    "PRV",
+    "HUL",
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Catch Me If You Can",
+   "y": 2002,
+   "ok": true,
+   "tmdb": 640,
+   "imdb": "tt0264464",
+   "matched": {
+    "title": "Catch Me If You Can",
+    "year": 2002
+   },
+   "runtime": 141,
+   "cert": "PG-13",
+   "tmdbScore": 80,
+   "votes": 17444,
+   "poster": "/ctjEj2xM32OvBXCq8zAdK3ZrsAj.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Ocean's Eleven",
+   "y": 2001,
+   "ok": true,
+   "tmdb": 161,
+   "imdb": "tt0240772",
+   "matched": {
+    "title": "Ocean's Eleven",
+    "year": 2001
+   },
+   "runtime": 116,
+   "cert": "PG-13",
+   "tmdbScore": 75,
+   "votes": 12804,
+   "poster": "/hQQCdZrsHtZyR6NbKH2YyCqd2fR.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Spotlight",
+   "y": 2015,
+   "ok": true,
+   "tmdb": 314365,
+   "imdb": "tt1895587",
+   "matched": {
+    "title": "Spotlight",
+    "year": 2015
+   },
+   "runtime": 129,
+   "cert": "R",
+   "tmdbScore": 78,
+   "votes": 8930,
+   "poster": "/8DPGG400FgaFWaqcv11n8mRd2NG.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Big Short",
+   "y": 2015,
+   "ok": true,
+   "tmdb": 318846,
+   "imdb": "tt1596363",
+   "matched": {
+    "title": "The Big Short",
+    "year": 2015
+   },
+   "runtime": 131,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 10020,
+   "poster": "/scVEaJEwP8zUix8vgmMoJJ9Nq0w.jpg",
+   "providers": [
+    "PAR",
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Michael Clayton",
+   "y": 2007,
+   "ok": true,
+   "tmdb": 4566,
+   "imdb": "tt0465538",
+   "matched": {
+    "title": "Michael Clayton",
+    "year": 2007
+   },
+   "runtime": 120,
+   "cert": "R",
+   "tmdbScore": 68,
+   "votes": 2041,
+   "poster": "/hhkW4yVIGo8Bee3UITKvqOvhNMG.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Drive",
+   "y": 2011,
+   "ok": true,
+   "tmdb": 64690,
+   "imdb": "tt0780504",
+   "matched": {
+    "title": "Drive",
+    "year": 2011
+   },
+   "runtime": 100,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 13911,
+   "poster": "/602vevIURmpDfzbnv5Ubi6wIkQm.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Baby Driver",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 339403,
+   "imdb": "tt3890160",
+   "matched": {
+    "title": "Baby Driver",
+    "year": 2017
+   },
+   "runtime": 113,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 17106,
+   "poster": "/tYzFuYXmT8LOYASlFCkaPiAFAl0.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Collateral",
+   "y": 2004,
+   "ok": true,
+   "tmdb": 1538,
+   "imdb": "tt0369339",
+   "matched": {
+    "title": "Collateral",
+    "year": 2004
+   },
+   "runtime": 120,
+   "cert": "R",
+   "tmdbScore": 72,
+   "votes": 6431,
+   "poster": "/nV5316WUsVij8sVXLCF1g7TFitg.jpg",
+   "providers": [
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Training Day",
+   "y": 2001,
+   "ok": true,
+   "tmdb": 2034,
+   "imdb": "tt0139654",
+   "matched": {
+    "title": "Training Day",
+    "year": 2001
+   },
+   "runtime": 122,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 6772,
+   "poster": "/bUeiwBQdupBLQthMCHKV7zv56uv.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "A Few Good Men",
+   "y": 1992,
+   "ok": true,
+   "tmdb": 881,
+   "imdb": "tt0104257",
+   "matched": {
+    "title": "A Few Good Men",
+    "year": 1992
+   },
+   "runtime": 138,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 4282,
+   "poster": "/rLOk4z9zL1tTukIYV56P94aZXKk.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Erin Brockovich",
+   "y": 2000,
+   "ok": true,
+   "tmdb": 462,
+   "imdb": "tt0195685",
+   "matched": {
+    "title": "Erin Brockovich",
+    "year": 2000
+   },
+   "runtime": 131,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 3725,
+   "poster": "/eMs20iUQyZVs05Ck7Q0LNnRsstr.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Coming to America",
+   "y": 1988,
+   "ok": true,
+   "tmdb": 9602,
+   "imdb": "tt0094898",
+   "matched": {
+    "title": "Coming to America",
+    "year": 1988
+   },
+   "runtime": 117,
+   "cert": "R",
+   "tmdbScore": 69,
+   "votes": 4844,
+   "poster": "/8YZiA1o264dk0cr1USyMdph6SZl.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Do the Right Thing",
+   "y": 1989,
+   "ok": true,
+   "tmdb": 925,
+   "imdb": "tt0097216",
+   "matched": {
+    "title": "Do the Right Thing",
+    "year": 1989
+   },
+   "runtime": 120,
+   "cert": "R",
+   "tmdbScore": 78,
+   "votes": 2059,
+   "poster": "/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Boyz n the Hood",
+   "y": 1991,
+   "ok": true,
+   "tmdb": 650,
+   "imdb": "tt0101507",
+   "matched": {
+    "title": "Boyz n the Hood",
+    "year": 1991
+   },
+   "runtime": 112,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 2329,
+   "poster": "/v4ox4aSCNT5vyLXl4Q71JiWwCXW.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Farewell",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 565310,
+   "imdb": "tt8637428",
+   "matched": {
+    "title": "The Farewell",
+    "year": 2019
+   },
+   "runtime": 100,
+   "cert": "PG",
+   "tmdbScore": 74,
+   "votes": 1575,
+   "poster": "/7ht2IMGynDSVQGvAXhAb83DLET8.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Minari",
+   "y": 2020,
+   "ok": true,
+   "tmdb": 615643,
+   "imdb": "tt10633456",
+   "matched": {
+    "title": "Minari",
+    "year": 2021
+   },
+   "runtime": 115,
+   "cert": "PG-13",
+   "tmdbScore": 73,
+   "votes": 1907,
+   "poster": "/6mPNdmjdbVKPITv3LLCmQoKs9Zw.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "CODA",
+   "y": 2021,
+   "ok": true,
+   "tmdb": 776503,
+   "imdb": "tt10366460",
+   "matched": {
+    "title": "CODA",
+    "year": 2021
+   },
+   "runtime": 112,
+   "cert": "PG-13",
+   "tmdbScore": 79,
+   "votes": 2677,
+   "poster": "/BzVjmm8l23rPsijLiNLUzuQtyd.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Killers of the Flower Moon",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 466420,
+   "imdb": "tt5537002",
+   "matched": {
+    "title": "Killers of the Flower Moon",
+    "year": 2023
+   },
+   "runtime": 206,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 4291,
+   "poster": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Napoleon",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 753342,
+   "imdb": "tt13287846",
+   "matched": {
+    "title": "Napoleon",
+    "year": 2023
+   },
+   "runtime": 158,
+   "cert": "R",
+   "tmdbScore": 63,
+   "votes": 3224,
+   "poster": "/ytFOXyghxLzAM4KZyazDdEkM66q.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Greyhound",
+   "y": 2020,
+   "ok": true,
+   "tmdb": 516486,
+   "imdb": "tt6048922",
+   "matched": {
+    "title": "Greyhound",
+    "year": 2020
+   },
+   "runtime": 92,
+   "cert": "PG-13",
+   "tmdbScore": 74,
+   "votes": 3426,
+   "poster": "/kjMbDciooTbJPofVXgAoFjfX8Of.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Beanie Bubble",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 926008,
+   "imdb": "tt17007120",
+   "matched": {
+    "title": "The Beanie Bubble",
+    "year": 2023
+   },
+   "runtime": 110,
+   "cert": "R",
+   "tmdbScore": 64,
+   "votes": 162,
+   "poster": "/9YDW8dCrQyRpppK5985hKY1Mc8X.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Wolfs",
+   "y": 2024,
+   "ok": true,
+   "tmdb": 877817,
+   "imdb": "tt14257582",
+   "matched": {
+    "title": "Wolfs",
+    "year": 2024
+   },
+   "runtime": 108,
+   "cert": "R",
+   "tmdbScore": 65,
+   "votes": 1535,
+   "poster": "/vOX1Zng472PC2KnS0B9nRfM8aaZ.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Holdovers",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 840430,
+   "imdb": "tt14849194",
+   "matched": {
+    "title": "The Holdovers",
+    "year": 2023
+   },
+   "runtime": 133,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 2625,
+   "poster": "/VHSzNBTwxV8vh7wylo7O9CLdac.jpg",
+   "providers": [
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Nomadland",
+   "y": 2020,
+   "ok": true,
+   "tmdb": 581734,
+   "imdb": "tt9770150",
+   "matched": {
+    "title": "Nomadland",
+    "year": 2021
+   },
+   "runtime": 108,
+   "cert": "R",
+   "tmdbScore": 72,
+   "votes": 3452,
+   "poster": "/8Vc5EOUEIF1EUXuX9eLFf7BvN3P.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Shape of Water",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 399055,
+   "imdb": "tt5580390",
+   "matched": {
+    "title": "The Shape of Water",
+    "year": 2017
+   },
+   "runtime": 123,
+   "cert": "R",
+   "tmdbScore": 72,
+   "votes": 13028,
+   "poster": "/9zfwPffUXpBrEP26yp0q1ckXDcj.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Birdman",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 194662,
+   "imdb": "tt2562232",
+   "matched": {
+    "title": "Birdman or (The Unexpected Virtue of Ignorance)",
+    "year": 2014
+   },
+   "runtime": 120,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 13768,
+   "poster": "/rHUg2AuIuLSIYMYFgavVwqt1jtc.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Roma",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 426426,
+   "imdb": "tt6155172",
+   "matched": {
+    "title": "Roma",
+    "year": 2018
+   },
+   "runtime": 135,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 4171,
+   "poster": "/dtIIyQyALk57ko5bjac7hi01YQ.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Irishman",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 398978,
+   "imdb": "tt1302006",
+   "matched": {
+    "title": "The Irishman",
+    "year": 2019
+   },
+   "runtime": 209,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 7664,
+   "poster": "/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Okja",
+   "y": 2017,
+   "ok": true,
+   "tmdb": 387426,
+   "imdb": "tt3967856",
+   "matched": {
+    "title": "Okja",
+    "year": 2017
+   },
+   "runtime": 120,
+   "cert": "PG-13",
+   "tmdbScore": 73,
+   "votes": 4614,
+   "poster": "/pHlRr2MfjK77VIIAO7p0R4jhsJI.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Athlete A",
+   "y": 2020,
+   "ok": true,
+   "tmdb": 684700,
+   "imdb": "tt11905462",
+   "matched": {
+    "title": "Athlete A",
+    "year": 2020
+   },
+   "runtime": 105,
+   "cert": "PG-13",
+   "tmdbScore": 75,
+   "votes": 289,
+   "poster": "/jUVbqKcDgcLSS5s4UV82XUkMKlU.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Truman Show",
+   "y": 1998,
+   "ok": true,
+   "tmdb": 37165,
+   "imdb": "tt0120382",
+   "matched": {
+    "title": "The Truman Show",
+    "year": 1998
+   },
+   "runtime": 103,
+   "cert": "PG",
+   "tmdbScore": 82,
+   "votes": 20700,
+   "poster": "/vuza0WqY239yBXOadKlGwJsZJFE.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Good Will Hunting",
+   "y": 1997,
+   "ok": true,
+   "tmdb": 489,
+   "imdb": "tt0119217",
+   "matched": {
+    "title": "Good Will Hunting",
+    "year": 1997
+   },
+   "runtime": 127,
+   "cert": "R",
+   "tmdbScore": 82,
+   "votes": 14202,
+   "poster": "/j9Z7P7BGHXn0I0uPiiyalC6efwe.jpg",
+   "providers": [
+    "PAR",
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Dead Poets Society",
+   "y": 1989,
+   "ok": true,
+   "tmdb": 207,
+   "imdb": "tt0097165",
+   "matched": {
+    "title": "Dead Poets Society",
+    "year": 1989
+   },
+   "runtime": 129,
+   "cert": "PG",
+   "tmdbScore": 83,
+   "votes": 12880,
+   "poster": "/tNvKkSnnn4Z6RCBThyK1gfCSSvv.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Slumdog Millionaire",
+   "y": 2008,
+   "ok": true,
+   "tmdb": 12405,
+   "imdb": "tt1010048",
+   "matched": {
+    "title": "Slumdog Millionaire",
+    "year": 2008
+   },
+   "runtime": 121,
+   "cert": "R",
+   "tmdbScore": 77,
+   "votes": 11520,
+   "poster": "/5leCCi7ZF0CawAfM5Qo2ECKPprc.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Prestige",
+   "y": 2006,
+   "ok": true,
+   "tmdb": 1124,
+   "imdb": "tt0482571",
+   "matched": {
+    "title": "The Prestige",
+    "year": 2006
+   },
+   "runtime": 130,
+   "cert": "PG-13",
+   "tmdbScore": 82,
+   "votes": 18002,
+   "poster": "/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Shutter Island",
+   "y": 2010,
+   "ok": true,
+   "tmdb": 11324,
+   "imdb": "tt1130884",
+   "matched": {
+    "title": "Shutter Island",
+    "year": 2010
+   },
+   "runtime": 138,
+   "cert": "R",
+   "tmdbScore": 82,
+   "votes": 26302,
+   "poster": "/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Sixth Sense",
+   "y": 1999,
+   "ok": true,
+   "tmdb": 745,
+   "imdb": "tt0167404",
+   "matched": {
+    "title": "The Sixth Sense",
+    "year": 1999
+   },
+   "runtime": 107,
+   "cert": "PG-13",
+   "tmdbScore": 80,
+   "votes": 13170,
+   "poster": "/vOyfUXNFSnaTk7Vk5AjpsKTUWsu.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Fight Club",
+   "y": 1999,
+   "ok": true,
+   "tmdb": 550,
+   "imdb": "tt0137523",
+   "matched": {
+    "title": "Fight Club",
+    "year": 1999
+   },
+   "runtime": 139,
+   "cert": "R",
+   "tmdbScore": 84,
+   "votes": 32711,
+   "poster": "/jSziioSwPVrOy9Yow3XhWIBDjq1.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "American Beauty",
+   "y": 1999,
+   "ok": true,
+   "tmdb": 14,
+   "imdb": "tt0169547",
+   "matched": {
+    "title": "American Beauty",
+    "year": 1999
+   },
+   "runtime": 122,
+   "cert": "R",
+   "tmdbScore": 80,
+   "votes": 13271,
+   "poster": "/wby9315QzVKdW9BonAefg8jGTTb.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Lost in Translation",
+   "y": 2003,
+   "ok": true,
+   "tmdb": 153,
+   "imdb": "tt0335266",
+   "matched": {
+    "title": "Lost in Translation",
+    "year": 2003
+   },
+   "runtime": 102,
+   "cert": "R",
+   "tmdbScore": 74,
+   "votes": 8261,
+   "poster": "/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Sideways",
+   "y": 2004,
+   "ok": true,
+   "tmdb": 9675,
+   "imdb": "tt0375063",
+   "matched": {
+    "title": "Sideways",
+    "year": 2004
+   },
+   "runtime": 127,
+   "cert": "R",
+   "tmdbScore": 71,
+   "votes": 1944,
+   "poster": "/zOsaxYLgvZVU7cJBpPn8CuE0MrP.jpg",
+   "providers": [
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Little Miss Sunshine",
+   "y": 2006,
+   "ok": true,
+   "tmdb": 773,
+   "imdb": "tt0449059",
+   "matched": {
+    "title": "Little Miss Sunshine",
+    "year": 2006
+   },
+   "runtime": 102,
+   "cert": "R",
+   "tmdbScore": 77,
+   "votes": 8010,
+   "poster": "/niNdhTpPHSgw22tK0PLjQMV640v.jpg",
+   "providers": [
+    "NFX",
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Juno",
+   "y": 2007,
+   "ok": true,
+   "tmdb": 7326,
+   "imdb": "tt0467406",
+   "matched": {
+    "title": "Juno",
+    "year": 2007
+   },
+   "runtime": 96,
+   "cert": "PG-13",
+   "tmdbScore": 71,
+   "votes": 7771,
+   "poster": "/jNIn2tVhpvFD6P9IojldI3mNYcn.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "500 Days of Summer",
+   "y": 2009,
+   "ok": true,
+   "tmdb": 19913,
+   "imdb": "tt1022603",
+   "matched": {
+    "title": "(500) Days of Summer",
+    "year": 2009
+   },
+   "runtime": 95,
+   "cert": "PG-13",
+   "tmdbScore": 73,
+   "votes": 11229,
+   "poster": "/qXAuQ9hF30sQRsXf40OfRVl0MJZ.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Perks of Being a Wallflower",
+   "y": 2012,
+   "ok": true,
+   "tmdb": 84892,
+   "imdb": "tt1659337",
+   "matched": {
+    "title": "The Perks of Being a Wallflower",
+    "year": 2012
+   },
+   "runtime": 103,
+   "cert": "PG-13",
+   "tmdbScore": 78,
+   "votes": 11396,
+   "poster": "/aKCvdFFF5n80P2VdS7d8YBwbCjh.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Boyhood",
+   "y": 2014,
+   "ok": true,
+   "tmdb": 85350,
+   "imdb": "tt1065073",
+   "matched": {
+    "title": "Boyhood",
+    "year": 2014
+   },
+   "runtime": 165,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 5608,
+   "poster": "/2BvtvDUyxiMJ4dmKfiQf4qdOHQN.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Coco Before Chanel",
+   "y": 2009,
+   "ok": true,
+   "tmdb": 11156,
+   "imdb": "tt1035736",
+   "matched": {
+    "title": "Coco Before Chanel",
+    "year": 2009
+   },
+   "runtime": 110,
+   "cert": "PG-13",
+   "tmdbScore": 69,
+   "votes": 1049,
+   "poster": "/nNpP1P2EufA6TN7fQOBeHUIVmeH.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "The Zone of Interest",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 467244,
+   "imdb": "tt7160372",
+   "matched": {
+    "title": "The Zone of Interest",
+    "year": 2023
+   },
+   "runtime": 105,
+   "cert": "PG-13",
+   "tmdbScore": 70,
+   "votes": 2720,
+   "poster": "/hUu9zyZmDd8VZegKi1iK1Vk0RYS.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Poor Things",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 792307,
+   "imdb": "tt14230458",
+   "matched": {
+    "title": "Poor Things",
+    "year": 2023
+   },
+   "runtime": 141,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 5686,
+   "poster": "/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Anatomy of a Fall",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 915935,
+   "imdb": "tt17009710",
+   "matched": {
+    "title": "Anatomy of a Fall",
+    "year": 2023
+   },
+   "runtime": 151,
+   "cert": "R",
+   "tmdbScore": 75,
+   "votes": 3429,
+   "poster": "/1ho0d4LNZw3Y0voeKmSvPSgJOJ2.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Aftersun",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 965150,
+   "imdb": "tt19770238",
+   "matched": {
+    "title": "Aftersun",
+    "year": 2022
+   },
+   "runtime": 101,
+   "cert": "R",
+   "tmdbScore": 76,
+   "votes": 1942,
+   "poster": "/evKz85EKouVbIr51zy5fOtpNRPg.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Everything Went Fine",
+   "y": 2021,
+   "ok": true,
+   "tmdb": 735726,
+   "imdb": "tt12847812",
+   "matched": {
+    "title": "Everything Went Fine",
+    "year": 2021
+   },
+   "runtime": 113,
+   "cert": "G",
+   "tmdbScore": 66,
+   "votes": 169,
+   "poster": "/hyNNufs7Ds8TuT2kv4Z1mEfPx0r.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Talk to Me",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 1118584,
+   "imdb": null,
+   "matched": {
+    "title": "Talk to Me",
+    "year": 2022
+   },
+   "runtime": 21,
+   "cert": null,
+   "tmdbScore": null,
+   "votes": 0,
+   "poster": "/9t7gUKSxXjvQpgHdC7VUhJ1BTBK.jpg",
+   "providers": []
+  },
+  {
+   "t": "Barbarian",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 913290,
+   "imdb": "tt15791034",
+   "matched": {
+    "title": "Barbarian",
+    "year": 2022
+   },
+   "runtime": 103,
+   "cert": "R",
+   "tmdbScore": 69,
+   "votes": 3440,
+   "poster": "/idT5mnqPcJgSkvpDX7pJffBzdVH.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Midsommar",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 530385,
+   "imdb": "tt8772262",
+   "matched": {
+    "title": "Midsommar",
+    "year": 2019
+   },
+   "runtime": 147,
+   "cert": "R",
+   "tmdbScore": 71,
+   "votes": 8342,
+   "poster": "/7LEI8ulZzO5gy9Ww2NVCrKmHeDZ.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Bodies Bodies Bodies",
+   "y": 2022,
+   "ok": true,
+   "tmdb": 520023,
+   "imdb": "tt8110652",
+   "matched": {
+    "title": "Bodies Bodies Bodies",
+    "year": 2022
+   },
+   "runtime": 94,
+   "cert": "R",
+   "tmdbScore": 61,
+   "votes": 1520,
+   "poster": "/hSuTjDmqRdy7Dii8ymnF2WILTeP.jpg",
+   "providers": [
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Nobody",
+   "y": 2021,
+   "ok": true,
+   "tmdb": 615457,
+   "imdb": "tt7888964",
+   "matched": {
+    "title": "Nobody",
+    "year": 2021
+   },
+   "runtime": 91,
+   "cert": "R",
+   "tmdbScore": 79,
+   "votes": 8617,
+   "poster": "/oBgWY00bEFeZ9N25wWVyuQddbAo.jpg",
+   "providers": [
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Fall Guy",
+   "y": 2024,
+   "ok": true,
+   "tmdb": 746036,
+   "imdb": "tt1684562",
+   "matched": {
+    "title": "The Fall Guy",
+    "year": 2024
+   },
+   "runtime": 127,
+   "cert": "PG-13",
+   "tmdbScore": 70,
+   "votes": 3982,
+   "poster": "/e7olqFmzcIX5c23kX4zSmLPJi8c.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Barbie",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 346698,
+   "imdb": "tt1517268",
+   "matched": {
+    "title": "Barbie",
+    "year": 2023
+   },
+   "runtime": 114,
+   "cert": "PG-13",
+   "tmdbScore": 69,
+   "votes": 11458,
+   "poster": "/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",
+   "providers": [
+    "MAX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Air",
+   "y": 2023,
+   "ok": true,
+   "tmdb": 964980,
+   "imdb": "tt16419074",
+   "matched": {
+    "title": "Air",
+    "year": 2023
+   },
+   "runtime": 112,
+   "cert": "R",
+   "tmdbScore": 73,
+   "votes": 2401,
+   "poster": "/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg",
+   "providers": [
+    "PRV"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Ford v Ferrari",
+   "y": 2019,
+   "ok": true,
+   "tmdb": 359724,
+   "imdb": "tt1950186",
+   "matched": {
+    "title": "Ford v Ferrari",
+    "year": 2019
+   },
+   "runtime": 153,
+   "cert": "PG-13",
+   "tmdbScore": 80,
+   "votes": 9223,
+   "poster": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Free Solo",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 515042,
+   "imdb": "tt7775622",
+   "matched": {
+    "title": "Free Solo",
+    "year": 2018
+   },
+   "runtime": 100,
+   "cert": "PG-13",
+   "tmdbScore": 79,
+   "votes": 1556,
+   "poster": "/v4QfYZMACODlWul9doN9RxE99ag.jpg",
+   "providers": [
+    "DIS",
+    "HUL"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Won't You Be My Neighbor?",
+   "y": 2018,
+   "ok": true,
+   "tmdb": 490003,
+   "imdb": "tt7681902",
+   "matched": {
+    "title": "Won't You Be My Neighbor?",
+    "year": 2018
+   },
+   "runtime": 95,
+   "cert": "PG-13",
+   "tmdbScore": 80,
+   "votes": 610,
+   "poster": "/8qE8NZjiP2M884baH0VoLF828Vp.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "My Octopus Teacher",
+   "y": 2020,
+   "ok": true,
+   "tmdb": 682110,
+   "imdb": "tt12888462",
+   "matched": {
+    "title": "My Octopus Teacher",
+    "year": 2020
+   },
+   "runtime": 85,
+   "cert": null,
+   "tmdbScore": 79,
+   "votes": 1074,
+   "poster": "/hvTVZb7hBC8tZAGoEhH5eiMJu2B.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Coraline",
+   "y": 2009,
+   "ok": true,
+   "tmdb": 14836,
+   "imdb": "tt0327597",
+   "matched": {
+    "title": "Coraline",
+    "year": 2009
+   },
+   "runtime": 100,
+   "cert": "PG",
+   "tmdbScore": 79,
+   "votes": 9341,
+   "poster": "/4jeFXQYytChdZYE9JYO7Un87IlW.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Gremlins",
+   "y": 1984,
+   "ok": true,
+   "tmdb": 927,
+   "imdb": "tt0087363",
+   "matched": {
+    "title": "Gremlins",
+    "year": 1984
+   },
+   "runtime": 106,
+   "cert": "PG",
+   "tmdbScore": 71,
+   "votes": 7109,
+   "poster": "/6m0F7fsXjQvUbCZrPWcJNrjvIui.jpg",
+   "providers": [
+    "PCK"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Beetlejuice",
+   "y": 1988,
+   "ok": true,
+   "tmdb": 4011,
+   "imdb": "tt0094721",
+   "matched": {
+    "title": "Beetlejuice",
+    "year": 1988
+   },
+   "runtime": 92,
+   "cert": "PG",
+   "tmdbScore": 74,
+   "votes": 8609,
+   "poster": "/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Poltergeist",
+   "y": 1982,
+   "ok": true,
+   "tmdb": 609,
+   "imdb": "tt0084516",
+   "matched": {
+    "title": "Poltergeist",
+    "year": 1982
+   },
+   "runtime": 114,
+   "cert": "PG",
+   "tmdbScore": 72,
+   "votes": 3419,
+   "poster": "/4eMN3GANH5GG4kXdHkrTZEUuQ9M.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Signs",
+   "y": 2002,
+   "ok": true,
+   "tmdb": 2675,
+   "imdb": "tt0286106",
+   "matched": {
+    "title": "Signs",
+    "year": 2002
+   },
+   "runtime": 106,
+   "cert": "PG-13",
+   "tmdbScore": 67,
+   "votes": 6493,
+   "poster": "/YtrIdrTxpRhvCnlw43dwOjfLqx.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Tremors",
+   "y": 1990,
+   "ok": true,
+   "tmdb": 9362,
+   "imdb": "tt0100814",
+   "matched": {
+    "title": "Tremors",
+    "year": 1990
+   },
+   "runtime": 96,
+   "cert": "PG-13",
+   "tmdbScore": 69,
+   "votes": 3670,
+   "poster": "/cA4ggkZ3r1d5r9hOAUWC8x5ul2i.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "ParaNorman",
+   "y": 2012,
+   "ok": true,
+   "tmdb": 77174,
+   "imdb": "tt1623288",
+   "matched": {
+    "title": "ParaNorman",
+    "year": 2012
+   },
+   "runtime": 93,
+   "cert": "PG",
+   "tmdbScore": 71,
+   "votes": 2845,
+   "poster": "/9DZPtuYTKYxt6vzHvZ5FLThG4fl.jpg",
+   "providers": [],
+   "rt": null
+  },
+  {
+   "t": "Hocus Pocus",
+   "y": 1993,
+   "ok": true,
+   "tmdb": 10439,
+   "imdb": "tt0107120",
+   "matched": {
+    "title": "Hocus Pocus",
+    "year": 1993
+   },
+   "runtime": 96,
+   "cert": "PG",
+   "tmdbScore": 70,
+   "votes": 3360,
+   "poster": "/by4D4Q9NlUjFSEUA1yrxq6ksXmk.jpg",
+   "providers": [
+    "DIS"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Warm Bodies",
+   "y": 2013,
+   "ok": true,
+   "tmdb": 82654,
+   "imdb": "tt1588173",
+   "matched": {
+    "title": "Warm Bodies",
+    "year": 2013
+   },
+   "runtime": 98,
+   "cert": "PG-13",
+   "tmdbScore": 65,
+   "votes": 6472,
+   "poster": "/pvVpl38YOBDOANb0pWbXFb8X3iZ.jpg",
+   "providers": [
+    "PRV"
+   ],
+   "rt": null
+  },
+  {
+   "t": "A Quiet Place Part II",
+   "y": 2021,
+   "ok": true,
+   "tmdb": 520763,
+   "imdb": "tt8332922",
+   "matched": {
+    "title": "A Quiet Place Part II",
+    "year": 2021
+   },
+   "runtime": 97,
+   "cert": "PG-13",
+   "tmdbScore": 74,
+   "votes": 7581,
+   "poster": "/4q2hz2m8hubgvijz8Ez0T2Os2Yv.jpg",
+   "providers": [
+    "NFX",
+    "PAR"
+   ],
+   "rt": null
+  },
+  {
+   "t": "Jumanji",
+   "y": 1995,
+   "ok": true,
+   "tmdb": 8844,
+   "imdb": "tt0113497",
+   "matched": {
+    "title": "Jumanji",
+    "year": 1995
+   },
+   "runtime": 104,
+   "cert": "PG",
+   "tmdbScore": 72,
+   "votes": 11489,
+   "poster": "/bdHG5Mo83VPobeZZdlSz0Y7HQHB.jpg",
+   "providers": [
+    "NFX"
+   ],
+   "rt": null
+  },
+  {
+   "t": "The Iron Giant",
+   "y": 1999,
+   "ok": true,
+   "tmdb": 10386,
+   "imdb": "tt0129167",
+   "matched": {
+    "title": "The Iron Giant",
+    "year": 1999
+   },
+   "runtime": 86,
+   "cert": "PG",
+   "tmdbScore": 80,
+   "votes": 6323,
+   "poster": "/ct04FCFLPImNG5thcPLRnVsZlmS.jpg",
+   "providers": [],
+   "rt": null
+  }
+ ]
+}
