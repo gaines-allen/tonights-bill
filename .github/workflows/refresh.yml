@@ -44,16 +44,24 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # ignore the timestamp-only diff; only commit when real data moved
-          if git diff --quiet -- data/catalog.json; then
+
+          # Stage first. On the very first run the file is untracked, and
+          # `git diff` ignores untracked files — so comparing before staging
+          # would report "no change" and silently throw the data away.
+          git add data/catalog.json
+          if git diff --cached --quiet -- data/catalog.json; then
             echo "no change"; exit 0
           fi
-          CHANGED=$(git diff -- data/catalog.json | grep -Ec '^[+-] +"(runtime|cert|rt|tmdbScore|poster|providers)' || true)
+
+          # Every run rewrites the generatedAt timestamp. Only commit when a
+          # real field moved, otherwise the history fills with empty churn.
+          CHANGED=$(git diff --cached -- data/catalog.json \
+                    | grep -Ec '^[+-] +"(runtime|cert|rt|tmdbScore|poster|providers)' || true)
           if [ "$CHANGED" -eq 0 ]; then
             echo "only the generated timestamp moved — skipping commit"
-            git checkout -- data/catalog.json
+            git reset -q -- data/catalog.json
             exit 0
           fi
-          git add data/catalog.json
+
           git commit -m "Refresh catalog data from TMDB ($CHANGED field changes)"
           git push
