@@ -53,10 +53,14 @@ jobs:
             echo "no change"; exit 0
           fi
 
-          # Every run rewrites the generatedAt timestamp. Only commit when a
-          # real field moved, otherwise the history fills with empty churn.
-          CHANGED=$(git diff --cached -- data/catalog.json \
-                    | grep -Ec '^[+-] +"(runtime|cert|rt|tmdbScore|poster|providers)' || true)
+          # Every run rewrites the generatedAt timestamp, so commit only when
+          # something else moved. Deliberately NOT an allowlist of field names:
+          # an allowlist silently discards any field added later, which is
+          # exactly how a run of fresh synopses got thrown away once.
+          CHANGED=$(git diff --cached -U0 -- data/catalog.json \
+                    | grep -E '^[+-]' \
+                    | grep -vE '^(\+\+\+|---)' \
+                    | grep -vc '"generatedAt"' || true)
           if [ "$CHANGED" -eq 0 ]; then
             echo "only the generated timestamp moved — skipping commit"
             git reset -q -- data/catalog.json
