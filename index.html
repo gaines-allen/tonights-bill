@@ -50,7 +50,7 @@
 }
 
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%; overflow-x:clip}
 body{
   margin:0; background:var(--black); color:var(--cream);
   font-family:var(--sans); font-size:17px; line-height:1.55;
@@ -241,8 +241,12 @@ img{display:block; max-width:100%}
   display:grid; grid-template-columns:minmax(300px,40%) 1fr; gap:var(--s7);
   align-items:start; padding-bottom:var(--s8); position:relative;
 }
+/* Bleeds past the column but must never widen the document. Centred on the
+   card and clipped by html{overflow-x:clip}; an inset of -50vw put its edges
+   600px outside the viewport and produced a horizontal scrollbar. */
 .backdrop{
-  position:absolute; inset:-40px -50vw auto; height:520px; z-index:-1;
+  position:absolute; top:-40px; left:50%; transform:translateX(-50%);
+  width:min(1600px, 128vw); height:520px; z-index:-1;
   background-size:cover; background-position:center 22%; opacity:.16;
   -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 88%);
   mask-image:linear-gradient(180deg,#000 0%,transparent 88%);
