@@ -1108,7 +1108,6 @@ const S = {
   time:    load("time",140),
   /* was a ceiling (99 meant "no limit"); anything out of floor range migrates to 0 */
   rate:    (function(v){ return (typeof v === "number" && v >= 0 && v <= 4) ? v : 0; })(load("rate",0)),
-  fitOnly: load("fitOnly",false),
   minRT:   load("minRT",0),
   moods:   load("moods",[]),
   timePreset: load("timePreset",""),
@@ -1125,7 +1124,7 @@ const S = {
 function save(){
   store("room",S.room); store("time",S.time); store("genres",S.genres);
   store("svc",S.svc);   store("taste",S.taste);
-  store("rate",S.rate); store("minRT",S.minRT); store("fitOnly",S.fitOnly);
+  store("rate",S.rate); store("minRT",S.minRT);
   store("watched",S.watched); store("offered",S.offered);
   store("moods",S.moods); store("bills",S.bills); store("locked",S.locked);
   store("timePreset",S.timePreset);
