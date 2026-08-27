@@ -1149,13 +1149,15 @@ function rememberOffer(titles){
   S.offered = S.offered.slice(0, OFFER_MEMORY);
   save();
 }
+/* State only. Repainting is the caller's job — reaching into the presentation
+   layer from here is what broke when the interface was rebuilt around it. */
 function markWatched(title){
   S.watched[title] = new Date().toISOString();
-  save(); renderBill(); renderGrid(); renderHistory();
+  save();
 }
 function unmarkWatched(title){
   delete S.watched[title];
-  save(); renderBill(); renderGrid(); renderHistory();
+  save();
 }
 
 /* ---------- helpers ---------- */
@@ -1310,7 +1312,10 @@ function scoreAll(){
     const fameN = f.pop === 3 ? 1 : (f.pop === 2 ? 0.82 : 0.62);
     /* With nothing tagged, recognizability is the only honest tiebreak. Once the
        viewer has a real profile, fame must get out of the way of it. */
-    const fameW = !T.n ? 0.34
+    /* Recognisability is only a tiebreak for someone we know nothing about.
+       The moment they tell us a mood, that is real signal and fame gets out of
+       the way — otherwise every cold-start answer returns the same famous films. */
+    const fameW = !T.n ? (S.moods.length ? 0.10 : 0.34)
                 : ((S.room === "friends" || S.room === "kids") ? 0.16 : 0.09)
                   / (1 + T.n * 0.35);
 
@@ -1410,6 +1415,18 @@ function why(rec){
     }
   }
 
+  /* what they asked for tonight */
+  if(S.moods.length){
+    const v = moodVector();
+    const hits = f.a.filter(function(x){ return v[x] > 0; })
+                    .sort(function(a,b){ return idfA(b) - idfA(a); });
+    if(hits.length >= 2){
+      const names = S.moods.map(function(k){ return MOOD_BY[k].n.toLowerCase(); });
+      bits.unshift("You asked for " + names.join(" and ") + " \u2014 this brings " +
+        hits.slice(0,2).map(function(x){ return ATTR_PHRASE[x] || x; }).join(" and ") + ".");
+    }
+  }
+
   /* room note */
   const R = room();
   const roomHits = f.a.filter(function(x){ return rec.upSet[x]; })
@@ -1424,7 +1441,7 @@ function why(rec){
   if(slack <= 12) bits.push("Uses nearly all the time you have &mdash; " + hm(f.r) + " against " + hm(S.time) + ".");
   else if(slack >= 55) bits.push("Leaves " + hm(slack) + " on the clock.");
 
-  if(!bits.length) bits.push("A clean fit for the runtime and the room. Tag a few titles above and this gets sharper.");
+  if(!bits.length) bits.push("A clean fit for tonight's runtime and the room. Teach us a few films you love and this gets a lot sharper.");
   return bits.slice(0,3).join(" ");
 }
 
@@ -1621,7 +1638,8 @@ function programEvening(opts){
 function renderBill(out){
   const picks = out.picks;
   $("bill-recap").innerHTML = "";
-  [["Room", (ROOMS.filter(function(r){return r.k===S.room;})[0]||{}).n || "—"],
+  const aud = AUDIENCES.filter(function(a){ return a.k === S.room; })[0];
+  [["Room", aud ? aud.n : ((ROOMS.filter(function(r){return r.k===S.room;})[0]||{}).n || "—")],
    ["Under", hm(S.time)],
    S.moods.length ? ["Mood", S.moods.map(function(k){ return MOOD_BY[k].n; }).join(", ")] : null,
    ["On", SERVICES.filter(function(s){ return S.svc[s.k]; }).length + " services"]
@@ -1849,7 +1867,9 @@ function lockBill(rec){
   S.bills = S.bills.slice(0, 24);
   markWatched(f.t);
   save();
-  renderLocked();
+  REROLLS = 0;
+  const out = scoreAll(); LAST = out;
+  renderBill(out);
   $("locked-slot").scrollIntoView({behavior:"smooth", block:"start"});
 }
 function renderLocked(){
