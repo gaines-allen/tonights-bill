@@ -147,8 +147,10 @@ same viewport on a laptop. Behind it, a heavily scrimmed backdrop drifts slowly
 between a few films — and once the viewer answers something, the room starts
 reacting to them instead.
 
-**Three decisions, three interaction languages.** This is the point of the
-design, and none of them is a card:
+**Three decisions, one scene.** On a wide screen the questions hang out in the
+left margin like credits, set in serif italic, so three decisions read as one
+composed page rather than three form sections stacked down the screen. Nothing
+is numbered. None of them is a card:
 
 - *Who's watching* — large type in a row, with a rule that draws itself under
   the answer and turns red when it is the one.
@@ -157,28 +159,48 @@ design, and none of them is a card:
   (`UNDER 2H 15`), and a red segment burned into the rule above tonight's.
 - *What kind of night is it* — a programme page set in Instrument Serif at six
   different sizes, on a three-column grid where each column starts at a
-  different height. Approaching one fades a film in behind the words at 13%.
+  different height. Approaching one fades a film in behind the words at 13%,
+  and the one you pick keeps it.
 
-**The call** is a red rectangle with no radius, sized as an event. Under it,
-*or let the house decide*.
+**The call** takes the full width of the frame and the largest sans on the
+page — the scene has been building to it. Disabled it is a hairline outline;
+armed it is a red slab.
 
-**Let the house decide** deals: seven posters pass through a shuffle for about
-620ms and one stays, then the reveal opens on it — one film, no shelf.
+**Let the house decide** is not a smaller button under the big one. It gets its
+own room below the call — hairlines top and bottom, *Or don't decide at all.*
+set in serif italic on one side and the action on the other. Taking it deals:
+seven posters pass through a shuffle for about 620ms and one stays, then the
+reveal opens on it — one film, no shelf.
 
-**The lights go down.** Requesting a bill does not swap screens. The room
-recedes (opacity, a little blur, a fractional scale-down), the page goes to
-black, a mono line reads *feature presentation*, the scene changes behind the
-black, and the artwork resolves out of a 14px blur while the title lands after
-it. About 1.1s end to end, and skipped entirely under `prefers-reduced-motion`.
+**The lights go down.** Requesting a bill does not swap screens.
 
-**The feature** fits one viewport on a laptop. The backdrop is carried at 90%
-opacity — Glass Onion stays Mediterranean blue, Ex Machina stays cold grey —
+```
+0ms     the room recedes — opacity, a little blur, a fractional scale-down
+~40ms   the chosen film's artwork starts downloading behind the black
+240ms   a line of mono in the dark: FEATURE PRESENTATION
+380ms   the scene changes while nobody can see it
+420ms   the darkness begins a long, slow lift while the backdrop resolves out
+        of a 22px blur underneath it — the film emerges *through* the dark
+~790ms  the title lands, blurring into focus, last and hardest
+```
+
+About 1.0s end to end. The house darkens in 300ms and comes back in 640ms, and
+that asymmetry is the whole trick: nothing is ever revealed by a cut. The wait
+for the artwork is spent inside the transition rather than in front of a
+spinner. Skipped entirely under `prefers-reduced-motion`.
+
+**The feature** fills the viewport, and the film supplies the palette. Under
+the backdrop sits a blown-up, blurred, saturated copy of the same artwork —
+that is what makes Dune's orange and The Matrix's green colour the whole room
+rather than just the middle of the frame. The backdrop itself is carried at 92%
 and legibility comes from layered scrims that darken the side the words are on
-while leaving a lit region of the frame alone, never from flattening the image.
-The title scales to its own length, so a short one is allowed to fill the
-frame. The poster hangs below the baseline of the copy rather than sitting in a
-cell. The fit percentage is demoted to a small mono `FIT 76 OF 100` at the
-bottom of the hierarchy.
+while leaving a lit region alone, never from flattening the image.
+
+The copy is anchored low and left, not centred. The hierarchy is fixed:
+`TONIGHT, YOU'RE WATCHING` / the title / one line of pitch /
+`2018 / 1H 40M / R / MAX` with the service lit / **LOCK IT IN**. Titles scale
+to their own length — a short one runs to 184px on a laptop. Critics and fit
+share one small mono line at the very bottom, where the arithmetic belongs.
 
 **Why this tonight** takes the sharpest sentence the engine can produce and
 uses it as the pitch, in serif italic, with the named film set upright inside

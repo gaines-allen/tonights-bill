@@ -81,7 +81,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   font-family:var(--serif);font-weight:400;line-height:.94;
   letter-spacing:-.012em;text-wrap:balance;
 }
-.say-xl{font-size:clamp(2.7rem, 6.4vw, 5.6rem)}
+.say-xl{font-size:clamp(3.4rem, 9.4vw, 9.6rem);line-height:.88;letter-spacing:-.022em}
 .say-lg{font-size:clamp(2.6rem, 6vw, 5.9rem);line-height:.9;letter-spacing:-.02em}
 .say-md{font-size:clamp(1.9rem, 3.4vw, 2.9rem)}
 
@@ -92,9 +92,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 }
 .tick-sm{font-size:10.5px;letter-spacing:.2em}
 
-.ask-of{                    /* the question above each decision */
-  font-family:var(--sans);font-size:12px;font-weight:600;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+/* The question is asked, not labelled. On a wide screen it hangs out in the
+   margin like a credit, which is what stops three decisions reading as three
+   form sections stacked down the page. */
+.ask-of{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(14px,1.2vw,18px);letter-spacing:0;text-transform:none;
+  color:var(--muted);
 }
 
 /* the house light */
@@ -185,7 +189,7 @@ main{position:relative;z-index:10}
   padding-bottom:clamp(20px,3.4vh,34px);
 }
 .annot .right{color:var(--dim)}
-.arrival h1{max-width:16ch}
+.arrival h1{max-width:13ch}
 .arrival .under{
   margin-top:clamp(14px,2vh,22px);
   font-size:clamp(15px,1.25vw,18px);color:var(--muted);max-width:38ch;
@@ -210,15 +214,22 @@ main{position:relative;z-index:10}
    SCENE 02 — MAKING THE NIGHT
    Three decisions, three languages. None of them is a card.
    -------------------------------------------------------------------------- */
-.night{padding-top:clamp(34px,6vh,72px);padding-bottom:clamp(60px,9vh,110px)}
-.decision{padding-top:clamp(26px,4.2vh,46px)}
-.decision > .ask-of{display:block;margin-bottom:clamp(16px,2.2vh,24px)}
+.night{padding-top:clamp(26px,4vh,52px);padding-bottom:clamp(60px,9vh,110px)}
+.decision{padding-top:clamp(18px,2.8vh,32px)}
+.decision > .ask-of{display:block;margin-bottom:clamp(12px,1.6vh,18px)}
+@media (min-width:900px){
+  .decision{
+    display:grid;grid-template-columns:clamp(116px,12vw,178px) minmax(0,1fr);
+    gap:clamp(18px,2.6vw,44px);align-items:baseline;
+  }
+  .decision > .ask-of{margin-bottom:0;text-align:right;padding-top:.5em}
+}
 
 /* ---- ONE: who's watching. Large type, a rule that draws itself. ---- */
 .who{display:flex;flex-wrap:wrap;gap:clamp(10px,1.2vw,18px) clamp(24px,3.4vw,54px)}
 .who button{
   position:relative;padding:4px 0 12px;
-  font-size:clamp(1.45rem,2.9vw,2.35rem);font-weight:600;
+  font-size:clamp(1.25rem,2.2vw,1.95rem);font-weight:600;
   letter-spacing:-.005em;text-transform:uppercase;line-height:1.05;
   color:var(--ghost);transition:color var(--quick);
 }
@@ -235,13 +246,15 @@ main{position:relative;z-index:10}
 /* ---- TWO: runtime as showtimes, printed across a rule ---- */
 /* A programme listing: one rule across the top, the times hanging beneath it,
    and a red segment burned into the rule above whichever one is tonight's. */
-.clockline{position:relative;padding-top:1px}
-.clockline::before{
-  content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--hair);
-}
+.clockline{position:relative}
 .showtimes{
   position:relative;display:flex;flex-wrap:wrap;
   gap:clamp(6px,1vw,10px) clamp(22px,4vw,60px);
+}
+/* the rule belongs to the listing, not to the page — it runs only as far as
+   the times themselves */
+.showtimes::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--hair);
 }
 .showtimes button{
   position:relative;padding:clamp(14px,2vh,20px) 0 4px;
@@ -270,17 +283,17 @@ main{position:relative;z-index:10}
 .night-opt{
   position:relative;isolation:isolate;overflow:hidden;
   border-top:1px solid var(--hair);
-  padding:clamp(14px,1.8vh,20px) 0 clamp(20px,3vh,34px);
+  padding:clamp(12px,1.6vh,18px) 0 clamp(18px,2.6vh,30px);
   padding-right:14px;
   transition:border-color var(--quick);
 }
 .night-opt:hover{border-top-color:var(--hair-2)}
-.night-opt .no{
-  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);
-  display:flex;align-items:center;gap:7px;margin-bottom:clamp(8px,1.4vh,14px);
-  transition:color var(--quick);
+/* the marker rides inside the line rather than sitting above it as an index */
+.night-opt .label .dot{
+  width:.3em;height:.3em;margin-right:.34em;vertical-align:.3em;
+  opacity:0;transition:opacity var(--quick);
 }
-.night-opt .no .dot{width:5px;height:5px;opacity:0;transition:opacity var(--quick)}
+.night-opt[aria-pressed="true"] .label .dot{opacity:1}
 .night-opt .label{
   font-family:var(--serif);line-height:.98;letter-spacing:-.01em;
   color:var(--cream-2);transition:color var(--quick);display:block;
@@ -296,38 +309,61 @@ main{position:relative;z-index:10}
 .night-opt[aria-pressed="true"] .wash{opacity:.2}
 .night-opt[aria-pressed="true"]{border-top-color:var(--red)}
 .night-opt[aria-pressed="true"] .label{color:var(--cream)}
-.night-opt[aria-pressed="true"] .no{color:var(--cream-2)}
-.night-opt[aria-pressed="true"] .no .dot{opacity:1}
 
 /* --------------------------------------------------------------------------
    THE CALL — an event, not a pill
    -------------------------------------------------------------------------- */
-.call{padding-top:clamp(34px,5.4vh,60px)}
+/* The whole scene has been building to this, so it takes the full width of
+   the frame and the largest sans on the page. */
+.call{padding-top:clamp(46px,7vh,88px)}
 .bill-go{
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-  width:100%;max-width:760px;background:var(--red);color:#fff;
-  padding:clamp(20px,2.6vh,28px) clamp(20px,2.6vw,34px);
-  font-size:clamp(15px,1.6vw,21px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  transition:background var(--quick), transform var(--quick);
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  width:100%;background:var(--red);color:#fff;
+  padding:clamp(26px,3.6vh,44px) clamp(22px,3vw,46px);
+  font-size:clamp(18px,2.6vw,34px);font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  line-height:1;
+  transition:background var(--quick), letter-spacing var(--calm);
 }
-.bill-go .arw{font-weight:400;transition:transform var(--calm)}
-.bill-go:hover{background:var(--red-lit)}
-.bill-go:hover .arw{transform:translateX(8px)}
-.bill-go[disabled]{background:var(--char);color:var(--dim);cursor:not-allowed}
+.bill-go .arw{font-weight:400;font-size:.9em;transition:transform var(--calm)}
+.bill-go:hover{background:var(--red-lit);letter-spacing:.11em}
+.bill-go:hover .arw{transform:translateX(14px)}
+.bill-go[disabled]{background:transparent;color:var(--dim);cursor:not-allowed;
+                   box-shadow:inset 0 0 0 1px var(--hair);letter-spacing:.09em}
 .bill-go[disabled]:hover .arw{transform:none}
-.call-note{margin-top:14px;font-size:13px;color:var(--dim);max-width:60ch}
+.call-note{margin-top:16px;font-size:13px;color:var(--dim);max-width:60ch}
 
-.house-line{
-  margin-top:clamp(20px,3vh,30px);
-  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
-  font-size:13px;color:var(--dim);
+/* Dealer's choice is not a smaller button under the big one. It is the other
+   thing you can do: hand the evening to the house and stop deciding. */
+.house-band{
+  margin-top:clamp(26px,4vh,44px);
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:clamp(20px,3vh,34px) 0;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px clamp(20px,3vw,40px);flex-wrap:wrap;
+  transition:border-color var(--calm);
 }
+.house-band:hover{border-color:var(--hair-2)}
+.house-say{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(1.15rem,2.2vw,1.85rem);line-height:1.2;color:var(--cream-2);
+  transition:color var(--quick);
+}
+.house-band:hover .house-say{color:var(--cream)}
 .house-pick{
-  font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);
-  padding-bottom:4px;border-bottom:1px solid var(--hair-2);
+  display:inline-flex;align-items:center;gap:.8em;flex:none;
+  font-size:clamp(11px,1.1vw,13px);font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--cream);
+  padding:14px 0;min-height:46px;
+  border-bottom:1px solid var(--hair-2);
   transition:border-color var(--quick), color var(--quick);
 }
-.house-pick:hover{border-bottom-color:var(--red);color:#fff}
+.house-pick .arw{font-weight:400;transition:transform var(--calm)}
+.house-band:hover .house-pick{border-bottom-color:var(--red);color:#fff}
+.house-band:hover .house-pick .arw{transform:translateX(7px)}
+.house-fine{
+  flex-basis:100%;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);
+}
 
 /* --------------------------------------------------------------------------
    FINE TUNE — explicitly advanced, so it may look like controls
@@ -413,6 +449,9 @@ main{position:relative;z-index:10}
   transition:opacity 300ms var(--ease);
 }
 .dark.down{opacity:1;pointer-events:all}
+/* The room goes dark quickly and comes back slowly, so the backdrop resolves
+   *through* the darkness instead of being revealed by a cut. */
+.dark.lift{transition:opacity 640ms var(--ease)}
 .dark .whisper{
   opacity:0;color:var(--dim);
   transition:opacity 320ms var(--ease);
@@ -428,16 +467,26 @@ main{position:relative;z-index:10}
    SCENE 04 — THE FEATURE
    The film owns the screen and keeps its own colour.
    -------------------------------------------------------------------------- */
-.feature{position:relative;isolation:isolate;min-height:100svh;display:flex;align-items:center}
+.feature{position:relative;isolation:isolate;min-height:100svh;display:flex;align-items:flex-end}
 .plate{position:absolute;inset:0;z-index:-2;overflow:hidden;background:var(--ink)}
+/* A blown-up, blurred copy of the same artwork under everything. It is what
+   makes Dune's orange and The Matrix's green colour the whole room rather
+   than just the middle of the frame. */
+.plate .wash{
+  position:absolute;inset:-14%;display:block;opacity:0;
+  background-size:cover;background-position:50% 42%;
+  filter:blur(70px) saturate(1.75);transform:scale(1.12);
+  transition:opacity 1100ms var(--ease);
+}
+.plate .wash.on{opacity:.62}
 .plate i{
   position:absolute;inset:0;display:block;opacity:0;
   background-size:cover;background-position:50% 30%;
-  transform:scale(1.05);filter:blur(14px);
-  transition:opacity 900ms var(--ease), transform 1400ms var(--ease), filter 900ms var(--ease);
+  transform:scale(1.09);filter:blur(22px);
+  transition:opacity 780ms var(--ease), transform 1200ms var(--ease), filter 820ms var(--ease);
 }
 /* resolving into focus is the reveal; it is never a fade from grey */
-.plate i.on{opacity:.9;transform:scale(1);filter:blur(0)}
+.plate i.on{opacity:.92;transform:scale(1);filter:blur(0)}
 /* Layered so the artwork keeps a lit region of its own. Dune stays orange,
    The Matrix stays green — the scrim only protects the words. */
 .plate::after{
@@ -452,7 +501,7 @@ main{position:relative;z-index:10}
 .feature-in{
   position:relative;z-index:1;width:100%;
   padding-top:calc(var(--mast) + clamp(20px,4vh,52px));
-  padding-bottom:clamp(30px,5vh,64px);
+  padding-bottom:clamp(46px,8vh,96px);
 }
 .bill-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,2.2vw,34px);align-items:end}
 .bill-copy{max-width:min(100%, 40rem);position:relative;z-index:2}
@@ -460,14 +509,15 @@ main{position:relative;z-index:10}
 .bill-title{margin-bottom:clamp(14px,2.2vh,22px)}
 .pitch{
   font-family:var(--serif);font-style:italic;
-  font-size:clamp(1.15rem,1.9vw,1.65rem);line-height:1.34;color:var(--cream);
-  max-width:30ch;margin-bottom:clamp(16px,2.4vh,24px);
+  font-size:clamp(1.2rem,2.05vw,1.8rem);line-height:1.32;color:var(--cream);
+  max-width:32ch;margin-bottom:clamp(18px,2.6vh,28px);
 }
 /* A film named inside the sentence is a title, not emphasis: it goes upright
    inside the italic pitch, and italic inside the upright panel. */
 .pitch b{font-weight:400;font-style:normal}
 .stub{display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(10px,1.2vw,16px)}
 .stub .slash{color:var(--dim)}
+.stub .lit{color:var(--cream)}
 .where{margin-top:10px;color:var(--cream-2)}
 .where b{color:var(--cream);font-weight:500}
 
@@ -503,10 +553,15 @@ main{position:relative;z-index:10}
 }
 
 /* the reveal, resolving in order: room, then artwork, then the title, last */
-.res-1{animation:res 760ms var(--ease) 120ms both}
-.res-2{animation:res 760ms var(--ease) 300ms both}
-.res-3{animation:res 760ms var(--ease) 440ms both}
-@keyframes res{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.res-1{animation:res 620ms var(--ease) 210ms both}
+/* the title lands last and lands hardest */
+.res-2{animation:title 820ms var(--ease) 370ms both}
+.res-3{animation:res 700ms var(--ease) 560ms both}
+@keyframes res{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes title{
+  from{opacity:0;transform:translateY(30px) scale(.985);filter:blur(6px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
 .swap{transition:opacity 260ms var(--ease), transform 260ms var(--ease)}
 .swap.out{opacity:0;transform:translateY(10px)}
 
@@ -700,6 +755,14 @@ main{position:relative;z-index:10}
   .doors button{font-size:10px;letter-spacing:.14em;padding:14px 0}
   .doors button[data-go="tonight"]{display:none}
   .annot .right{display:none}
+  /* the arrival scrim runs bottom-up on a phone for the same reason the
+     feature's does: a left-hand gradient protects nothing at this width */
+  .amb::after{
+    background:
+      linear-gradient(to bottom, rgba(8,8,8,.72) 0%, rgba(8,8,8,.34) 22%,
+                      rgba(8,8,8,.72) 48%, rgba(8,8,8,.93) 74%, var(--ink) 100%);
+  }
+  .amb i.on{opacity:.26}
   .who button{font-size:clamp(1.5rem,7.6vw,2.1rem)}
   .showtimes{gap:4px 12px}
   .nights{grid-template-columns:1fr 1fr;gap:0 20px}
@@ -729,7 +792,9 @@ main{position:relative;z-index:10}
   .find{margin-left:0;width:100%;order:3}
   .svcs{grid-template-columns:1fr}
   .opts button{padding:10px 0}
-  .house-pick,.recut{padding:9px 0 5px}
+  .recut{padding:9px 0 5px}
+  .house-band{padding:22px 0}
+  .house-pick{padding:12px 0;min-height:44px}
   .tune > summary{padding:26px 0}
   /* keep the primary action in reach */
   .pitch{font-size:1.1rem}
@@ -784,10 +849,13 @@ main{position:relative;z-index:10}
         <button class="bill-go" id="encore-go" type="button">
           <span>Show me the bill</span><span class="arw">&rarr;</span>
         </button>
-        <p class="house-line">
-          <span>or</span>
-          <button class="house-pick" id="encore-house" type="button">let the house decide</button>
-        </p>
+      <div class="house-band">
+        <p class="house-say">Or don&rsquo;t decide at all.</p>
+        <button class="house-pick" id="encore-house" type="button">
+          Let the house decide <span class="arw">&rarr;</span>
+        </button>
+        <p class="house-fine">One film. No list. No second-guessing.</p>
+      </div>
       </div>
     </div>
   </div>
@@ -815,10 +883,13 @@ main{position:relative;z-index:10}
         <span>Show me the bill</span><span class="arw">&rarr;</span>
       </button>
       <p class="call-note" id="call-note"></p>
-      <p class="house-line">
-        <span>or</span>
-        <button class="house-pick" id="house-pick" type="button">let the house decide</button>
-      </p>
+      <div class="house-band">
+        <p class="house-say">Or don&rsquo;t decide at all.</p>
+        <button class="house-pick" id="house-pick" type="button">
+          Let the house decide <span class="arw">&rarr;</span>
+        </button>
+        <p class="house-fine">One film. No list. No second-guessing.</p>
+      </div>
     </div>
 
     <details class="tune" id="tune">
@@ -875,7 +946,9 @@ main{position:relative;z-index:10}
 <!-- ══════════════════════ SCENE 04 · THE FEATURE ══════════════════════ -->
 <section class="scene" id="s-bill" aria-label="Tonight&rsquo;s bill">
   <div class="feature" id="feature">
-    <div class="plate" id="plate" aria-hidden="true"><i data-slot="a"></i><i data-slot="b"></i></div>
+    <div class="plate" id="plate" aria-hidden="true">
+      <b class="wash" id="wash"></b><i data-slot="a"></i><i data-slot="b"></i>
+    </div>
     <div class="feature-in frame">
       <div class="bill-grid swap" id="bill-grid"></div>
     </div>
@@ -1857,7 +1930,7 @@ const NIGHT_PLATE = {
   beautiful:"Portrait of a Lady on Fire", comfort:"Groundhog Day", weird:"Everything Everywhere All at Once"
 };
 /* set sizes vary so the programme has a rhythm rather than a grid */
-const NIGHT_SIZE = ["2.35rem","2rem","2.5rem","2.05rem","2.45rem","2.15rem"];
+const NIGHT_SIZE = ["2rem","1.72rem","2.12rem","1.78rem","2.06rem","1.84rem"];
 
 const ARRIVAL_PLATES = ["Blade Runner 2049","Mad Max: Fury Road","La La Land","Heat"];
 
@@ -1941,6 +2014,19 @@ function plater(root){
   };
 }
 let ambPlate = null, billPlate = null;
+
+/* The film's own palette, blown up and blurred under the whole viewport. */
+function colourWash(url){
+  const w = $("wash");
+  if(!w) return;
+  if(!url){ w.classList.remove("on"); return; }
+  const pre = new Image();
+  pre.onload = function(){
+    w.style.backgroundImage = 'url("' + url + '")';
+    w.classList.add("on");
+  };
+  pre.src = url;
+}
 
 function plateFor(title){
   const f = title && BY_TITLE[title];
@@ -2086,12 +2172,9 @@ function renderNights(){
     if(url) wash.style.backgroundImage = 'url("' + url + '")';
     b.appendChild(wash);
 
-    const no = el("span","no");
-    no.appendChild(el("span","dot"));
-    no.appendChild(document.createTextNode(String(i + 1).padStart(2,"0")));
-    b.appendChild(no);
-
-    const label = el("span","label", m.n);
+    const label = el("span","label");
+    label.appendChild(el("span","dot"));
+    label.appendChild(document.createTextNode(m.n));
     label.style.fontSize = NIGHT_SIZE[i % NIGHT_SIZE.length];
     b.appendChild(label);
 
@@ -2268,21 +2351,37 @@ function renderArrival(){
 /* ============================================================================
    SCENE 03 — the lights go down
    ========================================================================== */
-function lightsDown(then){
+/* The lights going down.
+   0ms    the room recedes and the house darkens
+   ~40ms  the chosen film's artwork starts downloading behind the black
+   240ms  a line of mono in the dark
+   380ms  the scene changes while nobody can see it
+   420ms  the darkness begins a long lift, and the backdrop resolves out of
+          blur underneath it — the film emerges through the dark, not after it
+   ~790ms the title lands
+   Total ≈ 1.0s. Nothing here is a spinner and nothing is a component swap. */
+function lightsDown(rec, then){
   if(REDUCED){ then(); return; }
   const d = $("dark"), scene = document.querySelector(".scene.on");
   $("whisper").textContent = "Feature presentation";
+
+  /* pull the artwork now so the wait is spent inside the transition */
+  if(rec && rec.f && rec.f.backdrop){ const pre = new Image(); pre.src = backdropURL(rec.f.backdrop); }
+
   if(scene) scene.classList.add("receding");
+  d.classList.remove("lift");
   d.classList.add("down");
-  setTimeout(function(){ d.classList.add("speak"); }, 250);
+  setTimeout(function(){ d.classList.add("speak"); }, 240);
   setTimeout(function(){
     then();
     d.classList.remove("speak");
-  }, 640);
+  }, 380);
   setTimeout(function(){
+    d.classList.add("lift");
     d.classList.remove("down");
     document.querySelectorAll(".receding").forEach(function(n){ n.classList.remove("receding"); });
-  }, 800);
+  }, 420);
+  setTimeout(function(){ d.classList.remove("lift"); }, 1120);
 }
 
 /* the house dealing: a few posters pass through, then one stays */
@@ -2331,7 +2430,8 @@ function programme(opts){
   const out = scoreAll();
   LAST = out;
   const paint = function(){ showScene("bill"); renderBill(out); };
-  if(opts.quiet) paint(); else lightsDown(paint);
+  const first = out.picks.length ? out.picks[0] : null;
+  if(opts.quiet) paint(); else lightsDown(heldRec(out) || first, paint);
   if(!opts.silent && out.picks.length){
     rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
   }
@@ -2395,7 +2495,9 @@ function setFeature(rec, animate){
     const fig = el("figure","bill-poster res-3");
     fig.appendChild(poster(rec.f, "(max-width:1199px) 16vw, 248px", true));
     grid.appendChild(fig);
-    billPlate(rec.f.backdrop ? backdropURL(rec.f.backdrop) : anyPlate());
+    const art = rec.f.backdrop ? backdropURL(rec.f.backdrop) : anyPlate();
+    billPlate(art);
+    colourWash(art);
     grid.classList.remove("out");
     say(rec.f.t + ". " + rec.f.y + ", " + hm(rec.f.r) + ", rated " + rec.f.mpaa + ".");
   };
@@ -2427,25 +2529,27 @@ function billCopy(rec){
     pitch.innerHTML = pitchOf(rec);
     b.appendChild(pitch);
 
+    const svc = serviceName(rec);
     const meta = el("div","stub res-3");
-    [String(f.y), hm(f.r).toUpperCase(), f.mpaa, f.rt + "% critics"].forEach(function(v, i){
+    [String(f.y), hm(f.r).toUpperCase(), f.mpaa,
+     svc || "Rent or buy"].forEach(function(v, i){
       if(i) meta.appendChild(el("span","slash","/"));
-      meta.appendChild(el("span","tick", v));
+      meta.appendChild(el("span","tick" + (i === 3 ? " lit" : ""), v));
     });
     b.appendChild(meta);
+    if(svc && !(rec.on && rec.on.length)){
+      b.appendChild(withClass(tick("Not on a service you have", true), "where res-3"));
+    }
   }
-
-  const svc = serviceName(rec);
-  const where = el("p","tick where res-3");
-  where.innerHTML = svc
-    ? ((rec.on && rec.on.length) ? "Watch on <b>" + svc + "</b>" : "Only on <b>" + svc + "</b>")
-    : "Rent or buy";
-  b.appendChild(where);
 
   b.appendChild(billActs(rec));
 
-  if(MODE !== "locked" && rec.T && rec.T.n && rec.score){
-    b.appendChild(withClass(tick("Fit " + Math.round(rec.score * 100) + " of 100", true), "score res-3"));
+  /* the arithmetic lives at the bottom of the hierarchy */
+  if(MODE !== "locked"){
+    const foot = [];
+    if(f.rt) foot.push(f.rt + "% critics");
+    if(rec.T && rec.T.n && rec.score) foot.push("fit " + Math.round(rec.score * 100) + " of 100");
+    if(foot.length) b.appendChild(withClass(tick(foot.join("  ·  "), true), "score res-3"));
   }
   return b;
 }
@@ -2455,10 +2559,10 @@ function withClass(node, cls){ node.className += " " + cls; return node; }
    size. Short titles are allowed to fill the frame. */
 function titleSize(t){
   const n = t.length;
-  if(n <= 11) return "clamp(3.6rem, 10.5vw, 9rem)";
-  if(n <= 18) return "clamp(3rem, 7.8vw, 7.2rem)";
-  if(n <= 30) return "clamp(2.5rem, 5.8vw, 5.4rem)";
-  return "clamp(2.1rem, 4.3vw, 4rem)";
+  if(n <= 11) return "clamp(4rem, 13vw, 11.5rem)";
+  if(n <= 18) return "clamp(3.4rem, 9.6vw, 9rem)";
+  if(n <= 30) return "clamp(2.8rem, 7vw, 6.6rem)";
+  return "clamp(2.3rem, 5.1vw, 4.8rem)";
 }
 
 function billActs(rec){
@@ -2791,7 +2895,7 @@ function renderWall(){
   });
 
   if(list.length > wallShown){
-    const more = el("button","house-pick","Show more"); more.type = "button";
+    const more = el("button","recut","Show more"); more.type = "button";
     const holder = el("div"); holder.style.gridColumn = "1/-1"; holder.style.marginTop = "8px";
     more.addEventListener("click", function(){ wallShown += 48; renderWall(); });
     holder.appendChild(more);
