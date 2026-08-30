@@ -16,8 +16,8 @@ better constraint. A local engine over hand-tagged data cannot invent a film
 that doesn't exist or claim something is on Netflix when it isn't — the two
 failure modes that would have made an LLM version useless in practice.
 
-For anything outside the catalog, the **Copy brief** button produces a
-structured prompt you can hand to any assistant with live search.
+For anything outside the catalog, there is nothing to ask — the house programmes
+from what it actually has on the shelf, and says so.
 
 ## How the scoring works
 
@@ -126,48 +126,131 @@ external images; those elements remove themselves on error rather than leaving
 broken boxes, which is why posters appear on GitHub Pages or locally but not
 inside a sandboxed artifact frame.
 
-### Reading the bill
+### The house
 
-Dark is the default — this is a thing you use at night — with a light toggle
-that persists. There is no `prefers-color-scheme` switch: the dark palette is
-the stylesheet's base, so the page also paints dark on the first frame with no
-flash of the wrong theme.
+The interface is the ninety seconds before a movie starts, not a form that
+returns results. It is built as **scenes** rather than pages: arrival, making
+the night, the lights going down, the feature.
 
-Each pick carries poster art, a real plot synopsis, the certification, the
-critic score, runtime, and where it streams. Posters shimmer at the correct
-2:3 aspect ratio while loading so nothing reflows under the reader, and remove
-themselves if the image is refused.
+Three voices do the work and never trade jobs. **Instrument Serif** is the
+cinematic voice — the opening statement, the mood programme, every movie title.
+**Archivo** is functional: navigation, buttons, questions, labels. **IBM Plex
+Mono** is ticket stock and nothing else — showtimes, runtime, year, rating,
+the date and time at the top of the arrival.
 
-**Keyboard:** `J`/`K` or arrows move through the bill, `C` compares the focused
-pick against the leader, `W` marks it watched, `/` jumps to search, `Esc`
-clears. Shortcuts are ignored while typing in a field.
+Colour is almost entirely black, charcoal and warm cream with one restrained
+red. The films supply the rest.
 
-**Comparing two picks.** Fit scores sit close together, so "why is 73 above 68"
-is a fair question. `C` breaks it down into the same four components the score
-is built from — taste, genre, room, recognisability — and names the one that
-actually decided it, rather than restating the total.
+**Arrival** is deliberately compact. A mono annotation (`SATURDAY / 8:47 PM`),
+the statement, one line under it, and then the first real decision inside the
+same viewport on a laptop. Behind it, a heavily scrimmed backdrop drifts slowly
+between a few films — and once the viewer answers something, the room starts
+reacting to them instead.
 
-**Recent evenings.** Two separate memories doing two different jobs. *Watched*
-is explicit: mark a film and it stops being offered until you clear it.
-*Offered* is automatic: the last three bills carry a small, bounded penalty so
-tonight's list is not word-for-word yesterday's. The penalty reorders near-ties
-and never buries a genuinely better match.
+**Three decisions, three interaction languages.** This is the point of the
+design, and none of them is a card:
+
+- *Who's watching* — large type in a row, with a rule that draws itself under
+  the answer and turns red when it is the one.
+- *How long have we got* — a programme listing. One hair rule across the top,
+  the times hanging beneath it in Archivo with a mono cap under each
+  (`UNDER 2H 15`), and a red segment burned into the rule above tonight's.
+- *What kind of night is it* — a programme page set in Instrument Serif at six
+  different sizes, on a three-column grid where each column starts at a
+  different height. Approaching one fades a film in behind the words at 13%.
+
+**The call** is a red rectangle with no radius, sized as an event. Under it,
+*or let the house decide*.
+
+**Let the house decide** deals: seven posters pass through a shuffle for about
+620ms and one stays, then the reveal opens on it — one film, no shelf.
+
+**The lights go down.** Requesting a bill does not swap screens. The room
+recedes (opacity, a little blur, a fractional scale-down), the page goes to
+black, a mono line reads *feature presentation*, the scene changes behind the
+black, and the artwork resolves out of a 14px blur while the title lands after
+it. About 1.1s end to end, and skipped entirely under `prefers-reduced-motion`.
+
+**The feature** fits one viewport on a laptop. The backdrop is carried at 90%
+opacity — Glass Onion stays Mediterranean blue, Ex Machina stays cold grey —
+and legibility comes from layered scrims that darken the side the words are on
+while leaving a lit region of the frame alone, never from flattening the image.
+The title scales to its own length, so a short one is allowed to fill the
+frame. The poster hangs below the baseline of the copy rather than sitting in a
+cell. The fit percentage is demoted to a small mono `FIT 76 OF 100` at the
+bottom of the hierarchy.
+
+**Why this tonight** takes the sharpest sentence the engine can produce and
+uses it as the pitch, in serif italic, with the named film set upright inside
+it. The panel then picks up from *where the pitch left off* rather than
+repeating it, and adds what you go for, how it fits tonight, and the films it
+feels closest to. Constraints nobody set are not listed as reasons.
+
+**Also playing** is a shelf that runs off the right edge of the frame so it is
+obvious the room continues. Hovering focuses one poster and steps the others
+back to 50%, and previews that film's backdrop behind the feature. The first
+alternative is flagged *Second choice*; the wild card — a well-reviewed film
+your profile would not have surfaced — is flagged *Wild card* and is promoted
+onto the shelf if the ranking would otherwise have buried it.
+
+**Recent evenings.** Two memories doing two jobs. *Watched* is explicit: mark a
+film **Seen it** and it stops being offered. *Offered* is automatic: the last
+three bills carry a small bounded penalty so tonight is not word-for-word
+yesterday. It reorders near-ties and never buries a better match.
+
+**Keyboard:** `Enter` programmes the bill, `R` deals another, `Esc` goes back to
+tonight. Shortcuts are ignored while typing in a field.
+
+**Returning viewers** get the fast lane — *Back for another?*, the films they'd
+defend, a mono line recapping tonight, and one button. **Change** brings the
+questions back.
+
+**My Movies** asks for five films you'd defend rather than five you liked.
+Loved posters are numbered `01`–`05` and outlined in red; the rest of the wall
+is untouched artwork.
+
+### Mobile
+
+Composed for the size, not stacked from the desktop. The masthead drops to the
+theatre name and two links. The feature bottom-aligns and takes a second scrim
+keyed to where the copy actually sits — a left-hand scrim protects nothing when
+text spans the full width. The pitch and synopsis clamp so the red action stays
+in reach, rails let the next poster peek in, and hover-only affordances become
+permanently visible. Touch targets are 44px or larger.
+
+### Accessibility
+
+Semantic sections and headings, a live region announcing each change of
+feature, focus rings in the system's own gold rather than the browser default,
+and a full `prefers-reduced-motion` path that removes the transition, the
+drift, the grain and every animation while keeping the state changes immediate.
+Small text sits at 4.5:1 against the ground; the dimmer tone is reserved for
+large display type, where 3:1 applies.
+
+### Performance
+
+Posters are lazy `<img>` tags with a `srcset` across TMDB's 185/342/500 widths
+and an explicit aspect ratio, so nothing reflows under the reader. Backdrops
+are requested at 780px on phones and 1280px above, preloaded off-screen and
+crossfaded in so a half-drawn image never appears. Only the artwork on screen
+is fetched. Everything moves on CSS transitions — there is no animation
+library. Some embedded viewers block external images; those elements remove
+themselves on error and fall back to a typographic poster.
 
 ### Why isn't this film showing up?
 
-Search any title in the taste grid and the page reports its verdict on every
-filter — runtime, room, rating floor, critic bar, genre, and where it streams —
-saying which ones it failed and by how much ("2h 25m runs past your 2h 20m —
-5m too long"). Dimmed grid cards carry the same explanation as a tooltip.
-
-The idea is borrowed from SuggestArr's `dry_run` mode, which returns every
-candidate with a per-filter pass/fail record instead of silently dropping the
-ones that lose. An unexplained absence is the hardest thing to debug in a
-recommender, because nothing appears to be wrong.
-
-`checkFilters()` is the single source of truth: `hardPass()` and `fitsTonight()`
-are both derived from it, so the explanation can never drift from the behaviour
+`checkFilters()` is the single source of truth for "does this fit tonight", and
+it returns a per-filter pass/fail record with a written reason for each —
+runtime, room, rating floor, critic bar, genre, and where it streams
+("2h 25m runs past your 2h 20m — 5m too long"). `hardPass()` and `fitsTonight()`
+are both derived from it, so an explanation can never drift from the behaviour
 it describes.
+
+The passing half of that record is what *Why this tonight* shows. The failing half is
+summarised under the bill: how many titles would have made it but sit on a
+service you don't have, how many are rent-or-buy only, how many are held back
+because you have already seen them. An unexplained absence is the hardest thing
+to debug in a recommender, because nothing appears to be wrong.
 
 ### Tests
 
