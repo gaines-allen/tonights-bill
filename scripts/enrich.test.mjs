@@ -6,7 +6,7 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { serviceCode, parseCatalog, pickMatch, usCertification, flatrateCodes, rtFromOmdb,
+import { serviceCode, parseCatalog, pickMatch, usCertification, flatrateCodes, logoPaths, rtFromOmdb,
          readOmdbPayload } from "./enrich.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -66,6 +66,16 @@ eq("missing results -> []", flatrateCodes({}), []);
 eq("dedupes repeats",
    flatrateCodes({ results: { US: { flatrate: [
      { provider_name: "Netflix" }, { provider_name: "Netflix Standard with Ads" }] } } }), ["NFX"]);
+
+console.log("\nprovider logos (the real marks, taken from the same response)");
+const provLogo = { results: { US: {
+  flatrate: [{ provider_name: "Netflix", logo_path: "/net.jpg" },
+             { provider_name: "Hulu", logo_path: "/hul.jpg" }],
+  rent:     [{ provider_name: "Apple TV", logo_path: "/rent.jpg" }]
+}}};
+eq("logos for subscription services only", logoPaths(provLogo), { NFX: "/net.jpg", HUL: "/hul.jpg" });
+eq("no US region -> {}", logoPaths({ results: { GB: { flatrate: [{ provider_name: "Netflix", logo_path: "/x.jpg" }] } } }), {});
+eq("missing logo_path is skipped", logoPaths({ results: { US: { flatrate: [{ provider_name: "Netflix" }] } } }), {});
 
 console.log("\ntitle matching (search returns wrong films for common titles)");
 const results = [

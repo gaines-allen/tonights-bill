@@ -158,6 +158,20 @@ export function flatrateCodes(providers) {
   return [...new Set(names.map(serviceCode).filter(Boolean))];
 }
 
+/* The per-movie providers payload already carries each service's own logo, so
+   the marks shown next to a film are the real ones rather than hand-drawn
+   imitations. Collected once across the whole run into _meta, never per film. */
+export function logoPaths(providers) {
+  const region = providers?.results?.[REGION];
+  if (!region) return {};
+  const out = {};
+  for (const p of [...(region.flatrate || []), ...(region.ads || [])]) {
+    const code = serviceCode(p.provider_name);
+    if (code && p.logo_path && !out[code]) out[code] = p.logo_path;
+  }
+  return out;
+}
+
 export function rtFromOmdb(omdb) {
   const r = (omdb?.Ratings || []).find((x) => x.Source === "Rotten Tomatoes");
   if (!r) return null;
@@ -198,6 +212,7 @@ async function enrichOne(film) {
   out.overview = trimOverview(details?.overview || hit.overview || "");
   out.backdrop = details?.backdrop_path || hit.backdrop_path || null;
   out.providers = flatrateCodes(prov);
+  out.logos = logoPaths(prov);
   /* Distinguishes "checked, and it is on nothing" from "never checked".
      Without this the page would keep showing a hand-guessed service for a
      film that is demonstrably not streaming anywhere. */
@@ -311,9 +326,16 @@ async function main() {
         ok.forEach((r) => { if (r.omdbError) tally[r.omdbError] = (tally[r.omdbError] || 0) + 1; });
         return tally;
       })(),
-      unmatched: missed.map((r) => `${r.t} (${r.y}): ${r.error || "unknown"}`)
+      unmatched: missed.map((r) => `${r.t} (${r.y}): ${r.error || "unknown"}`),
+      logos: (() => {
+        const all = {};
+        ok.forEach((r) => Object.entries(r.logos || {}).forEach(([code, path]) => {
+          if (!all[code]) all[code] = path;
+        }));
+        return all;
+      })()
     },
-    films: ok
+    films: ok.map(({ logos, ...rest }) => rest)
   };
 
   await mkdir(join(ROOT, "data"), { recursive: true });
