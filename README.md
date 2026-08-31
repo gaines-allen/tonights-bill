@@ -1,12 +1,20 @@
-# Tonight's Bill
+# Main Feature
 
-A movie picker for one household. You tell it who's on the couch, how much time
-you have, what you're in the mood for, and which films you've loved or bounced
-off. It scores a catalog of 244 major releases against that and returns a ranked
-bill, with a written reason for every pick.
+A movie picker for one household, dressed as a neighborhood video store that is
+still open late. (Formerly "Tonight's Bill".) You tell it who's on the couch,
+how much time you have, what you're in the mood for, and which films you've
+loved or bounced off. It scores a catalog of 244 major releases against that and
+hands you tonight's pick, with a written reason from the store.
 
 One self-contained file. No build step, no dependencies, no server.
 Open `index.html` in any browser.
+
+The 2026 redesign replaced the "ninety seconds before a movie starts" theater
+look with the Main Feature brand world: an illuminated marquee, cream ticket
+stock, laminated shelf signage, paper recommendation notes, and a browsable
+"The Aisles" section cut from the same catalog tags. Everything below about
+scoring, filters, and data still holds; where this document describes the old
+visual language, trust the code.
 
 ## Why it isn't an AI app
 
@@ -220,14 +228,14 @@ film **Seen it** and it stops being offered. *Offered* is automatic: the last
 three bills carry a small bounded penalty so tonight is not word-for-word
 yesterday. It reorders near-ties and never buries a better match.
 
-**Keyboard:** `Enter` programmes the bill, `R` deals another, `Esc` goes back to
-tonight. Shortcuts are ignored while typing in a field.
+**Keyboard:** `Enter` asks for tonight's pick, `R` deals another, `Esc` goes
+back to the counter. Shortcuts are ignored while typing in a field.
 
 **Returning viewers** get the fast lane — *Back for another?*, the films they'd
 defend, a mono line recapping tonight, and one button. **Change** brings the
 questions back.
 
-**My Movies** asks for five films you'd defend rather than five you liked.
+**Your Shelf** asks for five films you'd defend rather than five you liked.
 Loved posters are numbered `01`–`05` and outlined in red; the rest of the wall
 is untouched artwork.
 

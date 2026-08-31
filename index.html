@@ -2,48 +2,60 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080808">
-<meta name="description" content="Tonight's Bill programmes your evening. One feature, chosen for the room you're in.">
-<title>Tonight's Bill</title>
+<meta name="theme-color" content="#12161f">
+<meta name="description" content="Main Feature picks tonight's movie. A neighborhood video store that is still open late.">
+<title>Main Feature</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap">
 <style>
 /* ==========================================================================
-   TONIGHT'S BILL
-   The ninety seconds before a movie starts.
+   MAIN FEATURE
+   A marquee over the door of a very good video store, open late.
 
-   The interface is the theatre; the film is the projected image inside it.
-   Serif is the cinematic voice, Archivo does the work, mono is ticket stock.
-   Three decisions, three different interaction languages — nothing here is a
-   reusable card.
+   The world: classic theater marquee x 1990s video store x Criterion Closet.
+   The movies are the graphics. Paper, letterboard, laminate and wood carry
+   the interface; the display face does the shouting, the mono face does the
+   date stamps, the handwriting shows up twice and no more.
    ========================================================================== */
 
 :root{
   /* ---- the room ---- */
-  --ink:#080808;
-  --ink-2:#0F0F0E;
-  --char:#161615;         /* charcoal */
-  --cream:#F2EDE3;
-  --cream-2:#BEB9AE;
-  --muted:#8E8B84;
-  --dim:#7B7973;          /* 4.5:1 on the ground — safe for small type */
-  --ghost:#6B6963;        /* large display type only */
-  --red:#D8332B;
-  --red-lit:#F04438;
-  --gold:#E8B549;         /* used almost never */
-  --hair:rgba(242,237,227,.12);
-  --hair-2:rgba(242,237,227,.26);
+  --night:#12161f;          /* blue-black, never digitally pure */
+  --night-2:#171b26;
+  --navy:#1b2536;           /* the store's back wall */
+  --navy-2:#223048;
+  --navy-line:#35486b;
+  --wood:#3e2c1a;
+  --wood-hi:#5a4128;
+  --wood-lo:#2c1e11;
+  --cream:#f2e7cd;          /* marquee letterboard */
+  --paper:#ece0c2;          /* note paper */
+  --paper-2:#e0d1ab;
+  --paper-line:#c8b78c;
+  --ink:#2b2418;            /* ink on paper */
+  --ink-soft:#5b4f38;
+  --red:#a63a2a;            /* aged theater red */
+  --red-deep:#7d241b;       /* marquee letters */
+  --red-neon:#ff6a55;
+  --amber:#e2a13f;
+  --gold:#d9b36a;           /* laminated sign lettering */
+  --bulb:#ffe3ae;
+  --cream-dim:rgba(242,231,205,.62);
+  --cream-mute:#b7ab90;     /* warm muted text on dark */
+  --hair:rgba(242,231,205,.14);
+  --hair-2:rgba(242,231,205,.3);
 
   /* ---- voices ---- */
-  --serif:'Instrument Serif', 'Times New Roman', Georgia, serif;
+  --display:'Bebas Neue', 'Arial Narrow', 'Helvetica Neue Condensed', sans-serif;
   --sans:'Archivo', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
   --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --hand:'Caveat', 'Comic Sans MS', cursive;
 
   /* ---- measure ---- */
-  --frame:1560px;
-  --gut:clamp(20px, 4.6vw, 76px);
-  --mast:78px;
+  --frame:1460px;
+  --gut:clamp(18px, 4.2vw, 64px);
+  --mast:72px;
 
   /* ---- motion ---- */
   --ease:cubic-bezier(.22, 1, .36, 1);
@@ -57,7 +69,10 @@
 html{-webkit-text-size-adjust:100%}
 html,body{overflow-x:hidden}
 body{
-  margin:0;background:var(--ink);color:var(--cream);
+  margin:0;color:var(--cream);
+  background:
+    radial-gradient(120% 90% at 50% 0%, #1a2233 0%, var(--night) 52%, #0e0b09 100%);
+  background-attachment:fixed;
   font-family:var(--sans);font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
@@ -68,8 +83,7 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
 ::selection{background:var(--red);color:#fff}
 
-/* Focus belongs to the system, but it must never be subtle. */
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
     clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -77,34 +91,44 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* --------------------------------------------------------------------------
    VOICES
    -------------------------------------------------------------------------- */
-.say{                       /* the cinematic voice */
-  font-family:var(--serif);font-weight:400;line-height:.94;
-  letter-spacing:-.012em;text-wrap:balance;
+.say{                       /* marquee lettering */
+  font-family:var(--display);font-weight:400;line-height:.95;
+  letter-spacing:.03em;text-transform:uppercase;text-wrap:balance;
 }
-.say-xl{font-size:clamp(3.4rem, 9.4vw, 9.6rem);line-height:.88;letter-spacing:-.022em}
-.say-lg{font-size:clamp(2.6rem, 6vw, 5.9rem);line-height:.9;letter-spacing:-.02em}
-.say-md{font-size:clamp(1.9rem, 3.4vw, 2.9rem)}
+.say-xl{font-size:clamp(2.6rem, 6.4vw, 5.4rem);line-height:.92}
+.say-lg{font-size:clamp(2.2rem, 5vw, 4.4rem);line-height:.92}
+.say-md{font-size:clamp(1.5rem, 2.6vw, 2.2rem)}
 
-.tick{                      /* ticket stock: showtimes, runtime, year, rating */
+.tick{                      /* date-stamp stock: runtime, year, rating */
   font-family:var(--mono);font-size:11.5px;font-weight:500;
   letter-spacing:.16em;text-transform:uppercase;
-  font-variant-numeric:tabular-nums;color:var(--muted);
+  font-variant-numeric:tabular-nums;color:var(--cream-mute);
 }
 .tick-sm{font-size:10.5px;letter-spacing:.2em}
 
-/* The question is asked, not labelled. On a wide screen it hangs out in the
-   margin like a credit, which is what stops three decisions reading as three
-   form sections stacked down the page. */
-.ask-of{
-  font-family:var(--serif);font-style:italic;font-weight:400;
-  font-size:clamp(14px,1.2vw,18px);letter-spacing:0;text-transform:none;
-  color:var(--muted);
+.hand{                      /* the clerk's pen. used twice on the whole site. */
+  font-family:var(--hand);font-weight:500;font-size:clamp(18px,1.6vw,22px);
+  color:var(--amber);letter-spacing:0;text-transform:none;line-height:1.2;
+  transform:rotate(-1.2deg);display:inline-block;
 }
 
-/* the house light */
+/* section signage: the laminated gold-on-navy shelf sign */
+.ask-of{
+  font-family:var(--display);font-weight:400;font-size:clamp(1.05rem,1.6vw,1.35rem);
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:14px;
+}
+.ask-of::before,.ask-of::after{
+  content:"";height:1px;background:linear-gradient(90deg,transparent,var(--gold));
+  flex:0 0 34px;opacity:.55;
+}
+.ask-of::after{background:linear-gradient(90deg,var(--gold),transparent)}
+
+/* small red bulb used in labels */
 .dot{
   display:inline-block;width:.5em;height:.5em;border-radius:50%;
-  background:var(--red);flex:none;vertical-align:.1em;
+  background:var(--amber);box-shadow:0 0 6px rgba(226,161,63,.8);
+  flex:none;vertical-align:.1em;
 }
 
 /* --------------------------------------------------------------------------
@@ -113,15 +137,18 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .frame{max-width:var(--frame);margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
 
 /* --------------------------------------------------------------------------
-   AIR — grain and vignette. Felt, not seen.
+   AIR: warm vignette and grain. The store is lit by lamps, not monitors.
    -------------------------------------------------------------------------- */
 .air{position:fixed;inset:0;pointer-events:none;z-index:70}
 .air::before{
   content:"";position:absolute;inset:0;
-  background:radial-gradient(135% 100% at 50% 45%, transparent 46%, rgba(0,0,0,.5) 100%);
+  background:
+    radial-gradient(120% 90% at 50% 42%, transparent 44%, rgba(10,6,3,.55) 100%),
+    radial-gradient(40% 30% at 12% 8%, rgba(255,190,110,.05), transparent 70%),
+    radial-gradient(36% 28% at 88% 12%, rgba(255,120,90,.04), transparent 70%);
 }
 .air::after{
-  content:"";position:absolute;inset:-60%;opacity:.028;
+  content:"";position:absolute;inset:-60%;opacity:.035;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
   animation:grain 1100ms steps(4) infinite;
 }
@@ -131,7 +158,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 }
 
 /* --------------------------------------------------------------------------
-   MASTHEAD — the theatre's name over the door, nothing more
+   MASTHEAD: the small sign inside the door
    -------------------------------------------------------------------------- */
 .masthead{
   position:fixed;top:0;left:0;right:0;z-index:60;
@@ -139,30 +166,34 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   border-bottom:1px solid transparent;
 }
 .masthead.sunk{
-  background:rgba(8,8,8,.9);
-  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  background:rgba(14,12,9,.92);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
   border-bottom-color:var(--hair);
 }
 .masthead-in{
-  max-width:var(--frame);margin:0 auto;padding:24px var(--gut);
+  max-width:var(--frame);margin:0 auto;padding:16px var(--gut);
   display:flex;align-items:center;justify-content:space-between;gap:20px;
 }
 .house{
-  display:flex;align-items:center;gap:.62em;
-  font-family:var(--serif);font-size:clamp(17px,1.35vw,21px);
-  letter-spacing:.005em;white-space:nowrap;
+  font-family:var(--display);font-size:19px;letter-spacing:.1em;
+  text-transform:uppercase;white-space:nowrap;
+  background:var(--cream);color:var(--red-deep);
+  padding:5px 12px 3px;border-radius:3px;
+  box-shadow:0 2px 0 rgba(0,0,0,.4), inset 0 0 0 1px #d9c9a2;
+  transform:rotate(-.6deg);
 }
-.house .dot{width:7px;height:7px}
-.doors{display:flex;align-items:center;gap:clamp(18px,2.4vw,36px)}
+.house .dot{display:none}
+.doors{display:flex;align-items:center;gap:clamp(14px,2.2vw,32px)}
 .doors button{
-  font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--dim);transition:color var(--quick);white-space:nowrap;
+  font-family:var(--display);font-size:15px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cream-mute);transition:color var(--quick);white-space:nowrap;
   padding:8px 0;position:relative;
 }
 .doors button:hover{color:var(--cream)}
 .doors button[aria-current="page"]{color:var(--cream)}
 .doors button[aria-current="page"]::after{
-  content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:var(--red);
+  content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--amber);
+  box-shadow:0 0 8px rgba(226,161,63,.7);
 }
 
 /* --------------------------------------------------------------------------
@@ -172,7 +203,6 @@ main{position:relative;z-index:10}
 .scene{display:none}
 .scene.on{display:block}
 
-/* the whole room recedes while the lights go down */
 .receding{
   opacity:.18;filter:blur(3px);transform:scale(.988);
   transition:opacity 300ms var(--ease), filter 300ms var(--ease), transform 300ms var(--ease);
@@ -180,637 +210,830 @@ main{position:relative;z-index:10}
 }
 
 /* --------------------------------------------------------------------------
-   SCENE 01 — ARRIVAL
-   Compact on purpose: the first decision must be reachable without a journey.
+   THE MARQUEE. The name above the door. Built once, imitated nowhere else.
    -------------------------------------------------------------------------- */
-.arrival{position:relative;padding-top:calc(var(--mast) + clamp(26px,5vh,60px))}
-.annot{
-  display:flex;align-items:baseline;justify-content:space-between;gap:20px;
-  padding-bottom:clamp(20px,3.4vh,34px);
+.arrival{position:relative;padding-top:calc(var(--mast) + clamp(20px,4vh,44px))}
+
+.marquee{
+  position:relative;max-width:900px;margin:0 auto;
+  transform:rotate(-.4deg);
+  filter:drop-shadow(0 22px 44px rgba(0,0,0,.6));
+  padding:clamp(20px,3.4vw,32px);
+  background:linear-gradient(180deg,#8a5028 0%, #6b3a1b 40%, #4c250f 100%);
+  border-radius:16px;
+  box-shadow:
+    inset 0 2px 0 rgba(255,214,150,.4),
+    inset 0 -3px 8px rgba(0,0,0,.55),
+    0 0 60px rgba(255,180,100,.14);
 }
-.annot .right{color:var(--dim)}
-.arrival h1{max-width:13ch}
-.arrival .under{
-  margin-top:clamp(14px,2vh,22px);
-  font-size:clamp(15px,1.25vw,18px);color:var(--muted);max-width:38ch;
+/* bulb rows, top and bottom */
+.marquee::before,.marquee::after{
+  content:"";position:absolute;left:14px;right:14px;height:22px;
+  background-image:radial-gradient(circle at 11px 11px,
+    var(--bulb) 0 3.2px, #eda94f 5px, rgba(70,32,8,.65) 6.4px, transparent 8px);
+  background-size:30px 22px;background-repeat:repeat-x;background-position:center;
+  filter:drop-shadow(0 0 5px rgba(255,196,120,.85));
+  animation:bulbs 3.6s ease-in-out infinite;
+  pointer-events:none;
+}
+.marquee::before{top:4px}
+.marquee::after{bottom:4px}
+/* bulb columns, left and right */
+.lights{
+  position:absolute;top:26px;bottom:26px;width:22px;
+  background-image:radial-gradient(circle at 11px 11px,
+    var(--bulb) 0 3.2px, #eda94f 5px, rgba(70,32,8,.65) 6.4px, transparent 8px);
+  background-size:22px 30px;background-repeat:repeat-y;background-position:center;
+  filter:drop-shadow(0 0 5px rgba(255,196,120,.85));
+  animation:bulbs 3.6s ease-in-out infinite;
+  pointer-events:none;
+}
+.l-left{left:4px}
+.l-right{right:4px}
+@keyframes bulbs{
+  0%,100%{filter:drop-shadow(0 0 5px rgba(255,196,120,.85)) brightness(1)}
+  50%{filter:drop-shadow(0 0 3px rgba(255,196,120,.55)) brightness(.92)}
 }
 
-/* the atmosphere behind the arrival */
+.board{
+  position:relative;text-align:center;border-radius:6px;
+  padding:clamp(22px,4.4vw,46px) clamp(16px,4vw,52px) clamp(20px,3.6vw,38px);
+  background:
+    repeating-linear-gradient(180deg,
+      var(--cream) 0px, var(--cream) 42px,
+      #e3d5b4 42px, #e3d5b4 43px);
+  box-shadow:
+    inset 0 0 46px rgba(122,92,44,.22),
+    inset 0 2px 0 rgba(255,255,255,.5),
+    inset 0 -2px 0 rgba(0,0,0,.12);
+}
+.mq-name{
+  font-family:var(--display);color:var(--red-deep);
+  font-size:clamp(3.4rem, 12.5vw, 8.2rem);line-height:.88;letter-spacing:.045em;
+  text-shadow:0 2px 0 rgba(255,255,255,.4), 0 -1px 0 rgba(60,20,10,.18);
+}
+.mq-sub{
+  font-family:var(--display);color:#232a3c;
+  font-size:clamp(1rem, 2.8vw, 1.7rem);letter-spacing:.36em;margin-top:10px;
+  padding-left:.36em; /* recentre the tracked-out line */
+}
+
+/* the one neon moment */
+.neon{
+  font-family:var(--display);font-size:clamp(.85rem,1.4vw,1.05rem);
+  letter-spacing:.3em;text-transform:uppercase;color:var(--red-neon);
+  text-shadow:0 0 6px rgba(255,90,66,.9), 0 0 20px rgba(255,60,40,.5);
+  border:2px solid rgba(255,106,85,.5);border-radius:9px;padding:6px 14px 4px;
+  box-shadow:0 0 16px rgba(255,80,55,.3), inset 0 0 12px rgba(255,80,55,.2);
+  display:inline-block;transform:rotate(1.4deg);
+  animation:neon 9s linear infinite;
+}
+@keyframes neon{
+  0%,93.4%,94.2%,100%{opacity:1}
+  93.8%{opacity:.55}
+}
+
+.annot{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:clamp(22px,4vh,40px) 0 clamp(10px,2vh,18px);
+}
+.arrival h1{max-width:20ch}
+.arrival .under{
+  margin-top:clamp(10px,1.6vh,18px);
+  font-size:clamp(15px,1.25vw,17px);color:var(--cream-mute);max-width:44ch;
+}
+
+/* the movie wall glowing behind the entrance */
 .amb{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .amb i{
-  position:absolute;inset:0;display:block;opacity:0;
-  background-size:cover;background-position:50% 34%;
-  transition:opacity 1600ms var(--ease);
+  position:absolute;inset:0;background-size:cover;background-position:center 30%;
+  opacity:0;transition:opacity 1200ms var(--ease);
+  filter:saturate(.82) sepia(.14) brightness(.66);
 }
-.amb i.on{opacity:.34}
+.amb i.on{opacity:.5}
 .amb::after{
   content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(96deg, rgba(8,8,8,.94) 0%, rgba(8,8,8,.80) 34%, rgba(8,8,8,.42) 66%, rgba(8,8,8,.62) 100%),
-    linear-gradient(to bottom, rgba(8,8,8,.5) 0%, rgba(8,8,8,.18) 30%, rgba(8,8,8,.86) 80%, var(--ink) 100%);
+  background:linear-gradient(180deg, rgba(18,22,31,.42) 0%, rgba(18,22,31,.78) 55%, var(--night) 96%);
 }
 
 /* --------------------------------------------------------------------------
-   SCENE 02 — MAKING THE NIGHT
-   Three decisions, three languages. None of them is a card.
+   TELL US ABOUT TONIGHT: the store's back wall
    -------------------------------------------------------------------------- */
-.night{padding-top:clamp(26px,4vh,52px);padding-bottom:clamp(60px,9vh,110px)}
-.decision{padding-top:clamp(18px,2.8vh,32px)}
-.decision > .ask-of{display:block;margin-bottom:clamp(12px,1.6vh,18px)}
-@media (min-width:900px){
-  .decision{
-    display:grid;grid-template-columns:clamp(116px,12vw,178px) minmax(0,1fr);
-    gap:clamp(18px,2.6vw,44px);align-items:baseline;
-  }
-  .decision > .ask-of{margin-bottom:0;text-align:right;padding-top:.5em}
-}
+.night{padding-top:clamp(26px,4vh,44px);padding-bottom:clamp(40px,6vh,70px)}
+.decision{margin-top:clamp(30px,4.6vh,52px)}
+.decision > .ask-of{margin-bottom:clamp(14px,2vh,22px)}
 
-/* ---- ONE: who's watching. Large type, a rule that draws itself. ---- */
-.who{display:flex;flex-wrap:wrap;gap:clamp(10px,1.2vw,18px) clamp(24px,3.4vw,54px)}
+/* ---- one: who's watching. Cream tickets from behind the counter. ---- */
+.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:clamp(10px,1.4vw,18px)}
 .who button{
-  position:relative;padding:4px 0 12px;
-  font-size:clamp(1.25rem,2.2vw,1.95rem);font-weight:600;
-  letter-spacing:-.005em;text-transform:uppercase;line-height:1.05;
-  color:var(--ghost);transition:color var(--quick);
+  position:relative;text-align:center;
+  font-family:var(--display);font-size:clamp(1.25rem,1.8vw,1.6rem);
+  letter-spacing:.07em;text-transform:uppercase;color:var(--red-deep);
+  background:var(--paper);
+  padding:clamp(20px,2.6vw,30px) 10px clamp(16px,2.2vw,24px);
+  border-radius:4px;border:1px solid var(--paper-line);
+  box-shadow:0 6px 16px rgba(0,0,0,.45),
+    inset 0 0 0 4px var(--paper), inset 0 0 0 5px var(--paper-line);
+  transition:transform var(--quick), box-shadow var(--quick), background var(--quick);
 }
-.who button:hover{color:var(--cream-2)}
-.who button::after{
-  content:"";position:absolute;left:0;bottom:2px;height:2px;width:100%;
-  background:var(--hair-2);transform:scaleX(0);transform-origin:left;
-  transition:transform var(--calm), background var(--quick);
+.who button:nth-child(1){transform:rotate(-.7deg)}
+.who button:nth-child(2){transform:rotate(.4deg)}
+.who button:nth-child(3){transform:rotate(-.3deg)}
+.who button:nth-child(4){transform:rotate(.6deg)}
+.who button:hover{transform:translateY(-3px) rotate(0deg)}
+/* the punch: a picked ticket has a hole in it */
+.who button::before{
+  content:"";position:absolute;top:9px;left:50%;margin-left:-5px;
+  width:10px;height:10px;border-radius:50%;
+  background:transparent;transition:background var(--quick);
 }
-.who button:hover::after{transform:scaleX(1)}
-.who button[aria-pressed="true"]{color:var(--cream)}
-.who button[aria-pressed="true"]::after{background:var(--red);transform:scaleX(1)}
+.who button[aria-pressed="true"]{
+  background:#f7eed6;color:var(--red);
+  box-shadow:0 8px 18px rgba(0,0,0,.5),
+    inset 0 0 0 4px #f7eed6, inset 0 0 0 6px var(--red);
+  transform:translateY(-3px) rotate(0deg);
+}
+.who button[aria-pressed="true"]::before{
+  background:var(--night);box-shadow:inset 0 1px 2px rgba(0,0,0,.7);
+}
 
-/* ---- TWO: runtime as showtimes, printed across a rule ---- */
-/* A programme listing: one rule across the top, the times hanging beneath it,
-   and a red segment burned into the rule above whichever one is tonight's. */
-.clockline{position:relative}
-.showtimes{
-  position:relative;display:flex;flex-wrap:wrap;
-  gap:clamp(6px,1vw,10px) clamp(22px,4vw,60px);
-}
-/* the rule belongs to the listing, not to the page — it runs only as far as
-   the times themselves */
-.showtimes::before{
-  content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--hair);
-}
+/* ---- two: the clock, as laminated rental-category labels ---- */
+.clockline{border:0}
+.showtimes{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:clamp(10px,1.4vw,18px)}
 .showtimes button{
-  position:relative;padding:clamp(14px,2vh,20px) 0 4px;
-  display:flex;flex-direction:column;gap:6px;align-items:flex-start;
+  display:flex;flex-direction:column;gap:3px;align-items:flex-start;
+  background:linear-gradient(180deg,var(--navy-2),var(--navy));
+  border:1px solid var(--navy-line);border-radius:4px;
+  padding:14px 16px 12px;
+  box-shadow:0 4px 12px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.07);
+  transition:border-color var(--quick), transform var(--quick), background var(--quick);
 }
+.showtimes button:hover{transform:translateY(-2px);border-color:var(--hair-2)}
 .showtimes .name{
-  font-size:clamp(13px,1.15vw,15px);font-weight:600;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--cream-2);transition:color var(--quick);
+  font-family:var(--display);font-size:clamp(1.15rem,1.6vw,1.4rem);
+  letter-spacing:.08em;text-transform:uppercase;color:var(--gold);
 }
 .showtimes .cap{
-  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--dim);transition:color var(--quick);font-variant-numeric:tabular-nums;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--cream-mute);
 }
-.showtimes button:hover .name{color:var(--cream)}
-.showtimes button[aria-pressed="true"] .name{color:var(--cream)}
-.showtimes button[aria-pressed="true"] .cap{color:var(--red-lit)}
-.showtimes button[aria-pressed="true"]::before{
-  content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--red);
+.showtimes button[aria-pressed="true"]{
+  background:linear-gradient(180deg,#eab04e,#d3922f);border-color:#f3cd8a;
 }
+.showtimes button[aria-pressed="true"] .name{color:#241a08}
+.showtimes button[aria-pressed="true"] .cap{color:#54401c}
 
-/* ---- THREE: the night itself. A programme page, set in serif. ---- */
-.nights{
-  display:grid;gap:0 clamp(20px,2.6vw,44px);
-  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-}
+/* ---- three: the night itself. Lit shelf-end cards, the movies doing the talking. ---- */
+.nights{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:clamp(10px,1.4vw,18px)}
 .night-opt{
-  position:relative;isolation:isolate;overflow:hidden;
-  border-top:1px solid var(--hair);
-  padding:clamp(12px,1.6vh,18px) 0 clamp(18px,2.6vh,30px);
-  padding-right:14px;
-  transition:border-color var(--quick);
+  position:relative;overflow:hidden;border-radius:5px;
+  min-height:clamp(108px,13vh,148px);
+  border:1px solid var(--hair);
+  background:var(--night-2);
+  display:flex;align-items:flex-end;
+  transition:border-color var(--quick), transform var(--quick), box-shadow var(--quick);
 }
-.night-opt:hover{border-top-color:var(--hair-2)}
-/* the marker rides inside the line rather than sitting above it as an index */
-.night-opt .label .dot{
-  width:.3em;height:.3em;margin-right:.34em;vertical-align:.3em;
-  opacity:0;transition:opacity var(--quick);
-}
-.night-opt[aria-pressed="true"] .label .dot{opacity:1}
-.night-opt .label{
-  font-family:var(--serif);line-height:.98;letter-spacing:-.01em;
-  color:var(--cream-2);transition:color var(--quick);display:block;
-}
-.night-opt:hover .label{color:var(--cream)}
-/* restrained imagery: the film only shows itself once you lean in */
+.night-opt:hover{transform:translateY(-3px)}
 .night-opt .wash{
-  position:absolute;inset:0;z-index:-1;opacity:0;
-  background-size:cover;background-position:50% 42%;
-  transition:opacity var(--calm);
+  position:absolute;inset:0;background-size:cover;background-position:center 28%;
+  filter:saturate(.88) sepia(.12) brightness(.8);
+  transition:filter var(--calm), transform var(--long);
 }
-.night-opt:hover .wash{opacity:.13}
-.night-opt[aria-pressed="true"] .wash{opacity:.2}
-.night-opt[aria-pressed="true"]{border-top-color:var(--red)}
-.night-opt[aria-pressed="true"] .label{color:var(--cream)}
+.night-opt:hover .wash{filter:saturate(1) sepia(.06) brightness(.95);transform:scale(1.04)}
+.night-opt::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(18,22,31,0) 34%, rgba(14,11,8,.78) 94%);
+}
+.night-opt .label{
+  position:relative;z-index:2;display:flex;align-items:center;gap:.5em;
+  font-family:var(--display);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--cream);padding:14px 16px;line-height:.95;
+  text-shadow:0 2px 10px rgba(0,0,0,.8);
+}
+.night-opt .label .dot{background:rgba(242,231,205,.4);box-shadow:none;width:.38em;height:.38em}
+.night-opt[aria-pressed="true"]{
+  border-color:var(--amber);
+  box-shadow:0 0 0 1px var(--amber), 0 0 22px rgba(226,161,63,.35);
+}
+.night-opt[aria-pressed="true"] .wash{filter:saturate(1) sepia(.05) brightness(.95)}
+.night-opt[aria-pressed="true"] .label .dot{
+  background:var(--amber);box-shadow:0 0 8px rgba(226,161,63,.9);
+}
 
 /* --------------------------------------------------------------------------
-   THE CALL — an event, not a pill
+   THE COUNTER: the big red button and the dealer's ticket
    -------------------------------------------------------------------------- */
-/* The whole scene has been building to this, so it takes the full width of
-   the frame and the largest sans on the page. */
-.call{padding-top:clamp(46px,7vh,88px)}
+.call{margin-top:clamp(36px,5.5vh,60px)}
 .bill-go{
-  display:flex;align-items:center;justify-content:space-between;gap:24px;
-  width:100%;background:var(--red);color:#fff;
-  padding:clamp(26px,3.6vh,44px) clamp(22px,3vw,46px);
-  font-size:clamp(18px,2.6vw,34px);font-weight:700;letter-spacing:.09em;text-transform:uppercase;
-  line-height:1;
-  transition:background var(--quick), letter-spacing var(--calm);
+  display:inline-flex;align-items:center;gap:16px;
+  font-family:var(--display);font-size:clamp(1.35rem,2.4vw,1.9rem);
+  letter-spacing:.09em;text-transform:uppercase;color:var(--cream);
+  background:linear-gradient(180deg,#b8432c,#8e2c1d);
+  padding:16px 30px 13px;border-radius:5px;
+  border:1px solid #c96a50;
+  box-shadow:0 7px 0 #521509, 0 16px 30px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,220,180,.35);
+  transition:transform 90ms ease, box-shadow 90ms ease, filter var(--quick);
 }
-.bill-go .arw{font-weight:400;font-size:.9em;transition:transform var(--calm)}
-.bill-go:hover{background:var(--red-lit);letter-spacing:.11em}
-.bill-go:hover .arw{transform:translateX(14px)}
-.bill-go[disabled]{background:transparent;color:var(--dim);cursor:not-allowed;
-                   box-shadow:inset 0 0 0 1px var(--hair);letter-spacing:.09em}
-.bill-go[disabled]:hover .arw{transform:none}
-.call-note{margin-top:16px;font-size:13px;color:var(--dim);max-width:60ch}
+.bill-go:hover{filter:brightness(1.09)}
+.bill-go:active{transform:translateY(5px);box-shadow:0 2px 0 #521509, 0 8px 18px rgba(0,0,0,.5)}
+.bill-go:disabled{
+  filter:saturate(.25) brightness(.62);cursor:not-allowed;
+  box-shadow:0 4px 0 #2c1610, 0 10px 20px rgba(0,0,0,.4);
+}
+.bill-go .arw{font-family:var(--sans);font-weight:600}
+.call-note{margin-top:14px;font-size:14px;color:var(--cream-mute);max-width:52ch}
 
-/* Dealer's choice is not a smaller button under the big one. It is the other
-   thing you can do: hand the evening to the house and stop deciding. */
 .house-band{
-  margin-top:clamp(26px,4vh,44px);
-  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
-  padding:clamp(20px,3vh,34px) 0;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:16px clamp(20px,3vw,40px);flex-wrap:wrap;
-  transition:border-color var(--calm);
+  margin-top:clamp(24px,3.6vh,36px);display:flex;align-items:center;gap:18px;flex-wrap:wrap;
 }
-.house-band:hover{border-color:var(--hair-2)}
 .house-say{
-  font-family:var(--serif);font-style:italic;
-  font-size:clamp(1.15rem,2.2vw,1.85rem);line-height:1.2;color:var(--cream-2);
+  font-family:var(--hand);font-weight:500;font-size:clamp(18px,1.6vw,22px);
+  color:var(--amber);transform:rotate(-1.4deg);
+}
+.house-pick{
+  position:relative;display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--red-deep);background:var(--paper);
+  padding:10px 18px 8px 24px;border-radius:3px;
+  border:1px solid var(--paper-line);
+  box-shadow:0 4px 10px rgba(0,0,0,.45);
+  transform:rotate(.6deg);
+  transition:transform var(--quick), box-shadow var(--quick);
+}
+.house-pick:hover{transform:translateY(-2px) rotate(0deg)}
+/* perforated stub edge */
+.house-pick::before{
+  content:"";position:absolute;left:9px;top:4px;bottom:4px;width:0;
+  border-left:1px dashed rgba(90,70,40,.55);
+}
+.house-pick .arw{font-family:var(--sans);font-weight:600}
+.house-fine{flex-basis:100%;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cream-mute)}
+
+/* --------------------------------------------------------------------------
+   GOT RULES? The clipboard behind the counter.
+   -------------------------------------------------------------------------- */
+.tune{margin-top:clamp(38px,6vh,64px);border-top:1px dashed var(--hair);padding-top:18px}
+.tune summary{
+  cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--display);font-size:1.05rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--cream-mute);
   transition:color var(--quick);
 }
-.house-band:hover .house-say{color:var(--cream)}
-.house-pick{
-  display:inline-flex;align-items:center;gap:.8em;flex:none;
-  font-size:clamp(11px,1.1vw,13px);font-weight:700;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--cream);
-  padding:14px 0;min-height:46px;
-  border-bottom:1px solid var(--hair-2);
-  transition:border-color var(--quick), color var(--quick);
+.tune summary::-webkit-details-marker{display:none}
+.tune summary:hover{color:var(--cream)}
+.tune .sign{
+  display:inline-grid;place-items:center;width:22px;height:22px;
+  border:1px solid var(--hair-2);border-radius:3px;
+  font-family:var(--mono);font-size:13px;color:var(--amber);
 }
-.house-pick .arw{font-weight:400;transition:transform var(--calm)}
-.house-band:hover .house-pick{border-bottom-color:var(--red);color:#fff}
-.house-band:hover .house-pick .arw{transform:translateX(7px)}
-.house-fine{
-  flex-basis:100%;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--dim);
+.tune[open] .sign{transform:rotate(45deg)}
+.tune-body{
+  margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:26px clamp(24px,3.5vw,52px);
+  background:linear-gradient(180deg,var(--navy),#18202f);
+  border:1px solid var(--navy-line);border-radius:6px;
+  padding:clamp(20px,3vw,34px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 26px rgba(0,0,0,.35);
 }
-
-/* --------------------------------------------------------------------------
-   FINE TUNE — explicitly advanced, so it may look like controls
-   -------------------------------------------------------------------------- */
-.tune{margin-top:clamp(38px,6vh,70px);border-top:1px solid var(--hair)}
-.tune > summary{
-  list-style:none;cursor:pointer;padding:22px 0;
-  font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
-  display:flex;align-items:center;gap:12px;transition:color var(--quick);
-}
-.tune > summary::-webkit-details-marker{display:none}
-.tune > summary:hover{color:var(--cream)}
-.tune > summary .sign{font-size:14px;line-height:1;display:inline-block;transition:transform var(--calm)}
-.tune[open] > summary .sign{transform:rotate(45deg)}
-.tune-body{padding-bottom:54px;display:grid;gap:36px}
 .tune-block h3{
-  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--dim);margin-bottom:16px;
+  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:12px;
 }
-.opts{display:flex;flex-wrap:wrap;gap:9px 20px}
+.tune-block--wide{grid-column:1/-1}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
 .opts button{
-  font-size:14px;color:var(--muted);padding:4px 0 5px;border-bottom:1px solid transparent;
-  transition:color var(--quick), border-color var(--quick);
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cream-mute);border:1px solid var(--hair);border-radius:3px;
+  padding:7px 12px;transition:all var(--quick);background:rgba(0,0,0,.15);
 }
-.opts button:hover{color:var(--cream)}
-.opts button[aria-pressed="true"]{color:var(--cream);border-bottom-color:var(--red)}
-.dial{display:flex;align-items:center;gap:18px;max-width:440px}
-.dial input[type=range]{
-  flex:1;height:1px;background:var(--hair-2);appearance:none;border-radius:0;accent-color:var(--red);
+.opts button:hover{color:var(--cream);border-color:var(--hair-2)}
+.opts button[aria-pressed="true"]{
+  background:var(--amber);border-color:#f3cd8a;color:#241a08;font-weight:500;
 }
-.dial input[type=range]::-webkit-slider-thumb{
-  appearance:none;width:13px;height:13px;border-radius:50%;background:var(--red);border:0;cursor:pointer;
+.dial{display:flex;align-items:center;gap:16px}
+.dial input[type="range"]{flex:1;accent-color:var(--amber);height:22px}
+.dial .read{
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--cream);
+  min-width:58px;text-align:right;
 }
-.dial input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--red);border:0;cursor:pointer}
-.dial .read{font-family:var(--mono);font-size:12px;color:var(--cream);min-width:6em;letter-spacing:.08em}
-.svcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:0 30px}
-.svc{display:flex;align-items:center;justify-content:space-between;gap:14px;
-     width:100%;padding:11px 0;border-bottom:1px solid var(--hair)}
-.svc .n{font-size:14px;color:var(--dim);transition:color var(--quick)}
+.svcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.svc{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border:1px solid var(--hair);border-radius:3px;padding:9px 12px;
+  transition:all var(--quick);background:rgba(0,0,0,.15);
+}
+.svc:hover{border-color:var(--hair-2)}
+.svc .n{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cream-mute)}
+.svc .box{
+  width:14px;height:14px;border:1px solid var(--hair-2);border-radius:2px;flex:none;
+  transition:all var(--quick);
+}
 .svc[aria-pressed="true"] .n{color:var(--cream)}
-.svc .box{width:11px;height:11px;border:1px solid var(--hair-2);flex:none;transition:all var(--quick)}
-.svc[aria-pressed="true"] .box{background:var(--red);border-color:var(--red)}
-.tune-note{margin-top:14px;font-size:12.5px;color:var(--dim)}
+.svc[aria-pressed="true"] .box{
+  background:var(--amber);border-color:#f3cd8a;
+  box-shadow:0 0 8px rgba(226,161,63,.5);
+}
+.tune-note{grid-column:1/-1;font-size:12.5px;color:var(--cream-mute);margin-top:-8px}
+.tune .tune-note{margin-top:10px}
 
 /* --------------------------------------------------------------------------
-   RETURNING — the house already knows you
+   BACK FOR ANOTHER: the returning customer
    -------------------------------------------------------------------------- */
-.encore{padding-top:clamp(24px,4vh,44px)}
-.encore-shelf{margin-top:clamp(22px,3.4vh,34px)}
+.encore{margin-top:clamp(22px,3.6vh,36px)}
+.encore-shelf{margin-bottom:clamp(22px,3.4vh,34px)}
 .encore-set{
-  margin-top:clamp(24px,3.6vh,36px);padding-top:20px;border-top:1px solid var(--hair);
-  display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  background:var(--paper);color:var(--ink);border-radius:4px;
+  border:1px solid var(--paper-line);
+  padding:14px 18px;max-width:760px;
+  box-shadow:0 6px 16px rgba(0,0,0,.45);
+  transform:rotate(-.4deg);
 }
-.encore-set .v{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--cream-2)}
+.encore-set .tick{color:var(--ink-soft)}
+.encore-set .v{
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--ink);
+  flex:1;min-width:200px;
+}
 .recut{
-  font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
-  border-bottom:1px solid var(--hair-2);padding-bottom:3px;
-  transition:color var(--quick), border-color var(--quick);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--red-deep);border:1px solid rgba(125,36,27,.4);border-radius:3px;
+  padding:7px 12px;transition:all var(--quick);
 }
-.recut:hover{color:var(--cream);border-bottom-color:var(--red)}
+.recut:hover{background:var(--red-deep);color:var(--paper)}
+/* "Show more" on the dark wall reuses .recut */
+.wall .recut, .aisle .recut{
+  color:var(--cream-mute);border-color:var(--hair);
+}
+.wall .recut:hover, .aisle .recut:hover{background:var(--cream);color:var(--ink)}
 
 /* --------------------------------------------------------------------------
-   POSTERS — physical objects, never cards
+   POSTERS: the actual graphics of this site
    -------------------------------------------------------------------------- */
-.poster{position:relative;aspect-ratio:2/3;overflow:hidden;background:var(--char)}
-.poster img{width:100%;height:100%;object-fit:cover;
-            transition:transform var(--long), filter var(--calm)}
-.poster.pending{background:var(--char)}
+.poster{
+  position:relative;aspect-ratio:2/3;overflow:hidden;background:var(--navy);
+  border-radius:3px;
+  box-shadow:0 10px 20px rgba(0,0,0,.5), 0 2px 5px rgba(0,0,0,.5);
+}
+.poster img{width:100%;height:100%;object-fit:cover;transition:opacity var(--calm)}
+.poster.pending{background:var(--navy)}
+/* no artwork: a VHS spine of a case */
 .poster-set{
-  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
-  gap:6px;padding:14px;background:var(--char);
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;
+  padding:14px 12px;background:linear-gradient(160deg,var(--navy-2),#141b29);
+  border:1px solid var(--navy-line);border-radius:3px;
 }
-.poster-set .t{font-family:var(--serif);font-size:17px;line-height:1.02;color:var(--cream-2)}
-.poster-set .y{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--dim)}
+.poster-set .t{font-family:var(--display);font-size:19px;line-height:.95;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--cream)}
+.poster-set .y{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--gold)}
 
 /* --------------------------------------------------------------------------
-   SCENE 03 — THE LIGHTS GO DOWN
+   TONIGHT'S PICK: pulled off the shelf and put in front of you
    -------------------------------------------------------------------------- */
-.dark{
-  position:fixed;inset:0;z-index:90;background:var(--ink);
-  opacity:0;pointer-events:none;
-  display:flex;align-items:center;justify-content:center;
-  transition:opacity 300ms var(--ease);
-}
-.dark.down{opacity:1;pointer-events:all}
-/* The room goes dark quickly and comes back slowly, so the backdrop resolves
-   *through* the darkness instead of being revealed by a cut. */
-.dark.lift{transition:opacity 640ms var(--ease)}
-.dark .whisper{
-  opacity:0;color:var(--dim);
-  transition:opacity 320ms var(--ease);
-}
-.dark.speak .whisper{opacity:1}
-
-/* the shuffle the house deals through */
-.deal{width:clamp(120px,16vw,178px);opacity:0;transition:opacity 240ms var(--ease)}
-.dark.dealing .deal{opacity:1}
-.dark.dealing .whisper{opacity:1}
-
-/* --------------------------------------------------------------------------
-   SCENE 04 — THE FEATURE
-   The film owns the screen and keeps its own colour.
-   -------------------------------------------------------------------------- */
-.feature{position:relative;isolation:isolate;min-height:100svh;display:flex;align-items:flex-end}
-.plate{position:absolute;inset:0;z-index:-2;overflow:hidden;background:var(--ink)}
-/* A blown-up, blurred copy of the same artwork under everything. It is what
-   makes Dune's orange and The Matrix's green colour the whole room rather
-   than just the middle of the frame. */
-.plate .wash{
-  position:absolute;inset:-14%;display:block;opacity:0;
-  background-size:cover;background-position:50% 42%;
-  filter:blur(70px) saturate(1.75);transform:scale(1.12);
-  transition:opacity 1100ms var(--ease);
-}
-.plate .wash.on{opacity:.62}
+.feature{position:relative;padding-top:calc(var(--mast) + clamp(26px,5vh,54px));overflow:hidden}
+.plate{position:absolute;inset:0;z-index:-2;overflow:hidden}
 .plate i{
-  position:absolute;inset:0;display:block;opacity:0;
-  background-size:cover;background-position:50% 30%;
-  transform:scale(1.09);filter:blur(22px);
-  transition:opacity 780ms var(--ease), transform 1200ms var(--ease), filter 820ms var(--ease);
+  position:absolute;inset:0;background-size:cover;background-position:center 24%;
+  opacity:0;transition:opacity 1100ms var(--ease), filter 1100ms var(--ease);
+  filter:saturate(.82) sepia(.12) brightness(.44) blur(10px);
 }
-/* resolving into focus is the reveal; it is never a fade from grey */
-.plate i.on{opacity:.92;transform:scale(1);filter:blur(0)}
-/* Layered so the artwork keeps a lit region of its own. Dune stays orange,
-   The Matrix stays green — the scrim only protects the words. */
+.plate i.on{opacity:.5;filter:saturate(.82) sepia(.12) brightness(.44) blur(0)}
 .plate::after{
   content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(97deg, rgba(8,8,8,.95) 0%, rgba(8,8,8,.86) 26%, rgba(8,8,8,.44) 54%,
-                    rgba(8,8,8,.16) 74%, rgba(8,8,8,.5) 100%),
-    linear-gradient(to bottom, rgba(8,8,8,.6) 0%, rgba(8,8,8,.05) 26%,
-                    rgba(8,8,8,.1) 52%, rgba(8,8,8,.82) 88%, var(--ink) 100%),
-    radial-gradient(120% 90% at 46% 48%, transparent 40%, rgba(0,0,0,.42) 100%);
+  background:linear-gradient(180deg, rgba(18,22,31,.55) 0%, rgba(16,13,10,.88) 62%, var(--night) 97%);
 }
-.feature-in{
-  position:relative;z-index:1;width:100%;
-  padding-top:calc(var(--mast) + clamp(20px,4vh,52px));
-  padding-bottom:clamp(46px,8vh,96px);
+#wash{
+  position:absolute;inset:-12%;z-index:-3;background-size:cover;background-position:center;
+  opacity:0;filter:blur(70px) saturate(1.1) brightness(.5);
+  transition:opacity 1400ms var(--ease);
 }
-.bill-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,2.2vw,34px);align-items:end}
-.bill-copy{max-width:min(100%, 40rem);position:relative;z-index:2}
-.now{display:flex;align-items:center;gap:9px;margin-bottom:clamp(14px,2vh,20px)}
-.bill-title{margin-bottom:clamp(14px,2.2vh,22px)}
+#wash.on{opacity:.5}
+
+.feature-in{padding-bottom:clamp(30px,5vh,56px)}
+.bill-grid{
+  display:grid;grid-template-columns:minmax(0,1.5fr) minmax(200px,300px);
+  gap:clamp(26px,4vw,64px);align-items:start;
+  transition:opacity 240ms var(--ease), transform 240ms var(--ease);
+}
+.bill-grid.out{opacity:0;transform:translateY(10px)}
+
+/* staggered reveal */
+.swap .res-1{animation:res 500ms var(--ease) both}
+.swap .res-2{animation:res 500ms var(--ease) 90ms both}
+.swap .res-3{animation:res 500ms var(--ease) 190ms both}
+@keyframes res{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* the red plaque over the pick */
+.now{
+  display:inline-flex;align-items:center;gap:.7em;
+  font-family:var(--display);font-size:clamp(.95rem,1.4vw,1.15rem);
+  letter-spacing:.26em;text-transform:uppercase;color:var(--cream);
+  background:linear-gradient(180deg,#a93524,#7d241b);
+  padding:9px 22px 7px;border-radius:3px;
+  box-shadow:0 6px 16px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,214,150,.45);
+  transform:rotate(-.5deg);
+}
+.now .dot{width:.42em;height:.42em}
+
+.bill-copy{max-width:860px}
+.bill-copy > * + *{margin-top:clamp(16px,2.4vh,26px)}
+.bill-title{
+  font-family:var(--display);color:var(--cream);letter-spacing:.02em;
+  text-transform:uppercase;line-height:.88;
+  text-shadow:0 3px 24px rgba(0,0,0,.7);
+}
+
+/* the paper note from the store */
 .pitch{
-  font-family:var(--serif);font-style:italic;
-  font-size:clamp(1.2rem,2.05vw,1.8rem);line-height:1.32;color:var(--cream);
-  max-width:32ch;margin-bottom:clamp(18px,2.6vh,28px);
+  position:relative;display:inline-block;max-width:56ch;
+  background:var(--paper);color:var(--ink);
+  font-size:clamp(15px,1.3vw,17.5px);line-height:1.55;
+  padding:38px 22px 18px;border-radius:2px;
+  box-shadow:0 10px 22px rgba(0,0,0,.5);
+  transform:rotate(-.8deg);
 }
-/* A film named inside the sentence is a title, not emphasis: it goes upright
-   inside the italic pitch, and italic inside the upright panel. */
-.pitch b{font-weight:400;font-style:normal}
-.stub{display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(10px,1.2vw,16px)}
-.stub .slash{color:var(--dim)}
-.stub .lit{color:var(--cream)}
-.where{margin-top:10px;color:var(--cream-2)}
-.where b{color:var(--cream);font-weight:500}
+.pitch::before{
+  content:"The store says";position:absolute;top:14px;left:22px;
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--red-deep);
+}
+.pitch::after{
+  content:"";position:absolute;top:-10px;left:50%;width:86px;height:22px;margin-left:-43px;
+  background:rgba(236,224,194,.5);border-left:1px solid rgba(255,255,255,.4);
+  border-right:1px solid rgba(255,255,255,.4);
+  transform:rotate(-1.6deg);
+  box-shadow:0 1px 3px rgba(0,0,0,.2);
+}
+.pitch b{color:var(--red-deep);font-weight:600}
 
-.acts{margin-top:clamp(22px,3.2vh,34px);display:flex;flex-wrap:wrap;align-items:center;
-      gap:14px clamp(18px,2.4vw,30px)}
+/* metadata as a due-date row */
+.stub{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.stub .tick{color:var(--cream-dim)}
+.stub .slash{color:rgba(226,161,63,.5);font-family:var(--mono);font-size:11px}
+.stub .lit{color:var(--amber)}
+.where{color:#e0a494 !important}
+
+.acts{display:flex;align-items:center;gap:clamp(14px,2.4vw,28px);flex-wrap:wrap}
 .lock{
-  display:inline-flex;align-items:center;gap:.8em;background:var(--red);color:#fff;
-  padding:17px clamp(24px,2.4vw,34px);min-height:52px;
-  font-size:12.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  transition:background var(--quick);
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--display);font-size:clamp(1.15rem,1.9vw,1.5rem);
+  letter-spacing:.09em;text-transform:uppercase;color:var(--cream);
+  background:linear-gradient(180deg,#b8432c,#8e2c1d);
+  padding:12px 24px 10px;border-radius:4px;border:1px solid #c96a50;
+  box-shadow:0 5px 0 #521509, 0 12px 24px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,220,180,.35);
+  transition:transform 90ms ease, box-shadow 90ms ease, filter var(--quick);
 }
-.lock .arw{font-weight:400;transition:transform var(--calm)}
-.lock:hover{background:var(--red-lit)}
-.lock:hover .arw{transform:translateX(6px)}
-.lock--quiet{background:transparent;color:var(--cream);border:1px solid var(--hair-2);padding:16px clamp(23px,2.4vw,33px)}
-.lock--quiet:hover{background:rgba(242,237,227,.06);border-color:var(--cream)}
+.lock:hover{filter:brightness(1.09)}
+.lock:active{transform:translateY(3px);box-shadow:0 2px 0 #521509, 0 6px 14px rgba(0,0,0,.5)}
+.lock--quiet{
+  background:transparent;border:1px solid var(--hair-2);box-shadow:none;
+  color:var(--cream-dim);font-size:1.05rem;
+}
+.lock--quiet:hover{filter:none;color:var(--cream);border-color:var(--cream-dim)}
+.lock--quiet:active{transform:none;box-shadow:none}
+.lock .arw{font-family:var(--sans);font-weight:600}
 .act{
-  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
-  min-height:44px;display:inline-flex;align-items:center;
-  border-bottom:1px solid transparent;transition:color var(--quick), border-color var(--quick);
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cream-mute);padding:8px 0;border-bottom:1px dashed var(--hair-2);
+  transition:color var(--quick), border-color var(--quick);
 }
-.act:hover, .act[aria-expanded="true"]{color:var(--cream);border-bottom-color:var(--red)}
-/* the arithmetic sits at the bottom of the hierarchy, where it belongs */
-.score{margin-top:18px;color:var(--dim)}
+.act:hover{color:var(--cream);border-color:var(--cream-dim)}
 
-/* the poster breaks the grid rather than sitting in it */
-/* The poster hangs past the bottom of the feature and bridges into ALSO
-   PLAYING — a physical object set on the page, not a cell in a grid. */
-.bill-poster{display:none;position:relative;margin-bottom:calc(-1 * clamp(26px,5.5vh,76px))}
+.score{opacity:.75}
+
+/* the poster leaning against the counter */
+.bill-poster{
+  position:relative;transform:rotate(1.3deg);
+  transition:transform var(--calm);
+}
 .bill-poster .poster{
-  width:clamp(168px,15.5vw,248px);
-  box-shadow:0 40px 90px -40px rgba(0,0,0,.95), 0 0 0 1px rgba(242,237,227,.07);
+  border:5px solid #efe6d2;border-radius:4px;
+  box-shadow:0 24px 44px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5);
 }
 
-/* the reveal, resolving in order: room, then artwork, then the title, last */
-.res-1{animation:res 620ms var(--ease) 210ms both}
-/* the title lands last and lands hardest */
-.res-2{animation:title 820ms var(--ease) 370ms both}
-.res-3{animation:res 700ms var(--ease) 560ms both}
-@keyframes res{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes title{
-  from{opacity:0;transform:translateY(30px) scale(.985);filter:blur(6px)}
-  to{opacity:1;transform:none;filter:blur(0)}
+/* --------------------------------------------------------------------------
+   WHY THIS TONIGHT: the note unfolds
+   -------------------------------------------------------------------------- */
+.why{
+  max-height:0;overflow:hidden;
+  transition:max-height 500ms var(--ease);
 }
-.swap{transition:opacity 260ms var(--ease), transform 260ms var(--ease)}
-.swap.out{opacity:0;transform:translateY(10px)}
+.why.open{max-height:1200px}
+.why-in{
+  background:var(--paper);color:var(--ink);border-radius:4px;
+  border:1px solid var(--paper-line);
+  padding:clamp(22px,3.4vw,40px);
+  margin-bottom:clamp(26px,4vh,44px);
+  box-shadow:0 14px 30px rgba(0,0,0,.45);
+  transform:rotate(.3deg);
+}
+.why-said{
+  font-size:clamp(15px,1.3vw,17px);line-height:1.6;max-width:70ch;
+  margin-bottom:22px;padding-bottom:18px;border-bottom:1px dashed var(--paper-line);
+}
+.why-said b{color:var(--red-deep);font-weight:600}
+.why-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(20px,3vw,40px)}
+.why-cols h4{
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--red-deep);margin-bottom:10px;
+}
+.why-cols li{
+  font-size:14px;line-height:1.5;color:var(--ink);
+  padding:7px 0;border-bottom:1px solid rgba(200,183,140,.35);
+}
+.seeds{display:flex;gap:14px;flex-wrap:wrap}
+.seed{width:76px}
+.seed .poster{box-shadow:0 6px 12px rgba(0,0,0,.3)}
+.seed .sn{
+  display:block;margin-top:6px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);line-height:1.35;
+}
 
 /* --------------------------------------------------------------------------
-   WHY THIS TONIGHT
+   SHELVES: rails of cases on wood
    -------------------------------------------------------------------------- */
-.why{overflow:hidden;max-height:0;opacity:0;
-     transition:max-height 480ms var(--ease), opacity 320ms var(--ease)}
-.why.open{max-height:1800px;opacity:1}
-.why-in{padding:clamp(34px,5vh,58px) 0;border-top:1px solid var(--hair)}
-.why-said{font-family:var(--serif);font-size:clamp(1.25rem,2vw,1.75rem);line-height:1.36;
-          color:var(--cream);max-width:40ch}
-.why-said b{font-weight:400;font-style:italic}
-.why-cols{margin-top:clamp(26px,3.6vh,40px);display:grid;
-          grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:clamp(24px,3vw,48px)}
-.why-cols h4{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;
-             text-transform:uppercase;color:var(--dim);margin-bottom:14px}
-.why-cols li{font-size:14px;color:var(--muted);padding:7px 0;border-top:1px solid var(--hair);line-height:1.5}
-.why-cols li:first-child{border-top:0;padding-top:0}
-.seeds{display:flex;gap:12px}
-.seeds .seed{width:76px}
-.seeds .sn{display:block;margin-top:9px;font-size:11px;line-height:1.3;color:var(--muted)}
-
-/* --------------------------------------------------------------------------
-   ALSO PLAYING — a shelf that runs off the edge of the frame
-   -------------------------------------------------------------------------- */
-.shelf{padding-top:clamp(46px,7vh,88px)}
+.shelf{margin-top:clamp(30px,5vh,54px)}
 .shelf-head{
-  display:flex;align-items:baseline;justify-content:space-between;gap:20px;
-  padding-bottom:16px;margin-bottom:clamp(18px,2.4vh,26px);border-bottom:1px solid var(--hair);
+  display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;
+  margin-bottom:clamp(14px,2vh,20px);
 }
+.shelf-head h3{color:var(--gold)}
 .rail{
-  display:flex;gap:clamp(12px,1.2vw,20px);
-  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-  padding-bottom:10px;
-  /* run past the frame so the room clearly continues */
-  margin-right:calc(var(--gut) * -1);padding-right:var(--gut);
+  display:flex;gap:clamp(14px,1.8vw,22px);
+  overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+  padding:12px 6px 0;
+  scrollbar-width:thin;scrollbar-color:var(--wood-hi) transparent;
 }
-.rail::-webkit-scrollbar{display:none}
+/* the wood the cases sit on */
+.rail::after{content:"";flex:0 0 6px}
+.shelf .rail, .aisle .rail{
+  padding-bottom:24px;
+  background:linear-gradient(180deg, transparent calc(100% - 18px),
+    var(--wood-hi) calc(100% - 18px), var(--wood) calc(100% - 6px), var(--wood-lo) 100%);
+  border-radius:0 0 3px 3px;
+}
 .rail-item{
-  flex:0 0 clamp(132px,14.5vw,186px);scroll-snap-align:start;display:block;
-  transition:opacity var(--calm);
+  position:relative;flex:0 0 clamp(138px,15vw,184px);
+  display:flex;flex-direction:column;gap:8px;
+  transition:transform var(--quick);
 }
-.rail-item .poster img{filter:brightness(.8) saturate(.92)}
-/* focus the one you are looking at; let the others step back */
-.rail:hover .rail-item{opacity:.5}
-.rail:hover .rail-item:hover{opacity:1}
-.rail-item:hover .poster img{transform:scale(1.045);filter:brightness(1.05) saturate(1.02)}
-.rail-item:focus-visible{opacity:1}
+.rail-item:nth-child(odd){transform:rotate(-.5deg)}
+.rail-item:nth-child(even){transform:rotate(.4deg)}
+button.rail-item:hover{transform:translateY(-6px) rotate(0deg)}
+.rail-item .poster img{filter:brightness(.86) saturate(.95);transition:filter var(--quick), transform var(--long)}
+button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
 .rail-item .flag{
-  display:block;margin-bottom:9px;font-family:var(--mono);font-size:9.5px;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--red-lit);
+  position:absolute;z-index:3;top:-8px;left:-6px;
+  font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:#241a08;background:var(--amber);
+  padding:4px 8px 3px;border-radius:2px;transform:rotate(-3deg);
+  box-shadow:0 3px 6px rgba(0,0,0,.4);
 }
-.rail-item .flag.blank{color:transparent}
-.rail-item .rt{display:block;margin-top:12px;font-family:var(--serif);font-size:19px;
-               line-height:1.02;color:var(--cream)}
-.rail-item .rm{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;
-               letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.rail-item .flag.blank{display:none}
+.rail-item .rt{
+  font-family:var(--display);font-size:1.02rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--cream);line-height:1;
+}
+.rail-item .rm{
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--cream-mute);
+}
+
+/* double feature */
+.twin{display:flex;align-items:center;gap:clamp(16px,2.6vw,34px);flex-wrap:wrap}
+.twin-then{
+  font-family:var(--hand);font-size:24px;color:var(--amber);transform:rotate(-4deg);
+}
+.twin-slot{display:flex;gap:16px;align-items:center}
+.twin-slot .poster{width:clamp(84px,8vw,116px);flex:none}
+.twin-slot .when{font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--amber)}
+.twin-slot .t{font-family:var(--display);font-size:clamp(1.2rem,1.8vw,1.6rem);
+  letter-spacing:.04em;text-transform:uppercase;color:var(--cream);margin:4px 0 6px;line-height:.95}
+
+.footnote{
+  margin-top:clamp(26px,4vh,44px);font-family:var(--mono);font-size:11px;
+  letter-spacing:.06em;color:var(--cream-mute);max-width:72ch;line-height:1.8;
+}
+.footnote b{color:var(--cream);font-weight:500}
 
 /* --------------------------------------------------------------------------
-   DOUBLE FEATURE
+   THE AISLES: density is the point
    -------------------------------------------------------------------------- */
-.twin{display:grid;gap:clamp(20px,2.4vw,34px);grid-template-columns:1fr}
-.twin-slot{display:grid;grid-template-columns:clamp(88px,8.5vw,116px) minmax(0,1fr);gap:20px;align-items:center}
-.twin-slot .when{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-                 color:var(--red-lit);margin-bottom:8px}
-.twin-slot .t{font-family:var(--serif);font-size:clamp(1.15rem,1.7vw,1.5rem);line-height:1.04}
-.twin-slot .m{margin-top:8px}
-.twin-then{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;
-           color:var(--dim);text-align:center}
+.scene-head{padding-top:calc(var(--mast) + clamp(24px,4.5vh,50px))}
+.scene-head .under{margin-top:10px;font-size:15px;color:var(--cream-mute);max-width:48ch}
+
+.aisle{margin-top:clamp(34px,5.5vh,58px)}
+.aisle-sign{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.aisle-sign .plate-sign{
+  font-family:var(--display);font-size:clamp(1.25rem,2vw,1.7rem);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  background:linear-gradient(180deg,var(--navy-2),var(--navy));
+  border:1px solid var(--navy-line);border-radius:3px;
+  padding:8px 20px 6px;
+  box-shadow:0 5px 12px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.aisle-sign .tick{white-space:nowrap}
+.aisle .rail-item{flex-basis:clamp(118px,12vw,152px)}
+.aisle .rail-item .rt{font-size:.92rem}
 
 /* --------------------------------------------------------------------------
-   NOTES + THE DARK HOUSE
+   YOUR SHELF
    -------------------------------------------------------------------------- */
-.footnote{margin-top:clamp(40px,6vh,72px);padding-top:20px;border-top:1px solid var(--hair);
-          color:var(--dim);font-size:12.5px;line-height:1.7;max-width:70ch}
-.footnote b{color:var(--muted);font-weight:500}
-.empty{max-width:44ch}
-.empty p{margin-top:16px;color:var(--muted);font-size:15.5px;line-height:1.6}
-.empty .acts{margin-top:32px}
-
-/* --------------------------------------------------------------------------
-   MY MOVIES
-   -------------------------------------------------------------------------- */
-.scene-head{padding-top:calc(var(--mast) + clamp(40px,8vh,110px));padding-bottom:clamp(26px,4vh,48px)}
-.scene-head .under{margin-top:18px;color:var(--muted);font-size:clamp(15px,1.3vw,18px);max-width:40ch}
-
 .gauge{
-  display:flex;align-items:center;gap:clamp(14px,2.2vw,28px);flex-wrap:wrap;
-  padding:18px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
-  position:sticky;top:var(--mast);z-index:40;background:rgba(8,8,8,.92);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+  margin:clamp(22px,3.4vh,34px) 0 18px;
 }
-.pips{display:flex;gap:6px}
-.pips span{width:6px;height:6px;border-radius:50%;background:var(--hair-2);transition:background var(--calm)}
-.pips span.on{background:var(--red)}
-.gauge .said{font-size:13px;color:var(--muted)}
-.gauge .said.done{color:var(--cream)}
+.pips{display:flex;gap:7px}
+.pips span{
+  width:13px;height:13px;border-radius:50%;
+  border:1px solid var(--hair-2);transition:all var(--calm);
+}
+.pips span.on{
+  background:var(--amber);border-color:#f3cd8a;
+  box-shadow:0 0 10px rgba(226,161,63,.7);
+}
+.said{font-family:var(--hand);font-size:clamp(19px,1.7vw,23px);color:var(--cream-dim);
+  transform:rotate(-.8deg)}
+.said.done{color:var(--amber)}
 .find{
-  margin-left:auto;background:none;border:0;border-bottom:1px solid var(--hair);
-  color:var(--cream);font:inherit;font-size:14px;padding:8px 0;width:min(230px,42vw);
-  transition:border-color var(--quick);
+  margin-left:auto;flex:0 1 300px;min-width:200px;
+  background:rgba(0,0,0,.3);border:1px solid var(--hair);border-radius:3px;
+  color:var(--cream);font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  padding:11px 14px;transition:border-color var(--quick);
 }
-.find::placeholder{color:var(--dim)}
-.find:focus{outline:none;border-bottom-color:var(--red)}
-.read-out{display:flex;flex-wrap:wrap;gap:8px 20px;padding-top:22px;color:var(--muted);font-size:13.5px}
-.read-out .trait::after{content:"/";margin-left:20px;color:var(--dim)}
-.read-out .trait:last-child::after{content:""}
+.find::placeholder{color:var(--cream-mute)}
+.find:focus{outline:none;border-color:var(--amber)}
+.read-out{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:clamp(18px,3vh,28px)}
+.trait{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:#241a08;background:var(--gold);border-radius:2px;padding:5px 10px 4px;
+  transform:rotate(-.6deg);box-shadow:0 2px 5px rgba(0,0,0,.35);
+}
+.trait:nth-child(even){transform:rotate(.5deg)}
 
 .wall{
-  display:grid;gap:clamp(18px,2vw,28px) clamp(12px,1.2vw,20px);
-  grid-template-columns:repeat(auto-fill,minmax(clamp(118px,13.5vw,168px),1fr));
-  padding:clamp(28px,4vh,46px) 0 clamp(80px,12vh,140px);
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(128px,13vw,168px),1fr));
+  gap:clamp(14px,1.8vw,24px);padding-bottom:clamp(44px,7vh,80px);
 }
-.keep{position:relative}
-.keep .poster img{transition:transform var(--long), filter var(--calm)}
+.keep{display:flex;flex-direction:column;gap:7px}
+.keep .poster{cursor:default}
 .keep[data-state="hated"] .poster img{filter:grayscale(1) brightness(.38)}
-.keep[data-state="loved"] .poster::after{
-  content:"";position:absolute;inset:0;border:1px solid var(--red);pointer-events:none;
+.keep[data-state="loved"] .poster{
+  box-shadow:0 0 0 2px var(--amber), 0 10px 20px rgba(0,0,0,.5);
 }
 .keep .idx{
-  position:absolute;top:0;left:0;z-index:2;background:var(--red);color:#fff;
-  font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:5px 8px;
+  position:absolute;z-index:3;top:-9px;right:-9px;
+  display:grid;place-items:center;width:30px;height:30px;border-radius:50%;
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  color:var(--cream);background:var(--red);
+  box-shadow:0 3px 7px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,220,170,.4);
+  transform:rotate(8deg);
 }
-.keep .kt{display:block;margin-top:11px;font-family:var(--serif);font-size:16px;line-height:1.05;color:var(--cream)}
-.keep .ky{display:block;margin-top:5px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
-.react{
-  position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;
-  background:linear-gradient(to top, rgba(8,8,8,.95), rgba(8,8,8,.5) 72%, transparent);
-  padding:26px 10px 10px;gap:1px;opacity:0;transition:opacity var(--quick);
+.keep .react{
+  position:absolute;inset:auto 0 0 0;z-index:2;
+  display:flex;flex-direction:column;gap:5px;padding:10px 8px 8px;
+  background:linear-gradient(180deg, transparent, rgba(10,7,5,.9) 40%);
+  opacity:0;transition:opacity var(--quick);
 }
-.keep:hover .react, .keep:focus-within .react{opacity:1}
-.react button{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-              color:var(--muted);padding:6px 2px;transition:color var(--quick)}
-.react button:hover{color:var(--cream)}
-.react button.is-on{color:var(--red-lit)}
-@media (hover:none){
-  .react{opacity:1;position:static;background:none;padding:8px 0 0;flex-direction:row;gap:16px}
-  .react button{padding:9px 0;min-height:38px}
+.keep .poster:hover .react,
+.keep .poster:focus-within .react{opacity:1}
+@media (hover:none){.keep .react{opacity:1;position:static;background:none;
+  flex-direction:row;flex-wrap:wrap;padding:0}}
+.keep .react button{
+  font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink);background:var(--paper);border-radius:2px;
+  padding:5px 8px 4px;text-align:center;
+  box-shadow:0 2px 4px rgba(0,0,0,.4);
+  transition:all var(--quick);
+}
+.keep .react button:hover{background:#fff6de}
+.keep .react button.is-on{background:var(--amber);font-weight:500}
+.keep .kt{font-family:var(--display);font-size:.98rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--cream);line-height:1}
+.keep .ky{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--cream-mute)}
+
+/* --------------------------------------------------------------------------
+   PAST SHOWINGS: the rental history
+   -------------------------------------------------------------------------- */
+.run{margin-top:clamp(30px,4.6vh,50px)}
+.run-head{margin-bottom:16px}
+.run-head h2{color:var(--gold)}
+.stubs{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(140px,14vw,172px),1fr));
+  gap:clamp(16px,2vw,26px);
+}
+.ticket{
+  position:relative;display:flex;flex-direction:column;gap:0;
+  background:var(--paper);border:1px solid var(--paper-line);border-radius:3px;
+  padding:10px 10px 12px;
+  box-shadow:0 8px 18px rgba(0,0,0,.45);
+  transition:transform var(--quick);
+}
+.ticket:nth-child(odd){transform:rotate(-.6deg)}
+.ticket:nth-child(even){transform:rotate(.5deg)}
+.ticket:hover{transform:translateY(-3px) rotate(0deg)}
+.ticket .poster{box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.ticket .sd{
+  position:absolute;z-index:2;top:-9px;left:12px;
+  font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cream);
+  background:var(--red);padding:4px 9px 3px;border-radius:2px;
+  transform:rotate(-2deg);box-shadow:0 3px 6px rgba(0,0,0,.4);
+}
+.ticket .st{
+  margin-top:10px;font-family:var(--display);font-size:1rem;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--ink);line-height:1;
+}
+.ticket .sm{font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-soft);margin-top:5px}
+.ticket .drop{
+  margin-top:9px;align-self:flex-start;
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px dashed rgba(90,70,40,.5);
+  transition:color var(--quick);
+}
+.ticket .drop:hover{color:var(--red-deep)}
+.rewind{margin:clamp(28px,4vh,44px) 0 clamp(44px,7vh,80px)}
+
+.empty{padding-bottom:clamp(44px,7vh,80px)}
+.empty p{color:var(--cream-mute);margin-top:12px;max-width:44ch}
+
+/* --------------------------------------------------------------------------
+   COLOPHON: the navy strip on the way out
+   -------------------------------------------------------------------------- */
+.colophon{
+  margin-top:clamp(48px,8vh,90px);
+  background:linear-gradient(180deg,var(--navy),#131a28);
+  border-top:1px solid var(--navy-line);
+  padding:clamp(30px,5vh,54px) 0 clamp(36px,6vh,60px);
+}
+.colophon .frame{display:flex;flex-direction:column;gap:16px}
+.colo-flavor{
+  font-family:var(--display);font-size:clamp(1rem,1.6vw,1.3rem);
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+}
+.colophon .house{align-self:flex-start}
+.colophon #colophon-note{
+  font-family:var(--mono);font-size:11px;line-height:1.9;letter-spacing:.04em;
+  color:var(--cream-mute);max-width:78ch;
 }
 
 /* --------------------------------------------------------------------------
-   PAST SHOWINGS
+   THE DARK: lights down between scenes
    -------------------------------------------------------------------------- */
-.run{padding-top:clamp(30px,4.4vh,52px)}
-.run-head{padding-bottom:14px;margin-bottom:clamp(18px,2.4vh,24px);border-bottom:1px solid var(--hair)}
-.stubs{display:grid;gap:clamp(18px,2vw,28px) clamp(12px,1.2vw,20px);
-       grid-template-columns:repeat(auto-fill,minmax(clamp(118px,12.5vw,158px),1fr))}
-.ticket .sd{display:block;margin-top:11px;font-family:var(--mono);font-size:10px;
-            letter-spacing:.16em;text-transform:uppercase;color:var(--red-lit)}
-.ticket .st{display:block;margin-top:6px;font-family:var(--serif);font-size:16px;line-height:1.05;color:var(--cream)}
-.ticket .sm{display:block;margin-top:5px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
-.ticket .drop{margin-top:9px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
-              color:var(--dim);opacity:0;transition:opacity var(--quick)}
-.ticket:hover .drop, .ticket:focus-within .drop{opacity:1;color:var(--muted)}
-@media (hover:none){ .ticket .drop{opacity:1;padding:8px 0;min-height:34px} }
+.dark{
+  position:fixed;inset:0;z-index:80;pointer-events:none;
+  display:grid;place-items:center;
+  background:#0a0705;opacity:0;
+  transition:opacity 300ms var(--ease);
+}
+.dark.down{opacity:1;pointer-events:auto}
+.dark.lift{opacity:0;transition:opacity 700ms var(--ease)}
+.whisper{opacity:0;transition:opacity 200ms var(--ease);color:var(--cream-dim)}
+.dark.speak .whisper,.dark.dealing .whisper{opacity:1}
+.deal{width:178px}
+.deal .poster{box-shadow:0 20px 44px rgba(0,0,0,.8)}
 
 /* --------------------------------------------------------------------------
-   COLOPHON
+   RESPONSIVE
    -------------------------------------------------------------------------- */
-.colophon{border-top:1px solid var(--hair);margin-top:clamp(56px,9vh,110px);
-          padding-top:clamp(32px,5vh,54px);padding-bottom:clamp(38px,6vh,68px)}
-.colophon .house{margin-bottom:18px;opacity:.6;font-size:17px}
-.colophon p{color:var(--dim);font-size:12.5px;line-height:1.75;max-width:74ch}
-
-/* --------------------------------------------------------------------------
-   RESPONSIVE — each size is composed, not shrunk
-   -------------------------------------------------------------------------- */
-@media (min-width:768px){
-  .bill-grid{grid-template-columns:minmax(0,1fr) auto}
-  .bill-poster{display:block}
-  .tune-body{grid-template-columns:repeat(2,minmax(0,1fr));gap:42px clamp(28px,4vw,60px)}
-  .tune-block--wide{grid-column:1/-1}
-  .twin{grid-template-columns:1fr auto 1fr;align-items:center}
-  .nights{grid-template-columns:repeat(3,1fr)}
-  /* the programme page sets its own vertical rhythm: alternate columns drop */
-  .nights .night-opt:nth-child(3n+2){margin-top:clamp(14px,2.4vh,26px)}
-  .nights .night-opt:nth-child(3n+3){margin-top:clamp(28px,4.8vh,52px)}
+@media (max-width:1023px){
+  .bill-grid{grid-template-columns:minmax(0,1fr) minmax(150px,220px)}
 }
-
-@media (min-width:1200px){
-  .bill-copy{max-width:42rem}
-}
-
 @media (max-width:767px){
-  :root{--mast:76px}
-  .masthead-in{padding-top:16px;padding-bottom:16px;gap:12px}
-  .house{font-size:16px}
-  .doors{gap:16px}
-  .doors button{font-size:10px;letter-spacing:.14em;padding:14px 0}
-  .doors button[data-go="tonight"]{display:none}
-  .annot .right{display:none}
-  /* the arrival scrim runs bottom-up on a phone for the same reason the
-     feature's does: a left-hand gradient protects nothing at this width */
-  .amb::after{
-    background:
-      linear-gradient(to bottom, rgba(8,8,8,.72) 0%, rgba(8,8,8,.34) 22%,
-                      rgba(8,8,8,.72) 48%, rgba(8,8,8,.93) 74%, var(--ink) 100%);
-  }
-  .amb i.on{opacity:.26}
-  .who button{font-size:clamp(1.5rem,7.6vw,2.1rem)}
-  .showtimes{gap:4px 12px}
-  .nights{grid-template-columns:1fr 1fr;gap:0 20px}
-  .bill-go{max-width:none;padding:20px}
-  /* Mobile is its own composition: the copy sits at the foot of the frame and
-     the scrim runs bottom-up, because a left-hand scrim protects nothing when
-     the text spans the whole width. */
-  .feature{align-items:flex-end}
-  .plate::after{
-    background:
-      linear-gradient(to bottom, rgba(8,8,8,.6) 0%, rgba(8,8,8,.06) 16%,
-                      rgba(8,8,8,.3) 34%, rgba(8,8,8,.74) 56%, rgba(8,8,8,.94) 78%, var(--ink) 100%);
-  }
-  /* and a second scrim keyed to where the copy actually sits, so legibility
-     never depends on how tall the title happened to set */
-  .feature-in::before{
-    content:"";position:absolute;left:0;right:0;bottom:0;height:84%;z-index:-1;pointer-events:none;
-    background:linear-gradient(to bottom, rgba(8,8,8,0) 0%, rgba(8,8,8,.56) 22%,
-                               rgba(8,8,8,.86) 50%, rgba(8,8,8,.96) 100%);
-  }
-  .lock{width:100%;justify-content:center}
-  .acts{gap:14px 18px}
-  .acts .act{flex:0 0 auto;letter-spacing:.13em}
-  .pitch{max-width:none}
-  .rail-item{flex-basis:41vw;max-width:190px}
-  .twin-slot{grid-template-columns:84px minmax(0,1fr);gap:16px}
-  .find{margin-left:0;width:100%;order:3}
-  .svcs{grid-template-columns:1fr}
-  .opts button{padding:10px 0}
-  .recut{padding:9px 0 5px}
-  .house-band{padding:22px 0}
-  .house-pick{padding:12px 0;min-height:44px}
-  .tune > summary{padding:26px 0}
-  /* keep the primary action in reach */
-  .pitch{font-size:1.1rem}
+  :root{--mast:60px}
+  .masthead-in{padding-top:12px;padding-bottom:12px;gap:12px}
+  .doors{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .doors::-webkit-scrollbar{display:none}
+  .doors button{font-size:12.5px;letter-spacing:.12em;flex:none}
+  .house{font-size:15px;flex:none}
+  .bill-grid{grid-template-columns:minmax(0,1fr)}
+  .bill-poster{max-width:220px;order:-1;margin-bottom:6px}
+  .marquee{padding:14px}
+  .marquee::before{top:2px}
+  .marquee::after{bottom:2px}
+  .lights{display:none}
+  .annot{flex-wrap:wrap;gap:10px}
+  .tune-body{grid-template-columns:minmax(0,1fr)}
+  .find{margin-left:0;flex-basis:100%}
+  .encore-set .v{min-width:0}
 }
 
-/* --------------------------------------------------------------------------
-   REDUCED MOTION — still elegant, just immediate
-   -------------------------------------------------------------------------- */
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.001ms !important;animation-iteration-count:1 !important;
-    transition-duration:.001ms !important;scroll-behavior:auto !important;
-  }
+@media (prefers-reduced-motion: reduce){
   .air::after{animation:none}
-  .plate i{filter:none;transform:none}
-  .receding{filter:none;transform:none;opacity:.2}
+  .marquee::before,.marquee::after,.lights{animation:none}
+  .neon{animation:none}
+  .swap .res-1,.swap .res-2,.swap .res-3{animation:none}
+  *{transition-duration:1ms !important}
 }
 </style>
 <body>
@@ -819,10 +1042,11 @@ main{position:relative;z-index:10}
 
 <header class="masthead" id="masthead">
   <div class="masthead-in">
-    <a class="house" href="#s-tonight" id="house"><span class="dot"></span>Tonight&rsquo;s Bill</a>
+    <a class="house" href="#s-tonight" id="house"><span class="dot"></span>Main Feature</a>
     <nav class="doors" aria-label="Sections">
       <button type="button" data-go="tonight" aria-current="page">Tonight</button>
-      <button type="button" data-go="taste">My Movies</button>
+      <button type="button" data-go="aisles">The Aisles</button>
+      <button type="button" data-go="taste">Your Shelf</button>
       <button type="button" data-go="showings">Past Showings</button>
     </nav>
   </div>
@@ -830,31 +1054,41 @@ main{position:relative;z-index:10}
 
 <main>
 
-<!-- ══════════════ SCENE 01–02 · ARRIVAL AND MAKING THE NIGHT ══════════════ -->
+<!-- ══════════════ THE STORE FRONT: MARQUEE AND THREE QUESTIONS ══════════════ -->
 <section class="scene on" id="s-tonight" aria-label="Tonight">
 
   <div class="arrival frame">
     <div class="amb" id="amb" aria-hidden="true"><i data-slot="a"></i><i data-slot="b"></i></div>
+
+    <div class="marquee">
+      <span class="lights l-left" aria-hidden="true"></span>
+      <span class="lights l-right" aria-hidden="true"></span>
+      <div class="board">
+        <p class="mq-name">Main Feature</p>
+        <p class="mq-sub">Movies for Tonight</p>
+      </div>
+    </div>
+
     <div class="annot">
       <p class="tick" id="stamp"></p>
-      <p class="tick tick-sm right">One screen</p>
+      <p class="neon">Open Late</p>
     </div>
-    <h1 class="say say-xl" id="statement">What are we watching tonight?</h1>
-    <p class="under" id="under">No scrolling through Netflix for 45 minutes.</p>
+    <h1 class="say say-xl" id="statement">Tell us about tonight</h1>
+    <p class="under" id="under">Three quick answers and we hand you the movie.</p>
 
     <div class="encore" id="encore" hidden>
       <div class="encore-shelf" id="encore-shelf"></div>
       <div class="encore-set" id="encore-set"></div>
       <div class="call" id="encore-call">
         <button class="bill-go" id="encore-go" type="button">
-          <span>Show me the bill</span><span class="arw">&rarr;</span>
+          <span>Show me the main feature</span><span class="arw">&rarr;</span>
         </button>
       <div class="house-band">
-        <p class="house-say">Or don&rsquo;t decide at all.</p>
+        <p class="house-say">can't decide?</p>
         <button class="house-pick" id="encore-house" type="button">
-          Let the house decide <span class="arw">&rarr;</span>
+          Dealer's choice <span class="arw">&rarr;</span>
         </button>
-        <p class="house-fine">One film. No list. No second-guessing.</p>
+        <p class="house-fine">The house pulls one movie. That's the whole deal.</p>
       </div>
       </div>
     </div>
@@ -862,38 +1096,38 @@ main{position:relative;z-index:10}
 
   <div class="night frame" id="night">
     <div class="decision">
-      <h2 class="ask-of">Who&rsquo;s watching?</h2>
+      <h2 class="ask-of">Who's watching?</h2>
       <div class="who" id="q-who"></div>
     </div>
 
     <div class="decision">
-      <h2 class="ask-of">How long have we got?</h2>
+      <h2 class="ask-of">How much time?</h2>
       <div class="clockline">
         <div class="showtimes" id="q-time"></div>
       </div>
     </div>
 
     <div class="decision">
-      <h2 class="ask-of">What kind of night is it?</h2>
+      <h2 class="ask-of">What kind of night?</h2>
       <div class="nights" id="q-night"></div>
     </div>
 
     <div class="call">
       <button class="bill-go" id="show-bill" type="button">
-        <span>Show me the bill</span><span class="arw">&rarr;</span>
+        <span>Show me the main feature</span><span class="arw">&rarr;</span>
       </button>
       <p class="call-note" id="call-note"></p>
       <div class="house-band">
-        <p class="house-say">Or don&rsquo;t decide at all.</p>
+        <p class="house-say">can't decide?</p>
         <button class="house-pick" id="house-pick" type="button">
-          Let the house decide <span class="arw">&rarr;</span>
+          Dealer's choice <span class="arw">&rarr;</span>
         </button>
-        <p class="house-fine">One film. No list. No second-guessing.</p>
+        <p class="house-fine">The house pulls one movie. That's the whole deal.</p>
       </div>
     </div>
 
     <details class="tune" id="tune">
-      <summary><span class="sign">+</span> Fine tune tonight</summary>
+      <summary><span class="sign">+</span> Got rules?</summary>
       <div class="tune-body">
         <div class="tune-block">
           <h3>Exact runtime</h3>
@@ -943,8 +1177,8 @@ main{position:relative;z-index:10}
   </div>
 </section>
 
-<!-- ══════════════════════ SCENE 04 · THE FEATURE ══════════════════════ -->
-<section class="scene" id="s-bill" aria-label="Tonight&rsquo;s bill">
+<!-- ══════════════════════ TONIGHT'S PICK ══════════════════════ -->
+<section class="scene" id="s-bill" aria-label="Tonight's pick">
   <div class="feature" id="feature">
     <div class="plate" id="plate" aria-hidden="true">
       <b class="wash" id="wash"></b><i data-slot="a"></i><i data-slot="b"></i>
@@ -954,31 +1188,41 @@ main{position:relative;z-index:10}
     </div>
   </div>
 
-  <div class="why" id="why"><div class="why-in frame" id="why-in"></div></div>
+  <div class="why" id="why"><div class="frame"><div class="why-in" id="why-in"></div></div></div>
 
   <div class="frame" id="shelf-slot"></div>
   <div class="frame" id="twin-slot"></div>
 
   <div class="frame">
     <p class="footnote" id="footnote"></p>
-    <p style="margin-top:clamp(28px,4vh,48px)">
-      <button class="act" id="back-tonight" type="button">&larr;&nbsp; Back to tonight</button>
+    <p style="margin-top:clamp(28px,4vh,48px);padding-bottom:clamp(30px,5vh,56px)">
+      <button class="act" id="back-tonight" type="button">&larr;&nbsp; Back to the counter</button>
     </p>
   </div>
 </section>
 
-<!-- ══════════════════════ MY MOVIES ══════════════════════ -->
-<section class="scene" id="s-taste" aria-label="My movies">
+<!-- ══════════════════════ THE AISLES ══════════════════════ -->
+<section class="scene" id="s-aisles" aria-label="Browse the aisles">
   <div class="scene-head frame">
-    <p class="tick">My movies</p>
-    <h1 class="say say-lg" style="margin-top:18px">Give us five movies you&rsquo;d defend.</h1>
-    <p class="under">We&rsquo;ll figure out the rest.</p>
+    <p class="tick">Browse</p>
+    <h1 class="say say-lg" style="margin-top:14px">The aisles</h1>
+    <p class="under">Every case in the store, shelved the way we'd shelve them. Tap one and it becomes tonight's pick.</p>
+  </div>
+  <div class="frame" id="aisles-slot"></div>
+</section>
+
+<!-- ══════════════════════ YOUR SHELF ══════════════════════ -->
+<section class="scene" id="s-taste" aria-label="Your shelf">
+  <div class="scene-head frame">
+    <p class="tick">Your shelf</p>
+    <h1 class="say say-lg" style="margin-top:14px">Five movies you'd defend.</h1>
+    <p class="under">We'll work out the rest from there.</p>
   </div>
   <div class="frame">
     <div class="gauge">
       <div class="pips" id="pips" aria-hidden="true"></div>
       <p class="said" id="gauge-say"></p>
-      <input class="find" id="find" type="search" placeholder="Find a film&hellip;" aria-label="Search films">
+      <input class="find" id="find" type="search" placeholder="Find a movie&hellip;" aria-label="Search films">
     </div>
     <div class="read-out" id="read-out"></div>
     <div class="wall" id="wall"></div>
@@ -988,8 +1232,8 @@ main{position:relative;z-index:10}
 <!-- ══════════════════════ PAST SHOWINGS ══════════════════════ -->
 <section class="scene" id="s-showings" aria-label="Past showings">
   <div class="scene-head frame">
-    <p class="tick">The stub drawer</p>
-    <h1 class="say say-lg" style="margin-top:18px">Past showings</h1>
+    <p class="tick">The rental history</p>
+    <h1 class="say say-lg" style="margin-top:14px">Past showings</h1>
   </div>
   <div class="frame" id="showings-slot"></div>
 </section>
@@ -998,7 +1242,8 @@ main{position:relative;z-index:10}
 
 <footer class="colophon">
   <div class="frame">
-    <p class="house"><span class="dot"></span>Tonight&rsquo;s Bill</p>
+    <p class="colo-flavor">Good movies. Real recommendations.</p>
+    <p class="house"><span class="dot"></span>Main Feature</p>
     <p id="colophon-note"></p>
   </div>
 </footer>
@@ -1653,11 +1898,11 @@ function checkFilters(f){
     {k:"clock", label:"Runtime", pass: f.r <= S.time,
      detail: f.r <= S.time
        ? hm(f.r) + " fits inside " + hm(S.time)
-       : hm(f.r) + " runs past your " + hm(S.time) + " — " + hm(f.r - S.time) + " too long"},
-    {k:"room", label:"Who’s watching", pass: roomOK,
+       : hm(f.r) + " runs past your " + hm(S.time) + " by " + hm(f.r - S.time)},
+    {k:"room", label:"Who's watching", pass: roomOK,
      detail: roomOK
-       ? "Pitched at " + AGE_SAY[f.k] + " — fine for " + (ROOM_SAY[S.room] || R.n.toLowerCase())
-       : "Pitched at " + AGE_SAY[f.k] + " — too old for " + (ROOM_SAY[S.room] || R.n.toLowerCase())},
+       ? "Pitched at " + AGE_SAY[f.k] + ", fine for " + (ROOM_SAY[S.room] || R.n.toLowerCase())
+       : "Pitched at " + AGE_SAY[f.k] + ", too old for " + (ROOM_SAY[S.room] || R.n.toLowerCase())},
     {k:"rating", label:"Minimum rating", pass: rateRank(f) >= S.rate,
      detail: S.rate === 0 ? f.mpaa + ", no minimum set"
        : (rateRank(f) >= S.rate ? f.mpaa + " meets " + floorName(S.rate)
@@ -1669,11 +1914,11 @@ function checkFilters(f){
     {k:"genre", label:"Genre", pass: genreOK,
      detail: !S.genres.length ? f.g.map(gLabel).join(", ") + ", no genre filter"
        : (genreOK ? "matches " + f.g.filter(function(g){ return S.genres.indexOf(g)>-1; }).map(gLabel).join(", ")
-                  : f.g.map(gLabel).join(", ") + " — none of them selected")},
+                  : f.g.map(gLabel).join(", ") + ", none of them selected")},
     {k:"service", label:"Where it streams", pass: on.length > 0,
      detail: on.length ? "on " + on.map(function(c){ return SVC_NAME[c]; }).join(", ")
-       : (f.svcs.length ? "only on " + f.svcs.map(function(c){ return SVC_NAME[c]; }).join(", ") + ", which you don’t have"
-                        : (f.svcChecked ? "not on any subscription service right now — rent or buy only"
+       : (f.svcs.length ? "only on " + f.svcs.map(function(c){ return SVC_NAME[c]; }).join(", ") + ", which you don't have"
+                        : (f.svcChecked ? "not on any subscription service right now, rent or buy only"
                                         : "no availability recorded"))}
   ];
 }
@@ -1832,7 +2077,7 @@ function why(rec){
          .sort(function(a,b){ return idfA(b) - idfA(a); }), 2);
     if(hits.length >= 2){
       const names = S.moods.map(function(k){ return MOOD_BY[k].n.toLowerCase(); });
-      bits.push("You asked for " + names.join(" and ") + " \u2014 this brings " + phrases(hits) + ".");
+      bits.push("You asked for " + names.join(" and ") + ". This one brings " + phrases(hits) + ".");
     }
   }
 
@@ -1858,7 +2103,7 @@ function why(rec){
       else bits.push("Cut from the same cloth as <b>" + best.L.t + "</b>, which you loved.");
     }else if(strong.length){
       const ph = claim(strong, 2);
-      if(ph.length) bits.push("Leans on " + phrases(ph) + " &mdash; what your picks keep pointing at.");
+      if(ph.length) bits.push("Leans on " + phrases(ph) + ", which is what your picks keep pointing at.");
     }
 
     /* director echo */
@@ -1889,10 +2134,10 @@ function why(rec){
 
   /* clock note */
   const slack = S.time - f.r;
-  if(slack <= 12) bits.push("Uses nearly all the time you have &mdash; " + hm(f.r) + " against " + hm(S.time) + ".");
+  if(slack <= 12) bits.push("Uses nearly all the time you have: " + hm(f.r) + " against " + hm(S.time) + ".");
   else if(slack >= 55) bits.push("Leaves " + hm(slack) + " on the clock.");
 
-  if(!bits.length) bits.push("A clean fit for tonight's runtime and the room. Teach us a few films you love and this gets a lot sharper.");
+  if(!bits.length) bits.push("A clean fit for tonight's runtime and the room. Put five movies you'd defend on Your Shelf and the picks get sharper.");
   return bits.slice(0,3).join(" ");
 }
 
@@ -1908,18 +2153,18 @@ function why(rec){
 
 /* ---------- who is on the couch ---------- */
 const AUDIENCES = [
-  {k:"solo",    n:"Just me",    plate:"There Will Be Blood"},
-  {k:"two",     n:"Date night", plate:"La La Land"},
-  {k:"friends", n:"The crew",   plate:"The Nice Guys"},
-  {k:"teens",   n:"Family",     plate:"Spider-Man: Into the Spider-Verse"}
+  {k:"solo",    n:"Just me",          plate:"There Will Be Blood"},
+  {k:"two",     n:"Date night",       plate:"La La Land"},
+  {k:"friends", n:"A few friends",    plate:"The Nice Guys"},
+  {k:"teens",   n:"The whole family", plate:"Spider-Man: Into the Spider-Verse"}
 ];
 
 /* ---------- runtime, printed like showtimes ---------- */
 const TIMES = [
-  {k:"short", n:"90 min",           cap:"Under 1h 40", mins:100},
-  {k:"two",   n:"2 hours",          cap:"Under 2h 15", mins:135},
-  {k:"half",  n:"2½ hours",         cap:"Under 2h 45", mins:165},
-  {k:"long",  n:"Make it an epic",  cap:"No ceiling",  mins:240}
+  {k:"short", n:"90 minutes or less", cap:"Under 1h 40", mins:100},
+  {k:"two",   n:"About two hours",    cap:"Under 2h 15", mins:135},
+  {k:"half",  n:"Two and a half",     cap:"Under 2h 45", mins:165},
+  {k:"long",  n:"We're committed",    cap:"No ceiling",  mins:240}
 ];
 
 /* ---------- the six on the programme; the rest are in Fine Tune ---------- */
@@ -2107,7 +2352,7 @@ function whyParts(rec){
 function pitchOf(rec){ return whyParts(rec).pitch; }
 
 /* ---------- scenes ---------- */
-const SCENES = {tonight:"s-tonight", bill:"s-bill", taste:"s-taste", showings:"s-showings"};
+const SCENES = {tonight:"s-tonight", bill:"s-bill", aisles:"s-aisles", taste:"s-taste", showings:"s-showings"};
 function showScene(name){
   SCENE = name;
   Object.keys(SCENES).forEach(function(k){
@@ -2117,6 +2362,7 @@ function showScene(name){
     const active = b.dataset.go === (name === "bill" ? "tonight" : name);
     b.setAttribute("aria-current", active ? "page" : "false");
   });
+  if(name === "aisles")   renderAisles();
   if(name === "taste")    renderWall();
   if(name === "showings") renderShowings();
   window.scrollTo({top:0, behavior:"instant"});
@@ -2195,8 +2441,8 @@ function gate(){
   $("show-bill").disabled = !ready;
   $("encore-go").disabled = !ready;
   $("call-note").textContent = ready
-    ? (Object.keys(S.taste).length ? "" : "Tell us five films you'd defend in My Movies and this gets a lot sharper.")
-    : (S.room ? "Tell us how long we've got." : "Tell us who's watching and how long we've got.");
+    ? (Object.keys(S.taste).length ? "" : "Put five movies you'd defend on Your Shelf and the picks get sharper.")
+    : (S.room ? "Tell us how much time you've got." : "Tell us who's watching and how much time you've got.");
 }
 
 /* ---------- the atmosphere behind the arrival ---------- */
@@ -2293,8 +2539,8 @@ function renderArrival(){
   if(!returning()){
     $("encore").hidden = true;
     $("night").hidden = false;
-    $("statement").textContent = "What are we watching tonight?";
-    $("under").textContent = "No scrolling through Netflix for 45 minutes.";
+    $("statement").textContent = "Tell us about tonight";
+    $("under").textContent = "Three quick answers and we hand you the movie.";
     $("under").hidden = false;
     gate();
     return;
@@ -2511,7 +2757,7 @@ function billCopy(rec){
 
   b.appendChild(withClass(nowShowing(
     MODE === "locked" ? "Now showing" :
-    MODE === "house"  ? "The house picked" : "Tonight, you're watching"), "res-1"));
+    MODE === "house"  ? "Dealer's choice" : "Tonight's pick"), "res-1"));
 
   const h = el("h2","say bill-title res-2", f.t);
   h.style.fontSize = titleSize(f.t);
@@ -2577,7 +2823,7 @@ function billActs(rec){
       S.locked = null; save(); rebuild();
     });
     acts.appendChild(un);
-    const back = el("button","act","Programme something else"); back.type = "button";
+    const back = el("button","act","Pick something else"); back.type = "button";
     back.addEventListener("click", function(){
       unmarkWatched(S.locked.t); S.locked = null; save();
       showScene("tonight"); renderArrival();
@@ -2604,7 +2850,7 @@ function billActs(rec){
   });
   acts.appendChild(seen);
 
-  const again = el("button","act","Try another →"); again.type = "button";
+  const again = el("button","act","Show me something else →"); again.type = "button";
   again.addEventListener("click", dealAnother);
   acts.appendChild(again);
 
@@ -2620,8 +2866,8 @@ function renderShelf(out){
   const slot = $("shelf-slot");
   const sec = el("section","shelf");
   const head = el("div","shelf-head");
-  head.appendChild(el("h3","say say-md","Also playing"));
-  head.appendChild(tick("Tap one to make it tonight's", true));
+  head.appendChild(el("h3","say say-md","Also on the shelf"));
+  head.appendChild(el("p","hand","these are good too. tap one and it's yours."));
   sec.appendChild(head);
 
   const rail = el("div","rail");
@@ -2640,7 +2886,7 @@ function renderShelf(out){
     const t = el("section","shelf");
     const th = el("div","shelf-head");
     th.appendChild(el("h3","say say-md","Double feature"));
-    th.appendChild(tick("You said make it an epic", true));
+    th.appendChild(tick("You said we're committed", true));
     t.appendChild(th);
     const grid = el("div","twin");
     grid.appendChild(twinSlot(pair[0].f, "Starts " + clock(0)));
@@ -2746,7 +2992,7 @@ function toggleWhy(rec, btn){
   });
   else {
     const li = document.createElement("li");
-    li.textContent = "Nothing on the shelf yet — tonight's answers are doing all the work.";
+    li.textContent = "Nothing on your shelf yet, so tonight's answers are doing all the work.";
     ul1.appendChild(li);
   }
   likes.appendChild(ul1);
@@ -2809,9 +3055,9 @@ function darkHouse(){
   grid.style.gridTemplateColumns = "minmax(0,1fr)";
   billPlate(anyPlate());
   const b = el("div","bill-copy empty");
-  b.appendChild(withClass(nowShowing("The house is dark"), "res-1"));
-  b.appendChild(el("h2","say say-lg res-2","Nothing made the cut."));
-  b.appendChild(el("p","res-3","Tonight's answers rule out everything on the shelf. Loosen one and we'll find something worth watching."));
+  b.appendChild(withClass(nowShowing("The shelves came up empty"), "res-1"));
+  b.appendChild(el("h2","say say-lg res-2","Nothing fits tonight's rules."));
+  b.appendChild(el("p","res-3","Your answers rule out the whole store. Loosen one and we'll pull something good."));
   const acts = el("div","acts res-3");
   const relax = el("button","lock"); relax.type = "button";
   relax.appendChild(el("span",null,"Loosen the night"));
@@ -2826,7 +3072,7 @@ function darkHouse(){
     programme({silent:true, quiet:true});
   });
   acts.appendChild(relax);
-  const back = el("button","act","Back to tonight"); back.type = "button";
+  const back = el("button","act","Back to the counter"); back.type = "button";
   back.addEventListener("click", function(){ showScene("tonight"); renderArrival(); });
   acts.appendChild(back);
   b.appendChild(acts);
@@ -2840,9 +3086,9 @@ function renderFootnote(out){
   const bar = out.picks.length ? out.picks[out.picks.length-1].score : 0.5;
   const held = (out.locked || []).filter(function(r){ return r.score >= bar; });
   const gone = (out.notStreaming || []).filter(function(r){ return r.score >= bar; });
-  if(held.length) bits.push("<b>" + held.length + "</b> would have made the bill but sit on a service you don't have.");
+  if(held.length) bits.push("<b>" + held.length + "</b> would have made the shelf but sit on a service you don't have.");
   if(gone.length) bits.push("<b>" + gone.length + "</b> are rent-or-buy only tonight.");
-  if((out.watched || []).length) bits.push("<b>" + out.watched.length + "</b> held back — you've seen them.");
+  if((out.watched || []).length) bits.push("<b>" + out.watched.length + "</b> held back because you've seen them.");
   if(bits.length) n.innerHTML = bits.join(" ");
 }
 
@@ -2885,7 +3131,7 @@ function renderWall(){
     });
 
   if(!list.length){
-    w.appendChild(el("p", null, "Nothing on the shelf matches “" + findQ + "”."));
+    w.appendChild(el("p", null, 'Nothing on the shelf matches "' + findQ + '".'));
     return;
   }
   let n = 0;
@@ -2944,10 +3190,10 @@ function renderShowings(){
   if(!bills.length){
     const e = el("div","empty");
     e.style.paddingTop = "40px";
-    e.appendChild(el("h2","say say-md","The drawer is empty."));
-    e.appendChild(el("p",null,"Lock something in and the stub lands here."));
+    e.appendChild(el("h2","say say-md","No rentals on file."));
+    e.appendChild(el("p",null,"Lock a movie in and the card lands here."));
     const go = el("button","lock"); go.type = "button";
-    go.appendChild(el("span",null,"Programme tonight"));
+    go.appendChild(el("span",null,"Pick tonight's movie"));
     go.appendChild(el("span","arw","→"));
     go.style.marginTop = "28px";
     go.addEventListener("click", function(){ showScene("tonight"); renderArrival(); });
@@ -2977,6 +3223,7 @@ function renderShowings(){
     sec.appendChild(grid);
     w.appendChild(sec);
   });
+  w.appendChild(el("p","hand rewind","be kind, please rewind."));
 }
 
 function ticketFor(b){
@@ -2998,14 +3245,99 @@ function ticketFor(b){
   return c;
 }
 
+/* ============================================================================
+   THE AISLES
+   Browsing, not scoring. Every shelf is cut from the same hand-tagged catalog;
+   nothing here touches the engine.
+   ========================================================================== */
+const AISLES = [
+  {k:"staff",   n:"Staff picks", note:"trust us on these.",
+   pick:function(f){ return f.rt >= 94 && f.pop <= 2; }},
+  {k:"fresh",   n:"New releases",
+   pick:function(f){ return f.y >= 2022; }},
+  {k:"short",   n:"90 minutes or less",
+   pick:function(f){ return f.r <= 100; }},
+  {k:"date",    n:"Good for a date",
+   pick:function(f){ return f.a.indexOf("romantic") > -1 || f.g.indexOf("romance") > -1; }},
+  {k:"comfort", n:"Comfort movies",
+   pick:function(f){ return f.a.indexOf("cozy") > -1 ||
+     (f.a.indexOf("uplifting") > -1 && f.a.indexOf("earnest") > -1); }},
+  {k:"mind",    n:"Mind benders",
+   pick:function(f){ return f.a.indexOf("twisty") > -1 || f.a.indexOf("cerebral") > -1; }},
+  {k:"banger",  n:"Saturday night movies",
+   pick:function(f){ return f.pop === 3 &&
+     (f.a.indexOf("spectacle") > -1 || f.a.indexOf("propulsive") > -1); }},
+  {k:"action",  n:"Action & adventure",
+   pick:function(f){ return f.g.indexOf("action") > -1 || f.g.indexOf("adventure") > -1; }},
+  {k:"crime",   n:"Crime",
+   pick:function(f){ return f.g.indexOf("crime") > -1; }},
+  {k:"comedy",  n:"Comedy",
+   pick:function(f){ return f.g.indexOf("comedy") > -1; }},
+  {k:"scary",   n:"Late-night horror",
+   pick:function(f){ return f.g.indexOf("horror") > -1; }},
+  {k:"docs",    n:"Documentaries",
+   pick:function(f){ return f.g.indexOf("documentary") > -1; }}
+];
+
+function renderAisles(){
+  const w = $("aisles-slot"); w.innerHTML = "";
+  AISLES.forEach(function(a){
+    const films = FILMS.filter(a.pick).sort(function(x,y){
+      return (y.pop - x.pop) || (y.rt - x.rt);
+    });
+    if(films.length < 4) return;
+    const sec = el("section","aisle");
+    const sign = el("div","aisle-sign");
+    sign.appendChild(el("span","plate-sign", a.n));
+    sign.appendChild(tick(films.length + " titles", true));
+    if(a.note) sign.appendChild(el("span","hand", a.note));
+    sec.appendChild(sign);
+    const rail = el("div","rail");
+    films.forEach(function(f){
+      const b = el("button","rail-item"); b.type = "button";
+      b.setAttribute("aria-label", "Make " + f.t + " tonight's pick");
+      b.appendChild(el("span","flag blank"," "));
+      b.appendChild(poster(f, "(max-width:767px) 33vw, 150px"));
+      b.appendChild(el("span","rt", f.t));
+      b.appendChild(el("span","rm", f.y + " · " + hm(f.r)));
+      b.addEventListener("click", function(){ aislePick(f); });
+      rail.appendChild(b);
+    });
+    sec.appendChild(rail);
+    w.appendChild(sec);
+  });
+}
+
+/* Hand a browsed case straight to the counter. When tonight's filters already
+   rank it, use the real record so the store's note can explain itself. */
+function aislePick(f){
+  DEALER = false; closeWhy();
+  const out = scoreAll();
+  LAST = out;
+  let idx = -1;
+  for(let i = 0; i < out.picks.length; i++){ if(out.picks[i].f === f){ idx = i; break; } }
+  MODE = "feature";
+  $("shelf-slot").innerHTML = ""; $("twin-slot").innerHTML = ""; $("footnote").innerHTML = "";
+  showScene("bill");
+  if(idx > -1){
+    REROLLS = idx;
+    setFeature(out.picks[idx], false);
+    renderShelf(out);
+    renderFootnote(out);
+  } else {
+    const on = f.svcs.filter(function(c){ return S.svc[c]; });
+    setFeature({f:f, score:0, T:out.T, on:on, upSet:{}, parts:{}, weights:{}}, false);
+  }
+}
+
 /* ---------- provenance ---------- */
 function renderColophon(){
   const rtCount = FILMS.filter(function(f){ return f.rtSrc === "rt"; }).length;
-  let t = FILMS.length + " films, hand-tagged for pace, tone and how much of a night they ask of you. ";
+  let t = FILMS.length + " films on the shelves, hand-tagged for pace and tone. ";
   t += ENRICHED
     ? ("Runtimes, ratings, posters, synopses and streaming homes from " + ENRICHED.source +
        ", refreshed daily. " + (rtCount ? "Critic scores are Rotten Tomatoes, via OMDb. " : "") +
-       "Availability is accurate to about a day, not to the minute — check before you commit the evening. ")
+       "Availability is accurate to about a day, not to the minute. Check before you commit the evening. ")
     : "Streaming homes and critic scores here are our own estimates, not sourced feeds. ";
   t += STORAGE_OK
     ? "Your shelf is saved in this browser only."
@@ -3018,6 +3350,7 @@ function afterEnrichment(){
   renderColophon();
   renderNights();          /* the programme washes need backdrops */
   ambience();
+  if(SCENE === "aisles")   renderAisles();
   if(SCENE === "taste")    renderWall();
   if(SCENE === "showings") renderShowings();
   if(SCENE === "tonight")  renderArrival();
