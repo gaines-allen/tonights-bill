@@ -34,7 +34,7 @@ const LIMIT = Number(flag("--limit", 0)) || 0;
 const CONCURRENCY = Number(flag("--concurrency", 6));
 const VERBOSE = args.includes("--verbose");
 const NO_DISCOVER   = args.includes("--no-discover");
-const PAGES         = Number(flag("--pages", 6));        /* per service, 20 titles a page */
+const PAGES         = Number(flag("--pages", 9));        /* per service, 20 titles a page */
 const MIN_VOTES     = Number(flag("--min-votes", 400));  /* enough that someone has seen it */
 const MIN_SCORE     = Number(flag("--min-score", 6.1));
 const MAX_SHELF     = Number(flag("--max-shelf", 900));  /* ceiling on discovered titles */
@@ -109,7 +109,7 @@ async function getJSON(url, tries = 4) {
     }
     if (res.status === 404) return null;
     if (!res.ok) {
-      if (res.status >= 500 && i < tries - 1) { await sleep(600 * (i + 1)); continue; }
+      if (res.status >= 500 && i < tries - 1) { await sleep(1500 * (i + 1) ** 2); continue; }
       throw new Error(`${res.status} ${res.statusText} for ${url.replace(/api_key=[^&]+/, "api_key=***")}`);
     }
     return res.json();
@@ -381,22 +381,46 @@ async function providerDirectory() {
   return { ids, logos };
 }
 
+/**
+ * A page of what a service is streaming. TMDB has been known to 500 on the
+ * vote filters when they are combined with a provider filter, so the same
+ * query is available without them and the thresholds are applied here instead.
+ * The result set is identical; only where the filtering happens changes.
+ */
+async function discoverPage(providerId, page, minVotes, minScore, plain) {
+  const params = {
+    watch_region: REGION,
+    with_watch_providers: providerId,
+    with_watch_monetization_types: "flatrate",
+    sort_by: "popularity.desc",
+    include_adult: false,
+    page
+  };
+  if (!plain) {
+    params["vote_count.gte"] = minVotes;
+    params["vote_average.gte"] = minScore;
+  }
+  return getJSON(tmdbUrl("/discover/movie", params));
+}
+
 async function discoverOn(providerId, pages, minVotes, minScore) {
   const found = [];
+  let plain = false;
   for (let page = 1; page <= pages; page++) {
-    const data = await getJSON(tmdbUrl("/discover/movie", {
-      watch_region: REGION,
-      with_watch_providers: providerId,
-      with_watch_monetization_types: "flatrate",
-      sort_by: "popularity.desc",
-      "vote_count.gte": minVotes,
-      "vote_average.gte": minScore,
-      include_adult: false,
-      language: "en-US",
-      page
-    }));
+    let data;
+    try {
+      data = await discoverPage(providerId, page, minVotes, minScore, plain);
+    } catch (e) {
+      if (plain) throw e;
+      plain = true;                       // drop the suspect filters and carry on
+      data = await discoverPage(providerId, page, minVotes, minScore, true);
+    }
     if (!data?.results?.length) break;
-    found.push(...data.results);
+    for (const r of data.results) {
+      if ((r.vote_count || 0) < minVotes) continue;
+      if ((r.vote_average || 0) < minScore) continue;
+      found.push(r);
+    }
     if (page >= (data.total_pages || 1)) break;
   }
   return found;
@@ -512,43 +536,56 @@ async function main() {
   /* ---- what is on the services right now ---------------------------------
      Runs after the curated pass so a discovered title can be checked against
      the hand-authored list and never shelved twice. */
-  const seen = new Set(films.map((f) => `${norm(f.t)}::${f.y}`));
-  let shelf = [], directory = { ids: {}, logos: {} };
-  if (!NO_DISCOVER) {
-    directory = await providerDirectory();
-    const codes = Object.keys(directory.ids);
-    console.log(`\nScanning ${codes.length} services for what is streaming now…`);
-    const dirLookup = directorAttrs(films);
-
-    const candidates = new Map();
-    for (const code of codes) {
-      const rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
-      for (const r of rows) if (!candidates.has(r.id)) candidates.set(r.id, r);
-      console.log(`  ${code.padEnd(4)} ${String(rows.length).padStart(4)} candidates`);
-    }
-    /* drop anything the curated catalog already covers */
-    const fresh = [...candidates.values()]
-      .filter((r) => !seen.has(`${norm(r.title)}::${Number((r.release_date || "").slice(0, 4))}`))
-      .slice(0, MAX_SHELF);
-    console.log(`\n${fresh.length} new candidates, fetching details…`);
-    const built = await pool(fresh.map((r) => ({ id: r.id, t: r.title, y: 0 })), CONCURRENCY,
-      (item) => shelfRecord(item.id, dirLookup));
-    shelf = built.filter((r) => r && r.t);
-    /* a title can reach two services under two ids; keep one */
-    const byKey = new Map();
-    for (const r of shelf) {
-      const key = `${norm(r.t)}::${r.y}`;
-      if (!byKey.has(key)) byKey.set(key, r);
-    }
-    shelf = [...byKey.values()];
-  }
-
-  /* ---- what changed since yesterday --------------------------------------
-     The point of a daily scan is knowing what arrived and what left, so the
-     page can shelve new arrivals together and stop offering what is gone. */
   let previous = null;
   try { previous = JSON.parse(await readFile(join(ROOT, "data", "catalog.json"), "utf8")); }
   catch { /* first run */ }
+
+  const seen = new Set(films.map((f) => `${norm(f.t)}::${f.y}`));
+  let shelf = [], directory = { ids: {}, logos: {} }, scanned = false;
+  if (!NO_DISCOVER) {
+    try {
+      directory = await providerDirectory();
+      const codes = Object.keys(directory.ids);
+      console.log(`\nScanning ${codes.length} services for what is streaming now…`);
+      const dirLookup = directorAttrs(films);
+
+      const candidates = new Map();
+      for (const code of codes) {
+        const rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
+        for (const r of rows) if (!candidates.has(r.id)) candidates.set(r.id, r);
+        console.log(`  ${code.padEnd(4)} ${String(rows.length).padStart(4)} candidates`);
+      }
+      if (!candidates.size) throw new Error("every service returned nothing");
+
+      const fresh = [...candidates.values()]
+        .filter((r) => !seen.has(`${norm(r.title)}::${Number((r.release_date || "").slice(0, 4))}`))
+        .slice(0, MAX_SHELF);
+      console.log(`\n${fresh.length} new candidates, fetching details…`);
+      const built = await pool(fresh.map((r) => ({ id: r.id, t: r.title, y: 0 })), CONCURRENCY,
+        (item) => shelfRecord(item.id, dirLookup));
+
+      const byKey = new Map();
+      for (const r of built) {
+        if (!r || !r.t) continue;
+        const key = `${norm(r.t)}::${r.y}`;
+        if (!byKey.has(key)) byKey.set(key, r);
+      }
+      shelf = [...byKey.values()];
+      scanned = true;
+    } catch (e) {
+      /* A daily job must not turn a bad afternoon at TMDB into an empty store.
+         Keep yesterday's shelf and say so, rather than reporting that every
+         film on it has left. */
+      console.warn(`\n  !! scan failed: ${e.message.slice(0, 120)}`);
+      console.warn(`  keeping the shelf from the last good scan.`);
+      shelf = (previous?.shelf || []).slice();
+    }
+  } else if (previous?.shelf) {
+    shelf = previous.shelf.slice();
+  }
+
+  /* ---- what changed since yesterday --------------------------------------
+     Only a scan that actually ran can claim a title has left. */
   const today = new Date().toISOString().slice(0, 10);
   const firstSeen = new Map();
   for (const r of previous?.shelf || []) if (r.firstSeen) firstSeen.set(`${norm(r.t)}::${r.y}`, r.firstSeen);
@@ -559,18 +596,20 @@ async function main() {
   const arrived = [];
   for (const r of shelf) {
     const key = `${norm(r.t)}::${r.y}`;
-    r.firstSeen = firstSeen.get(key) || (hadShelf ? today : null);
-    if (hadShelf && r.firstSeen === today) arrived.push(r.t);
+    r.firstSeen = firstSeen.get(key) || (hadShelf && scanned ? today : r.firstSeen || null);
+    if (hadShelf && scanned && r.firstSeen === today) arrived.push(r.t);
   }
-  /* A curated title that has lost every service, or a discovered title that
-     dropped off the shelf entirely, is gone as far as tonight is concerned. */
-  const wasStreaming = new Set();
-  for (const f of previous?.films || []) if ((f.providers || []).length) wasStreaming.add(f.t);
-  for (const r of previous?.shelf  || []) wasStreaming.add(r.t);
+
   const nowStreaming = new Set();
   for (const f of ok)    if ((f.providers || []).length) nowStreaming.add(f.t);
   for (const r of shelf) nowStreaming.add(r.t);
-  const departed = [...wasStreaming].filter((t) => !nowStreaming.has(t));
+  let departed = [];
+  if (scanned) {
+    const wasStreaming = new Set();
+    for (const f of previous?.films || []) if ((f.providers || []).length) wasStreaming.add(f.t);
+    for (const r of previous?.shelf  || []) wasStreaming.add(r.t);
+    departed = [...wasStreaming].filter((t) => !nowStreaming.has(t));
+  }
 
   const payload = {
     _meta: {
@@ -596,6 +635,7 @@ async function main() {
         return all;
       })(),
       scannedAt: today,
+      scanOk: scanned,
       shelfCount: shelf.length,
       streamingNow: nowStreaming.size,
       arrived,
