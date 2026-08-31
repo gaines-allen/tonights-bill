@@ -418,6 +418,7 @@ async function discoverOn(providerId, pages, minVotes, minScore) {
       found.push(r);
     }
     if (page >= (data.total_pages || 1)) break;
+    await sleep(320);          /* these queries are expensive at their end */
   }
   return found;
 }
@@ -549,9 +550,19 @@ async function main() {
       const candidates = new Map();
       for (const code of codes) {
         try {
-          const rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
+          let rows;
+          try {
+            rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
+          } catch (first) {
+            /* The 500s come and go rather than tracking any one service, which
+               reads as load at their end. Stand back and ask once more before
+               writing the service off for the night. */
+            await sleep(6000);
+            rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
+          }
           for (const r of rows) if (!candidates.has(r.id)) candidates.set(r.id, r);
           console.log(`  ${code.padEnd(4)} ${String(rows.length).padStart(4)} candidates`);
+          await sleep(900);
         } catch (e) {
           /* One service having a bad day is not the whole store closing. */
           failed.push(code);
