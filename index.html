@@ -1742,29 +1742,29 @@ function rateRank(f){
    attribute tags the scorer already understands, so nothing about the taste
    maths changes — a mood simply adds a second thing to match against. */
 const MOODS = [
-  {k:"easy",    n:"Easy watch",      sub:"Nothing heavy",
+  {k:"easy",    n:"Easy watch",      sub:"Nothing heavy", say:"an easy watch",
    up:["brisk","comic","uplifting","cozy","propulsive"], down:["slowburn","bleak","cerebral"]},
-  {k:"laugh",   n:"Make me laugh",   sub:"Actually funny",
+  {k:"laugh",   n:"Make me laugh",   sub:"Actually funny", say:"something funny",
    up:["comic","ironic","brisk","ensemble"],             down:["bleak","slowburn"]},
-  {k:"guess",   n:"Keep me guessing",sub:"Twists and turns",
+  {k:"guess",   n:"Keep me guessing",sub:"Twists and turns", say:"something twisty",
    up:["twisty","cerebral","propulsive","mystery"],      down:["cozy"]},
-  {k:"big",     n:"I want a banger", sub:"Scale and spectacle",
+  {k:"big",     n:"I want a banger", sub:"Scale and spectacle", say:"a banger",
    up:["spectacle","epic","practical","propulsive","visual"], down:["dialogue"]},
-  {k:"weird",   n:"Get weird",       sub:"Off the beaten path",
+  {k:"weird",   n:"Get weird",       sub:"Off the beaten path", say:"something strange",
    up:["weird","auteur","visual","stylish"],             down:["grounded"]},
-  {k:"acting",  n:"Great acting",    sub:"People, not plot",
+  {k:"acting",  n:"Great acting",    sub:"People, not plot", say:"great acting",
    up:["characterstudy","dialogue","ensemble","earnest"],down:["spectacle"]},
-  {k:"scream",  n:"I want to scream", sub:"Lights off, door locked",
+  {k:"scream",  n:"I want to scream", sub:"Lights off, door locked", say:"something scary",
    up:["scary","horror","visceral","weird"],             down:["cozy","uplifting"]},
-  {k:"dark",    n:"Dark & intense",  sub:"Turn the lights off",
+  {k:"dark",    n:"Dark & intense",  sub:"Turn the lights off", say:"something dark",
    up:["bleak","visceral","violent","slowburn","scary"], down:["comic","cozy","uplifting"]},
-  {k:"comfort", n:"Comfort movie",   sub:"Something kind",
+  {k:"comfort", n:"Comfort movie",   sub:"Something kind", say:"a comfort movie",
    up:["cozy","uplifting","earnest","romantic","hopeful"],down:["bleak","violent","scary"]},
-  {k:"beautiful",n:"Something beautiful", sub:"Made with an eye",
+  {k:"beautiful",n:"Something beautiful", sub:"Made with an eye", say:"something beautiful",
    up:["visual","auteur","stylish","epic","practical"], down:["brisk"]},
   /* An acclaim ask, not an atmosphere one. It deliberately carries no tags:
      instead it lifts the critic floor, a control the engine already has. */
-  {k:"great",   n:"Something great",  sub:"Nothing but the good stuff",
+  {k:"great",   n:"Something great",  sub:"Nothing but the good stuff", say:"something great",
    up:[], down:[], critics:88}
 ];
 const MOOD_BY = {}; MOODS.forEach(function(m){ MOOD_BY[m.k] = m; });
@@ -2210,7 +2210,10 @@ function why(rec){
       f.a.filter(function(x){ return v[x] > 0; })
          .sort(function(a,b){ return idfA(b) - idfA(a); }), 2);
     if(hits.length >= 2){
-      const names = S.moods.map(function(k){ return MOOD_BY[k].n.toLowerCase(); });
+      const names = S.moods.map(function(k){
+        const m = MOOD_BY[k];
+        return m.say || m.n.toLowerCase();
+      });
       bits.push("You asked for " + names.join(" and ") + ". This one brings " + phrases(hits) + ".");
     }
   }
@@ -2254,7 +2257,8 @@ function why(rec){
   }
 
   if(S.moods.indexOf("great") > -1 && f.rt >= 88){
-    bits.push("You asked for something great: critics have it at " + f.rt + "%.");
+    bits.push("You asked for something great: " +
+      (f.rtSrc === "rt" ? "critics have it at " : "viewers have it at ") + f.rt + "%.");
   }
 
   /* room note */
@@ -2999,7 +3003,7 @@ function billCopy(rec){
   /* the arithmetic lives at the bottom of the hierarchy */
   if(MODE !== "locked"){
     const foot = [];
-    if(f.rt) foot.push(f.rt + "% critics");
+    if(f.rt) foot.push(f.rt + "% " + (f.rtSrc === "rt" ? "critics" : "audience"));
     if(rec.T && rec.T.n && rec.score) foot.push("fit " + Math.round(rec.score * 100) + " of 100");
     if(foot.length) b.appendChild(withClass(tick(foot.join("  ·  "), true), "score res-3"));
   }
@@ -3470,8 +3474,10 @@ function onTheShelves(f){ return !!(f.svcs && f.svcs.length); }
 const AISLES = [
   {k:"new",     n:"Just added", note:"landed in the last fortnight.",
    pick:function(f){ return f.firstSeen && daysSince(f.firstSeen) <= 14; }},
+  /* A Rotten Tomatoes critic score and a TMDB audience score do not sit on the
+     same scale, so each is judged against its own bar. */
   {k:"staff",   n:"Staff picks", note:"trust us on these.",
-   pick:function(f){ return f.rt >= 94 && f.pop <= 2; }},
+   pick:function(f){ return f.pop <= 2 && f.rt >= (f.rtSrc === "rt" ? 90 : 78); }},
   {k:"fresh",   n:"New releases",
    pick:function(f){ return f.y >= 2022; }},
   {k:"short",   n:"90 minutes or less",

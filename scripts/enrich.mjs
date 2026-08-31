@@ -38,6 +38,7 @@ const PAGES         = Number(flag("--pages", 9));        /* per service, 20 titl
 const MIN_VOTES     = Number(flag("--min-votes", 400));  /* enough that someone has seen it */
 const MIN_SCORE     = Number(flag("--min-score", 6.1));
 const MAX_SHELF     = Number(flag("--max-shelf", 900));  /* ceiling on discovered titles */
+const OMDB_BUDGET   = Number(flag("--omdb-budget", 950)); /* OMDb allows 1000 lookups a day */
 
 const TOKEN = process.env.TMDB_TOKEN || "";
 const APIKEY = process.env.TMDB_API_KEY || "";
@@ -471,6 +472,7 @@ async function shelfRecord(id, dirLookup) {
     poster: d.poster_path,
     backdrop: d.backdrop_path,
     tmdb: d.id,
+    imdb: d.imdb_id || null,
     logos: logoPaths(d["watch/providers"])
   };
 }
@@ -595,6 +597,24 @@ async function main() {
           if (held.has(key)) continue;
           if ((r.svcs || []).some((c) => failed.includes(c))) { shelf.push(r); held.add(key); }
         }
+      }
+      /* A TMDB user score and a Rotten Tomatoes critic score are not the same
+         number, and the page prints this one under the word "critics". Score
+         the discovered shelf the same way the curated rows are scored so the
+         two populations can be compared at all. OMDb has a daily ceiling, so
+         the most recognisable titles go first and the rest keep the TMDB score,
+         clearly marked as an audience number. */
+      if (OMDB && shelf.length) {
+        const budget = Math.max(0, OMDB_BUDGET - ok.length);
+        const queue = shelf.filter((r) => r.imdb)
+                           .sort((a, b) => b.pop - a.pop || b.rt - a.rt)
+                           .slice(0, budget);
+        console.log(`\nCritic scores for ${queue.length} of ${shelf.length} discovered titles…`);
+        await pool(queue.map((r) => ({ t: r.t, y: r.y, rec: r })), CONCURRENCY, async (item) => {
+          const res = await fetchOmdb(item.rec.imdb);
+          if (res.rt != null) { item.rec.rt = res.rt; item.rec.rtSrc = "rt"; }
+          return { ok: true, t: item.t };
+        });
       }
       scanned = true;
     } catch (e) {
