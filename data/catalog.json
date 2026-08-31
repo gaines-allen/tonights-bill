@@ -1,15 +1,16 @@
 {
  "_meta": {
-  "generatedAt": "2026-08-31T14:43:40.220Z",
+  "generatedAt": "2026-08-31T14:52:17.780Z",
   "region": "US",
   "source": "TMDB + OMDb",
   "total": 245,
   "matched": 245,
   "withProviders": 128,
-  "withRT": 242,
+  "withRT": 98,
   "withOverview": 245,
   "omdbErrors": {
-   "no Rotten Tomatoes entry for this title": 2
+   "Request limit reached!": 145,
+   "no Rotten Tomatoes entry for this title": 1
   },
   "unmatched": [],
   "logos": {
@@ -22,9 +23,14 @@
    "PCK": "/2aGrp1xw3qhwCYvNGAJZPdjfeeX.jpg"
   },
   "scannedAt": "2026-08-31",
-  "scanOk": false,
-  "shelfCount": 0,
-  "streamingNow": 128,
+  "scanOk": true,
+  "servicesMissed": [
+   "PRV",
+   "MAX",
+   "PAR"
+  ],
+  "shelfCount": 135,
+  "streamingNow": 261,
   "arrived": [],
   "departed": []
  },
@@ -1040,7 +1046,7 @@
    "runtime": 140,
    "cert": "PG-13",
    "tmdbScore": 77,
-   "votes": 23062,
+   "votes": 23063,
    "poster": "/sPX89Td70IDDjVr85jdSBb4rWGr.jpg",
    "overview": "Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the corruption that plagues his home, Gotham City. Unable to work within the system, he instead creates a new identity, a symbol of fear for the criminal underworld - The Batman.",
    "backdrop": "/9IIBboV7MCT0bTxzXHmWK1Hq558.jpg",
@@ -1281,7 +1287,7 @@
    "runtime": 107,
    "cert": "R",
    "tmdbScore": 84,
-   "votes": 17009,
+   "votes": 17010,
    "poster": "/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
    "overview": "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
    "backdrop": "/wbQa0EnWUyRzQ5d1pHLNRlmsCUP.jpg",
@@ -1569,7 +1575,7 @@
    "runtime": 128,
    "cert": "R",
    "tmdbScore": 73,
-   "votes": 8845,
+   "votes": 8846,
    "poster": "/4GFPuL14eXi66V96xBWY73Y9PfR.jpg",
    "overview": "Following the death of the Leigh family matriarch, Annie and her children uncover disturbing secrets about their heritage. Their daily lives are not only impacted, but they also become entangled in a chilling fate from which they cannot escape, driving them to the brink of madness.",
    "backdrop": "/gJbTXKNTL6O7r7PzF6ZRkJGBlPp.jpg",
@@ -1613,7 +1619,7 @@
    "runtime": 91,
    "cert": "PG-13",
    "tmdbScore": 74,
-   "votes": 15654,
+   "votes": 15655,
    "poster": "/nAU74GmpUk7t5iklEp3bufwDq4n.jpg",
    "overview": "A family is forced to live in silence while hiding from creatures that hunt by sound.",
    "backdrop": "/nHRUtBwFNnNN70vcQ7lAsjc2T6S.jpg",
@@ -1843,7 +1849,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Spider-Man: Into the Spider-Verse",
@@ -1905,7 +1912,7 @@
    "runtime": 115,
    "cert": "PG",
    "tmdbScore": 77,
-   "votes": 19220,
+   "votes": 19222,
    "poster": "/2LqaLgk4Z226KkgPJuiOQ58wvrm.jpg",
    "overview": "Bob Parr has given up his superhero days to log in time as an insurance adjuster and raise his three children with his formerly heroic wife in suburbia. But when he receives a mysterious assignment, it's time to get back into costume.",
    "backdrop": "/lxwzY9vNwjDgxWKt3zZ6zcU6rEJ.jpg",
@@ -2008,7 +2015,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 98
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Coco",
@@ -2031,7 +2039,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Up",
@@ -2054,7 +2063,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 98
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Finding Nemo",
@@ -2078,7 +2088,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 99
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Zootopia",
@@ -2116,7 +2127,7 @@
    "runtime": 107,
    "cert": "PG",
    "tmdbScore": 76,
-   "votes": 13967,
+   "votes": 13969,
    "poster": "/m5MDZOIFEFlxGiLuAzWzFSsWcye.jpg",
    "overview": "In Ancient Polynesia, when a terrible curse incurred by Maui reaches an impetuous Chieftain's daughter's island, she answers the Ocean's call to seek out the demigod to set things right.",
    "backdrop": "/qLVNZFHYUR6Li64He67SWl6BHQe.jpg",
@@ -2124,7 +2135,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "How to Train Your Dragon",
@@ -2139,7 +2151,7 @@
    "runtime": 98,
    "cert": "PG",
    "tmdbScore": 79,
-   "votes": 14654,
+   "votes": 14655,
    "poster": "/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg",
    "overview": "As the son of a Viking leader on the cusp of manhood, shy Hiccup Horrendous Haddock III faces a rite of passage: he must kill a dragon to prove his warrior mettle. But after downing a feared dragon, he realizes that he no longer wants to destroy it, and instead befriends the beast – which he names Toothless – much to the chagrin of his warrior father.",
    "backdrop": "/59vDC1BuEQvti24OMr0ZvtAK6R1.jpg",
@@ -2147,7 +2159,8 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": 99
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Lion King",
@@ -2170,7 +2183,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Klaus",
@@ -2193,7 +2207,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Puss in Boots: The Last Wish",
@@ -2217,7 +2232,7 @@
    ],
    "providersChecked": true,
    "rt": null,
-   "omdbError": "no Rotten Tomatoes entry for this title"
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Lord of the Rings: The Fellowship of the Ring",
@@ -2240,7 +2255,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Lord of the Rings: The Two Towers",
@@ -2263,7 +2279,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Lord of the Rings: The Return of the King",
@@ -2278,7 +2295,7 @@
    "runtime": 201,
    "cert": "PG-13",
    "tmdbScore": 85,
-   "votes": 27219,
+   "votes": 27221,
    "poster": "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
    "overview": "As armies mass for a final battle that will decide the fate of the world--and powerful, ancient forces of Light and Dark compete to determine the outcome--one member of the Fellowship of the Ring is revealed as the noble heir to the throne of the Kings of Men.",
    "backdrop": "/ctiw6FZK4N36LmkjSklWEbuvlq9.jpg",
@@ -2286,7 +2303,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Pan's Labyrinth",
@@ -2307,7 +2325,8 @@
    "backdrop": "/6G6nqSW9S7EHA9HrYl0Z8uo2H7f.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Princess Bride",
@@ -2330,7 +2349,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Harry Potter and the Prisoner of Azkaban",
@@ -2377,7 +2397,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 99
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "When Harry Met Sally",
@@ -2419,7 +2440,8 @@
    "backdrop": "/qA2TyqPldTtoTVY3LKrNIG5g6bH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 100
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Eternal Sunshine of the Spotless Mind",
@@ -2434,13 +2456,14 @@
    "runtime": 108,
    "cert": "R",
    "tmdbScore": 81,
-   "votes": 16658,
+   "votes": 16659,
    "poster": "/5MwkWH9tYHv3mV9OdYTMR5qreIz.jpg",
    "overview": "Joel Barish, heartbroken that his girlfriend underwent a procedure to erase him from her memory, decides to do the same. However, as he watches his memories of her fade away, he realises that he still loves her, and may be too late to correct his mistake.",
    "backdrop": "/W1ffLQGHoxfAOq0ZYdPtJlvAdb.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "La La Land",
@@ -2461,7 +2484,8 @@
    "backdrop": "/nlPCdZlHtRNcF6C9hzUH4ebmV1w.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Notting Hill",
@@ -2482,7 +2506,8 @@
    "backdrop": "/enTZhfxAdgOCdFdbj52MR3F10yC.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 84
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Crazy Rich Asians",
@@ -2503,7 +2528,8 @@
    "backdrop": "/zeHB7aP46Xs3u4aFLuAq2GFeUGb.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Past Lives",
@@ -2524,7 +2550,8 @@
    "backdrop": "/7HR38hMBl23lf38MAN63y4pKsHz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Portrait of a Lady on Fire",
@@ -2547,7 +2574,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 98
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Brokeback Mountain",
@@ -2568,7 +2596,8 @@
    "backdrop": "/vXzqV2RtJlT9WhNEM4NYWCEC6ZI.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 88
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Superbad",
@@ -2589,7 +2618,8 @@
    "backdrop": "/coru98UcFBzJIU7bxZguxaePgu0.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 88
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Bridesmaids",
@@ -2612,7 +2642,8 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": 89
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Airplane!",
@@ -2635,7 +2666,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Big Lebowski",
@@ -2658,7 +2690,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 79
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Groundhog Day",
@@ -2679,7 +2712,8 @@
    "backdrop": "/4W6RYDNe4OByNryOCvJprrutm9h.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Hot Fuzz",
@@ -2694,13 +2728,14 @@
    "runtime": 121,
    "cert": "R",
    "tmdbScore": 76,
-   "votes": 8550,
+   "votes": 8552,
    "poster": "/zPib4ukTSdXvHP9pxGkFCe34f3y.jpg",
    "overview": "Former London constable Nicholas Angel finds it difficult to adapt to his new assignment in the sleepy British village of Sandford. Not only does he miss the excitement of the big city, but he also has a well-meaning oaf for a partner. However, when a series of grisly accidents rocks Sandford, Angel smells something rotten in the idyllic village.",
    "backdrop": "/9rMSCFH9zhv1vILpEZQlUJs9iUm.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Shaun of the Dead",
@@ -2721,7 +2756,8 @@
    "backdrop": "/wb34q3VgzHgL8frVMywrN3wXmqx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Booksmart",
@@ -2742,7 +2778,8 @@
    "backdrop": "/cheDSO3mYmsAFQlRM91o7MK6Wcc.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Palm Springs",
@@ -2765,7 +2802,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Game Night",
@@ -2788,7 +2826,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 85
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Nice Guys",
@@ -2809,7 +2848,8 @@
    "backdrop": "/yxYUN3fBPJdTNdXC1l8L24XFPhX.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Jojo Rabbit",
@@ -2830,7 +2870,8 @@
    "backdrop": "/lTyikzfGgRX5ZqIfVeT26APYfRL.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 81
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Mission: Impossible - Fallout",
@@ -2853,7 +2894,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 98
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "John Wick",
@@ -2874,7 +2916,8 @@
    "backdrop": "/ff2ti5DkA9UYLzyqhQfI2kZqEuh.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 87
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Top Gun: Maverick",
@@ -2897,7 +2940,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Casino Royale",
@@ -2912,13 +2956,14 @@
    "runtime": 144,
    "cert": "PG-13",
    "tmdbScore": 76,
-   "votes": 11942,
+   "votes": 11944,
    "poster": "/lMrxYKKhd4lqRzwUHAy5gcx9PSO.jpg",
    "overview": "Le Chiffre, a banker to the world's terrorists, is scheduled to participate in a high-stakes poker game in Montenegro, where he intends to use his winnings to establish his financial grip on the terrorist market. M sends Bond—on his maiden mission as a 00 Agent—to attend this game and prevent Le Chiffre from winning.",
    "backdrop": "/klJMCIblHLFwCuGjKz7tyOpekIC.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Skyfall",
@@ -2939,7 +2984,8 @@
    "backdrop": "/wkA622CCN2X0uwpgqYEOnUYEDf5.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Raiders of the Lost Ark",
@@ -2963,7 +3009,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Die Hard",
@@ -2986,7 +3033,8 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Raid: Redemption",
@@ -3009,7 +3057,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 87
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Mission: Impossible - Ghost Protocol",
@@ -3032,7 +3081,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Black Panther",
@@ -3056,7 +3106,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Avengers",
@@ -3080,7 +3131,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Avengers: Infinity War",
@@ -3103,7 +3155,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 85
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Avengers: Endgame",
@@ -3126,7 +3179,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Guardians of the Galaxy",
@@ -3141,7 +3195,7 @@
    "runtime": 121,
    "cert": "PG-13",
    "tmdbScore": 79,
-   "votes": 30210,
+   "votes": 30211,
    "poster": "/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg",
    "overview": "Light years from Earth, 26 years after being abducted, Peter Quill finds himself the prime target of a manhunt after discovering an orb wanted by Ronan the Accuser.",
    "backdrop": "/uLtVbjvS1O7gXL8lUOwsFOH4man.jpg",
@@ -3149,7 +3203,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Thor: Ragnarok",
@@ -3172,7 +3227,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Logan",
@@ -3195,7 +3251,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Spider-Man: No Way Home",
@@ -3218,7 +3275,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Whale Rider",
@@ -3239,7 +3297,8 @@
    "backdrop": "/dLJ6qwEXg2AglBSClRV5iVYZI1b.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Paddington 2",
@@ -3262,7 +3321,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 99
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "School of Rock",
@@ -3286,7 +3346,8 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Sandlot",
@@ -3311,7 +3372,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 66
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Matilda",
@@ -3326,7 +3388,7 @@
    "runtime": 98,
    "cert": "PG",
    "tmdbScore": 72,
-   "votes": 4924,
+   "votes": 4925,
    "poster": "/wYoDpWInsBEVSmWStnRH06ddoyk.jpg",
    "overview": "Matilda Wormwood is an brilliant and intelligent little girl. Unfortunately, her parents, Harry and Zinnia, fail to see that fact. As time passes, she finally starts school and has a kind teacher, loyal friends, and a terrifying, sadistic headmistress.",
    "backdrop": "/t3HVA7XdVnQneMjI5hYjEhXmHY3.jpg",
@@ -3334,7 +3396,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 89
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Enola Holmes",
@@ -3357,7 +3420,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Jumanji: Welcome to the Jungle",
@@ -3378,7 +3442,8 @@
    "backdrop": "/zZKmEmRDc7ZjFucPm2UGNgDRlDc.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 76
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Wonder",
@@ -3399,7 +3464,8 @@
    "backdrop": "/b7xQ5fuyVO4c24igizCfPgF6n7q.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 86
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Princess Diaries",
@@ -3422,7 +3488,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 50
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Sing Street",
@@ -3443,7 +3510,8 @@
    "backdrop": "/zArKQrtZRb4lqjYXepBMLdegiDz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Hunt for the Wilderpeople",
@@ -3467,7 +3535,8 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Rear Window",
@@ -3488,7 +3557,8 @@
    "backdrop": "/zGs5tZOlvc9cprdcU6kDOVNpujf.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 99
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Psycho",
@@ -3530,7 +3600,8 @@
    "backdrop": "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 100
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Dr. Strangelove",
@@ -3551,7 +3622,8 @@
    "backdrop": "/7i0L2ee4Iy0aXV6vR5u1ZmblOrx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 98
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "2001: A Space Odyssey",
@@ -3574,7 +3646,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 90
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Chinatown",
@@ -3595,7 +3668,8 @@
    "backdrop": "/pyvkujOZ5qvY2NlQVC71flfgVWE.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 98
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Taxi Driver",
@@ -3616,7 +3690,8 @@
    "backdrop": "/9uddYYTNcLWpzUkl5iw1RUYhLhY.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 89
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Jaws",
@@ -3637,7 +3712,8 @@
    "backdrop": "/i1yf91svRHX45l9BXL8rVFzLoPH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Rocky",
@@ -3660,7 +3736,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Alien: Romulus",
@@ -3683,7 +3760,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 80
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Some Like It Hot",
@@ -3704,7 +3782,8 @@
    "backdrop": "/5zTwAcnI3zCJ0mucPPnoBtkSWEV.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Singin' in the Rain",
@@ -3727,7 +3806,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 100
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Apartment",
@@ -3748,7 +3828,8 @@
    "backdrop": "/2L8U8rUyWeFTb6n1egTNeJsEsvj.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Vertigo",
@@ -3763,13 +3844,14 @@
    "runtime": 128,
    "cert": "PG",
    "tmdbScore": 81,
-   "votes": 6468,
+   "votes": 6469,
    "poster": "/15uOEfqBNTVtDUT7hGBVCka0rZz.jpg",
    "overview": "A retired San Francisco detective suffering from acrophobia investigates the strange activities of an old friend's wife, all the while becoming dangerously obsessed with her.",
    "backdrop": "/rtVwkTqllcmyY4TVOycgVBHppWf.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Wolf of Wall Street",
@@ -3794,7 +3876,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 79
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Catch Me If You Can",
@@ -3817,7 +3900,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Ocean's Eleven",
@@ -3838,7 +3922,8 @@
    "backdrop": "/ncoqdHs1poUaBqyKic9YI8ai7MP.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 83
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Spotlight",
@@ -3859,7 +3944,8 @@
    "backdrop": "/8FbbcmwmpGd7brfiC7f7lWFNGdi.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Big Short",
@@ -3883,7 +3969,8 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 89
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Michael Clayton",
@@ -3904,7 +3991,8 @@
    "backdrop": "/8j6GP3wOkUDIC7DZDsAyaDsr1el.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 90
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Drive",
@@ -3925,7 +4013,8 @@
    "backdrop": "/hoyAALgfmjMEK7O1wZ4r8wT91RP.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Baby Driver",
@@ -3948,7 +4037,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Collateral",
@@ -3963,7 +4053,7 @@
    "runtime": 120,
    "cert": "R",
    "tmdbScore": 72,
-   "votes": 6443,
+   "votes": 6444,
    "poster": "/nV5316WUsVij8sVXLCF1g7TFitg.jpg",
    "overview": "Cab driver Max picks up a man who offers him $600 to drive him around. But the promise of easy money sours when Max realizes his fare is an assassin.",
    "backdrop": "/qVzmXKKOTtd3szkiCheCNrfa394.jpg",
@@ -3971,7 +4061,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 86
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Training Day",
@@ -3992,7 +4083,8 @@
    "backdrop": "/nuO8o9ltxhI7AZQxePavEZ4TyHa.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 74
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "A Few Good Men",
@@ -4013,7 +4105,8 @@
    "backdrop": "/H40nWdJngUc6gtytMAbElm9HOu.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 85
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Erin Brockovich",
@@ -4055,7 +4148,8 @@
    "backdrop": "/vsCIw7ARCKQVPT2K2hkkFVl7yo5.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 71
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Do the Right Thing",
@@ -4076,7 +4170,8 @@
    "backdrop": "/xnLh9CNRxkpkSNikVhi5qLwcfUG.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Boyz n the Hood",
@@ -4091,13 +4186,14 @@
    "runtime": 112,
    "cert": "R",
    "tmdbScore": 76,
-   "votes": 2329,
+   "votes": 2330,
    "poster": "/v4ox4aSCNT5vyLXl4Q71JiWwCXW.jpg",
    "overview": "Three friends growing up in South Central Los Angeles navigate a neighborhood plagued by violence, unemployment, and crime, each responding differently to the harsh realities of street life. As tragedy strikes close to home, their friendship, choices, and hopes for a better future are put to the ultimate test.",
    "backdrop": "/xensHK9qUso0rIrTeQw3ConGu2s.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Farewell",
@@ -4118,7 +4214,8 @@
    "backdrop": "/5INPBiKVRsyp9kgHfsC0cTfvKFH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Minari",
@@ -4139,7 +4236,8 @@
    "backdrop": "/bKCpRjjTKcr3KAITmwjVMobbBYg.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 98
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "CODA",
@@ -4160,7 +4258,8 @@
    "backdrop": "/v85FlkbMYKa5du1glm0YfYNsL2n.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Killers of the Flower Moon",
@@ -4181,7 +4280,8 @@
    "backdrop": "/acvE3RWjDLgvbL2RtcyzkrsAyNV.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Napoleon",
@@ -4202,7 +4302,8 @@
    "backdrop": "/33pMXav77ICRnceEBLhL8lXTywv.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 58
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Greyhound",
@@ -4223,7 +4324,8 @@
    "backdrop": "/xXBnM6uSTk6qqCf0SRZKXcga9Ba.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 77
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Beanie Bubble",
@@ -4244,7 +4346,8 @@
    "backdrop": "/zzbEAP5d1Ci0QKitpaA8PykHIj4.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 46
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Wolfs",
@@ -4288,7 +4391,8 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Nomadland",
@@ -4311,7 +4415,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Shape of Water",
@@ -4334,7 +4439,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Birdman",
@@ -4355,7 +4461,8 @@
    "backdrop": "/s0OrExdg7i3RLR7oqzHRk4q2kL4.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Roma",
@@ -4401,7 +4508,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Okja",
@@ -4424,7 +4532,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 87
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Athlete A",
@@ -4447,7 +4556,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 100
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Truman Show",
@@ -4468,7 +4578,8 @@
    "backdrop": "/rmiG2uwcNoGFmBKMoa1pIcf514L.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Good Will Hunting",
@@ -4492,7 +4603,8 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Dead Poets Society",
@@ -4513,7 +4625,8 @@
    "backdrop": "/lFIXZpwwlF9hg8NM3RazaIJDuaj.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 85
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Slumdog Millionaire",
@@ -4534,7 +4647,8 @@
    "backdrop": "/1wZoVT9RJsZmNjg8CecXqSgFUd9.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Prestige",
@@ -4555,7 +4669,8 @@
    "backdrop": "/z3br1ub7spqGMkxgjgJSdM4DC21.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 77
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Shutter Island",
@@ -4576,7 +4691,8 @@
    "backdrop": "/rbZvGN1A1QyZuoKzhCw8QPmf2q0.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 69
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Sixth Sense",
@@ -4597,7 +4713,8 @@
    "backdrop": "/6TjllWT3cGrPFyqDXurVZ3L8bBi.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 86
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Fight Club",
@@ -4618,7 +4735,8 @@
    "backdrop": "/c6OLXfKAk5BKeR6broC8pYiCquX.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 81
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "American Beauty",
@@ -4660,7 +4778,8 @@
    "backdrop": "/6ITVHoipvxAS8luzKtHTbPaHLtT.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Sideways",
@@ -4707,7 +4826,8 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Juno",
@@ -4728,7 +4848,8 @@
    "backdrop": "/sRXMmeNHTSWRYdDz3zaHNyyPJ0u.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "500 Days of Summer",
@@ -4743,13 +4864,14 @@
    "runtime": 95,
    "cert": "PG-13",
    "tmdbScore": 73,
-   "votes": 11243,
+   "votes": 11244,
    "poster": "/qXAuQ9hF30sQRsXf40OfRVl0MJZ.jpg",
    "overview": "Tom, greeting-card writer and hopeless romantic, is caught completely off-guard when his girlfriend, Summer, suddenly dumps him. He reflects on their 500 days together to try to figure out where their love affair went sour, and in doing so, Tom rediscovers his true passions in life.",
    "backdrop": "/1M2i4Mxd03elGOTmEkIvqrHfmyS.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 86
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Perks of Being a Wallflower",
@@ -4770,7 +4892,8 @@
    "backdrop": "/aM6E4DBP6588q3tEr9hz41ls80q.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 85
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Boyhood",
@@ -4793,7 +4916,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Coco Before Chanel",
@@ -4814,7 +4938,8 @@
    "backdrop": "/kZkk6iLvFPOiF6Xze2fYSiTbJ1Q.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 63
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Zone of Interest",
@@ -4858,7 +4983,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Anatomy of a Fall",
@@ -4881,7 +5007,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Aftersun",
@@ -4902,7 +5029,8 @@
    "backdrop": "/4jdduww9j5RyzO4ITRcuBFhqNN1.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Everything Went Fine",
@@ -4923,7 +5051,8 @@
    "backdrop": "/haOixpc26lheuIuO2WIi1M8nDO0.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Talk to Me",
@@ -4966,7 +5095,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Midsommar",
@@ -4989,7 +5119,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 83
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Bodies Bodies Bodies",
@@ -5012,7 +5143,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 85
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Nobody",
@@ -5035,7 +5167,8 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 83
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Fall Guy",
@@ -5056,7 +5189,8 @@
    "backdrop": "/2rjI2uXmjitMAaXVO21r9ao7v2j.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 81
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Barbie",
@@ -5079,7 +5213,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 88
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Air",
@@ -5102,7 +5237,8 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Ford v Ferrari",
@@ -5123,7 +5259,8 @@
    "backdrop": "/2vq5GTJOahE03mNYZGxIynlHcWr.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Free Solo",
@@ -5147,7 +5284,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Won't You Be My Neighbor?",
@@ -5191,7 +5329,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 93
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Coraline",
@@ -5235,7 +5374,8 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 86
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Beetlejuice",
@@ -5256,7 +5396,8 @@
    "backdrop": "/yRKyJJYIzfeiVDHBe4LXguPQCvD.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 83
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Poltergeist",
@@ -5277,7 +5418,8 @@
    "backdrop": "/bvkPno6U02lLyvPWCnmibq4eIaN.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 89
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Signs",
@@ -5298,7 +5440,8 @@
    "backdrop": "/rsPjEr7o02mo8ex6wD2PbRwasUe.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 76
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Tremors",
@@ -5319,7 +5462,8 @@
    "backdrop": "/3L3DUwfRLW18OUiLSdmovfICyY3.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 88
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "ParaNorman",
@@ -5340,7 +5484,8 @@
    "backdrop": "/fRhpdmaA1wTAboeiKW2ZHvDezIm.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 89
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Hocus Pocus",
@@ -5363,7 +5508,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 42
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Warm Bodies",
@@ -5386,7 +5532,8 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": 81
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "A Quiet Place Part II",
@@ -5410,7 +5557,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 91
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Jumanji",
@@ -5433,7 +5581,8 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": 56
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Iron Giant",
@@ -5454,8 +5603,4164 @@
    "backdrop": "/ni5cXCrrGzoiIEoIwOzGiIwMZlH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   }
  ],
- "shelf": []
+ "shelf": [
+  {
+   "t": "Facing El Chapo",
+   "y": 2026,
+   "r": 91,
+   "g": [
+    "crime",
+    "action",
+    "thriller"
+   ],
+   "a": [
+    "grounded",
+    "violent",
+    "propulsive",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Chava Cartas",
+   "h": "Two Mexican officers must survive the final hours of their shift after crossing a ruthless cartel boss.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 88,
+   "rtSrc": "tmdb",
+   "poster": "/alpf5v4UqSFawPmG9RX03Or4BDk.jpg",
+   "backdrop": "/c4U96GrPRfnNrS01mBtqnocvlLJ.jpg",
+   "tmdb": 1621552,
+   "firstSeen": null
+  },
+  {
+   "t": "The Last House",
+   "y": 2026,
+   "r": 110,
+   "g": [
+    "horror",
+    "scifi",
+    "thriller"
+   ],
+   "a": [
+    "scary",
+    "cerebral",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Louis Leterrier",
+   "h": "A family suddenly sealed inside their home must work together to survive against dwindling resources and the ominous threat keeping them trapped.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/6JU7E8Vv2M11egkctWVOScxWR75.jpg",
+   "backdrop": "/1RhfevWmWCVHtEqxWBEjPOC5KG1.jpg",
+   "tmdb": 1284041,
+   "firstSeen": null
+  },
+  {
+   "t": "Spider-Man: Homecoming",
+   "y": 2017,
+   "r": 133,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "earnest",
+    "spectacle",
+    "cerebral",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX",
+    "DIS"
+   ],
+   "d": "Jon Watts",
+   "h": "Following the events of Captain America: Civil War, Peter Parker, with the help of his mentor Tony Stark, tries to balance his life as an ordinary high school student in Queens, New York City, with fighting crime as his superhero alter ego Spider-Man as a new threat, the Vulture, emerges.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg",
+   "backdrop": "/fn4n6uOYcB6Uh89nbNPoU2w80RV.jpg",
+   "tmdb": 315635,
+   "firstSeen": null
+  },
+  {
+   "t": "Swapped",
+   "y": 2026,
+   "r": 102,
+   "g": [
+    "adventure",
+    "animation",
+    "family",
+    "fantasy"
+   ],
+   "a": [
+    "spectacle",
+    "visual",
+    "cozy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Nathan Greno",
+   "h": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat—one that could endanger not only their species, but the entire valley they call home.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 89,
+   "rtSrc": "tmdb",
+   "poster": "/tHhxWxge06goXU6ZQH1hj7vK8Hd.jpg",
+   "backdrop": "/zMwhWailP1WY7sb6AoE6b8ugoy.jpg",
+   "tmdb": 1007757,
+   "firstSeen": null
+  },
+  {
+   "t": "Jurassic World Rebirth",
+   "y": 2025,
+   "r": 134,
+   "g": [
+    "scifi",
+    "adventure",
+    "action"
+   ],
+   "a": [
+    "cerebral",
+    "spectacle",
+    "propulsive",
+    "bleak"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Gareth Edwards",
+   "h": "Five years after the events of Jurassic World Dominion, covert operations expert Zora Bennett is contracted to lead a skilled team on a top-secret mission to secure genetic material from the world's three most massive dinosaurs.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 63,
+   "rtSrc": "tmdb",
+   "poster": "/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg",
+   "backdrop": "/zNriRTr0kWwyaXPzdg1EIxf0BWk.jpg",
+   "tmdb": 1234821,
+   "firstSeen": null
+  },
+  {
+   "t": "War Machine",
+   "y": 2026,
+   "r": 110,
+   "g": [
+    "action",
+    "scifi",
+    "thriller"
+   ],
+   "a": [
+    "propulsive",
+    "violent",
+    "spectacle",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Patrick Hughes",
+   "h": "On one last grueling mission during Army Ranger training, a combat engineer must lead his unit in a fight against a giant otherworldly killing machine.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 75,
+   "rtSrc": "tmdb",
+   "poster": "/rFhKkXhk7ClU03jQ5rHIApJDwev.jpg",
+   "backdrop": "/6yeVcxFR0j08vlv2OlL6zbewm4D.jpg",
+   "tmdb": 1265609,
+   "firstSeen": null
+  },
+  {
+   "t": "GOAT",
+   "y": 2026,
+   "r": 100,
+   "g": [
+    "animation",
+    "comedy",
+    "family"
+   ],
+   "a": [
+    "earnest",
+    "cozy",
+    "hopeful",
+    "visual",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Tyree Dillihay",
+   "h": "A small goat with big dreams gets a once-in-a-lifetime shot to join the pros and play roarball, a high-intensity, co-ed, full-contact sport dominated by the fastest, fiercest animals in the world.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 81,
+   "rtSrc": "tmdb",
+   "poster": "/wfuqMlaExcoYiUEvKfVpUTt1v4u.jpg",
+   "backdrop": "/tq3h43fZy0H80vzf47MAY7R9Mxo.jpg",
+   "tmdb": 1297842,
+   "firstSeen": null
+  },
+  {
+   "t": "KPop Demon Hunters",
+   "y": 2025,
+   "r": 96,
+   "g": [
+    "fantasy",
+    "musical",
+    "comedy",
+    "animation"
+   ],
+   "a": [
+    "scary",
+    "hopeful",
+    "visual",
+    "uplifting",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Maggie Kang",
+   "h": "When K-pop superstars Rumi, Mira and Zoey aren't selling out stadiums, they're using their secret powers to protect their fans from supernatural threats.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 80,
+   "rtSrc": "tmdb",
+   "poster": "/zT7Lhw3BhJbMkRqm9Zlx2YGMsY0.jpg",
+   "backdrop": "/w3Bi0wygeFQctn6AqFTwhGNXRwL.jpg",
+   "tmdb": 803796,
+   "firstSeen": null
+  },
+  {
+   "t": "How to Train Your Dragon",
+   "y": 2025,
+   "r": 125,
+   "g": [
+    "fantasy",
+    "family",
+    "action",
+    "adventure"
+   ],
+   "a": [
+    "spectacle",
+    "visual",
+    "cozy",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Dean DeBlois",
+   "h": "On the rugged isle of Berk, where Vikings and dragons have been bitter enemies for generations, Hiccup stands apart, defying centuries of tradition when he befriends Toothless, a feared Night Fury dragon. Their unlikely bond reveals the true nature of dragons, challenging the very foundations of Viking society.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 79,
+   "rtSrc": "tmdb",
+   "poster": "/53dsJ3oEnBhTBVMigWJ9tkA5bzJ.jpg",
+   "backdrop": "/8J6UlIFcU7eZfq9iCLbgc8Auklg.jpg",
+   "tmdb": 1087192,
+   "firstSeen": null
+  },
+  {
+   "t": "Schindler's List",
+   "y": 1993,
+   "r": 195,
+   "g": [
+    "drama",
+    "war"
+   ],
+   "a": [
+    "grounded",
+    "dialogue",
+    "characterstudy",
+    "visceral",
+    "epic",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Steven Spielberg",
+   "h": "The true story of how businessman Oskar Schindler saved over a thousand Jewish lives from the Nazis while they worked as slaves in his factory during World War II.",
+   "k": "adult",
+   "pop": 3,
+   "mpaa": "R",
+   "rt": 86,
+   "rtSrc": "tmdb",
+   "poster": "/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg",
+   "backdrop": "/zb6fM1CX41D9rF9hdgclu0peUmy.jpg",
+   "tmdb": 424,
+   "firstSeen": null
+  },
+  {
+   "t": "Black Adam",
+   "y": 2022,
+   "r": 125,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "scary",
+    "spectacle",
+    "propulsive",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX",
+    "MAX"
+   ],
+   "d": "Jaume Collet-Serra",
+   "h": "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods—and imprisoned just as quickly—Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/rCtreCr4xiYEWDQTebybolIh6Xe.jpg",
+   "backdrop": "/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
+   "tmdb": 436270,
+   "firstSeen": null
+  },
+  {
+   "t": "Jurassic World Dominion",
+   "y": 2022,
+   "r": 147,
+   "g": [
+    "adventure",
+    "scifi",
+    "thriller",
+    "action"
+   ],
+   "a": [
+    "propulsive",
+    "scary",
+    "spectacle",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Colin Trevorrow",
+   "h": "Four years after Isla Nublar was destroyed, dinosaurs now live—and hunt—alongside humans all over the world. This fragile balance will reshape the future and determine, once and for all, whether human beings are to remain the apex predators on a planet they now share with history's most fearsome creatures.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/jbAvCACjLf1ZG0unB2tdmx5HAf1.jpg",
+   "backdrop": "/698FjyzLdpgXmUSr63LaRwblTmx.jpg",
+   "tmdb": 507086,
+   "firstSeen": null
+  },
+  {
+   "t": "Voicemails for Isabelle",
+   "y": 2026,
+   "r": 119,
+   "g": [
+    "romance",
+    "comedy",
+    "drama"
+   ],
+   "a": [
+    "romantic",
+    "comic",
+    "characterstudy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Leah McKendrick",
+   "h": "A young woman's hilariously confessional voicemails to her late sister are unknowingly redirected to a stranger, who begins to fall in love from afar.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 83,
+   "rtSrc": "tmdb",
+   "poster": "/canZTWSxACSnAluir3dCtMxKpA1.jpg",
+   "backdrop": "/2WU6Y6aonzD6uAaCmNnEFlesxxJ.jpg",
+   "tmdb": 614945,
+   "firstSeen": null
+  },
+  {
+   "t": "Minions: The Rise of Gru",
+   "y": 2022,
+   "r": 87,
+   "g": [
+    "animation",
+    "comedy",
+    "scifi",
+    "crime",
+    "family"
+   ],
+   "a": [
+    "visual",
+    "comic",
+    "cerebral",
+    "violent",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Kyle Balda",
+   "h": "A fanboy of a supervillain supergroup known as the Vicious 6, Gru hatches a plan to become evil enough to join them, with the backup of his followers, the Minions.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/wKiOkZTN9lUUUNZLmtnwubZYONg.jpg",
+   "backdrop": "/wZS4xSfPtk1NPQnx9zsT5R2WhCu.jpg",
+   "tmdb": 438148,
+   "firstSeen": null
+  },
+  {
+   "t": "Frankenstein",
+   "y": 2025,
+   "r": 150,
+   "g": [
+    "drama",
+    "fantasy",
+    "horror"
+   ],
+   "a": [
+    "earnest",
+    "scary",
+    "cerebral",
+    "characterstudy",
+    "visual",
+    "epic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Guillermo del Toro",
+   "h": "Dr. Victor Frankenstein, a brilliant but egotistical scientist, brings a creature to life in a monstrous experiment that ultimately leads to the undoing of both the creator and his tragic creation.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/g4JtvGlQO7DByTI6frUobqvSL3R.jpg",
+   "backdrop": "/hpXBJxLD2SEf8l2CspmSeiHrBKX.jpg",
+   "tmdb": 1062722,
+   "firstSeen": null
+  },
+  {
+   "t": "After We Fell",
+   "y": 2021,
+   "r": 99,
+   "g": [
+    "drama",
+    "romance"
+   ],
+   "a": [
+    "characterstudy",
+    "romantic",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Castille Landon",
+   "h": "Just as Tessa's life begins to become unglued, nothing is what she thought it would be. Not her friends nor her family. The only person that she should be able to rely on is Hardin, who is furious when he discovers the massive secret that she's been keeping. Before Tessa makes the biggest decision of her life, everything changes because of revelations about her family.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/dU4HfnTEJDf9KvxGS9hgO7BVeju.jpg",
+   "backdrop": "/mxdiaM2tsx8M6W3zLgiPwAkhQfq.jpg",
+   "tmdb": 744275,
+   "firstSeen": null
+  },
+  {
+   "t": "Five Nights at Freddy's 2",
+   "y": 2025,
+   "r": 104,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "violent",
+    "scary",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Emma Tammi",
+   "h": "One year since the supernatural nightmare at Freddy Fazbear's Pizza, the stories about what transpired there have been twisted into a campy local legend, inspiring the town's first ever Fazfest.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/udAxQEORq2I5wxI97N2TEqdhzBE.jpg",
+   "backdrop": "/54BOXpX2ieTXMDzHymdDMnUIzYG.jpg",
+   "tmdb": 1228246,
+   "firstSeen": null
+  },
+  {
+   "t": "28 Years Later",
+   "y": 2025,
+   "r": 115,
+   "g": [
+    "horror",
+    "thriller",
+    "scifi"
+   ],
+   "a": [
+    "bleak",
+    "weird",
+    "propulsive",
+    "scary",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Danny Boyle",
+   "h": "Twenty-eight years after the Rage virus outbreak, a heavily-defended island survives connected to the mainland by a single causeway. When one of the group leaves the island into the dark heart of the mainland, he discovers secrets, wonders, and horrors that have mutated not only the infected but other survivors as well.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/n5FygjEppOvac6yEaowi26nTyw3.jpg",
+   "backdrop": "/6WqqEjiycNvDLjbEClM1zCwIbDD.jpg",
+   "tmdb": 1100988,
+   "firstSeen": null
+  },
+  {
+   "t": "28 Years Later: The Bone Temple",
+   "y": 2026,
+   "r": 109,
+   "g": [
+    "horror",
+    "thriller",
+    "scifi"
+   ],
+   "a": [
+    "bleak",
+    "propulsive",
+    "scary",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Nia DaCosta",
+   "h": "Dr. Kelson finds himself in a shocking new relationship - with consequences that could change the world as they know it - and Spike's encounter with Jimmy Crystal becomes a nightmare he can't escape.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/kK1BGkG3KAvWB0WMV1DfOx9yTMZ.jpg",
+   "backdrop": "/hHDNOlATHhre4eZ7aYz5cdyJLik.jpg",
+   "tmdb": 1272837,
+   "firstSeen": null
+  },
+  {
+   "t": "Charlie and the Chocolate Factory",
+   "y": 2005,
+   "r": 115,
+   "g": [
+    "adventure",
+    "comedy",
+    "family",
+    "fantasy"
+   ],
+   "a": [
+    "ironic",
+    "spectacle",
+    "comic",
+    "cozy",
+    "visual",
+    "weird"
+   ],
+   "svcs": [
+    "NFX",
+    "MAX"
+   ],
+   "d": "Tim Burton",
+   "h": "A young boy wins a tour through the most magnificent chocolate factory in the world, led by the world's most unusual candy maker.",
+   "k": "all",
+   "pop": 3,
+   "mpaa": "PG",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/iKP6wg3c6COUe8gYutoGG7qcPnO.jpg",
+   "backdrop": "/atoIgfAk2Ig2HFJLD0VUnjiPWEz.jpg",
+   "tmdb": 118,
+   "firstSeen": null
+  },
+  {
+   "t": "Wicked: For Good",
+   "y": 2025,
+   "r": 137,
+   "g": [
+    "fantasy",
+    "adventure",
+    "romance"
+   ],
+   "a": [
+    "visual",
+    "spectacle",
+    "romantic",
+    "brisk",
+    "comic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Jon M. Chu",
+   "h": "As an angry mob rises against the Wicked Witch, Glinda and Elphaba will need to come together one final time. With their singular friendship now the fulcrum of their futures, they will need to truly see each other, with honesty and empathy, if they are to change themselves, and all of Oz, for good.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/si9tolnefLSUKaqQEGz1bWArOaL.jpg",
+   "backdrop": "/cGbPBHKSFO7hSIjxkb3KOaGdOep.jpg",
+   "tmdb": 967941,
+   "firstSeen": null
+  },
+  {
+   "t": "Green Book",
+   "y": 2018,
+   "r": 130,
+   "g": [
+    "drama",
+    "comedy"
+   ],
+   "a": [
+    "cozy",
+    "grounded",
+    "characterstudy",
+    "comic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Peter Farrelly",
+   "h": "Tony Lip, a bouncer in 1962, is hired to drive pianist Don Shirley on a tour through the Deep South in the days when African Americans, forced to find alternate accommodations and services due to segregation laws below the Mason-Dixon Line, relied on a guide called The Negro Motorist Green Book.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 82,
+   "rtSrc": "tmdb",
+   "poster": "/7BsvSuDQuoqhWmU2fL7W2GOcZHU.jpg",
+   "backdrop": "/5En0fmDagt3Pk8d7P3uTwfeQceg.jpg",
+   "tmdb": 490132,
+   "firstSeen": null
+  },
+  {
+   "t": "The Fifth Element",
+   "y": 1997,
+   "r": 126,
+   "g": [
+    "scifi",
+    "action",
+    "adventure"
+   ],
+   "a": [
+    "bleak",
+    "propulsive",
+    "spectacle",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Luc Besson",
+   "h": "In 2257, a taxi driver is unintentionally given the task of saving a young girl who is part of the key that will ensure the survival of humanity.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/fPtlCO1yQtnoLHOwKtWz7db6RGU.jpg",
+   "backdrop": "/jW21PoKwqs79wk6bfiYezox63mK.jpg",
+   "tmdb": 18,
+   "firstSeen": null
+  },
+  {
+   "t": "Bugonia",
+   "y": 2025,
+   "r": 119,
+   "g": [
+    "scifi",
+    "thriller",
+    "comedy"
+   ],
+   "a": [
+    "weird",
+    "ironic",
+    "twisty",
+    "spectacle",
+    "dialogue",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Yorgos Lanthimos",
+   "h": "Two conspiracy obsessed young men kidnap the high-powered CEO of a major company, convinced that she is an alien intent on destroying planet Earth.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/rSdOua3wKMEaFWDcKAYWRjXQWOt.jpg",
+   "backdrop": "/tN3pTxkQoP96wtaEahYuRVdUWb2.jpg",
+   "tmdb": 701387,
+   "firstSeen": null
+  },
+  {
+   "t": "The Hunger Games: Mockingjay - Part 1",
+   "y": 2014,
+   "r": 123,
+   "g": [
+    "scifi",
+    "adventure",
+    "thriller"
+   ],
+   "a": [
+    "bleak",
+    "cerebral",
+    "spectacle",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Francis Lawrence",
+   "h": "After surviving the Quarter Quell, Katniss finds herself in the hidden stronghold of District 13, where the rebellion against the Capitol is gaining momentum. Struggling with the weight of becoming the symbol of resistance, she must navigate fragile alliances while trying to protect those she loves.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg",
+   "backdrop": "/lV1P1Q5gLDXVG1ZYCxZHStkcQC3.jpg",
+   "tmdb": 131631,
+   "firstSeen": null
+  },
+  {
+   "t": "Nobody 2",
+   "y": 2025,
+   "r": 89,
+   "g": [
+    "action",
+    "thriller",
+    "comedy",
+    "crime"
+   ],
+   "a": [
+    "ironic",
+    "violent",
+    "propulsive",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Timo Tjahjanto",
+   "h": "Former assassin Hutch Mansell takes his family on a nostalgic vacation to a small-town theme park, only to be pulled back into violence when they clash with a corrupt operator, a crooked sheriff, and a ruthless crime boss.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/svXVRoRSu6zzFtCzkRsjZS7Lqpd.jpg",
+   "backdrop": "/82C04rTiXYZ7c8XZv91Nu53w82Y.jpg",
+   "tmdb": 1007734,
+   "firstSeen": null
+  },
+  {
+   "t": "The Bad Guys 2",
+   "y": 2025,
+   "r": 104,
+   "g": [
+    "family",
+    "comedy",
+    "crime",
+    "adventure",
+    "animation",
+    "action"
+   ],
+   "a": [
+    "propulsive",
+    "romantic",
+    "spectacle",
+    "cozy",
+    "comic",
+    "violent"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Pierre Perifel",
+   "h": "The now-reformed Bad Guys are trying (very, very hard) to be good, but instead find themselves hijacked into a high-stakes, globe-trotting heist, masterminded by a new team of criminals they never saw coming: The Bad Girls.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/26oSPnq0ct59l07QOXZKyzsiRtN.jpg",
+   "backdrop": "/jvpkBenB6hv19WWYVlaiow8zklq.jpg",
+   "tmdb": 1175942,
+   "firstSeen": null
+  },
+  {
+   "t": "I Swear",
+   "y": 2025,
+   "r": 121,
+   "g": [
+    "drama"
+   ],
+   "a": [
+    "ironic",
+    "grounded",
+    "spectacle",
+    "hopeful",
+    "characterstudy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Kirk Jones",
+   "h": "Diagnosed with Tourette Syndrome at 15, John Davidson navigates his way against the odds through troubled teenage years and into adulthood, finding inspiration in the kindness of others to discover his true purpose in life.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 82,
+   "rtSrc": "tmdb",
+   "poster": "/vUwyhNWBKkSwK8ELvEeBRwV724h.jpg",
+   "backdrop": "/4mKczHAW4XPDXGk7V5k7Ui3dgUk.jpg",
+   "tmdb": 1317149,
+   "firstSeen": null
+  },
+  {
+   "t": "Sonic the Hedgehog 2",
+   "y": 2022,
+   "r": 123,
+   "g": [
+    "action",
+    "adventure",
+    "family",
+    "comedy"
+   ],
+   "a": [
+    "violent",
+    "propulsive",
+    "spectacle",
+    "cozy",
+    "comic"
+   ],
+   "svcs": [
+    "NFX",
+    "PAR"
+   ],
+   "d": "Jeff Fowler",
+   "h": "After settling in Green Hills, Sonic is eager to prove he has what it takes to be a true hero. His test comes when Dr. Robotnik returns, this time with a new partner, Knuckles, in search for an emerald that has the power to destroy civilizations.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg",
+   "backdrop": "/xuLA0pii2IMJW2puT7EvJtgpg0H.jpg",
+   "tmdb": 675353,
+   "firstSeen": null
+  },
+  {
+   "t": "Dungeons & Dragons: Honor Among Thieves",
+   "y": 2023,
+   "r": 134,
+   "g": [
+    "adventure",
+    "fantasy",
+    "comedy"
+   ],
+   "a": [
+    "propulsive",
+    "spectacle",
+    "visual",
+    "comic"
+   ],
+   "svcs": [
+    "NFX",
+    "PAR"
+   ],
+   "d": "John Francis Daley",
+   "h": "A charming thief and a band of unlikely adventurers undertake an epic heist to retrieve a lost relic, but things go dangerously awry when they run afoul of the wrong people.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/v7UF7ypAqjsFZFdjksjQ7IUpXdn.jpg",
+   "backdrop": "/AdBXP8e6K3FYdDrMx3Wr6WZqCYF.jpg",
+   "tmdb": 493529,
+   "firstSeen": null
+  },
+  {
+   "t": "Karate Kid: Legends",
+   "y": 2025,
+   "r": 94,
+   "g": [
+    "action",
+    "adventure",
+    "drama"
+   ],
+   "a": [
+    "cerebral",
+    "propulsive",
+    "spectacle",
+    "characterstudy",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Jonathan Entwistle",
+   "h": "After a family tragedy, kung fu prodigy Li Fong is uprooted from his home in Beijing and forced to move to New York City with his mother. When a new friend needs his help, Li enters a karate competition – but his skills alone aren't enough. Li's kung fu teacher Mr.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/c90Lt7OQGsOmhv6x4JoFdoHzw5l.jpg",
+   "backdrop": "/7Q2CmqIVJuDAESPPp76rWIiA0AD.jpg",
+   "tmdb": 1011477,
+   "firstSeen": null
+  },
+  {
+   "t": "Remarkably Bright Creatures",
+   "y": 2026,
+   "r": 114,
+   "g": [
+    "drama",
+    "mystery"
+   ],
+   "a": [
+    "melancholy",
+    "characterstudy",
+    "twisty"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Olivia Newman",
+   "h": "Through unlikely bonds formed during night shifts at a local aquarium, Tova, an elderly widow, learns of a life-changing discovery that may bring her joy and wonder once again.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 84,
+   "rtSrc": "tmdb",
+   "poster": "/9HcEqn3D4J6b2Z0jK54id9nA0fr.jpg",
+   "backdrop": "/bVGHSe47W6oCQL1Q88pvRAet51A.jpg",
+   "tmdb": 1330021,
+   "firstSeen": null
+  },
+  {
+   "t": "The Hunger Games: Catching Fire",
+   "y": 2013,
+   "r": 146,
+   "g": [
+    "adventure",
+    "action",
+    "scifi"
+   ],
+   "a": [
+    "bleak",
+    "twisty",
+    "propulsive",
+    "spectacle",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Francis Lawrence",
+   "h": "After surviving the Hunger Games, Katniss and Peeta struggle with the consequences of their victory as unrest spreads across Panem. Forced back into the spotlight, they become symbols of hope and resistance while the Capitol prepares a new and deadly challenge that will change the future of the nation forever.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/vrQHDXjVmbYzadOXQ0UaObunoy2.jpg",
+   "backdrop": "/eHaazLxM5LRMh0ySkVy7SK6wUWt.jpg",
+   "tmdb": 101299,
+   "firstSeen": null
+  },
+  {
+   "t": "Peaky Blinders: The Immortal Man",
+   "y": 2026,
+   "r": 112,
+   "g": [
+    "crime",
+    "drama"
+   ],
+   "a": [
+    "scary",
+    "violent",
+    "characterstudy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Tom Harper",
+   "h": "After his estranged son gets embroiled in a Nazi plot, self-exiled gangster Tommy Shelby must return to Birmingham to save his family — and his nation.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 72,
+   "rtSrc": "tmdb",
+   "poster": "/gRMalasZEzsZi4w2VFuYusfSfqf.jpg",
+   "backdrop": "/1fkuBPid72KGS6WmtkEXMftZtkE.jpg",
+   "tmdb": 875828,
+   "firstSeen": null
+  },
+  {
+   "t": "The Angry Birds Movie 2",
+   "y": 2019,
+   "r": 97,
+   "g": [
+    "animation",
+    "adventure",
+    "comedy",
+    "family",
+    "action"
+   ],
+   "a": [
+    "visual",
+    "spectacle",
+    "comic",
+    "cozy",
+    "propulsive",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Thurop Van Orman",
+   "h": "Red, Chuck, Bomb and the rest of their feathered friends are surprised when a green pig suggests that they put aside their differences and unite to fight a common threat. Aggressive birds from an island covered in ice are planning to use an elaborate weapon to destroy the fowl and swine.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/ebe8hJRCwdflNQbUjRrfmqtUiNi.jpg",
+   "backdrop": "/tTVjF5q63fli9ecSg5L9ljHibKJ.jpg",
+   "tmdb": 454640,
+   "firstSeen": null
+  },
+  {
+   "t": "Minions",
+   "y": 2015,
+   "r": 91,
+   "g": [
+    "family",
+    "animation",
+    "adventure",
+    "comedy"
+   ],
+   "a": [
+    "cozy",
+    "visual",
+    "spectacle",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX",
+    "PCK"
+   ],
+   "d": "Kyle Balda",
+   "h": "Minions Stuart, Kevin and Bob are recruited by Scarlet Overkill, a super-villain who, alongside her inventor husband Herb, hatches a plot to take over the world.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 64,
+   "rtSrc": "tmdb",
+   "poster": "/dr02BdCNAUPVU07aOodwPYv6HCf.jpg",
+   "backdrop": "/wKrxeY6lbu7KFBsWVcMH6M8avwr.jpg",
+   "tmdb": 211672,
+   "firstSeen": null
+  },
+  {
+   "t": "Law Abiding Citizen",
+   "y": 2009,
+   "r": 109,
+   "g": [
+    "drama",
+    "crime",
+    "thriller"
+   ],
+   "a": [
+    "violent",
+    "dialogue",
+    "characterstudy",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "F. Gary Gray",
+   "h": "A frustrated man decides to take justice into his own hands after a plea bargain sets one of his family's killers free. He targets not only the killer but also the district attorney and others involved in the deal.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/fcEXcip7v0O1ndV4VUdFqJSqbOg.jpg",
+   "backdrop": "/nazre7z7MoUwAqimnrSlMlfLR5t.jpg",
+   "tmdb": 22803,
+   "firstSeen": null
+  },
+  {
+   "t": "Wake Up Dead Man: A Knives Out Mystery",
+   "y": 2025,
+   "r": 145,
+   "g": [
+    "thriller",
+    "mystery",
+    "comedy"
+   ],
+   "a": [
+    "ironic",
+    "twisty",
+    "propulsive",
+    "comic",
+    "ensemble"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Rian Johnson",
+   "h": "When young priest Jud Duplenticy is sent to assist charismatic firebrand Monsignor Jefferson Wicks, it’s clear that all is not well in the pews. After a sudden and seemingly impossible murder rocks the town, the lack of an obvious suspect prompts local police chief Geraldine Scott to join forces with renowned detective Benoit Blanc to unravel a mystery that defies all logic.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 72,
+   "rtSrc": "tmdb",
+   "poster": "/iV9LM8aUb83BjCCx2RUnKE5sSQg.jpg",
+   "backdrop": "/fiRDzpcJe7qz3yIR43hdXIE3NHv.jpg",
+   "tmdb": 812583,
+   "firstSeen": null
+  },
+  {
+   "t": "All Quiet on the Western Front",
+   "y": 2022,
+   "r": 147,
+   "g": [
+    "war",
+    "drama"
+   ],
+   "a": [
+    "violent",
+    "spectacle",
+    "visceral",
+    "characterstudy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Edward Berger",
+   "h": "Paul Baumer and his friends Albert and Muller, egged on by romantic dreams of heroism, voluntarily enlist in the German army. Full of excitement and patriotic fervour, the boys enthusiastically march into a war they believe in. But once on the Western Front, they discover the soul-destroying horror of World War I.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/2IRjbi9cADuDMKmHdLK7LaqQDKA.jpg",
+   "backdrop": "/xBwtP27cx8WfjHJVFkpuV6F1RES.jpg",
+   "tmdb": 49046,
+   "firstSeen": null
+  },
+  {
+   "t": "Godzilla Minus One",
+   "y": 2023,
+   "r": 125,
+   "g": [
+    "scifi",
+    "horror",
+    "action"
+   ],
+   "a": [
+    "scary",
+    "spectacle",
+    "melancholy",
+    "cerebral",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Takashi Yamazaki",
+   "h": "In postwar Japan, Godzilla brings new devastation to an already scorched landscape. With no military intervention or government help in sight, the survivors must join together in the face of despair and fight back against an unrelenting horror.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/2E2WTX0TJEflAged6kzErwqX1kt.jpg",
+   "backdrop": "/oHBhHoNe59VH6bUMazDtJmWOFSS.jpg",
+   "tmdb": 940721,
+   "firstSeen": null
+  },
+  {
+   "t": "Ghostbusters",
+   "y": 1984,
+   "r": 105,
+   "g": [
+    "comedy",
+    "fantasy"
+   ],
+   "a": [
+    "scary",
+    "spectacle",
+    "comic",
+    "visual"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Ivan Reitman",
+   "h": "After losing their university jobs, three parapsychologists start a ghost-catching business in New York City and uncover a supernatural threat that could destroy the world.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 75,
+   "rtSrc": "tmdb",
+   "poster": "/7E8nLijS9AwwUEPu2oFYOVKhdFA.jpg",
+   "backdrop": "/c6yfABGVKuB5cjoOwdX4AJMlzUz.jpg",
+   "tmdb": 620,
+   "firstSeen": null
+  },
+  {
+   "t": "Hotel Transylvania 2",
+   "y": 2015,
+   "r": 89,
+   "g": [
+    "animation",
+    "comedy",
+    "family",
+    "fantasy"
+   ],
+   "a": [
+    "visual",
+    "comic",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Genndy Tartakovsky",
+   "h": "When the old-old-old-fashioned vampire Vlad arrives at the hotel for an impromptu family get-together, Hotel Transylvania is in for a collision of supernatural old-school and modern day cool.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/3nFnrivNgipSKZ8LZJJbRSlAcTR.jpg",
+   "backdrop": "/mfnkxXWuh2Br097Qteq8ieqKfev.jpg",
+   "tmdb": 159824,
+   "firstSeen": null
+  },
+  {
+   "t": "The Bad Guys",
+   "y": 2022,
+   "r": 100,
+   "g": [
+    "action",
+    "adventure",
+    "animation",
+    "comedy",
+    "crime",
+    "family"
+   ],
+   "a": [
+    "propulsive",
+    "spectacle",
+    "visual",
+    "comic",
+    "violent",
+    "cozy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Pierre Perifel",
+   "h": "When the Bad Guys, a crew of criminal animals, are finally caught after years of heists and being the world’s most-wanted villains, Mr. Wolf brokers a deal to save them all from prison.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 75,
+   "rtSrc": "tmdb",
+   "poster": "/7qop80YfuO0BwJa1uXk1DXUUEwv.jpg",
+   "backdrop": "/oXx1QZzeF5V3HMQ11q6WCkA2pQh.jpg",
+   "tmdb": 629542,
+   "firstSeen": null
+  },
+  {
+   "t": "Nuremberg",
+   "y": 2025,
+   "r": 149,
+   "g": [
+    "drama"
+   ],
+   "a": [
+    "grounded",
+    "dialogue",
+    "characterstudy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "James Vanderbilt",
+   "h": "In postwar Germany, an American psychiatrist must determine whether Nazi prisoners are fit to go on trial for war crimes, and finds himself in a complex battle of intellect and ethics with Hermann Göring, Hitler's right-hand man.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/xthXNYltOOm80vW5Kxjzxx5gvQ6.jpg",
+   "backdrop": "/bf5TG9RODkPXmtJSgf8Iymof1wl.jpg",
+   "tmdb": 1214931,
+   "firstSeen": null
+  },
+  {
+   "t": "Scream VI",
+   "y": 2023,
+   "r": 123,
+   "g": [
+    "horror",
+    "thriller",
+    "crime"
+   ],
+   "a": [
+    "ironic",
+    "twisty",
+    "violent",
+    "scary",
+    "cerebral",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX",
+    "PAR"
+   ],
+   "d": "Matt Bettinelli-Olpin",
+   "h": "Following the latest Ghostface killings, the four survivors leave Woodsboro behind and start a fresh chapter.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/wDWwtvkRRlgTiUr6TyLSMX8FCuZ.jpg",
+   "backdrop": "/k6ANeyxAfMRi5xhxIXv1Scn9vc2.jpg",
+   "tmdb": 934433,
+   "firstSeen": null
+  },
+  {
+   "t": "The Gentlemen",
+   "y": 2020,
+   "r": 113,
+   "g": [
+    "action",
+    "comedy",
+    "crime"
+   ],
+   "a": [
+    "ironic",
+    "violent",
+    "propulsive",
+    "comic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Guy Ritchie",
+   "h": "American expat Mickey Pearson has built a highly profitable marijuana empire in London. When word gets out that he’s looking to cash out of the business forever it triggers plots, schemes, bribery and blackmail in an attempt to steal his domain out from under him.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/jtrhTYB7xSrJxR1vusu99nvnZ1g.jpg",
+   "backdrop": "/hClLP88yMIuhslwSVxtYrvWmxfp.jpg",
+   "tmdb": 522627,
+   "firstSeen": null
+  },
+  {
+   "t": "Neon Genesis Evangelion: The End of Evangelion",
+   "y": 1997,
+   "r": 87,
+   "g": [
+    "animation",
+    "scifi",
+    "drama",
+    "fantasy",
+    "action"
+   ],
+   "a": [
+    "bleak",
+    "weird",
+    "cerebral",
+    "visual",
+    "characterstudy",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Kazuya Tsurumaki",
+   "h": "SEELE orders an all-out attack on NERV, aiming to destroy the Evas before Gendo can advance his own plans for the Human Instrumentality Project. Shinji is pushed to the limits of his sanity as he is forced to decide the fate of humanity.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 83,
+   "rtSrc": "tmdb",
+   "poster": "/j6G24dqI4WgUtChhWjfnI4lnmiK.jpg",
+   "backdrop": "/AfyuI3glMCBDFmNPj9PY6DwbgGp.jpg",
+   "tmdb": 18491,
+   "firstSeen": null
+  },
+  {
+   "t": "American Sniper",
+   "y": 2014,
+   "r": 133,
+   "g": [
+    "war",
+    "action"
+   ],
+   "a": [
+    "grounded",
+    "hopeful",
+    "visceral",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Clint Eastwood",
+   "h": "S. Navy SEAL Chris Kyle takes his sole mission—protect his comrades—to heart and becomes one of the most lethal snipers in American history. His pinpoint accuracy not only saves countless lives but also makes him a prime target of insurgents. Despite grave danger and his struggle to be a good husband and father to his family back in the States, Kyle serves four tours of duty in Iraq.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/i1U46OwMc6vlm7OoSUKfqUH615e.jpg",
+   "backdrop": "/rl95VDEP3nsUQmGzE0S1S7y6T0N.jpg",
+   "tmdb": 190859,
+   "firstSeen": null
+  },
+  {
+   "t": "The Hunger Games: The Ballad of Songbirds & Snakes",
+   "y": 2023,
+   "r": 157,
+   "g": [
+    "scifi",
+    "action"
+   ],
+   "a": [
+    "bleak",
+    "propulsive",
+    "spectacle",
+    "cerebral",
+    "epic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Francis Lawrence",
+   "h": "64 years before he becomes the tyrannical president of Panem, Coriolanus Snow sees a chance for a change in fortunes when he mentors Lucy Gray Baird, the female tribute from District 12.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/mBaXZ95R2OxueZhvQbcEWy2DqyO.jpg",
+   "backdrop": "/bk1TitfD4YIGrM6AvljonMCtfnl.jpg",
+   "tmdb": 695721,
+   "firstSeen": null
+  },
+  {
+   "t": "Hamnet",
+   "y": 2025,
+   "r": 125,
+   "g": [
+    "drama",
+    "romance"
+   ],
+   "a": [
+    "melancholy",
+    "characterstudy",
+    "romantic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Chloé Zhao",
+   "h": "The powerful story of love and loss that inspired the creation of Shakespeare's timeless masterpiece, Hamlet.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/vbeyOZm2bvBXcbgPD3v6o94epPX.jpg",
+   "backdrop": "/73BClq9FOcrWrutnpiqhCNEWEwJ.jpg",
+   "tmdb": 858024,
+   "firstSeen": null
+  },
+  {
+   "t": "Enola Holmes 3",
+   "y": 2026,
+   "r": 109,
+   "g": [
+    "adventure",
+    "crime",
+    "mystery"
+   ],
+   "a": [
+    "spectacle",
+    "violent",
+    "twisty"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Philip Barantini",
+   "h": "Adventure follows detective Enola Holmes to Malta, where her plans to tie the knot unravel when Sherlock's disappearance plunges her into a perilous case.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/7kRYHH9H9PjBFwz1FprbHB2AAjI.jpg",
+   "backdrop": "/jLuGZc84MvPYCQomQg9DI72mstt.jpg",
+   "tmdb": 1202033,
+   "firstSeen": null
+  },
+  {
+   "t": "Sing",
+   "y": 2016,
+   "r": 108,
+   "g": [
+    "animation",
+    "comedy",
+    "family",
+    "musical"
+   ],
+   "a": [
+    "visual",
+    "comic",
+    "cozy",
+    "uplifting"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Garth Jennings",
+   "h": "A koala named Buster recruits his best friend to help him drum up business for his theater by hosting a singing competition.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/rwopfpHqPCYBSgBuZwkaXXqHp14.jpg",
+   "backdrop": "/z9ft5HYHzWcasR6SGcgeluxTznB.jpg",
+   "tmdb": 335797,
+   "firstSeen": null
+  },
+  {
+   "t": "Caught Stealing",
+   "y": 2025,
+   "r": 107,
+   "g": [
+    "crime",
+    "thriller",
+    "comedy"
+   ],
+   "a": [
+    "ironic",
+    "violent",
+    "propulsive",
+    "comic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Darren Aronofsky",
+   "h": "Burned-out ex-baseball player Hank Thompson unexpectedly finds himself embroiled in a dangerous struggle for survival amidst the criminal underbelly of late 1990s New York City, forced to navigate a treacherous underworld he never imagined.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/cvda8s5J8YaHjTyEyXQpvD6f3iV.jpg",
+   "backdrop": "/41043LV7mfluH8iXEUPVseCDAv5.jpg",
+   "tmdb": 1245993,
+   "firstSeen": null
+  },
+  {
+   "t": "Despicable Me 3",
+   "y": 2017,
+   "r": 90,
+   "g": [
+    "action",
+    "animation",
+    "comedy",
+    "family",
+    "adventure"
+   ],
+   "a": [
+    "propulsive",
+    "visual",
+    "comic",
+    "cozy",
+    "spectacle",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Kyle Balda",
+   "h": "Gru and his wife Lucy must stop former '80s child star Balthazar Bratt from achieving world domination.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 65,
+   "rtSrc": "tmdb",
+   "poster": "/e72KCMHNkbZ6USRJmABeqwmaJ5n.jpg",
+   "backdrop": "/ftRkFtAGuHngHnLiOxktq0aCVMF.jpg",
+   "tmdb": 324852,
+   "firstSeen": null
+  },
+  {
+   "t": "Leave the World Behind",
+   "y": 2023,
+   "r": 140,
+   "g": [
+    "drama",
+    "mystery",
+    "thriller"
+   ],
+   "a": [
+    "slowburn",
+    "characterstudy",
+    "twisty",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Sam Esmail",
+   "h": "A family's getaway to a luxurious rental home takes an ominous turn when a cyberattack knocks out their devices—and two strangers appear at their door.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 64,
+   "rtSrc": "tmdb",
+   "poster": "/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg",
+   "backdrop": "/5cRw2QHQz5bp7W2KLdSpZoFoTTw.jpg",
+   "tmdb": 726209,
+   "firstSeen": null
+  },
+  {
+   "t": "Percy Jackson & the Olympians: The Lightning Thief",
+   "y": 2010,
+   "r": 118,
+   "g": [
+    "adventure",
+    "fantasy",
+    "family"
+   ],
+   "a": [
+    "scary",
+    "spectacle",
+    "visual",
+    "cozy"
+   ],
+   "svcs": [
+    "NFX",
+    "DIS"
+   ],
+   "d": "Chris Columbus",
+   "h": "Accident prone teenager, Percy discovers he's actually a demi-God, the son of Poseidon, and he is needed when Zeus' lightning is stolen. Percy must master his new found skills in order to prevent a war between the Gods that could devastate the entire world.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 62,
+   "rtSrc": "tmdb",
+   "poster": "/brzpTyZ5bnM7s53C1KSk1TmrMO6.jpg",
+   "backdrop": "/ugiV9SpJburMOPeIyjBJyAnO1So.jpg",
+   "tmdb": 32657,
+   "firstSeen": null
+  },
+  {
+   "t": "Scream",
+   "y": 2022,
+   "r": 114,
+   "g": [
+    "horror",
+    "mystery"
+   ],
+   "a": [
+    "twisty",
+    "violent",
+    "scary"
+   ],
+   "svcs": [
+    "NFX",
+    "PAR"
+   ],
+   "d": "Tyler Gillett",
+   "h": "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town’s deadly past.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 67,
+   "rtSrc": "tmdb",
+   "poster": "/nD4M4Bx457ryLuKYpxFwQ2IBJ5w.jpg",
+   "backdrop": "/ifUfE79O1raUwbaQRIB7XnFz5ZC.jpg",
+   "tmdb": 646385,
+   "firstSeen": null
+  },
+  {
+   "t": "The Mitchells vs. the Machines",
+   "y": 2021,
+   "r": 110,
+   "g": [
+    "animation",
+    "adventure",
+    "comedy"
+   ],
+   "a": [
+    "earnest",
+    "visual",
+    "spectacle",
+    "comic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Mike Rianda",
+   "h": "A quirky, dysfunctional family's road trip is upended when they find themselves in the middle of the robot apocalypse and suddenly become humanity's unlikeliest last hope.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 78,
+   "rtSrc": "tmdb",
+   "poster": "/mI2Di7HmskQQ34kz0iau6J1vr70.jpg",
+   "backdrop": "/vsZLf5uog08pAnfsMuDWrsLWUUF.jpg",
+   "tmdb": 501929,
+   "firstSeen": null
+  },
+  {
+   "t": "Home",
+   "y": 2015,
+   "r": 94,
+   "g": [
+    "fantasy",
+    "comedy",
+    "animation",
+    "scifi",
+    "family"
+   ],
+   "a": [
+    "spectacle",
+    "visual",
+    "comic",
+    "cerebral",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Tim Johnson",
+   "h": "When Earth is taken over by the overly-confident Boov, an alien race in search of a new place to call home, all humans are promptly relocated, while all Boov get busy reorganizing the planet. But when one resourceful girl, Tip, manages to avoid capture, she finds herself the accidental accomplice of a banished Boov named Oh.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/usFenYnk6mr8C62dB1MoAfSWMGR.jpg",
+   "backdrop": "/gnkBzJVH2zicIopP2fHf4kRElne.jpg",
+   "tmdb": 228161,
+   "firstSeen": null
+  },
+  {
+   "t": "Hitman's Wife's Bodyguard",
+   "y": 2021,
+   "r": 117,
+   "g": [
+    "action",
+    "comedy",
+    "crime",
+    "thriller"
+   ],
+   "a": [
+    "propulsive",
+    "comic",
+    "violent"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Patrick Hughes",
+   "h": "The world’s most lethal odd couple – bodyguard Michael Bryce and hitman Darius Kincaid – are back on another life-threatening mission. Still unlicensed and under scrutiny, Bryce is forced into action by Darius's even more volatile wife, the infamous international con artist Sonia Kincaid.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/6zwGWDpY8Zu0L6W4SYWERBR8Msw.jpg",
+   "backdrop": "/bjIPzixuWnOzxDG25WaXKuy9lYZ.jpg",
+   "tmdb": 522931,
+   "firstSeen": null
+  },
+  {
+   "t": "Black Phone 2",
+   "y": 2025,
+   "r": 114,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "violent",
+    "scary",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Scott Derrickson",
+   "h": "Four years after defeating The Grabber, Finney Blake is struggling with life after captivity.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/vBOpqxW0SDhACwEO2LZT29DuNG2.jpg",
+   "backdrop": "/6zKjoOOb3OZnZuiHtQZn4Kd69Gq.jpg",
+   "tmdb": 1197137,
+   "firstSeen": null
+  },
+  {
+   "t": "The Northman",
+   "y": 2022,
+   "r": 137,
+   "g": [
+    "action",
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "violent",
+    "propulsive",
+    "spectacle",
+    "visual"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Robert Eggers",
+   "h": "Prince Amleth is on the verge of becoming a man when his father is brutally murdered by his uncle, who kidnaps the boy's mother. Two decades later, Amleth is now a Viking who's on a mission to save his mother, kill his uncle and avenge his father.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg",
+   "backdrop": "/qZYvF1M7y8Gfp4S6OBHbYfB0Lgc.jpg",
+   "tmdb": 639933,
+   "firstSeen": null
+  },
+  {
+   "t": "Zombieland",
+   "y": 2009,
+   "r": 88,
+   "g": [
+    "comedy",
+    "horror"
+   ],
+   "a": [
+    "bleak",
+    "weird",
+    "ironic",
+    "propulsive",
+    "violent",
+    "comic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Ruben Fleischer",
+   "h": "Columbus has made a habit of running from what scares him. Tallahassee doesn't have fears. If he did, he'd kick their ever-living ass. In a world overrun by zombies, these two are perfectly evolved survivors. But now, they're about to stare down the most terrifying prospect of all: each other.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/dUkAmAyPVqubSBNRjRqCgHggZcK.jpg",
+   "backdrop": "/oihWVx3imvRKujnGmSDYhfG1gI5.jpg",
+   "tmdb": 19908,
+   "firstSeen": null
+  },
+  {
+   "t": "Sisu: Road to Revenge",
+   "y": 2025,
+   "r": 89,
+   "g": [
+    "action",
+    "war",
+    "thriller"
+   ],
+   "a": [
+    "propulsive",
+    "violent",
+    "visceral",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Jalmari Helander",
+   "h": "Returning to the house where his family was brutally murdered during the war, \"the man who refuses to die\" dismantles it, loads it on a truck, and is determined to rebuild it somewhere safe in their honor. When the commander who killed his family comes back hellbent on finishing the job, a relentless, eye-popping cross-country chase ensues.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/roCMOuMQ55Z2TxVx1vZZTevlo0n.jpg",
+   "backdrop": "/10MiMMNzWeE53cHhSlfroPiO8vi.jpg",
+   "tmdb": 1223601,
+   "firstSeen": null
+  },
+  {
+   "t": "Fargo",
+   "y": 1996,
+   "r": 98,
+   "g": [
+    "crime",
+    "drama",
+    "thriller"
+   ],
+   "a": [
+    "weird",
+    "ironic",
+    "stylish",
+    "violent",
+    "characterstudy",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX",
+    "PRV"
+   ],
+   "d": "Joel Coen",
+   "h": "Jerry, a small-town Minnesota car salesman is bursting at the seams with debt... but he's got a plan. He's going to hire two thugs to kidnap his wife in a scheme to collect a hefty ransom from his wealthy father-in-law. It's going to be a snap and nobody's going to get hurt... until people start dying.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 78,
+   "rtSrc": "tmdb",
+   "poster": "/rt7cpEr1uP6RTZykBFhBTcRaKvG.jpg",
+   "backdrop": "/747dgDfL5d8esobk7h4odaOFhUq.jpg",
+   "tmdb": 275,
+   "firstSeen": null
+  },
+  {
+   "t": "A Quiet Place: Day One",
+   "y": 2024,
+   "r": 100,
+   "g": [
+    "horror",
+    "scifi",
+    "thriller"
+   ],
+   "a": [
+    "propulsive",
+    "scary",
+    "spectacle",
+    "cerebral",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX",
+    "PRV",
+    "PAR"
+   ],
+   "d": "Michael Sarnoski",
+   "h": "As New York City is invaded by alien creatures who hunt by sound, a woman named Sam fights to survive with her cat.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/hU42CRk14JuPEdqZG3AWmagiPAP.jpg",
+   "backdrop": "/6XjMwQTvnICBz6TguiDKkDVHvgS.jpg",
+   "tmdb": 762441,
+   "firstSeen": null
+  },
+  {
+   "t": "Thrash",
+   "y": 2026,
+   "r": 84,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "propulsive",
+    "scary",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Tommy Wirkola",
+   "h": "When a catastrophic hurricane slams a coastal town, stranded residents must survive rapidly rising waters swarming with ravenous sharks.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 62,
+   "rtSrc": "tmdb",
+   "poster": "/adk8weka3O5648g3de4z3y4aE7G.jpg",
+   "backdrop": "/hniERZojXCEc7Fp3yljZUigOAhm.jpg",
+   "tmdb": 1290417,
+   "firstSeen": null
+  },
+  {
+   "t": "Counterattack",
+   "y": 2025,
+   "r": 85,
+   "g": [
+    "action",
+    "adventure",
+    "thriller"
+   ],
+   "a": [
+    "propulsive",
+    "spectacle",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Chava Cartas",
+   "h": "When a hostage rescue mission creates a new enemy, Capt. Guerrero and his elite soldiers must face an ambush by a criminal group.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 83,
+   "rtSrc": "tmdb",
+   "poster": "/38I76hGcFY6xB47pjm7pZwkfuAF.jpg",
+   "backdrop": "/deUWVEgNh2IGjShyymZhaYP40ye.jpg",
+   "tmdb": 1356039,
+   "firstSeen": null
+  },
+  {
+   "t": "Dilwale Dulhania Le Jayenge",
+   "y": 1995,
+   "r": 190,
+   "g": [
+    "comedy",
+    "drama",
+    "romance"
+   ],
+   "a": [
+    "comic",
+    "characterstudy",
+    "romantic",
+    "epic"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Aditya Chopra",
+   "h": "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancé. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 85,
+   "rtSrc": "tmdb",
+   "poster": "/lfRkUr7DYdHldAqi3PwdQGBRBPM.jpg",
+   "backdrop": "/84beTJf26mfhoasUlKSOiNSutyS.jpg",
+   "tmdb": 19404,
+   "firstSeen": null
+  },
+  {
+   "t": "The Hitman's Bodyguard",
+   "y": 2017,
+   "r": 118,
+   "g": [
+    "action",
+    "comedy",
+    "crime",
+    "thriller"
+   ],
+   "a": [
+    "dialogue",
+    "propulsive",
+    "comic",
+    "violent"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Patrick Hughes",
+   "h": "The world’s top bodyguard gets a new client, a hitman who must testify at the International Court of Justice. They must put their differences aside and work together to make it to the trial on time.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/5CGjlz2vyBhW5xHW4eNOZIdgzYq.jpg",
+   "backdrop": "/7KsqfXDECZMryX1Rv4RKsT7SIjQ.jpg",
+   "tmdb": 390043,
+   "firstSeen": null
+  },
+  {
+   "t": "The Ballad of Buster Scruggs",
+   "y": 2018,
+   "r": 132,
+   "g": [
+    "western",
+    "comedy",
+    "drama"
+   ],
+   "a": [
+    "ironic",
+    "grounded",
+    "comic",
+    "characterstudy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Joel Coen",
+   "h": "Vignettes weaving together the stories of six individuals in the old West at the end of the Civil War. Following the tales of a sharp-shooting songster, a wannabe bank robber, two weary traveling performers, a lone gold prospector, a woman traveling the West to an uncertain future, and a motley crew of strangers undertaking a carriage ride.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/voxl654m7p36y8FLu8oQD7dfwwK.jpg",
+   "backdrop": "/12RXkIWUXwOHXgAmlxJNIWRGrri.jpg",
+   "tmdb": 537996,
+   "firstSeen": null
+  },
+  {
+   "t": "Glass Onion: A Knives Out Mystery",
+   "y": 2022,
+   "r": 140,
+   "g": [
+    "comedy",
+    "crime",
+    "mystery"
+   ],
+   "a": [
+    "ironic",
+    "twisty",
+    "comic",
+    "violent",
+    "ensemble"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Rian Johnson",
+   "h": "World-famous detective Benoit Blanc heads to Greece to peel back the layers of a mystery surrounding a tech billionaire and his eclectic crew of friends.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/vDGr1YdrlfbU9wxTOdpf3zChmv9.jpg",
+   "backdrop": "/y3uOfZAYwLkbvhunswBCskNMrfI.jpg",
+   "tmdb": 661374,
+   "firstSeen": null
+  },
+  {
+   "t": "The Hunger Games: Mockingjay - Part 2",
+   "y": 2015,
+   "r": 137,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "bleak",
+    "propulsive",
+    "spectacle",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Francis Lawrence",
+   "h": "As the war between the Capitol and the districts reaches its peak, Katniss Everdeen embarks on a perilous mission to liberate Panem and confront President Snow. Joined by a team of trusted allies, she navigates deadly traps, shifting loyalties, and the heavy cost of rebellion, determined to bring freedom to her people and end the Hunger Games once and for all.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/lImKHDfExAulp16grYm8zD5eONE.jpg",
+   "backdrop": "/qVgLMRVNB5bHU0inmRa0ueShacN.jpg",
+   "tmdb": 131634,
+   "firstSeen": null
+  },
+  {
+   "t": "Waterworld",
+   "y": 1995,
+   "r": 135,
+   "g": [
+    "adventure",
+    "action",
+    "scifi"
+   ],
+   "a": [
+    "propulsive",
+    "spectacle",
+    "cerebral"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Kevin Reynolds",
+   "h": "In a futuristic world where the polar ice caps have melted and made Earth a liquid planet, a beautiful barmaid rescues a mutant seafarer from a floating island prison. They escape, along with her young charge, Enola, and sail off aboard his ship. But the trio soon becomes the target of a menacing pirate who covets the map to 'Dryland'—which is tattooed on Enola's back.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 62,
+   "rtSrc": "tmdb",
+   "poster": "/X4UyUO5jgzs3c5YafnmYKLKKYw.jpg",
+   "backdrop": "/yaIu82UiD9QZEkKCGrAd8VAmc0V.jpg",
+   "tmdb": 9804,
+   "firstSeen": null
+  },
+  {
+   "t": "The Karate Kid",
+   "y": 2010,
+   "r": 140,
+   "g": [
+    "action",
+    "adventure",
+    "drama",
+    "family"
+   ],
+   "a": [
+    "propulsive",
+    "spectacle",
+    "characterstudy",
+    "cozy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Harald Zwart",
+   "h": "12-year-old Dre Parker could've been the most popular kid in Detroit, but his mother's latest career move has landed him in China. Dre immediately falls for his classmate Mei Ying but the cultural differences make such a friendship impossible. Even worse, Dre's feelings make him an enemy of the class bully, Cheng. With no friends in a strange land, Dre has nowhere to turn but maintenance man Mr.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/b1RBy3l297N0c7PHjlz35cClWju.jpg",
+   "backdrop": "/v8DepuF6gizphLzIyNZeQiB0hij.jpg",
+   "tmdb": 38575,
+   "firstSeen": null
+  },
+  {
+   "t": "IF",
+   "y": 2024,
+   "r": 104,
+   "g": [
+    "comedy",
+    "fantasy",
+    "family"
+   ],
+   "a": [
+    "comic",
+    "visual",
+    "cozy",
+    "scary",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX",
+    "PAR"
+   ],
+   "d": "John Krasinski",
+   "h": "After discovering she can see everyone's imaginary friends, a girl embarks on a magical adventure to reconnect forgotten imaginary friends with their kids.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/xbKFv4KF3sVYuWKllLlwWDmuZP7.jpg",
+   "backdrop": "/nxxCPRGTzxUH8SFMrIsvMmdxHti.jpg",
+   "tmdb": 639720,
+   "firstSeen": null
+  },
+  {
+   "t": "The Witch",
+   "y": 2016,
+   "r": 92,
+   "g": [
+    "horror",
+    "drama",
+    "mystery",
+    "fantasy",
+    "thriller"
+   ],
+   "a": [
+    "scary",
+    "characterstudy",
+    "twisty",
+    "visual",
+    "propulsive",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Robert Eggers",
+   "h": "In 1630, a farmer relocates his family to a remote plot of land on the edge of a forest where strange, unsettling things happen. With suspicion and paranoia mounting, each family member's faith, loyalty and love are tested in shocking ways.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/zap5hpFCWSvdWSuPGAQyjUv2wAC.jpg",
+   "backdrop": "/zi2oYYNSSv7t44iSt5YrxHX9PYs.jpg",
+   "tmdb": 310131,
+   "firstSeen": null
+  },
+  {
+   "t": "The Black Phone",
+   "y": 2022,
+   "r": 103,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "violent",
+    "scary",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Scott Derrickson",
+   "h": "Finney Blake, a shy but clever 13-year-old boy, is abducted by a sadistic killer and trapped in a soundproof basement where screaming is of little use. When a disconnected phone on the wall begins to ring, Finney discovers that he can hear the voices of the killer’s previous victims. And they are dead set on making sure that what happened to them doesn’t happen to Finney.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 75,
+   "rtSrc": "tmdb",
+   "poster": "/p9ZUzCyy9wRTDuuQexkQ78R2BgF.jpg",
+   "backdrop": "/AfvIjhDu9p64jKcmohS4hsPG95Q.jpg",
+   "tmdb": 756999,
+   "firstSeen": null
+  },
+  {
+   "t": "Don't Look Up",
+   "y": 2021,
+   "r": 138,
+   "g": [
+    "comedy",
+    "scifi",
+    "drama"
+   ],
+   "a": [
+    "ironic",
+    "cerebral",
+    "comic",
+    "characterstudy",
+    "propulsive"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Adam McKay",
+   "h": "Two astronomers go on a media tour to warn humankind of a planet-killing comet hurtling toward Earth. The response from a distracted world: Meh.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/th4E1yqsE8DGpAseLiUrI60Hf8V.jpg",
+   "backdrop": "/nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg",
+   "tmdb": 646380,
+   "firstSeen": null
+  },
+  {
+   "t": "The Breakfast Club",
+   "y": 1985,
+   "r": 98,
+   "g": [
+    "comedy",
+    "drama"
+   ],
+   "a": [
+    "earnest",
+    "comic",
+    "characterstudy",
+    "brisk"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "John Hughes",
+   "h": "Five high school students from different walks of life endure a Saturday detention under a power-hungry principal. The disparate group includes rebel John, princess Claire, outcast Allison, brainy Brian and Andrew, the jock. Each has a chance to tell his or her story, making the others see them a little differently -- and when the day ends, they question whether school will ever be the same.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/gp4zlj7wgbiofLMNsTPndMuO3PN.jpg",
+   "backdrop": "/s5HDOmFZaPVQFjk9BxxDrLu1T0g.jpg",
+   "tmdb": 2108,
+   "firstSeen": null
+  },
+  {
+   "t": "Miraculous: Ladybug & Cat Noir, The Movie",
+   "y": 2023,
+   "r": 105,
+   "g": [
+    "animation",
+    "fantasy",
+    "action",
+    "romance",
+    "family"
+   ],
+   "a": [
+    "spectacle",
+    "visual",
+    "propulsive",
+    "romantic",
+    "cozy"
+   ],
+   "svcs": [
+    "NFX"
+   ],
+   "d": "Jeremy Zag",
+   "h": "After a guardian of magical jewels turns an awkward girl and a popular boy into superheroes, they can never reveal their identities — even to each other.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/dQNJ8SdCMn3zWwHzzQD2xrphR1X.jpg",
+   "backdrop": "/iEFuHjqrE059SmflBva1JzDJutE.jpg",
+   "tmdb": 496450,
+   "firstSeen": null
+  },
+  {
+   "t": "Avatar: Fire and Ash",
+   "y": 2025,
+   "r": 198,
+   "g": [
+    "scifi",
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "visual",
+    "epic",
+    "propulsive",
+    "visceral"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "James Cameron",
+   "h": "In the wake of the devastating war against the RDA and the loss of their eldest son, Jake Sully and Neytiri face a new threat on Pandora: the Ash People, a violent and power-hungry Na'vi tribe led by the ruthless Varang. Jake's family must fight for their survival and the future of Pandora in a conflict that pushes them to their emotional and physical limits.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/bRBeSHfGHwkEpImlhxPmOcUsaeg.jpg",
+   "backdrop": "/sdZSjtGUTSN8B3al5o0f2WoQfQQ.jpg",
+   "tmdb": 83533,
+   "firstSeen": null
+  },
+  {
+   "t": "Spider-Man",
+   "y": 2002,
+   "r": 121,
+   "g": [
+    "action",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "melancholy",
+    "propulsive"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Sam Raimi",
+   "h": "After being bitten by a genetically altered spider at Oscorp, nerdy but endearing high school student Peter Parker is endowed with amazing powers to become the superhero known as Spider-Man.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/or6XJBVpcEbIkma0V9zshnbEtx4.jpg",
+   "backdrop": "/zQ8AxTPiCiS5nnwXpwTBPBHSaa5.jpg",
+   "tmdb": 557,
+   "firstSeen": null
+  },
+  {
+   "t": "Zootopia 2",
+   "y": 2025,
+   "r": 108,
+   "g": [
+    "animation",
+    "adventure",
+    "comedy",
+    "mystery",
+    "family"
+   ],
+   "a": [
+    "visual",
+    "spectacle",
+    "comic",
+    "twisty",
+    "cozy"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Jared Bush",
+   "h": "After cracking the biggest case in Zootopia's history, rookie cops Judy Hopps and Nick Wilde find themselves on the twisting trail of a great mystery when Gary De'Snake arrives and turns the animal metropolis upside down. To crack the case, Judy and Nick must go undercover to unexpected new parts of town, where their growing partnership is tested like never before.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/oJ7g2CifqpStmoYQyaLQgEU32qO.jpg",
+   "backdrop": "/lgotja3xMoJZbynwHfcQcJAEMWH.jpg",
+   "tmdb": 1084242,
+   "firstSeen": null
+  },
+  {
+   "t": "Deadpool & Wolverine",
+   "y": 2024,
+   "r": 128,
+   "g": [
+    "action",
+    "comedy",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "propulsive",
+    "comic",
+    "cerebral"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Shawn Levy",
+   "h": "A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+   "backdrop": "/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+   "tmdb": 533535,
+   "firstSeen": null
+  },
+  {
+   "t": "Hoppers",
+   "y": 2026,
+   "r": 104,
+   "g": [
+    "adventure",
+    "animation",
+    "comedy",
+    "family",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "visual",
+    "comic",
+    "cozy",
+    "cerebral"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Daniel Chong",
+   "h": "Scientists have discovered how to 'hop' human consciousness into lifelike robotic animals, allowing people to communicate with animals as animals. Animal lover Mabel seizes an opportunity to use the technology, uncovering mysteries within the animal world beyond anything she could have imagined.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 82,
+   "rtSrc": "tmdb",
+   "poster": "/xjtWQ2CL1mpmMNwuU5HeS4Iuwuu.jpg",
+   "backdrop": "/3Jj0A10NVu2dWnoEL5t5oT79L1Y.jpg",
+   "tmdb": 1327819,
+   "firstSeen": null
+  },
+  {
+   "t": "Avengers: Age of Ultron",
+   "y": 2015,
+   "r": 141,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive",
+    "comic"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Joss Whedon",
+   "h": "When Tony Stark tries to jumpstart a dormant peacekeeping program, things go awry and Earth’s Mightiest Heroes are put to the ultimate test as the fate of the planet hangs in the balance. As the villainous Ultron emerges, it is up to The Avengers to stop him from enacting his terrible plans, and soon uneasy alliances and unexpected action pave the way for an epic and unique global adventure.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg",
+   "backdrop": "/kIBK5SKwgqIIuRKhhWrJn3XkbPq.jpg",
+   "tmdb": 99861,
+   "firstSeen": null
+  },
+  {
+   "t": "Spider-Man: Far From Home",
+   "y": 2019,
+   "r": 129,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive",
+    "earnest"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Jon Watts",
+   "h": "Peter Parker and his friends go on a summer trip to Europe. However, they will hardly be able to rest - Peter will have to agree to help Nick Fury uncover the mystery of creatures that cause natural disasters and destruction throughout the continent.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg",
+   "backdrop": "/vamhMTvh9m9zFHDoR0v1nRtf6T4.jpg",
+   "tmdb": 429617,
+   "firstSeen": null
+  },
+  {
+   "t": "The Amazing Spider-Man",
+   "y": 2012,
+   "r": 136,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "melancholy",
+    "propulsive",
+    "cerebral",
+    "stylish"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Marc Webb",
+   "h": "A teenage Peter Parker grapples with both high school and amazing super-human crises as his alter-ego Spider-Man.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/jexoNYnPd6vVrmygwF6QZmWPFdu.jpg",
+   "backdrop": "/HVcza6tJtWFrLriuh3Ano4Vt46.jpg",
+   "tmdb": 1930,
+   "firstSeen": null
+  },
+  {
+   "t": "Spider-Man 3",
+   "y": 2007,
+   "r": 139,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "violent",
+    "spectacle",
+    "cerebral",
+    "melancholy",
+    "propulsive"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Sam Raimi",
+   "h": "The seemingly invincible Spider-Man goes up against an all-new crop of villains—including the shape-shifting Sandman. While Spider-Man’s superpowers are altered by an alien organism, his alter ego, Peter Parker, deals with nemesis Eddie Brock and also gets caught up in a love triangle.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 65,
+   "rtSrc": "tmdb",
+   "poster": "/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg",
+   "backdrop": "/FfAU0PUs8AJkMU2VbkVNFtRXR4.jpg",
+   "tmdb": 559,
+   "firstSeen": null
+  },
+  {
+   "t": "The Fantastic 4: First Steps",
+   "y": 2025,
+   "r": 115,
+   "g": [
+    "scifi",
+    "adventure",
+    "action"
+   ],
+   "a": [
+    "romantic",
+    "spectacle",
+    "cerebral",
+    "propulsive"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Matt Shakman",
+   "h": "Against the vibrant backdrop of a 1960s-inspired, retro-futuristic world, Marvel's First Family is forced to balance their roles as heroes with the strength of their family bond, while defending Earth from a ravenous space god called Galactus and his enigmatic Herald, Silver Surfer.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/nf5qaSEvyYSNeFH0YhSs5EsBLX9.jpg",
+   "backdrop": "/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+   "tmdb": 617126,
+   "firstSeen": null
+  },
+  {
+   "t": "Captain America: Civil War",
+   "y": 2016,
+   "r": 147,
+   "g": [
+    "adventure",
+    "action",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "propulsive",
+    "cerebral"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Joe Russo",
+   "h": "Following the events of Age of Ultron, the collective governments of the world pass an act designed to regulate all superhuman activity. This polarizes opinion amongst the Avengers, causing two factions to side with Iron Man or Captain America, which causes an epic battle between former allies.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 75,
+   "rtSrc": "tmdb",
+   "poster": "/rAGiXaUfPzY7CDEyNKUofk3Kw2e.jpg",
+   "backdrop": "/wdwcOBMkt3zmPQuEMxB3FUtMio2.jpg",
+   "tmdb": 271110,
+   "firstSeen": null
+  },
+  {
+   "t": "Guardians of the Galaxy Vol. 3",
+   "y": 2023,
+   "r": 150,
+   "g": [
+    "scifi",
+    "adventure",
+    "action"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive",
+    "epic",
+    "comic"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "James Gunn",
+   "h": "Peter Quill, still reeling from the loss of Gamora, must rally his team around him to defend the universe along with protecting one of their own. A mission that, if not completed successfully, could quite possibly lead to the end of the Guardians as we know them.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 79,
+   "rtSrc": "tmdb",
+   "poster": "/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+   "backdrop": "/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg",
+   "tmdb": 447365,
+   "firstSeen": null
+  },
+  {
+   "t": "The Amazing Spider-Man 2",
+   "y": 2014,
+   "r": 141,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive",
+    "stylish",
+    "melancholy"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Marc Webb",
+   "h": "For Peter Parker, life is busy. Between taking out the bad guys as Spider-Man and spending time with the person he loves, Gwen Stacy, high school graduation cannot come quickly enough. Peter has not forgotten about the promise he made to Gwen’s father to protect her by staying away, but that is a promise he cannot keep.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/bU7nTmvmy0h3VUP01v1T2imgH6N.jpg",
+   "backdrop": "/k0hlAzTryCYX1O1LyC6P8tAa8s0.jpg",
+   "tmdb": 102382,
+   "firstSeen": null
+  },
+  {
+   "t": "Avatar: The Way of Water",
+   "y": 2022,
+   "r": 192,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "melancholy",
+    "propulsive",
+    "cerebral",
+    "epic",
+    "visceral"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "James Cameron",
+   "h": "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+   "backdrop": "/kJsPVzdyBrYHLomuNv5SJDXUQ2f.jpg",
+   "tmdb": 76600,
+   "firstSeen": null
+  },
+  {
+   "t": "Iron Man",
+   "y": 2008,
+   "r": 126,
+   "g": [
+    "action",
+    "scifi",
+    "adventure"
+   ],
+   "a": [
+    "spectacle",
+    "propulsive",
+    "cerebral"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Jon Favreau",
+   "h": "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/78lPtwv72eTNqFW9COBYI0dWDJa.jpg",
+   "backdrop": "/cKvDv2LpwVEqbdXWoQl4XgGN6le.jpg",
+   "tmdb": 1726,
+   "firstSeen": null
+  },
+  {
+   "t": "Thunderbolts*",
+   "y": 2025,
+   "r": 127,
+   "g": [
+    "action",
+    "scifi",
+    "adventure"
+   ],
+   "a": [
+    "spectacle",
+    "propulsive",
+    "cerebral"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Jake Schreier",
+   "h": "After finding themselves ensnared in a death trap, seven disillusioned castoffs must embark on a dangerous mission that will force them to confront the darkest corners of their pasts.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg",
+   "backdrop": "/rthMuZfFv4fqEU4JVbgSW9wQ8rs.jpg",
+   "tmdb": 986056,
+   "firstSeen": null
+  },
+  {
+   "t": "Doctor Strange in the Multiverse of Madness",
+   "y": 2022,
+   "r": 126,
+   "g": [
+    "fantasy",
+    "action",
+    "adventure"
+   ],
+   "a": [
+    "spectacle",
+    "visual",
+    "propulsive"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Sam Raimi",
+   "h": "Doctor Strange, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 72,
+   "rtSrc": "tmdb",
+   "poster": "/ddJcSKbcp4rKZTmuyWaMhuwcfMz.jpg",
+   "backdrop": "/lv3TXqhpaIxkclIHbhN2MRMOemQ.jpg",
+   "tmdb": 453395,
+   "firstSeen": null
+  },
+  {
+   "t": "Avatar",
+   "y": 2009,
+   "r": 162,
+   "g": [
+    "scifi",
+    "action",
+    "adventure"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive",
+    "epic",
+    "visceral"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "James Cameron",
+   "h": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg",
+   "backdrop": "/vL5LR6WdxWPjLPFRLe133jXWsh5.jpg",
+   "tmdb": 19995,
+   "firstSeen": null
+  },
+  {
+   "t": "Iron Man 2",
+   "y": 2010,
+   "r": 124,
+   "g": [
+    "adventure",
+    "action",
+    "scifi"
+   ],
+   "a": [
+    "violent",
+    "spectacle",
+    "propulsive",
+    "cerebral"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Jon Favreau",
+   "h": "With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony Stark faces pressure from the government, the press and the public to share his technology with the military. Unwilling to let go of his invention, Stark, with Pepper Potts and James 'Rhodey' Rhodes at his side, must forge new alliances – and confront powerful enemies.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg",
+   "backdrop": "/7lmBufEG7P7Y1HClYK3gCxYrkgS.jpg",
+   "tmdb": 10138,
+   "firstSeen": null
+  },
+  {
+   "t": "Frozen II",
+   "y": 2019,
+   "r": 103,
+   "g": [
+    "family",
+    "animation",
+    "adventure",
+    "comedy",
+    "fantasy"
+   ],
+   "a": [
+    "earnest",
+    "cozy",
+    "visual",
+    "spectacle",
+    "comic"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Jennifer Lee",
+   "h": "Elsa, Anna, Kristoff and Olaf head far into the forest to learn the truth about an ancient mystery of their kingdom.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 72,
+   "rtSrc": "tmdb",
+   "poster": "/mINJaa34MtknCYl5AjtNJzWj8cD.jpg",
+   "backdrop": "/AoSZyb37ljMAxw0RdeQEBHKtgcc.jpg",
+   "tmdb": 330457,
+   "firstSeen": null
+  },
+  {
+   "t": "The Incredible Hulk",
+   "y": 2008,
+   "r": 114,
+   "g": [
+    "scifi",
+    "action",
+    "adventure"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Louis Leterrier",
+   "h": "Scientist Bruce Banner scours the planet for an antidote to the unbridled force of rage within him: the Hulk. But when the military masterminds who dream of exploiting his powers force him back to civilization, he finds himself coming face to face with a new, deadly foe.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 63,
+   "rtSrc": "tmdb",
+   "poster": "/gKzYx79y0AQTL4UAk1cBQJ3nvrm.jpg",
+   "backdrop": "/jPu8yiadqgzwFPGKJmGo637ASVP.jpg",
+   "tmdb": 1724,
+   "firstSeen": null
+  },
+  {
+   "t": "Venom: The Last Dance",
+   "y": 2024,
+   "r": 109,
+   "g": [
+    "scifi",
+    "action",
+    "adventure"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive"
+   ],
+   "svcs": [
+    "DIS",
+    "NFX"
+   ],
+   "d": "Kelly Marcel",
+   "h": "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 67,
+   "rtSrc": "tmdb",
+   "poster": "/vGXptEdgZIhPg3cGlc7e8sNPC2e.jpg",
+   "backdrop": "/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
+   "tmdb": 912649,
+   "firstSeen": null
+  },
+  {
+   "t": "Ice Age: Collision Course",
+   "y": 2016,
+   "r": 95,
+   "g": [
+    "adventure",
+    "animation",
+    "family",
+    "comedy",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "visual",
+    "cozy",
+    "comic",
+    "cerebral",
+    "brisk"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Michael Thurmeier",
+   "h": "Set after the events of Continental Drift, Scrat's epic pursuit of his elusive acorn catapults him outside of Earth, where he accidentally sets off a series of cosmic events that transform and threaten the planet.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 61,
+   "rtSrc": "tmdb",
+   "poster": "/tFzUkdhPOForVrEfvxydXfPLrZR.jpg",
+   "backdrop": "/wQoe0j7ZDk7LWexC0XhwkK4brIb.jpg",
+   "tmdb": 278154,
+   "firstSeen": null
+  },
+  {
+   "t": "Inside Out 2",
+   "y": 2024,
+   "r": 97,
+   "g": [
+    "animation",
+    "adventure",
+    "comedy",
+    "family"
+   ],
+   "a": [
+    "visual",
+    "spectacle",
+    "comic",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "DIS"
+   ],
+   "d": "Kelsey Mann",
+   "h": "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 75,
+   "rtSrc": "tmdb",
+   "poster": "/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+   "backdrop": "/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
+   "tmdb": 1022789,
+   "firstSeen": null
+  },
+  {
+   "t": "Insidious: The Red Door",
+   "y": 2023,
+   "r": 107,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "earnest",
+    "scary",
+    "propulsive"
+   ],
+   "svcs": [
+    "HUL",
+    "MAX"
+   ],
+   "d": "Patrick Wilson",
+   "h": "To put their demons to rest once and for all, Josh Lambert and a college-aged Dalton Lambert must go deeper into The Further than ever before, facing their family's dark past and a host of new and more horrifying terrors that lurk behind the red door.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 65,
+   "rtSrc": "tmdb",
+   "poster": "/d07phJqCx6z5wILDYqkyraorDPi.jpg",
+   "backdrop": "/i2GVEvltEu3BXn5crBSxgKuTaca.jpg",
+   "tmdb": 614479,
+   "firstSeen": null
+  },
+  {
+   "t": "Ready or Not: Here I Come",
+   "y": 2026,
+   "r": 108,
+   "g": [
+    "horror",
+    "comedy"
+   ],
+   "a": [
+    "ironic",
+    "propulsive",
+    "violent",
+    "scary",
+    "comic"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Matt Bettinelli-Olpin",
+   "h": "Moments after surviving an all-out attack from the Le Domas family, Grace discovers she’s reached the next level of the nightmarish game — and this time with her estranged sister Faith at her side. Grace has one chance to survive, keep her sister alive, and claim the High Seat of the Council that controls the world. Four rival families are hunting her for the throne, and whoever wins rules it all.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/13ZcJzSGEqVgDSqsS9U5EkQwPkV.jpg",
+   "backdrop": "/fx2cEuadZK28VHKkc0F1nFR96i0.jpg",
+   "tmdb": 1266127,
+   "firstSeen": null
+  },
+  {
+   "t": "Predator: Badlands",
+   "y": 2025,
+   "r": 107,
+   "g": [
+    "action",
+    "scifi",
+    "adventure"
+   ],
+   "a": [
+    "propulsive",
+    "spectacle",
+    "cerebral"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Dan Trachtenberg",
+   "h": "Cast out from his clan, a young Predator finds an unlikely ally in a damaged android and embarks on a treacherous journey in search of the ultimate adversary.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 78,
+   "rtSrc": "tmdb",
+   "poster": "/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg",
+   "backdrop": "/82lM4GJ9uuNvNDOEpxFy77uv4Ak.jpg",
+   "tmdb": 1242898,
+   "firstSeen": null
+  },
+  {
+   "t": "Good Luck, Have Fun, Don't Die",
+   "y": 2026,
+   "r": 134,
+   "g": [
+    "scifi",
+    "action",
+    "comedy"
+   ],
+   "a": [
+    "cerebral",
+    "propulsive",
+    "comic"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Gore Verbinski",
+   "h": "A 'Man from the Future' arrives at an LA diner where he must recruit the precise combination of disgruntled patrons to join him on a one-night quest to save the world from the terminal threat of a rogue artificial intelligence.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/af7yguGbWQyvYtk6QCD5l4yBbKN.jpg",
+   "backdrop": "/drRxbu2OHG0DEENptZ8wI5f0uEU.jpg",
+   "tmdb": 1119449,
+   "firstSeen": null
+  },
+  {
+   "t": "Thor",
+   "y": 2011,
+   "r": 115,
+   "g": [
+    "adventure",
+    "fantasy",
+    "action"
+   ],
+   "a": [
+    "spectacle",
+    "hopeful",
+    "visual",
+    "propulsive"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Kenneth Branagh",
+   "h": "Against his father Odin's will, The Mighty Thor - a powerful but arrogant warrior god - recklessly reignites an ancient war. Thor is cast down to Earth and forced to live among humans as punishment. Once here, Thor learns what it takes to be a true hero when the most dangerous villain of his world sends the darkest forces of Asgard to invade Earth.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/prSfAi1xGrhLQNxVSUFh61xQ4Qy.jpg",
+   "backdrop": "/cDJ61O1STtbWNBwefuqVrRe3d7l.jpg",
+   "tmdb": 10195,
+   "firstSeen": null
+  },
+  {
+   "t": "Send Help",
+   "y": 2026,
+   "r": 113,
+   "g": [
+    "horror",
+    "thriller",
+    "comedy"
+   ],
+   "a": [
+    "propulsive",
+    "scary",
+    "comic"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Sam Raimi",
+   "h": "Two colleagues become stranded on a deserted island, the only survivors of a plane crash. On the island, they must overcome past grievances and work together to survive, but ultimately, it's a battle of wills and wits to make it out alive.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/zbJWVHOtj3ljBzWgL1P8pxP03Up.jpg",
+   "backdrop": "/bpp58yHuQmpt6xwggI63mVRw7po.jpg",
+   "tmdb": 1198994,
+   "firstSeen": null
+  },
+  {
+   "t": "Jumanji: The Next Level",
+   "y": 2019,
+   "r": 123,
+   "g": [
+    "adventure",
+    "comedy",
+    "fantasy"
+   ],
+   "a": [
+    "weird",
+    "spectacle",
+    "comic",
+    "visual",
+    "brisk"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Jake Kasdan",
+   "h": "As the gang return to Jumanji to rescue one of their own, they discover that nothing is as they expect. The players will have to brave parts unknown and unexplored in order to escape the world’s most dangerous game.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/jyw8VKYEiM1UDzPB7NsisUgBeJ8.jpg",
+   "backdrop": "/qgch2rFskIxDMgwrD5lWTaB4nBl.jpg",
+   "tmdb": 512200,
+   "firstSeen": null
+  },
+  {
+   "t": "Star Wars: The Last Jedi",
+   "y": 2017,
+   "r": 152,
+   "g": [
+    "adventure",
+    "action",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "propulsive",
+    "cerebral",
+    "epic",
+    "twisty",
+    "ensemble"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Rian Johnson",
+   "h": "Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares to do battle with the First Order.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 67,
+   "rtSrc": "tmdb",
+   "poster": "/ySaaKHOLAQU5HoZqWmzDIj1VvZ1.jpg",
+   "backdrop": "/bIUaCtWaRgd78SnoHJDI8TNf7Sd.jpg",
+   "tmdb": 181808,
+   "firstSeen": null
+  },
+  {
+   "t": "Twilight",
+   "y": 2008,
+   "r": 122,
+   "g": [
+    "fantasy",
+    "drama",
+    "romance"
+   ],
+   "a": [
+    "weird",
+    "scary",
+    "visual",
+    "characterstudy",
+    "romantic"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Catherine Hardwicke",
+   "h": "When Bella Swan moves to a small town in the Pacific Northwest, she falls in love with Edward Cullen, a mysterious classmate who reveals himself to be a 108-year-old vampire. Despite Edward's repeated cautions, Bella can't stay away from him, a fatal move that endangers her own life.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 63,
+   "rtSrc": "tmdb",
+   "poster": "/3Gkb6jm6962ADUPaCBqzz9CTbn9.jpg",
+   "backdrop": "/weAYfu6FfrNxEDJ3xH1XpgQcqUv.jpg",
+   "tmdb": 8966,
+   "firstSeen": null
+  },
+  {
+   "t": "Once Upon a Time... in Hollywood",
+   "y": 2019,
+   "r": 162,
+   "g": [
+    "comedy",
+    "drama",
+    "thriller"
+   ],
+   "a": [
+    "grounded",
+    "comic",
+    "characterstudy",
+    "propulsive",
+    "epic",
+    "stylish"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Quentin Tarantino",
+   "h": "Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski…",
+   "k": "adult",
+   "pop": 3,
+   "mpaa": "R",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg",
+   "backdrop": "/xwgBHC2FgoIrQitl8jZwXXdsR9u.jpg",
+   "tmdb": 466272,
+   "firstSeen": null
+  },
+  {
+   "t": "Spider-Man 2",
+   "y": 2004,
+   "r": 127,
+   "g": [
+    "action",
+    "adventure",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Sam Raimi",
+   "h": "Peter Parker is going through a major identity crisis. Burned out from being Spider-Man, he decides to shelve his superhero alter ego, which leaves the city suffering in the wake of carnage left by the evil Doc Ock. In the meantime, Parker still can't act on his feelings for Mary Jane Watson, a girl he's loved since childhood.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/aGuvNAaaZuWXYQQ6N2v7DeuP6mB.jpg",
+   "backdrop": "/6al048Lat3eLVQOuKtc9h6Tu94d.jpg",
+   "tmdb": 558,
+   "firstSeen": null
+  },
+  {
+   "t": "Ghostbusters: Afterlife",
+   "y": 2021,
+   "r": 124,
+   "g": [
+    "fantasy",
+    "comedy",
+    "adventure"
+   ],
+   "a": [
+    "scary",
+    "visual",
+    "comic",
+    "spectacle",
+    "earnest"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Jason Reitman",
+   "h": "When single mom Callie and her two kids Trevor and Phoebe arrive in a small Oklahoma town, they begin to discover their connection to the original Ghostbusters and the secret legacy their grandfather left behind.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/sg4xJaufDiQl7caFEskBtQXfD4x.jpg",
+   "backdrop": "/EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg",
+   "tmdb": 425909,
+   "firstSeen": null
+  },
+  {
+   "t": "Dawn of the Planet of the Apes",
+   "y": 2014,
+   "r": 130,
+   "g": [
+    "scifi",
+    "action",
+    "drama",
+    "thriller"
+   ],
+   "a": [
+    "bleak",
+    "violent",
+    "cerebral",
+    "propulsive",
+    "characterstudy"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Matt Reeves",
+   "h": "A group of scientists in San Francisco struggle to stay alive in the aftermath of a plague that is wiping out humanity, while Caesar tries to maintain dominance over his community of intelligent apes.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/mSmAc9G25fhOHH45SLEeagR0qi7.jpg",
+   "backdrop": "/3SozaNPOYUadcmTPgndDibMyDNC.jpg",
+   "tmdb": 119450,
+   "firstSeen": null
+  },
+  {
+   "t": "Jurassic World",
+   "y": 2015,
+   "r": 124,
+   "g": [
+    "adventure",
+    "scifi",
+    "thriller",
+    "action"
+   ],
+   "a": [
+    "propulsive",
+    "spectacle",
+    "cerebral"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Colin Trevorrow",
+   "h": "Twenty-two years after the events of Jurassic Park, Isla Nublar now features a fully functioning dinosaur theme park, Jurassic World, as originally envisioned by John Hammond.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 67,
+   "rtSrc": "tmdb",
+   "poster": "/rhr4y79GpxQF9IsfJItRXVaoGs4.jpg",
+   "backdrop": "/dF6FjTZzRTENfB4R17HDN20jLT2.jpg",
+   "tmdb": 135397,
+   "firstSeen": null
+  },
+  {
+   "t": "Anora",
+   "y": 2024,
+   "r": 139,
+   "g": [
+    "drama",
+    "comedy",
+    "romance"
+   ],
+   "a": [
+    "romantic",
+    "characterstudy",
+    "comic"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Sean Baker",
+   "h": "A young sex worker from Brooklyn gets her chance at a Cinderella story when she meets and impulsively marries the son of an oligarch. Once the news reaches Russia, her fairytale is threatened as his parents set out to get the marriage annulled.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/cgXk2tNYhJZLXdBDO5DidAVzQ82.jpg",
+   "backdrop": "/qvyOfwTC3qdbzkqdXWSSEMHtjBZ.jpg",
+   "tmdb": 1064213,
+   "firstSeen": null
+  },
+  {
+   "t": "American Psycho",
+   "y": 2000,
+   "r": 102,
+   "g": [
+    "thriller",
+    "drama",
+    "crime"
+   ],
+   "a": [
+    "ironic",
+    "scary",
+    "propulsive",
+    "characterstudy",
+    "violent"
+   ],
+   "svcs": [
+    "PRV",
+    "HUL"
+   ],
+   "d": "Mary Harron",
+   "h": "A wealthy New York investment banking executive hides his alternate psychopathic ego from his co-workers and friends as he escalates deeper into his illogical, gratuitous fantasies.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/9uGHEgsiUXjCNq8wdq4r49YL8A1.jpg",
+   "backdrop": "/5oaMV2q0qzxkIW2ukU3lldLu5q2.jpg",
+   "tmdb": 1359,
+   "firstSeen": null
+  },
+  {
+   "t": "Girl in the Basement",
+   "y": 2021,
+   "r": 88,
+   "g": [
+    "thriller",
+    "crime"
+   ],
+   "a": [
+    "grounded",
+    "propulsive",
+    "violent",
+    "brisk"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Elisabeth Röhm",
+   "h": "Sara is a teen girl who is looking forward to her 18th birthday to move away from her controlling father Don. But before she could even blow out the candles, Don imprisons her in the basement of their home.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/tPP9n6r5QrIKPnshnJqE7klptj2.jpg",
+   "backdrop": "/vDR2h5uQNgWyx3fsEVnEOcNFibZ.jpg",
+   "tmdb": 801335,
+   "firstSeen": null
+  },
+  {
+   "t": "Obsession",
+   "y": 2026,
+   "r": 109,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "weird",
+    "scary",
+    "propulsive"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Curry Barker",
+   "h": "After breaking the mysterious \"One Wish Willow\" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 82,
+   "rtSrc": "tmdb",
+   "poster": "/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg",
+   "backdrop": "/rZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg",
+   "tmdb": 1339713,
+   "firstSeen": null
+  },
+  {
+   "t": "The Super Mario Galaxy Movie",
+   "y": 2026,
+   "r": 98,
+   "g": [
+    "family",
+    "comedy",
+    "adventure",
+    "fantasy",
+    "animation"
+   ],
+   "a": [
+    "earnest",
+    "spectacle",
+    "cozy",
+    "comic",
+    "visual",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Michael Jelenic",
+   "h": "Having thwarted Bowser's previous plot to marry Princess Peach, Mario and Luigi now face a fresh threat in Bowser Jr., who is determined to liberate his father from captivity and restore the family legacy. Alongside companions new and old, the brothers travel across the stars to stop the young heir's crusade.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 82,
+   "rtSrc": "tmdb",
+   "poster": "/eJGWx219ZcEMVQJhAgMiqo8tYY.jpg",
+   "backdrop": "/kxQiIJ4gVcD3K6o14MJ72p5yRcE.jpg",
+   "tmdb": 1226863,
+   "firstSeen": null
+  },
+  {
+   "t": "Harry Potter and the Philosopher's Stone",
+   "y": 2001,
+   "r": 152,
+   "g": [
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "scary",
+    "spectacle",
+    "visual",
+    "epic"
+   ],
+   "svcs": [
+    "MAX",
+    "PCK"
+   ],
+   "d": "Chris Columbus",
+   "h": "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard—with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry.",
+   "k": "all",
+   "pop": 3,
+   "mpaa": "PG",
+   "rt": 79,
+   "rtSrc": "tmdb",
+   "poster": "/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg",
+   "backdrop": "/1XAC6RPT01UX9EQGy2JVn5c8pgy.jpg",
+   "tmdb": 671,
+   "firstSeen": null
+  },
+  {
+   "t": "Insidious: Chapter 3",
+   "y": 2015,
+   "r": 97,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "scary",
+    "propulsive",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Leigh Whannell",
+   "h": "A prequel set before the haunting of the Lambert family that reveals how gifted psychic Elise Rainier reluctantly agrees to use her ability to contact the dead in order to help a teenage girl who has been targeted by a dangerous supernatural entity.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 63,
+   "rtSrc": "tmdb",
+   "poster": "/iDdGfdNvY1EX0uDdA4Ru77fwMfc.jpg",
+   "backdrop": "/1fpwEe2GvNjAq2MN2xxdifNZLBT.jpg",
+   "tmdb": 280092,
+   "firstSeen": null
+  },
+  {
+   "t": "Harry Potter and the Chamber of Secrets",
+   "y": 2002,
+   "r": 161,
+   "g": [
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "cozy",
+    "scary",
+    "spectacle",
+    "visual",
+    "epic"
+   ],
+   "svcs": [
+    "MAX",
+    "PCK"
+   ],
+   "d": "Chris Columbus",
+   "h": "Cars fly, trees fight back, and a mysterious house-elf comes to warn Harry Potter at the start of his second year at Hogwarts. Adventure and danger await when bloody writing on a wall announces: The Chamber Of Secrets Has Been Opened. To save Hogwarts will require all of Harry, Ron and Hermione's magical abilities and courage.",
+   "k": "all",
+   "pop": 3,
+   "mpaa": "PG",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/sdEOH0992YZ0QSxgXNIGLq1ToUi.jpg",
+   "backdrop": "/1stUIsjawROZxjiCMtqqXqgfZWC.jpg",
+   "tmdb": 672,
+   "firstSeen": null
+  },
+  {
+   "t": "Harry Potter and the Deathly Hallows: Part 1",
+   "y": 2010,
+   "r": 146,
+   "g": [
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "cozy",
+    "propulsive",
+    "scary",
+    "spectacle",
+    "visual"
+   ],
+   "svcs": [
+    "MAX",
+    "PCK"
+   ],
+   "d": "David Yates",
+   "h": "Harry, Ron and Hermione walk away from their last year at Hogwarts to find and destroy the remaining Horcruxes, putting an end to Voldemort's bid for immortality. But with Harry's beloved Dumbledore dead and Voldemort's unscrupulous Death Eaters on the loose, the world is more dangerous than ever.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/iGoXIpQb7Pot00EEdwpwPajheZ5.jpg",
+   "backdrop": "/vcrgU0KaNj5mKUCIQSUdiQwTE9y.jpg",
+   "tmdb": 12444,
+   "firstSeen": null
+  },
+  {
+   "t": "Harry Potter and the Deathly Hallows: Part 2",
+   "y": 2011,
+   "r": 130,
+   "g": [
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "cozy",
+    "scary",
+    "spectacle",
+    "visual"
+   ],
+   "svcs": [
+    "MAX",
+    "PCK"
+   ],
+   "d": "David Yates",
+   "h": "Harry, Ron and Hermione continue their quest to vanquish the evil Voldemort once and for all. Just as things begin to look hopeless for the young wizards, Harry discovers a trio of magical objects that endow him with powers to rival Voldemort's formidable skills.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 81,
+   "rtSrc": "tmdb",
+   "poster": "/c54HpQmuwXjHq2C9wmoACjxoom3.jpg",
+   "backdrop": "/cbcpDn6XJaIGoOil1bKuskU8ds4.jpg",
+   "tmdb": 12445,
+   "firstSeen": null
+  },
+  {
+   "t": "Troy",
+   "y": 2004,
+   "r": 163,
+   "g": [
+    "war",
+    "action",
+    "drama"
+   ],
+   "a": [
+    "spectacle",
+    "visceral",
+    "propulsive",
+    "characterstudy",
+    "epic"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Wolfgang Petersen",
+   "h": "C. during the late Bronze age, two emerging nations begin to clash. Paris, the Trojan prince, convinces Helen, Queen of Sparta, to leave her husband Menelaus, and sail with him back to Troy. After Menelaus finds out that his wife was taken by the Trojans, he asks his brother Agamemnon to help him get her back. Agamemnon sees this as an opportunity for power.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 72,
+   "rtSrc": "tmdb",
+   "poster": "/a07wLy4ONfpsjnBqMwhlWTJTcm.jpg",
+   "backdrop": "/wyFJcodi5T9LJAeiE8Se7ScdOFj.jpg",
+   "tmdb": 652,
+   "firstSeen": null
+  },
+  {
+   "t": "The Super Mario Bros. Movie",
+   "y": 2023,
+   "r": 93,
+   "g": [
+    "family",
+    "comedy",
+    "adventure",
+    "fantasy",
+    "animation"
+   ],
+   "a": [
+    "cozy",
+    "comic",
+    "spectacle",
+    "visual",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Michael Jelenic",
+   "h": "While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated, Mario embarks on an epic quest to find Luigi.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",
+   "backdrop": "/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg",
+   "tmdb": 502356,
+   "firstSeen": null
+  },
+  {
+   "t": "Harry Potter and the Half-Blood Prince",
+   "y": 2009,
+   "r": 153,
+   "g": [
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "cozy",
+    "scary",
+    "spectacle",
+    "visual",
+    "epic"
+   ],
+   "svcs": [
+    "MAX",
+    "PCK"
+   ],
+   "d": "David Yates",
+   "h": "Dumbledore tries to prepare Harry for the final battle with Voldemort while Death Eaters wreak havoc in both Muggle and Wizard worlds.",
+   "k": "all",
+   "pop": 3,
+   "mpaa": "PG",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/z7uo9zmQdQwU5ZJHFpv2Upl30i1.jpg",
+   "backdrop": "/ze6Mx4QE5mQVXRYmG2flncqqle4.jpg",
+   "tmdb": 767,
+   "firstSeen": null
+  },
+  {
+   "t": "Harry Potter and the Goblet of Fire",
+   "y": 2005,
+   "r": 157,
+   "g": [
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "cozy",
+    "scary",
+    "spectacle",
+    "visual",
+    "epic"
+   ],
+   "svcs": [
+    "MAX",
+    "PCK"
+   ],
+   "d": "Mike Newell",
+   "h": "When his name emerges from the Goblet of Fire, Harry Potter becomes a competitor in a grueling battle for glory among three wizarding schools. Signs of Voldemort's return emerge as Harry's friends help him prepare for the Triwizard Tournament.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 78,
+   "rtSrc": "tmdb",
+   "poster": "/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg",
+   "backdrop": "/1OV7hau4D3rWGS5bu8sqBYeVpe.jpg",
+   "tmdb": 674,
+   "firstSeen": null
+  },
+  {
+   "t": "Harry Potter and the Order of the Phoenix",
+   "y": 2007,
+   "r": 138,
+   "g": [
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "earnest",
+    "cozy",
+    "scary",
+    "melancholy",
+    "spectacle",
+    "visual"
+   ],
+   "svcs": [
+    "MAX",
+    "PCK"
+   ],
+   "d": "David Yates",
+   "h": "When a new professor's methods leave Hogwarts unprepared to fight the rising tide of evil, Harry teaches students how to defend against the dark arts.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/5aOyriWkPec0zUDxmHFP9qMmBaj.jpg",
+   "backdrop": "/pkxPkHOPJjOvzfQOclANEBT8OfK.jpg",
+   "tmdb": 675,
+   "firstSeen": null
+  },
+  {
+   "t": "Shrek",
+   "y": 2001,
+   "r": 90,
+   "g": [
+    "animation",
+    "comedy",
+    "fantasy",
+    "adventure",
+    "family"
+   ],
+   "a": [
+    "ironic",
+    "romantic",
+    "visual",
+    "comic",
+    "spectacle",
+    "cozy"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Andrew Adamson",
+   "h": "It ain't easy bein' green -- especially if you're a likable (albeit smelly) ogre named Shrek. On a mission to retrieve a gorgeous princess from the clutches of a fire-breathing dragon, Shrek teams up with an unlikely compatriot -- a wisecracking donkey.",
+   "k": "all",
+   "pop": 3,
+   "mpaa": "PG",
+   "rt": 78,
+   "rtSrc": "tmdb",
+   "poster": "/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg",
+   "backdrop": "/w0eKUOEog2ImtktCHAMUZws8qif.jpg",
+   "tmdb": 808,
+   "firstSeen": null
+  }
+ ]
 }
