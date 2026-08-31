@@ -248,11 +248,17 @@ export async function readOmdbPayload(res, text) {
   return { rt, error: rt == null ? "no Rotten Tomatoes entry for this title" : null };
 }
 
+/* OMDb allows 1000 lookups a day and answers every one after that with the
+   same refusal. Once it says so, stop asking for the rest of the run. */
+let omdbSpent = false;
 async function fetchOmdb(imdbId) {
+  if (omdbSpent) return { rt: null, error: "daily limit already reached" };
   const url = `https://www.omdbapi.com/?apikey=${encodeURIComponent(OMDB)}&i=${imdbId}&tomatoes=true`;
   try {
     const res = await fetch(url, { headers: { accept: "application/json" } });
-    return await readOmdbPayload(res, await res.text());
+    const out = await readOmdbPayload(res, await res.text());
+    if (out.error && /limit reached/i.test(out.error)) omdbSpent = true;
+    return out;
   } catch (e) {
     return { rt: null, error: "network: " + e.message };
   }
@@ -528,17 +534,28 @@ async function main() {
   if (LIMIT) films = films.slice(0, LIMIT);
   console.log(`Enriching ${films.length} titles from TMDB${OMDB ? " + OMDb" : ""} (region ${REGION})…`);
 
-  const rows = await pool(films, CONCURRENCY, enrichOne);
-  const ok = rows.filter((r) => r.ok);
-  const missed = rows.filter((r) => !r.ok);
-
-  /* ---- what is on the services right now ---------------------------------
-     Runs after the curated pass so a discovered title can be checked against
-     the hand-authored list and never shelved twice. */
   let previous = null;
   try { previous = JSON.parse(await readFile(join(ROOT, "data", "catalog.json"), "utf8")); }
   catch { /* first run */ }
 
+  const rows = await pool(films, CONCURRENCY, enrichOne);
+  const ok = rows.filter((r) => r.ok);
+  const missed = rows.filter((r) => !r.ok);
+
+  /* A critic score we already hold is better than one we could not fetch today.
+     Without this, a day when OMDb is out of quota quietly rewrites every real
+     Rotten Tomatoes score as a TMDB audience score. */
+  const heldRT = new Map();
+  for (const f of previous?.films || []) if (f.rt != null && f.rtSrc !== "tmdb") heldRT.set(`${f.t}::${f.y}`, f.rt);
+  for (const f of previous?.shelf || []) if (f.rt != null && f.rtSrc === "rt") heldRT.set(`${f.t}::${f.y}`, f.rt);
+  let carried = 0;
+  for (const r of ok) {
+    if (r.rt == null && heldRT.has(`${r.t}::${r.y}`)) { r.rt = heldRT.get(`${r.t}::${r.y}`); r.rtCarried = true; carried++; }
+  }
+
+  /* ---- what is on the services right now ---------------------------------
+     Runs after the curated pass so a discovered title can be checked against
+     the hand-authored list and never shelved twice. */
   const seen = new Set(films.map((f) => `${norm(f.t)}::${f.y}`));
   let shelf = [], directory = { ids: {}, logos: {} }, scanned = false;
   const failed = [];
@@ -611,6 +628,8 @@ async function main() {
                            .slice(0, budget);
         console.log(`\nCritic scores for ${queue.length} of ${shelf.length} discovered titles…`);
         await pool(queue.map((r) => ({ t: r.t, y: r.y, rec: r })), CONCURRENCY, async (item) => {
+          const held = heldRT.get(`${item.rec.t}::${item.rec.y}`);
+          if (held != null) { item.rec.rt = held; item.rec.rtSrc = "rt"; return { ok: true, t: item.t }; }
           const res = await fetchOmdb(item.rec.imdb);
           if (res.rt != null) { item.rec.rt = res.rt; item.rec.rtSrc = "rt"; }
           return { ok: true, t: item.t };
@@ -704,7 +723,7 @@ async function main() {
 
   console.log(`\nmatched          ${ok.length}/${rows.length}`);
   console.log(`with providers   ${payload._meta.withProviders}`);
-  console.log(`with RT score    ${payload._meta.withRT}`);
+  console.log(`with RT score    ${payload._meta.withRT}${carried ? ` (${carried} held from the last good run)` : ""}`);
   const errs = Object.entries(payload._meta.omdbErrors || {});
   if (OMDB && errs.length) {
     console.log(`\nOMDb did not return scores. Reasons:`);

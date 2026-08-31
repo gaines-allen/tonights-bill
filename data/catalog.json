@@ -6,7 +6,7 @@
   "total": 245,
   "matched": 245,
   "withProviders": 128,
-  "withRT": 14,
+  "withRT": 242,
   "withOverview": 245,
   "omdbErrors": {
    "Request limit reached!": 230
@@ -109,7 +109,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -131,7 +131,7 @@
    "backdrop": "/gILte6Zd7m1YneIr6MVhh30S9pr.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -156,7 +156,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -178,7 +178,7 @@
    "backdrop": "/6WRrGYalXXveItfpnipYdayFkQB.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -202,7 +202,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -224,7 +224,7 @@
    "backdrop": "/xKsnZDERG1dk95wuZ5q9iks3OL3.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 84,
    "omdbError": "Request limit reached!"
   },
   {
@@ -246,7 +246,7 @@
    "backdrop": "/i5H7zusQGsysGQ8i6P361Vnr0n2.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 84,
    "omdbError": "Request limit reached!"
   },
   {
@@ -270,7 +270,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 90,
    "omdbError": "Request limit reached!"
   },
   {
@@ -294,7 +294,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -316,7 +316,7 @@
    "backdrop": "/3RFmTz5h2UuFWEV4oH00XICBR9y.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 81,
    "omdbError": "Request limit reached!"
   },
   {
@@ -340,7 +340,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -362,7 +362,7 @@
    "backdrop": "/aYcnDyLMnpKce1FOYUpZrXtgUye.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -384,7 +384,7 @@
    "backdrop": "/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 99,
    "omdbError": "Request limit reached!"
   },
   {
@@ -410,7 +410,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -434,7 +434,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -456,7 +456,7 @@
    "backdrop": "/eGljNfNCrPhFYG2RXXmmE0OKu5.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -480,7 +480,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -502,7 +502,7 @@
    "backdrop": "/hJ5R9d6QuH3tzr8L8neZZTuzNXm.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -526,7 +526,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -550,7 +550,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 83,
    "omdbError": "Request limit reached!"
   },
   {
@@ -574,7 +574,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -600,7 +600,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 73,
    "omdbError": "Request limit reached!"
   },
   {
@@ -622,7 +622,7 @@
    "backdrop": "/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 86,
    "omdbError": "Request limit reached!"
   },
   {
@@ -646,7 +646,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 83,
    "omdbError": "Request limit reached!"
   },
   {
@@ -668,7 +668,7 @@
    "backdrop": "/AmR3JG1VQVxU8TfAvljUhfSFUOx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -690,7 +690,7 @@
    "backdrop": "/4kix6fAblJIH6eMs0Ku2loyZJXK.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -714,7 +714,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -738,7 +738,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -760,7 +760,7 @@
    "backdrop": "/www52jvhbB0ppe9s0zxbf9EYox.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -782,7 +782,7 @@
    "backdrop": "/uT895WNwm0aIJRtGizcQhrejWUo.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -804,7 +804,7 @@
    "backdrop": "/4V1yIoAKPMRQwGBaSses8Bp2nsi.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -826,7 +826,7 @@
    "backdrop": "/1YnZchmaGc8dchgRPDpR1KGrixA.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -848,7 +848,7 @@
    "backdrop": "/9trZvBr44UGedUOiGo3jgSUw13e.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -872,7 +872,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -896,7 +896,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -918,7 +918,7 @@
    "backdrop": "/4GPCnwvTbsDleH5QIOyDLMsK8a2.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -940,7 +940,7 @@
    "backdrop": "/jhM3wgWUrrOkz9r4xwV5cV5RhI4.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 90,
    "omdbError": "Request limit reached!"
   },
   {
@@ -964,7 +964,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -988,7 +988,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1010,7 +1010,7 @@
    "backdrop": "/mXLVA0YL6tcXi6SJSuAh9ONXFj5.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 99,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1032,7 +1032,7 @@
    "backdrop": "/5bzPWQ2dFUl2aZKkp7ILJVVkRed.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1056,7 +1056,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1080,7 +1080,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1104,7 +1104,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 84,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1128,7 +1128,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1152,7 +1152,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 85,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1176,7 +1176,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1198,7 +1198,7 @@
    "backdrop": "/ddIkmH3TpR6XSc47jj0BrGK5Rbz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1222,7 +1222,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1246,7 +1246,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1268,7 +1268,7 @@
    "backdrop": "/hwNtEmmugU5Yd7hpfprNWI0DGIn.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1290,7 +1290,7 @@
    "backdrop": "/49fzLedFVKgGgFChLMuulDJBY1c.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1312,7 +1312,7 @@
    "backdrop": "/3k2TRmqMjgt7tcwkYwZQdctnty3.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 90,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1334,7 +1334,7 @@
    "backdrop": "/pNjh59JSxChQktamG3LMp9ZoQzp.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1352,13 +1352,13 @@
    "tmdbScore": 85,
    "votes": 30331,
    "poster": "/Cw4hIUIAmSYfK9QfaUW5igp9La.jpg",
-   "overview": "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
+   "overview": "A man with a low IQ has accomplished great things in his life and been present during significant historic events\u2014in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
    "backdrop": "/66Kn4XWhkuPkJxOJyPEx4U2CUfN.jpg",
    "providers": [
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 75,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1380,7 +1380,7 @@
    "backdrop": "/1PXwh3nJzgRkkYnqfWInJNypeL4.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1402,7 +1402,7 @@
    "backdrop": "/wbQa0EnWUyRzQ5d1pHLNRlmsCUP.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1426,7 +1426,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1444,13 +1444,13 @@
    "tmdbScore": 74,
    "votes": 7662,
    "poster": "/qLnfEmPrDjJfPyyddLJPkXmshkp.jpg",
-   "overview": "The tender, heartbreaking story of a young man’s struggle to find himself, told across three defining chapters in his life as he experiences the ecstasy, pain, and beauty of falling in love, while grappling with his own sexuality.",
+   "overview": "The tender, heartbreaking story of a young man\u2019s struggle to find himself, told across three defining chapters in his life as he experiences the ecstasy, pain, and beauty of falling in love, while grappling with his own sexuality.",
    "backdrop": "/jm1oD3eB08LImSwL1LrzF9AJQ5b.jpg",
    "providers": [
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1474,7 +1474,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1519,7 +1519,7 @@
    "backdrop": "/1vXD5HXqkhvsXFHE7KmCPZGPR1e.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1543,7 +1543,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1568,7 +1568,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 99,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1586,11 +1586,11 @@
    "tmdbScore": 80,
    "votes": 16428,
    "poster": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
-   "overview": "The Grand Budapest Hotel tells of a legendary concierge at a famous European hotel between the wars and his friendship with a young employee who becomes his trusted protégé. The story involves the theft and recovery of a priceless Renaissance painting, the battle for an enormous family fortune and the slow and then sudden upheavals that transformed Europe during the first half of the 20th century.",
+   "overview": "The Grand Budapest Hotel tells of a legendary concierge at a famous European hotel between the wars and his friendship with a young employee who becomes his trusted prot\u00e9g\u00e9. The story involves the theft and recovery of a priceless Renaissance painting, the battle for an enormous family fortune and the slow and then sudden upheavals that transformed Europe during the first half of the 20th century.",
    "backdrop": "/9udCLTxTFl28RxnK8Q05E154ZGa.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1612,7 +1612,7 @@
    "backdrop": "/4HWAQu28e2yaWrtupFPGFkdNU7V.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1634,7 +1634,7 @@
    "backdrop": "/4vSBj7BYsyuKCx96EJzGyp20WfY.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1658,7 +1658,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1680,7 +1680,7 @@
    "backdrop": "/bBQHALHRAaaORlPNXv7fNcRXYdx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1704,7 +1704,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 90,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1726,7 +1726,7 @@
    "backdrop": "/t18ocAG0cpgC1AP288SseqmXqB5.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1750,7 +1750,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1772,7 +1772,7 @@
    "backdrop": "/AdKA2F1SzYPhSZdEbjH1Zh75UVQ.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 84,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1794,7 +1794,7 @@
    "backdrop": "/r9leYNa8nTRCceZrZhP1DXkgKVb.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 85,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1816,7 +1816,7 @@
    "backdrop": "/ikaRI4yMxKOje5SmOlAhOBUnicL.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1840,7 +1840,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 78,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1864,7 +1864,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1888,7 +1888,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 83,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1910,7 +1910,7 @@
    "backdrop": "/aJFwk1clMal1prxAvKAgHxKPAf.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 87,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1934,7 +1934,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1958,7 +1958,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -1982,7 +1982,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2006,7 +2006,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2024,14 +2024,14 @@
    "tmdbScore": 83,
    "votes": 9144,
    "poster": "/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
-   "overview": "After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence.",
+   "overview": "After reuniting with Gwen Stacy, Brooklyn\u2019s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence.",
    "backdrop": "/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
    "providers": [
     "DIS",
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2080,7 +2080,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2090,7 +2090,7 @@
    "tmdb": 10681,
    "imdb": "tt0910970",
    "matched": {
-    "title": "WALL·E",
+    "title": "WALL\u00b7E",
     "year": 2008
    },
    "runtime": 98,
@@ -2098,13 +2098,13 @@
    "tmdbScore": 81,
    "votes": 20757,
    "poster": "/hbhFnRzzg6ZDmm8YAmxBnQpQIPh.jpg",
-   "overview": "After hundreds of years doing what he was built for, WALL•E— a robot designed to clean up the earth—discovers a new purpose in life when he meets a sleek search robot named EVE. EVE comes to realize that WALL•E has inadvertently stumbled upon the key to the planet's future, and races back to space to report to the humans.",
+   "overview": "After hundreds of years doing what he was built for, WALL\u2022E\u2014 a robot designed to clean up the earth\u2014discovers a new purpose in life when he meets a sleek search robot named EVE. EVE comes to realize that WALL\u2022E has inadvertently stumbled upon the key to the planet's future, and races back to space to report to the humans.",
    "backdrop": "/nYs4ZwnJBK4AgljhvzwNz7fpr3E.jpg",
    "providers": [
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2129,7 +2129,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 100,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2153,7 +2153,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2171,13 +2171,13 @@
    "tmdbScore": 82,
    "votes": 21329,
    "poster": "/6Ryitt95xrO8KXuqRGm1fUuNwqF.jpg",
-   "overview": "Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events.",
+   "overview": "Despite his family\u2019s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events.",
    "backdrop": "/g7CHF8gTLGooTbP4GznIGwaqAGL.jpg",
    "providers": [
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2201,7 +2201,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2226,7 +2226,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 99,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2273,7 +2273,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2291,13 +2291,13 @@
    "tmdbScore": 79,
    "votes": 14655,
    "poster": "/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg",
-   "overview": "As the son of a Viking leader on the cusp of manhood, shy Hiccup Horrendous Haddock III faces a rite of passage: he must kill a dragon to prove his warrior mettle. But after downing a feared dragon, he realizes that he no longer wants to destroy it, and instead befriends the beast – which he names Toothless – much to the chagrin of his warrior father.",
+   "overview": "As the son of a Viking leader on the cusp of manhood, shy Hiccup Horrendous Haddock III faces a rite of passage: he must kill a dragon to prove his warrior mettle. But after downing a feared dragon, he realizes that he no longer wants to destroy it, and instead befriends the beast \u2013 which he names Toothless \u2013 much to the chagrin of his warrior father.",
    "backdrop": "/59vDC1BuEQvti24OMr0ZvtAK6R1.jpg",
    "providers": [
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 99,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2321,7 +2321,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2345,7 +2345,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2393,7 +2393,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2417,7 +2417,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2441,7 +2441,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2459,11 +2459,11 @@
    "tmdbScore": 78,
    "votes": 11682,
    "poster": "/z7xXihu5wHuSMWymq5VAulPVuvg.jpg",
-   "overview": "In post–civil war Spain, 10-year-old Ofelia moves with her pregnant mother to live under the control of her cruel stepfather. Drawn into a mysterious labyrinth, she meets a faun who reveals that she may be a lost princess from an underground kingdom. To return to her true father, she must complete a series of surreal and perilous tasks that blur the line between reality and fantasy.",
+   "overview": "In post\u2013civil war Spain, 10-year-old Ofelia moves with her pregnant mother to live under the control of her cruel stepfather. Drawn into a mysterious labyrinth, she meets a faun who reveals that she may be a lost princess from an underground kingdom. To return to her true father, she must complete a series of surreal and perilous tasks that blur the line between reality and fantasy.",
    "backdrop": "/6G6nqSW9S7EHA9HrYl0Z8uo2H7f.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2487,7 +2487,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2512,7 +2512,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 90,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2536,7 +2536,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 99,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2558,7 +2558,7 @@
    "backdrop": "/orq7v7J0Esq9TWpKitCXPbevOdW.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 90,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2580,7 +2580,7 @@
    "backdrop": "/qA2TyqPldTtoTVY3LKrNIG5g6bH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 100,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2602,7 +2602,7 @@
    "backdrop": "/W1ffLQGHoxfAOq0ZYdPtJlvAdb.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2624,7 +2624,7 @@
    "backdrop": "/nlPCdZlHtRNcF6C9hzUH4ebmV1w.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2646,7 +2646,7 @@
    "backdrop": "/enTZhfxAdgOCdFdbj52MR3F10yC.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 84,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2668,7 +2668,7 @@
    "backdrop": "/zeHB7aP46Xs3u4aFLuAq2GFeUGb.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2690,7 +2690,7 @@
    "backdrop": "/7HR38hMBl23lf38MAN63y4pKsHz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2714,7 +2714,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2736,7 +2736,7 @@
    "backdrop": "/vXzqV2RtJlT9WhNEM4NYWCEC6ZI.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2758,7 +2758,7 @@
    "backdrop": "/coru98UcFBzJIU7bxZguxaePgu0.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2776,13 +2776,13 @@
    "tmdbScore": 65,
    "votes": 4752,
    "poster": "/gJtA7hYsBMQ7EM3sPBMUdBfU7a0.jpg",
-   "overview": "Annie's life is a mess. But when she finds out her lifetime best friend is engaged, she simply must serve as Lillian's maid of honor. Though lovelorn and broke, Annie bluffs her way through the expensive and bizarre rituals. With one chance to get it perfect, she’ll show Lillian and her bridesmaids just how far you’ll go for someone you love.",
+   "overview": "Annie's life is a mess. But when she finds out her lifetime best friend is engaged, she simply must serve as Lillian's maid of honor. Though lovelorn and broke, Annie bluffs her way through the expensive and bizarre rituals. With one chance to get it perfect, she\u2019ll show Lillian and her bridesmaids just how far you\u2019ll go for someone you love.",
    "backdrop": "/1pkpV7a02phSfAPeGVmpHaQd99J.jpg",
    "providers": [
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2806,7 +2806,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2830,7 +2830,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 79,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2852,7 +2852,7 @@
    "backdrop": "/4W6RYDNe4OByNryOCvJprrutm9h.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2874,7 +2874,7 @@
    "backdrop": "/9rMSCFH9zhv1vILpEZQlUJs9iUm.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2896,7 +2896,7 @@
    "backdrop": "/wb34q3VgzHgL8frVMywrN3wXmqx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2918,7 +2918,7 @@
    "backdrop": "/cheDSO3mYmsAFQlRM91o7MK6Wcc.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2965,7 +2965,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 85,
    "omdbError": "Request limit reached!"
   },
   {
@@ -2987,7 +2987,7 @@
    "backdrop": "/yxYUN3fBPJdTNdXC1l8L24XFPhX.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3009,7 +3009,7 @@
    "backdrop": "/lTyikzfGgRX5ZqIfVeT26APYfRL.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 81,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3071,13 +3071,13 @@
    "tmdbScore": 82,
    "votes": 11447,
    "poster": "/n0YuM4f5lvGAP6MAW2kBIzugXnc.jpg",
-   "overview": "After more than thirty years of service as one of the Navy’s top aviators, and dodging the advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.",
+   "overview": "After more than thirty years of service as one of the Navy\u2019s top aviators, and dodging the advancement in rank that would ground him, Pete \u201cMaverick\u201d Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.",
    "backdrop": "/AaV1YIdWKnjAIAOe8UUKBFm327v.jpg",
    "providers": [
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3095,11 +3095,11 @@
    "tmdbScore": 76,
    "votes": 11944,
    "poster": "/lMrxYKKhd4lqRzwUHAy5gcx9PSO.jpg",
-   "overview": "Le Chiffre, a banker to the world's terrorists, is scheduled to participate in a high-stakes poker game in Montenegro, where he intends to use his winnings to establish his financial grip on the terrorist market. M sends Bond—on his maiden mission as a 00 Agent—to attend this game and prevent Le Chiffre from winning.",
+   "overview": "Le Chiffre, a banker to the world's terrorists, is scheduled to participate in a high-stakes poker game in Montenegro, where he intends to use his winnings to establish his financial grip on the terrorist market. M sends Bond\u2014on his maiden mission as a 00 Agent\u2014to attend this game and prevent Le Chiffre from winning.",
    "backdrop": "/klJMCIblHLFwCuGjKz7tyOpekIC.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3138,7 +3138,7 @@
    "tmdbScore": 79,
    "votes": 13917,
    "poster": "/ceG9VzoRAVGwivFU403Wc3AHRys.jpg",
-   "overview": "When Dr. Indiana Jones – the tweed-suited professor who just happens to be a celebrated archaeologist – is hired by the government to locate the legendary Ark of the Covenant, he finds himself up against the entire Nazi regime.",
+   "overview": "When Dr. Indiana Jones \u2013 the tweed-suited professor who just happens to be a celebrated archaeologist \u2013 is hired by the government to locate the legendary Ark of the Covenant, he finds himself up against the entire Nazi regime.",
    "backdrop": "/zPACwR32amTNvzId9qyapCWXYDJ.jpg",
    "providers": [
     "DIS",
@@ -3168,7 +3168,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3192,7 +3192,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 87,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3216,7 +3216,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3241,7 +3241,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3266,7 +3266,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3290,7 +3290,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 85,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3314,7 +3314,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3361,7 +3361,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3385,7 +3385,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3409,7 +3409,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3427,11 +3427,11 @@
    "tmdbScore": 70,
    "votes": 460,
    "poster": "/cVBZQZq091KtwBm2qObOv0JTFcH.jpg",
-   "overview": "A contemporary story of love, rejection, and triumph as a young Māori girl fights to fulfill a destiny her grandfather refuses to recognize.",
+   "overview": "A contemporary story of love, rejection, and triumph as a young M\u0101ori girl fights to fulfill a destiny her grandfather refuses to recognize.",
    "backdrop": "/dLJ6qwEXg2AglBSClRV5iVYZI1b.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3455,7 +3455,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 99,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3480,7 +3480,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3506,7 +3506,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 66,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3530,7 +3530,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3554,7 +3554,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3572,11 +3572,11 @@
    "tmdbScore": 68,
    "votes": 14759,
    "poster": "/pSgXKPU5h6U89ipF7HBYajvYt7j.jpg",
-   "overview": "Four teenagers in detention discover an old video game console with a game they’ve never heard of. When they decide to play, they are immediately sucked into the jungle world of Jumanji in the bodies of their avatars. They’ll have to complete the adventure of their lives filled with fun, thrills and danger or be stuck in the game forever!",
+   "overview": "Four teenagers in detention discover an old video game console with a game they\u2019ve never heard of. When they decide to play, they are immediately sucked into the jungle world of Jumanji in the bodies of their avatars. They\u2019ll have to complete the adventure of their lives filled with fun, thrills and danger or be stuck in the game forever!",
    "backdrop": "/zZKmEmRDc7ZjFucPm2UGNgDRlDc.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 76,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3594,11 +3594,11 @@
    "tmdbScore": 81,
    "votes": 8377,
    "poster": "/sONh3LYGFcVDTy8pm1tbSOB13Li.jpg",
-   "overview": "The story of August Pullman – a boy with facial differences – who enters fifth grade, attending a mainstream elementary school for the first time.",
+   "overview": "The story of August Pullman \u2013 a boy with facial differences \u2013 who enters fifth grade, attending a mainstream elementary school for the first time.",
    "backdrop": "/b7xQ5fuyVO4c24igizCfPgF6n7q.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 86,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3622,7 +3622,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 50,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3644,7 +3644,7 @@
    "backdrop": "/zArKQrtZRb4lqjYXepBMLdegiDz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3669,7 +3669,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3691,7 +3691,7 @@
    "backdrop": "/zGs5tZOlvc9cprdcU6kDOVNpujf.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 99,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3713,7 +3713,7 @@
    "backdrop": "/mufF1aYvwdpKerhq5R1YrVcbJLY.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3735,7 +3735,7 @@
    "backdrop": "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 100,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3757,7 +3757,7 @@
    "backdrop": "/7i0L2ee4Iy0aXV6vR5u1ZmblOrx.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3781,7 +3781,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 90,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3803,7 +3803,7 @@
    "backdrop": "/pyvkujOZ5qvY2NlQVC71flfgVWE.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3825,7 +3825,7 @@
    "backdrop": "/9uddYYTNcLWpzUkl5iw1RUYhLhY.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3847,7 +3847,7 @@
    "backdrop": "/i1yf91svRHX45l9BXL8rVFzLoPH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3865,13 +3865,13 @@
    "tmdbScore": 78,
    "votes": 8839,
    "poster": "/xSI0dbKLDETwhiVUy6hGE8KXUln.jpg",
-   "overview": "Rocky Balboa is a Philadelphia club fighter who seems to be going nowhere. But when a stroke of fate puts him in the ring with a world heavyweight champion, Rocky knows that it's his one shot at the big time — a once-in-a-lifetime opportunity to go the distance and come out a winner!",
+   "overview": "Rocky Balboa is a Philadelphia club fighter who seems to be going nowhere. But when a stroke of fate puts him in the ring with a world heavyweight champion, Rocky knows that it's his one shot at the big time \u2014 a once-in-a-lifetime opportunity to go the distance and come out a winner!",
    "backdrop": "/bacOuUnRBoAO1NjMfsAGX2EKRrS.jpg",
    "providers": [
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3895,7 +3895,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 80,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3917,7 +3917,7 @@
    "backdrop": "/5zTwAcnI3zCJ0mucPPnoBtkSWEV.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3941,7 +3941,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 100,
    "omdbError": "Request limit reached!"
   },
   {
@@ -3963,7 +3963,7 @@
    "backdrop": "/2L8U8rUyWeFTb6n1egTNeJsEsvj.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4010,7 +4010,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 79,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4034,7 +4034,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4056,7 +4056,7 @@
    "backdrop": "/ncoqdHs1poUaBqyKic9YI8ai7MP.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 83,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4078,7 +4078,7 @@
    "backdrop": "/8FbbcmwmpGd7brfiC7f7lWFNGdi.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4124,7 +4124,7 @@
    "backdrop": "/8j6GP3wOkUDIC7DZDsAyaDsr1el.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 90,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4146,7 +4146,7 @@
    "backdrop": "/hoyAALgfmjMEK7O1wZ4r8wT91RP.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4170,7 +4170,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4194,7 +4194,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 86,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4216,7 +4216,7 @@
    "backdrop": "/nuO8o9ltxhI7AZQxePavEZ4TyHa.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 74,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4238,7 +4238,7 @@
    "backdrop": "/H40nWdJngUc6gtytMAbElm9HOu.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 85,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4260,7 +4260,7 @@
    "backdrop": "/3HmLKhahTxX2ALTWlagr92pZrU7.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 87,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4278,11 +4278,11 @@
    "tmdbScore": 69,
    "votes": 4850,
    "poster": "/djRAvxyvvN2yqlJKDbT3uy4vOBw.jpg",
-   "overview": "An African prince decides it’s time for him to find a princess... and his mission leads him and his most loyal friend to Queens, New York. In disguise as an impoverished immigrant, the pampered prince quickly finds himself a new job, new friends, new digs, new enemies and lots of trouble.",
+   "overview": "An African prince decides it\u2019s time for him to find a princess... and his mission leads him and his most loyal friend to Queens, New York. In disguise as an impoverished immigrant, the pampered prince quickly finds himself a new job, new friends, new digs, new enemies and lots of trouble.",
    "backdrop": "/vsCIw7ARCKQVPT2K2hkkFVl7yo5.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 71,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4304,7 +4304,7 @@
    "backdrop": "/xnLh9CNRxkpkSNikVhi5qLwcfUG.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4326,7 +4326,7 @@
    "backdrop": "/xensHK9qUso0rIrTeQw3ConGu2s.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4348,7 +4348,7 @@
    "backdrop": "/5INPBiKVRsyp9kgHfsC0cTfvKFH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4370,7 +4370,7 @@
    "backdrop": "/bKCpRjjTKcr3KAITmwjVMobbBYg.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 98,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4392,7 +4392,7 @@
    "backdrop": "/v85FlkbMYKa5du1glm0YfYNsL2n.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4410,11 +4410,11 @@
    "tmdbScore": 74,
    "votes": 4301,
    "poster": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg",
-   "overview": "When oil is discovered in 1920s Oklahoma under Osage Nation land, the Osage people are murdered one by one—until the FBI steps in to unravel the mystery.",
+   "overview": "When oil is discovered in 1920s Oklahoma under Osage Nation land, the Osage people are murdered one by one\u2014until the FBI steps in to unravel the mystery.",
    "backdrop": "/acvE3RWjDLgvbL2RtcyzkrsAyNV.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4436,7 +4436,7 @@
    "backdrop": "/33pMXav77ICRnceEBLhL8lXTywv.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 58,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4458,7 +4458,7 @@
    "backdrop": "/xXBnM6uSTk6qqCf0SRZKXcga9Ba.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 77,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4476,11 +4476,11 @@
    "tmdbScore": 64,
    "votes": 164,
    "poster": "/9YDW8dCrQyRpppK5985hKY1Mc8X.jpg",
-   "overview": "Ty was a frustrated toy salesman until his collaboration with three women turned his stuffed animals into a defining '90s trend. This behind-the-scenes look at history's biggest toy craze is a wild story about what—and who—is valued in this world.",
+   "overview": "Ty was a frustrated toy salesman until his collaboration with three women turned his stuffed animals into a defining '90s trend. This behind-the-scenes look at history's biggest toy craze is a wild story about what\u2014and who\u2014is valued in this world.",
    "backdrop": "/zzbEAP5d1Ci0QKitpaA8PykHIj4.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 46,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4502,7 +4502,7 @@
    "backdrop": "/nSVwus6Vcnw06zqKAa1ioacrpUF.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 66,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4520,13 +4520,13 @@
    "tmdbScore": 76,
    "votes": 2641,
    "poster": "/VHSzNBTwxV8vh7wylo7O9CLdac.jpg",
-   "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+   "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them \u2014 a damaged, brainy troublemaker \u2014 and with the school\u2019s head cook, who has just lost a son in Vietnam.",
    "backdrop": "/A99WMiz0ASpH9coOFrxSEuwTWx0.jpg",
    "providers": [
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4550,7 +4550,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4574,7 +4574,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4596,7 +4596,7 @@
    "backdrop": "/s0OrExdg7i3RLR7oqzHRk4q2kL4.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4643,7 +4643,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4667,7 +4667,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 87,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4691,7 +4691,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 100,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4713,7 +4713,7 @@
    "backdrop": "/rmiG2uwcNoGFmBKMoa1pIcf514L.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 94,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4738,7 +4738,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4760,7 +4760,7 @@
    "backdrop": "/lFIXZpwwlF9hg8NM3RazaIJDuaj.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 85,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4782,7 +4782,7 @@
    "backdrop": "/1wZoVT9RJsZmNjg8CecXqSgFUd9.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4804,7 +4804,7 @@
    "backdrop": "/z3br1ub7spqGMkxgjgJSdM4DC21.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 77,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4826,7 +4826,7 @@
    "backdrop": "/rbZvGN1A1QyZuoKzhCw8QPmf2q0.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 69,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4848,7 +4848,7 @@
    "backdrop": "/6TjllWT3cGrPFyqDXurVZ3L8bBi.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 86,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4870,7 +4870,7 @@
    "backdrop": "/c6OLXfKAk5BKeR6broC8pYiCquX.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 81,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4913,7 +4913,7 @@
    "backdrop": "/6ITVHoipvxAS8luzKtHTbPaHLtT.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4961,7 +4961,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -4983,7 +4983,7 @@
    "backdrop": "/sRXMmeNHTSWRYdDz3zaHNyyPJ0u.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5005,7 +5005,7 @@
    "backdrop": "/1M2i4Mxd03elGOTmEkIvqrHfmyS.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 86,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5027,7 +5027,7 @@
    "backdrop": "/aM6E4DBP6588q3tEr9hz41ls80q.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 85,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5051,7 +5051,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5073,7 +5073,7 @@
    "backdrop": "/kZkk6iLvFPOiF6Xze2fYSiTbJ1Q.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 63,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5091,7 +5091,7 @@
    "tmdbScore": 70,
    "votes": 2725,
    "poster": "/hUu9zyZmDd8VZegKi1iK1Vk0RYS.jpg",
-   "overview": "The commandant of Auschwitz, Rudolf Höss, and his wife Hedwig, strive to build a dream life for their family in a house and garden next to the camp.",
+   "overview": "The commandant of Auschwitz, Rudolf H\u00f6ss, and his wife Hedwig, strive to build a dream life for their family in a house and garden next to the camp.",
    "backdrop": "/pnTSOKcYnvdpQNQElAtJM1rWOxH.jpg",
    "providers": [],
    "providersChecked": true,
@@ -5118,7 +5118,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5142,7 +5142,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5164,7 +5164,7 @@
    "backdrop": "/4jdduww9j5RyzO4ITRcuBFhqNN1.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 95,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5186,7 +5186,7 @@
    "backdrop": "/haOixpc26lheuIuO2WIi1M8nDO0.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5230,7 +5230,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5254,7 +5254,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 83,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5278,7 +5278,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 85,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5296,13 +5296,13 @@
    "tmdbScore": 79,
    "votes": 8632,
    "poster": "/oBgWY00bEFeZ9N25wWVyuQddbAo.jpg",
-   "overview": "Hutch Mansell, a suburban dad, overlooked husband, nothing neighbor — a \"nobody.\" When two thieves break into his home one night, Hutch's unknown long-simmering rage is ignited and propels him on a brutal path that will uncover dark secrets he fought to leave behind.",
+   "overview": "Hutch Mansell, a suburban dad, overlooked husband, nothing neighbor \u2014 a \"nobody.\" When two thieves break into his home one night, Hutch's unknown long-simmering rage is ignited and propels him on a brutal path that will uncover dark secrets he fought to leave behind.",
    "backdrop": "/61MrK5U4w4MVL1vfwoG12zYPJ8B.jpg",
    "providers": [
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 83,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5324,7 +5324,7 @@
    "backdrop": "/2rjI2uXmjitMAaXVO21r9ao7v2j.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 81,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5348,7 +5348,7 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5372,7 +5372,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5394,7 +5394,7 @@
    "backdrop": "/2vq5GTJOahE03mNYZGxIynlHcWr.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 92,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5419,7 +5419,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5441,7 +5441,7 @@
    "backdrop": "/yrepQdpreOorLyBJyvZkGn3Izfe.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 97,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5459,13 +5459,13 @@
    "tmdbScore": 79,
    "votes": 1075,
    "poster": "/hvTVZb7hBC8tZAGoEhH5eiMJu2B.jpg",
-   "overview": "After years of swimming every day in the freezing ocean at the tip of Africa, Craig Foster meets an unlikely teacher: a young octopus who displays remarkable curiosity. Visiting her den and tracking her movements for months on end he eventually wins the animal’s trust and they develop a never-before-seen bond between human and wild animal.",
+   "overview": "After years of swimming every day in the freezing ocean at the tip of Africa, Craig Foster meets an unlikely teacher: a young octopus who displays remarkable curiosity. Visiting her den and tracking her movements for months on end he eventually wins the animal\u2019s trust and they develop a never-before-seen bond between human and wild animal.",
    "backdrop": "/sW7VOrkHKYIeV9PaYc5IqGU2XK8.jpg",
    "providers": [
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 93,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5487,7 +5487,7 @@
    "backdrop": "/hofnlIyF6bePkgQOpcuRWLvzf15.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5511,7 +5511,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 86,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5533,7 +5533,7 @@
    "backdrop": "/yRKyJJYIzfeiVDHBe4LXguPQCvD.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 83,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5555,7 +5555,7 @@
    "backdrop": "/bvkPno6U02lLyvPWCnmibq4eIaN.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5577,7 +5577,7 @@
    "backdrop": "/rsPjEr7o02mo8ex6wD2PbRwasUe.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 76,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5599,7 +5599,7 @@
    "backdrop": "/3L3DUwfRLW18OUiLSdmovfICyY3.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 88,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5621,7 +5621,7 @@
    "backdrop": "/fRhpdmaA1wTAboeiKW2ZHvDezIm.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 89,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5645,7 +5645,7 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 42,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5669,7 +5669,7 @@
     "PRV"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 81,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5694,7 +5694,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 91,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5718,7 +5718,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
+   "rt": 56,
    "omdbError": "Request limit reached!"
   },
   {
@@ -5740,7 +5740,7 @@
    "backdrop": "/ni5cXCrrGzoiIEoIwOzGiIwMZlH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
+   "rt": 96,
    "omdbError": "Request limit reached!"
   }
  ],
@@ -5857,7 +5857,7 @@
     "NFX"
    ],
    "d": "Nathan Greno",
-   "h": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat—one that could endanger not only their species, but the entire valley they call home.",
+   "h": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat\u2014one that could endanger not only their species, but the entire valley they call home.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
@@ -6082,7 +6082,7 @@
     "MAX"
    ],
    "d": "Jaume Collet-Serra",
-   "h": "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods—and imprisoned just as quickly—Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
+   "h": "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods\u2014and imprisoned just as quickly\u2014Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -6114,7 +6114,7 @@
     "NFX"
    ],
    "d": "Colin Trevorrow",
-   "h": "Four years after Isla Nublar was destroyed, dinosaurs now live—and hunt—alongside humans all over the world. This fragile balance will reshape the future and determine, once and for all, whether human beings are to remain the apex predators on a planet they now share with history's most fearsome creatures.",
+   "h": "Four years after Isla Nublar was destroyed, dinosaurs now live\u2014and hunt\u2014alongside humans all over the world. This fragile balance will reshape the future and determine, once and for all, whether human beings are to remain the apex predators on a planet they now share with history's most fearsome creatures.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -6722,7 +6722,7 @@
     "NFX"
    ],
    "d": "Jonathan Entwistle",
-   "h": "After a family tragedy, kung fu prodigy Li Fong is uprooted from his home in Beijing and forced to move to New York City with his mother. When a new friend needs his help, Li enters a karate competition – but his skills alone aren't enough. Li's kung fu teacher Mr.",
+   "h": "After a family tragedy, kung fu prodigy Li Fong is uprooted from his home in Beijing and forced to move to New York City with his mother. When a new friend needs his help, Li enters a karate competition \u2013 but his skills alone aren't enough. Li's kung fu teacher Mr.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -6812,7 +6812,7 @@
     "NFX"
    ],
    "d": "Tom Harper",
-   "h": "After his estranged son gets embroiled in a Nazi plot, self-exiled gangster Tommy Shelby must return to Birmingham to save his family — and his nation.",
+   "h": "After his estranged son gets embroiled in a Nazi plot, self-exiled gangster Tommy Shelby must return to Birmingham to save his family \u2014 and his nation.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -6944,7 +6944,7 @@
     "NFX"
    ],
    "d": "Rian Johnson",
-   "h": "When young priest Jud Duplenticy is sent to assist charismatic firebrand Monsignor Jefferson Wicks, it’s clear that all is not well in the pews. After a sudden and seemingly impossible murder rocks the town, the lack of an obvious suspect prompts local police chief Geraldine Scott to join forces with renowned detective Benoit Blanc to unravel a mystery that defies all logic.",
+   "h": "When young priest Jud Duplenticy is sent to assist charismatic firebrand Monsignor Jefferson Wicks, it\u2019s clear that all is not well in the pews. After a sudden and seemingly impossible murder rocks the town, the lack of an obvious suspect prompts local police chief Geraldine Scott to join forces with renowned detective Benoit Blanc to unravel a mystery that defies all logic.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -7104,7 +7104,7 @@
     "NFX"
    ],
    "d": "Pierre Perifel",
-   "h": "When the Bad Guys, a crew of criminal animals, are finally caught after years of heists and being the world’s most-wanted villains, Mr. Wolf brokers a deal to save them all from prison.",
+   "h": "When the Bad Guys, a crew of criminal animals, are finally caught after years of heists and being the world\u2019s most-wanted villains, Mr. Wolf brokers a deal to save them all from prison.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
@@ -7132,7 +7132,7 @@
     "NFX"
    ],
    "d": "James Vanderbilt",
-   "h": "In postwar Germany, an American psychiatrist must determine whether Nazi prisoners are fit to go on trial for war crimes, and finds himself in a complex battle of intellect and ethics with Hermann Göring, Hitler's right-hand man.",
+   "h": "In postwar Germany, an American psychiatrist must determine whether Nazi prisoners are fit to go on trial for war crimes, and finds himself in a complex battle of intellect and ethics with Hermann G\u00f6ring, Hitler's right-hand man.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -7197,7 +7197,7 @@
     "NFX"
    ],
    "d": "Guy Ritchie",
-   "h": "American expat Mickey Pearson has built a highly profitable marijuana empire in London. When word gets out that he’s looking to cash out of the business forever it triggers plots, schemes, bribery and blackmail in an attempt to steal his domain out from under him.",
+   "h": "American expat Mickey Pearson has built a highly profitable marijuana empire in London. When word gets out that he\u2019s looking to cash out of the business forever it triggers plots, schemes, bribery and blackmail in an attempt to steal his domain out from under him.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -7262,7 +7262,7 @@
     "NFX"
    ],
    "d": "Clint Eastwood",
-   "h": "S. Navy SEAL Chris Kyle takes his sole mission—protect his comrades—to heart and becomes one of the most lethal snipers in American history. His pinpoint accuracy not only saves countless lives but also makes him a prime target of insurgents. Despite grave danger and his struggle to be a good husband and father to his family back in the States, Kyle serves four tours of duty in Iraq.",
+   "h": "S. Navy SEAL Chris Kyle takes his sole mission\u2014protect his comrades\u2014to heart and becomes one of the most lethal snipers in American history. His pinpoint accuracy not only saves countless lives but also makes him a prime target of insurgents. Despite grave danger and his struggle to be a good husband and father to his family back in the States, Kyle serves four tours of duty in Iraq.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -7321,7 +7321,7 @@
    "svcs": [
     "NFX"
    ],
-   "d": "Chloé Zhao",
+   "d": "Chlo\u00e9 Zhao",
    "h": "The powerful story of love and loss that inspired the creation of Shakespeare's timeless masterpiece, Hamlet.",
    "k": "teen",
    "pop": 1,
@@ -7481,7 +7481,7 @@
     "NFX"
    ],
    "d": "Sam Esmail",
-   "h": "A family's getaway to a luxurious rental home takes an ominous turn when a cyberattack knocks out their devices—and two strangers appear at their door.",
+   "h": "A family's getaway to a luxurious rental home takes an ominous turn when a cyberattack knocks out their devices\u2014and two strangers appear at their door.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -7543,7 +7543,7 @@
     "PAR"
    ],
    "d": "Tyler Gillett",
-   "h": "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town’s deadly past.",
+   "h": "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town\u2019s deadly past.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -7640,7 +7640,7 @@
     "NFX"
    ],
    "d": "Patrick Hughes",
-   "h": "The world’s most lethal odd couple – bodyguard Michael Bryce and hitman Darius Kincaid – are back on another life-threatening mission. Still unlicensed and under scrutiny, Bryce is forced into action by Darius's even more volatile wife, the infamous international con artist Sonia Kincaid.",
+   "h": "The world\u2019s most lethal odd couple \u2013 bodyguard Michael Bryce and hitman Darius Kincaid \u2013 are back on another life-threatening mission. Still unlicensed and under scrutiny, Bryce is forced into action by Darius's even more volatile wife, the infamous international con artist Sonia Kincaid.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -7952,7 +7952,7 @@
     "PRV"
    ],
    "d": "Travis Knight",
-   "h": "After being separated for 15 years, the Sword of Power leads Prince Adam back to Eternia, where he discovers his home shattered under the fiendish rule of Skeletor. To save his family and his world, Adam must join forces with his closest allies, Teela and Duncan/Man-At-Arms, and embrace his true destiny as He-Man — the most powerful man in the universe.",
+   "h": "After being separated for 15 years, the Sword of Power leads Prince Adam back to Eternia, where he discovers his home shattered under the fiendish rule of Skeletor. To save his family and his world, Adam must join forces with his closest allies, Teela and Duncan/Man-At-Arms, and embrace his true destiny as He-Man \u2014 the most powerful man in the universe.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -8047,7 +8047,7 @@
    "svcs": [
     "PRV"
    ],
-   "d": "Ángel Manuel Soto",
+   "d": "\u00c1ngel Manuel Soto",
    "h": "Estranged half-brothers Jonny and James reunite after their father's mysterious death. As they search for the truth, buried secrets reveal a conspiracy threatening to tear their family apart.",
    "k": "adult",
    "pop": 1,
@@ -8112,7 +8112,7 @@
     "PAR"
    ],
    "d": "Christopher McQuarrie",
-   "h": "Ethan Hunt and team continue their search for the terrifying AI known as the Entity — which has infiltrated intelligence networks all over the globe — with the world's governments and a mysterious ghost from Hunt's past on their trail.",
+   "h": "Ethan Hunt and team continue their search for the terrifying AI known as the Entity \u2014 which has infiltrated intelligence networks all over the globe \u2014 with the world's governments and a mysterious ghost from Hunt's past on their trail.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -8170,7 +8170,7 @@
    "svcs": [
     "PRV"
    ],
-   "d": "Domingo González",
+   "d": "Domingo Gonz\u00e1lez",
    "h": "Noah must leave her city, boyfriend, and friends to move into William Leister's mansion, the flashy and wealthy husband of her mother Rafaela. As a proud and independent 17 year old, Noah resists living in a mansion surrounded by luxury. However, it is there where she meets Nick, her new stepbrother, and the clash of their strong personalities becomes evident from the very beginning.",
    "k": "teen",
    "pop": 2,
@@ -8268,7 +8268,7 @@
     "PAR"
    ],
    "d": "Edgar Wright",
-   "h": "Desperate to save his sick daughter, working-class Ben Richards is convinced by The Running Man's charming but ruthless producer to enter the deadly competition game as a last resort. But Ben's defiance, instincts, and grit turn him into an unexpected fan favorite — and a threat to the entire system.",
+   "h": "Desperate to save his sick daughter, working-class Ben Richards is convinced by The Running Man's charming but ruthless producer to enter the deadly competition game as a last resort. But Ben's defiance, instincts, and grit turn him into an unexpected fan favorite \u2014 and a threat to the entire system.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -8361,7 +8361,7 @@
     "PRV"
    ],
    "d": "Sergio Leone",
-   "h": "While the Civil War rages on between the Union and the Confederacy, three men – a quiet loner, a ruthless hitman, and a Mexican bandit – comb the American Southwest in search of a strongbox containing $200,000 in stolen gold.",
+   "h": "While the Civil War rages on between the Union and the Confederacy, three men \u2013 a quiet loner, a ruthless hitman, and a Mexican bandit \u2013 comb the American Southwest in search of a strongbox containing $200,000 in stolen gold.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -8396,7 +8396,7 @@
     "PRV"
    ],
    "d": "Chris Renaud",
-   "h": "Gru and Lucy and their girls—Margo, Edith and Agnes—welcome a new member to the Gru family, Gru Jr., who is intent on tormenting his dad. Gru also faces a new nemesis in Maxime Le Mal and his femme fatale girlfriend Valentina, forcing the family to go on the run.",
+   "h": "Gru and Lucy and their girls\u2014Margo, Edith and Agnes\u2014welcome a new member to the Gru family, Gru Jr., who is intent on tormenting his dad. Gru also faces a new nemesis in Maxime Le Mal and his femme fatale girlfriend Valentina, forcing the family to go on the run.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
@@ -8679,7 +8679,7 @@
     "PRV"
    ],
    "d": "Roman Polanski",
-   "h": "The true story of pianist Władysław Szpilman's experiences in Warsaw during the Nazi occupation. When the Jews of the city find themselves forced into a ghetto, Szpilman finds work playing in a café; and when his family is deported in 1942, he stays behind, works for a while as a laborer, and eventually goes into hiding in the ruins of the war-torn city.",
+   "h": "The true story of pianist W\u0142adys\u0142aw Szpilman's experiences in Warsaw during the Nazi occupation. When the Jews of the city find themselves forced into a ghetto, Szpilman finds work playing in a caf\u00e9; and when his family is deported in 1942, he stays behind, works for a while as a laborer, and eventually goes into hiding in the ruins of the war-torn city.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -8996,7 +8996,7 @@
     "HUL"
    ],
    "d": "Ruben Fleischer",
-   "h": "A young street-smart, Nathan Drake and his wisecracking partner Victor “Sully” Sullivan embark on a dangerous pursuit of “the greatest treasure never found” while also tracking clues that may lead to Nathan’s long-lost brother.",
+   "h": "A young street-smart, Nathan Drake and his wisecracking partner Victor \u201cSully\u201d Sullivan embark on a dangerous pursuit of \u201cthe greatest treasure never found\u201d while also tracking clues that may lead to Nathan\u2019s long-lost brother.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -9029,7 +9029,7 @@
     "MAX"
    ],
    "d": "Bryan Singer",
-   "h": "A. interrogation room, Verbal Kint attempts to convince the feds that a mythic crime lord, Keyser Soze, not only exists, but was also responsible for drawing him and his four partners into a multi-million dollar heist that ended with an explosion in San Pedro harbor – leaving few survivors. Verbal lures his interrogators with an incredible story of the crime lord's almost supernatural prowess.",
+   "h": "A. interrogation room, Verbal Kint attempts to convince the feds that a mythic crime lord, Keyser Soze, not only exists, but was also responsible for drawing him and his four partners into a multi-million dollar heist that ended with an explosion in San Pedro harbor \u2013 leaving few survivors. Verbal lures his interrogators with an incredible story of the crime lord's almost supernatural prowess.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -9059,7 +9059,7 @@
     "PAR"
    ],
    "d": "Donald Petrie",
-   "h": "It's the battle of wills, as Andie needs to prove she can dump a guy in 10 days, whereas Ben needs to prove he can win a girl in 10 days. Now, the clock is ticking—and the wildly entertaining comedy smash is off and running in this irresistible tale of sex, lies and outrageous romantic fireworks!",
+   "h": "It's the battle of wills, as Andie needs to prove she can dump a guy in 10 days, whereas Ben needs to prove he can win a girl in 10 days. Now, the clock is ticking\u2014and the wildly entertaining comedy smash is off and running in this irresistible tale of sex, lies and outrageous romantic fireworks!",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -9197,7 +9197,7 @@
    "firstSeen": null
   },
   {
-   "t": "The Accountant²",
+   "t": "The Accountant\u00b2",
    "y": 2025,
    "r": 133,
    "g": [
@@ -9372,7 +9372,7 @@
     "PRV"
    ],
    "d": "Luke Greenfield",
-   "h": "When out-of-work accountant Brian joins stay-at-home dad Jeff for a playdate with their sons, he expects a laid-back afternoon. Instead, they're chased by mercenaries, and Brian—totally unprepared—must survive one absurd obstacle after another.",
+   "h": "When out-of-work accountant Brian joins stay-at-home dad Jeff for a playdate with their sons, he expects a laid-back afternoon. Instead, they're chased by mercenaries, and Brian\u2014totally unprepared\u2014must survive one absurd obstacle after another.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -9434,7 +9434,7 @@
    "svcs": [
     "PRV"
    ],
-   "d": "Rowan Joffé",
+   "d": "Rowan Joff\u00e9",
    "h": "A woman wakes up every day, remembering nothing as a result of a traumatic accident in her past. One day, new terrifying truths emerge that force her to question everyone around her.",
    "k": "adult",
    "pop": 1,
@@ -9662,7 +9662,7 @@
     "DIS"
    ],
    "d": "Joss Whedon",
-   "h": "When Tony Stark tries to jumpstart a dormant peacekeeping program, things go awry and Earth’s Mightiest Heroes are put to the ultimate test as the fate of the planet hangs in the balance. As the villainous Ultron emerges, it is up to The Avengers to stop him from enacting his terrible plans, and soon uneasy alliances and unexpected action pave the way for an epic and unique global adventure.",
+   "h": "When Tony Stark tries to jumpstart a dormant peacekeeping program, things go awry and Earth\u2019s Mightiest Heroes are put to the ultimate test as the fate of the planet hangs in the balance. As the villainous Ultron emerges, it is up to The Avengers to stop him from enacting his terrible plans, and soon uneasy alliances and unexpected action pave the way for an epic and unique global adventure.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -9758,7 +9758,7 @@
     "HUL"
    ],
    "d": "Sam Raimi",
-   "h": "The seemingly invincible Spider-Man goes up against an all-new crop of villains—including the shape-shifting Sandman. While Spider-Man’s superpowers are altered by an alien organism, his alter ego, Peter Parker, deals with nemesis Eddie Brock and also gets caught up in a love triangle.",
+   "h": "The seemingly invincible Spider-Man goes up against an all-new crop of villains\u2014including the shape-shifting Sandman. While Spider-Man\u2019s superpowers are altered by an alien organism, his alter ego, Peter Parker, deals with nemesis Eddie Brock and also gets caught up in a love triangle.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -9883,7 +9883,7 @@
     "DIS"
    ],
    "d": "Marc Webb",
-   "h": "For Peter Parker, life is busy. Between taking out the bad guys as Spider-Man and spending time with the person he loves, Gwen Stacy, high school graduation cannot come quickly enough. Peter has not forgotten about the promise he made to Gwen’s father to protect her by staying away, but that is a promise he cannot keep.",
+   "h": "For Peter Parker, life is busy. Between taking out the bad guys as Spider-Man and spending time with the person he loves, Gwen Stacy, high school graduation cannot come quickly enough. Peter has not forgotten about the promise he made to Gwen\u2019s father to protect her by staying away, but that is a promise he cannot keep.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -10072,7 +10072,7 @@
     "HUL"
    ],
    "d": "Jon Favreau",
-   "h": "With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony Stark faces pressure from the government, the press and the public to share his technology with the military. Unwilling to let go of his invention, Stark, with Pepper Potts and James 'Rhodey' Rhodes at his side, must forge new alliances – and confront powerful enemies.",
+   "h": "With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony Stark faces pressure from the government, the press and the public to share his technology with the military. Unwilling to let go of his invention, Stark, with Pepper Potts and James 'Rhodey' Rhodes at his side, must forge new alliances \u2013 and confront powerful enemies.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -10236,7 +10236,7 @@
     "DIS"
    ],
    "d": "Kelsey Mann",
-   "h": "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone.",
+   "h": "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who\u2019ve long been running a successful operation by all accounts, aren\u2019t sure how to feel when Anxiety shows up. And it looks like she\u2019s not alone.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -10266,7 +10266,7 @@
     "DIS"
    ],
    "d": "Gore Verbinski",
-   "h": "When wily pirate Captain Barbossa seizes Jack Sparrow’s beloved ship, the Black Pearl, and kidnaps the governor’s daughter, Elizabeth Swann, blacksmith Will Turner reluctantly teams up with the unpredictable pirate Jack to rescue her—only to uncover a terrifying curse that turns Barbossa’s crew into the undead.",
+   "h": "When wily pirate Captain Barbossa seizes Jack Sparrow\u2019s beloved ship, the Black Pearl, and kidnaps the governor\u2019s daughter, Elizabeth Swann, blacksmith Will Turner reluctantly teams up with the unpredictable pirate Jack to rescue her\u2014only to uncover a terrifying curse that turns Barbossa\u2019s crew into the undead.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -10361,7 +10361,7 @@
     "DIS"
    ],
    "d": "Bryan Singer",
-   "h": "The ultimate X-Men ensemble fights a war for the survival of the species across two time periods as they join forces with their younger selves in an epic battle that must change the past – to save our future.",
+   "h": "The ultimate X-Men ensemble fights a war for the survival of the species across two time periods as they join forces with their younger selves in an epic battle that must change the past \u2013 to save our future.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -10429,7 +10429,7 @@
     "DIS"
    ],
    "d": "Ryan Coogler",
-   "h": "Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death. As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.",
+   "h": "Queen Ramonda, Shuri, M\u2019Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T\u2019Challa\u2019s death. As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -10461,7 +10461,7 @@
     "DIS"
    ],
    "d": "Taika Waititi",
-   "h": "After his retirement is interrupted by Gorr the God Butcher, a galactic killer who seeks the extinction of the gods, Thor Odinson enlists the help of King Valkyrie, Korg, and ex-girlfriend Jane Foster, who now wields Mjolnir as the Mighty Thor. Together they embark upon a harrowing cosmic adventure to uncover the mystery of the God Butcher’s vengeance and stop him before it’s too late.",
+   "h": "After his retirement is interrupted by Gorr the God Butcher, a galactic killer who seeks the extinction of the gods, Thor Odinson enlists the help of King Valkyrie, Korg, and ex-girlfriend Jane Foster, who now wields Mjolnir as the Mighty Thor. Together they embark upon a harrowing cosmic adventure to uncover the mystery of the God Butcher\u2019s vengeance and stop him before it\u2019s too late.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -10621,7 +10621,7 @@
     "DIS"
    ],
    "d": "Chris Columbus",
-   "h": "Instead of flying to Florida with his folks, Kevin ends up alone in New York, where he gets a hotel room with his dad's credit card—despite problems from a clerk and meddling bellboy. But when Kevin runs into his old nemeses, the Wet Bandits, he's determined to foil their plans to rob a toy store on Christmas Eve.",
+   "h": "Instead of flying to Florida with his folks, Kevin ends up alone in New York, where he gets a hotel room with his dad's credit card\u2014despite problems from a clerk and meddling bellboy. But when Kevin runs into his old nemeses, the Wet Bandits, he's determined to foil their plans to rob a toy store on Christmas Eve.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -10745,7 +10745,7 @@
     "HUL"
    ],
    "d": "Matt Bettinelli-Olpin",
-   "h": "Moments after surviving an all-out attack from the Le Domas family, Grace discovers she’s reached the next level of the nightmarish game — and this time with her estranged sister Faith at her side. Grace has one chance to survive, keep her sister alive, and claim the High Seat of the Council that controls the world. Four rival families are hunting her for the throne, and whoever wins rules it all.",
+   "h": "Moments after surviving an all-out attack from the Le Domas family, Grace discovers she\u2019s reached the next level of the nightmarish game \u2014 and this time with her estranged sister Faith at her side. Grace has one chance to survive, keep her sister alive, and claim the High Seat of the Council that controls the world. Four rival families are hunting her for the throne, and whoever wins rules it all.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -10899,7 +10899,7 @@
     "HUL"
    ],
    "d": "Jake Kasdan",
-   "h": "As the gang return to Jumanji to rescue one of their own, they discover that nothing is as they expect. The players will have to brave parts unknown and unexplored in order to escape the world’s most dangerous game.",
+   "h": "As the gang return to Jumanji to rescue one of their own, they discover that nothing is as they expect. The players will have to brave parts unknown and unexplored in order to escape the world\u2019s most dangerous game.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -10998,7 +10998,7 @@
     "HUL"
    ],
    "d": "Quentin Tarantino",
-   "h": "Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski…",
+   "h": "Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski\u2026",
    "k": "adult",
    "pop": 3,
    "mpaa": "R",
@@ -11218,7 +11218,7 @@
     "DIS",
     "HUL"
    ],
-   "d": "Elisabeth Röhm",
+   "d": "Elisabeth R\u00f6hm",
    "h": "Sara is a teen girl who is looking forward to her 18th birthday to move away from her controlling father Don. But before she could even blow out the candles, Don imprisons her in the basement of their home.",
    "k": "teen",
    "pop": 1,
@@ -11287,7 +11287,7 @@
     "PAR"
    ],
    "d": "Jeff Fowler",
-   "h": "Powered with incredible speed, Sonic The Hedgehog embraces his new home on Earth. That is, until Sonic sparks the attention of super-uncool evil genius Dr. Robotnik. Now it’s super-villain vs. super-sonic in an all-out race across the globe to stop Robotnik from using Sonic’s unique power for world domination.",
+   "h": "Powered with incredible speed, Sonic The Hedgehog embraces his new home on Earth. That is, until Sonic sparks the attention of super-uncool evil genius Dr. Robotnik. Now it\u2019s super-villain vs. super-sonic in an all-out race across the globe to stop Robotnik from using Sonic\u2019s unique power for world domination.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -11351,7 +11351,7 @@
     "HUL"
    ],
    "d": "Mark Dindal",
-   "h": "Garfield, the world-famous, Monday-hating, lasagna-loving indoor cat, is about to have a wild outdoor adventure! After an unexpected reunion with his long-lost father – scruffy street cat Vic – Garfield and his canine friend Odie are forced from their perfectly pampered life into joining Vic in a hilarious, high-stakes heist.",
+   "h": "Garfield, the world-famous, Monday-hating, lasagna-loving indoor cat, is about to have a wild outdoor adventure! After an unexpected reunion with his long-lost father \u2013 scruffy street cat Vic \u2013 Garfield and his canine friend Odie are forced from their perfectly pampered life into joining Vic in a hilarious, high-stakes heist.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
@@ -11510,7 +11510,7 @@
     "HUL"
    ],
    "d": "Emilie Blichfeldt",
-   "h": "In a fairy-tale kingdom where beauty is a brutal business, Elvira battles to compete with her incredibly beautiful stepsister, Agnes, and she will go to any length to catch the Prince’s eye.",
+   "h": "In a fairy-tale kingdom where beauty is a brutal business, Elvira battles to compete with her incredibly beautiful stepsister, Agnes, and she will go to any length to catch the Prince\u2019s eye.",
    "k": "adult",
    "pop": 1,
    "mpaa": "NR",
@@ -11606,7 +11606,7 @@
     "HUL"
    ],
    "d": "David Leitch",
-   "h": "Unlucky assassin Ladybug is determined to do his job peacefully after one too many gigs gone off the rails. Fate, however, may have other plans, as Ladybug's latest mission puts him on a collision course with lethal adversaries from around the globe—all with connected, yet conflicting, objectives—on the world's fastest train.",
+   "h": "Unlucky assassin Ladybug is determined to do his job peacefully after one too many gigs gone off the rails. Fate, however, may have other plans, as Ladybug's latest mission puts him on a collision course with lethal adversaries from around the globe\u2014all with connected, yet conflicting, objectives\u2014on the world's fastest train.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -11637,7 +11637,7 @@
     "HUL"
    ],
    "d": "BenDavid Grabinski",
-   "h": "Two gangsters and the woman they love try to survive the most dangerous night of their lives. As if that wasn’t enough, there’s one wild ingredient added to the mix: a time machine.",
+   "h": "Two gangsters and the woman they love try to survive the most dangerous night of their lives. As if that wasn\u2019t enough, there\u2019s one wild ingredient added to the mix: a time machine.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -11800,7 +11800,7 @@
     "HUL"
    ],
    "d": "Emile Ardolino",
-   "h": "Expecting the usual tedium that accompanies a summer in the Catskills with her family, 17-year-old Frances 'Baby' Houseman is surprised to find herself stepping into the shoes of a professional hoofer—and unexpectedly falling in love.",
+   "h": "Expecting the usual tedium that accompanies a summer in the Catskills with her family, 17-year-old Frances 'Baby' Houseman is surprised to find herself stepping into the shoes of a professional hoofer\u2014and unexpectedly falling in love.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -11861,7 +11861,7 @@
     "HUL"
    ],
    "d": "Gareth Edwards",
-   "h": "Amid a future war between the human race and the forces of artificial intelligence, a hardened ex-special forces agent grieving the disappearance of his wife, is recruited to hunt down and kill the Creator, the elusive architect of advanced AI who has developed a mysterious weapon with the power to end the war—and mankind itself.",
+   "h": "Amid a future war between the human race and the forces of artificial intelligence, a hardened ex-special forces agent grieving the disappearance of his wife, is recruited to hunt down and kill the Creator, the elusive architect of advanced AI who has developed a mysterious weapon with the power to end the war\u2014and mankind itself.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -11927,7 +11927,7 @@
     "HUL"
    ],
    "d": "Luke Sparke",
-   "h": "During the Vietnam War, a recon unit ventures to an isolated jungle valley to uncover the fate of a missing platoon. They soon find themselves in a fight for their lives against an unexpected enemy — prehistoric dinosaurs.",
+   "h": "During the Vietnam War, a recon unit ventures to an isolated jungle valley to uncover the fate of a missing platoon. They soon find themselves in a fight for their lives against an unexpected enemy \u2014 prehistoric dinosaurs.",
    "k": "adult",
    "pop": 1,
    "mpaa": "NR",
@@ -12021,7 +12021,7 @@
     "HUL"
    ],
    "d": "Kenneth Branagh",
-   "h": "Celebrated sleuth Hercule Poirot, now retired and living in self-imposed exile in Venice, reluctantly attends a Halloween séance at a decaying, haunted palazzo. When one of the guests is murdered, the detective is thrust into a sinister world of shadows and secrets.",
+   "h": "Celebrated sleuth Hercule Poirot, now retired and living in self-imposed exile in Venice, reluctantly attends a Halloween s\u00e9ance at a decaying, haunted palazzo. When one of the guests is murdered, the detective is thrust into a sinister world of shadows and secrets.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -12113,7 +12113,7 @@
     "HUL"
    ],
    "d": "Barry Sonnenfeld",
-   "h": "Kay and Jay reunite to provide our best, last and only line of defense against a sinister seductress who levels the toughest challenge yet to the MIB's untarnished mission statement – protecting Earth from the scum of the universe. It's been four years since the alien-seeking agents averted an intergalactic disaster of epic proportions.",
+   "h": "Kay and Jay reunite to provide our best, last and only line of defense against a sinister seductress who levels the toughest challenge yet to the MIB's untarnished mission statement \u2013 protecting Earth from the scum of the universe. It's been four years since the alien-seeking agents averted an intergalactic disaster of epic proportions.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -12212,7 +12212,7 @@
     "HUL"
    ],
    "d": "Dan Trachtenberg",
-   "h": "While three of the fiercest warriors in human history—a Viking raider, a ninja in feudal Japan, and a WWII pilot—are killers in their own right, they are merely prey for their new opponent: the ultimate killer of killers.",
+   "h": "While three of the fiercest warriors in human history\u2014a Viking raider, a ninja in feudal Japan, and a WWII pilot\u2014are killers in their own right, they are merely prey for their new opponent: the ultimate killer of killers.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -12459,7 +12459,7 @@
     "PCK"
    ],
    "d": "Chris Columbus",
-   "h": "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard—with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry.",
+   "h": "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard\u2014with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry.",
    "k": "all",
    "pop": 3,
    "mpaa": "PG",
@@ -12490,7 +12490,7 @@
     "MAX"
    ],
    "d": "Simon McQuoid",
-   "h": "The fan favorite champions—now joined by Johnny Cage himself—are pitted against one another in the ultimate, no-holds barred, gory battle to defeat the dark rule of Shao Kahn that threatens the very existence of the Earthrealm and its defenders.",
+   "h": "The fan favorite champions\u2014now joined by Johnny Cage himself\u2014are pitted against one another in the ultimate, no-holds barred, gory battle to defeat the dark rule of Shao Kahn that threatens the very existence of the Earthrealm and its defenders.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -12519,7 +12519,7 @@
     "MAX"
    ],
    "d": "Lee Cronin",
-   "h": "The young daughter of a journalist disappears into the desert without a trace—eight years later, the broken family is shocked when she is returned to them, as what should be a joyful reunion turns into a living nightmare.",
+   "h": "The young daughter of a journalist disappears into the desert without a trace\u2014eight years later, the broken family is shocked when she is returned to them, as what should be a joyful reunion turns into a living nightmare.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -12903,7 +12903,7 @@
     "PAR"
    ],
    "d": "James Cameron",
-   "h": "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship. Rose tells the whole story from Titanic's departure through to its death—on its first and last voyage—on April 15, 1912.",
+   "h": "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fianc\u00e9. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship. Rose tells the whole story from Titanic's departure through to its death\u2014on its first and last voyage\u2014on April 15, 1912.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -12931,7 +12931,7 @@
    "svcs": [
     "PAR"
    ],
-   "d": "André Øvredal",
+   "d": "Andr\u00e9 \u00d8vredal",
    "h": "After a young couple witnesses a gruesome highway accident, they soon realize they did not leave the crash scene alone, as a demonic presence called the Passenger that won't stop until it claims them both turns their van life adventure into a nightmare.",
    "k": "adult",
    "pop": 1,
@@ -12993,7 +12993,7 @@
     "PAR"
    ],
    "d": "Todd Phillips",
-   "h": "When three friends finally come to after a raucous night of bachelor-party revelry, they find a baby in the closet and a tiger in the bathroom. But they can't seem to locate their best friend, Doug – who's supposed to be tying the knot. Launching a frantic search for Doug, the trio perseveres through a nasty hangover to try to make it to the church on time.",
+   "h": "When three friends finally come to after a raucous night of bachelor-party revelry, they find a baby in the closet and a tiger in the bathroom. But they can't seem to locate their best friend, Doug \u2013 who's supposed to be tying the knot. Launching a frantic search for Doug, the trio perseveres through a nasty hangover to try to make it to the church on time.",
    "k": "adult",
    "pop": 3,
    "mpaa": "R",
@@ -13152,7 +13152,7 @@
     "PCK"
    ],
    "d": "Michael Jelenic",
-   "h": "While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated, Mario embarks on an epic quest to find Luigi.",
+   "h": "While working underground to fix a water main, Brooklyn plumbers\u2014and brothers\u2014Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated, Mario embarks on an epic quest to find Luigi.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -13417,7 +13417,7 @@
     "PCK"
    ],
    "d": "Mark Osborne",
-   "h": "Chosen by prophecy but doubted by all, Po is an unlikely choice for the mystical title of the Dragon Warrior—a clumsy panda thrust into the world of kung fu as a deadly enemy threatens the Valley of Peace. Under reluctant guidance by Master Shifu and the Furious Five, Po must embrace who he is to unlock the power that no scroll can teach.",
+   "h": "Chosen by prophecy but doubted by all, Po is an unlikely choice for the mystical title of the Dragon Warrior\u2014a clumsy panda thrust into the world of kung fu as a deadly enemy threatens the Valley of Peace. Under reluctant guidance by Master Shifu and the Furious Five, Po must embrace who he is to unlock the power that no scroll can teach.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -13609,7 +13609,7 @@
     "PCK"
    ],
    "d": "Mike Mitchell",
-   "h": "A midlife-crisis burdened Shrek, longing for the days of when he felt like a real ogre, makes a pact with magic deal-maker Rumpelstiltskin. But when he's duped and sent to a twisted version of Far Far Away—where Rumpelstiltskin is king, ogres are hunted, and he and Fiona have never met—he sets out to restore his world and reclaim his true love.",
+   "h": "A midlife-crisis burdened Shrek, longing for the days of when he felt like a real ogre, makes a pact with magic deal-maker Rumpelstiltskin. But when he's duped and sent to a twisted version of Far Far Away\u2014where Rumpelstiltskin is king, ogres are hunted, and he and Fiona have never met\u2014he sets out to restore his world and reclaim his true love.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -13740,7 +13740,7 @@
     "PCK"
    ],
    "d": "Clay Kaytis",
-   "h": "An island populated entirely by happy, flightless birds or almost entirely. In this paradise, Red, a bird with a temper problem, speedy Chuck, and the volatile Bomb have always been outsiders. But when the island is visited by mysterious green piggies, it’s up to these unlikely outcasts to figure out what the pigs are up to.",
+   "h": "An island populated entirely by happy, flightless birds or almost entirely. In this paradise, Red, a bird with a temper problem, speedy Chuck, and the volatile Bomb have always been outsiders. But when the island is visited by mysterious green piggies, it\u2019s up to these unlikely outcasts to figure out what the pigs are up to.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -13805,7 +13805,7 @@
     "PCK"
    ],
    "d": "Jennifer Yuh Nelson",
-   "h": "Po is finally living the dream as the Dragon Warrior—until a shadow from his past comes roaring back. When the ruthless peacock Lord Shen unleashes a devastating new weapon used to wipe out kung fu masters across the land, Po and the Furious Five race across China to put an end to his plans.",
+   "h": "Po is finally living the dream as the Dragon Warrior\u2014until a shadow from his past comes roaring back. When the ruthless peacock Lord Shen unleashes a devastating new weapon used to wipe out kung fu masters across the land, Po and the Furious Five race across China to put an end to his plans.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -13933,7 +13933,7 @@
     "PCK"
    ],
    "d": "Tom Shadyac",
-   "h": "He's Ace Ventura: Pet Detective. The Ace is on the case to find the Miami Dolphins' missing mascot and quarterback Dan Marino. He goes eyeball to eyeball with a man-eating shark, stakes out the Miami Dolphins and woos and wows the ladies. Whether he's undercover, under fire or underwater, he always gets his man… or beast!",
+   "h": "He's Ace Ventura: Pet Detective. The Ace is on the case to find the Miami Dolphins' missing mascot and quarterback Dan Marino. He goes eyeball to eyeball with a man-eating shark, stakes out the Miami Dolphins and woos and wows the ladies. Whether he's undercover, under fire or underwater, he always gets his man\u2026 or beast!",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
