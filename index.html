@@ -1429,6 +1429,7 @@ const RAW = [
 ["The Shining",1980,146,"horror","scary|slowburn|weird|visual|auteur|bleak","MAX","Stanley Kubrick","A caretaker, an empty hotel, and a winter with no way down the mountain.","adult",3,"R",83],
 ["The Thing",1982,109,"horror|scifi","scary|practical|bleak|visceral|slowburn","PCK","John Carpenter","Something in the Antarctic camp is imitating them, and it is very good at it.","adult",2,"R",85],
 ["It Follows",2014,100,"horror","scary|slowburn|stylish|weird|visual","PRV","David Robert Mitchell","It walks. It never stops. It only walks.","adult",1,"R",95],
+["Scream",1996,111,"horror|mystery","scary|twisty|ironic|propulsive|violent","PAR","Wes Craven","A masked killer starts quoting the rules of horror movies to a town that was not paying attention.","adult",3,"R",81],
 ["Sinners",2025,137,"horror|drama","stylish|visceral|scary|epic|visual|auteur","MAX","Ryan Coogler","Twin brothers open a juke joint in 1932 Mississippi and something worse than the town shows up.","adult",2,"R",97],
 ["Nope",2022,130,"horror|scifi","weird|spectacle|slowburn|visual|scary","PCK","Jordan Peele","Something is living in the cloud above the ranch, and they decide to film it.","adult",2,"R",83],
 ["28 Days Later",2002,113,"horror|thriller","bleak|propulsive|visceral|grounded|scary","HUL","Danny Boyle","He wakes in an empty hospital in an empty London and it is not empty.","adult",2,"R",87],
@@ -1625,21 +1626,27 @@ const FILMS = RAW.map(function(row,i){
   return o;
 });
 const BY_TITLE = {};
-FILMS.forEach(function(f){ BY_TITLE[f.t] = f; });
 
 /* Rarity weighting. "comic" and "brisk" are everywhere; "twisty" and "auteur" are not.
    A shared rare tag says far more about taste than a shared common one, so every tag
    is weighted by how uncommon it is across the catalog. */
 const IDF_A = {}, IDF_G = {};
-(function(){
+/* Rebuilt whenever the catalog changes. The nightly scan adds and drops titles,
+   and a tag's rarity is only meaningful against the shelf as it stands now. */
+function reindex(){
+  Object.keys(BY_TITLE).forEach(function(k){ delete BY_TITLE[k]; });
+  FILMS.forEach(function(f){ BY_TITLE[f.t] = f; });
   const dfA = {}, dfG = {}, N = FILMS.length;
   FILMS.forEach(function(f){
     f.a.forEach(function(x){ dfA[x] = (dfA[x]||0)+1; });
     f.g.forEach(function(x){ dfG[x] = (dfG[x]||0)+1; });
   });
+  Object.keys(IDF_A).forEach(function(k){ delete IDF_A[k]; });
+  Object.keys(IDF_G).forEach(function(k){ delete IDF_G[k]; });
   Object.keys(dfA).forEach(function(x){ IDF_A[x] = Math.log(N/dfA[x]) + 0.30; });
   Object.keys(dfG).forEach(function(x){ IDF_G[x] = Math.log(N/dfG[x]) + 0.30; });
-})();
+}
+reindex();
 function idfA(x){ return IDF_A[x] || 1; }
 
 /* weighted mean of a taste table over a film's tags, rare tags counting for more */
@@ -1747,6 +1754,8 @@ const MOODS = [
    up:["weird","auteur","visual","stylish"],             down:["grounded"]},
   {k:"acting",  n:"Great acting",    sub:"People, not plot",
    up:["characterstudy","dialogue","ensemble","earnest"],down:["spectacle"]},
+  {k:"scream",  n:"I want to scream", sub:"Lights off, door locked",
+   up:["scary","horror","visceral","weird"],             down:["cozy","uplifting"]},
   {k:"dark",    n:"Dark & intense",  sub:"Turn the lights off",
    up:["bleak","visceral","violent","slowburn","scary"], down:["comic","cozy","uplifting"]},
   {k:"comfort", n:"Comfort movie",   sub:"Something kind",
@@ -1841,8 +1850,29 @@ function applyEnrichment(payload){
   if(payload._meta && payload._meta.logos){
     Object.keys(payload._meta.logos).forEach(function(c){ SVC_LOGO[c] = payload._meta.logos[c]; });
   }
-  ENRICHED = Object.assign({}, payload._meta, {applied: hit});
-  return hit > 0;
+  /* Titles the nightly scan found on the services. The curated catalog wins any
+     collision: a hand-tagged film knows how it plays, a derived one guesses. */
+  let shelved = 0;
+  if(Array.isArray(payload.shelf)){
+    payload.shelf.forEach(function(e){
+      if(!e || !e.t || BY_TITLE[e.t] || !(e.svcs && e.svcs.length)) return;
+      FILMS.push({
+        id: FILMS.length, t:e.t, y:e.y, r:e.r,
+        g: e.g || [], a: e.a || [],
+        s: e.svcs[0], svcs: e.svcs.slice(), svcChecked: true,
+        d: e.d || "Unknown", h: e.h || "", k: e.k || "teen",
+        pop: e.pop || 1, mpaa: e.mpaa || "NR",
+        rt: e.rt || 0, rtSrc: e.rtSrc || "tmdb",
+        poster: e.poster || null, backdrop: e.backdrop || null,
+        tmdb: e.tmdb || null, firstSeen: e.firstSeen || null,
+        found: true
+      });
+      shelved++;
+    });
+  }
+  reindex();
+  ENRICHED = Object.assign({}, payload._meta, {applied: hit, shelved: shelved});
+  return hit > 0 || shelved > 0;
 }
 
 async function loadEnrichment(){
@@ -2272,10 +2302,10 @@ const TIMES = [
 ];
 
 /* ---------- the six on the programme; the rest are in Fine Tune ---------- */
-const NIGHTS = ["laugh","guess","big","beautiful","comfort","weird"];
+const NIGHTS = ["laugh","guess","big","scream","beautiful","comfort","weird"];
 /* a film to stand behind each one, shown only on approach */
 const NIGHT_PLATE = {
-  laugh:"The Big Lebowski", guess:"Knives Out", big:"Dune: Part Two",
+  laugh:"The Big Lebowski", guess:"Knives Out", big:"Dune: Part Two", scream:"Scream",
   beautiful:"Portrait of a Lady on Fire", comfort:"Groundhog Day", weird:"Everything Everywhere All at Once"
 };
 /* set sizes vary so the programme has a rhythm rather than a grid */
@@ -3428,7 +3458,18 @@ function ticketFor(b){
    Browsing, not scoring. Every shelf is cut from the same hand-tagged catalog;
    nothing here touches the engine.
    ========================================================================== */
+/* Days since an ISO date, for the arrivals shelf. */
+function daysSince(iso){
+  const t = Date.parse(iso);
+  return isFinite(t) ? (Date.now() - t) / 86400000 : Infinity;
+}
+/* Nothing reaches an aisle unless it is streaming somewhere tonight. A title
+   that has left every service is not on the shelves, so it is not shown. */
+function onTheShelves(f){ return !!(f.svcs && f.svcs.length); }
+
 const AISLES = [
+  {k:"new",     n:"Just added", note:"landed in the last fortnight.",
+   pick:function(f){ return f.firstSeen && daysSince(f.firstSeen) <= 14; }},
   {k:"staff",   n:"Staff picks", note:"trust us on these.",
    pick:function(f){ return f.rt >= 94 && f.pop <= 2; }},
   {k:"fresh",   n:"New releases",
@@ -3451,7 +3492,7 @@ const AISLES = [
    pick:function(f){ return f.g.indexOf("crime") > -1; }},
   {k:"comedy",  n:"Comedy",
    pick:function(f){ return f.g.indexOf("comedy") > -1; }},
-  {k:"scary",   n:"Late-night horror",
+  {k:"scary",   n:"Late-night horror", note:"lights off.",
    pick:function(f){ return f.g.indexOf("horror") > -1; }},
   {k:"docs",    n:"Documentaries",
    pick:function(f){ return f.g.indexOf("documentary") > -1; }}
@@ -3460,7 +3501,7 @@ const AISLES = [
 function renderAisles(){
   const w = $("aisles-slot"); w.innerHTML = "";
   AISLES.forEach(function(a){
-    const films = FILMS.filter(a.pick).sort(function(x,y){
+    const films = FILMS.filter(onTheShelves).filter(a.pick).sort(function(x,y){
       return (y.pop - x.pop) || (y.rt - x.rt);
     });
     if(films.length < 4) return;
@@ -3513,10 +3554,15 @@ function aislePick(f){
 /* ---------- provenance ---------- */
 function renderColophon(){
   const rtCount = FILMS.filter(function(f){ return f.rtSrc === "rt"; }).length;
-  let t = FILMS.length + " films on the shelves, hand-tagged for pace and tone. ";
+  const live = FILMS.filter(function(f){ return f.svcs && f.svcs.length; }).length;
+  let t = FILMS.length + " films, " + live + " of them streaming somewhere tonight. ";
+  if(ENRICHED && ENRICHED.shelved){
+    t += "The store is re-scanned every day: " + ENRICHED.shelved +
+         " titles came from that scan, and anything that has left every service drops off the shelves. ";
+  }
   t += ENRICHED
     ? ("Runtimes, ratings, posters, synopses and streaming homes from " + ENRICHED.source +
-       ", refreshed daily. " + (rtCount ? "Critic scores are Rotten Tomatoes, via OMDb. " : "") +
+       ". " + (rtCount ? "Critic scores are Rotten Tomatoes, via OMDb. " : "") +
        "Availability is accurate to about a day, not to the minute. Check before you commit the evening. ")
     : "Streaming homes and critic scores here are our own estimates, not sourced feeds. ";
   t += STORAGE_OK

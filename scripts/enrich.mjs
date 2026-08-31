@@ -33,6 +33,11 @@ const flag = (n, d) => {
 const LIMIT = Number(flag("--limit", 0)) || 0;
 const CONCURRENCY = Number(flag("--concurrency", 6));
 const VERBOSE = args.includes("--verbose");
+const NO_DISCOVER   = args.includes("--no-discover");
+const PAGES         = Number(flag("--pages", 6));        /* per service, 20 titles a page */
+const MIN_VOTES     = Number(flag("--min-votes", 400));  /* enough that someone has seen it */
+const MIN_SCORE     = Number(flag("--min-score", 6.1));
+const MAX_SHELF     = Number(flag("--max-shelf", 900));  /* ceiling on discovered titles */
 
 const TOKEN = process.env.TMDB_TOKEN || "";
 const APIKEY = process.env.TMDB_API_KEY || "";
@@ -271,6 +276,199 @@ export function trimOverview(text, max = 400) {
   return out.length >= 60 ? out : t.slice(0, max).replace(/\s+\S*$/, "") + "\u2026";
 }
 
+/* ============================================================================
+   DISCOVERY
+   The hand-authored catalog is a seed, not the whole store. This walks what is
+   actually on the eight services right now and brings back everything worth
+   shelving, streaming originals included, since an original only ever lives on
+   its own service and would never turn up in a hand-written list.
+
+   Nothing here invents a tag it cannot defend. Attributes come from TMDB's own
+   human-curated keywords, the genres, the runtime, and, where the director is
+   already someone the curated catalog has an opinion about, from that opinion.
+   A film that cannot earn at least three attributes is left on the shelf,
+   because a thinly-tagged film scores badly and would crowd out a real match.
+   ============================================================================ */
+
+const TMDB_GENRE = {
+  28:"action", 12:"adventure", 16:"animation", 35:"comedy", 80:"crime",
+  99:"documentary", 18:"drama", 10751:"family", 14:"fantasy", 36:"drama",
+  27:"horror", 10402:"musical", 9648:"mystery", 10749:"romance", 878:"scifi",
+  53:"thriller", 10752:"war", 37:"western"
+};
+
+/* One or two attributes a genre can be trusted to imply on its own. */
+const GENRE_ATTRS = {
+  horror:["scary"], comedy:["comic"], romance:["romantic"], documentary:["grounded"],
+  war:["visceral"], thriller:["propulsive"], action:["propulsive"], animation:["visual"],
+  family:["cozy"], crime:["violent"], musical:["uplifting"], drama:["characterstudy"],
+  mystery:["twisty"], fantasy:["visual"], scifi:["cerebral"], adventure:["spectacle"],
+  western:["grounded"]
+};
+
+/* TMDB keywords are written by people, which makes them the best signal here
+   for how a film actually plays rather than what it is filed under. */
+const KEYWORD_ATTRS = [
+  [/dystopi|post.?apocalyp|nihilis|despair|bleak/,                 "bleak"],
+  [/time loop|surreal|absurd|psychedelic|bizarre|body horror/,     "weird"],
+  [/dark comedy|black comedy|satire|parody/,                       "ironic"],
+  [/coming of age|father son|mother daughter|family relationship/, "earnest"],
+  [/christmas|holiday season|feel.?good|heartwarming/,             "cozy"],
+  [/twist ending|unreliable narrator|whodunit|conspiracy/,         "twisty"],
+  [/heist|chase|race against time|escape|manhunt|survival/,        "propulsive"],
+  [/based on (a )?true|biography|true crime|docudrama/,            "grounded"],
+  [/revenge|gore|slasher|brutality|massacre/,                      "violent"],
+  [/supernatural|haunting|ghost|possession|demon|monster|serial killer/, "scary"],
+  [/love triangle|wedding|first love|romantic/,                    "romantic"],
+  [/space|alien|superhero|kaiju|giant monster|battle/,             "spectacle"],
+  [/stop motion|puppet|practical effect|miniature/,                "practical"],
+  [/courtroom|trial|dialogue|stage play|play adaptation/,          "dialogue"],
+  [/ensemble cast|multiple storylines/,                            "ensemble"],
+  [/artificial intelligence|philosoph|memory|identity|time travel/,"cerebral"],
+  [/grief|loss|loneliness|terminal illness|melancholy/,            "melancholy"],
+  [/redemption|inspirational|underdog|triumph/,                    "hopeful"],
+  [/slow burn|meditative|contemplative/,                           "slowburn"],
+  [/visually striking|cinematography|neo.?noir|stylish/,           "stylish"]
+];
+
+/**
+ * Everything a discovered film's attribute list is allowed to come from.
+ * Kept pure so it can be tested without touching the network.
+ */
+export function deriveAttrs({ genres = [], keywords = [], runtime = 0, dirAttrs = [] }) {
+  const out = [];
+  const add = (a) => { if (a && out.indexOf(a) === -1) out.push(a); };
+
+  const kw = keywords.map((k) => String(k).toLowerCase()).join(" | ");
+  for (const [re, attr] of KEYWORD_ATTRS) if (re.test(kw)) add(attr);
+  for (const g of genres) (GENRE_ATTRS[g] || []).forEach(add);
+  if (runtime && runtime <= 100) add("brisk");
+  if (runtime && runtime >= 150) add("epic");
+  /* A director the curated catalog already has a read on carries that read
+     forward, which is how a new Villeneuve lands as visual rather than generic. */
+  dirAttrs.slice(0, 2).forEach(add);
+
+  return out.length >= 3 ? out.slice(0, 6) : null;
+}
+
+export function audienceFrom(cert, genres = []) {
+  if (cert === "G" || cert === "PG") return "all";
+  if (cert === "PG-13") return "teen";
+  if (cert === "R" || cert === "NC-17") return "adult";
+  if (genres.indexOf("horror") > -1) return "adult";
+  if (genres.indexOf("family") > -1 || genres.indexOf("animation") > -1) return "all";
+  return "teen";
+}
+
+/* How recognisable a film is, on the catalog's 3/2/1 scale. Vote count tracks
+   reach far better than TMDB's own popularity number, which spikes on release. */
+export function fameFrom(votes = 0) {
+  return votes >= 15000 ? 3 : votes >= 4000 ? 2 : 1;
+}
+
+/* Provider ids are looked up by name rather than hardcoded, so a service that
+   renumbers (HBO Max -> Max did exactly that) cannot silently stop returning
+   anything. The same call carries every service's logo. */
+async function providerDirectory() {
+  const list = await getJSON(tmdbUrl("/watch/providers/movie", { watch_region: REGION }));
+  const ids = {}, logos = {};
+  for (const p of list?.results || []) {
+    const code = serviceCode(p.provider_name);
+    if (!code || ids[code]) continue;
+    ids[code] = p.provider_id;
+    if (p.logo_path) logos[code] = p.logo_path;
+  }
+  return { ids, logos };
+}
+
+async function discoverOn(providerId, pages, minVotes, minScore) {
+  const found = [];
+  for (let page = 1; page <= pages; page++) {
+    const data = await getJSON(tmdbUrl("/discover/movie", {
+      watch_region: REGION,
+      with_watch_providers: providerId,
+      with_watch_monetization_types: "flatrate",
+      sort_by: "popularity.desc",
+      "vote_count.gte": minVotes,
+      "vote_average.gte": minScore,
+      include_adult: false,
+      language: "en-US",
+      page
+    }));
+    if (!data?.results?.length) break;
+    found.push(...data.results);
+    if (page >= (data.total_pages || 1)) break;
+  }
+  return found;
+}
+
+/* One request per candidate: details, keywords, credits, certification and
+   availability all come back together. */
+async function shelfRecord(id, dirLookup) {
+  const d = await getJSON(tmdbUrl(`/movie/${id}`, {
+    append_to_response: "keywords,credits,release_dates,watch/providers"
+  }));
+  if (!d || !d.title || !d.release_date) return null;
+
+  const year = Number(d.release_date.slice(0, 4));
+  const runtime = d.runtime || 0;
+  if (!year || runtime < 60 || runtime > 260) return null;
+  if (!d.poster_path || !d.backdrop_path) return null;
+
+  const providers = flatrateCodes(d["watch/providers"]);
+  if (!providers.length) return null;                 // discovery only ever shelves what streams
+
+  const genres = [...new Set((d.genres || []).map((g) => TMDB_GENRE[g.id]).filter(Boolean))];
+  if (!genres.length) return null;
+
+  const keywords = (d.keywords?.keywords || []).map((k) => k.name);
+  const director = (d.credits?.crew || []).find((c) => c.job === "Director")?.name || "";
+  const attrs = deriveAttrs({
+    genres, keywords, runtime,
+    dirAttrs: dirLookup[director] || []
+  });
+  if (!attrs) return null;
+
+  const overview = trimOverview(d.overview || "");
+  if (!overview) return null;
+
+  const cert = usCertification(d.release_dates);
+  return {
+    t: d.title,
+    y: year,
+    r: runtime,
+    g: genres,
+    a: attrs,
+    svcs: providers,
+    d: director || "Unknown",
+    h: overview,
+    k: audienceFrom(cert, genres),
+    pop: fameFrom(d.vote_count || 0),
+    mpaa: cert || "NR",
+    rt: d.vote_average ? Math.round(d.vote_average * 10) : 0,
+    rtSrc: "tmdb",
+    poster: d.poster_path,
+    backdrop: d.backdrop_path,
+    tmdb: d.id,
+    logos: logoPaths(d["watch/providers"])
+  };
+}
+
+/* What the curated catalog believes about each director it already knows. */
+export function directorAttrs(curated) {
+  const tally = {};
+  for (const f of curated) {
+    if (!f.d) continue;
+    const bag = (tally[f.d] = tally[f.d] || {});
+    String(f.a || "").split("|").forEach((a) => { if (a) bag[a] = (bag[a] || 0) + 1; });
+  }
+  const out = {};
+  for (const [dir, bag] of Object.entries(tally)) {
+    out[dir] = Object.entries(bag).sort((a, b) => b[1] - a[1]).map(([a]) => a);
+  }
+  return out;
+}
+
 /* ---------------- runner ---------------- */
 async function pool(items, n, fn) {
   const results = new Array(items.length);
@@ -311,6 +509,69 @@ async function main() {
   const ok = rows.filter((r) => r.ok);
   const missed = rows.filter((r) => !r.ok);
 
+  /* ---- what is on the services right now ---------------------------------
+     Runs after the curated pass so a discovered title can be checked against
+     the hand-authored list and never shelved twice. */
+  const seen = new Set(films.map((f) => `${norm(f.t)}::${f.y}`));
+  let shelf = [], directory = { ids: {}, logos: {} };
+  if (!NO_DISCOVER) {
+    directory = await providerDirectory();
+    const codes = Object.keys(directory.ids);
+    console.log(`\nScanning ${codes.length} services for what is streaming now…`);
+    const dirLookup = directorAttrs(films);
+
+    const candidates = new Map();
+    for (const code of codes) {
+      const rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
+      for (const r of rows) if (!candidates.has(r.id)) candidates.set(r.id, r);
+      console.log(`  ${code.padEnd(4)} ${String(rows.length).padStart(4)} candidates`);
+    }
+    /* drop anything the curated catalog already covers */
+    const fresh = [...candidates.values()]
+      .filter((r) => !seen.has(`${norm(r.title)}::${Number((r.release_date || "").slice(0, 4))}`))
+      .slice(0, MAX_SHELF);
+    console.log(`\n${fresh.length} new candidates, fetching details…`);
+    const built = await pool(fresh.map((r) => ({ id: r.id, t: r.title, y: 0 })), CONCURRENCY,
+      (item) => shelfRecord(item.id, dirLookup));
+    shelf = built.filter((r) => r && r.t);
+    /* a title can reach two services under two ids; keep one */
+    const byKey = new Map();
+    for (const r of shelf) {
+      const key = `${norm(r.t)}::${r.y}`;
+      if (!byKey.has(key)) byKey.set(key, r);
+    }
+    shelf = [...byKey.values()];
+  }
+
+  /* ---- what changed since yesterday --------------------------------------
+     The point of a daily scan is knowing what arrived and what left, so the
+     page can shelve new arrivals together and stop offering what is gone. */
+  let previous = null;
+  try { previous = JSON.parse(await readFile(join(ROOT, "data", "catalog.json"), "utf8")); }
+  catch { /* first run */ }
+  const today = new Date().toISOString().slice(0, 10);
+  const firstSeen = new Map();
+  for (const r of previous?.shelf || []) if (r.firstSeen) firstSeen.set(`${norm(r.t)}::${r.y}`, r.firstSeen);
+  /* On the first run there is nothing to compare against, so every title would
+     read as "just arrived". Leave the date unset instead of claiming a whole
+     catalog landed today; tomorrow's run is the first that can tell. */
+  const hadShelf = Array.isArray(previous?.shelf) && previous.shelf.length > 0;
+  const arrived = [];
+  for (const r of shelf) {
+    const key = `${norm(r.t)}::${r.y}`;
+    r.firstSeen = firstSeen.get(key) || (hadShelf ? today : null);
+    if (hadShelf && r.firstSeen === today) arrived.push(r.t);
+  }
+  /* A curated title that has lost every service, or a discovered title that
+     dropped off the shelf entirely, is gone as far as tonight is concerned. */
+  const wasStreaming = new Set();
+  for (const f of previous?.films || []) if ((f.providers || []).length) wasStreaming.add(f.t);
+  for (const r of previous?.shelf  || []) wasStreaming.add(r.t);
+  const nowStreaming = new Set();
+  for (const f of ok)    if ((f.providers || []).length) nowStreaming.add(f.t);
+  for (const r of shelf) nowStreaming.add(r.t);
+  const departed = [...wasStreaming].filter((t) => !nowStreaming.has(t));
+
   const payload = {
     _meta: {
       generatedAt: new Date().toISOString(),
@@ -328,14 +589,20 @@ async function main() {
       })(),
       unmatched: missed.map((r) => `${r.t} (${r.y}): ${r.error || "unknown"}`),
       logos: (() => {
-        const all = {};
-        ok.forEach((r) => Object.entries(r.logos || {}).forEach(([code, path]) => {
+        const all = Object.assign({}, directory.logos);
+        [...ok, ...shelf].forEach((r) => Object.entries(r.logos || {}).forEach(([code, path]) => {
           if (!all[code]) all[code] = path;
         }));
         return all;
-      })()
+      })(),
+      scannedAt: today,
+      shelfCount: shelf.length,
+      streamingNow: nowStreaming.size,
+      arrived,
+      departed
     },
-    films: ok.map(({ logos, ...rest }) => rest)
+    films: ok.map(({ logos, ...rest }) => rest),
+    shelf: shelf.map(({ logos, ...rest }) => rest)
   };
 
   await mkdir(join(ROOT, "data"), { recursive: true });
@@ -363,6 +630,10 @@ async function main() {
     console.log(`\nyear drift — verify these matched the right film:`);
     suspect.forEach((r) => console.log(`  - "${r.t}" (${r.y}) matched "${r.matched.title}" (${r.matched.year})`));
   }
+  console.log(`\ndiscovered      ${shelf.length} streaming titles`);
+  console.log(`streaming now   ${nowStreaming.size} of ${ok.length + shelf.length} total`);
+  if (arrived.length)  console.log(`arrived today   ${arrived.length}: ${arrived.slice(0, 6).join(", ")}${arrived.length > 6 ? "…" : ""}`);
+  if (departed.length) console.log(`no longer on    ${departed.length}: ${departed.slice(0, 6).join(", ")}${departed.length > 6 ? "…" : ""}`);
   console.log(`\nwrote data/catalog.json`);
 }
 

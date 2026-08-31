@@ -7,6 +7,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { serviceCode, parseCatalog, pickMatch, usCertification, flatrateCodes, logoPaths, rtFromOmdb,
+         deriveAttrs, audienceFrom, fameFrom, directorAttrs,
          readOmdbPayload } from "./enrich.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -67,6 +68,35 @@ eq("dedupes repeats",
    flatrateCodes({ results: { US: { flatrate: [
      { provider_name: "Netflix" }, { provider_name: "Netflix Standard with Ads" }] } } }), ["NFX"]);
 
+console.log("\ndiscovered titles must earn their tags");
+eq("keywords carry the read",
+   deriveAttrs({ genres:["horror"], keywords:["haunting","gore","dystopia"], runtime:95 }).sort(),
+   ["bleak","brisk","scary","violent"].sort());
+eq("too thin to shelve",
+   deriveAttrs({ genres:[], keywords:[], runtime:0 }), null);
+eq("a long film reads as epic",
+   deriveAttrs({ genres:["adventure","drama"], keywords:["battle"], runtime:165 }).indexOf("epic") > -1, true);
+eq("no duplicate attributes",
+   (() => { const a = deriveAttrs({ genres:["horror","thriller"], keywords:["ghost","possession","slasher"], runtime:99 });
+            return a.length === new Set(a).size; })(), true);
+eq("caps at six",
+   deriveAttrs({ genres:["horror","comedy","action","drama","romance","scifi","war"],
+                 keywords:["ghost","dark comedy","heist","grief","wedding","space","dystopia"],
+                 runtime:95 }).length <= 6, true);
+eq("a known director lends his read",
+   deriveAttrs({ genres:["drama"], keywords:["grief"], runtime:120, dirAttrs:["auteur","visual"] }).indexOf("auteur") > -1, true);
+
+eq("PG-13 is a teen room", audienceFrom("PG-13", ["action"]), "teen");
+eq("R is grown-ups", audienceFrom("R", ["drama"]), "adult");
+eq("unrated horror is not for kids", audienceFrom(null, ["horror"]), "adult");
+eq("unrated animation is", audienceFrom(null, ["animation"]), "all");
+
+eq("vote count sets fame", [fameFrom(20000), fameFrom(5000), fameFrom(100)], [3, 2, 1]);
+
+eq("director opinions come from the curated rows",
+   directorAttrs([{ d:"Ari Aster", a:"scary|bleak" }, { d:"Ari Aster", a:"scary|weird" }])["Ari Aster"][0],
+   "scary");
+
 console.log("\nprovider logos (the real marks, taken from the same response)");
 const provLogo = { results: { US: {
   flatrate: [{ provider_name: "Netflix", logo_path: "/net.jpg" },
@@ -124,7 +154,7 @@ eq("non-JSON error page still reports",
 console.log("\ncatalog parsing from index.html");
 const html = await readFile(join(ROOT, "index.html"), "utf8");
 const films = parseCatalog(html);
-eq("parses every row", films.length, 244);
+eq("parses every row", films.length, 245);   /* hand-authored seed; discovery adds on top */
 eq("keys named by COLS", Object.keys(films[0]).sort().join(","),
    "a,d,g,h,k,mpaa,pop,r,rt,s,t,y");
 eq("first title", films[0].t, "The Godfather");
