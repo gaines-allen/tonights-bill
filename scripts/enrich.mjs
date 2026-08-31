@@ -618,11 +618,19 @@ async function main() {
      read as "just arrived". Leave the date unset instead of claiming a whole
      catalog landed today; tomorrow's run is the first that can tell. */
   const hadShelf = Array.isArray(previous?.shelf) && previous.shelf.length > 0;
+  /* Presence on yesterday's shelf is what makes a title old, not whether it
+     happened to carry a date. Keying on the date marked an entire carried-over
+     shelf as arriving today the first time dates existed. */
+  const prevKeys = new Set((previous?.shelf || []).map((r) => `${norm(r.t)}::${r.y}`));
   const arrived = [];
   for (const r of shelf) {
     const key = `${norm(r.t)}::${r.y}`;
-    r.firstSeen = firstSeen.get(key) || (hadShelf && scanned ? today : r.firstSeen || null);
-    if (hadShelf && scanned && r.firstSeen === today) arrived.push(r.t);
+    if (prevKeys.has(key)) {
+      r.firstSeen = firstSeen.get(key) || null;      // was here before, date unknown
+    } else {
+      r.firstSeen = hadShelf && scanned ? today : null;
+      if (r.firstSeen) arrived.push(r.t);
+    }
   }
 
   const nowStreaming = new Set();
