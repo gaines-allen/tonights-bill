@@ -1,15 +1,15 @@
 {
  "_meta": {
-  "generatedAt": "2026-08-31T15:00:03.017Z",
+  "generatedAt": "2026-08-31T15:08:20.829Z",
   "region": "US",
   "source": "TMDB + OMDb",
   "total": 245,
   "matched": 245,
   "withProviders": 128,
-  "withRT": 20,
+  "withRT": 14,
   "withOverview": 245,
   "omdbErrors": {
-   "Request limit reached!": 224
+   "Request limit reached!": 230
   },
   "unmatched": [],
   "logos": {
@@ -23,137 +23,53 @@
   },
   "scannedAt": "2026-08-31",
   "scanOk": true,
-  "servicesMissed": [
-   "PAR"
-  ],
-  "shelfCount": 243,
-  "streamingNow": 369,
+  "servicesMissed": [],
+  "shelfCount": 261,
+  "streamingNow": 387,
   "arrived": [
-   "Facing El Chapo",
-   "The Last House",
-   "Spider-Man: Homecoming",
-   "Swapped",
-   "Jurassic World Rebirth",
-   "War Machine",
-   "GOAT",
-   "KPop Demon Hunters",
-   "How to Train Your Dragon",
-   "Schindler's List",
-   "Black Adam",
-   "Jurassic World Dominion",
-   "Voicemails for Isabelle",
-   "Minions: The Rise of Gru",
-   "Frankenstein",
-   "After We Fell",
-   "Five Nights at Freddy's 2",
-   "28 Years Later",
-   "28 Years Later: The Bone Temple",
-   "Charlie and the Chocolate Factory",
-   "Wicked: For Good",
-   "Green Book",
-   "The Fifth Element",
-   "Bugonia",
-   "The Hunger Games: Mockingjay - Part 1",
-   "Nobody 2",
-   "The Bad Guys 2",
-   "I Swear",
-   "Sonic the Hedgehog 2",
-   "Dungeons & Dragons: Honor Among Thieves",
-   "Karate Kid: Legends",
-   "Remarkably Bright Creatures",
-   "The Hunger Games: Catching Fire",
-   "Peaky Blinders: The Immortal Man",
-   "The Angry Birds Movie 2",
-   "Minions",
-   "Law Abiding Citizen",
-   "Wake Up Dead Man: A Knives Out Mystery",
-   "All Quiet on the Western Front",
-   "Godzilla Minus One",
-   "Ghostbusters",
-   "Hotel Transylvania 2",
-   "The Bad Guys",
-   "Nuremberg",
-   "Scream VI",
-   "The Gentlemen",
-   "Neon Genesis Evangelion: The End of Evangelion",
-   "American Sniper",
-   "The Hunger Games: The Ballad of Songbirds & Snakes",
-   "Hamnet",
-   "Enola Holmes 3",
-   "Sing",
-   "Caught Stealing",
-   "Despicable Me 3",
-   "Leave the World Behind",
-   "Percy Jackson & the Olympians: The Lightning Thief",
-   "Scream",
-   "The Mitchells vs. the Machines",
-   "Home",
-   "Hitman's Wife's Bodyguard",
-   "Black Phone 2",
-   "The Northman",
-   "Zombieland",
-   "Sisu: Road to Revenge",
-   "Fargo",
-   "A Quiet Place: Day One",
-   "Thrash",
-   "Counterattack",
-   "Project Hail Mary",
-   "Masters of the Universe",
-   "The Sheep Detectives",
-   "The Wild Robot",
-   "The Wrecking Crew",
-   "Superman",
-   "Mission: Impossible - The Final Reckoning",
-   "Jungle",
-   "My Fault",
-   "One Battle After Another",
-   "Road House",
-   "The Running Man",
-   "Sonic the Hedgehog 3",
-   "Scarface",
-   "The Good, the Bad and the Ugly",
-   "Despicable Me 4",
-   "Red One",
-   "Weapons",
-   "xXx: Return of Xander Cage",
-   "A Working Man",
-   "How to Train Your Dragon 2",
-   "The Beekeeper",
-   "The Handmaiden",
-   "World War Z",
-   "The Pianist",
-   "Unfaithful",
-   "Pretty Lethal",
-   "Mercy",
-   "In Time",
-   "Mr. & Mrs. Smith",
-   "Migration",
-   "Kung Fu Panda 4",
-   "Play Dirty",
-   "Gladiator II",
-   "Uncharted",
-   "The Usual Suspects",
-   "How to Lose a Guy in 10 Days",
-   "The Phoenician Scheme",
-   "Primate",
-   "Heads of State",
-   "The Naked Gun",
-   "The Accountant\u00b2",
-   "Reservoir Dogs",
-   "Sin City: A Dame to Kill For",
-   "Smile 2",
-   "Apocalypto",
-   "Playdate",
-   "Ghost in the Shell",
-   "Before I Go to Sleep",
-   "Transformers One",
-   "The Gangster, the Cop, the Devil",
+   "Men in Black II",
+   "Descendants: The Rise of Red",
+   "Bad Boys II",
+   "Predator: Killer of Killers",
+   "Gran Turismo",
+   "Land of Bad",
+   "Together",
+   "It Ends with Us",
+   "Tropic Thunder",
+   "Avatar Aang: The Last Airbender",
+   "Terminator 2: Judgment Day",
+   "Gladiator",
+   "The Godfather Part II",
+   "Titanic",
+   "Passenger",
+   "Scream 7",
+   "The Hangover",
+   "Predator",
+   "Wicked",
+   "Shrek the Third",
+   "Kung Fu Panda",
+   "Shrek 2",
+   "The Secret Life of Pets 2",
+   "Fantastic Beasts and Where to Find Them",
+   "Five Nights at Freddy's",
+   "Fast & Furious Presents: Hobbs & Shaw",
+   "Shrek Forever After",
+   "Mean Girls",
+   "The Matrix Reloaded",
+   "Megamind",
+   "The Angry Birds Movie",
+   "The Matrix Revolutions",
+   "Kung Fu Panda 2",
+   "Kung Fu Panda 3",
+   "Ace Ventura: Pet Detective",
+   "Armageddon",
+   "The Croods: A New Age"
+  ],
+  "departed": [
    "Regretting You",
    "The Amateur",
    "It's a Wonderful Life",
    "Roofman",
-   "The Texas Chain Saw Massacre",
-   "Donnie Darko",
    "The Tomorrow War",
    "The Mist",
    "Trolls Band Together",
@@ -164,116 +80,12 @@
    "Boyka: Undisputed IV",
    "RoboCop",
    "Terrifier 3",
-   "Triangle",
    "War Dogs",
    "Oblivion",
    "From Paris with Love",
    "Snowpiercer",
-   "A Man Called Otto",
-   "Avatar: Fire and Ash",
-   "Spider-Man",
-   "Zootopia 2",
-   "Deadpool & Wolverine",
-   "Hoppers",
-   "Avengers: Age of Ultron",
-   "Spider-Man: Far From Home",
-   "The Amazing Spider-Man",
-   "Spider-Man 3",
-   "The Fantastic 4: First Steps",
-   "Captain America: Civil War",
-   "Guardians of the Galaxy Vol. 3",
-   "The Amazing Spider-Man 2",
-   "Avatar: The Way of Water",
-   "Iron Man",
-   "Thunderbolts*",
-   "Doctor Strange in the Multiverse of Madness",
-   "Avatar",
-   "Iron Man 2",
-   "Frozen II",
-   "The Incredible Hulk",
-   "Venom: The Last Dance",
-   "Ice Age: Collision Course",
-   "Inside Out 2",
-   "Pirates of the Caribbean: The Curse of the Black Pearl",
-   "Star Wars",
-   "Monsters, Inc.",
-   "X-Men: Days of Future Past",
-   "Big Hero 6",
-   "Black Panther: Wakanda Forever",
-   "Thor: Love and Thunder",
-   "Toy Story 3",
-   "X-Men: Apocalypse",
-   "Deadpool 2",
-   "Moana 2",
-   "Home Alone 2: Lost in New York",
-   "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
-   "Guardians of the Galaxy Vol. 2",
-   "Insidious: The Red Door",
-   "Ready or Not: Here I Come",
-   "Predator: Badlands",
-   "Good Luck, Have Fun, Don't Die",
-   "Thor",
-   "Send Help",
-   "Jumanji: The Next Level",
-   "Star Wars: The Last Jedi",
-   "Twilight",
-   "Once Upon a Time... in Hollywood",
-   "Spider-Man 2",
-   "Ghostbusters: Afterlife",
-   "Dawn of the Planet of the Apes",
-   "Jurassic World",
-   "Anora",
-   "American Psycho",
-   "Girl in the Basement",
-   "Rise of the Planet of the Apes",
-   "Sonic the Hedgehog",
-   "Star Wars: The Rise of Skywalker",
-   "The Garfield Movie",
-   "Ready or Not",
-   "The Equalizer 3",
-   "Men in Black",
-   "Bad Boys: Ride or Die",
-   "The Ugly Stepsister",
-   "Despicable Me 2",
-   "No Other Choice",
-   "Bullet Train",
-   "Mike & Nick & Nick & Alice",
-   "Independence Day",
-   "The Twilight Saga: Eclipse",
-   "Where the Crawdads Sing",
-   "Dirty Dancing",
-   "Death on the Nile",
-   "The Creator",
-   "Rio",
-   "Primitive War",
-   "Prey",
-   "The Twilight Saga: Breaking Dawn - Part 2",
-   "A Haunting in Venice",
-   "Casino",
-   "Twisters",
-   "Greenland 2: Migration",
-   "Harry Potter and the Philosopher's Stone",
-   "Mortal Kombat II",
-   "Lee Cronin's The Mummy",
-   "Harry Potter and the Chamber of Secrets",
-   "The Drama",
-   "Harry Potter and the Deathly Hallows: Part 1",
-   "Harry Potter and the Deathly Hallows: Part 2",
-   "The Terminator",
-   "The Dark Knight Rises",
-   "A Minecraft Movie",
-   "Obsession",
-   "The Super Mario Galaxy Movie",
-   "Insidious: Chapter 3",
-   "Troy",
-   "The Super Mario Bros. Movie",
-   "Harry Potter and the Half-Blood Prince",
-   "Harry Potter and the Goblet of Fire",
-   "Harry Potter and the Order of the Phoenix",
-   "Shrek",
    "IF"
-  ],
-  "departed": []
+  ]
  },
  "films": [
   {
@@ -1060,7 +872,8 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Martian",
@@ -1539,7 +1352,7 @@
    "tmdbScore": 85,
    "votes": 30331,
    "poster": "/Cw4hIUIAmSYfK9QfaUW5igp9La.jpg",
-   "overview": "A man with a low IQ has accomplished great things in his life and been present during significant historic events\u2014in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
+   "overview": "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
    "backdrop": "/66Kn4XWhkuPkJxOJyPEx4U2CUfN.jpg",
    "providers": [
     "PAR"
@@ -1583,13 +1396,14 @@
    "runtime": 107,
    "cert": "R",
    "tmdbScore": 84,
-   "votes": 17009,
+   "votes": 17010,
    "poster": "/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
    "overview": "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
    "backdrop": "/wbQa0EnWUyRzQ5d1pHLNRlmsCUP.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 94
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "There Will Be Blood",
@@ -1630,7 +1444,7 @@
    "tmdbScore": 74,
    "votes": 7662,
    "poster": "/qLnfEmPrDjJfPyyddLJPkXmshkp.jpg",
-   "overview": "The tender, heartbreaking story of a young man\u2019s struggle to find himself, told across three defining chapters in his life as he experiences the ecstasy, pain, and beauty of falling in love, while grappling with his own sexuality.",
+   "overview": "The tender, heartbreaking story of a young man’s struggle to find himself, told across three defining chapters in his life as he experiences the ecstasy, pain, and beauty of falling in love, while grappling with his own sexuality.",
    "backdrop": "/jm1oD3eB08LImSwL1LrzF9AJQ5b.jpg",
    "providers": [
     "HUL"
@@ -1684,8 +1498,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 95
   },
   {
    "t": "The Banshees of Inisherin",
@@ -1773,7 +1586,7 @@
    "tmdbScore": 80,
    "votes": 16428,
    "poster": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
-   "overview": "The Grand Budapest Hotel tells of a legendary concierge at a famous European hotel between the wars and his friendship with a young employee who becomes his trusted prot\u00e9g\u00e9. The story involves the theft and recovery of a priceless Renaissance painting, the battle for an enormous family fortune and the slow and then sudden upheavals that transformed Europe during the first half of the 20th century.",
+   "overview": "The Grand Budapest Hotel tells of a legendary concierge at a famous European hotel between the wars and his friendship with a young employee who becomes his trusted protégé. The story involves the theft and recovery of a priceless Renaissance painting, the battle for an enormous family fortune and the slow and then sudden upheavals that transformed Europe during the first half of the 20th century.",
    "backdrop": "/9udCLTxTFl28RxnK8Q05E154ZGa.jpg",
    "providers": [],
    "providersChecked": true,
@@ -1883,7 +1696,7 @@
    "runtime": 128,
    "cert": "R",
    "tmdbScore": 73,
-   "votes": 8845,
+   "votes": 8846,
    "poster": "/4GFPuL14eXi66V96xBWY73Y9PfR.jpg",
    "overview": "Following the death of the Leigh family matriarch, Annie and her children uncover disturbing secrets about their heritage. Their daily lives are not only impacted, but they also become entangled in a chilling fate from which they cannot escape, driving them to the brink of madness.",
    "backdrop": "/gJbTXKNTL6O7r7PzF6ZRkJGBlPp.jpg",
@@ -2211,7 +2024,7 @@
    "tmdbScore": 83,
    "votes": 9144,
    "poster": "/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
-   "overview": "After reuniting with Gwen Stacy, Brooklyn\u2019s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence.",
+   "overview": "After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence.",
    "backdrop": "/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
    "providers": [
     "DIS",
@@ -2234,7 +2047,7 @@
    "runtime": 115,
    "cert": "PG",
    "tmdbScore": 77,
-   "votes": 19220,
+   "votes": 19222,
    "poster": "/2LqaLgk4Z226KkgPJuiOQ58wvrm.jpg",
    "overview": "Bob Parr has given up his superhero days to log in time as an insurance adjuster and raise his three children with his formerly heroic wife in suburbia. But when he receives a mysterious assignment, it's time to get back into costume.",
    "backdrop": "/lxwzY9vNwjDgxWKt3zZ6zcU6rEJ.jpg",
@@ -2277,7 +2090,7 @@
    "tmdb": 10681,
    "imdb": "tt0910970",
    "matched": {
-    "title": "WALL\u00b7E",
+    "title": "WALL·E",
     "year": 2008
    },
    "runtime": 98,
@@ -2285,7 +2098,7 @@
    "tmdbScore": 81,
    "votes": 20757,
    "poster": "/hbhFnRzzg6ZDmm8YAmxBnQpQIPh.jpg",
-   "overview": "After hundreds of years doing what he was built for, WALL\u2022E\u2014 a robot designed to clean up the earth\u2014discovers a new purpose in life when he meets a sleek search robot named EVE. EVE comes to realize that WALL\u2022E has inadvertently stumbled upon the key to the planet's future, and races back to space to report to the humans.",
+   "overview": "After hundreds of years doing what he was built for, WALL•E— a robot designed to clean up the earth—discovers a new purpose in life when he meets a sleek search robot named EVE. EVE comes to realize that WALL•E has inadvertently stumbled upon the key to the planet's future, and races back to space to report to the humans.",
    "backdrop": "/nYs4ZwnJBK4AgljhvzwNz7fpr3E.jpg",
    "providers": [
     "DIS"
@@ -2358,7 +2171,7 @@
    "tmdbScore": 82,
    "votes": 21329,
    "poster": "/6Ryitt95xrO8KXuqRGm1fUuNwqF.jpg",
-   "overview": "Despite his family\u2019s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events.",
+   "overview": "Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events.",
    "backdrop": "/g7CHF8gTLGooTbP4GznIGwaqAGL.jpg",
    "providers": [
     "DIS"
@@ -2452,7 +2265,7 @@
    "runtime": 107,
    "cert": "PG",
    "tmdbScore": 76,
-   "votes": 13967,
+   "votes": 13969,
    "poster": "/m5MDZOIFEFlxGiLuAzWzFSsWcye.jpg",
    "overview": "In Ancient Polynesia, when a terrible curse incurred by Maui reaches an impetuous Chieftain's daughter's island, she answers the Ocean's call to seek out the demigod to set things right.",
    "backdrop": "/qLVNZFHYUR6Li64He67SWl6BHQe.jpg",
@@ -2476,9 +2289,9 @@
    "runtime": 98,
    "cert": "PG",
    "tmdbScore": 79,
-   "votes": 14654,
+   "votes": 14655,
    "poster": "/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg",
-   "overview": "As the son of a Viking leader on the cusp of manhood, shy Hiccup Horrendous Haddock III faces a rite of passage: he must kill a dragon to prove his warrior mettle. But after downing a feared dragon, he realizes that he no longer wants to destroy it, and instead befriends the beast \u2013 which he names Toothless \u2013 much to the chagrin of his warrior father.",
+   "overview": "As the son of a Viking leader on the cusp of manhood, shy Hiccup Horrendous Haddock III faces a rite of passage: he must kill a dragon to prove his warrior mettle. But after downing a feared dragon, he realizes that he no longer wants to destroy it, and instead befriends the beast – which he names Toothless – much to the chagrin of his warrior father.",
    "backdrop": "/59vDC1BuEQvti24OMr0ZvtAK6R1.jpg",
    "providers": [
     "PRV"
@@ -2620,7 +2433,7 @@
    "runtime": 201,
    "cert": "PG-13",
    "tmdbScore": 85,
-   "votes": 27219,
+   "votes": 27221,
    "poster": "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
    "overview": "As armies mass for a final battle that will decide the fate of the world--and powerful, ancient forces of Light and Dark compete to determine the outcome--one member of the Fellowship of the Ring is revealed as the noble heir to the throne of the Kings of Men.",
    "backdrop": "/ctiw6FZK4N36LmkjSklWEbuvlq9.jpg",
@@ -2646,7 +2459,7 @@
    "tmdbScore": 78,
    "votes": 11682,
    "poster": "/z7xXihu5wHuSMWymq5VAulPVuvg.jpg",
-   "overview": "In post\u2013civil war Spain, 10-year-old Ofelia moves with her pregnant mother to live under the control of her cruel stepfather. Drawn into a mysterious labyrinth, she meets a faun who reveals that she may be a lost princess from an underground kingdom. To return to her true father, she must complete a series of surreal and perilous tasks that blur the line between reality and fantasy.",
+   "overview": "In post–civil war Spain, 10-year-old Ofelia moves with her pregnant mother to live under the control of her cruel stepfather. Drawn into a mysterious labyrinth, she meets a faun who reveals that she may be a lost princess from an underground kingdom. To return to her true father, she must complete a series of surreal and perilous tasks that blur the line between reality and fantasy.",
    "backdrop": "/6G6nqSW9S7EHA9HrYl0Z8uo2H7f.jpg",
    "providers": [],
    "providersChecked": true,
@@ -2745,7 +2558,8 @@
    "backdrop": "/orq7v7J0Esq9TWpKitCXPbevOdW.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 90
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Before Sunrise",
@@ -2782,7 +2596,7 @@
    "runtime": 108,
    "cert": "R",
    "tmdbScore": 81,
-   "votes": 16658,
+   "votes": 16659,
    "poster": "/5MwkWH9tYHv3mV9OdYTMR5qreIz.jpg",
    "overview": "Joel Barish, heartbroken that his girlfriend underwent a procedure to erase him from her memory, decides to do the same. However, as he watches his memories of her fade away, he realises that he still loves her, and may be too late to correct his mistake.",
    "backdrop": "/W1ffLQGHoxfAOq0ZYdPtJlvAdb.jpg",
@@ -2876,7 +2690,8 @@
    "backdrop": "/7HR38hMBl23lf38MAN63y4pKsHz.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 95
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Portrait of a Lady on Fire",
@@ -2899,7 +2714,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 98
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Brokeback Mountain",
@@ -2960,7 +2776,7 @@
    "tmdbScore": 65,
    "votes": 4752,
    "poster": "/gJtA7hYsBMQ7EM3sPBMUdBfU7a0.jpg",
-   "overview": "Annie's life is a mess. But when she finds out her lifetime best friend is engaged, she simply must serve as Lillian's maid of honor. Though lovelorn and broke, Annie bluffs her way through the expensive and bizarre rituals. With one chance to get it perfect, she\u2019ll show Lillian and her bridesmaids just how far you\u2019ll go for someone you love.",
+   "overview": "Annie's life is a mess. But when she finds out her lifetime best friend is engaged, she simply must serve as Lillian's maid of honor. Though lovelorn and broke, Annie bluffs her way through the expensive and bizarre rituals. With one chance to get it perfect, she’ll show Lillian and her bridesmaids just how far you’ll go for someone you love.",
    "backdrop": "/1pkpV7a02phSfAPeGVmpHaQd99J.jpg",
    "providers": [
     "PRV"
@@ -3052,7 +2868,7 @@
    "runtime": 121,
    "cert": "R",
    "tmdbScore": 76,
-   "votes": 8550,
+   "votes": 8552,
    "poster": "/zPib4ukTSdXvHP9pxGkFCe34f3y.jpg",
    "overview": "Former London constable Nicholas Angel finds it difficult to adapt to his new assignment in the sleepy British village of Sandford. Not only does he miss the excitement of the big city, but he also has a well-meaning oaf for a partner. However, when a series of grisly accidents rocks Sandford, Angel smells something rotten in the idyllic village.",
    "backdrop": "/9rMSCFH9zhv1vILpEZQlUJs9iUm.jpg",
@@ -3102,7 +2918,8 @@
    "backdrop": "/cheDSO3mYmsAFQlRM91o7MK6Wcc.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 96
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Palm Springs",
@@ -3125,8 +2942,7 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 95
   },
   {
    "t": "Game Night",
@@ -3217,8 +3033,7 @@
     "PAR"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 98
   },
   {
    "t": "John Wick",
@@ -3239,8 +3054,7 @@
    "backdrop": "/ff2ti5DkA9UYLzyqhQfI2kZqEuh.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 87
   },
   {
    "t": "Top Gun: Maverick",
@@ -3257,7 +3071,7 @@
    "tmdbScore": 82,
    "votes": 11447,
    "poster": "/n0YuM4f5lvGAP6MAW2kBIzugXnc.jpg",
-   "overview": "After more than thirty years of service as one of the Navy\u2019s top aviators, and dodging the advancement in rank that would ground him, Pete \u201cMaverick\u201d Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.",
+   "overview": "After more than thirty years of service as one of the Navy’s top aviators, and dodging the advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.",
    "backdrop": "/AaV1YIdWKnjAIAOe8UUKBFm327v.jpg",
    "providers": [
     "PAR"
@@ -3279,9 +3093,9 @@
    "runtime": 144,
    "cert": "PG-13",
    "tmdbScore": 76,
-   "votes": 11942,
+   "votes": 11944,
    "poster": "/lMrxYKKhd4lqRzwUHAy5gcx9PSO.jpg",
-   "overview": "Le Chiffre, a banker to the world's terrorists, is scheduled to participate in a high-stakes poker game in Montenegro, where he intends to use his winnings to establish his financial grip on the terrorist market. M sends Bond\u2014on his maiden mission as a 00 Agent\u2014to attend this game and prevent Le Chiffre from winning.",
+   "overview": "Le Chiffre, a banker to the world's terrorists, is scheduled to participate in a high-stakes poker game in Montenegro, where he intends to use his winnings to establish his financial grip on the terrorist market. M sends Bond—on his maiden mission as a 00 Agent—to attend this game and prevent Le Chiffre from winning.",
    "backdrop": "/klJMCIblHLFwCuGjKz7tyOpekIC.jpg",
    "providers": [],
    "providersChecked": true,
@@ -3307,8 +3121,7 @@
    "backdrop": "/wkA622CCN2X0uwpgqYEOnUYEDf5.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 92
   },
   {
    "t": "Raiders of the Lost Ark",
@@ -3323,9 +3136,9 @@
    "runtime": 115,
    "cert": "PG",
    "tmdbScore": 79,
-   "votes": 13915,
+   "votes": 13917,
    "poster": "/ceG9VzoRAVGwivFU403Wc3AHRys.jpg",
-   "overview": "When Dr. Indiana Jones \u2013 the tweed-suited professor who just happens to be a celebrated archaeologist \u2013 is hired by the government to locate the legendary Ark of the Covenant, he finds himself up against the entire Nazi regime.",
+   "overview": "When Dr. Indiana Jones – the tweed-suited professor who just happens to be a celebrated archaeologist – is hired by the government to locate the legendary Ark of the Covenant, he finds himself up against the entire Nazi regime.",
    "backdrop": "/zPACwR32amTNvzId9qyapCWXYDJ.jpg",
    "providers": [
     "DIS",
@@ -3379,7 +3192,8 @@
     "HUL"
    ],
    "providersChecked": true,
-   "rt": 87
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Mission: Impossible - Ghost Protocol",
@@ -3476,7 +3290,8 @@
     "DIS"
    ],
    "providersChecked": true,
-   "rt": 85
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Avengers: Endgame",
@@ -3515,7 +3330,7 @@
    "runtime": 121,
    "cert": "PG-13",
    "tmdbScore": 79,
-   "votes": 30210,
+   "votes": 30211,
    "poster": "/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg",
    "overview": "Light years from Earth, 26 years after being abducted, Peter Quill finds himself the prime target of a manhunt after discovering an orb wanted by Ronan the Accuser.",
    "backdrop": "/uLtVbjvS1O7gXL8lUOwsFOH4man.jpg",
@@ -3612,7 +3427,7 @@
    "tmdbScore": 70,
    "votes": 460,
    "poster": "/cVBZQZq091KtwBm2qObOv0JTFcH.jpg",
-   "overview": "A contemporary story of love, rejection, and triumph as a young M\u0101ori girl fights to fulfill a destiny her grandfather refuses to recognize.",
+   "overview": "A contemporary story of love, rejection, and triumph as a young Māori girl fights to fulfill a destiny her grandfather refuses to recognize.",
    "backdrop": "/dLJ6qwEXg2AglBSClRV5iVYZI1b.jpg",
    "providers": [],
    "providersChecked": true,
@@ -3707,7 +3522,7 @@
    "runtime": 98,
    "cert": "PG",
    "tmdbScore": 72,
-   "votes": 4924,
+   "votes": 4925,
    "poster": "/wYoDpWInsBEVSmWStnRH06ddoyk.jpg",
    "overview": "Matilda Wormwood is an brilliant and intelligent little girl. Unfortunately, her parents, Harry and Zinnia, fail to see that fact. As time passes, she finally starts school and has a kind teacher, loyal friends, and a terrifying, sadistic headmistress.",
    "backdrop": "/t3HVA7XdVnQneMjI5hYjEhXmHY3.jpg",
@@ -3757,7 +3572,7 @@
    "tmdbScore": 68,
    "votes": 14759,
    "poster": "/pSgXKPU5h6U89ipF7HBYajvYt7j.jpg",
-   "overview": "Four teenagers in detention discover an old video game console with a game they\u2019ve never heard of. When they decide to play, they are immediately sucked into the jungle world of Jumanji in the bodies of their avatars. They\u2019ll have to complete the adventure of their lives filled with fun, thrills and danger or be stuck in the game forever!",
+   "overview": "Four teenagers in detention discover an old video game console with a game they’ve never heard of. When they decide to play, they are immediately sucked into the jungle world of Jumanji in the bodies of their avatars. They’ll have to complete the adventure of their lives filled with fun, thrills and danger or be stuck in the game forever!",
    "backdrop": "/zZKmEmRDc7ZjFucPm2UGNgDRlDc.jpg",
    "providers": [],
    "providersChecked": true,
@@ -3779,7 +3594,7 @@
    "tmdbScore": 81,
    "votes": 8377,
    "poster": "/sONh3LYGFcVDTy8pm1tbSOB13Li.jpg",
-   "overview": "The story of August Pullman \u2013 a boy with facial differences \u2013 who enters fifth grade, attending a mainstream elementary school for the first time.",
+   "overview": "The story of August Pullman – a boy with facial differences – who enters fifth grade, attending a mainstream elementary school for the first time.",
    "backdrop": "/b7xQ5fuyVO4c24igizCfPgF6n7q.jpg",
    "providers": [],
    "providersChecked": true,
@@ -3898,7 +3713,8 @@
    "backdrop": "/mufF1aYvwdpKerhq5R1YrVcbJLY.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "12 Angry Men",
@@ -4049,7 +3865,7 @@
    "tmdbScore": 78,
    "votes": 8839,
    "poster": "/xSI0dbKLDETwhiVUy6hGE8KXUln.jpg",
-   "overview": "Rocky Balboa is a Philadelphia club fighter who seems to be going nowhere. But when a stroke of fate puts him in the ring with a world heavyweight champion, Rocky knows that it's his one shot at the big time \u2014 a once-in-a-lifetime opportunity to go the distance and come out a winner!",
+   "overview": "Rocky Balboa is a Philadelphia club fighter who seems to be going nowhere. But when a stroke of fate puts him in the ring with a world heavyweight champion, Rocky knows that it's his one shot at the big time — a once-in-a-lifetime opportunity to go the distance and come out a winner!",
    "backdrop": "/bacOuUnRBoAO1NjMfsAGX2EKRrS.jpg",
    "providers": [
     "NFX"
@@ -4163,7 +3979,7 @@
    "runtime": 128,
    "cert": "PG",
    "tmdbScore": 81,
-   "votes": 6468,
+   "votes": 6469,
    "poster": "/15uOEfqBNTVtDUT7hGBVCka0rZz.jpg",
    "overview": "A retired San Francisco detective suffering from acrophobia investigates the strange activities of an old friend's wife, all the while becoming dangerously obsessed with her.",
    "backdrop": "/rtVwkTqllcmyY4TVOycgVBHppWf.jpg",
@@ -4287,8 +4103,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 89
   },
   {
    "t": "Michael Clayton",
@@ -4371,7 +4186,7 @@
    "runtime": 120,
    "cert": "R",
    "tmdbScore": 72,
-   "votes": 6443,
+   "votes": 6444,
    "poster": "/nV5316WUsVij8sVXLCF1g7TFitg.jpg",
    "overview": "Cab driver Max picks up a man who offers him $600 to drive him around. But the promise of easy money sours when Max realizes his fare is an assassin.",
    "backdrop": "/qVzmXKKOTtd3szkiCheCNrfa394.jpg",
@@ -4401,7 +4216,8 @@
    "backdrop": "/nuO8o9ltxhI7AZQxePavEZ4TyHa.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 74
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "A Few Good Men",
@@ -4438,7 +4254,7 @@
    "runtime": 131,
    "cert": "R",
    "tmdbScore": 74,
-   "votes": 3728,
+   "votes": 3729,
    "poster": "/eMs20iUQyZVs05Ck7Q0LNnRsstr.jpg",
    "overview": "A twice-divorced mother of three who sees an injustice, takes on the bad guy and wins -- with a little help from her push-up bra. Erin goes to work for an attorney and comes across medical records describing illnesses clustered in one nearby town. She starts investigating and soon exposes a monumental cover-up.",
    "backdrop": "/3HmLKhahTxX2ALTWlagr92pZrU7.jpg",
@@ -4462,7 +4278,7 @@
    "tmdbScore": 69,
    "votes": 4850,
    "poster": "/djRAvxyvvN2yqlJKDbT3uy4vOBw.jpg",
-   "overview": "An African prince decides it\u2019s time for him to find a princess... and his mission leads him and his most loyal friend to Queens, New York. In disguise as an impoverished immigrant, the pampered prince quickly finds himself a new job, new friends, new digs, new enemies and lots of trouble.",
+   "overview": "An African prince decides it’s time for him to find a princess... and his mission leads him and his most loyal friend to Queens, New York. In disguise as an impoverished immigrant, the pampered prince quickly finds himself a new job, new friends, new digs, new enemies and lots of trouble.",
    "backdrop": "/vsCIw7ARCKQVPT2K2hkkFVl7yo5.jpg",
    "providers": [],
    "providersChecked": true,
@@ -4504,7 +4320,7 @@
    "runtime": 112,
    "cert": "R",
    "tmdbScore": 76,
-   "votes": 2329,
+   "votes": 2330,
    "poster": "/v4ox4aSCNT5vyLXl4Q71JiWwCXW.jpg",
    "overview": "Three friends growing up in South Central Los Angeles navigate a neighborhood plagued by violence, unemployment, and crime, each responding differently to the harsh realities of street life. As tragedy strikes close to home, their friendship, choices, and hopes for a better future are put to the ultimate test.",
    "backdrop": "/xensHK9qUso0rIrTeQw3ConGu2s.jpg",
@@ -4594,7 +4410,7 @@
    "tmdbScore": 74,
    "votes": 4301,
    "poster": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg",
-   "overview": "When oil is discovered in 1920s Oklahoma under Osage Nation land, the Osage people are murdered one by one\u2014until the FBI steps in to unravel the mystery.",
+   "overview": "When oil is discovered in 1920s Oklahoma under Osage Nation land, the Osage people are murdered one by one—until the FBI steps in to unravel the mystery.",
    "backdrop": "/acvE3RWjDLgvbL2RtcyzkrsAyNV.jpg",
    "providers": [],
    "providersChecked": true,
@@ -4660,7 +4476,7 @@
    "tmdbScore": 64,
    "votes": 164,
    "poster": "/9YDW8dCrQyRpppK5985hKY1Mc8X.jpg",
-   "overview": "Ty was a frustrated toy salesman until his collaboration with three women turned his stuffed animals into a defining '90s trend. This behind-the-scenes look at history's biggest toy craze is a wild story about what\u2014and who\u2014is valued in this world.",
+   "overview": "Ty was a frustrated toy salesman until his collaboration with three women turned his stuffed animals into a defining '90s trend. This behind-the-scenes look at history's biggest toy craze is a wild story about what—and who—is valued in this world.",
    "backdrop": "/zzbEAP5d1Ci0QKitpaA8PykHIj4.jpg",
    "providers": [],
    "providersChecked": true,
@@ -4686,7 +4502,8 @@
    "backdrop": "/nSVwus6Vcnw06zqKAa1ioacrpUF.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 66
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "The Holdovers",
@@ -4703,13 +4520,14 @@
    "tmdbScore": 76,
    "votes": 2641,
    "poster": "/VHSzNBTwxV8vh7wylo7O9CLdac.jpg",
-   "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them \u2014 a damaged, brainy troublemaker \u2014 and with the school\u2019s head cook, who has just lost a son in Vietnam.",
+   "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
    "backdrop": "/A99WMiz0ASpH9coOFrxSEuwTWx0.jpg",
    "providers": [
     "PCK"
    ],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Nomadland",
@@ -4802,8 +4620,7 @@
     "NFX"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 96
   },
   {
    "t": "The Irishman",
@@ -5075,8 +4892,7 @@
    "backdrop": "/2ndw55F40IkALzWyjCCza3M6nqM.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 87
   },
   {
    "t": "Lost in Translation",
@@ -5121,8 +4937,7 @@
     "PCK"
    ],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 97
   },
   {
    "t": "Little Miss Sunshine",
@@ -5184,7 +4999,7 @@
    "runtime": 95,
    "cert": "PG-13",
    "tmdbScore": 73,
-   "votes": 11243,
+   "votes": 11244,
    "poster": "/qXAuQ9hF30sQRsXf40OfRVl0MJZ.jpg",
    "overview": "Tom, greeting-card writer and hopeless romantic, is caught completely off-guard when his girlfriend, Summer, suddenly dumps him. He reflects on their 500 days together to try to figure out where their love affair went sour, and in doing so, Tom rediscovers his true passions in life.",
    "backdrop": "/1M2i4Mxd03elGOTmEkIvqrHfmyS.jpg",
@@ -5276,12 +5091,11 @@
    "tmdbScore": 70,
    "votes": 2725,
    "poster": "/hUu9zyZmDd8VZegKi1iK1Vk0RYS.jpg",
-   "overview": "The commandant of Auschwitz, Rudolf H\u00f6ss, and his wife Hedwig, strive to build a dream life for their family in a house and garden next to the camp.",
+   "overview": "The commandant of Auschwitz, Rudolf Höss, and his wife Hedwig, strive to build a dream life for their family in a house and garden next to the camp.",
    "backdrop": "/pnTSOKcYnvdpQNQElAtJM1rWOxH.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": null,
-   "omdbError": "Request limit reached!"
+   "rt": 93
   },
   {
    "t": "Poor Things",
@@ -5482,7 +5296,7 @@
    "tmdbScore": 79,
    "votes": 8632,
    "poster": "/oBgWY00bEFeZ9N25wWVyuQddbAo.jpg",
-   "overview": "Hutch Mansell, a suburban dad, overlooked husband, nothing neighbor \u2014 a \"nobody.\" When two thieves break into his home one night, Hutch's unknown long-simmering rage is ignited and propels him on a brutal path that will uncover dark secrets he fought to leave behind.",
+   "overview": "Hutch Mansell, a suburban dad, overlooked husband, nothing neighbor — a \"nobody.\" When two thieves break into his home one night, Hutch's unknown long-simmering rage is ignited and propels him on a brutal path that will uncover dark secrets he fought to leave behind.",
    "backdrop": "/61MrK5U4w4MVL1vfwoG12zYPJ8B.jpg",
    "providers": [
     "PCK"
@@ -5534,7 +5348,8 @@
     "MAX"
    ],
    "providersChecked": true,
-   "rt": 88
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Air",
@@ -5579,7 +5394,8 @@
    "backdrop": "/2vq5GTJOahE03mNYZGxIynlHcWr.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 92
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Free Solo",
@@ -5625,7 +5441,8 @@
    "backdrop": "/yrepQdpreOorLyBJyvZkGn3Izfe.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 97
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "My Octopus Teacher",
@@ -5642,7 +5459,7 @@
    "tmdbScore": 79,
    "votes": 1075,
    "poster": "/hvTVZb7hBC8tZAGoEhH5eiMJu2B.jpg",
-   "overview": "After years of swimming every day in the freezing ocean at the tip of Africa, Craig Foster meets an unlikely teacher: a young octopus who displays remarkable curiosity. Visiting her den and tracking her movements for months on end he eventually wins the animal\u2019s trust and they develop a never-before-seen bond between human and wild animal.",
+   "overview": "After years of swimming every day in the freezing ocean at the tip of Africa, Craig Foster meets an unlikely teacher: a young octopus who displays remarkable curiosity. Visiting her den and tracking her movements for months on end he eventually wins the animal’s trust and they develop a never-before-seen bond between human and wild animal.",
    "backdrop": "/sW7VOrkHKYIeV9PaYc5IqGU2XK8.jpg",
    "providers": [
     "NFX"
@@ -5738,7 +5555,8 @@
    "backdrop": "/bvkPno6U02lLyvPWCnmibq4eIaN.jpg",
    "providers": [],
    "providersChecked": true,
-   "rt": 89
+   "rt": null,
+   "omdbError": "Request limit reached!"
   },
   {
    "t": "Signs",
@@ -5955,6 +5773,7 @@
    "poster": "/alpf5v4UqSFawPmG9RX03Or4BDk.jpg",
    "backdrop": "/c4U96GrPRfnNrS01mBtqnocvlLJ.jpg",
    "tmdb": 1621552,
+   "imdb": "tt39390497",
    "firstSeen": null
   },
   {
@@ -5984,6 +5803,7 @@
    "poster": "/6JU7E8Vv2M11egkctWVOScxWR75.jpg",
    "backdrop": "/1RhfevWmWCVHtEqxWBEjPOC5KG1.jpg",
    "tmdb": 1284041,
+   "imdb": "tt32268156",
    "firstSeen": null
   },
   {
@@ -6015,6 +5835,7 @@
    "poster": "/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg",
    "backdrop": "/fn4n6uOYcB6Uh89nbNPoU2w80RV.jpg",
    "tmdb": 315635,
+   "imdb": "tt2250912",
    "firstSeen": null
   },
   {
@@ -6036,7 +5857,7 @@
     "NFX"
    ],
    "d": "Nathan Greno",
-   "h": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat\u2014one that could endanger not only their species, but the entire valley they call home.",
+   "h": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat—one that could endanger not only their species, but the entire valley they call home.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
@@ -6045,6 +5866,7 @@
    "poster": "/tHhxWxge06goXU6ZQH1hj7vK8Hd.jpg",
    "backdrop": "/zMwhWailP1WY7sb6AoE6b8ugoy.jpg",
    "tmdb": 1007757,
+   "imdb": "tt29552248",
    "firstSeen": null
   },
   {
@@ -6075,6 +5897,7 @@
    "poster": "/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg",
    "backdrop": "/zNriRTr0kWwyaXPzdg1EIxf0BWk.jpg",
    "tmdb": 1234821,
+   "imdb": "tt31036941",
    "firstSeen": null
   },
   {
@@ -6105,6 +5928,7 @@
    "poster": "/rFhKkXhk7ClU03jQ5rHIApJDwev.jpg",
    "backdrop": "/6yeVcxFR0j08vlv2OlL6zbewm4D.jpg",
    "tmdb": 1265609,
+   "imdb": "tt15940132",
    "firstSeen": null
   },
   {
@@ -6137,6 +5961,7 @@
    "poster": "/wfuqMlaExcoYiUEvKfVpUTt1v4u.jpg",
    "backdrop": "/tq3h43fZy0H80vzf47MAY7R9Mxo.jpg",
    "tmdb": 1297842,
+   "imdb": "tt27613895",
    "firstSeen": null
   },
   {
@@ -6170,6 +5995,7 @@
    "poster": "/zT7Lhw3BhJbMkRqm9Zlx2YGMsY0.jpg",
    "backdrop": "/w3Bi0wygeFQctn6AqFTwhGNXRwL.jpg",
    "tmdb": 803796,
+   "imdb": "tt14205554",
    "firstSeen": null
   },
   {
@@ -6201,6 +6027,7 @@
    "poster": "/53dsJ3oEnBhTBVMigWJ9tkA5bzJ.jpg",
    "backdrop": "/8J6UlIFcU7eZfq9iCLbgc8Auklg.jpg",
    "tmdb": 1087192,
+   "imdb": "tt26743210",
    "firstSeen": null
   },
   {
@@ -6232,6 +6059,7 @@
    "poster": "/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg",
    "backdrop": "/zb6fM1CX41D9rF9hdgclu0peUmy.jpg",
    "tmdb": 424,
+   "imdb": "tt0108052",
    "firstSeen": null
   },
   {
@@ -6254,7 +6082,7 @@
     "MAX"
    ],
    "d": "Jaume Collet-Serra",
-   "h": "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods\u2014and imprisoned just as quickly\u2014Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
+   "h": "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods—and imprisoned just as quickly—Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -6263,6 +6091,7 @@
    "poster": "/rCtreCr4xiYEWDQTebybolIh6Xe.jpg",
    "backdrop": "/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
    "tmdb": 436270,
+   "imdb": "tt6443346",
    "firstSeen": null
   },
   {
@@ -6285,7 +6114,7 @@
     "NFX"
    ],
    "d": "Colin Trevorrow",
-   "h": "Four years after Isla Nublar was destroyed, dinosaurs now live\u2014and hunt\u2014alongside humans all over the world. This fragile balance will reshape the future and determine, once and for all, whether human beings are to remain the apex predators on a planet they now share with history's most fearsome creatures.",
+   "h": "Four years after Isla Nublar was destroyed, dinosaurs now live—and hunt—alongside humans all over the world. This fragile balance will reshape the future and determine, once and for all, whether human beings are to remain the apex predators on a planet they now share with history's most fearsome creatures.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -6294,6 +6123,7 @@
    "poster": "/jbAvCACjLf1ZG0unB2tdmx5HAf1.jpg",
    "backdrop": "/698FjyzLdpgXmUSr63LaRwblTmx.jpg",
    "tmdb": 507086,
+   "imdb": "tt8041270",
    "firstSeen": null
   },
   {
@@ -6323,6 +6153,7 @@
    "poster": "/canZTWSxACSnAluir3dCtMxKpA1.jpg",
    "backdrop": "/2WU6Y6aonzD6uAaCmNnEFlesxxJ.jpg",
    "tmdb": 614945,
+   "imdb": "tt10375624",
    "firstSeen": null
   },
   {
@@ -6357,6 +6188,7 @@
    "poster": "/wKiOkZTN9lUUUNZLmtnwubZYONg.jpg",
    "backdrop": "/wZS4xSfPtk1NPQnx9zsT5R2WhCu.jpg",
    "tmdb": 438148,
+   "imdb": "tt5113044",
    "firstSeen": null
   },
   {
@@ -6389,6 +6221,7 @@
    "poster": "/g4JtvGlQO7DByTI6frUobqvSL3R.jpg",
    "backdrop": "/hpXBJxLD2SEf8l2CspmSeiHrBKX.jpg",
    "tmdb": 1062722,
+   "imdb": "tt1312221",
    "firstSeen": null
   },
   {
@@ -6417,6 +6250,7 @@
    "poster": "/dU4HfnTEJDf9KvxGS9hgO7BVeju.jpg",
    "backdrop": "/mxdiaM2tsx8M6W3zLgiPwAkhQfq.jpg",
    "tmdb": 744275,
+   "imdb": "tt13069986",
    "firstSeen": null
   },
   {
@@ -6445,6 +6279,7 @@
    "poster": "/udAxQEORq2I5wxI97N2TEqdhzBE.jpg",
    "backdrop": "/54BOXpX2ieTXMDzHymdDMnUIzYG.jpg",
    "tmdb": 1228246,
+   "imdb": "tt30274401",
    "firstSeen": null
   },
   {
@@ -6476,6 +6311,7 @@
    "poster": "/n5FygjEppOvac6yEaowi26nTyw3.jpg",
    "backdrop": "/6WqqEjiycNvDLjbEClM1zCwIbDD.jpg",
    "tmdb": 1100988,
+   "imdb": "tt10548174",
    "firstSeen": null
   },
   {
@@ -6506,6 +6342,7 @@
    "poster": "/kK1BGkG3KAvWB0WMV1DfOx9yTMZ.jpg",
    "backdrop": "/hHDNOlATHhre4eZ7aYz5cdyJLik.jpg",
    "tmdb": 1272837,
+   "imdb": "tt32141377",
    "firstSeen": null
   },
   {
@@ -6540,6 +6377,7 @@
    "poster": "/iKP6wg3c6COUe8gYutoGG7qcPnO.jpg",
    "backdrop": "/atoIgfAk2Ig2HFJLD0VUnjiPWEz.jpg",
    "tmdb": 118,
+   "imdb": "tt0367594",
    "firstSeen": null
   },
   {
@@ -6571,6 +6409,7 @@
    "poster": "/si9tolnefLSUKaqQEGz1bWArOaL.jpg",
    "backdrop": "/cGbPBHKSFO7hSIjxkb3KOaGdOep.jpg",
    "tmdb": 967941,
+   "imdb": "tt19847976",
    "firstSeen": null
   },
   {
@@ -6600,6 +6439,7 @@
    "poster": "/7BsvSuDQuoqhWmU2fL7W2GOcZHU.jpg",
    "backdrop": "/5En0fmDagt3Pk8d7P3uTwfeQceg.jpg",
    "tmdb": 490132,
+   "imdb": "tt6966692",
    "firstSeen": null
   },
   {
@@ -6630,6 +6470,7 @@
    "poster": "/fPtlCO1yQtnoLHOwKtWz7db6RGU.jpg",
    "backdrop": "/jW21PoKwqs79wk6bfiYezox63mK.jpg",
    "tmdb": 18,
+   "imdb": "tt0119116",
    "firstSeen": null
   },
   {
@@ -6662,6 +6503,7 @@
    "poster": "/rSdOua3wKMEaFWDcKAYWRjXQWOt.jpg",
    "backdrop": "/tN3pTxkQoP96wtaEahYuRVdUWb2.jpg",
    "tmdb": 701387,
+   "imdb": "tt12300742",
    "firstSeen": null
   },
   {
@@ -6692,6 +6534,7 @@
    "poster": "/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg",
    "backdrop": "/lV1P1Q5gLDXVG1ZYCxZHStkcQC3.jpg",
    "tmdb": 131631,
+   "imdb": "tt1951265",
    "firstSeen": null
   },
   {
@@ -6724,6 +6567,7 @@
    "poster": "/svXVRoRSu6zzFtCzkRsjZS7Lqpd.jpg",
    "backdrop": "/82C04rTiXYZ7c8XZv91Nu53w82Y.jpg",
    "tmdb": 1007734,
+   "imdb": "tt28996126",
    "firstSeen": null
   },
   {
@@ -6759,6 +6603,7 @@
    "poster": "/26oSPnq0ct59l07QOXZKyzsiRtN.jpg",
    "backdrop": "/jvpkBenB6hv19WWYVlaiow8zklq.jpg",
    "tmdb": 1175942,
+   "imdb": "tt30017619",
    "firstSeen": null
   },
   {
@@ -6788,6 +6633,7 @@
    "poster": "/vUwyhNWBKkSwK8ELvEeBRwV724h.jpg",
    "backdrop": "/4mKczHAW4XPDXGk7V5k7Ui3dgUk.jpg",
    "tmdb": 1317149,
+   "imdb": "tt31514146",
    "firstSeen": null
   },
   {
@@ -6821,6 +6667,7 @@
    "poster": "/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg",
    "backdrop": "/xuLA0pii2IMJW2puT7EvJtgpg0H.jpg",
    "tmdb": 675353,
+   "imdb": "tt12412888",
    "firstSeen": null
   },
   {
@@ -6852,6 +6699,7 @@
    "poster": "/v7UF7ypAqjsFZFdjksjQ7IUpXdn.jpg",
    "backdrop": "/AdBXP8e6K3FYdDrMx3Wr6WZqCYF.jpg",
    "tmdb": 493529,
+   "imdb": "tt2906216",
    "firstSeen": null
   },
   {
@@ -6874,7 +6722,7 @@
     "NFX"
    ],
    "d": "Jonathan Entwistle",
-   "h": "After a family tragedy, kung fu prodigy Li Fong is uprooted from his home in Beijing and forced to move to New York City with his mother. When a new friend needs his help, Li enters a karate competition \u2013 but his skills alone aren't enough. Li's kung fu teacher Mr.",
+   "h": "After a family tragedy, kung fu prodigy Li Fong is uprooted from his home in Beijing and forced to move to New York City with his mother. When a new friend needs his help, Li enters a karate competition – but his skills alone aren't enough. Li's kung fu teacher Mr.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -6883,6 +6731,7 @@
    "poster": "/c90Lt7OQGsOmhv6x4JoFdoHzw5l.jpg",
    "backdrop": "/7Q2CmqIVJuDAESPPp76rWIiA0AD.jpg",
    "tmdb": 1011477,
+   "imdb": "tt1674782",
    "firstSeen": null
   },
   {
@@ -6911,6 +6760,7 @@
    "poster": "/9HcEqn3D4J6b2Z0jK54id9nA0fr.jpg",
    "backdrop": "/bVGHSe47W6oCQL1Q88pvRAet51A.jpg",
    "tmdb": 1330021,
+   "imdb": "tt33100314",
    "firstSeen": null
   },
   {
@@ -6942,6 +6792,7 @@
    "poster": "/vrQHDXjVmbYzadOXQ0UaObunoy2.jpg",
    "backdrop": "/eHaazLxM5LRMh0ySkVy7SK6wUWt.jpg",
    "tmdb": 101299,
+   "imdb": "tt1951264",
    "firstSeen": null
   },
   {
@@ -6961,7 +6812,7 @@
     "NFX"
    ],
    "d": "Tom Harper",
-   "h": "After his estranged son gets embroiled in a Nazi plot, self-exiled gangster Tommy Shelby must return to Birmingham to save his family \u2014 and his nation.",
+   "h": "After his estranged son gets embroiled in a Nazi plot, self-exiled gangster Tommy Shelby must return to Birmingham to save his family — and his nation.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -6970,6 +6821,7 @@
    "poster": "/gRMalasZEzsZi4w2VFuYusfSfqf.jpg",
    "backdrop": "/1fkuBPid72KGS6WmtkEXMftZtkE.jpg",
    "tmdb": 875828,
+   "imdb": "tt15574124",
    "firstSeen": null
   },
   {
@@ -7004,6 +6856,7 @@
    "poster": "/ebe8hJRCwdflNQbUjRrfmqtUiNi.jpg",
    "backdrop": "/tTVjF5q63fli9ecSg5L9ljHibKJ.jpg",
    "tmdb": 454640,
+   "imdb": "tt6095472",
    "firstSeen": null
   },
   {
@@ -7037,6 +6890,7 @@
    "poster": "/dr02BdCNAUPVU07aOodwPYv6HCf.jpg",
    "backdrop": "/wKrxeY6lbu7KFBsWVcMH6M8avwr.jpg",
    "tmdb": 211672,
+   "imdb": "tt2293640",
    "firstSeen": null
   },
   {
@@ -7067,6 +6921,7 @@
    "poster": "/fcEXcip7v0O1ndV4VUdFqJSqbOg.jpg",
    "backdrop": "/nazre7z7MoUwAqimnrSlMlfLR5t.jpg",
    "tmdb": 22803,
+   "imdb": "tt1197624",
    "firstSeen": null
   },
   {
@@ -7089,7 +6944,7 @@
     "NFX"
    ],
    "d": "Rian Johnson",
-   "h": "When young priest Jud Duplenticy is sent to assist charismatic firebrand Monsignor Jefferson Wicks, it\u2019s clear that all is not well in the pews. After a sudden and seemingly impossible murder rocks the town, the lack of an obvious suspect prompts local police chief Geraldine Scott to join forces with renowned detective Benoit Blanc to unravel a mystery that defies all logic.",
+   "h": "When young priest Jud Duplenticy is sent to assist charismatic firebrand Monsignor Jefferson Wicks, it’s clear that all is not well in the pews. After a sudden and seemingly impossible murder rocks the town, the lack of an obvious suspect prompts local police chief Geraldine Scott to join forces with renowned detective Benoit Blanc to unravel a mystery that defies all logic.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -7098,6 +6953,7 @@
    "poster": "/iV9LM8aUb83BjCCx2RUnKE5sSQg.jpg",
    "backdrop": "/fiRDzpcJe7qz3yIR43hdXIE3NHv.jpg",
    "tmdb": 812583,
+   "imdb": "tt14364480",
    "firstSeen": null
   },
   {
@@ -7127,6 +6983,7 @@
    "poster": "/2IRjbi9cADuDMKmHdLK7LaqQDKA.jpg",
    "backdrop": "/xBwtP27cx8WfjHJVFkpuV6F1RES.jpg",
    "tmdb": 49046,
+   "imdb": "tt1016150",
    "firstSeen": null
   },
   {
@@ -7158,6 +7015,7 @@
    "poster": "/2E2WTX0TJEflAged6kzErwqX1kt.jpg",
    "backdrop": "/oHBhHoNe59VH6bUMazDtJmWOFSS.jpg",
    "tmdb": 940721,
+   "imdb": "tt23289160",
    "firstSeen": null
   },
   {
@@ -7187,6 +7045,7 @@
    "poster": "/7E8nLijS9AwwUEPu2oFYOVKhdFA.jpg",
    "backdrop": "/c6yfABGVKuB5cjoOwdX4AJMlzUz.jpg",
    "tmdb": 620,
+   "imdb": "tt0087332",
    "firstSeen": null
   },
   {
@@ -7218,6 +7077,7 @@
    "poster": "/3nFnrivNgipSKZ8LZJJbRSlAcTR.jpg",
    "backdrop": "/mfnkxXWuh2Br097Qteq8ieqKfev.jpg",
    "tmdb": 159824,
+   "imdb": "tt2510894",
    "firstSeen": null
   },
   {
@@ -7244,7 +7104,7 @@
     "NFX"
    ],
    "d": "Pierre Perifel",
-   "h": "When the Bad Guys, a crew of criminal animals, are finally caught after years of heists and being the world\u2019s most-wanted villains, Mr. Wolf brokers a deal to save them all from prison.",
+   "h": "When the Bad Guys, a crew of criminal animals, are finally caught after years of heists and being the world’s most-wanted villains, Mr. Wolf brokers a deal to save them all from prison.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
@@ -7253,6 +7113,7 @@
    "poster": "/7qop80YfuO0BwJa1uXk1DXUUEwv.jpg",
    "backdrop": "/oXx1QZzeF5V3HMQ11q6WCkA2pQh.jpg",
    "tmdb": 629542,
+   "imdb": "tt8115900",
    "firstSeen": null
   },
   {
@@ -7271,7 +7132,7 @@
     "NFX"
    ],
    "d": "James Vanderbilt",
-   "h": "In postwar Germany, an American psychiatrist must determine whether Nazi prisoners are fit to go on trial for war crimes, and finds himself in a complex battle of intellect and ethics with Hermann G\u00f6ring, Hitler's right-hand man.",
+   "h": "In postwar Germany, an American psychiatrist must determine whether Nazi prisoners are fit to go on trial for war crimes, and finds himself in a complex battle of intellect and ethics with Hermann Göring, Hitler's right-hand man.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -7280,6 +7141,7 @@
    "poster": "/xthXNYltOOm80vW5Kxjzxx5gvQ6.jpg",
    "backdrop": "/bf5TG9RODkPXmtJSgf8Iymof1wl.jpg",
    "tmdb": 1214931,
+   "imdb": "tt29567915",
    "firstSeen": null
   },
   {
@@ -7313,6 +7175,7 @@
    "poster": "/wDWwtvkRRlgTiUr6TyLSMX8FCuZ.jpg",
    "backdrop": "/k6ANeyxAfMRi5xhxIXv1Scn9vc2.jpg",
    "tmdb": 934433,
+   "imdb": "tt17663992",
    "firstSeen": null
   },
   {
@@ -7334,7 +7197,7 @@
     "NFX"
    ],
    "d": "Guy Ritchie",
-   "h": "American expat Mickey Pearson has built a highly profitable marijuana empire in London. When word gets out that he\u2019s looking to cash out of the business forever it triggers plots, schemes, bribery and blackmail in an attempt to steal his domain out from under him.",
+   "h": "American expat Mickey Pearson has built a highly profitable marijuana empire in London. When word gets out that he’s looking to cash out of the business forever it triggers plots, schemes, bribery and blackmail in an attempt to steal his domain out from under him.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -7343,6 +7206,7 @@
    "poster": "/jtrhTYB7xSrJxR1vusu99nvnZ1g.jpg",
    "backdrop": "/hClLP88yMIuhslwSVxtYrvWmxfp.jpg",
    "tmdb": 522627,
+   "imdb": "tt8367814",
    "firstSeen": null
   },
   {
@@ -7377,6 +7241,7 @@
    "poster": "/j6G24dqI4WgUtChhWjfnI4lnmiK.jpg",
    "backdrop": "/AfyuI3glMCBDFmNPj9PY6DwbgGp.jpg",
    "tmdb": 18491,
+   "imdb": "tt0169858",
    "firstSeen": null
   },
   {
@@ -7397,7 +7262,7 @@
     "NFX"
    ],
    "d": "Clint Eastwood",
-   "h": "S. Navy SEAL Chris Kyle takes his sole mission\u2014protect his comrades\u2014to heart and becomes one of the most lethal snipers in American history. His pinpoint accuracy not only saves countless lives but also makes him a prime target of insurgents. Despite grave danger and his struggle to be a good husband and father to his family back in the States, Kyle serves four tours of duty in Iraq.",
+   "h": "S. Navy SEAL Chris Kyle takes his sole mission—protect his comrades—to heart and becomes one of the most lethal snipers in American history. His pinpoint accuracy not only saves countless lives but also makes him a prime target of insurgents. Despite grave danger and his struggle to be a good husband and father to his family back in the States, Kyle serves four tours of duty in Iraq.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -7406,6 +7271,7 @@
    "poster": "/i1U46OwMc6vlm7OoSUKfqUH615e.jpg",
    "backdrop": "/rl95VDEP3nsUQmGzE0S1S7y6T0N.jpg",
    "tmdb": 190859,
+   "imdb": "tt2179136",
    "firstSeen": null
   },
   {
@@ -7436,6 +7302,7 @@
    "poster": "/mBaXZ95R2OxueZhvQbcEWy2DqyO.jpg",
    "backdrop": "/bk1TitfD4YIGrM6AvljonMCtfnl.jpg",
    "tmdb": 695721,
+   "imdb": "tt10545296",
    "firstSeen": null
   },
   {
@@ -7454,7 +7321,7 @@
    "svcs": [
     "NFX"
    ],
-   "d": "Chlo\u00e9 Zhao",
+   "d": "Chloé Zhao",
    "h": "The powerful story of love and loss that inspired the creation of Shakespeare's timeless masterpiece, Hamlet.",
    "k": "teen",
    "pop": 1,
@@ -7464,6 +7331,7 @@
    "poster": "/vbeyOZm2bvBXcbgPD3v6o94epPX.jpg",
    "backdrop": "/73BClq9FOcrWrutnpiqhCNEWEwJ.jpg",
    "tmdb": 858024,
+   "imdb": "tt14905854",
    "firstSeen": null
   },
   {
@@ -7493,6 +7361,7 @@
    "poster": "/7kRYHH9H9PjBFwz1FprbHB2AAjI.jpg",
    "backdrop": "/jLuGZc84MvPYCQomQg9DI72mstt.jpg",
    "tmdb": 1202033,
+   "imdb": "tt32278481",
    "firstSeen": null
   },
   {
@@ -7524,6 +7393,7 @@
    "poster": "/rwopfpHqPCYBSgBuZwkaXXqHp14.jpg",
    "backdrop": "/z9ft5HYHzWcasR6SGcgeluxTznB.jpg",
    "tmdb": 335797,
+   "imdb": "tt3470600",
    "firstSeen": null
   },
   {
@@ -7554,6 +7424,7 @@
    "poster": "/cvda8s5J8YaHjTyEyXQpvD6f3iV.jpg",
    "backdrop": "/41043LV7mfluH8iXEUPVseCDAv5.jpg",
    "tmdb": 1245993,
+   "imdb": "tt1493274",
    "firstSeen": null
   },
   {
@@ -7588,6 +7459,7 @@
    "poster": "/e72KCMHNkbZ6USRJmABeqwmaJ5n.jpg",
    "backdrop": "/ftRkFtAGuHngHnLiOxktq0aCVMF.jpg",
    "tmdb": 324852,
+   "imdb": "tt3469046",
    "firstSeen": null
   },
   {
@@ -7609,7 +7481,7 @@
     "NFX"
    ],
    "d": "Sam Esmail",
-   "h": "A family's getaway to a luxurious rental home takes an ominous turn when a cyberattack knocks out their devices\u2014and two strangers appear at their door.",
+   "h": "A family's getaway to a luxurious rental home takes an ominous turn when a cyberattack knocks out their devices—and two strangers appear at their door.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -7618,6 +7490,7 @@
    "poster": "/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg",
    "backdrop": "/5cRw2QHQz5bp7W2KLdSpZoFoTTw.jpg",
    "tmdb": 726209,
+   "imdb": "tt12747748",
    "firstSeen": null
   },
   {
@@ -7649,6 +7522,7 @@
    "poster": "/brzpTyZ5bnM7s53C1KSk1TmrMO6.jpg",
    "backdrop": "/ugiV9SpJburMOPeIyjBJyAnO1So.jpg",
    "tmdb": 32657,
+   "imdb": "tt0814255",
    "firstSeen": null
   },
   {
@@ -7669,7 +7543,7 @@
     "PAR"
    ],
    "d": "Tyler Gillett",
-   "h": "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town\u2019s deadly past.",
+   "h": "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town’s deadly past.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -7678,6 +7552,7 @@
    "poster": "/nD4M4Bx457ryLuKYpxFwQ2IBJ5w.jpg",
    "backdrop": "/ifUfE79O1raUwbaQRIB7XnFz5ZC.jpg",
    "tmdb": 646385,
+   "imdb": "tt11245972",
    "firstSeen": null
   },
   {
@@ -7708,6 +7583,7 @@
    "poster": "/mI2Di7HmskQQ34kz0iau6J1vr70.jpg",
    "backdrop": "/vsZLf5uog08pAnfsMuDWrsLWUUF.jpg",
    "tmdb": 501929,
+   "imdb": "tt7979580",
    "firstSeen": null
   },
   {
@@ -7742,6 +7618,7 @@
    "poster": "/usFenYnk6mr8C62dB1MoAfSWMGR.jpg",
    "backdrop": "/gnkBzJVH2zicIopP2fHf4kRElne.jpg",
    "tmdb": 228161,
+   "imdb": "tt2224026",
    "firstSeen": null
   },
   {
@@ -7763,7 +7640,7 @@
     "NFX"
    ],
    "d": "Patrick Hughes",
-   "h": "The world\u2019s most lethal odd couple \u2013 bodyguard Michael Bryce and hitman Darius Kincaid \u2013 are back on another life-threatening mission. Still unlicensed and under scrutiny, Bryce is forced into action by Darius's even more volatile wife, the infamous international con artist Sonia Kincaid.",
+   "h": "The world’s most lethal odd couple – bodyguard Michael Bryce and hitman Darius Kincaid – are back on another life-threatening mission. Still unlicensed and under scrutiny, Bryce is forced into action by Darius's even more volatile wife, the infamous international con artist Sonia Kincaid.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -7772,6 +7649,7 @@
    "poster": "/6zwGWDpY8Zu0L6W4SYWERBR8Msw.jpg",
    "backdrop": "/bjIPzixuWnOzxDG25WaXKuy9lYZ.jpg",
    "tmdb": 522931,
+   "imdb": "tt8385148",
    "firstSeen": null
   },
   {
@@ -7800,6 +7678,7 @@
    "poster": "/vBOpqxW0SDhACwEO2LZT29DuNG2.jpg",
    "backdrop": "/6zKjoOOb3OZnZuiHtQZn4Kd69Gq.jpg",
    "tmdb": 1197137,
+   "imdb": "tt29644189",
    "firstSeen": null
   },
   {
@@ -7830,6 +7709,7 @@
    "poster": "/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg",
    "backdrop": "/qZYvF1M7y8Gfp4S6OBHbYfB0Lgc.jpg",
    "tmdb": 639933,
+   "imdb": "tt11138512",
    "firstSeen": null
   },
   {
@@ -7861,6 +7741,7 @@
    "poster": "/dUkAmAyPVqubSBNRjRqCgHggZcK.jpg",
    "backdrop": "/oihWVx3imvRKujnGmSDYhfG1gI5.jpg",
    "tmdb": 19908,
+   "imdb": "tt1156398",
    "firstSeen": null
   },
   {
@@ -7891,6 +7772,7 @@
    "poster": "/roCMOuMQ55Z2TxVx1vZZTevlo0n.jpg",
    "backdrop": "/10MiMMNzWeE53cHhSlfroPiO8vi.jpg",
    "tmdb": 1223601,
+   "imdb": "tt31844586",
    "firstSeen": null
   },
   {
@@ -7924,6 +7806,7 @@
    "poster": "/rt7cpEr1uP6RTZykBFhBTcRaKvG.jpg",
    "backdrop": "/747dgDfL5d8esobk7h4odaOFhUq.jpg",
    "tmdb": 275,
+   "imdb": "tt0116282",
    "firstSeen": null
   },
   {
@@ -7957,6 +7840,7 @@
    "poster": "/hU42CRk14JuPEdqZG3AWmagiPAP.jpg",
    "backdrop": "/6XjMwQTvnICBz6TguiDKkDVHvgS.jpg",
    "tmdb": 762441,
+   "imdb": "tt13433802",
    "firstSeen": null
   },
   {
@@ -7985,6 +7869,7 @@
    "poster": "/adk8weka3O5648g3de4z3y4aE7G.jpg",
    "backdrop": "/hniERZojXCEc7Fp3yljZUigOAhm.jpg",
    "tmdb": 1290417,
+   "imdb": "tt32362890",
    "firstSeen": null
   },
   {
@@ -8014,6 +7899,7 @@
    "poster": "/38I76hGcFY6xB47pjm7pZwkfuAF.jpg",
    "backdrop": "/deUWVEgNh2IGjShyymZhaYP40ye.jpg",
    "tmdb": 1356039,
+   "imdb": "tt23648788",
    "firstSeen": null
   },
   {
@@ -8043,6 +7929,7 @@
    "poster": "/yihdXomYb5kTeSivtFndMy5iDmf.jpg",
    "backdrop": "/8Tfys3mDZVp4tNoH2ktm06a0Tau.jpg",
    "tmdb": 687163,
+   "imdb": "tt12042730",
    "firstSeen": null
   },
   {
@@ -8065,7 +7952,7 @@
     "PRV"
    ],
    "d": "Travis Knight",
-   "h": "After being separated for 15 years, the Sword of Power leads Prince Adam back to Eternia, where he discovers his home shattered under the fiendish rule of Skeletor. To save his family and his world, Adam must join forces with his closest allies, Teela and Duncan/Man-At-Arms, and embrace his true destiny as He-Man \u2014 the most powerful man in the universe.",
+   "h": "After being separated for 15 years, the Sword of Power leads Prince Adam back to Eternia, where he discovers his home shattered under the fiendish rule of Skeletor. To save his family and his world, Adam must join forces with his closest allies, Teela and Duncan/Man-At-Arms, and embrace his true destiny as He-Man — the most powerful man in the universe.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -8074,6 +7961,7 @@
    "poster": "/oRuyGUHdoaQxWP3SDfafGkStxTC.jpg",
    "backdrop": "/yQIdU11DYQQp0neGtGtGxbGfRer.jpg",
    "tmdb": 454639,
+   "imdb": "tt0427340",
    "firstSeen": null
   },
   {
@@ -8104,6 +7992,7 @@
    "poster": "/iKy5460GdsoknM8ppmGlJbKxAKa.jpg",
    "backdrop": "/a8uQvrplTkhGJQog6GZ6CqF8An6.jpg",
    "tmdb": 1301421,
+   "imdb": "tt32565993",
    "firstSeen": null
   },
   {
@@ -8135,6 +8024,7 @@
    "poster": "/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg",
    "backdrop": "/1pmXyN3sKeYoUhu5VBZiDU4BX21.jpg",
    "tmdb": 1184918,
+   "imdb": "tt29623480",
    "firstSeen": null
   },
   {
@@ -8157,7 +8047,7 @@
    "svcs": [
     "PRV"
    ],
-   "d": "\u00c1ngel Manuel Soto",
+   "d": "Ángel Manuel Soto",
    "h": "Estranged half-brothers Jonny and James reunite after their father's mysterious death. As they search for the truth, buried secrets reveal a conspiracy threatening to tear their family apart.",
    "k": "adult",
    "pop": 1,
@@ -8167,6 +8057,7 @@
    "poster": "/gbVwHl4YPSq6BcC92TQpe7qUTh6.jpg",
    "backdrop": "/cz4vLJrmaV1zJlRYbxqtvLzeLWB.jpg",
    "tmdb": 1168190,
+   "imdb": "tt33046197",
    "firstSeen": null
   },
   {
@@ -8198,6 +8089,7 @@
    "poster": "/ldyfo0BKmz5rWtJJKCvwaNS4cJT.jpg",
    "backdrop": "/eGX66zonvc4bXg3rM08RUxdYSDx.jpg",
    "tmdb": 1061474,
+   "imdb": "tt5950044",
    "firstSeen": null
   },
   {
@@ -8220,7 +8112,7 @@
     "PAR"
    ],
    "d": "Christopher McQuarrie",
-   "h": "Ethan Hunt and team continue their search for the terrifying AI known as the Entity \u2014 which has infiltrated intelligence networks all over the globe \u2014 with the world's governments and a mysterious ghost from Hunt's past on their trail.",
+   "h": "Ethan Hunt and team continue their search for the terrifying AI known as the Entity — which has infiltrated intelligence networks all over the globe — with the world's governments and a mysterious ghost from Hunt's past on their trail.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -8229,6 +8121,7 @@
    "poster": "/iKPsC9EFUafRP9SrUznI61getVP.jpg",
    "backdrop": "/538U9snNc2fpnOmYXAPUh3zn31H.jpg",
    "tmdb": 575265,
+   "imdb": "tt9603208",
    "firstSeen": null
   },
   {
@@ -8257,6 +8150,7 @@
    "poster": "/tDgxknTVwrScxpCYyGUjXSn5NRk.jpg",
    "backdrop": "/tav8VVa6H6KooK5rFhAG2jT5ZNx.jpg",
    "tmdb": 390062,
+   "imdb": "tt3758172",
    "firstSeen": null
   },
   {
@@ -8276,7 +8170,7 @@
    "svcs": [
     "PRV"
    ],
-   "d": "Domingo Gonz\u00e1lez",
+   "d": "Domingo González",
    "h": "Noah must leave her city, boyfriend, and friends to move into William Leister's mansion, the flashy and wealthy husband of her mother Rafaela. As a proud and independent 17 year old, Noah resists living in a mansion surrounded by luxury. However, it is there where she meets Nick, her new stepbrother, and the clash of their strong personalities becomes evident from the very beginning.",
    "k": "teen",
    "pop": 2,
@@ -8286,6 +8180,7 @@
    "poster": "/w46Vw536HwNnEzOa7J24YH9DPRS.jpg",
    "backdrop": "/oz4U9eA6ilYf1tyiVuGmkftdLac.jpg",
    "tmdb": 1010581,
+   "imdb": "tt21909764",
    "firstSeen": null
   },
   {
@@ -8319,6 +8214,7 @@
    "poster": "/lbBWwxBht4JFP5PsuJ5onpMqugW.jpg",
    "backdrop": "/zpEWFNqoN8Qg1SzMMHmaGyOBTdW.jpg",
    "tmdb": 1054867,
+   "imdb": "tt30144839",
    "firstSeen": null
   },
   {
@@ -8348,6 +8244,7 @@
    "poster": "/fDEdtS4P0gJsxHDIt8dG8TR5dx1.jpg",
    "backdrop": "/clFFCapyGpE7KD4Jsu5pUbFBZF4.jpg",
    "tmdb": 359410,
+   "imdb": "tt3359350",
    "firstSeen": null
   },
   {
@@ -8371,7 +8268,7 @@
     "PAR"
    ],
    "d": "Edgar Wright",
-   "h": "Desperate to save his sick daughter, working-class Ben Richards is convinced by The Running Man's charming but ruthless producer to enter the deadly competition game as a last resort. But Ben's defiance, instincts, and grit turn him into an unexpected fan favorite \u2014 and a threat to the entire system.",
+   "h": "Desperate to save his sick daughter, working-class Ben Richards is convinced by The Running Man's charming but ruthless producer to enter the deadly competition game as a last resort. But Ben's defiance, instincts, and grit turn him into an unexpected fan favorite — and a threat to the entire system.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -8380,6 +8277,7 @@
    "poster": "/dKL78O9zxczVgjtNcQ9UkbYLzqX.jpg",
    "backdrop": "/aHj7d7wSLqrg5cjAcgHhiGr97Ih.jpg",
    "tmdb": 798645,
+   "imdb": "tt14107334",
    "firstSeen": null
   },
   {
@@ -8412,6 +8310,7 @@
    "poster": "/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg",
    "backdrop": "/zOpe0eHsq0A2NvNyBbtT6sj53qV.jpg",
    "tmdb": 939243,
+   "imdb": "tt18259086",
    "firstSeen": null
   },
   {
@@ -8443,6 +8342,7 @@
    "poster": "/iQ5ztdjvteGeboxtmRdXEChJOHh.jpg",
    "backdrop": "/1qM2BYNE11Viby8ImC9LC00DgDr.jpg",
    "tmdb": 111,
+   "imdb": "tt0086250",
    "firstSeen": null
   },
   {
@@ -8461,7 +8361,7 @@
     "PRV"
    ],
    "d": "Sergio Leone",
-   "h": "While the Civil War rages on between the Union and the Confederacy, three men \u2013 a quiet loner, a ruthless hitman, and a Mexican bandit \u2013 comb the American Southwest in search of a strongbox containing $200,000 in stolen gold.",
+   "h": "While the Civil War rages on between the Union and the Confederacy, three men – a quiet loner, a ruthless hitman, and a Mexican bandit – comb the American Southwest in search of a strongbox containing $200,000 in stolen gold.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -8470,6 +8370,7 @@
    "poster": "/bX2xnavhMYjWDoZp1VM6VnU1xwe.jpg",
    "backdrop": "/x4biAVdPVCghBlsVIzB6NmbghIz.jpg",
    "tmdb": 429,
+   "imdb": "tt0060196",
    "firstSeen": null
   },
   {
@@ -8495,7 +8396,7 @@
     "PRV"
    ],
    "d": "Chris Renaud",
-   "h": "Gru and Lucy and their girls\u2014Margo, Edith and Agnes\u2014welcome a new member to the Gru family, Gru Jr., who is intent on tormenting his dad. Gru also faces a new nemesis in Maxime Le Mal and his femme fatale girlfriend Valentina, forcing the family to go on the run.",
+   "h": "Gru and Lucy and their girls—Margo, Edith and Agnes—welcome a new member to the Gru family, Gru Jr., who is intent on tormenting his dad. Gru also faces a new nemesis in Maxime Le Mal and his femme fatale girlfriend Valentina, forcing the family to go on the run.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
@@ -8504,6 +8405,7 @@
    "poster": "/wWba3TaojhK7NdycRhoQpsG0FaH.jpg",
    "backdrop": "/twsxsfao6ZOVvT8LfudH603MMi6.jpg",
    "tmdb": 519182,
+   "imdb": "tt7510222",
    "firstSeen": null
   },
   {
@@ -8537,6 +8439,7 @@
    "poster": "/cdqLnri3NEGcmfnqwk2TSIYtddg.jpg",
    "backdrop": "/rOmUuQEZfPXglwFs5ELLLUDKodL.jpg",
    "tmdb": 845781,
+   "imdb": "tt14948432",
    "firstSeen": null
   },
   {
@@ -8566,6 +8469,7 @@
    "poster": "/cpf7vsRZ0MYRQcnLWteD5jK9ymT.jpg",
    "backdrop": "/8VyTWJrNEyV2MTWvniDVp0MpOAe.jpg",
    "tmdb": 1078605,
+   "imdb": "tt26581740",
    "firstSeen": null
   },
   {
@@ -8595,6 +8499,7 @@
    "poster": "/hba8zREJpP1AYhaXgb2oJLQeO0K.jpg",
    "backdrop": "/4QLdZ2A8mkDWp2rpfgDrwmeCtUW.jpg",
    "tmdb": 47971,
+   "imdb": "tt1293847",
    "firstSeen": null
   },
   {
@@ -8624,6 +8529,7 @@
    "poster": "/6FRFIogh3zFnVWn7Z6zcYnIbRcX.jpg",
    "backdrop": "/fTrQsdMS2MUw00RnzH0r3JWHhts.jpg",
    "tmdb": 1197306,
+   "imdb": "tt9150192",
    "firstSeen": null
   },
   {
@@ -8658,6 +8564,7 @@
    "poster": "/d13Uj86LdbDLrfDoHR5aDOFYyJC.jpg",
    "backdrop": "/8AAuJtCzaibYkbE0QVHc8EBsELB.jpg",
    "tmdb": 82702,
+   "imdb": "tt1646971",
    "firstSeen": null
   },
   {
@@ -8687,6 +8594,7 @@
    "poster": "/A7EByudX0eOzlkQ2FIbogzyazm2.jpg",
    "backdrop": "/f0ACHVpV707zqu4etZrXnWNdSgL.jpg",
    "tmdb": 866398,
+   "imdb": "tt15314262",
    "firstSeen": null
   },
   {
@@ -8716,6 +8624,7 @@
    "poster": "/dLlH4aNHdnmf62umnInL8xPlPzw.jpg",
    "backdrop": "/jnFmHDHmPZrQ7vyHmxXHcoxp25j.jpg",
    "tmdb": 290098,
+   "imdb": "tt4016934",
    "firstSeen": null
   },
   {
@@ -8747,6 +8656,7 @@
    "poster": "/aCnVdvExw6UWSeQfr0tUH3jr4qG.jpg",
    "backdrop": "/kg2FOT2Oe5PSCgs3L4vLel6B7ck.jpg",
    "tmdb": 72190,
+   "imdb": "tt0816711",
    "firstSeen": null
   },
   {
@@ -8769,7 +8679,7 @@
     "PRV"
    ],
    "d": "Roman Polanski",
-   "h": "The true story of pianist W\u0142adys\u0142aw Szpilman's experiences in Warsaw during the Nazi occupation. When the Jews of the city find themselves forced into a ghetto, Szpilman finds work playing in a caf\u00e9; and when his family is deported in 1942, he stays behind, works for a while as a laborer, and eventually goes into hiding in the ruins of the war-torn city.",
+   "h": "The true story of pianist Władysław Szpilman's experiences in Warsaw during the Nazi occupation. When the Jews of the city find themselves forced into a ghetto, Szpilman finds work playing in a café; and when his family is deported in 1942, he stays behind, works for a while as a laborer, and eventually goes into hiding in the ruins of the war-torn city.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -8778,6 +8688,7 @@
    "poster": "/2hFvxCCWrTmCYwfy7yum0GKRi3Y.jpg",
    "backdrop": "/c0fB9xk7D1aVb3Bg2rk2SVJcGn.jpg",
    "tmdb": 423,
+   "imdb": "tt0253474",
    "firstSeen": null
   },
   {
@@ -8807,6 +8718,7 @@
    "poster": "/bjiHEhuiwhIygzjczbTPAA07cGc.jpg",
    "backdrop": "/egVj5Y9f79xPnyAQJmeDR0Uwow3.jpg",
    "tmdb": 2251,
+   "imdb": "tt0250797",
    "firstSeen": null
   },
   {
@@ -8836,6 +8748,7 @@
    "poster": "/znTPnXCK3lEQJgqXCvP7e5FUz6f.jpg",
    "backdrop": "/z3bzhmC0CPikWeerUkLO73YvGrC.jpg",
    "tmdb": 1084187,
+   "imdb": "tt26678938",
    "firstSeen": null
   },
   {
@@ -8866,6 +8779,7 @@
    "poster": "/pyok1kZJCfyuFapYXzHcy7BLlQa.jpg",
    "backdrop": "/gIClklFGYBe0uiOoiP2vtocJbss.jpg",
    "tmdb": 1236153,
+   "imdb": "tt31050594",
    "firstSeen": null
   },
   {
@@ -8895,6 +8809,7 @@
    "poster": "/3Mwj2sIONQckOZP3YwsUXF7U5I4.jpg",
    "backdrop": "/pxL08w7Eq0vKrQ3mJzYp0VHGaKG.jpg",
    "tmdb": 49530,
+   "imdb": "tt1637688",
    "firstSeen": null
   },
   {
@@ -8926,6 +8841,7 @@
    "poster": "/kjD700RtyhveN3ZbOnSvUSne0Qj.jpg",
    "backdrop": "/tgDSUwWMgypgmcBhRs9u30RLPNC.jpg",
    "tmdb": 787,
+   "imdb": "tt0356910",
    "firstSeen": null
   },
   {
@@ -8958,6 +8874,7 @@
    "poster": "/ldfCF9RhR40mppkzmftxapaHeTo.jpg",
    "backdrop": "/gklkxY0veMajdCiGe6ggsh07VG2.jpg",
    "tmdb": 940551,
+   "imdb": "tt6495056",
    "firstSeen": null
   },
   {
@@ -8993,6 +8910,7 @@
    "poster": "/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg",
    "backdrop": "/3ffPx9jqg0yj9y1KWeagT7D20CB.jpg",
    "tmdb": 1011985,
+   "imdb": "tt21692408",
    "firstSeen": null
   },
   {
@@ -9023,6 +8941,7 @@
    "poster": "/ovZ0zq0NwRghtWI1oLaM0lWuoEw.jpg",
    "backdrop": "/k6tdiMTO39RQj3dhfspuzprfoe0.jpg",
    "tmdb": 941109,
+   "imdb": "tt18392014",
    "firstSeen": null
   },
   {
@@ -9055,6 +8974,7 @@
    "poster": "/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
    "backdrop": "/tOqIwliWMovSIZ9DyvHcHI7p2im.jpg",
    "tmdb": 558449,
+   "imdb": "tt9218128",
    "firstSeen": null
   },
   {
@@ -9076,7 +8996,7 @@
     "HUL"
    ],
    "d": "Ruben Fleischer",
-   "h": "A young street-smart, Nathan Drake and his wisecracking partner Victor \u201cSully\u201d Sullivan embark on a dangerous pursuit of \u201cthe greatest treasure never found\u201d while also tracking clues that may lead to Nathan\u2019s long-lost brother.",
+   "h": "A young street-smart, Nathan Drake and his wisecracking partner Victor “Sully” Sullivan embark on a dangerous pursuit of “the greatest treasure never found” while also tracking clues that may lead to Nathan’s long-lost brother.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -9085,6 +9005,7 @@
    "poster": "/rJHC1RUORuUhtfNb4Npclx0xnOf.jpg",
    "backdrop": "/fwrqW8Lp5VQuppFrODd4iJ8LySE.jpg",
    "tmdb": 335787,
+   "imdb": "tt1464335",
    "firstSeen": null
   },
   {
@@ -9108,7 +9029,7 @@
     "MAX"
    ],
    "d": "Bryan Singer",
-   "h": "A. interrogation room, Verbal Kint attempts to convince the feds that a mythic crime lord, Keyser Soze, not only exists, but was also responsible for drawing him and his four partners into a multi-million dollar heist that ended with an explosion in San Pedro harbor \u2013 leaving few survivors. Verbal lures his interrogators with an incredible story of the crime lord's almost supernatural prowess.",
+   "h": "A. interrogation room, Verbal Kint attempts to convince the feds that a mythic crime lord, Keyser Soze, not only exists, but was also responsible for drawing him and his four partners into a multi-million dollar heist that ended with an explosion in San Pedro harbor – leaving few survivors. Verbal lures his interrogators with an incredible story of the crime lord's almost supernatural prowess.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -9117,6 +9038,7 @@
    "poster": "/99X2SgyFunJFXGAYnDv3sb9pnUD.jpg",
    "backdrop": "/hy0Hx9fMPk2fmw26Li60z1S2giU.jpg",
    "tmdb": 629,
+   "imdb": "tt0114814",
    "firstSeen": null
   },
   {
@@ -9137,7 +9059,7 @@
     "PAR"
    ],
    "d": "Donald Petrie",
-   "h": "It's the battle of wills, as Andie needs to prove she can dump a guy in 10 days, whereas Ben needs to prove he can win a girl in 10 days. Now, the clock is ticking\u2014and the wildly entertaining comedy smash is off and running in this irresistible tale of sex, lies and outrageous romantic fireworks!",
+   "h": "It's the battle of wills, as Andie needs to prove she can dump a guy in 10 days, whereas Ben needs to prove he can win a girl in 10 days. Now, the clock is ticking—and the wildly entertaining comedy smash is off and running in this irresistible tale of sex, lies and outrageous romantic fireworks!",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -9146,6 +9068,7 @@
    "poster": "/2dlftyPz7mTYbrsPvTogyFmYd7d.jpg",
    "backdrop": "/cdYj6HFpKp5NTmLiHHbNEGSmDT4.jpg",
    "tmdb": 9919,
+   "imdb": "tt0251127",
    "firstSeen": null
   },
   {
@@ -9178,6 +9101,7 @@
    "poster": "/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg",
    "backdrop": "/bajke0ThKJ2V2iHE9DDYOJGdS7a.jpg",
    "tmdb": 1137350,
+   "imdb": "tt30840798",
    "firstSeen": null
   },
   {
@@ -9207,6 +9131,7 @@
    "poster": "/rKleYiEj4pFqxedTRWfujLooi84.jpg",
    "backdrop": "/d5C5Wsx4fnMRA0tj9BK1kTPcgQe.jpg",
    "tmdb": 1315303,
+   "imdb": "tt33028778",
    "firstSeen": null
   },
   {
@@ -9236,6 +9161,7 @@
    "poster": "/lVgE5oLzf7ABmzyASEVcjYyHI41.jpg",
    "backdrop": "/vJbEUMeI2AxBUZKjP6ZVeVNNTLh.jpg",
    "tmdb": 749170,
+   "imdb": "tt13357520",
    "firstSeen": null
   },
   {
@@ -9267,10 +9193,11 @@
    "poster": "/rwla9vqzrKVVKVKiOuROTIXGsxj.jpg",
    "backdrop": "/1wi1hcbl6KYqARjdQ4qrBWZdiau.jpg",
    "tmdb": 1035259,
+   "imdb": "tt3402138",
    "firstSeen": null
   },
   {
-   "t": "The Accountant\u00b2",
+   "t": "The Accountant²",
    "y": 2025,
    "r": 133,
    "g": [
@@ -9296,6 +9223,7 @@
    "poster": "/lUvfTcOZiK0sdcX0WNLPbMyKjGm.jpg",
    "backdrop": "/yBDvgpyynDsbMyK21FoQu1c2wYR.jpg",
    "tmdb": 870028,
+   "imdb": "tt7068946",
    "firstSeen": null
   },
   {
@@ -9326,6 +9254,7 @@
    "poster": "/xi8Iu6qyTfyZVDVy60raIOYJJmk.jpg",
    "backdrop": "/jwt159hXWA9Q5xpBo8hWb3zwLi7.jpg",
    "tmdb": 500,
+   "imdb": "tt0105236",
    "firstSeen": null
   },
   {
@@ -9357,6 +9286,7 @@
    "poster": "/50kALxDX4mmzIRljbNbPY0u4cie.jpg",
    "backdrop": "/rxMnmklIpunsNsRkQ7hw61ZJa84.jpg",
    "tmdb": 189,
+   "imdb": "tt0458481",
    "firstSeen": null
   },
   {
@@ -9388,6 +9318,7 @@
    "poster": "/ht8Uv9QPv9y7K0RvUyJIaXOZTfd.jpg",
    "backdrop": "/iR79ciqhtaZ9BE7YFA1HpCHQgX4.jpg",
    "tmdb": 1100782,
+   "imdb": "tt29268110",
    "firstSeen": null
   },
   {
@@ -9419,6 +9350,7 @@
    "poster": "/cRY25Q32kDNPFDkFkxAs6bgCq3L.jpg",
    "backdrop": "/nnmbJvYyDS1VkMOCbxSpdBi3WbJ.jpg",
    "tmdb": 1579,
+   "imdb": "tt0472043",
    "firstSeen": null
   },
   {
@@ -9440,7 +9372,7 @@
     "PRV"
    ],
    "d": "Luke Greenfield",
-   "h": "When out-of-work accountant Brian joins stay-at-home dad Jeff for a playdate with their sons, he expects a laid-back afternoon. Instead, they're chased by mercenaries, and Brian\u2014totally unprepared\u2014must survive one absurd obstacle after another.",
+   "h": "When out-of-work accountant Brian joins stay-at-home dad Jeff for a playdate with their sons, he expects a laid-back afternoon. Instead, they're chased by mercenaries, and Brian—totally unprepared—must survive one absurd obstacle after another.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -9449,6 +9381,7 @@
    "poster": "/fGodXWqJkkkbSebPIlxLSygV8GY.jpg",
    "backdrop": "/5lQ4euO30sDin5nCifvi0vURFNd.jpg",
    "tmdb": 1248226,
+   "imdb": "tt31425731",
    "firstSeen": null
   },
   {
@@ -9480,6 +9413,7 @@
    "poster": "/9gC88zYUBARRSThcG93MvW14sqx.jpg",
    "backdrop": "/jIpagj2Dud9g3ZVJFvaWikEWsYz.jpg",
    "tmdb": 9323,
+   "imdb": "tt0113568",
    "firstSeen": null
   },
   {
@@ -9500,7 +9434,7 @@
    "svcs": [
     "PRV"
    ],
-   "d": "Rowan Joff\u00e9",
+   "d": "Rowan Joffé",
    "h": "A woman wakes up every day, remembering nothing as a result of a traumatic accident in her past. One day, new terrifying truths emerge that force her to question everyone around her.",
    "k": "adult",
    "pop": 1,
@@ -9510,6 +9444,7 @@
    "poster": "/1sSWpTupVixOanIpZdLGzsKvcZS.jpg",
    "backdrop": "/4Vyrc1SGaBZZ0ZGDq4o6LcEgq1i.jpg",
    "tmdb": 204922,
+   "imdb": "tt1726592",
    "firstSeen": null
   },
   {
@@ -9542,704 +9477,7 @@
    "poster": "/iRCgqpdVE4wyLQvGYU3ZP7pAtUc.jpg",
    "backdrop": "/cMfokHWle5lfCreoV08cbmkKv6G.jpg",
    "tmdb": 698687,
-   "firstSeen": null
-  },
-  {
-   "t": "The Gangster, the Cop, the Devil",
-   "y": 2019,
-   "r": 110,
-   "g": [
-    "action",
-    "crime",
-    "thriller"
-   ],
-   "a": [
-    "grounded",
-    "scary",
-    "propulsive",
-    "violent"
-   ],
-   "svcs": [
-    "PRV",
-    "PCK"
-   ],
-   "d": "Lee Won-tae",
-   "h": "After barely surviving a brutal attack by a sadistic serial killer, crime boss Jang Dong-su is left humiliated. Determined to catch the killer known as K, he forms an uneasy alliance with Jung Tae-seok, a relentless and incorruptible detective who often disrupts his illegal business. However, while Jang Dong-su wants K dead, Jung Tae-suk is determined to bring him to justice.",
-   "k": "teen",
-   "pop": 1,
-   "mpaa": "NR",
-   "rt": 79,
-   "rtSrc": "tmdb",
-   "poster": "/oHlM4abRm6BzrRcz9Nup1uidw9H.jpg",
-   "backdrop": "/jJJQ1PPXUEchqyZ9YyWzgSNU39Z.jpg",
-   "tmdb": 581528,
-   "firstSeen": null
-  },
-  {
-   "t": "Regretting You",
-   "y": 2025,
-   "r": 116,
-   "g": [
-    "romance",
-    "drama"
-   ],
-   "a": [
-    "earnest",
-    "melancholy",
-    "romantic",
-    "characterstudy"
-   ],
-   "svcs": [
-    "PRV",
-    "PAR"
-   ],
-   "d": "Josh Boone",
-   "h": "Morgan Grant and her daughter Clara explore what's left behind after a devastating accident reveals a shocking betrayal and forces them to confront family secrets, redefine love, and rediscover each other.",
-   "k": "teen",
-   "pop": 1,
-   "mpaa": "PG-13",
-   "rt": 71,
-   "rtSrc": "tmdb",
-   "poster": "/z4gVnxTaks3anTycwKjDmvQSuWt.jpg",
-   "backdrop": "/m3WlBJJRbFPaut1QS0PbOG8Wezy.jpg",
-   "tmdb": 1327862,
-   "firstSeen": null
-  },
-  {
-   "t": "The Amateur",
-   "y": 2025,
-   "r": 123,
-   "g": [
-    "thriller",
-    "action"
-   ],
-   "a": [
-    "twisty",
-    "propulsive",
-    "violent"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "James Hawes",
-   "h": "After his life is turned upside down when his wife is killed in a London terrorist attack, a brilliant but introverted CIA decoder takes matters into his own hands when his supervisors refuse to take action.",
-   "k": "teen",
-   "pop": 1,
-   "mpaa": "PG-13",
-   "rt": 69,
-   "rtSrc": "tmdb",
-   "poster": "/SNEoUInCa5fAgwuEBMIMBGvkkh.jpg",
-   "backdrop": "/aD7FXrm2GErTmzrIFBntPyhAqS9.jpg",
-   "tmdb": 1087891,
-   "firstSeen": null
-  },
-  {
-   "t": "It's a Wonderful Life",
-   "y": 1946,
-   "r": 131,
-   "g": [
-    "drama",
-    "family",
-    "fantasy"
-   ],
-   "a": [
-    "cozy",
-    "characterstudy",
-    "visual"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Frank Capra",
-   "h": "George Bailey has spent his entire life giving to the people of Bedford Falls. All that prevents rich skinflint Mr. Potter from taking over the entire town is George's modest building and loan company. But on Christmas Eve the business's $8,000 is lost and George's troubles begin.",
-   "k": "all",
-   "pop": 2,
-   "mpaa": "PG",
-   "rt": 83,
-   "rtSrc": "tmdb",
-   "poster": "/bSqt9rhDZx1Q7UZ86dBPKdNomp2.jpg",
-   "backdrop": "/3q35nBLCIdEbxYfsr7D5ocYQXKz.jpg",
-   "tmdb": 1585,
-   "firstSeen": null
-  },
-  {
-   "t": "Roofman",
-   "y": 2025,
-   "r": 126,
-   "g": [
-    "crime",
-    "comedy",
-    "drama"
-   ],
-   "a": [
-    "propulsive",
-    "grounded",
-    "violent",
-    "comic",
-    "characterstudy"
-   ],
-   "svcs": [
-    "PRV",
-    "PAR"
-   ],
-   "d": "Derek Cianfrance",
-   "h": "\" After escaping prison, he secretly lives inside a Toys \u201cR\u201d Us for six months, surviving undetected while planning his next move. But when he falls for a divorced mom drawn to his undeniable charm, his double life begins to unravel, setting off a compelling and suspenseful game of cat and mouse as his past closes in.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "R",
-   "rt": 70,
-   "rtSrc": "tmdb",
-   "poster": "/wXDFtcnYtevleGzCmAD2ReQnJ4l.jpg",
-   "backdrop": "/E7hhuSZ1U5xymN2Olg2EOr4N4P.jpg",
-   "tmdb": 1242419,
-   "firstSeen": null
-  },
-  {
-   "t": "The Texas Chain Saw Massacre",
-   "y": 1974,
-   "r": 83,
-   "g": [
-    "horror"
-   ],
-   "a": [
-    "violent",
-    "scary",
-    "brisk",
-    "practical"
-   ],
-   "svcs": [
-    "PRV",
-    "PCK"
-   ],
-   "d": "Tobe Hooper",
-   "h": "Five friends head out to rural Texas to visit the grave of a grandfather. On the way, they stumble across what appears to be a deserted house, only to discover something sinister within. Something armed with a chainsaw.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "R",
-   "rt": 73,
-   "rtSrc": "tmdb",
-   "poster": "/mpgkRPH1GNkMCgdPk2OMyHzAks7.jpg",
-   "backdrop": "/wvBx1Q1FcQE1BPLfBbgA3y9aaS1.jpg",
-   "tmdb": 30497,
-   "firstSeen": null
-  },
-  {
-   "t": "Donnie Darko",
-   "y": 2001,
-   "r": 114,
-   "g": [
-    "fantasy",
-    "drama",
-    "mystery"
-   ],
-   "a": [
-    "weird",
-    "cerebral",
-    "melancholy",
-    "visual",
-    "characterstudy",
-    "twisty"
-   ],
-   "svcs": [
-    "PRV",
-    "HUL"
-   ],
-   "d": "Richard Kelly",
-   "h": "After narrowly escaping a bizarre accident, a troubled teenager is plagued by visions of a large bunny rabbit that manipulates him to commit a series of crimes.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 78,
-   "rtSrc": "tmdb",
-   "poster": "/j2AtZFsflxiluaNtajMTI0Avm8C.jpg",
-   "backdrop": "/msCHK5Kh1YbdZ0zPJ2nzPUhhSN9.jpg",
-   "tmdb": 141,
-   "firstSeen": null
-  },
-  {
-   "t": "The Tomorrow War",
-   "y": 2021,
-   "r": 138,
-   "g": [
-    "action",
-    "scifi",
-    "adventure"
-   ],
-   "a": [
-    "earnest",
-    "spectacle",
-    "cerebral",
-    "propulsive"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Chris McKay",
-   "h": "The world is stunned when a group of time travelers arrive from the year 2051 to deliver an urgent message: Thirty years in the future, mankind is losing a global war against a deadly alien species. The only hope for survival is for soldiers and civilians from the present to be transported to the future and join the fight. Among those recruited is high school teacher and family man Dan Forester.",
-   "k": "teen",
-   "pop": 2,
-   "mpaa": "PG-13",
-   "rt": 75,
-   "rtSrc": "tmdb",
-   "poster": "/34nDCQZwaEvsy4CFO5hkGRFDCVU.jpg",
-   "backdrop": "/yizL4cEKsVvl17Wc1mGEIrQtM2F.jpg",
-   "tmdb": 588228,
-   "firstSeen": null
-  },
-  {
-   "t": "The Mist",
-   "y": 2007,
-   "r": 126,
-   "g": [
-    "horror",
-    "scifi",
-    "thriller"
-   ],
-   "a": [
-    "earnest",
-    "propulsive",
-    "scary",
-    "spectacle",
-    "cerebral",
-    "slowburn"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Frank Darabont",
-   "h": "After a violent storm, a dense cloud of mist envelops a small Maine town, trapping David Drayton and his five-year-old son in a local grocery store with other local residents. They soon discover that the mist conceals deadly horrors that threaten their lives, and worse, their sanity.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 70,
-   "rtSrc": "tmdb",
-   "poster": "/c4UgUKZjM0Qzy5t4hAXSOFHYsnb.jpg",
-   "backdrop": "/76J14zgwVWyOciri7X7F3DGP3TA.jpg",
-   "tmdb": 5876,
-   "firstSeen": null
-  },
-  {
-   "t": "Trolls Band Together",
-   "y": 2023,
-   "r": 91,
-   "g": [
-    "animation",
-    "family",
-    "musical",
-    "fantasy",
-    "comedy",
-    "adventure"
-   ],
-   "a": [
-    "visual",
-    "cozy",
-    "uplifting",
-    "comic",
-    "spectacle",
-    "brisk"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Walt Dohrn",
-   "h": "When Branch's brother, Floyd, is kidnapped for his musical talents by a pair of nefarious pop-star villains, Branch and Poppy embark on a harrowing and emotional journey to reunite the other brothers and rescue Floyd from a fate even worse than pop-culture obscurity.",
-   "k": "all",
-   "pop": 1,
-   "mpaa": "PG",
-   "rt": 72,
-   "rtSrc": "tmdb",
-   "poster": "/3ySgD2xwasTHOK6R9bNZiEwKgYo.jpg",
-   "backdrop": "/mDW6z7I6de6JbUgPOkAEZwKbg7G.jpg",
-   "tmdb": 901362,
-   "firstSeen": null
-  },
-  {
-   "t": "The Idea of You",
-   "y": 2024,
-   "r": 116,
-   "g": [
-    "musical",
-    "comedy",
-    "romance",
-    "drama"
-   ],
-   "a": [
-    "uplifting",
-    "comic",
-    "romantic",
-    "characterstudy"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Michael Showalter",
-   "h": "40-year-old single mom Sol\u00e8ne begins an unexpected romance with 24-year-old Hayes Campbell, the lead singer of August Moon, the hottest boy band on the planet. As they begin a whirlwind romance, it isn't long before Hayes' superstar status poses unavoidable challenges to their relationship, and Sol\u00e8ne soon discovers that life in the glare of his spotlight might be more than she bargained for.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "R",
-   "rt": 73,
-   "rtSrc": "tmdb",
-   "poster": "/Y5P4Q3q8nrruZ9aD3wXeJS2Plg.jpg",
-   "backdrop": "/sI6uCeF8mUlZx22mFfHSi9W3XQ9.jpg",
-   "tmdb": 843527,
-   "firstSeen": null
-  },
-  {
-   "t": "Kick-Ass",
-   "y": 2010,
-   "r": 118,
-   "g": [
-    "action",
-    "crime"
-   ],
-   "a": [
-    "ironic",
-    "spectacle",
-    "cerebral",
-    "propulsive",
-    "violent"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Matthew Vaughn",
-   "h": "Dave Lizewski is an unnoticed high school student and comic book fan who one day decides to become a super-hero, even though he has no powers, training or meaningful reason to do so.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 71,
-   "rtSrc": "tmdb",
-   "poster": "/iHMbrTHJwocsNvo5murCBw0CwTo.jpg",
-   "backdrop": "/P4bGyJQF0shAcRku3I2perNUQR.jpg",
-   "tmdb": 23483,
-   "firstSeen": null
-  },
-  {
-   "t": "The Magnificent Seven",
-   "y": 1960,
-   "r": 128,
-   "g": [
-    "western",
-    "action",
-    "adventure",
-    "drama"
-   ],
-   "a": [
-    "hopeful",
-    "grounded",
-    "propulsive",
-    "spectacle",
-    "characterstudy"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "John Sturges",
-   "h": "An oppressed Mexican peasant village hires seven gunfighters to help defend their homes.",
-   "k": "teen",
-   "pop": 1,
-   "mpaa": "NR",
-   "rt": 75,
-   "rtSrc": "tmdb",
-   "poster": "/e5ToxOyJwuZD4VOfI0qEn5uIjeJ.jpg",
-   "backdrop": "/x0JQBBfK68gHm8rmyKk60bnnyw9.jpg",
-   "tmdb": 966,
-   "firstSeen": null
-  },
-  {
-   "t": "I Spit on Your Grave",
-   "y": 2010,
-   "r": 108,
-   "g": [
-    "thriller",
-    "crime",
-    "horror"
-   ],
-   "a": [
-    "violent",
-    "propulsive",
-    "scary"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Steven R. Monroe",
-   "h": "A beautiful woman from the city, Jennifer Hills, rents an isolated cabin in the country to write her latest novel. Soon, a group of local lowlifes subject her to a nightmare of degradation, rape, and violence.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "R",
-   "rt": 65,
-   "rtSrc": "tmdb",
-   "poster": "/sD5mBllYcBR5sQTyR2VGYhpHf6B.jpg",
-   "backdrop": "/f4QIQvecRkKD5t7aPclyIr3SEP.jpg",
-   "tmdb": 43947,
-   "firstSeen": null
-  },
-  {
-   "t": "Boyka: Undisputed IV",
-   "y": 2016,
-   "r": 87,
-   "g": [
-    "action",
-    "drama",
-    "thriller",
-    "crime"
-   ],
-   "a": [
-    "propulsive",
-    "characterstudy",
-    "violent",
-    "brisk"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Todor Chapkanov",
-   "h": "In the fourth installment of the fighting franchise, Boyka is shooting for the big leagues when an accidental death in the ring makes him question everything he stands for. When he finds out the wife of the man he accidentally killed is in trouble, Boyka offers to fight in a series of impossible battles to free her from a life of servitude.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "R",
-   "rt": 72,
-   "rtSrc": "tmdb",
-   "poster": "/7QGdIJWWTkPhVjpQ0zA6z69khod.jpg",
-   "backdrop": "/tCsYQTkQx7vknDmTw666K1XxAdx.jpg",
-   "tmdb": 348893,
-   "firstSeen": null
-  },
-  {
-   "t": "RoboCop",
-   "y": 1987,
-   "r": 102,
-   "g": [
-    "action",
-    "thriller",
-    "scifi"
-   ],
-   "a": [
-    "bleak",
-    "scary",
-    "propulsive",
-    "cerebral"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Paul Verhoeven",
-   "h": "In a violent, near-apocalyptic Detroit, evil corporation Omni Consumer Products wins a contract from the city government to privatize the police force. To test their crime-eradicating cyborgs, the company leads street cop Alex Murphy into an armed confrontation with crime lord Boddicker so they can use his body to support their untested RoboCop prototype.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 74,
-   "rtSrc": "tmdb",
-   "poster": "/hHtOgGb3NihlyRATHlKPaFApbrd.jpg",
-   "backdrop": "/xcaX6BZ1JUPSVMH2gBkWIckLLaA.jpg",
-   "tmdb": 5548,
-   "firstSeen": null
-  },
-  {
-   "t": "Terrifier 3",
-   "y": 2024,
-   "r": 125,
-   "g": [
-    "horror"
-   ],
-   "a": [
-    "cozy",
-    "violent",
-    "scary"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Damien Leone",
-   "h": "Five years after surviving Art the Clown's Halloween massacre, Sienna and Jonathan are still struggling to rebuild their shattered lives. As the holiday season approaches, they try to embrace the Christmas spirit and leave the horrors of the past behind. But just when they think they're safe, Art returns, determined to turn their holiday cheer into a new nightmare.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "NR",
-   "rt": 68,
-   "rtSrc": "tmdb",
-   "poster": "/ju10W5gl3PPK3b7TjEmVOZap51I.jpg",
-   "backdrop": "/bHfGHipZ32Oec94FDJO4mWs3aZ5.jpg",
-   "tmdb": 1034541,
-   "firstSeen": null
-  },
-  {
-   "t": "Triangle",
-   "y": 2009,
-   "r": 99,
-   "g": [
-    "horror"
-   ],
-   "a": [
-    "weird",
-    "scary",
-    "brisk"
-   ],
-   "svcs": [
-    "PRV",
-    "PCK"
-   ],
-   "d": "Christopher Smith",
-   "h": "When Jess sets sail on a yacht with a group of friends, she cannot shake the feeling that there is something wrong.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "R",
-   "rt": 69,
-   "rtSrc": "tmdb",
-   "poster": "/cRlMrbc4Iof7vN0ZqHwJnMBYBLi.jpg",
-   "backdrop": "/rlVpm5r7vZYyU9JHWf9UGOVDo5M.jpg",
-   "tmdb": 26466,
-   "firstSeen": null
-  },
-  {
-   "t": "War Dogs",
-   "y": 2016,
-   "r": 114,
-   "g": [
-    "comedy",
-    "crime",
-    "drama"
-   ],
-   "a": [
-    "comic",
-    "violent",
-    "characterstudy"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Todd Phillips",
-   "h": "Based on the true story of two young men, David Packouz and Efraim Diveroli, who won a $300 million contract from the Pentagon to arm America's allies in Afghanistan.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 69,
-   "rtSrc": "tmdb",
-   "poster": "/mDcPRjZC1bb6LavFU3gwsWdVfCM.jpg",
-   "backdrop": "/oNoprEND25zXR6Fns8cIZUkuoMc.jpg",
-   "tmdb": 308266,
-   "firstSeen": null
-  },
-  {
-   "t": "Oblivion",
-   "y": 2013,
-   "r": 124,
-   "g": [
-    "action",
-    "scifi",
-    "adventure",
-    "mystery"
-   ],
-   "a": [
-    "bleak",
-    "spectacle",
-    "propulsive",
-    "cerebral",
-    "twisty"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Joseph Kosinski",
-   "h": "Jack Harper is one of the last few drone repairmen stationed on Earth. Part of a massive operation to extract vital resources after decades of war with a terrifying threat known as the Scavs, Jack\u2019s mission is nearly complete. His existence is brought crashing down when he rescues a beautiful stranger from a downed spacecraft.",
-   "k": "teen",
-   "pop": 2,
-   "mpaa": "PG-13",
-   "rt": 67,
-   "rtSrc": "tmdb",
-   "poster": "/bYLM3GpNUZnoFElPXp1zlhDPdtv.jpg",
-   "backdrop": "/2kVt8oj1cSz4GAP0Hi8SESOiH0T.jpg",
-   "tmdb": 75612,
-   "firstSeen": null
-  },
-  {
-   "t": "From Paris with Love",
-   "y": 2010,
-   "r": 92,
-   "g": [
-    "action",
-    "crime",
-    "thriller"
-   ],
-   "a": [
-    "propulsive",
-    "violent",
-    "brisk"
-   ],
-   "svcs": [
-    "PRV"
-   ],
-   "d": "Pierre Morel",
-   "h": "James Reese has a good job as an ambassador's aid in France, but his real passion is a side gig\u2014working in a minor role in the CIA. He would love to be a full-fledged agent and can't believe his luck when he lands an assignment with Charlie Wax.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "R",
-   "rt": 65,
-   "rtSrc": "tmdb",
-   "poster": "/poVoLKLxUqsTLSntA40Po2F78dZ.jpg",
-   "backdrop": "/fra7Gk8xHPWaY4g8p6ue0o2yKOJ.jpg",
-   "tmdb": 26389,
-   "firstSeen": null
-  },
-  {
-   "t": "Snowpiercer",
-   "y": 2013,
-   "r": 127,
-   "g": [
-    "action",
-    "scifi",
-    "drama"
-   ],
-   "a": [
-    "bleak",
-    "twisty",
-    "propulsive",
-    "cerebral",
-    "characterstudy"
-   ],
-   "svcs": [
-    "PRV",
-    "HUL"
-   ],
-   "d": "Bong Joon Ho",
-   "h": "In a future where a failed global-warming experiment kills off most life on the planet, a class system evolves aboard the Snowpiercer; a train that travels around the globe via a perpetual-motion engine.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 69,
-   "rtSrc": "tmdb",
-   "poster": "/kw6YQudA0TMcNmGUGy5XIw7zbnV.jpg",
-   "backdrop": "/tBIRtMCELcA5PxO7z7OiuCHJdFO.jpg",
-   "tmdb": 110415,
-   "firstSeen": null
-  },
-  {
-   "t": "A Man Called Otto",
-   "y": 2022,
-   "r": 126,
-   "g": [
-    "comedy",
-    "drama"
-   ],
-   "a": [
-    "melancholy",
-    "comic",
-    "characterstudy"
-   ],
-   "svcs": [
-    "PRV",
-    "HUL"
-   ],
-   "d": "Marc Forster",
-   "h": "When a lively young family moves in next door, grumpy widower Otto Anderson meets his match in a quick-witted, pregnant woman named Marisol, leading to an unlikely friendship that turns his world upside down.",
-   "k": "teen",
-   "pop": 1,
-   "mpaa": "PG-13",
-   "rt": 77,
-   "rtSrc": "tmdb",
-   "poster": "/130H1gap9lFfiTF9iDrqNIkFvC9.jpg",
-   "backdrop": "/v2LilmCylr3bL9TCZSj6syjowZh.jpg",
-   "tmdb": 937278,
+   "imdb": "tt8864596",
    "firstSeen": null
   },
   {
@@ -10272,6 +9510,7 @@
    "poster": "/bRBeSHfGHwkEpImlhxPmOcUsaeg.jpg",
    "backdrop": "/sdZSjtGUTSN8B3al5o0f2WoQfQQ.jpg",
    "tmdb": 83533,
+   "imdb": "tt1757678",
    "firstSeen": null
   },
   {
@@ -10302,6 +9541,7 @@
    "poster": "/or6XJBVpcEbIkma0V9zshnbEtx4.jpg",
    "backdrop": "/zQ8AxTPiCiS5nnwXpwTBPBHSaa5.jpg",
    "tmdb": 557,
+   "imdb": "tt0145487",
    "firstSeen": null
   },
   {
@@ -10335,6 +9575,7 @@
    "poster": "/oJ7g2CifqpStmoYQyaLQgEU32qO.jpg",
    "backdrop": "/lgotja3xMoJZbynwHfcQcJAEMWH.jpg",
    "tmdb": 1084242,
+   "imdb": "tt26443597",
    "firstSeen": null
   },
   {
@@ -10365,6 +9606,7 @@
    "poster": "/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
    "backdrop": "/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
    "tmdb": 533535,
+   "imdb": "tt6263850",
    "firstSeen": null
   },
   {
@@ -10398,6 +9640,7 @@
    "poster": "/xjtWQ2CL1mpmMNwuU5HeS4Iuwuu.jpg",
    "backdrop": "/3Jj0A10NVu2dWnoEL5t5oT79L1Y.jpg",
    "tmdb": 1327819,
+   "imdb": "tt26443616",
    "firstSeen": null
   },
   {
@@ -10419,7 +9662,7 @@
     "DIS"
    ],
    "d": "Joss Whedon",
-   "h": "When Tony Stark tries to jumpstart a dormant peacekeeping program, things go awry and Earth\u2019s Mightiest Heroes are put to the ultimate test as the fate of the planet hangs in the balance. As the villainous Ultron emerges, it is up to The Avengers to stop him from enacting his terrible plans, and soon uneasy alliances and unexpected action pave the way for an epic and unique global adventure.",
+   "h": "When Tony Stark tries to jumpstart a dormant peacekeeping program, things go awry and Earth’s Mightiest Heroes are put to the ultimate test as the fate of the planet hangs in the balance. As the villainous Ultron emerges, it is up to The Avengers to stop him from enacting his terrible plans, and soon uneasy alliances and unexpected action pave the way for an epic and unique global adventure.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -10428,6 +9671,7 @@
    "poster": "/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg",
    "backdrop": "/kIBK5SKwgqIIuRKhhWrJn3XkbPq.jpg",
    "tmdb": 99861,
+   "imdb": "tt2395427",
    "firstSeen": null
   },
   {
@@ -10458,6 +9702,7 @@
    "poster": "/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg",
    "backdrop": "/vamhMTvh9m9zFHDoR0v1nRtf6T4.jpg",
    "tmdb": 429617,
+   "imdb": "tt6320628",
    "firstSeen": null
   },
   {
@@ -10489,6 +9734,7 @@
    "poster": "/jexoNYnPd6vVrmygwF6QZmWPFdu.jpg",
    "backdrop": "/HVcza6tJtWFrLriuh3Ano4Vt46.jpg",
    "tmdb": 1930,
+   "imdb": "tt0948470",
    "firstSeen": null
   },
   {
@@ -10512,7 +9758,7 @@
     "HUL"
    ],
    "d": "Sam Raimi",
-   "h": "The seemingly invincible Spider-Man goes up against an all-new crop of villains\u2014including the shape-shifting Sandman. While Spider-Man\u2019s superpowers are altered by an alien organism, his alter ego, Peter Parker, deals with nemesis Eddie Brock and also gets caught up in a love triangle.",
+   "h": "The seemingly invincible Spider-Man goes up against an all-new crop of villains—including the shape-shifting Sandman. While Spider-Man’s superpowers are altered by an alien organism, his alter ego, Peter Parker, deals with nemesis Eddie Brock and also gets caught up in a love triangle.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -10521,6 +9767,7 @@
    "poster": "/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg",
    "backdrop": "/FfAU0PUs8AJkMU2VbkVNFtRXR4.jpg",
    "tmdb": 559,
+   "imdb": "tt0413300",
    "firstSeen": null
   },
   {
@@ -10551,6 +9798,7 @@
    "poster": "/nf5qaSEvyYSNeFH0YhSs5EsBLX9.jpg",
    "backdrop": "/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
    "tmdb": 617126,
+   "imdb": "tt10676052",
    "firstSeen": null
   },
   {
@@ -10580,6 +9828,7 @@
    "poster": "/rAGiXaUfPzY7CDEyNKUofk3Kw2e.jpg",
    "backdrop": "/wdwcOBMkt3zmPQuEMxB3FUtMio2.jpg",
    "tmdb": 271110,
+   "imdb": "tt3498820",
    "firstSeen": null
   },
   {
@@ -10611,6 +9860,7 @@
    "poster": "/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
    "backdrop": "/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg",
    "tmdb": 447365,
+   "imdb": "tt6791350",
    "firstSeen": null
   },
   {
@@ -10633,7 +9883,7 @@
     "DIS"
    ],
    "d": "Marc Webb",
-   "h": "For Peter Parker, life is busy. Between taking out the bad guys as Spider-Man and spending time with the person he loves, Gwen Stacy, high school graduation cannot come quickly enough. Peter has not forgotten about the promise he made to Gwen\u2019s father to protect her by staying away, but that is a promise he cannot keep.",
+   "h": "For Peter Parker, life is busy. Between taking out the bad guys as Spider-Man and spending time with the person he loves, Gwen Stacy, high school graduation cannot come quickly enough. Peter has not forgotten about the promise he made to Gwen’s father to protect her by staying away, but that is a promise he cannot keep.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -10642,6 +9892,7 @@
    "poster": "/bU7nTmvmy0h3VUP01v1T2imgH6N.jpg",
    "backdrop": "/k0hlAzTryCYX1O1LyC6P8tAa8s0.jpg",
    "tmdb": 102382,
+   "imdb": "tt1872181",
    "firstSeen": null
   },
   {
@@ -10674,6 +9925,7 @@
    "poster": "/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
    "backdrop": "/kJsPVzdyBrYHLomuNv5SJDXUQ2f.jpg",
    "tmdb": 76600,
+   "imdb": "tt1630029",
    "firstSeen": null
   },
   {
@@ -10704,6 +9956,7 @@
    "poster": "/78lPtwv72eTNqFW9COBYI0dWDJa.jpg",
    "backdrop": "/cKvDv2LpwVEqbdXWoQl4XgGN6le.jpg",
    "tmdb": 1726,
+   "imdb": "tt0371746",
    "firstSeen": null
   },
   {
@@ -10733,6 +9986,7 @@
    "poster": "/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg",
    "backdrop": "/rthMuZfFv4fqEU4JVbgSW9wQ8rs.jpg",
    "tmdb": 986056,
+   "imdb": "tt20969586",
    "firstSeen": null
   },
   {
@@ -10762,6 +10016,7 @@
    "poster": "/ddJcSKbcp4rKZTmuyWaMhuwcfMz.jpg",
    "backdrop": "/lv3TXqhpaIxkclIHbhN2MRMOemQ.jpg",
    "tmdb": 453395,
+   "imdb": "tt9419884",
    "firstSeen": null
   },
   {
@@ -10794,6 +10049,7 @@
    "poster": "/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg",
    "backdrop": "/vL5LR6WdxWPjLPFRLe133jXWsh5.jpg",
    "tmdb": 19995,
+   "imdb": "tt0499549",
    "firstSeen": null
   },
   {
@@ -10816,7 +10072,7 @@
     "HUL"
    ],
    "d": "Jon Favreau",
-   "h": "With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony Stark faces pressure from the government, the press and the public to share his technology with the military. Unwilling to let go of his invention, Stark, with Pepper Potts and James 'Rhodey' Rhodes at his side, must forge new alliances \u2013 and confront powerful enemies.",
+   "h": "With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony Stark faces pressure from the government, the press and the public to share his technology with the military. Unwilling to let go of his invention, Stark, with Pepper Potts and James 'Rhodey' Rhodes at his side, must forge new alliances – and confront powerful enemies.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -10825,6 +10081,7 @@
    "poster": "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg",
    "backdrop": "/7lmBufEG7P7Y1HClYK3gCxYrkgS.jpg",
    "tmdb": 10138,
+   "imdb": "tt1228705",
    "firstSeen": null
   },
   {
@@ -10858,6 +10115,7 @@
    "poster": "/mINJaa34MtknCYl5AjtNJzWj8cD.jpg",
    "backdrop": "/AoSZyb37ljMAxw0RdeQEBHKtgcc.jpg",
    "tmdb": 330457,
+   "imdb": "tt4520988",
    "firstSeen": null
   },
   {
@@ -10888,6 +10146,7 @@
    "poster": "/gKzYx79y0AQTL4UAk1cBQJ3nvrm.jpg",
    "backdrop": "/jPu8yiadqgzwFPGKJmGo637ASVP.jpg",
    "tmdb": 1724,
+   "imdb": "tt0800080",
    "firstSeen": null
   },
   {
@@ -10918,6 +10177,7 @@
    "poster": "/vGXptEdgZIhPg3cGlc7e8sNPC2e.jpg",
    "backdrop": "/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
    "tmdb": 912649,
+   "imdb": "tt16366836",
    "firstSeen": null
   },
   {
@@ -10952,6 +10212,7 @@
    "poster": "/tFzUkdhPOForVrEfvxydXfPLrZR.jpg",
    "backdrop": "/wQoe0j7ZDk7LWexC0XhwkK4brIb.jpg",
    "tmdb": 278154,
+   "imdb": "tt3416828",
    "firstSeen": null
   },
   {
@@ -10975,7 +10236,7 @@
     "DIS"
    ],
    "d": "Kelsey Mann",
-   "h": "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who\u2019ve long been running a successful operation by all accounts, aren\u2019t sure how to feel when Anxiety shows up. And it looks like she\u2019s not alone.",
+   "h": "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -10984,6 +10245,7 @@
    "poster": "/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
    "backdrop": "/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
    "tmdb": 1022789,
+   "imdb": "tt22022452",
    "firstSeen": null
   },
   {
@@ -11004,7 +10266,7 @@
     "DIS"
    ],
    "d": "Gore Verbinski",
-   "h": "When wily pirate Captain Barbossa seizes Jack Sparrow\u2019s beloved ship, the Black Pearl, and kidnaps the governor\u2019s daughter, Elizabeth Swann, blacksmith Will Turner reluctantly teams up with the unpredictable pirate Jack to rescue her\u2014only to uncover a terrifying curse that turns Barbossa\u2019s crew into the undead.",
+   "h": "When wily pirate Captain Barbossa seizes Jack Sparrow’s beloved ship, the Black Pearl, and kidnaps the governor’s daughter, Elizabeth Swann, blacksmith Will Turner reluctantly teams up with the unpredictable pirate Jack to rescue her—only to uncover a terrifying curse that turns Barbossa’s crew into the undead.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -11013,6 +10275,7 @@
    "poster": "/poHwCZeWzJCShH7tOjg8RIoyjcw.jpg",
    "backdrop": "/uRNgkJSkNBFbbn9fPsEjDIy8Sh3.jpg",
    "tmdb": 22,
+   "imdb": "tt0325980",
    "firstSeen": null
   },
   {
@@ -11043,6 +10306,7 @@
    "poster": "/fai0rspsNeJCS69wHNjOdWxcI7P.jpg",
    "backdrop": "/yUiXA68FfQeA8cRBhd0Ao0jIRZt.jpg",
    "tmdb": 11,
+   "imdb": "tt0076759",
    "firstSeen": null
   },
   {
@@ -11076,6 +10340,7 @@
    "poster": "/wFSpyMsp7H0ttERbxY7Trlv8xry.jpg",
    "backdrop": "/sDTnMOJ3H5wI38OxObmCtK7wfd5.jpg",
    "tmdb": 585,
+   "imdb": "tt0198781",
    "firstSeen": null
   },
   {
@@ -11096,7 +10361,7 @@
     "DIS"
    ],
    "d": "Bryan Singer",
-   "h": "The ultimate X-Men ensemble fights a war for the survival of the species across two time periods as they join forces with their younger selves in an epic battle that must change the past \u2013 to save our future.",
+   "h": "The ultimate X-Men ensemble fights a war for the survival of the species across two time periods as they join forces with their younger selves in an epic battle that must change the past – to save our future.",
    "k": "teen",
    "pop": 3,
    "mpaa": "PG-13",
@@ -11105,6 +10370,7 @@
    "poster": "/tYfijzolzgoMOtegh1Y7j2Enorg.jpg",
    "backdrop": "/3czpqXzFy5UcNuD1AubecRLWkwD.jpg",
    "tmdb": 127585,
+   "imdb": "tt1877832",
    "firstSeen": null
   },
   {
@@ -11139,6 +10405,7 @@
    "poster": "/2mxS4wUimwlLmI1xp6QW6NSU361.jpg",
    "backdrop": "/4s2d3xdyqotiVNHTlTlJjrr3q0H.jpg",
    "tmdb": 177572,
+   "imdb": "tt2245084",
    "firstSeen": null
   },
   {
@@ -11162,7 +10429,7 @@
     "DIS"
    ],
    "d": "Ryan Coogler",
-   "h": "Queen Ramonda, Shuri, M\u2019Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T\u2019Challa\u2019s death. As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.",
+   "h": "Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death. As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -11171,6 +10438,7 @@
    "poster": "/sv1xJUazXeYqALzczSZ3O6nkH75.jpg",
    "backdrop": "/83H0C66AcvkwpG2738VCTHMY9uv.jpg",
    "tmdb": 505642,
+   "imdb": "tt9114286",
    "firstSeen": null
   },
   {
@@ -11193,7 +10461,7 @@
     "DIS"
    ],
    "d": "Taika Waititi",
-   "h": "After his retirement is interrupted by Gorr the God Butcher, a galactic killer who seeks the extinction of the gods, Thor Odinson enlists the help of King Valkyrie, Korg, and ex-girlfriend Jane Foster, who now wields Mjolnir as the Mighty Thor. Together they embark upon a harrowing cosmic adventure to uncover the mystery of the God Butcher\u2019s vengeance and stop him before it\u2019s too late.",
+   "h": "After his retirement is interrupted by Gorr the God Butcher, a galactic killer who seeks the extinction of the gods, Thor Odinson enlists the help of King Valkyrie, Korg, and ex-girlfriend Jane Foster, who now wields Mjolnir as the Mighty Thor. Together they embark upon a harrowing cosmic adventure to uncover the mystery of the God Butcher’s vengeance and stop him before it’s too late.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -11202,6 +10470,7 @@
    "poster": "/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg",
    "backdrop": "/jsoz1HlxczSuTx0mDl2h0lxy36l.jpg",
    "tmdb": 616037,
+   "imdb": "tt10648342",
    "firstSeen": null
   },
   {
@@ -11233,6 +10502,7 @@
    "poster": "/AbbXspMOwdvwWZgVN0nabZq03Ec.jpg",
    "backdrop": "/uAfhsySkr1UzQg1zdg3dZQRz9Fd.jpg",
    "tmdb": 10193,
+   "imdb": "tt0435761",
    "firstSeen": null
   },
   {
@@ -11263,6 +10533,7 @@
    "poster": "/ikA8UhYdTGpqbatFa93nIf6noSr.jpg",
    "backdrop": "/sTQNRqLbfCXolrb5CizAW1dj528.jpg",
    "tmdb": 246655,
+   "imdb": "tt3385516",
    "firstSeen": null
   },
   {
@@ -11293,6 +10564,7 @@
    "poster": "/to0spRl1CMDvyUbOnbb4fTk3VAd.jpg",
    "backdrop": "/3P52oz9HPQWxcwHOwxtyrVV1LKi.jpg",
    "tmdb": 383498,
+   "imdb": "tt5463162",
    "firstSeen": null
   },
   {
@@ -11327,6 +10599,7 @@
    "poster": "/aLVkiINlIeCkcZIzb7XHzPYgO6L.jpg",
    "backdrop": "/vYqt6kb4lcF8wwqsMMaULkP9OEn.jpg",
    "tmdb": 1241982,
+   "imdb": "tt13622970",
    "firstSeen": null
   },
   {
@@ -11348,7 +10621,7 @@
     "DIS"
    ],
    "d": "Chris Columbus",
-   "h": "Instead of flying to Florida with his folks, Kevin ends up alone in New York, where he gets a hotel room with his dad's credit card\u2014despite problems from a clerk and meddling bellboy. But when Kevin runs into his old nemeses, the Wet Bandits, he's determined to foil their plans to rob a toy store on Christmas Eve.",
+   "h": "Instead of flying to Florida with his folks, Kevin ends up alone in New York, where he gets a hotel room with his dad's credit card—despite problems from a clerk and meddling bellboy. But when Kevin runs into his old nemeses, the Wet Bandits, he's determined to foil their plans to rob a toy store on Christmas Eve.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -11357,6 +10630,7 @@
    "poster": "/uuitWHpJwxD1wruFl2nZHIb4UGN.jpg",
    "backdrop": "/8fnYJPoXxwAN4valDLgz2whMGTH.jpg",
    "tmdb": 772,
+   "imdb": "tt0104431",
    "firstSeen": null
   },
   {
@@ -11387,6 +10661,7 @@
    "poster": "/iREd0rNCjYdf5Ar0vfaW32yrkm.jpg",
    "backdrop": "/tuDhEdza074bA497bO9WFEPs6O6.jpg",
    "tmdb": 411,
+   "imdb": "tt0363771",
    "firstSeen": null
   },
   {
@@ -11418,6 +10693,7 @@
    "poster": "/y4MBh0EjBlMuOzv9axM4qJlmhzz.jpg",
    "backdrop": "/bW93ycPSSi3Hxx1NvlMX5qm2mQu.jpg",
    "tmdb": 283995,
+   "imdb": "tt3896198",
    "firstSeen": null
   },
   {
@@ -11447,6 +10723,7 @@
    "poster": "/d07phJqCx6z5wILDYqkyraorDPi.jpg",
    "backdrop": "/i2GVEvltEu3BXn5crBSxgKuTaca.jpg",
    "tmdb": 614479,
+   "imdb": "tt13405778",
    "firstSeen": null
   },
   {
@@ -11468,7 +10745,7 @@
     "HUL"
    ],
    "d": "Matt Bettinelli-Olpin",
-   "h": "Moments after surviving an all-out attack from the Le Domas family, Grace discovers she\u2019s reached the next level of the nightmarish game \u2014 and this time with her estranged sister Faith at her side. Grace has one chance to survive, keep her sister alive, and claim the High Seat of the Council that controls the world. Four rival families are hunting her for the throne, and whoever wins rules it all.",
+   "h": "Moments after surviving an all-out attack from the Le Domas family, Grace discovers she’s reached the next level of the nightmarish game — and this time with her estranged sister Faith at her side. Grace has one chance to survive, keep her sister alive, and claim the High Seat of the Council that controls the world. Four rival families are hunting her for the throne, and whoever wins rules it all.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -11477,6 +10754,7 @@
    "poster": "/13ZcJzSGEqVgDSqsS9U5EkQwPkV.jpg",
    "backdrop": "/fx2cEuadZK28VHKkc0F1nFR96i0.jpg",
    "tmdb": 1266127,
+   "imdb": "tt33978029",
    "firstSeen": null
   },
   {
@@ -11506,6 +10784,7 @@
    "poster": "/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg",
    "backdrop": "/82lM4GJ9uuNvNDOEpxFy77uv4Ak.jpg",
    "tmdb": 1242898,
+   "imdb": "tt31227572",
    "firstSeen": null
   },
   {
@@ -11535,6 +10814,7 @@
    "poster": "/af7yguGbWQyvYtk6QCD5l4yBbKN.jpg",
    "backdrop": "/drRxbu2OHG0DEENptZ8wI5f0uEU.jpg",
    "tmdb": 1119449,
+   "imdb": "tt1341338",
    "firstSeen": null
   },
   {
@@ -11566,6 +10846,7 @@
    "poster": "/prSfAi1xGrhLQNxVSUFh61xQ4Qy.jpg",
    "backdrop": "/cDJ61O1STtbWNBwefuqVrRe3d7l.jpg",
    "tmdb": 10195,
+   "imdb": "tt0800369",
    "firstSeen": null
   },
   {
@@ -11595,6 +10876,7 @@
    "poster": "/zbJWVHOtj3ljBzWgL1P8pxP03Up.jpg",
    "backdrop": "/bpp58yHuQmpt6xwggI63mVRw7po.jpg",
    "tmdb": 1198994,
+   "imdb": "tt8036976",
    "firstSeen": null
   },
   {
@@ -11617,7 +10899,7 @@
     "HUL"
    ],
    "d": "Jake Kasdan",
-   "h": "As the gang return to Jumanji to rescue one of their own, they discover that nothing is as they expect. The players will have to brave parts unknown and unexplored in order to escape the world\u2019s most dangerous game.",
+   "h": "As the gang return to Jumanji to rescue one of their own, they discover that nothing is as they expect. The players will have to brave parts unknown and unexplored in order to escape the world’s most dangerous game.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -11626,6 +10908,7 @@
    "poster": "/jyw8VKYEiM1UDzPB7NsisUgBeJ8.jpg",
    "backdrop": "/qgch2rFskIxDMgwrD5lWTaB4nBl.jpg",
    "tmdb": 512200,
+   "imdb": "tt7975244",
    "firstSeen": null
   },
   {
@@ -11659,6 +10942,7 @@
    "poster": "/ySaaKHOLAQU5HoZqWmzDIj1VvZ1.jpg",
    "backdrop": "/bIUaCtWaRgd78SnoHJDI8TNf7Sd.jpg",
    "tmdb": 181808,
+   "imdb": "tt2527336",
    "firstSeen": null
   },
   {
@@ -11690,6 +10974,7 @@
    "poster": "/3Gkb6jm6962ADUPaCBqzz9CTbn9.jpg",
    "backdrop": "/weAYfu6FfrNxEDJ3xH1XpgQcqUv.jpg",
    "tmdb": 8966,
+   "imdb": "tt1099212",
    "firstSeen": null
   },
   {
@@ -11713,7 +10998,7 @@
     "HUL"
    ],
    "d": "Quentin Tarantino",
-   "h": "Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski\u2026",
+   "h": "Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski…",
    "k": "adult",
    "pop": 3,
    "mpaa": "R",
@@ -11722,6 +11007,7 @@
    "poster": "/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg",
    "backdrop": "/xwgBHC2FgoIrQitl8jZwXXdsR9u.jpg",
    "tmdb": 466272,
+   "imdb": "tt7131622",
    "firstSeen": null
   },
   {
@@ -11752,6 +11038,7 @@
    "poster": "/aGuvNAaaZuWXYQQ6N2v7DeuP6mB.jpg",
    "backdrop": "/6al048Lat3eLVQOuKtc9h6Tu94d.jpg",
    "tmdb": 558,
+   "imdb": "tt0316654",
    "firstSeen": null
   },
   {
@@ -11783,6 +11070,7 @@
    "poster": "/sg4xJaufDiQl7caFEskBtQXfD4x.jpg",
    "backdrop": "/EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg",
    "tmdb": 425909,
+   "imdb": "tt4513678",
    "firstSeen": null
   },
   {
@@ -11815,6 +11103,7 @@
    "poster": "/mSmAc9G25fhOHH45SLEeagR0qi7.jpg",
    "backdrop": "/3SozaNPOYUadcmTPgndDibMyDNC.jpg",
    "tmdb": 119450,
+   "imdb": "tt2103281",
    "firstSeen": null
   },
   {
@@ -11845,6 +11134,7 @@
    "poster": "/rhr4y79GpxQF9IsfJItRXVaoGs4.jpg",
    "backdrop": "/dF6FjTZzRTENfB4R17HDN20jLT2.jpg",
    "tmdb": 135397,
+   "imdb": "tt0369610",
    "firstSeen": null
   },
   {
@@ -11874,6 +11164,7 @@
    "poster": "/cgXk2tNYhJZLXdBDO5DidAVzQ82.jpg",
    "backdrop": "/qvyOfwTC3qdbzkqdXWSSEMHtjBZ.jpg",
    "tmdb": 1064213,
+   "imdb": "tt28607951",
    "firstSeen": null
   },
   {
@@ -11906,6 +11197,7 @@
    "poster": "/9uGHEgsiUXjCNq8wdq4r49YL8A1.jpg",
    "backdrop": "/5oaMV2q0qzxkIW2ukU3lldLu5q2.jpg",
    "tmdb": 1359,
+   "imdb": "tt0144084",
    "firstSeen": null
   },
   {
@@ -11926,7 +11218,7 @@
     "DIS",
     "HUL"
    ],
-   "d": "Elisabeth R\u00f6hm",
+   "d": "Elisabeth Röhm",
    "h": "Sara is a teen girl who is looking forward to her 18th birthday to move away from her controlling father Don. But before she could even blow out the candles, Don imprisons her in the basement of their home.",
    "k": "teen",
    "pop": 1,
@@ -11936,6 +11228,7 @@
    "poster": "/tPP9n6r5QrIKPnshnJqE7klptj2.jpg",
    "backdrop": "/vDR2h5uQNgWyx3fsEVnEOcNFibZ.jpg",
    "tmdb": 801335,
+   "imdb": "tt13269536",
    "firstSeen": null
   },
   {
@@ -11969,6 +11262,7 @@
    "poster": "/oqA45qMyyo1TtrnVEBKxqmTPhbN.jpg",
    "backdrop": "/6cCF0KMUO2QmrVsQFujkQduREXX.jpg",
    "tmdb": 61791,
+   "imdb": "tt1318514",
    "firstSeen": null
   },
   {
@@ -11993,7 +11287,7 @@
     "PAR"
    ],
    "d": "Jeff Fowler",
-   "h": "Powered with incredible speed, Sonic The Hedgehog embraces his new home on Earth. That is, until Sonic sparks the attention of super-uncool evil genius Dr. Robotnik. Now it\u2019s super-villain vs. super-sonic in an all-out race across the globe to stop Robotnik from using Sonic\u2019s unique power for world domination.",
+   "h": "Powered with incredible speed, Sonic The Hedgehog embraces his new home on Earth. That is, until Sonic sparks the attention of super-uncool evil genius Dr. Robotnik. Now it’s super-villain vs. super-sonic in an all-out race across the globe to stop Robotnik from using Sonic’s unique power for world domination.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -12002,6 +11296,7 @@
    "poster": "/aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg",
    "backdrop": "/stmYfCUGd8Iy6kAMBr6AmWqx8Bq.jpg",
    "tmdb": 454626,
+   "imdb": "tt3794354",
    "firstSeen": null
   },
   {
@@ -12032,6 +11327,7 @@
    "poster": "/db32LaOibwEliAmSL2jjDF6oDdj.jpg",
    "backdrop": "/jOzrELAzFxtMx2I4uDGHOotdfsS.jpg",
    "tmdb": 181812,
+   "imdb": "tt2527338",
    "firstSeen": null
   },
   {
@@ -12055,7 +11351,7 @@
     "HUL"
    ],
    "d": "Mark Dindal",
-   "h": "Garfield, the world-famous, Monday-hating, lasagna-loving indoor cat, is about to have a wild outdoor adventure! After an unexpected reunion with his long-lost father \u2013 scruffy street cat Vic \u2013 Garfield and his canine friend Odie are forced from their perfectly pampered life into joining Vic in a hilarious, high-stakes heist.",
+   "h": "Garfield, the world-famous, Monday-hating, lasagna-loving indoor cat, is about to have a wild outdoor adventure! After an unexpected reunion with his long-lost father – scruffy street cat Vic – Garfield and his canine friend Odie are forced from their perfectly pampered life into joining Vic in a hilarious, high-stakes heist.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
@@ -12064,6 +11360,7 @@
    "poster": "/p6AbOJvMQhBmffd0PIv0u8ghWeY.jpg",
    "backdrop": "/P82NAcEsLIYgQtrtn36tYsj41m.jpg",
    "tmdb": 748783,
+   "imdb": "tt5779228",
    "firstSeen": null
   },
   {
@@ -12095,6 +11392,7 @@
    "poster": "/oJD9KQFoObZmxAS1je56SIFVNJt.jpg",
    "backdrop": "/oJ1MIABA0WF0a7MDVQnnMvBdex8.jpg",
    "tmdb": 567609,
+   "imdb": "tt7798634",
    "firstSeen": null
   },
   {
@@ -12126,6 +11424,7 @@
    "poster": "/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg",
    "backdrop": "/gystuaqp5AkVqqu3Nf0564zeOv4.jpg",
    "tmdb": 926393,
+   "imdb": "tt17024450",
    "firstSeen": null
   },
   {
@@ -12158,6 +11457,7 @@
    "poster": "/uLOmOF5IzWoyrgIF5MfUnh5pa1X.jpg",
    "backdrop": "/o9puyKpayQoX8ikIaYtf2PfKv3.jpg",
    "tmdb": 607,
+   "imdb": "tt0119654",
    "firstSeen": null
   },
   {
@@ -12187,6 +11487,7 @@
    "poster": "/oGythE98MYleE6mZlGs5oBGkux1.jpg",
    "backdrop": "/3q01ACG0MWm0DekhvkPFCXyPZSu.jpg",
    "tmdb": 573435,
+   "imdb": "tt4919268",
    "firstSeen": null
   },
   {
@@ -12209,7 +11510,7 @@
     "HUL"
    ],
    "d": "Emilie Blichfeldt",
-   "h": "In a fairy-tale kingdom where beauty is a brutal business, Elvira battles to compete with her incredibly beautiful stepsister, Agnes, and she will go to any length to catch the Prince\u2019s eye.",
+   "h": "In a fairy-tale kingdom where beauty is a brutal business, Elvira battles to compete with her incredibly beautiful stepsister, Agnes, and she will go to any length to catch the Prince’s eye.",
    "k": "adult",
    "pop": 1,
    "mpaa": "NR",
@@ -12218,6 +11519,7 @@
    "poster": "/rayAREIKtSinuov10GvrZHyXfXH.jpg",
    "backdrop": "/kG8bBajeSTUxJGmS47WujcraZUk.jpg",
    "tmdb": 1284120,
+   "imdb": "tt29344903",
    "firstSeen": null
   },
   {
@@ -12252,6 +11554,7 @@
    "poster": "/5Fh4NdoEnCjCK9wLjdJ9DJNFl2b.jpg",
    "backdrop": "/uD267eSiACfWLxp47t3gYymOQRj.jpg",
    "tmdb": 93456,
+   "imdb": "tt1690953",
    "firstSeen": null
   },
   {
@@ -12282,6 +11585,7 @@
    "poster": "/vc2S0dvgpsM0XfSiXZDMVkRCSSU.jpg",
    "backdrop": "/1eM6Ey1FzpgJigrxRiSYtntSWq7.jpg",
    "tmdb": 639988,
+   "imdb": "tt1527793",
    "firstSeen": null
   },
   {
@@ -12302,7 +11606,7 @@
     "HUL"
    ],
    "d": "David Leitch",
-   "h": "Unlucky assassin Ladybug is determined to do his job peacefully after one too many gigs gone off the rails. Fate, however, may have other plans, as Ladybug's latest mission puts him on a collision course with lethal adversaries from around the globe\u2014all with connected, yet conflicting, objectives\u2014on the world's fastest train.",
+   "h": "Unlucky assassin Ladybug is determined to do his job peacefully after one too many gigs gone off the rails. Fate, however, may have other plans, as Ladybug's latest mission puts him on a collision course with lethal adversaries from around the globe—all with connected, yet conflicting, objectives—on the world's fastest train.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
@@ -12311,6 +11615,7 @@
    "poster": "/j8szC8OgrejDQjjMKSVXyaAjw3V.jpg",
    "backdrop": "/y2Ca1neKke2mGPMaHzlCNDVZqsK.jpg",
    "tmdb": 718930,
+   "imdb": "tt12593682",
    "firstSeen": null
   },
   {
@@ -12332,7 +11637,7 @@
     "HUL"
    ],
    "d": "BenDavid Grabinski",
-   "h": "Two gangsters and the woman they love try to survive the most dangerous night of their lives. As if that wasn\u2019t enough, there\u2019s one wild ingredient added to the mix: a time machine.",
+   "h": "Two gangsters and the woman they love try to survive the most dangerous night of their lives. As if that wasn’t enough, there’s one wild ingredient added to the mix: a time machine.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -12341,6 +11646,41 @@
    "poster": "/7F0jc75HrSkLVcvOXR2FXAIwuEv.jpg",
    "backdrop": "/uNToXatdunyvWXyXMrTI1nLvh6r.jpg",
    "tmdb": 1115544,
+   "imdb": "tt27552099",
+   "firstSeen": null
+  },
+  {
+   "t": "Donnie Darko",
+   "y": 2001,
+   "r": 114,
+   "g": [
+    "fantasy",
+    "drama",
+    "mystery"
+   ],
+   "a": [
+    "weird",
+    "cerebral",
+    "melancholy",
+    "visual",
+    "characterstudy",
+    "twisty"
+   ],
+   "svcs": [
+    "PRV",
+    "HUL"
+   ],
+   "d": "Richard Kelly",
+   "h": "After narrowly escaping a bizarre accident, a troubled teenager is plagued by visions of a large bunny rabbit that manipulates him to commit a series of crimes.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 78,
+   "rtSrc": "tmdb",
+   "poster": "/j2AtZFsflxiluaNtajMTI0Avm8C.jpg",
+   "backdrop": "/msCHK5Kh1YbdZ0zPJ2nzPUhhSN9.jpg",
+   "tmdb": 141,
+   "imdb": "tt0246578",
    "firstSeen": null
   },
   {
@@ -12371,6 +11711,7 @@
    "poster": "/p0BPQGSPoSa8Ml0DAf2mB2kCU0R.jpg",
    "backdrop": "/uw4SnKFZ453Gxmj5XR5Susj8TNo.jpg",
    "tmdb": 602,
+   "imdb": "tt0116629",
    "firstSeen": null
   },
   {
@@ -12403,6 +11744,7 @@
    "poster": "/dK4Gi1UdMiHzHc7r7CZQG4IQ9Sr.jpg",
    "backdrop": "/yiWfT2Bl1Nul3Xie39Ahs3FqSjA.jpg",
    "tmdb": 24021,
+   "imdb": "tt1325004",
    "firstSeen": null
   },
   {
@@ -12435,6 +11777,7 @@
    "poster": "/n1el846gLDXfhOvrRCsyvaAOQWv.jpg",
    "backdrop": "/fsHxHpREPdE299Bl7RvKb1HKk9U.jpg",
    "tmdb": 682507,
+   "imdb": "tt9411972",
    "firstSeen": null
   },
   {
@@ -12457,7 +11800,7 @@
     "HUL"
    ],
    "d": "Emile Ardolino",
-   "h": "Expecting the usual tedium that accompanies a summer in the Catskills with her family, 17-year-old Frances 'Baby' Houseman is surprised to find herself stepping into the shoes of a professional hoofer\u2014and unexpectedly falling in love.",
+   "h": "Expecting the usual tedium that accompanies a summer in the Catskills with her family, 17-year-old Frances 'Baby' Houseman is surprised to find herself stepping into the shoes of a professional hoofer—and unexpectedly falling in love.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -12466,6 +11809,7 @@
    "poster": "/9Jw6jys7q9gjzVX5zm1z0gC8gY9.jpg",
    "backdrop": "/6iDQCBUSZKzY8Rnu8ECwl2gXcfG.jpg",
    "tmdb": 88,
+   "imdb": "tt0092890",
    "firstSeen": null
   },
   {
@@ -12495,6 +11839,7 @@
    "poster": "/kVr5zIAFSPRQ57Y1zE7KzmhzdMQ.jpg",
    "backdrop": "/lRbDyjI7HEaXxflFQbYpqHRGFBJ.jpg",
    "tmdb": 505026,
+   "imdb": "tt7657566",
    "firstSeen": null
   },
   {
@@ -12516,7 +11861,7 @@
     "HUL"
    ],
    "d": "Gareth Edwards",
-   "h": "Amid a future war between the human race and the forces of artificial intelligence, a hardened ex-special forces agent grieving the disappearance of his wife, is recruited to hunt down and kill the Creator, the elusive architect of advanced AI who has developed a mysterious weapon with the power to end the war\u2014and mankind itself.",
+   "h": "Amid a future war between the human race and the forces of artificial intelligence, a hardened ex-special forces agent grieving the disappearance of his wife, is recruited to hunt down and kill the Creator, the elusive architect of advanced AI who has developed a mysterious weapon with the power to end the war—and mankind itself.",
    "k": "teen",
    "pop": 2,
    "mpaa": "PG-13",
@@ -12525,6 +11870,7 @@
    "poster": "/3dSivDtOuyxLDxPH4v2tcNG1fP7.jpg",
    "backdrop": "/kjQBrc00fB2RjHZB3PGR4w9ibpz.jpg",
    "tmdb": 670292,
+   "imdb": "tt11858890",
    "firstSeen": null
   },
   {
@@ -12558,6 +11904,7 @@
    "poster": "/4nJxhUknKV8Gqdhov8pU1YWDYfb.jpg",
    "backdrop": "/3vxlXdwBKztOJdgiZ2Qwasl9FY4.jpg",
    "tmdb": 46195,
+   "imdb": "tt1436562",
    "firstSeen": null
   },
   {
@@ -12580,7 +11927,7 @@
     "HUL"
    ],
    "d": "Luke Sparke",
-   "h": "During the Vietnam War, a recon unit ventures to an isolated jungle valley to uncover the fate of a missing platoon. They soon find themselves in a fight for their lives against an unexpected enemy \u2014 prehistoric dinosaurs.",
+   "h": "During the Vietnam War, a recon unit ventures to an isolated jungle valley to uncover the fate of a missing platoon. They soon find themselves in a fight for their lives against an unexpected enemy — prehistoric dinosaurs.",
    "k": "adult",
    "pop": 1,
    "mpaa": "NR",
@@ -12589,6 +11936,7 @@
    "poster": "/noujgznyJIaurEinZhcSVzTmkLo.jpg",
    "backdrop": "/bWF5ImUscXXYia8owpm8coadR4m.jpg",
    "tmdb": 1257009,
+   "imdb": "tt18312380",
    "firstSeen": null
   },
   {
@@ -12619,6 +11967,7 @@
    "poster": "/2FKjLRt7oK1bRRIrxgWmthbBdFh.jpg",
    "backdrop": "/7ZO9yoEU2fAHKhmJWfAc2QIPWJg.jpg",
    "tmdb": 766507,
+   "imdb": "tt11866324",
    "firstSeen": null
   },
   {
@@ -12649,6 +11998,7 @@
    "poster": "/7IGdPaKujv0BjI0Zd0m0a4CzEjJ.jpg",
    "backdrop": "/qkl57wzSFrpi2sRpoc2mZJbMuLP.jpg",
    "tmdb": 50620,
+   "imdb": "tt1673434",
    "firstSeen": null
   },
   {
@@ -12671,7 +12021,7 @@
     "HUL"
    ],
    "d": "Kenneth Branagh",
-   "h": "Celebrated sleuth Hercule Poirot, now retired and living in self-imposed exile in Venice, reluctantly attends a Halloween s\u00e9ance at a decaying, haunted palazzo. When one of the guests is murdered, the detective is thrust into a sinister world of shadows and secrets.",
+   "h": "Celebrated sleuth Hercule Poirot, now retired and living in self-imposed exile in Venice, reluctantly attends a Halloween séance at a decaying, haunted palazzo. When one of the guests is murdered, the detective is thrust into a sinister world of shadows and secrets.",
    "k": "teen",
    "pop": 1,
    "mpaa": "PG-13",
@@ -12680,6 +12030,7 @@
    "poster": "/l6iwxT0NbVw6QiF08YTIuTnXS82.jpg",
    "backdrop": "/qB9wshRySHgN2MibLOlsW6YalqD.jpg",
    "tmdb": 945729,
+   "imdb": "tt22687790",
    "firstSeen": null
   },
   {
@@ -12710,6 +12061,7 @@
    "poster": "/gziIkUSnYuj9ChCi8qOu2ZunpSC.jpg",
    "backdrop": "/iZGiMD0p1M2AOmzKknFo5bkuz94.jpg",
    "tmdb": 524,
+   "imdb": "tt0112641",
    "firstSeen": null
   },
   {
@@ -12738,7 +12090,323 @@
    "poster": "/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg",
    "backdrop": "/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg",
    "tmdb": 718821,
+   "imdb": "tt12584954",
    "firstSeen": null
+  },
+  {
+   "t": "Men in Black II",
+   "y": 2002,
+   "r": 88,
+   "g": [
+    "action",
+    "comedy",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "propulsive",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Barry Sonnenfeld",
+   "h": "Kay and Jay reunite to provide our best, last and only line of defense against a sinister seductress who levels the toughest challenge yet to the MIB's untarnished mission statement – protecting Earth from the scum of the universe. It's been four years since the alien-seeking agents averted an intergalactic disaster of epic proportions.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 64,
+   "rtSrc": "tmdb",
+   "poster": "/enA22EPyzc2WQ1VVyY7zxresQQr.jpg",
+   "backdrop": "/o1l6OCqA3pYDZHIc5L1s7CEzCMv.jpg",
+   "tmdb": 608,
+   "imdb": "tt0120912",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Descendants: The Rise of Red",
+   "y": 2024,
+   "r": 92,
+   "g": [
+    "fantasy",
+    "adventure",
+    "family",
+    "comedy"
+   ],
+   "a": [
+    "cerebral",
+    "visual",
+    "spectacle",
+    "cozy",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "DIS",
+    "HUL"
+   ],
+   "d": "Jennifer Phang",
+   "h": "After the Queen of Hearts incites a coup on Auradon, her rebellious daughter Red and Cinderella's perfectionist daughter Chloe join forces and travel back in time to try to undo the traumatic event that set Red's mother down her villainous path.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "G",
+   "rt": 67,
+   "rtSrc": "tmdb",
+   "poster": "/8fYluTtB3b3HKO7KQa5tzrvGaps.jpg",
+   "backdrop": "/dn3gbDpXPSwC6saMJOHkCiFA9jn.jpg",
+   "tmdb": 974262,
+   "imdb": "tt20202136",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Bad Boys II",
+   "y": 2003,
+   "r": 146,
+   "g": [
+    "action",
+    "crime",
+    "comedy"
+   ],
+   "a": [
+    "weird",
+    "propulsive",
+    "violent",
+    "comic"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Michael Bay",
+   "h": "Detectives Marcus Burnett and Mike Lowrey of the Miami Narcotics Task Force are tasked with stopping the flow of the drug Ecstasy into Miami. They track the drugs to the whacked-out Cuban drug lord Johnny Tapia, who is also involved in a bloody war with Russian and Haitian mobsters.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 67,
+   "rtSrc": "tmdb",
+   "poster": "/yCvB5fG5aEPqa1St7ihY6KEAsHD.jpg",
+   "backdrop": "/gxSVZCUlDd8upT1G2wdrUdz2hxG.jpg",
+   "tmdb": 8961,
+   "imdb": "tt0172156",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Predator: Killer of Killers",
+   "y": 2025,
+   "r": 85,
+   "g": [
+    "animation",
+    "action",
+    "scifi",
+    "thriller"
+   ],
+   "a": [
+    "spectacle",
+    "visual",
+    "propulsive",
+    "cerebral",
+    "brisk"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Dan Trachtenberg",
+   "h": "While three of the fiercest warriors in human history—a Viking raider, a ninja in feudal Japan, and a WWII pilot—are killers in their own right, they are merely prey for their new opponent: the ultimate killer of killers.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 78,
+   "rtSrc": "tmdb",
+   "poster": "/2XDQa6EmFHSA37j1t0w88vpWqj9.jpg",
+   "backdrop": "/3AGZKVr2DPT9H53gYtkSEC1tK1E.jpg",
+   "tmdb": 1376434,
+   "imdb": "tt36463894",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Gran Turismo",
+   "y": 2023,
+   "r": 135,
+   "g": [
+    "adventure",
+    "drama",
+    "action"
+   ],
+   "a": [
+    "grounded",
+    "spectacle",
+    "characterstudy",
+    "propulsive",
+    "visceral"
+   ],
+   "svcs": [
+    "HUL",
+    "MAX"
+   ],
+   "d": "Neill Blomkamp",
+   "h": "The ultimate wish-fulfillment tale of a teenage Gran Turismo player whose gaming skills won him a series of Nissan competitions to become an actual professional racecar driver.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/51tqzRtKMMZEYUpSYkrUE7v9ehm.jpg",
+   "backdrop": "/xFYpUmB01nswPgbzi8EOCT1ZYFu.jpg",
+   "tmdb": 980489,
+   "imdb": "tt4495098",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "A Man Called Otto",
+   "y": 2022,
+   "r": 126,
+   "g": [
+    "comedy",
+    "drama"
+   ],
+   "a": [
+    "melancholy",
+    "comic",
+    "characterstudy"
+   ],
+   "svcs": [
+    "PRV",
+    "HUL"
+   ],
+   "d": "Marc Forster",
+   "h": "When a lively young family moves in next door, grumpy widower Otto Anderson meets his match in a quick-witted, pregnant woman named Marisol, leading to an unlikely friendship that turns his world upside down.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 77,
+   "rtSrc": "tmdb",
+   "poster": "/130H1gap9lFfiTF9iDrqNIkFvC9.jpg",
+   "backdrop": "/v2LilmCylr3bL9TCZSj6syjowZh.jpg",
+   "tmdb": 937278,
+   "imdb": "tt7405458",
+   "firstSeen": null
+  },
+  {
+   "t": "Land of Bad",
+   "y": 2024,
+   "r": 113,
+   "g": [
+    "action",
+    "war",
+    "thriller"
+   ],
+   "a": [
+    "spectacle",
+    "propulsive",
+    "visceral"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "William Eubank",
+   "h": "When a Delta Force special ops mission goes terribly wrong, Air Force drone pilot Reaper has 48 hours to remedy what has devolved into a wild rescue operation. With no weapons and no communication other than the drone above, the ground mission suddenly becomes a full-scale battle when the team is discovered by the enemy.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/h3jYanWMEJq6JJsCopy1h7cT2Hs.jpg",
+   "backdrop": "/iKqItVltY6r0eJeIRdIZV8IrBpz.jpg",
+   "tmdb": 969492,
+   "imdb": "tt19864802",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Together",
+   "y": 2025,
+   "r": 102,
+   "g": [
+    "horror",
+    "romance"
+   ],
+   "a": [
+    "weird",
+    "scary",
+    "romantic"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Michael Shanks",
+   "h": "Years into their relationship, Tim and Millie find themselves at a crossroads as they move to the country, abandoning all that is familiar in their lives except each other. With tensions already flaring, a nightmarish encounter with a mysterious, unnatural force threatens to corrupt their lives, their love, and their flesh.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/80slKYVM5teFH3kz6ouWrZXveqj.jpg",
+   "backdrop": "/39Niij05MXfibXBsHiUU0Ml0POX.jpg",
+   "tmdb": 1242011,
+   "imdb": "tt31184028",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "It Ends with Us",
+   "y": 2024,
+   "r": 131,
+   "g": [
+    "drama",
+    "romance"
+   ],
+   "a": [
+    "weird",
+    "romantic",
+    "characterstudy"
+   ],
+   "svcs": [
+    "HUL"
+   ],
+   "d": "Justin Baldoni",
+   "h": "When a woman's first love suddenly reenters her life, her relationship with a charming, but abusive neurosurgeon is upended, and she realizes she must learn to rely on her own strength to make an impossible choice for her future.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "PG-13",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/AjV6jFJ2YFIluYo4GQf13AA1tqu.jpg",
+   "backdrop": "/8yPSYhooj8nyBbmV3GVdLDwuE7e.jpg",
+   "tmdb": 1079091,
+   "imdb": "tt10655524",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Tropic Thunder",
+   "y": 2008,
+   "r": 107,
+   "g": [
+    "action",
+    "comedy",
+    "war"
+   ],
+   "a": [
+    "ironic",
+    "propulsive",
+    "comic",
+    "visceral"
+   ],
+   "svcs": [
+    "PRV",
+    "HUL",
+    "PAR"
+   ],
+   "d": "Ben Stiller",
+   "h": "A group of self-absorbed actors set out to make the most expensive war film ever. After ballooning costs force the studio to cancel the movie, the frustrated director refuses to stop shooting, leading his cast into the jungles of Southeast Asia, where they encounter real bad guys.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 67,
+   "rtSrc": "tmdb",
+   "poster": "/zAurB9mNxfYRoVrVjAJJwGV3sPg.jpg",
+   "backdrop": "/4pLi4QMm0MZ9TSoF3l8qQmY9HNO.jpg",
+   "tmdb": 7446,
+   "imdb": "tt0942385",
+   "firstSeen": "2026-08-31"
   },
   {
    "t": "Greenland 2: Migration",
@@ -12769,6 +12437,7 @@
    "poster": "/z2tqCJLsw6uEJ8nJV8BsQXGa3dr.jpg",
    "backdrop": "/cLFbDVfhllIMybpo2fkGNzehiQG.jpg",
    "tmdb": 840464,
+   "imdb": "tt14850054",
    "firstSeen": null
   },
   {
@@ -12790,7 +12459,7 @@
     "PCK"
    ],
    "d": "Chris Columbus",
-   "h": "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard\u2014with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry.",
+   "h": "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard—with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry.",
    "k": "all",
    "pop": 3,
    "mpaa": "PG",
@@ -12799,6 +12468,7 @@
    "poster": "/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg",
    "backdrop": "/1XAC6RPT01UX9EQGy2JVn5c8pgy.jpg",
    "tmdb": 671,
+   "imdb": "tt0241527",
    "firstSeen": null
   },
   {
@@ -12820,7 +12490,7 @@
     "MAX"
    ],
    "d": "Simon McQuoid",
-   "h": "The fan favorite champions\u2014now joined by Johnny Cage himself\u2014are pitted against one another in the ultimate, no-holds barred, gory battle to defeat the dark rule of Shao Kahn that threatens the very existence of the Earthrealm and its defenders.",
+   "h": "The fan favorite champions—now joined by Johnny Cage himself—are pitted against one another in the ultimate, no-holds barred, gory battle to defeat the dark rule of Shao Kahn that threatens the very existence of the Earthrealm and its defenders.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -12829,6 +12499,7 @@
    "poster": "/hwRdDFIhaEmpRgoki805YvyyjZf.jpg",
    "backdrop": "/ybmfvoIPxQ9Ivy2tEhi6JxufMJL.jpg",
    "tmdb": 931285,
+   "imdb": "tt17490712",
    "firstSeen": null
   },
   {
@@ -12848,7 +12519,7 @@
     "MAX"
    ],
    "d": "Lee Cronin",
-   "h": "The young daughter of a journalist disappears into the desert without a trace\u2014eight years later, the broken family is shocked when she is returned to them, as what should be a joyful reunion turns into a living nightmare.",
+   "h": "The young daughter of a journalist disappears into the desert without a trace—eight years later, the broken family is shocked when she is returned to them, as what should be a joyful reunion turns into a living nightmare.",
    "k": "adult",
    "pop": 1,
    "mpaa": "R",
@@ -12857,6 +12528,7 @@
    "poster": "/1q308iixueCU4pFtSYugNOevtNx.jpg",
    "backdrop": "/xugEpZk9YQ0DIz1aFvH5HGkqpZK.jpg",
    "tmdb": 1304313,
+   "imdb": "tt32612507",
    "firstSeen": null
   },
   {
@@ -12888,6 +12560,7 @@
    "poster": "/sdEOH0992YZ0QSxgXNIGLq1ToUi.jpg",
    "backdrop": "/1stUIsjawROZxjiCMtqqXqgfZWC.jpg",
    "tmdb": 672,
+   "imdb": "tt0295297",
    "firstSeen": null
   },
   {
@@ -12918,6 +12591,7 @@
    "poster": "/rnIOUhzwJDfgQakx8EjoNyItKgs.jpg",
    "backdrop": "/1oKLEA9JOhvaBwLpqjROisvWMy7.jpg",
    "tmdb": 1325734,
+   "imdb": "tt33071426",
    "firstSeen": null
   },
   {
@@ -12949,6 +12623,7 @@
    "poster": "/iGoXIpQb7Pot00EEdwpwPajheZ5.jpg",
    "backdrop": "/vcrgU0KaNj5mKUCIQSUdiQwTE9y.jpg",
    "tmdb": 12444,
+   "imdb": "tt0926084",
    "firstSeen": null
   },
   {
@@ -12979,6 +12654,7 @@
    "poster": "/c54HpQmuwXjHq2C9wmoACjxoom3.jpg",
    "backdrop": "/cbcpDn6XJaIGoOil1bKuskU8ds4.jpg",
    "tmdb": 12445,
+   "imdb": "tt1201607",
    "firstSeen": null
   },
   {
@@ -13009,6 +12685,7 @@
    "poster": "/qvktm0BHcnmDpul4Hz01GIazWPr.jpg",
    "backdrop": "/ffdqHMWkh1h9MABwIfbfRJhgFW6.jpg",
    "tmdb": 218,
+   "imdb": "tt0088247",
    "firstSeen": null
   },
   {
@@ -13042,6 +12719,7 @@
    "poster": "/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg",
    "backdrop": "/y2DB71C4nyIdMrANijz8mzvQtk6.jpg",
    "tmdb": 49026,
+   "imdb": "tt1345836",
    "firstSeen": null
   },
   {
@@ -13075,7 +12753,257 @@
    "poster": "/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg",
    "backdrop": "/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg",
    "tmdb": 950387,
+   "imdb": "tt3566834",
    "firstSeen": null
+  },
+  {
+   "t": "Avatar Aang: The Last Airbender",
+   "y": 2026,
+   "r": 99,
+   "g": [
+    "animation",
+    "action",
+    "adventure",
+    "fantasy"
+   ],
+   "a": [
+    "cerebral",
+    "visual",
+    "propulsive",
+    "spectacle",
+    "brisk"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "Lauren Montgomery",
+   "h": "Avatar Aang, the world's last Airbender, learns of an ancient power that could save his culture from extinction. With the help of his friends, he embarks on a global quest to find it before it falls into the wrong hands and threatens to upend the peace they sacrificed everything to achieve.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 92,
+   "rtSrc": "tmdb",
+   "poster": "/3sgnSfNT27Bx5O5ukr7B26mhEQq.jpg",
+   "backdrop": "/ezbrL1dMymKQZw7mDEWa2ZTzN7d.jpg",
+   "tmdb": 980431,
+   "imdb": "tt18259538",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Terminator 2: Judgment Day",
+   "y": 1991,
+   "r": 137,
+   "g": [
+    "action",
+    "thriller",
+    "scifi"
+   ],
+   "a": [
+    "bleak",
+    "cerebral",
+    "propulsive",
+    "visceral"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "James Cameron",
+   "h": "Ten years after the events of the original, a reprogrammed T-800 is sent back in time to protect young John Connor from the shape-shifting T-1000. Together with his mother Sarah, he fights to stop Skynet from triggering a nuclear apocalypse.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 82,
+   "rtSrc": "tmdb",
+   "poster": "/jFTVD4XoWQTcg7wdyJKa8PEds5q.jpg",
+   "backdrop": "/izkMjmhauFx9DjoBQqM5sM5WAwE.jpg",
+   "tmdb": 280,
+   "imdb": "tt0103064",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Gladiator",
+   "y": 2000,
+   "r": 155,
+   "g": [
+    "action",
+    "drama",
+    "adventure"
+   ],
+   "a": [
+    "violent",
+    "spectacle",
+    "cerebral",
+    "propulsive",
+    "characterstudy",
+    "epic"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "Ridley Scott",
+   "h": "After the death of Emperor Marcus Aurelius, his devious son takes power and demotes Maximus, one of Rome's most capable generals who Marcus preferred. Eventually, Maximus is forced to become a gladiator and battle to the death against other men for the amusement of paying audiences.",
+   "k": "adult",
+   "pop": 3,
+   "mpaa": "R",
+   "rt": 82,
+   "rtSrc": "tmdb",
+   "poster": "/wN2xWp1eIwCKOD0BHTcErTBv1Uq.jpg",
+   "backdrop": "/jhk6D8pim3yaByu1801kMoxXFaX.jpg",
+   "tmdb": 98,
+   "imdb": "tt0172495",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "The Godfather Part II",
+   "y": 1974,
+   "r": 202,
+   "g": [
+    "drama",
+    "crime"
+   ],
+   "a": [
+    "violent",
+    "characterstudy",
+    "epic",
+    "slowburn"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "Francis Ford Coppola",
+   "h": "In the continuing saga of the Corleone crime family, a young Vito Corleone grows up in Sicily and in 1910s New York. In the 1950s, Michael Corleone attempts to expand the family business into Las Vegas, Hollywood and Cuba.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 86,
+   "rtSrc": "tmdb",
+   "poster": "/sSuQTCZwqKrNBNIsksO9IAUoWP9.jpg",
+   "backdrop": "/pGzqRKrYeK4LogoysNro0vG8d8N.jpg",
+   "tmdb": 240,
+   "imdb": "tt0071562",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Titanic",
+   "y": 1997,
+   "r": 194,
+   "g": [
+    "drama",
+    "romance"
+   ],
+   "a": [
+    "grounded",
+    "characterstudy",
+    "romantic",
+    "epic",
+    "propulsive",
+    "visceral"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "James Cameron",
+   "h": "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship. Rose tells the whole story from Titanic's departure through to its death—on its first and last voyage—on April 15, 1912.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 79,
+   "rtSrc": "tmdb",
+   "poster": "/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg",
+   "backdrop": "/xnHVX37XZEp33hhCbYlQFq7ux1J.jpg",
+   "tmdb": 597,
+   "imdb": "tt0120338",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Passenger",
+   "y": 2026,
+   "r": 94,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "scary",
+    "propulsive",
+    "brisk"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "André Øvredal",
+   "h": "After a young couple witnesses a gruesome highway accident, they soon realize they did not leave the crash scene alone, as a demonic presence called the Passenger that won't stop until it claims them both turns their van life adventure into a nightmare.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/2sOEJzhPzjTkZSlPbGxOJ7xgIyS.jpg",
+   "backdrop": "/3pDfu71mrzSuFYyIfnKEjt8z4BC.jpg",
+   "tmdb": 1368314,
+   "imdb": "tt33763941",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Scream 7",
+   "y": 2026,
+   "r": 114,
+   "g": [
+    "horror",
+    "mystery",
+    "crime"
+   ],
+   "a": [
+    "twisty",
+    "violent",
+    "scary",
+    "cerebral"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "Kevin Williamson",
+   "h": "When a new Ghostface killer emerges in the quiet town where Sidney Prescott has built a new life, her darkest fears are realized as her daughter becomes the next target. Determined to protect her family, Sidney must face the horrors of her past to put an end to the bloodshed once and for all.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 62,
+   "rtSrc": "tmdb",
+   "poster": "/jjyuk0edLiW8vOSnlfwWCCLpbh5.jpg",
+   "backdrop": "/3eUyLEF5M0ky3h6KJsWiWzaakB8.jpg",
+   "tmdb": 1159559,
+   "imdb": "tt27047903",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "The Hangover",
+   "y": 2009,
+   "r": 100,
+   "g": [
+    "comedy"
+   ],
+   "a": [
+    "weird",
+    "cerebral",
+    "melancholy",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "Todd Phillips",
+   "h": "When three friends finally come to after a raucous night of bachelor-party revelry, they find a baby in the closet and a tiger in the bathroom. But they can't seem to locate their best friend, Doug – who's supposed to be tying the knot. Launching a frantic search for Doug, the trio perseveres through a nasty hangover to try to make it to the church on time.",
+   "k": "adult",
+   "pop": 3,
+   "mpaa": "R",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/A0uS9rHR56FeBtpjVki16M5xxSW.jpg",
+   "backdrop": "/iuRVt8tFiXDPGgzavhuSa3QHRxD.jpg",
+   "tmdb": 18785,
+   "imdb": "tt1119646",
+   "firstSeen": "2026-08-31"
   },
   {
    "t": "Obsession",
@@ -13103,6 +13031,7 @@
    "poster": "/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg",
    "backdrop": "/rZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg",
    "tmdb": 1339713,
+   "imdb": "tt37287335",
    "firstSeen": null
   },
   {
@@ -13137,6 +13066,7 @@
    "poster": "/eJGWx219ZcEMVQJhAgMiqo8tYY.jpg",
    "backdrop": "/kxQiIJ4gVcD3K6o14MJ72p5yRcE.jpg",
    "tmdb": 1226863,
+   "imdb": "tt28650488",
    "firstSeen": null
   },
   {
@@ -13165,6 +13095,7 @@
    "poster": "/iDdGfdNvY1EX0uDdA4Ru77fwMfc.jpg",
    "backdrop": "/1fpwEe2GvNjAq2MN2xxdifNZLBT.jpg",
    "tmdb": 280092,
+   "imdb": "tt3195644",
    "firstSeen": null
   },
   {
@@ -13196,6 +13127,7 @@
    "poster": "/a07wLy4ONfpsjnBqMwhlWTJTcm.jpg",
    "backdrop": "/wyFJcodi5T9LJAeiE8Se7ScdOFj.jpg",
    "tmdb": 652,
+   "imdb": "tt0332452",
    "firstSeen": null
   },
   {
@@ -13220,7 +13152,7 @@
     "PCK"
    ],
    "d": "Michael Jelenic",
-   "h": "While working underground to fix a water main, Brooklyn plumbers\u2014and brothers\u2014Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated, Mario embarks on an epic quest to find Luigi.",
+   "h": "While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated, Mario embarks on an epic quest to find Luigi.",
    "k": "all",
    "pop": 2,
    "mpaa": "PG",
@@ -13229,6 +13161,7 @@
    "poster": "/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",
    "backdrop": "/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg",
    "tmdb": 502356,
+   "imdb": "tt6718170",
    "firstSeen": null
   },
   {
@@ -13260,6 +13193,7 @@
    "poster": "/z7uo9zmQdQwU5ZJHFpv2Upl30i1.jpg",
    "backdrop": "/ze6Mx4QE5mQVXRYmG2flncqqle4.jpg",
    "tmdb": 767,
+   "imdb": "tt0417741",
    "firstSeen": null
   },
   {
@@ -13291,6 +13225,7 @@
    "poster": "/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg",
    "backdrop": "/1OV7hau4D3rWGS5bu8sqBYeVpe.jpg",
    "tmdb": 674,
+   "imdb": "tt0330373",
    "firstSeen": null
   },
   {
@@ -13323,6 +13258,7 @@
    "poster": "/5aOyriWkPec0zUDxmHFP9qMmBaj.jpg",
    "backdrop": "/pkxPkHOPJjOvzfQOclANEBT8OfK.jpg",
    "tmdb": 675,
+   "imdb": "tt0373889",
    "firstSeen": null
   },
   {
@@ -13357,39 +13293,753 @@
    "poster": "/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg",
    "backdrop": "/w0eKUOEog2ImtktCHAMUZws8qif.jpg",
    "tmdb": 808,
+   "imdb": "tt0126029",
    "firstSeen": null
   },
   {
-   "t": "IF",
-   "y": 2024,
-   "r": 104,
+   "t": "Predator",
+   "y": 1987,
+   "r": 107,
    "g": [
-    "comedy",
-    "fantasy",
-    "family"
+    "scifi",
+    "action",
+    "adventure",
+    "thriller"
    ],
    "a": [
-    "comic",
-    "visual",
-    "cozy",
-    "scary",
-    "propulsive"
+    "propulsive",
+    "spectacle",
+    "cerebral",
+    "comic"
    ],
    "svcs": [
-    "NFX",
-    "PAR"
+    "PCK"
    ],
-   "d": "John Krasinski",
-   "h": "After discovering she can see everyone's imaginary friends, a girl embarks on a magical adventure to reconnect forgotten imaginary friends with their kids.",
+   "d": "John McTiernan",
+   "h": "A team of elite commandos on a secret mission in a Central American jungle come to find themselves hunted by an extraterrestrial warrior.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 76,
+   "rtSrc": "tmdb",
+   "poster": "/k3mW4qfJo6SKqe6laRyNGnbB9n5.jpg",
+   "backdrop": "/YL3GPOiDcNraIJOVDCZsoOBoDy.jpg",
+   "tmdb": 106,
+   "imdb": "tt0093773",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Wicked",
+   "y": 2024,
+   "r": 162,
+   "g": [
+    "drama",
+    "romance",
+    "fantasy"
+   ],
+   "a": [
+    "romantic",
+    "characterstudy",
+    "visual",
+    "epic",
+    "brisk",
+    "comic"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Jon M. Chu",
+   "h": "In the land of Oz, ostracized and misunderstood green-skinned Elphaba is forced to share a room with the popular aristocrat Glinda at Shiz University, and the two's unlikely friendship is tested as they begin to fulfill their respective destinies as Glinda the Good and the Wicked Witch of the West.",
    "k": "all",
    "pop": 1,
    "mpaa": "PG",
    "rt": 69,
    "rtSrc": "tmdb",
-   "poster": "/xbKFv4KF3sVYuWKllLlwWDmuZP7.jpg",
-   "backdrop": "/nxxCPRGTzxUH8SFMrIsvMmdxHti.jpg",
-   "tmdb": 639720,
+   "poster": "/j5AVKdTm8mG7tjoxIPU5V7riaDy.jpg",
+   "backdrop": "/fyZ6SDUS4o9jp2EHxfZa3qS9ean.jpg",
+   "tmdb": 402431,
+   "imdb": "tt1262426",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Shrek the Third",
+   "y": 2007,
+   "r": 93,
+   "g": [
+    "fantasy",
+    "adventure",
+    "animation",
+    "comedy",
+    "family"
+   ],
+   "a": [
+    "visual",
+    "spectacle",
+    "comic",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Chris Miller",
+   "h": "After the King of Far Far Away dies, Shrek and Fiona are to succede. However, Shrek wants to return to his cozy swamp and live in peace and quiet, so when he finds out there is another heir to the throne, he and Donkey set off to bring him back to rule the kingdom.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 63,
+   "rtSrc": "tmdb",
+   "poster": "/n4SexGGQzI26E269tfpa80MZaGV.jpg",
+   "backdrop": "/wvXxKpFGXvQJRB0nvvfURhRD3C0.jpg",
+   "tmdb": 810,
+   "imdb": "tt0413267",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Kung Fu Panda",
+   "y": 2008,
+   "r": 90,
+   "g": [
+    "action",
+    "animation",
+    "comedy",
+    "family"
+   ],
+   "a": [
+    "hopeful",
+    "propulsive",
+    "visual",
+    "comic",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Mark Osborne",
+   "h": "Chosen by prophecy but doubted by all, Po is an unlikely choice for the mystical title of the Dragon Warrior—a clumsy panda thrust into the world of kung fu as a deadly enemy threatens the Valley of Peace. Under reluctant guidance by Master Shifu and the Furious Five, Po must embrace who he is to unlock the power that no scroll can teach.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/wWt4JYXTg5Wr3xBW2phBrMKgp3x.jpg",
+   "backdrop": "/qdthf9WrRDSaIkGVQGhhJ9pz1hn.jpg",
+   "tmdb": 9502,
+   "imdb": "tt0441773",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Shrek 2",
+   "y": 2004,
+   "r": 92,
+   "g": [
+    "animation",
+    "comedy",
+    "family",
+    "fantasy",
+    "romance"
+   ],
+   "a": [
+    "romantic",
+    "cerebral",
+    "visual",
+    "comic",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Conrad Vernon",
+   "h": "Happily ever after never seemed so far far away when a trip to meet the in-laws turns into a hilariously twisted adventure for Shrek and Fiona. With the help of ever-faithful Donkey, Shrek takes on the potion-brewing Fairy Godmother, pompous Prince Charming, and infamous ogre-killer Puss In Boots.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/2yYP0PQjG8zVqturh1BAqu2Tixl.jpg",
+   "backdrop": "/8ohobj5lAIbl5XWw11FywS3IRrS.jpg",
+   "tmdb": 809,
+   "imdb": "tt0298148",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "The Secret Life of Pets 2",
+   "y": 2019,
+   "r": 86,
+   "g": [
+    "animation",
+    "comedy",
+    "family",
+    "adventure"
+   ],
+   "a": [
+    "visual",
+    "comic",
+    "cozy",
+    "spectacle",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Chris Renaud",
+   "h": "Max the terrier must cope with some major life changes when his owner gets married and has a baby. When the family takes a trip to the countryside, nervous Max has numerous run-ins with canine-intolerant cows, hostile foxes and a scary turkey. Luckily for Max, he soon catches a break when he meets Rooster, a gruff farm dog who tries to cure the lovable pooch of his neuroses.",
+   "k": "all",
+   "pop": 1,
+   "mpaa": "PG",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/s9xg4V5EDKiphgIksVJ9gewBM11.jpg",
+   "backdrop": "/zDIievPXqjfjLogXFqnnopU0OkK.jpg",
+   "tmdb": 412117,
+   "imdb": "tt5113040",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Fantastic Beasts and Where to Find Them",
+   "y": 2016,
+   "r": 133,
+   "g": [
+    "fantasy",
+    "adventure"
+   ],
+   "a": [
+    "propulsive",
+    "visual",
+    "spectacle"
+   ],
+   "svcs": [
+    "MAX",
+    "PCK"
+   ],
+   "d": "David Yates",
+   "h": "In 1926, Newt Scamander arrives at the Magical Congress of the United States of America with a magically expanded briefcase, which houses a number of dangerous creatures and their habitats. When the creatures escape from the briefcase, it sends the American wizarding authorities after Newt, and threatens to strain even further the state of magical and non-magical relations.",
+   "k": "teen",
+   "pop": 3,
+   "mpaa": "PG-13",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/fLsaFKExQt05yqjoAvKsmOMYvJR.jpg",
+   "backdrop": "/8Qsr8pvDL3s1jNZQ4HK1d1Xlvnh.jpg",
+   "tmdb": 259316,
+   "imdb": "tt3183660",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Five Nights at Freddy's",
+   "y": 2023,
+   "r": 110,
+   "g": [
+    "horror",
+    "thriller"
+   ],
+   "a": [
+    "scary",
+    "spectacle",
+    "propulsive"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Emma Tammi",
+   "h": "Recently fired and desperate for work, a troubled young man named Mike agrees to take a position as a night security guard at an abandoned theme restaurant: Freddy Fazbear's Pizzeria. But he soon discovers that nothing at Freddy's is what it seems.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/7BpNtNfxuocYEVREzVMO75hso1l.jpg",
+   "backdrop": "/7NRGAtu8E4343NSKwhkgmVRDINw.jpg",
+   "tmdb": 507089,
+   "imdb": "tt4589218",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Fast & Furious Presents: Hobbs & Shaw",
+   "y": 2019,
+   "r": 137,
+   "g": [
+    "action",
+    "adventure",
+    "comedy"
+   ],
+   "a": [
+    "propulsive",
+    "spectacle",
+    "comic"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "David Leitch",
+   "h": "Ever since US Diplomatic Security Service Agent Hobbs and lawless outcast Shaw first faced off, they just have traded smack talk and body blows. But when cyber-genetically enhanced anarchist Brixton's ruthless actions threaten the future of humanity, they join forces to defeat him.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg",
+   "backdrop": "/hpgda6P9GutvdkDX5MUJ92QG9aj.jpg",
+   "tmdb": 384018,
+   "imdb": "tt6806448",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Shrek Forever After",
+   "y": 2010,
+   "r": 93,
+   "g": [
+    "comedy",
+    "adventure",
+    "fantasy",
+    "animation",
+    "family"
+   ],
+   "a": [
+    "romantic",
+    "cerebral",
+    "comic",
+    "spectacle",
+    "visual",
+    "cozy"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Mike Mitchell",
+   "h": "A midlife-crisis burdened Shrek, longing for the days of when he felt like a real ogre, makes a pact with magic deal-maker Rumpelstiltskin. But when he's duped and sent to a twisted version of Far Far Away—where Rumpelstiltskin is king, ogres are hunted, and he and Fiona have never met—he sets out to restore his world and reclaim his true love.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 64,
+   "rtSrc": "tmdb",
+   "poster": "/6HrfPZtKcGmX2tUWW3cnciZTaSD.jpg",
+   "backdrop": "/uzzTystB8lL0mRDII5Sfs5HxgkI.jpg",
+   "tmdb": 10192,
+   "imdb": "tt0892791",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Mean Girls",
+   "y": 2004,
+   "r": 97,
+   "g": [
+    "drama",
+    "comedy"
+   ],
+   "a": [
+    "earnest",
+    "characterstudy",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "PAR",
+    "PCK"
+   ],
+   "d": "Mark Waters",
+   "h": "Cady Heron is a hit with The Plastics, the A-list girl clique at her new school, until she makes the mistake of falling for Aaron Samuels, the ex-boyfriend of alpha Plastic Regina George.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 72,
+   "rtSrc": "tmdb",
+   "poster": "/2ZkuQXvVhh45uSvkBej4S7Ix1NJ.jpg",
+   "backdrop": "/nP3y0TkR6XniFs9J53qQkg4Bnnk.jpg",
+   "tmdb": 10625,
+   "imdb": "tt0377092",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "The Matrix Reloaded",
+   "y": 2003,
+   "r": 138,
+   "g": [
+    "adventure",
+    "action",
+    "thriller",
+    "scifi"
+   ],
+   "a": [
+    "bleak",
+    "cerebral",
+    "spectacle",
+    "propulsive"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Lana Wachowski",
+   "h": "The Resistance builds in numbers as humans are freed from the Matrix and brought to the city of Zion. Neo discovers his superpowers, including the ability to see the code inside the Matrix. With machine sentinels digging to Zion in 72 hours, Neo, Morpheus and Trinity must find the Keymaker to ultimately reach the Source.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/aA5qHS0FbSXO8PxcxUIHbDrJyuh.jpg",
+   "backdrop": "/ihOJcrorpDQtHTzIOrobbOhpJsj.jpg",
+   "tmdb": 604,
+   "imdb": "tt0234215",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Megamind",
+   "y": 2010,
+   "r": 96,
+   "g": [
+    "animation",
+    "action",
+    "comedy",
+    "family",
+    "scifi"
+   ],
+   "a": [
+    "spectacle",
+    "cerebral",
+    "visual",
+    "propulsive",
+    "comic",
+    "cozy"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Tom McGrath",
+   "h": "After Megamind, a highly intelligent alien supervillain, defeats his long-time nemesis Metro Man, Megamind creates a new hero to fight, but must act to save the city when his \"creation\" becomes an even worse villain than he was.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 70,
+   "rtSrc": "tmdb",
+   "poster": "/uZ9ytt3sPTx62XTfN56ILSuYWRe.jpg",
+   "backdrop": "/irpJXGiVr539uuspcQcNdkhS2lq.jpg",
+   "tmdb": 38055,
+   "imdb": "tt1001526",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "The Angry Birds Movie",
+   "y": 2016,
+   "r": 97,
+   "g": [
+    "animation",
+    "adventure",
+    "comedy",
+    "family"
+   ],
+   "a": [
+    "visual",
+    "spectacle",
+    "comic",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Clay Kaytis",
+   "h": "An island populated entirely by happy, flightless birds or almost entirely. In this paradise, Red, a bird with a temper problem, speedy Chuck, and the volatile Bomb have always been outsiders. But when the island is visited by mysterious green piggies, it’s up to these unlikely outcasts to figure out what the pigs are up to.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 63,
+   "rtSrc": "tmdb",
+   "poster": "/iOH0fEFtV9z9rZp9zmBFGGeWicv.jpg",
+   "backdrop": "/o4mhrLxv6I70kvYA42qANGUF7ya.jpg",
+   "tmdb": 153518,
+   "imdb": "tt1985949",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "The Matrix Revolutions",
+   "y": 2003,
+   "r": 129,
+   "g": [
+    "adventure",
+    "action",
+    "thriller",
+    "scifi"
+   ],
+   "a": [
+    "bleak",
+    "cerebral",
+    "spectacle",
+    "propulsive"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Lilly Wachowski",
+   "h": "The human city of Zion defends itself against the massive invasion of the machines as Neo fights to end the war at another front while also opposing the rogue Agent Smith.",
+   "k": "adult",
+   "pop": 2,
+   "mpaa": "R",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/qEWiBXJGXK28jGBAm8oFKKTB0WD.jpg",
+   "backdrop": "/533xAMhhVyjTy8hwMUFEt5TuDfR.jpg",
+   "tmdb": 605,
+   "imdb": "tt0242653",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Kung Fu Panda 2",
+   "y": 2011,
+   "r": 91,
+   "g": [
+    "animation",
+    "family",
+    "comedy",
+    "action"
+   ],
+   "a": [
+    "visual",
+    "cozy",
+    "comic",
+    "propulsive",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Jennifer Yuh Nelson",
+   "h": "Po is finally living the dream as the Dragon Warrior—until a shadow from his past comes roaring back. When the ruthless peacock Lord Shen unleashes a devastating new weapon used to wipe out kung fu masters across the land, Po and the Furious Five race across China to put an end to his plans.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 71,
+   "rtSrc": "tmdb",
+   "poster": "/mtqqD00vB4PGRt20gWtGqFhrkd0.jpg",
+   "backdrop": "/reHkSQwiYKK4SabnGDY1FWKie82.jpg",
+   "tmdb": 49444,
+   "imdb": "tt1302011",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "The Gangster, the Cop, the Devil",
+   "y": 2019,
+   "r": 110,
+   "g": [
+    "action",
+    "crime",
+    "thriller"
+   ],
+   "a": [
+    "grounded",
+    "scary",
+    "propulsive",
+    "violent"
+   ],
+   "svcs": [
+    "PRV",
+    "PCK"
+   ],
+   "d": "Lee Won-tae",
+   "h": "After barely surviving a brutal attack by a sadistic serial killer, crime boss Jang Dong-su is left humiliated. Determined to catch the killer known as K, he forms an uneasy alliance with Jung Tae-seok, a relentless and incorruptible detective who often disrupts his illegal business. However, while Jang Dong-su wants K dead, Jung Tae-suk is determined to bring him to justice.",
+   "k": "teen",
+   "pop": 1,
+   "mpaa": "NR",
+   "rt": 79,
+   "rtSrc": "tmdb",
+   "poster": "/oHlM4abRm6BzrRcz9Nup1uidw9H.jpg",
+   "backdrop": "/jJJQ1PPXUEchqyZ9YyWzgSNU39Z.jpg",
+   "tmdb": 581528,
+   "imdb": "tt10208198",
    "firstSeen": null
+  },
+  {
+   "t": "The Texas Chain Saw Massacre",
+   "y": 1974,
+   "r": 83,
+   "g": [
+    "horror"
+   ],
+   "a": [
+    "violent",
+    "scary",
+    "brisk",
+    "practical"
+   ],
+   "svcs": [
+    "PRV",
+    "PCK"
+   ],
+   "d": "Tobe Hooper",
+   "h": "Five friends head out to rural Texas to visit the grave of a grandfather. On the way, they stumble across what appears to be a deserted house, only to discover something sinister within. Something armed with a chainsaw.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 73,
+   "rtSrc": "tmdb",
+   "poster": "/mpgkRPH1GNkMCgdPk2OMyHzAks7.jpg",
+   "backdrop": "/wvBx1Q1FcQE1BPLfBbgA3y9aaS1.jpg",
+   "tmdb": 30497,
+   "imdb": "tt0072271",
+   "firstSeen": null
+  },
+  {
+   "t": "Kung Fu Panda 3",
+   "y": 2016,
+   "r": 95,
+   "g": [
+    "animation",
+    "action",
+    "adventure",
+    "comedy",
+    "family"
+   ],
+   "a": [
+    "visual",
+    "propulsive",
+    "spectacle",
+    "comic",
+    "cozy",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Jennifer Yuh Nelson",
+   "h": "While Po and his father are visiting a secret panda village, an evil spirit threatens all of China, forcing Po to form a ragtag army to fight back.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/oajNi4Su39WAByHI6EONu8G8HYn.jpg",
+   "backdrop": "/s3FiHTdpQVpqIqdBxLLiy40wGut.jpg",
+   "tmdb": 140300,
+   "imdb": "tt2267968",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Ace Ventura: Pet Detective",
+   "y": 1994,
+   "r": 86,
+   "g": [
+    "comedy",
+    "crime",
+    "mystery"
+   ],
+   "a": [
+    "comic",
+    "violent",
+    "twisty",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Tom Shadyac",
+   "h": "He's Ace Ventura: Pet Detective. The Ace is on the case to find the Miami Dolphins' missing mascot and quarterback Dan Marino. He goes eyeball to eyeball with a man-eating shark, stakes out the Miami Dolphins and woos and wows the ladies. Whether he's undercover, under fire or underwater, he always gets his man… or beast!",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 66,
+   "rtSrc": "tmdb",
+   "poster": "/pqiRuETmuSybfnVZ7qyeoXhQyN1.jpg",
+   "backdrop": "/nbvREKIjX16mwNZtFqAoQTTHPnQ.jpg",
+   "tmdb": 3049,
+   "imdb": "tt0109040",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Armageddon",
+   "y": 1998,
+   "r": 151,
+   "g": [
+    "action",
+    "scifi",
+    "adventure"
+   ],
+   "a": [
+    "propulsive",
+    "romantic",
+    "spectacle",
+    "melancholy",
+    "cerebral",
+    "epic"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Michael Bay",
+   "h": "When an asteroid threatens to collide with Earth, NASA honcho Dan Truman determines the only way to stop it is to drill into its surface and detonate a nuclear bomb. This leads him to renowned driller Harry Stamper, who agrees to helm the dangerous space mission provided he can bring along his own hotshot crew. J.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 68,
+   "rtSrc": "tmdb",
+   "poster": "/eTM3qtGhDU8cvjpoa6KEt5E2auU.jpg",
+   "backdrop": "/1cO6OQJxz7YhTZ4V1OlkYfebeJa.jpg",
+   "tmdb": 95,
+   "imdb": "tt0120591",
+   "firstSeen": "2026-08-31"
+  },
+  {
+   "t": "Triangle",
+   "y": 2009,
+   "r": 99,
+   "g": [
+    "horror"
+   ],
+   "a": [
+    "weird",
+    "scary",
+    "brisk"
+   ],
+   "svcs": [
+    "PRV",
+    "PCK"
+   ],
+   "d": "Christopher Smith",
+   "h": "When Jess sets sail on a yacht with a group of friends, she cannot shake the feeling that there is something wrong.",
+   "k": "adult",
+   "pop": 1,
+   "mpaa": "R",
+   "rt": 69,
+   "rtSrc": "tmdb",
+   "poster": "/cRlMrbc4Iof7vN0ZqHwJnMBYBLi.jpg",
+   "backdrop": "/rlVpm5r7vZYyU9JHWf9UGOVDo5M.jpg",
+   "tmdb": 26466,
+   "imdb": "tt1187064",
+   "firstSeen": null
+  },
+  {
+   "t": "The Croods: A New Age",
+   "y": 2020,
+   "r": 95,
+   "g": [
+    "animation",
+    "family",
+    "adventure",
+    "fantasy",
+    "comedy"
+   ],
+   "a": [
+    "visual",
+    "cozy",
+    "spectacle",
+    "comic",
+    "brisk"
+   ],
+   "svcs": [
+    "PCK"
+   ],
+   "d": "Joel Crawford",
+   "h": "Searching for a safer habitat, the prehistoric Crood family discovers an idyllic, walled-in paradise that meets all of its needs. Unfortunately, they must also learn to live with the Bettermans -- a family that's a couple of steps above the Croods on the evolutionary ladder.",
+   "k": "all",
+   "pop": 2,
+   "mpaa": "PG",
+   "rt": 74,
+   "rtSrc": "tmdb",
+   "poster": "/tbVZ3Sq88dZaCANlUcewQuHQOaE.jpg",
+   "backdrop": "/ytTQoYkdpsgtfDWrNFCei8Mfbxu.jpg",
+   "tmdb": 529203,
+   "imdb": "tt2850386",
+   "firstSeen": "2026-08-31"
   }
  ]
 }
