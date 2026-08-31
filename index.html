@@ -709,6 +709,27 @@ main{position:relative;z-index:10}
   font-family:var(--display);font-size:13px;letter-spacing:.03em;text-transform:uppercase;
   color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45);
 }
+a.svc-chip{
+  cursor:pointer;
+  transition:background var(--quick), border-color var(--quick), transform var(--quick);
+}
+a.svc-chip:hover{
+  background:rgba(0,0,0,.5);border-color:var(--hair-2);transform:translateY(-1px);
+}
+a.svc-chip:hover .svc-name{color:#fff}
+a.svc-chip:hover .svc-mark{box-shadow:0 4px 12px rgba(0,0,0,.6)}
+.svc-go{
+  font-family:var(--sans);font-size:12px;line-height:1;color:var(--gold);
+  opacity:.5;transition:opacity var(--quick);
+}
+a.svc-chip:hover .svc-go{opacity:1}
+.rent-link{
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);
+  border-bottom:1px dashed rgba(217,179,106,.5);padding-bottom:2px;
+  transition:color var(--quick), border-color var(--quick);
+}
+.rent-link:hover{color:var(--cream);border-color:var(--cream)}
 .playing-note{
   font-family:var(--mono);font-size:10px;letter-spacing:.14em;
   text-transform:uppercase;color:#e0a494;
@@ -1651,6 +1672,24 @@ const SVC_COLOR = {}; SERVICES.forEach(function(s){ SVC_COLOR[s.k]=s.c; });
 const LOGO_BASE = "https://image.tmdb.org/t/p/w92";
 const SVC_LOGO  = {};
 const SVC_SHORT = {NFX:"N", MAX:"max", HUL:"hulu", DIS:"D+", PRV:"prime", APL:"tv+", PAR:"P+", PCK:"pea"};
+/* No service publishes a way to look up its own title IDs, so a link to the
+   exact title page is not on offer. These open the service itself with the
+   title already searched, which is the closest thing that cannot rot: a URL
+   built from a title can never point at the wrong film the way a stale ID can.
+   Verified against each service's live search route. */
+const SVC_URL = {
+  NFX:"https://www.netflix.com/search?q=",
+  MAX:"https://play.max.com/search?q=",
+  HUL:"https://www.hulu.com/search?q=",
+  DIS:"https://www.disneyplus.com/browse/search?q=",
+  PRV:"https://www.amazon.com/s?i=instant-video&k=",
+  APL:"https://tv.apple.com/search?term=",
+  PAR:"https://www.paramountplus.com/search/?q=",
+  PCK:"https://www.peacocktv.com/watch/search?q="
+};
+function svcURL(code, title){
+  return SVC_URL[code] ? SVC_URL[code] + encodeURIComponent(title) : null;
+}
 
 const ROOMS = [
   {k:"solo",   n:"Just me",       floor:"adult",
@@ -1793,6 +1832,7 @@ function applyEnrichment(payload){
       f.svcs = e.providers.slice();
       f.svcChecked = true;      /* checked and empty means "on nothing", not "unknown" */
     }
+    if(e.tmdb) f.tmdb = e.tmdb;
     if(e.poster) f.poster = e.poster;
     if(e.backdrop) f.backdrop = e.backdrop;
     if(e.overview){ f.h = e.overview; f.hSrc = "tmdb"; }   /* real synopsis beats the terse hook */
@@ -2408,14 +2448,29 @@ function whereRow(rec){
   if(!list.length){
     row.appendChild(el("span","playing-label",
       f.svcChecked ? "Rent or buy only tonight" : "No availability recorded"));
+    if(f.tmdb){
+      const rent = el("a","rent-link","Where to rent it");
+      rent.href = "https://www.themoviedb.org/movie/" + f.tmdb + "/watch?locale=US";
+      rent.target = "_blank"; rent.rel = "noopener noreferrer";
+      rent.setAttribute("aria-label", "Where to rent " + f.t + ", opens in a new tab");
+      row.appendChild(rent);
+    }
     return row;
   }
   row.appendChild(el("span","playing-label", have.length ? "Streaming on" : "Only on"));
   const chips = el("div","svc-chips");
   list.slice(0,3).forEach(function(c){
-    const chip = el("span","svc-chip");
+    const url = svcURL(c, f.t);
+    const chip = el(url ? "a" : "span", "svc-chip");
+    if(url){
+      chip.href = url;
+      chip.target = "_blank"; chip.rel = "noopener noreferrer";
+      chip.setAttribute("aria-label",
+        "Find " + f.t + " on " + (SVC_NAME[c] || c) + ", opens in a new tab");
+    }
     chip.appendChild(svcMark(c, true));
     chip.appendChild(el("span","svc-name", SVC_NAME[c] || c));
+    if(url) chip.appendChild(el("span","svc-go","\u2197"));
     chips.appendChild(chip);
   });
   row.appendChild(chips);
