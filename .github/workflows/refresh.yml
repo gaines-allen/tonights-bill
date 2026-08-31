@@ -10,6 +10,11 @@ on:
   schedule:
     - cron: "20 11 * * *"     # 11:20 UTC daily, after JustWatch's push to TMDB
   workflow_dispatch:           # and on demand from the Actions tab
+    inputs:
+      args:
+        description: "Extra args for the refresh (e.g. --probe, --no-discover)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -33,7 +38,11 @@ jobs:
             echo "::error::TMDB_TOKEN secret is not set — nothing to refresh."
             exit 1
           fi
-          node scripts/enrich.mjs
+          if [ "${{ inputs.args }}" = "--probe" ]; then
+            node scripts/probe.mjs
+            exit 0
+          fi
+          node scripts/enrich.mjs ${{ inputs.args }}
 
       - name: Verify the merge still holds
         run: |
