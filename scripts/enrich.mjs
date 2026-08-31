@@ -382,38 +382,34 @@ async function providerDirectory() {
 }
 
 /**
- * A page of what a service is streaming. TMDB has been known to 500 on the
- * vote filters when they are combined with a provider filter, so the same
- * query is available without them and the thresholds are applied here instead.
- * The result set is identical; only where the filtering happens changes.
+ * A page of what a service is streaming.
+ *
+ * TMDB 500s on any vote_* filter or sort combined with a provider filter,
+ * confirmed by walking the query up one parameter at a time (scripts/probe.mjs).
+ * So the query never mentions votes and the thresholds are applied here. Same
+ * result set, minus a server-side bug we cannot fix from this end.
  */
-async function discoverPage(providerId, page, minVotes, minScore, plain) {
-  const params = {
+async function discoverPage(providerId, page) {
+  return getJSON(tmdbUrl("/discover/movie", {
     watch_region: REGION,
     with_watch_providers: providerId,
     with_watch_monetization_types: "flatrate",
     sort_by: "popularity.desc",
     include_adult: false,
     page
-  };
-  if (!plain) {
-    params["vote_count.gte"] = minVotes;
-    params["vote_average.gte"] = minScore;
-  }
-  return getJSON(tmdbUrl("/discover/movie", params));
+  }));
 }
 
 async function discoverOn(providerId, pages, minVotes, minScore) {
   const found = [];
-  let plain = false;
   for (let page = 1; page <= pages; page++) {
     let data;
     try {
-      data = await discoverPage(providerId, page, minVotes, minScore, plain);
+      data = await discoverPage(providerId, page);
     } catch (e) {
-      if (plain) throw e;
-      plain = true;                       // drop the suspect filters and carry on
-      data = await discoverPage(providerId, page, minVotes, minScore, true);
+      /* These queries flake. Losing page 7 is not a reason to lose pages 1-6. */
+      if (page === 1) throw e;
+      break;
     }
     if (!data?.results?.length) break;
     for (const r of data.results) {
@@ -542,6 +538,7 @@ async function main() {
 
   const seen = new Set(films.map((f) => `${norm(f.t)}::${f.y}`));
   let shelf = [], directory = { ids: {}, logos: {} }, scanned = false;
+  const failed = [];
   if (!NO_DISCOVER) {
     try {
       directory = await providerDirectory();
@@ -551,9 +548,15 @@ async function main() {
 
       const candidates = new Map();
       for (const code of codes) {
-        const rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
-        for (const r of rows) if (!candidates.has(r.id)) candidates.set(r.id, r);
-        console.log(`  ${code.padEnd(4)} ${String(rows.length).padStart(4)} candidates`);
+        try {
+          const rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
+          for (const r of rows) if (!candidates.has(r.id)) candidates.set(r.id, r);
+          console.log(`  ${code.padEnd(4)} ${String(rows.length).padStart(4)} candidates`);
+        } catch (e) {
+          /* One service having a bad day is not the whole store closing. */
+          failed.push(code);
+          console.log(`  ${code.padEnd(4)}    - unreachable (${e.message.slice(0, 60)})`);
+        }
       }
       if (!candidates.size) throw new Error("every service returned nothing");
 
@@ -571,6 +574,17 @@ async function main() {
         if (!byKey.has(key)) byKey.set(key, r);
       }
       shelf = [...byKey.values()];
+      /* Films whose only home is a service we could not read this time would
+         otherwise vanish and read as "left the service". Carry those forward
+         from the last good scan instead of pretending they are gone. */
+      if (failed.length) {
+        const held = new Set(shelf.map((r) => `${norm(r.t)}::${r.y}`));
+        for (const r of previous?.shelf || []) {
+          const key = `${norm(r.t)}::${r.y}`;
+          if (held.has(key)) continue;
+          if ((r.svcs || []).some((c) => failed.includes(c))) { shelf.push(r); held.add(key); }
+        }
+      }
       scanned = true;
     } catch (e) {
       /* A daily job must not turn a bad afternoon at TMDB into an empty store.
@@ -604,7 +618,7 @@ async function main() {
   for (const f of ok)    if ((f.providers || []).length) nowStreaming.add(f.t);
   for (const r of shelf) nowStreaming.add(r.t);
   let departed = [];
-  if (scanned) {
+  if (scanned && !failed.length) {
     const wasStreaming = new Set();
     for (const f of previous?.films || []) if ((f.providers || []).length) wasStreaming.add(f.t);
     for (const r of previous?.shelf  || []) wasStreaming.add(r.t);
@@ -636,6 +650,7 @@ async function main() {
       })(),
       scannedAt: today,
       scanOk: scanned,
+      servicesMissed: failed,
       shelfCount: shelf.length,
       streamingNow: nowStreaming.size,
       arrived,
