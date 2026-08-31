@@ -257,7 +257,7 @@ async function fetchOmdb(imdbId) {
  * sentences up to a readable length rather than cutting mid-clause, and drop
  * anything too thin to be worth showing.
  */
-export function trimOverview(text, max = 260) {
+export function trimOverview(text, max = 400) {
   const t = String(text || "").replace(/\s+/g, " ").trim();
   if (t.length < 40) return null;                 // stubs like "No overview found."
   if (t.length <= max) return t;
