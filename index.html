@@ -670,6 +670,58 @@ main{position:relative;z-index:10}
 }
 .pitch b{color:var(--red-deep);font-weight:600}
 
+/* the story, printed on the back of the case */
+.synopsis{
+  border-left:2px solid rgba(217,179,106,.42);
+  padding-left:clamp(14px,1.4vw,20px);max-width:62ch;
+}
+.synopsis-label{
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:8px;
+}
+.synopsis-copy{
+  font-size:clamp(14.5px,1.12vw,16.5px);line-height:1.66;color:var(--cream-dim);
+}
+
+/* where it is actually playing, with the service's own mark */
+.playing{display:flex;align-items:center;gap:clamp(12px,1.4vw,18px);flex-wrap:wrap}
+.playing-label{
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--cream-mute);
+}
+.svc-chips{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.svc-chip{
+  display:inline-flex;align-items:center;gap:11px;
+  background:rgba(0,0,0,.32);border:1px solid var(--hair);border-radius:6px;
+  padding:7px 16px 7px 7px;
+}
+.svc-name{
+  font-family:var(--display);font-size:clamp(1.05rem,1.5vw,1.3rem);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--cream);line-height:1;
+}
+.svc-mark{
+  display:inline-grid;place-items:center;flex:none;overflow:hidden;
+  width:clamp(34px,3.2vw,42px);height:clamp(34px,3.2vw,42px);border-radius:7px;
+  box-shadow:0 3px 8px rgba(0,0,0,.55);
+}
+.svc-mark img{width:100%;height:100%;object-fit:cover;display:block}
+.svc-mark--plate{
+  font-family:var(--display);font-size:13px;letter-spacing:.03em;text-transform:uppercase;
+  color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45);
+}
+.playing-note{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:#e0a494;
+}
+
+/* the same mark, stuck on a case like a rental sticker */
+.svc-sticker{
+  position:absolute;top:8px;right:8px;z-index:3;
+  width:27px;height:27px;border-radius:6px;
+  box-shadow:0 3px 8px rgba(0,0,0,.6), 0 0 0 2px rgba(242,231,205,.82);
+}
+.svc-sticker.svc-mark--plate{font-size:9px}
+
 /* metadata as a due-date row */
 .stub{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .stub .tick{color:var(--cream-dim)}
@@ -1026,6 +1078,8 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   .tune-body{grid-template-columns:minmax(0,1fr)}
   .find{margin-left:0;flex-basis:100%}
   .encore-set .v{min-width:0}
+  .svc-chip{padding:6px 13px 6px 6px;gap:9px}
+  .svc-sticker{width:23px;height:23px;top:6px;right:6px}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -1590,6 +1644,13 @@ const SERVICES = [
   {k:"PCK", n:"Peacock",      c:"#FCCC12", on:false}
 ];
 const SVC_NAME = {}; SERVICES.forEach(function(s){ SVC_NAME[s.k]=s.n; });
+const SVC_COLOR = {}; SERVICES.forEach(function(s){ SVC_COLOR[s.k]=s.c; });
+/* Real service logos arrive with the enrichment (_meta.logos). Until they do,
+   or if the image is blocked, a brand-coloured plate stands in so a film is
+   never left with an unlabelled square. */
+const LOGO_BASE = "https://image.tmdb.org/t/p/w92";
+const SVC_LOGO  = {};
+const SVC_SHORT = {NFX:"N", MAX:"max", HUL:"hulu", DIS:"D+", PRV:"prime", APL:"tv+", PAR:"P+", PCK:"pea"};
 
 const ROOMS = [
   {k:"solo",   n:"Just me",       floor:"adult",
@@ -1737,6 +1798,9 @@ function applyEnrichment(payload){
     if(e.overview){ f.h = e.overview; f.hSrc = "tmdb"; }   /* real synopsis beats the terse hook */
     hit++;
   });
+  if(payload._meta && payload._meta.logos){
+    Object.keys(payload._meta.logos).forEach(function(c){ SVC_LOGO[c] = payload._meta.logos[c]; });
+  }
   ENRICHED = Object.assign({}, payload._meta, {applied: hit});
   return hit > 0;
 }
@@ -2313,9 +2377,66 @@ function toneWords(f, n){
     .map(function(x){ return ATTR_WORD[x]; });
 }
 function shelfLine(f){ return toneWords(f,2).concat([hm(f.r)]).join(" · "); }
-function serviceName(rec){
-  const on = (rec.on && rec.on.length) ? rec.on : rec.f.svcs;
-  return on.map(function(c){ return SVC_NAME[c]; }).filter(Boolean)[0] || null;
+/* The service's own logo, at whatever size the caller's class asks for.
+   `silent` drops the alt text for the case where the name is set beside it. */
+function svcMark(code, silent){
+  const box = el("span","svc-mark");
+  function plate(){
+    box.classList.add("svc-mark--plate");
+    box.style.background = SVC_COLOR[code] || "#3a3a3a";
+    box.textContent = SVC_SHORT[code] || (SVC_NAME[code] || "?").slice(0,1);
+  }
+  if(SVC_LOGO[code]){
+    const img = document.createElement("img");
+    img.alt = silent ? "" : (SVC_NAME[code] || "");
+    img.decoding = "async"; img.loading = "lazy";
+    img.width = 46; img.height = 46;
+    img.src = LOGO_BASE + SVC_LOGO[code];
+    img.addEventListener("error", function(){ img.remove(); plate(); });
+    box.appendChild(img);
+  } else plate();
+  return box;
+}
+
+/* Where tonight's film actually lives. Services you subscribe to win; if it is
+   only somewhere else, say so rather than quietly showing a name you can't use. */
+function whereRow(rec){
+  const f = rec.f;
+  const have = (rec.on && rec.on.length) ? rec.on : [];
+  const list = have.length ? have : (f.svcs || []);
+  const row = el("div","playing");
+  if(!list.length){
+    row.appendChild(el("span","playing-label",
+      f.svcChecked ? "Rent or buy only tonight" : "No availability recorded"));
+    return row;
+  }
+  row.appendChild(el("span","playing-label", have.length ? "Streaming on" : "Only on"));
+  const chips = el("div","svc-chips");
+  list.slice(0,3).forEach(function(c){
+    const chip = el("span","svc-chip");
+    chip.appendChild(svcMark(c, true));
+    chip.appendChild(el("span","svc-name", SVC_NAME[c] || c));
+    chips.appendChild(chip);
+  });
+  row.appendChild(chips);
+  if(!have.length) row.appendChild(el("span","playing-note","not a service you have"));
+  return row;
+}
+
+/* The plot, as printed on the back of the case. TMDB's synopsis when the
+   enrichment has landed, the hand-written hook when it has not. */
+function synopsisBlock(f){
+  const wrap = el("div","synopsis");
+  wrap.appendChild(el("p","synopsis-label","The story"));
+  wrap.appendChild(el("p","synopsis-copy", f.h));
+  return wrap;
+}
+
+/* a rental sticker on the corner of a case */
+function stickerOn(box, f){
+  const on = (f.svcs || []).filter(function(c){ return S.svc[c]; });
+  const code = on[0] || (f.svcs || [])[0];
+  if(code) box.appendChild(withClass(svcMark(code), "svc-sticker"));
 }
 function say(msg){ $("announce").textContent = msg; }
 
@@ -2770,22 +2891,22 @@ function billCopy(rec){
       times.appendChild(el("span","tick", pair[0] + " " + pair[1]));
     });
     b.appendChild(times);
+    if(f.h) b.appendChild(withClass(synopsisBlock(f), "res-3"));
+    b.appendChild(withClass(whereRow(rec), "res-3"));
   } else {
     const pitch = el("p","pitch res-3");
     pitch.innerHTML = pitchOf(rec);
     b.appendChild(pitch);
 
-    const svc = serviceName(rec);
+    if(f.h) b.appendChild(withClass(synopsisBlock(f), "res-3"));
+
     const meta = el("div","stub res-3");
-    [String(f.y), hm(f.r).toUpperCase(), f.mpaa,
-     svc || "Rent or buy"].forEach(function(v, i){
+    [String(f.y), hm(f.r).toUpperCase(), f.mpaa].forEach(function(v, i){
       if(i) meta.appendChild(el("span","slash","/"));
-      meta.appendChild(el("span","tick" + (i === 3 ? " lit" : ""), v));
+      meta.appendChild(el("span","tick", v));
     });
     b.appendChild(meta);
-    if(svc && !(rec.on && rec.on.length)){
-      b.appendChild(withClass(tick("Not on a service you have", true), "where res-3"));
-    }
+    b.appendChild(withClass(whereRow(rec), "res-3"));
   }
 
   b.appendChild(billActs(rec));
@@ -2902,7 +3023,9 @@ function shelfItem(rec, flag){
   const b = el("button","rail-item"); b.type = "button";
   b.setAttribute("aria-label", "Make " + f.t + " tonight's feature");
   b.appendChild(el("span","flag" + (flag ? "" : " blank"), flag || " "));
-  b.appendChild(poster(f, "(max-width:767px) 41vw, 186px"));
+  const box = poster(f, "(max-width:767px) 41vw, 186px");
+  stickerOn(box, f);
+  b.appendChild(box);
   b.appendChild(el("span","rt", f.t));
   b.appendChild(el("span","rm", shelfLine(f)));
   b.addEventListener("click", function(){ promote(rec); });
@@ -3297,7 +3420,9 @@ function renderAisles(){
       const b = el("button","rail-item"); b.type = "button";
       b.setAttribute("aria-label", "Make " + f.t + " tonight's pick");
       b.appendChild(el("span","flag blank"," "));
-      b.appendChild(poster(f, "(max-width:767px) 33vw, 150px"));
+      const box = poster(f, "(max-width:767px) 33vw, 150px");
+      stickerOn(box, f);
+      b.appendChild(box);
       b.appendChild(el("span","rt", f.t));
       b.appendChild(el("span","rm", f.y + " · " + hm(f.r)));
       b.addEventListener("click", function(){ aislePick(f); });
