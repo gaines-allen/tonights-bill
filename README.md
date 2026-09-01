@@ -205,16 +205,45 @@ and legibility comes from layered scrims that darken the side the words are on
 while leaving a lit region alone, never from flattening the image.
 
 The copy is anchored low and left, not centred. The hierarchy is fixed:
-`TONIGHT, YOU'RE WATCHING` / the title / one line of pitch /
+`TONIGHT'S PICK` / the title / **what the store says** / the story /
 `2018 / 1H 40M / R / MAX` with the service lit / **LOCK IT IN**. Titles scale
 to their own length — a short one runs to 184px on a laptop. Critics and fit
 share one small mono line at the very bottom, where the arithmetic belongs.
 
-**Why this tonight** takes the sharpest sentence the engine can produce and
-uses it as the pitch, in serif italic, with the named film set upright inside
-it. The panel then picks up from *where the pitch left off* rather than
-repeating it, and adds what you go for, how it fits tonight, and the films it
-feels closest to. Constraints nobody set are not listed as reasons.
+**What the store says** is the one place the recommendation is explained. It
+replaced a one-line pitch and a separate *Why this tonight* panel that said the
+same thing twice in two voices. The card is two to four sentences in the
+clerk's handwriting: what you asked for, what the film actually carries and
+whose film it is, how it sits against your clock and your room, and a sign-off
+— a title already on your shelf where there is one, three one-word reads where
+there is not. It stays off the synopsis, the year, the rating, the service and
+the critic score on purpose; all five are printed within a few inches of it.
+No model and no network call: every ingredient is in hand by the time a pick
+exists. *The story* stays below it as the plot synopsis.
+
+### The reveal
+Asking for a pick runs one 1.8-second sequence, owned by a single controller
+(`Reveal`). The ask depresses and locks out; the questions step down and the
+room goes under a veil; the marquee bulbs run one lap; the hero is painted and
+the veil lifts off it while the film's own colour spreads out of the middle;
+the poster pulls forward as the title enters a line at a time; the store's card
+arrives; then *Lock it in* goes live and the shelf appears underneath. Taking
+an alternate off the shelf is not a new recommendation, so it gets a ~400ms
+swap instead.
+
+Every beat is a ticketed timeout: a callback whose ticket is stale does
+nothing, so a fast second click, a navigation, or a fresh request part-way
+through cannot leave half of one sequence layered over another. Under
+`prefers-reduced-motion` there is no chase, stagger, rotation or travel — the
+finished page arrives inside 100ms. The result is announced through a polite
+live region as *Tonight's pick is [title]* and focus moves to the heading
+without scrolling the page.
+
+The accent colour is derived from the film's own attribute and genre tags,
+nudged by a hash of the title, rather than sampled from the poster — reading
+pixels from a cross-origin image is one missing CORS header away from throwing
+on every title, and the accent must never cost a second request. It reaches
+light, hairlines and glow only, never a text colour.
 
 **Also playing** is a shelf that runs off the right edge of the frame so it is
 obvious the room continues. Hovering focuses one poster and steps the others
@@ -276,7 +305,7 @@ runtime, room, rating floor, critic bar, genre, and where it streams
 are both derived from it, so an explanation can never drift from the behaviour
 it describes.
 
-The passing half of that record is what *Why this tonight* shows. The failing half is
+The passing half of that record is what the store's card draws on. The failing half is
 summarised under the bill: how many titles would have made it but sit on a
 service you don't have, how many are rent-or-buy only, how many are held back
 because you have already seen them. An unexplained absence is the hardest thing
@@ -287,6 +316,7 @@ to debug in a recommender, because nothing appears to be wrong.
 ```bash
 node scripts/enrich.test.mjs   # transforms: service mapping, cert, providers, matching
 node scripts/merge.test.mjs    # merge safety against the real index.html catalog
+node scripts/reveal.test.mjs   # the reveal sequence, store copy, accent, lock-in
 ```
 
 Both run offline — no API key, no network.

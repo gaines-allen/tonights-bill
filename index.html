@@ -226,34 +226,45 @@ main{position:relative;z-index:10}
     inset 0 -3px 8px rgba(0,0,0,.55),
     0 0 60px rgba(255,180,100,.14);
 }
-/* bulb rows, top and bottom */
-.marquee::before,.marquee::after{
-  content:"";position:absolute;left:14px;right:14px;height:22px;
-  background-image:radial-gradient(circle at 11px 11px,
-    var(--bulb) 0 3.2px, #eda94f 5px, rgba(70,32,8,.65) 6.4px, transparent 8px);
-  background-size:30px 22px;background-repeat:repeat-x;background-position:center;
-  filter:drop-shadow(0 0 5px rgba(255,196,120,.85));
-  animation:bulbs 3.6s ease-in-out infinite;
-  pointer-events:none;
+/* ---- the bulbs, one element apiece ----
+   A strip of background-image bulbs can only ever pulse as one object: every
+   light in the row brightens on the same beat, which is the tell of a fake
+   marquee. Real ones drift. So each bulb is its own element with its own
+   period, phase and floor, and the border can be sent round once when a pick
+   lands. Only opacity, box-shadow and a hairline scale animate — no layout. */
+.lights{position:absolute;pointer-events:none}
+.l-top   {left:14px;right:14px;top:4px;height:22px}
+.l-bottom{left:14px;right:14px;bottom:4px;height:22px}
+.l-left  {top:26px;bottom:26px;left:4px;width:22px}
+.l-right {top:26px;bottom:26px;right:4px;width:22px}
+
+.bulb{
+  position:absolute;width:8px;height:8px;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%,
+    #fff6e2 0 16%, var(--bulb) 44%, #eda94f 76%, #b9762c 100%);
+  /* the socket ring keeps an unlit bulb reading as a bulb, not a hole */
+  box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);
+  animation:shimmer var(--dur,3.6s) ease-in-out var(--del,0s) infinite;
+  will-change:opacity;
 }
-.marquee::before{top:4px}
-.marquee::after{bottom:4px}
-/* bulb columns, left and right */
-.lights{
-  position:absolute;top:26px;bottom:26px;width:22px;
-  background-image:radial-gradient(circle at 11px 11px,
-    var(--bulb) 0 3.2px, #eda94f 5px, rgba(70,32,8,.65) 6.4px, transparent 8px);
-  background-size:22px 30px;background-repeat:repeat-y;background-position:center;
-  filter:drop-shadow(0 0 5px rgba(255,196,120,.85));
-  animation:bulbs 3.6s ease-in-out infinite;
-  pointer-events:none;
+.l-top .bulb,.l-bottom .bulb{top:50%;margin-top:-4px;left:var(--p);margin-left:-4px}
+.l-left .bulb,.l-right .bulb{left:50%;margin-left:-4px;top:var(--p);margin-top:-4px}
+
+@keyframes shimmer{
+  0%,100%{opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8)}
+  50%    {opacity:var(--lo,.74);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 3px rgba(255,196,120,.42)}
 }
-.l-left{left:4px}
-.l-right{right:4px}
-@keyframes bulbs{
-  0%,100%{filter:drop-shadow(0 0 5px rgba(255,196,120,.85)) brightness(1)}
-  50%{filter:drop-shadow(0 0 3px rgba(255,196,120,.55)) brightness(.92)}
+
+/* One lap when the pick lands. --chase is the bulb's position around the
+   perimeter, so the flare travels top -> right -> bottom -> left and stops. */
+.marquee.chase .bulb{animation:chase 180ms ease-out var(--chase,0ms) 1 both}
+@keyframes chase{
+  0%  {opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);transform:scale(1)}
+  34% {opacity:1;box-shadow:0 0 0 1.4px rgba(255,232,186,.95), 0 0 18px 4px rgba(255,214,150,1);transform:scale(1.55)}
+  100%{opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);transform:scale(1)}
 }
+/* the marquee is the one thing that stays lit while the page goes under */
+.rv-dim .marquee{position:relative;z-index:81}
 
 .board{
   position:relative;text-align:center;border-radius:6px;
@@ -437,6 +448,13 @@ main{position:relative;z-index:10}
 }
 .bill-go:hover{filter:brightness(1.09)}
 .bill-go:active{transform:translateY(5px);box-shadow:0 2px 0 #521509, 0 8px 18px rgba(0,0,0,.5)}
+/* the firm mechanical response at 0.0s: it goes down and stays down */
+.bill-go.pressed,.house-pick.pressed{
+  transform:translateY(6px);
+  box-shadow:0 0 0 #521509, 0 3px 8px rgba(0,0,0,.6), inset 0 2px 7px rgba(0,0,0,.5);
+  filter:brightness(.92);
+  transition:transform 110ms cubic-bezier(.3,.9,.3,1), box-shadow 110ms ease, filter 110ms ease;
+}
 .bill-go:disabled{
   filter:saturate(.25) brightness(.62);cursor:not-allowed;
   box-shadow:0 4px 0 #2c1610, 0 10px 20px rgba(0,0,0,.4);
@@ -598,17 +616,37 @@ main{position:relative;z-index:10}
   opacity:0;transition:opacity 1100ms var(--ease), filter 1100ms var(--ease);
   filter:saturate(.82) sepia(.12) brightness(.44) blur(10px);
 }
-.plate i.on{opacity:.5;filter:saturate(.82) sepia(.12) brightness(.44) blur(0)}
+.plate i.on{opacity:.64;filter:saturate(.9) sepia(.08) brightness(.62) blur(0)}
+/* The artwork used to be flattened by one full-bleed gradient. Now the middle
+   of the hero is left open and the darkness is put back only where type sits:
+   a soft hole over the centre, the heavy fall kept to the edges and the foot. */
 .plate::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(18,22,31,.55) 0%, rgba(16,13,10,.88) 62%, var(--night) 97%);
+  background:
+    radial-gradient(74% 66% at 60% 34%,
+      rgba(18,22,31,0) 0%, rgba(18,22,31,.22) 54%, rgba(16,13,10,.7) 100%),
+    linear-gradient(180deg, rgba(18,22,31,.34) 0%, rgba(16,13,10,.8) 66%, var(--night) 97%);
 }
 #wash{
   position:absolute;inset:-12%;z-index:-3;background-size:cover;background-position:center;
-  opacity:0;filter:blur(70px) saturate(1.1) brightness(.5);
+  opacity:0;filter:blur(70px) saturate(1.15) brightness(.56);
   transition:opacity 1400ms var(--ease);
 }
 #wash.on{opacity:.5}
+
+/* ---- the film's own accent, spreading out of the middle of the hero ----
+   Light, hairlines and glow only. It never touches a text colour, so contrast
+   is whatever it was before the wash arrived. */
+#acc-wash{
+  position:absolute;inset:0;z-index:-3;pointer-events:none;
+  background:
+    radial-gradient(62% 78% at 52% 30%, var(--acc-glow) 0%, transparent 70%),
+    linear-gradient(180deg, var(--acc-soft) 0%, transparent 58%);
+  opacity:0;transform:scale(.86);
+  transition:opacity 640ms var(--ease), transform 940ms var(--ease);
+  will-change:opacity, transform;
+}
+#acc-wash.on{opacity:1;transform:scale(1)}
 
 .feature-in{padding-bottom:clamp(30px,5vh,56px)}
 .bill-grid{
@@ -616,16 +654,103 @@ main{position:relative;z-index:10}
   gap:clamp(26px,4vw,64px);align-items:start;
   transition:opacity 240ms var(--ease), transform 240ms var(--ease);
 }
-.bill-grid.out{opacity:0;transform:translateY(10px)}
+.bill-grid.out{opacity:0;transform:translateY(8px)}
 
-/* staggered reveal */
-.swap .res-1{animation:res 500ms var(--ease) both}
-.swap .res-2{animation:res 500ms var(--ease) 90ms both}
-.swap .res-3{animation:res 500ms var(--ease) 190ms both}
+/* Swapping to an alternate: the whole move lands inside ~400ms, which is
+   short enough to read as one gesture rather than a second reveal. */
+.swap .res-1{animation:res 220ms var(--ease) both}
+.swap .res-2{animation:res 220ms var(--ease) 45ms both}
+.swap .res-3{animation:res 220ms var(--ease) 90ms both}
 @keyframes res{
-  from{opacity:0;transform:translateY(14px)}
+  from{opacity:0;transform:translateY(12px)}
   to{opacity:1;transform:translateY(0)}
 }
+
+/* ==========================================================================
+   THE REVEAL
+   One class per beat, added in order by the Reveal controller. Everything the
+   hero holds back is declared once under .revealing and released by the beat
+   that owns it, so the timing lives in one place instead of in six animations
+   that have to be kept in step by hand. Opacity and transform only.
+   ========================================================================== */
+#s-bill.revealing .swap .res-1,
+#s-bill.revealing .swap .res-2,
+#s-bill.revealing .swap .res-3{animation:none}
+
+#s-bill .bill-poster,
+#s-bill .store-card,
+#s-bill .bill-copy .now,
+#s-bill .bill-copy .stub,
+#s-bill .bill-copy .synopsis,
+#s-bill .bill-copy .playing,
+#s-bill .bill-copy .score,
+#s-bill .acts,
+#s-bill #shelf-slot,
+#s-bill #twin-slot,
+#s-bill #footnote{
+  transition:opacity 520ms var(--ease), transform 640ms var(--ease), filter 520ms var(--ease);
+}
+
+/* --- held back --- */
+#s-bill.revealing .bill-poster{
+  opacity:0;transform:translateY(12px) scale(.945) rotate(4.4deg);filter:blur(6px);
+}
+#s-bill.revealing .bill-title .ln > span{opacity:0;transform:translateY(104%)}
+#s-bill.revealing .store-card{opacity:0;transform:translateY(16px) rotate(-2.6deg)}
+#s-bill.revealing .bill-copy .now,
+#s-bill.revealing .bill-copy .stub,
+#s-bill.revealing .bill-copy .synopsis,
+#s-bill.revealing .bill-copy .playing,
+#s-bill.revealing .bill-copy .score{opacity:0;transform:translateY(10px)}
+#s-bill.revealing .acts{opacity:0}
+#s-bill.revealing .lock{pointer-events:none}
+#s-bill.revealing #shelf-slot,
+#s-bill.revealing #twin-slot,
+#s-bill.revealing #footnote{opacity:0;transform:translateY(18px)}
+
+/* --- beat 3 (1.1s): the poster comes forward, the title enters line by line --- */
+#s-bill.revealing.rv-3 .bill-poster{opacity:1;transform:rotate(1.3deg);filter:none}
+#s-bill.revealing.rv-3 .bill-copy .now{opacity:1;transform:none}
+.bill-title .ln{
+  display:block;overflow:hidden;
+  /* the mask has to clear the face's descenders, so it is grown and the
+     growth is taken straight back out of the flow */
+  padding-bottom:.08em;margin-bottom:-.08em;
+}
+.bill-title .ln > span{
+  display:block;
+  transition:opacity 300ms var(--ease) var(--ld,0ms), transform 560ms var(--ease) var(--ld,0ms);
+  will-change:transform;
+}
+#s-bill.revealing.rv-3 .bill-title .ln > span{opacity:1;transform:none}
+
+/* --- beat 4 (1.4s): the card from the store --- */
+#s-bill.revealing.rv-4 .store-card{opacity:1;transform:rotate(-.7deg)}
+#s-bill.revealing.rv-4 .bill-copy .stub,
+#s-bill.revealing.rv-4 .bill-copy .synopsis,
+#s-bill.revealing.rv-4 .bill-copy .playing,
+#s-bill.revealing.rv-4 .bill-copy .score{opacity:1;transform:none}
+
+/* --- beat 5 (1.8s): the night becomes actionable --- */
+#s-bill.revealing.rv-5 .acts{opacity:1}
+#s-bill.revealing.rv-5 .lock{pointer-events:auto}
+#s-bill.revealing.rv-5 #shelf-slot,
+#s-bill.revealing.rv-5 #twin-slot,
+#s-bill.revealing.rv-5 #footnote{opacity:1;transform:none}
+
+/* the questionnaire steps down and out; the marquee is left lit above it */
+#s-tonight .night,
+#s-tonight .annot,
+#s-tonight h1,
+#s-tonight .under,
+#s-tonight .encore{
+  transition:opacity 340ms var(--ease), transform 420ms var(--ease);
+}
+#s-tonight.rv-dim .night{opacity:0;transform:translateY(16px);pointer-events:none}
+#s-tonight.rv-dim .annot,
+#s-tonight.rv-dim h1,
+#s-tonight.rv-dim .under,
+#s-tonight.rv-dim .encore{opacity:.12;transform:translateY(10px);pointer-events:none}
 
 /* the red plaque over the pick */
 .now{
@@ -639,7 +764,14 @@ main{position:relative;z-index:10}
 }
 .now .dot{width:.42em;height:.42em}
 
-.bill-copy{max-width:860px}
+/* a local pool of dark under the copy column, so every line stays readable
+   however bright the backdrop behind it happens to be */
+.bill-copy{max-width:860px;position:relative}
+.bill-copy::before{
+  content:"";position:absolute;inset:-7% -16% -9% -18%;z-index:-1;pointer-events:none;
+  background:radial-gradient(62% 64% at 28% 46%,
+    rgba(10,13,19,.88) 0%, rgba(10,13,19,.58) 48%, transparent 80%);
+}
 .bill-copy > * + *{margin-top:clamp(16px,2.4vh,26px)}
 .bill-title{
   font-family:var(--display);color:var(--cream);letter-spacing:.02em;
@@ -647,32 +779,47 @@ main{position:relative;z-index:10}
   text-shadow:0 3px 24px rgba(0,0,0,.7);
 }
 
-/* the paper note from the store */
-.pitch{
-  position:relative;display:inline-block;max-width:56ch;
-  background:var(--paper);color:var(--ink);
-  font-size:clamp(15px,1.3vw,17.5px);line-height:1.55;
-  padding:38px 22px 18px;border-radius:2px;
-  box-shadow:0 10px 22px rgba(0,0,0,.5);
-  transform:rotate(-.8deg);
+/* ---- WHAT THE STORE SAYS ----
+   One card now owns the whole recommendation. The old one-line pitch and the
+   fold-out "why" panel said the same thing twice in two different voices. */
+.store-card{
+  position:relative;display:block;max-width:58ch;
+  background:linear-gradient(177deg, var(--paper) 0%, var(--paper-2) 100%);
+  color:var(--ink);border-radius:2px;
+  padding:clamp(38px,3.4vw,44px) clamp(20px,2vw,28px) clamp(20px,2.2vw,26px);
+  box-shadow:0 14px 30px rgba(0,0,0,.52), inset 0 0 0 1px rgba(255,255,255,.26);
+  transform:rotate(-.7deg);
 }
-.pitch::before{
-  content:"The store says";position:absolute;top:14px;left:22px;
+/* the faint rule of a notepad, and a soft crease down the sheet */
+.store-card::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:2px;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 27px, rgba(160,138,92,.16) 27px 28px),
+    linear-gradient(96deg, transparent 46%, rgba(120,100,62,.09) 50%, transparent 54%);
+  mix-blend-mode:multiply;opacity:.55;
+}
+.store-label{
   font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.22em;
   text-transform:uppercase;color:var(--red-deep);
+  position:absolute;top:clamp(15px,1.5vw,18px);left:clamp(20px,2vw,28px);
 }
-.pitch::after{
-  content:"";position:absolute;top:-10px;left:50%;width:86px;height:22px;margin-left:-43px;
-  background:rgba(236,224,194,.5);border-left:1px solid rgba(255,255,255,.4);
-  border-right:1px solid rgba(255,255,255,.4);
-  transform:rotate(-1.6deg);
-  box-shadow:0 1px 3px rgba(0,0,0,.2);
+.store-copy{
+  position:relative;z-index:1;
+  font-family:var(--hand);font-size:clamp(20px,1.72vw,25px);line-height:1.42;
+  color:#332a1a;letter-spacing:.006em;
 }
-.pitch b{color:var(--red-deep);font-weight:600}
+.store-copy b{color:var(--red-deep);font-weight:700}
+/* a strip of tape over the top edge */
+.store-tape{
+  position:absolute;top:-11px;left:50%;width:92px;height:23px;margin-left:-46px;
+  background:rgba(236,224,194,.52);
+  border-left:1px solid rgba(255,255,255,.4);border-right:1px solid rgba(255,255,255,.4);
+  transform:rotate(-1.6deg);box-shadow:0 1px 3px rgba(0,0,0,.2);
+}
 
 /* the story, printed on the back of the case */
 .synopsis{
-  border-left:2px solid rgba(217,179,106,.42);
+  border-left:2px solid var(--acc-line, rgba(217,179,106,.42));
   padding-left:clamp(14px,1.4vw,20px);max-width:62ch;
 }
 .synopsis-label{
@@ -692,7 +839,7 @@ main{position:relative;z-index:10}
 .svc-chips{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .svc-chip{
   display:inline-flex;align-items:center;gap:11px;
-  background:rgba(0,0,0,.32);border:1px solid var(--hair);border-radius:6px;
+  background:rgba(0,0,0,.32);border:1px solid var(--acc-line, var(--hair));border-radius:6px;
   padding:7px 16px 7px 7px;
 }
 .svc-name{
@@ -786,46 +933,58 @@ a.svc-chip:hover .svc-go{opacity:1}
 }
 .bill-poster .poster{
   border:5px solid #efe6d2;border-radius:4px;
-  box-shadow:0 24px 44px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5);
+  box-shadow:0 24px 44px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5),
+    0 0 34px -6px var(--acc-glow, transparent);
 }
+/* TMDB artwork is graded for a white page and goes muddy on this one */
+.bill-poster .poster img{filter:brightness(1.18) saturate(1.09)}
 
 /* --------------------------------------------------------------------------
-   WHY THIS TONIGHT: the note unfolds
+   LOCKING IT IN
    -------------------------------------------------------------------------- */
-.why{
-  max-height:0;overflow:hidden;
-  transition:max-height 500ms var(--ease);
+/* the deeper press: further down, and it stays down */
+.lock.sealing{
+  transform:translateY(5px);
+  box-shadow:0 0 0 #521509, 0 4px 10px rgba(0,0,0,.6),
+    inset 0 2px 6px rgba(0,0,0,.45);
+  filter:brightness(.94);
+  transition:transform 120ms cubic-bezier(.3,.9,.3,1), box-shadow 120ms ease, filter 120ms ease;
 }
-.why.open{max-height:1200px}
-.why-in{
-  background:var(--paper);color:var(--ink);border-radius:4px;
-  border:1px solid var(--paper-line);
-  padding:clamp(22px,3.4vw,40px);
-  margin-bottom:clamp(26px,4vh,44px);
-  box-shadow:0 14px 30px rgba(0,0,0,.45);
-  transform:rotate(.3deg);
+.sorted{
+  display:flex;align-items:center;gap:.7em;
+  font-family:var(--display);font-size:clamp(1.25rem,2.1vw,1.7rem);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--cream);
+  opacity:0;transform:translateY(8px);
+  transition:opacity 320ms var(--ease), transform 420ms var(--ease);
 }
-.why-said{
-  font-size:clamp(15px,1.3vw,17px);line-height:1.6;max-width:70ch;
-  margin-bottom:22px;padding-bottom:18px;border-bottom:1px dashed var(--paper-line);
+.sorted.on{opacity:1;transform:none}
+.sorted .dot{background:var(--red-neon);box-shadow:0 0 10px rgba(255,106,85,.9)}
+/* the shelf steps back once the night is decided */
+.shelf-dim{
+  opacity:.4;filter:saturate(.62);
+  transition:opacity 420ms var(--ease), filter 420ms var(--ease);
 }
-.why-said b{color:var(--red-deep);font-weight:600}
-.why-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(20px,3vw,40px)}
-.why-cols h4{
-  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--red-deep);margin-bottom:10px;
+
+/* ---- a box of red vines on the edge of the counter ----
+   Drawn here, not borrowed: a kraft tray, a red band, and five lengths of
+   licorice standing in it. Decorative, so it is hidden from assistive tech
+   and dropped entirely when the column gets narrow. */
+.candy{
+  position:absolute;right:clamp(10px,2.4vw,40px);bottom:0;
+  width:120px;height:96px;pointer-events:none;z-index:1;
+  opacity:.92;filter:drop-shadow(0 12px 18px rgba(0,0,0,.55));
 }
-.why-cols li{
-  font-size:14px;line-height:1.5;color:var(--ink);
-  padding:7px 0;border-bottom:1px solid rgba(200,183,140,.35);
+.candy .vine{
+  transform-origin:50% 100%;
+  transition:transform 360ms cubic-bezier(.2,1.3,.4,1);
 }
-.seeds{display:flex;gap:14px;flex-wrap:wrap}
-.seed{width:76px}
-.seed .poster{box-shadow:0 6px 12px rgba(0,0,0,.3)}
-.seed .sn{
-  display:block;margin-top:6px;font-family:var(--mono);font-size:9px;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);line-height:1.35;
+.candy .lid{
+  transform-origin:14% 100%;
+  transition:transform 320ms cubic-bezier(.2,1.3,.4,1);
 }
+.candy.open .lid{transform:rotate(-13deg) translateY(-2px)}
+.candy.open .v3{transform:translateY(-15px) rotate(-5deg)}
+@media (max-width:900px){.candy{display:none}}
 
 /* --------------------------------------------------------------------------
    SHELVES: rails of cases on wood
@@ -1071,6 +1230,10 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
 }
 .dark.down{opacity:1;pointer-events:auto}
 .dark.lift{opacity:0;transition:opacity 700ms var(--ease)}
+/* the reveal's own veil: deep enough to take the page away, and lifted again
+   as the hero arrives underneath it */
+.dark.veil{opacity:.93;pointer-events:auto;transition:opacity 300ms var(--ease)}
+.dark.rv-lift{opacity:0;pointer-events:none;transition:opacity 460ms var(--ease)}
 .whisper{opacity:0;transition:opacity 200ms var(--ease);color:var(--cream-dim)}
 .dark.speak .whisper,.dark.dealing .whisper{opacity:1}
 .deal{width:178px}
@@ -1090,11 +1253,28 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   .doors button{font-size:12.5px;letter-spacing:.12em;flex:none}
   .house{font-size:15px;flex:none}
   .bill-grid{grid-template-columns:minmax(0,1fr)}
-  .bill-poster{max-width:220px;order:-1;margin-bottom:6px}
+  /* poster, then title, then the card: the explanation stays next to the name */
+  .bill-poster{max-width:200px;order:-1;margin-bottom:6px}
   .marquee{padding:14px}
-  .marquee::before{top:2px}
-  .marquee::after{bottom:2px}
-  .lights{display:none}
+  .l-top{top:2px}
+  .l-bottom{bottom:2px}
+  .l-left,.l-right{display:none}
+  /* Caveat at body size is hard work on a phone, so the store speaks in the
+     normal voice here. The paper, tape and rule stay. */
+  .store-copy{font-family:var(--sans);font-size:15.5px;line-height:1.62;letter-spacing:0}
+  .store-card{max-width:none}
+  /* shorter throws: the same order, less distance to cover */
+  #s-bill.revealing .bill-poster{transform:translateY(8px) scale(.96) rotate(3deg);filter:blur(4px)}
+  #s-bill.revealing .store-card{transform:translateY(10px) rotate(-1.8deg)}
+  #s-bill.revealing .bill-copy .now,
+  #s-bill.revealing .bill-copy .stub,
+  #s-bill.revealing .bill-copy .synopsis,
+  #s-bill.revealing .bill-copy .playing,
+  #s-bill.revealing .bill-copy .score{transform:translateY(6px)}
+  #s-bill.revealing #shelf-slot,
+  #s-bill.revealing #twin-slot,
+  #s-bill.revealing #footnote{transform:translateY(10px)}
+  #s-tonight.rv-dim .night{transform:translateY(10px)}
   .annot{flex-wrap:wrap;gap:10px}
   .tune-body{grid-template-columns:minmax(0,1fr)}
   .find{margin-left:0;flex-basis:100%}
@@ -1105,9 +1285,24 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
 
 @media (prefers-reduced-motion: reduce){
   .air::after{animation:none}
-  .marquee::before,.marquee::after,.lights{animation:none}
+  .bulb,.marquee.chase .bulb{animation:none;opacity:.94}
   .neon{animation:none}
   .swap .res-1,.swap .res-2,.swap .res-3{animation:none}
+  /* No chase, no stagger, no rotation, no travel: the finished state fades up
+     in one short step. The Reveal controller skips straight to it as well. */
+  #s-bill.revealing .bill-poster,
+  #s-bill.revealing .store-card,
+  #s-bill.revealing .bill-title .ln > span,
+  #s-bill.revealing .bill-copy .now,
+  #s-bill.revealing .bill-copy .stub,
+  #s-bill.revealing .bill-copy .synopsis,
+  #s-bill.revealing .bill-copy .playing,
+  #s-bill.revealing .bill-copy .score,
+  #s-bill.revealing .acts,
+  #s-bill.revealing #shelf-slot,
+  #s-bill.revealing #twin-slot,
+  #s-bill.revealing #footnote{transform:none !important;filter:none !important}
+  .candy .vine,.candy .lid{transition:none}
   *{transition-duration:1ms !important}
 }
 </style>
@@ -1135,9 +1330,11 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   <div class="arrival frame">
     <div class="amb" id="amb" aria-hidden="true"><i data-slot="a"></i><i data-slot="b"></i></div>
 
-    <div class="marquee">
-      <span class="lights l-left" aria-hidden="true"></span>
-      <span class="lights l-right" aria-hidden="true"></span>
+    <div class="marquee" id="marquee">
+      <span class="lights l-top"    aria-hidden="true"></span>
+      <span class="lights l-right"  aria-hidden="true"></span>
+      <span class="lights l-bottom" aria-hidden="true"></span>
+      <span class="lights l-left"   aria-hidden="true"></span>
       <div class="board">
         <p class="mq-name">Main Feature</p>
         <p class="mq-sub">Movies for Tonight</p>
@@ -1256,14 +1453,27 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
 <section class="scene" id="s-bill" aria-label="Tonight's pick">
   <div class="feature" id="feature">
     <div class="plate" id="plate" aria-hidden="true">
-      <b class="wash" id="wash"></b><i data-slot="a"></i><i data-slot="b"></i>
+      <b class="wash" id="wash"></b><b class="acc" id="acc-wash"></b><i data-slot="a"></i><i data-slot="b"></i>
     </div>
     <div class="feature-in frame">
       <div class="bill-grid swap" id="bill-grid"></div>
     </div>
-  </div>
 
-  <div class="why" id="why"><div class="frame"><div class="why-in" id="why-in"></div></div></div>
+    <!-- the box on the edge of the counter. drawn, not photographed. -->
+    <svg class="candy" id="candy" viewBox="0 0 120 96" aria-hidden="true" focusable="false">
+      <g class="vines">
+        <rect class="vine v1" x="30" y="24" width="7" height="48" rx="3.5" fill="#b2201d"/>
+        <rect class="vine v2" x="41" y="18" width="7" height="54" rx="3.5" fill="#c62a24"/>
+        <rect class="vine v3" x="52" y="14" width="7" height="58" rx="3.5" fill="#d8362c"/>
+        <rect class="vine v4" x="63" y="19" width="7" height="53" rx="3.5" fill="#c62a24"/>
+        <rect class="vine v5" x="74" y="26" width="7" height="46" rx="3.5" fill="#a81c1a"/>
+      </g>
+      <path d="M22 56 h76 l-6 38 h-64 Z" fill="#8a6033"/>
+      <path d="M22 56 h76 l-2 12 h-72 Z" fill="#a2743f"/>
+      <rect class="lid" x="20" y="50" width="80" height="11" rx="2.5" fill="#b23028"/>
+      <rect x="28" y="72" width="64" height="7" rx="2" fill="#7d241b" opacity=".75"/>
+    </svg>
+  </div>
 
   <div class="frame" id="shelf-slot"></div>
   <div class="frame" id="twin-slot"></div>
@@ -2183,12 +2393,30 @@ function doubleFeature(picks, budget){
 }
 
 /* ---------- reasoning ---------- */
-function why(rec){
-  const f = rec.f, T = rec.T;
-  const bits = [];
+/* ============================================================================
+   WHAT THE STORE SAYS
+   The clerk's case for the film: two to four sentences, assembled from the
+   same three answers and the same tag vocabulary the scorer already used.
+   No model, no network. By the time a pick exists every ingredient is in hand.
 
-  /* Every clause draws from the same pool of the film's traits, so without a
-     ledger the same two words turn up three sentences running. Claim as you go. */
+   It stays off the synopsis, the year, the rating, the service and the critic
+   score deliberately. All five are printed within a few inches of this card,
+   and a clerk who reads the box back to you is not making a case for anything.
+   ========================================================================== */
+
+/* Oxford list. Three items joined without the last comma read as two. */
+function listOf(parts){
+  if(parts.length <= 1) return parts[0] || "";
+  if(parts.length === 2) return parts[0] + " and " + parts[1];
+  return parts.slice(0, -1).join(", ") + ", and " + parts[parts.length - 1];
+}
+function upFirst(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
+
+function storeSays(rec){
+  const f = rec.f, T = rec.T;
+
+  /* One ledger for the whole card. Without it the same rare tag turns up as
+     the reason you were sold, the reason it fits, and the sign-off. */
   const spoken = {};
   function claim(list, n){
     const out = [];
@@ -2199,84 +2427,104 @@ function why(rec){
     }
     return out;
   }
-  function phrases(list){
-    return list.map(function(x){ return ATTR_PHRASE[x] || x; }).join(" and ");
+  function rarest(a, b){ return idfA(b) - idfA(a); }
+  function phrases(list){ return list.map(function(x){ return ATTR_PHRASE[x] || x; }); }
+
+  const said = [];
+
+  /* ---- 1. what was asked for, in their own words ---- */
+  const asked = S.moods.map(function(k){
+    const m = MOOD_BY[k];
+    return m ? (m.say || m.n.toLowerCase()) : null;
+  }).filter(Boolean);
+
+  if(asked.length >= 3){
+    said.push("You asked for " + listOf(asked.slice(0, 3)) + ".");
+  } else if(asked.length === 2){
+    /* keyed off the film, not a coin, so the same pick reads the same way twice */
+    said.push(f.id % 2
+      ? "You wanted " + asked[0] + ", but still " + asked[1] + "."
+      : "You came in after " + asked[0] + " and " + asked[1] + ".");
+  } else if(asked.length === 1){
+    said.push("You asked for " + asked[0] + ".");
+  } else {
+    /* deliberately not the runtime or the room: sentence three is already
+       spending both, and hearing them twice reads like a form letter */
+    said.push("You didn't give us much to go on, so this is the store's own call.");
   }
 
-  /* what they asked for tonight — first claim on the film's traits */
-  if(S.moods.length){
-    const v = moodVector();
-    const hits = claim(
-      f.a.filter(function(x){ return v[x] > 0; })
-         .sort(function(a,b){ return idfA(b) - idfA(a); }), 2);
-    if(hits.length >= 2){
-      const names = S.moods.map(function(k){
-        const m = MOOD_BY[k];
-        return m.say || m.n.toLowerCase();
-      });
-      bits.push("You asked for " + names.join(" and ") + ". This one brings " + phrases(hits) + ".");
-    }
+  /* ---- 2. what it actually carries, and whose film it is ----
+     Tonight's asks get first claim on the traits; the rarest of what is left
+     fills the gap, so the sentence is specific to this film and not to its
+     genre. The director is the one detail the catalog always has. */
+  const v = S.moods.length ? moodVector() : {};
+  /* "auteur" reads as "a singular director's hand", which is the director
+     clause again in different words. Whoever it is gets named instead. */
+  const usable = function(x){ return ATTR_PHRASE[x] && !(f.d && x === "auteur"); };
+  const wanted = f.a.filter(function(x){ return v[x] > 0 && usable(x); }).sort(rarest);
+  const pool = wanted.concat(
+    f.a.filter(function(x){ return usable(x) && wanted.indexOf(x) === -1; }).sort(rarest));
+  const got = claim(pool, 3);
+  if(got.length){
+    said.push("This one has " + listOf(phrases(got)) +
+      (f.d ? ", all of it unmistakably " + f.d + "." : "."));
+  } else if(f.d){
+    said.push("It is a " + f.d + " picture, and it behaves like one.");
   }
 
-  if(T.n){
-    /* which loved title does this most resemble? */
-    let best = null, bestN = 0;
-    T.loved.forEach(function(L){
-      const shared = f.a.filter(function(x){ return L.a.indexOf(x)>-1; });
-      let mass = 0;
-      shared.forEach(function(x){ mass += idfA(x); });
-      if(mass > bestN){
-        shared.sort(function(a,b){ return idfA(b)-idfA(a); });   /* rarest first */
-        bestN = mass; best = {L:L, shared:shared, n:shared.length};
-      }
-    });
-    const strong = f.a
-      .filter(function(x){ return (T.aw[x]||0) > 0.12; })
-      .sort(function(a,b){ return (T.aw[b]||0)*idfA(b) - (T.aw[a]||0)*idfA(a); });
-
-    if(best && best.n >= 2){
-      const ph = claim(best.shared, 2);
-      if(ph.length) bits.push("Shares " + phrases(ph) + " with <b>" + best.L.t + "</b>, which you loved.");
-      else bits.push("Cut from the same cloth as <b>" + best.L.t + "</b>, which you loved.");
-    }else if(strong.length){
-      const ph = claim(strong, 2);
-      if(ph.length) bits.push("Leans on " + phrases(ph) + ", which is what your picks keep pointing at.");
-    }
-
-    /* director echo */
-    if((T.dw[f.d]||0) > 0 && (!best || best.L.d !== f.d)){
-      bits.push("Same director you already rated well: " + f.d + ".");
-    }
-    /* honest caveat when a disliked trait is present */
-    const risk = f.a
-      .filter(function(x){ return (T.aw[x]||0) < -0.22; })
-      .sort(function(a,b){ return (T.aw[a]||0)-(T.aw[b]||0); })[0];
-    if(risk){
-      bits.push("Fair warning: it does have " + (ATTR_PHRASE[risk]||risk) + ", which your misses share.");
-    }
-  }
-
-  if(S.moods.indexOf("great") > -1 && f.rt >= 88){
-    bits.push("You asked for something great: " +
-      (f.rtSrc === "rt" ? "critics have it at " : "viewers have it at ") + f.rt + "%.");
-  }
-
-  /* room note */
-  const R = room();
-  const roomHits = claim(
-    f.a.filter(function(x){ return rec.upSet[x]; })
-       .sort(function(a,b){ return idfA(b)-idfA(a); }), 2);
-  if(roomHits.length >= 2 && S.room !== "solo"){
-    bits.push("Built for " + (ROOM_SAY[S.room] || R.n.toLowerCase()) + ": " + phrases(roomHits) + ".");
-  }
-
-  /* clock note */
+  /* ---- 3. the clock and the room ---- */
   const slack = S.time - f.r;
-  if(slack <= 12) bits.push("Uses nearly all the time you have: " + hm(f.r) + " against " + hm(S.time) + ".");
-  else if(slack >= 55) bits.push("Leaves " + hm(slack) + " on the clock.");
+  let fit;
+  if(slack <= 12)      fit = "It runs " + hm(f.r) + ", which is very nearly all the time you have";
+  else if(slack >= 55) fit = "At " + hm(f.r) + " it leaves you " + hm(slack) + " back on the clock";
+  else                 fit = "At " + hm(f.r) + " it sits comfortably inside the " + hm(S.time) + " you gave us";
 
-  if(!bits.length) bits.push("A clean fit for tonight's runtime and the room. Put five movies you'd defend on Your Shelf and the picks get sharper.");
-  return bits.slice(0,3).join(" ");
+  const roomHit = claim(f.a.filter(function(x){
+    return rec.upSet && rec.upSet[x] && ATTR_PHRASE[x];
+  }).sort(rarest), 1);
+  if(S.room === "solo") fit += ", and it is a better film watched alone";
+  else if(roomHit.length) fit += ", and " + phrases(roomHit)[0] + " is the right call for " +
+                                 (ROOM_SAY[S.room] || "the room");
+  said.push(fit + ".");
+
+  /* ---- 4. the sign-off ----
+     A film already on their shelf is the sharpest close available. Failing
+     that, three one-word reads of what is left unspoken. */
+  const near = seeds(rec, T, 1)[0];
+  const shared = near ? claim(f.a.filter(function(x){
+    return near.a.indexOf(x) > -1 && ATTR_PHRASE[x];
+  }).sort(rarest), 1) : [];
+
+  if(near && shared.length){
+    said.push("It shares " + phrases(shared)[0] + " with <b>" + near.t +
+              "</b>, which is already on your shelf.");
+  } else if(near){
+    said.push("If <b>" + near.t + "</b> earned its place on your shelf, this belongs next to it.");
+  } else {
+    const closers = f.a.filter(function(x){ return ATTR_WORD[x] && !spoken[x]; })
+                       .sort(rarest).slice(0, 3);
+    if(closers.length >= 2){
+      said.push(upFirst(listOf(closers.map(function(x){
+        return ATTR_WORD[x].toLowerCase();
+      }))) + ".");
+    }
+  }
+
+  return said.slice(0, 4).join(" ");
+}
+
+/* The card itself. Built only from el(), so it can be exercised without a
+   browser. The label text is fixed copy and is asserted in the tests. */
+function storeCard(rec){
+  const card = el("div","store-card");
+  const tape = el("b","store-tape");
+  tape.setAttribute("aria-hidden","true");
+  card.appendChild(tape);
+  card.appendChild(el("p","store-label","WHAT THE STORE SAYS"));
+  const copy = el("p","store-copy");
+  copy.innerHTML = storeSays(rec);
+  card.appendChild(copy);
+  return card;
 }
 
 
@@ -2334,7 +2582,7 @@ let HEAD    = null;    /* what is in the feature slot */
 let REROLLS = 0;
 let DEALER  = false;
 let MODE    = "feature";
-let WHY_OPEN = false;
+let JUST_LOCKED = false;   /* one render of the lock-in confirmation */
 let RECUT   = false;   /* a returning viewer asked to change the answers */
 
 const REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -2350,7 +2598,7 @@ function posterSet(path){
 function backdropURL(path){
   return "https://image.tmdb.org/t/p/" + (NARROW() ? "w780" : "w1280") + path;
 }
-function poster(f, sizes, eager){
+function poster(f, sizes, eager, alt){
   const box = el("div","poster");
   function unset(){
     const s = el("div","poster-set");
@@ -2361,7 +2609,9 @@ function poster(f, sizes, eager){
   if(f.poster){
     box.classList.add("pending");
     const img = document.createElement("img");
-    img.alt = "";                        /* the title is set beside it */
+    /* Decorative in a rail, where the title is set right beside it. The
+       feature poster is the exception: it is the subject, so it is named. */
+    img.alt = alt || "";
     img.decoding = "async";
     img.loading = eager ? "eager" : "lazy";
     img.width = 342; img.height = 513;   /* holds the frame: no reflow */
@@ -2373,6 +2623,210 @@ function poster(f, sizes, eager){
     box.appendChild(img);
   } else unset();
   return box;
+}
+
+/* ============================================================================
+   THE MARQUEE BULBS
+   One element per bulb. A background-image strip can only pulse as a single
+   object — every light on the same beat, which is the tell of a fake marquee.
+   Real ones drift apart. Individual bulbs also make the chase possible: the
+   flare travels the perimeter in DOM-independent order and stops.
+   ========================================================================== */
+const BULB_PITCH = 29;      /* target spacing in px; fitted to each side */
+const CHASE_SPREAD = 160;   /* ms for the flare to travel the whole border */
+let bulbLayout = "";
+
+/* Deterministic jitter. The same marquee shimmers the same way on every visit,
+   and nothing here calls Math.random while painting. */
+function bulbNoise(i, salt){
+  const x = Math.sin((i + 1) * 12.9898 + salt * 78.233) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+function buildBulbs(){
+  const mq = $("marquee");
+  if(!mq) return;
+  const w = mq.offsetWidth, h = mq.offsetHeight;
+  if(!w || !h) return;
+  /* Measured once per layout, never per frame. Nothing below reads the DOM. */
+  const key = w + "x" + h;
+  if(key === bulbLayout) return;
+  bulbLayout = key;
+
+  const sides = [
+    {sel:".l-top",    len:Math.max(0, w - 28), flip:false},
+    {sel:".l-right",  len:Math.max(0, h - 52), flip:false},
+    {sel:".l-bottom", len:Math.max(0, w - 28), flip:true},   /* runs right to left */
+    {sel:".l-left",   len:Math.max(0, h - 52), flip:true}    /* runs bottom to top */
+  ];
+
+  /* The side rails are dropped on narrow screens, so they are not built there
+     either — a hidden bulb still holding a slot in the chase would leave the
+     flare stalling against the edge of the board for no visible reason. */
+  const narrow = w < 768;
+  const counts = sides.map(function(sd, i){
+    if(narrow && (i === 1 || i === 3)) return 0;
+    return sd.len < 20 ? 0 : Math.max(2, Math.round(sd.len / BULB_PITCH));
+  });
+  const total = counts.reduce(function(a,b){ return a + b; }, 0) || 1;
+
+  let ordinal = 0, salt = 0;
+  sides.forEach(function(sd, si){
+    const rail = mq.querySelector(sd.sel);
+    if(!rail) return;
+    rail.innerHTML = "";
+    const n = counts[si];
+    const frag = document.createDocumentFragment();
+    for(let i = 0; i < n; i++){
+      const b = document.createElement("i");
+      b.className = "bulb";
+      /* half-step inset keeps bulbs off the corners where two rails meet */
+      b.style.setProperty("--p", ((i + 0.5) * (sd.len / n)) + "px");
+
+      /* idle: own period, own phase, own floor */
+      const a = bulbNoise(i, si + 1), c = bulbNoise(i, si + 9);
+      b.style.setProperty("--dur", (2.6 + a * 3.4).toFixed(2) + "s");
+      b.style.setProperty("--del", (-(c * 4).toFixed(2)) + "s");
+      b.style.setProperty("--hi",  (0.9 + a * 0.1).toFixed(3));
+      b.style.setProperty("--lo",  (0.6 + c * 0.22).toFixed(3));
+
+      /* chase: position around the perimeter, not position in the DOM */
+      const k = ordinal + (sd.flip ? (n - 1 - i) : i);
+      b.style.setProperty("--chase", Math.round(k / total * CHASE_SPREAD) + "ms");
+      frag.appendChild(b);
+      salt++;
+    }
+    rail.appendChild(frag);
+    ordinal += n;
+  });
+}
+
+/* One lap, then back to the quiet drift. Off-screen the marquee is skipped
+   entirely — there is no point flaring bulbs nobody can see. */
+function chaseBulbs(){
+  if(REDUCED) return;
+  const mq = $("marquee");
+  if(!mq || !$("s-tonight").classList.contains("on")) return;
+  mq.classList.remove("chase");
+  void mq.offsetWidth;            /* one reflow, to restart the animation */
+  mq.classList.add("chase");
+}
+
+/* ============================================================================
+   THE FILM'S ACCENT
+   Reading colour off the poster means a canvas read of a cross-origin image,
+   which is one missing CORS header away from throwing on every title, and the
+   brief rules out a second request just for colour. So the accent comes from
+   what the catalog already holds: the film's own attribute and genre tags in a
+   fixed priority, nudged by a hash of the title so two "visual" films are not
+   the same teal. Deterministic, offline, free.
+
+   It only ever reaches light, hairlines and glow. No text colour is derived
+   from it, so contrast is exactly what it was before the wash arrived.
+   ========================================================================== */
+const ACCENT_ATTR = [
+  ["scary",          356, 58, 30],
+  ["melancholy",     248, 50, 34],
+  ["visual",         186, 54, 30],
+  ["weird",          282, 52, 34],
+  ["romantic",       338, 46, 34],
+  ["bleak",          213, 34, 30],
+  ["violent",          6, 52, 29],
+  ["cozy",            32, 54, 34],
+  ["uplifting",       44, 56, 36],
+  ["comic",           46, 60, 36],
+  ["spectacle",      208, 60, 34],
+  ["epic",            26, 50, 33],
+  ["cerebral",       228, 46, 32],
+  ["propulsive",      16, 56, 32],
+  ["stylish",        306, 42, 32],
+  ["characterstudy", 200, 30, 30],
+  ["grounded",       170, 28, 29]
+];
+const ACCENT_GENRE = {
+  horror:[356,58,30], scifi:[196,58,31], crime:[210,34,29], romance:[338,46,34],
+  comedy:[46,58,36], fantasy:[276,50,34], war:[28,40,30], animation:[196,54,34],
+  documentary:[200,26,29], musical:[318,50,34], thriller:[206,44,30], action:[14,52,32],
+  drama:[222,34,31], family:[40,52,36], adventure:[160,42,31], mystery:[258,44,32]
+};
+const ACCENT_FALLBACK = [216, 30, 26];    /* the store's own navy */
+
+function hashTitle(t){
+  let h = 0;
+  for(let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 100003;
+  return h;
+}
+function accentFor(f){
+  if(!f) return {h:ACCENT_FALLBACK[0], s:ACCENT_FALLBACK[1], l:ACCENT_FALLBACK[2]};
+  let base = null;
+  for(let i = 0; i < ACCENT_ATTR.length && !base; i++){
+    if((f.a || []).indexOf(ACCENT_ATTR[i][0]) > -1) base = ACCENT_ATTR[i].slice(1);
+  }
+  for(let i = 0; i < (f.g || []).length && !base; i++) base = ACCENT_GENRE[f.g[i]] || null;
+  if(!base) base = ACCENT_FALLBACK;
+  const drift = (hashTitle(f.t) % 21) - 10;
+  return {h:(base[0] + drift + 360) % 360, s:base[1], l:base[2]};
+}
+function applyAccent(f){
+  const a = accentFor(f), n = $("s-bill");
+  if(!n) return;
+  n.style.setProperty("--acc",      "hsl(" + a.h + " " + a.s + "% " + a.l + "%)");
+  n.style.setProperty("--acc-soft", "hsla(" + a.h + " " + a.s + "% " + a.l + "% / .3)");
+  n.style.setProperty("--acc-glow", "hsla(" + a.h + " " + Math.min(a.s + 14, 78) + "% " +
+                                    Math.min(a.l + 15, 62) + "% / .4)");
+  n.style.setProperty("--acc-line", "hsla(" + a.h + " " + a.s + "% " +
+                                    Math.min(a.l + 28, 70) + "% / .5)");
+}
+
+/* ============================================================================
+   THE TITLE, A LINE AT A TIME
+   The wrap has to be known before the entrance can start, so the words are
+   laid out once, every top is read in a single pass, and equal tops become a
+   line. One read, one write — no measuring inside the animation.
+   ========================================================================== */
+const TITLE_STEP = 100;      /* ms between lines */
+const TITLE_WINDOW = 300;    /* the last line still starts inside the reveal */
+
+function titleStep(lines){
+  if(lines <= 1) return 0;
+  /* Eight lines at 100ms would run past the end of the sequence, so a long
+     title compresses rather than overrunning a short one. */
+  return Math.max(40, Math.min(TITLE_STEP, Math.round(TITLE_WINDOW / (lines - 1))));
+}
+
+function lineWrap(h, text){
+  if(!h) return 0;
+  h.textContent = "";
+  const words = String(text).split(/\s+/).filter(Boolean);
+  if(!words.length) return 0;
+
+  const probes = words.map(function(w, i){
+    const sp = document.createElement("span");
+    sp.textContent = w + (i < words.length - 1 ? " " : "");
+    h.appendChild(sp);
+    return sp;
+  });
+  const tops = probes.map(function(sp){ return sp.offsetTop; });   /* read */
+
+  const lines = [];                                               /* write */
+  tops.forEach(function(t, i){
+    if(!i || t !== tops[i - 1]) lines.push([]);
+    lines[lines.length - 1].push(words[i]);
+  });
+
+  h.textContent = "";
+  const step = titleStep(lines.length);
+  lines.forEach(function(ws, i){
+    const ln = el("span","ln");
+    /* the joining space belongs to the text, not the layout: without it the
+       heading's accessible name runs two lines together as one word, and a
+       trailing space in a block box collapses to nothing on screen */
+    const inner = el("span", null, ws.join(" ") + (i < lines.length - 1 ? " " : ""));
+    inner.style.setProperty("--ld", (i * step) + "ms");
+    ln.appendChild(inner);
+    h.appendChild(ln);
+  });
+  return lines.length;
 }
 
 /* Two plates crossfading, so artwork never arrives half-drawn. */
@@ -2551,16 +3005,6 @@ function seeds(rec, T, n){
     .slice(0, n)
     .map(function(x){ return x.L; });
 }
-/* The pitch takes the sharpest single sentence the engine can make; the panel
-   picks up from there rather than repeating it back. */
-function whyParts(rec){
-  const all = why(rec);
-  const cut = all.indexOf(". ");
-  if(cut === -1) return {pitch:all, rest:""};
-  return {pitch:all.slice(0, cut + 1), rest:all.slice(cut + 2)};
-}
-function pitchOf(rec){ return whyParts(rec).pitch; }
-
 /* ---------- scenes ---------- */
 const SCENES = {tonight:"s-tonight", bill:"s-bill", aisles:"s-aisles", taste:"s-taste", showings:"s-showings"};
 function showScene(name){
@@ -2807,103 +3251,234 @@ function renderArrival(){
 /* ============================================================================
    SCENE 03 — the lights go down
    ========================================================================== */
-/* The lights going down.
-   0ms    the room recedes and the house darkens
-   ~40ms  the chosen film's artwork starts downloading behind the black
-   240ms  a line of mono in the dark
-   380ms  the scene changes while nobody can see it
-   420ms  the darkness begins a long lift, and the backdrop resolves out of
-          blur underneath it — the film emerges through the dark, not after it
-   ~790ms the title lands
-   Total ≈ 1.0s. Nothing here is a spinner and nothing is a component swap. */
-function lightsDown(rec, then){
-  if(REDUCED){ then(); return; }
-  const d = $("dark"), scene = document.querySelector(".scene.on");
-  $("whisper").textContent = "Feature presentation";
+/* The reveal, as one sequence.
 
-  /* pull the artwork now so the wait is spent inside the transition */
-  if(rec && rec.f && rec.f.backdrop){ const pre = new Image(); pre.src = backdropURL(rec.f.backdrop); }
+   0.0s  the ask depresses and locks out, so a second click cannot start a
+         second sequence
+   0.2s  the questions step down and fade; the room goes under a veil
+   0.5s  one lap of the marquee bulbs, above the veil
+   0.8s  the hero is painted and the veil lifts off it while the film's own
+         colour spreads out of the middle
+   1.1s  the poster pulls into focus and forward; the title enters line by line
+   1.4s  what the store says
+   1.8s  "Lock it in" goes live and the shelf arrives underneath
 
-  if(scene) scene.classList.add("receding");
-  d.classList.remove("lift");
-  d.classList.add("down");
-  setTimeout(function(){ d.classList.add("speak"); }, 240);
-  setTimeout(function(){
-    then();
-    d.classList.remove("speak");
-  }, 380);
-  setTimeout(function(){
-    d.classList.add("lift");
-    d.classList.remove("down");
-    document.querySelectorAll(".receding").forEach(function(n){ n.classList.remove("receding"); });
-  }, 420);
-  setTimeout(function(){ d.classList.remove("lift"); }, 1120);
-}
+   Every beat is a ticketed timeout. A callback whose ticket is stale does
+   nothing, so a fast second click, a navigation, or a fresh request part-way
+   through cannot leave half of one sequence layered over another. This is the
+   only place in the file that sets a timer against the hero. */
+const Reveal = (function(){
+  let ticket = 0;
+  let timers = [];
+  let running = false;
+  let btn = null;
 
-/* the house dealing: a few posters pass through, then one stays */
-function dealOut(cands, then){
-  if(REDUCED || !cands.length){ then(); return; }
-  const d = $("dark"), deal = $("deal"), scene = document.querySelector(".scene.on");
-  $("whisper").textContent = "The house is dealing";
-  deal.innerHTML = "";
-  const cards = cands.slice(0,7).map(function(rec, i){
-    const p = poster(rec.f, "178px", true);
-    p.style.position = i ? "absolute" : "relative";
-    p.style.inset = i ? "0" : "auto";
-    p.style.opacity = i ? "0" : "1";
-    return p;
-  });
-  deal.style.position = "relative";
-  cards.forEach(function(c){ deal.appendChild(c); });
+  function clear(){
+    for(let i = 0; i < timers.length; i++) clearTimeout(timers[i]);
+    timers = [];
+  }
+  function at(ms, fn){
+    const mine = ticket;
+    timers.push(setTimeout(function(){
+      if(mine !== ticket) return;      /* superseded: do nothing at all */
+      fn();
+    }, ms));
+  }
+  function press(node){
+    btn = node || null;
+    if(!btn) return;
+    btn.classList.add("pressed");
+    btn.disabled = true;
+  }
+  function release(){
+    if(btn){ btn.classList.remove("pressed"); btn.disabled = false; btn = null; }
+    gate();                            /* the questionnaire decides its own state */
+  }
+  function stages(){
+    $("s-bill").classList.remove("revealing","rv-3","rv-4","rv-5");
+    $("s-tonight").classList.remove("rv-dim");
+    const mq = $("marquee"); if(mq) mq.classList.remove("chase");
+    const d = $("dark");
+    d.classList.remove("veil","rv-lift","down","dealing","speak","lift");
+    $("deal").innerHTML = "";
+  }
+  function reset(){
+    ticket++; clear();
+    running = false;
+    stages();
+    release();
+  }
 
-  if(scene) scene.classList.add("receding");
-  d.classList.add("down","dealing");
-  let i = 0;
-  const turn = setInterval(function(){
-    cards[i % cards.length].style.opacity = "0";
-    i++;
-    cards[i % cards.length].style.opacity = "1";
-  }, 78);
-  setTimeout(function(){
-    clearInterval(turn);
-    then();
-    setTimeout(function(){
-      d.classList.remove("down","dealing");
-      deal.innerHTML = "";
-      document.querySelectorAll(".receding").forEach(function(n){ n.classList.remove("receding"); });
-    }, 120);
-  }, 620);
-}
+  /* the house dealing, stepped by the same scheduler so a cancel stops it too */
+  function dealCards(cands){
+    const deal = $("deal");
+    deal.innerHTML = "";
+    deal.style.position = "relative";
+    const cards = cands.slice(0, 7).map(function(r, i){
+      const c = poster(r.f, "178px", true);
+      c.style.position = i ? "absolute" : "relative";
+      c.style.inset = i ? "0" : "auto";
+      c.style.opacity = i ? "0" : "1";
+      deal.appendChild(c);
+      return c;
+    });
+    if(cards.length < 2) return;
+    let i = 0;
+    const step = function(){
+      cards[i % cards.length].style.opacity = "0";
+      i++;
+      cards[i % cards.length].style.opacity = "1";
+      if(i < 7) at(78, step);
+    };
+    at(78, step);
+  }
+
+  return {
+    busy: function(){ return running; },
+    cancel: reset,
+
+    /* schedule work on the sequence in flight — used by the lock-in seal, so
+       navigating away cancels it like anything else */
+    seal: function(fn){ at(REDUCED ? 0 : 260, fn); },
+
+    /* the full 1.8s sequence */
+    full: function(opts){
+      opts = opts || {};
+      if(running) return false;        /* duplicate request: ignored outright */
+      ticket++; clear();
+      running = true;
+      press(opts.button);
+
+      const bill = $("s-bill"), tonight = $("s-tonight"), dark = $("dark");
+      const rec = opts.rec;
+      const done = function(){
+        running = false;
+        release();
+        if(opts.done) opts.done();
+      };
+
+      /* Reduced motion: no chase, no stagger, no rotation, no travel. The
+         finished page fades up in one short step. */
+      if(REDUCED){
+        stages();
+        at(0, function(){ opts.paint(); done(); });
+        return true;
+      }
+
+      /* Pull the artwork now so the wait is spent inside the veil rather than
+         after it. If it is slow or missing the sequence still runs to time and
+         the poster falls back to its printed case. */
+      if(rec && rec.f){
+        if(rec.f.poster){ const pi = new Image(); pi.src = POSTER_BASE + rec.f.poster; }
+        if(rec.f.backdrop){ const bi = new Image(); bi.src = backdropURL(rec.f.backdrop); }
+      }
+
+      bill.classList.add("revealing");
+      bill.classList.remove("rv-3","rv-4","rv-5");
+      $("acc-wash").classList.remove("on");
+
+      at(200, function(){
+        tonight.classList.add("rv-dim");
+        dark.classList.remove("rv-lift","lift","down");
+        dark.classList.add("veil","speak");
+        $("whisper").textContent = opts.whisper || "Feature presentation";
+        if(opts.deal && opts.deal.length) dealCards(opts.deal);
+      });
+
+      at(500, chaseBulbs);
+      at(860, function(){ const mq = $("marquee"); if(mq) mq.classList.remove("chase"); });
+
+      at(800, function(){
+        opts.paint();                  /* scene swap and full render, still held back */
+        dark.classList.remove("veil","speak","dealing");
+        dark.classList.add("rv-lift");
+        $("deal").innerHTML = "";
+        tonight.classList.remove("rv-dim");
+      });
+
+      at(1100, function(){ bill.classList.add("rv-3"); });
+      at(1400, function(){ bill.classList.add("rv-4"); });
+      at(1800, function(){
+        bill.classList.add("rv-5");
+        dark.classList.remove("rv-lift");
+        done();
+      });
+      /* once every transition has landed, the staging classes have no work
+         left to do and the hero goes back to its plain resting state */
+      at(2300, function(){ bill.classList.remove("revealing","rv-3","rv-4","rv-5"); });
+      return true;
+    },
+
+    /* swapping in an alternate: the same order, inside ~400ms */
+    swap: function(rec, after){
+      ticket++; clear();
+      stages();
+      running = true;
+      const grid = $("bill-grid");
+      const land = function(){ setFeature(rec); if(after) after(); };
+      if(REDUCED){ land(); reshelfNow(); running = false; return; }
+      grid.classList.add("out");
+      at(130, land);
+      at(260, reshelfNow);
+      at(440, function(){ running = false; });
+    }
+  };
+})();
 
 /* ============================================================================
    Programming the evening
    ========================================================================== */
 function programme(opts){
   opts = opts || {};
+  if(Reveal.busy()) return;
   DEALER = false;
   REROLLS = 0;
-  closeWhy();
   const out = scoreAll();
   LAST = out;
   const paint = function(){ showScene("bill"); renderBill(out); };
-  const first = out.picks.length ? out.picks[0] : null;
-  if(opts.quiet) paint(); else lightsDown(heldRec(out) || first, paint);
   if(!opts.silent && out.picks.length){
     rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
   }
+  if(opts.quiet){ Reveal.cancel(); paint(); announcePick(); return; }
+  Reveal.full({
+    rec:    heldRec(out) || (out.picks.length ? out.picks[0] : null),
+    button: opts.button,
+    paint:  paint,
+    done:   announcePick
+  });
 }
 
-function houseDecides(){
+function houseDecides(e){
+  if(Reveal.busy()) return;
   if(!S.room) S.room = "two";
   if(!S.timePreset){ S.timePreset = "two"; S.time = 135; }
   save();
   renderWho(); renderTimes(); renderNights(); gate();
-  DEALER = true; REROLLS = 0; closeWhy();
+  DEALER = true; REROLLS = 0;
   const out = scoreAll();
   LAST = out;
   const paint = function(){ showScene("bill"); renderBill(out); };
-  dealOut(out.picks, paint);
   if(out.picks.length) rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
+  Reveal.full({
+    rec:     out.picks.length ? out.picks[0] : null,
+    button:  e && e.currentTarget,
+    paint:   paint,
+    deal:    out.picks,
+    whisper: "The house is dealing",
+    done:    announcePick
+  });
+}
+
+/* The result, spoken once, in the shape the live region promises. */
+function announcePick(){
+  if(!HEAD) return;
+  say("Tonight's pick is " + HEAD.f.t + ".");
+  const h = document.querySelector("#bill-grid .bill-title");
+  if(!h) return;
+  h.setAttribute("tabindex","-1");
+  /* preventScroll keeps the page where the reveal left it: moving focus must
+     not yank the hero out from under the person reading it */
+  try { h.focus({preventScroll:true}); } catch(err) { h.focus(); }
 }
 
 /* ============================================================================
@@ -2917,15 +3492,20 @@ function heldRec(out){
 }
 
 function renderBill(out){
-  closeWhy();
   $("shelf-slot").innerHTML = "";
   $("twin-slot").innerHTML = "";
   $("footnote").innerHTML = "";
 
   const held = heldRec(out);
+  if(!held){
+    /* the box shuts again the moment the night is no longer decided */
+    const c = $("candy"); if(c) c.classList.remove("open");
+    $("shelf-slot").classList.remove("shelf-dim");
+    $("twin-slot").classList.remove("shelf-dim");
+  }
   if(held){
     MODE = "locked";
-    setFeature(held, false);
+    setFeature(held);
   } else if(!out.picks.length){
     MODE = "dark";
     darkHouse();
@@ -2934,31 +3514,47 @@ function renderBill(out){
   } else {
     MODE = DEALER ? "house" : "feature";
     REROLLS = Math.min(REROLLS, out.picks.length - 1);
-    setFeature(out.picks[REROLLS], false);
+    setFeature(out.picks[REROLLS]);
   }
 
   if(!DEALER) renderShelf(out);
   renderFootnote(out);
 }
 
-function setFeature(rec, animate){
+/* Paints the hero. No timers live here any more: when the paint happens is the
+   Reveal controller's business, and only its business. */
+function setFeature(rec){
   HEAD = rec;
   const grid = $("bill-grid");
-  const paint = function(){
-    grid.innerHTML = "";
-    grid.style.gridTemplateColumns = "";
-    grid.appendChild(billCopy(rec));
-    const fig = el("figure","bill-poster res-3");
-    fig.appendChild(poster(rec.f, "(max-width:1199px) 16vw, 248px", true));
-    grid.appendChild(fig);
-    const art = rec.f.backdrop ? backdropURL(rec.f.backdrop) : anyPlate();
-    billPlate(art);
-    colourWash(art);
-    grid.classList.remove("out");
-    say(rec.f.t + ". " + rec.f.y + ", " + hm(rec.f.r) + ", rated " + rec.f.mpaa + ".");
-  };
-  if(animate && !REDUCED){ grid.classList.add("out"); setTimeout(paint, 260); }
-  else paint();
+  grid.innerHTML = "";
+  grid.style.gridTemplateColumns = "";
+  grid.appendChild(billCopy(rec));
+
+  const fig = el("figure","bill-poster res-3");
+  fig.appendChild(poster(rec.f, "(max-width:1199px) 16vw, 248px", true, rec.f.t + " poster"));
+  grid.appendChild(fig);
+
+  /* the title has to be in the document before its wrap can be read */
+  lineWrap(grid.querySelector(".bill-title"), rec.f.t);
+
+  const art = rec.f.backdrop ? backdropURL(rec.f.backdrop) : anyPlate();
+  if(billPlate) billPlate(art);        /* the crossfaders are built by init() */
+  colourWash(art);
+
+  /* Custom properties inside a gradient do not transition, so the wash is
+     dropped and re-spread rather than cross-faded to the new colour.
+
+     The reset is committed with a single forced reflow rather than a pair of
+     animation frames: a backgrounded tab throttles rAF, and the callback that
+     never runs is the one that turns the colour on at all. */
+  const aw = $("acc-wash");
+  if(aw){
+    aw.classList.remove("on");
+    applyAccent(rec.f);
+    void aw.offsetWidth;
+    aw.classList.add("on");
+  }
+  grid.classList.remove("out");
 }
 
 function billCopy(rec){
@@ -2983,9 +3579,9 @@ function billCopy(rec){
     if(f.h) b.appendChild(withClass(synopsisBlock(f), "res-3"));
     b.appendChild(withClass(whereRow(rec), "res-3"));
   } else {
-    const pitch = el("p","pitch res-3");
-    pitch.innerHTML = pitchOf(rec);
-    b.appendChild(pitch);
+    /* One card owns the recommendation, and it sits above "The story" so the
+       case comes before the plot. There is no second explanation anywhere. */
+    b.appendChild(withClass(storeCard(rec), "res-3"));
 
     if(f.h) b.appendChild(withClass(synopsisBlock(f), "res-3"));
 
@@ -3026,6 +3622,15 @@ function billActs(rec){
   const acts = el("div","acts res-3");
 
   if(MODE === "locked"){
+    if(JUST_LOCKED){
+      const done = el("p","sorted");
+      done.appendChild(el("span","dot"));
+      done.appendChild(document.createTextNode("Tonight is sorted."));
+      acts.appendChild(done);
+      void done.offsetWidth;            /* commit the hidden state, then reveal */
+      done.classList.add("on");
+      JUST_LOCKED = false;
+    }
     const un = el("button","lock lock--quiet","Change my mind"); un.type = "button";
     un.addEventListener("click", function(){
       unmarkWatched(S.locked.t);
@@ -3035,6 +3640,7 @@ function billActs(rec){
     acts.appendChild(un);
     const back = el("button","act","Pick something else"); back.type = "button";
     back.addEventListener("click", function(){
+      Reveal.cancel();
       unmarkWatched(S.locked.t); S.locked = null; save();
       showScene("tonight"); renderArrival();
     });
@@ -3045,14 +3651,8 @@ function billActs(rec){
   const lock = el("button","lock"); lock.type = "button";
   lock.appendChild(el("span",null,"Lock it in"));
   lock.appendChild(el("span","arw","→"));
-  lock.addEventListener("click", function(){ lockIt(rec); });
+  lock.addEventListener("click", function(){ lockIt(rec, lock); });
   acts.appendChild(lock);
-
-  const whyBtn = el("button","act","Why this tonight"); whyBtn.type = "button";
-  whyBtn.setAttribute("aria-expanded","false");
-  whyBtn.setAttribute("aria-controls","why");
-  whyBtn.addEventListener("click", function(){ toggleWhy(rec, whyBtn); });
-  acts.appendChild(whyBtn);
 
   const seen = el("button","act","Seen it"); seen.type = "button";
   seen.addEventListener("click", function(){
@@ -3061,7 +3661,7 @@ function billActs(rec){
   acts.appendChild(seen);
 
   const again = el("button","act","Show me something else →"); again.type = "button";
-  again.addEventListener("click", dealAnother);
+  again.addEventListener("click", function(e){ dealAnother(e.currentTarget); });
   acts.appendChild(again);
 
   return acts;
@@ -3140,30 +3740,36 @@ function twinSlot(f, when){
   return row;
 }
 
+/* Taking an alternate off the shelf. Not a new recommendation — the same
+   night, a different case — so it gets the short move, not the full reveal. */
 function promote(rec){
   if(!LAST) return;
   const i = LAST.picks.indexOf(rec);
   if(i > -1) REROLLS = i;
   MODE = DEALER ? "house" : "feature";
-  closeWhy();
-  setFeature(rec, true);
-  reshelf();
+  Reveal.swap(rec, announcePick);
   $("s-bill").scrollIntoView({behavior: REDUCED ? "instant" : "smooth", block:"start"});
 }
-function dealAnother(){
-  if(!LAST || !LAST.picks.length) return;
+
+/* "Show me something else" is a request for a completely new recommendation,
+   so it runs the whole sequence rather than the shelf's short swap. */
+function dealAnother(button){
+  if(!LAST || !LAST.picks.length || Reveal.busy()) return;
   REROLLS = (REROLLS + 1) % LAST.picks.length;
-  closeWhy();
-  setFeature(LAST.picks[REROLLS], true);
-  reshelf();
+  const rec = LAST.picks[REROLLS];
+  Reveal.full({
+    rec:    rec,
+    button: button || null,
+    paint:  function(){ showScene("bill"); renderBill(LAST); },
+    done:   announcePick
+  });
 }
+
 /* the shelf follows the feature a beat later, so the swap reads as one move */
-function reshelf(){
-  if(DEALER) return;
-  setTimeout(function(){
-    $("shelf-slot").innerHTML = ""; $("twin-slot").innerHTML = "";
-    renderShelf(LAST);
-  }, REDUCED ? 0 : 260);
+function reshelfNow(){
+  if(DEALER || !LAST) return;
+  $("shelf-slot").innerHTML = ""; $("twin-slot").innerHTML = "";
+  renderShelf(LAST);
 }
 function rebuild(){
   const out = scoreAll();
@@ -3171,83 +3777,19 @@ function rebuild(){
   renderBill(out);
 }
 
-/* ---------- WHY THIS TONIGHT ---------- */
-function closeWhy(){
-  WHY_OPEN = false;
-  $("why").classList.remove("open");
-  document.querySelectorAll('.act[aria-controls="why"]').forEach(function(b){
-    b.setAttribute("aria-expanded","false");
-  });
-}
-function toggleWhy(rec, btn){
-  if(WHY_OPEN){ closeWhy(); return; }
-  WHY_OPEN = true;
-  btn.setAttribute("aria-expanded","true");
-  const p = $("why-in"); p.innerHTML = "";
-  const T = rec.T;
 
-  const rest = whyParts(rec).rest;
-  if(rest){
-    const said = el("p","why-said");
-    said.innerHTML = rest;
-    p.appendChild(said);
-  }
-
-  const cols = el("div","why-cols");
-
-  const likes = el("div");
-  likes.appendChild(el("h4",null,"What you go for"));
-  const ul1 = document.createElement("ul");
-  const traits = tasteTraits(T, 4);
-  if(traits.length) traits.forEach(function(t){
-    const li = document.createElement("li"); li.textContent = t; ul1.appendChild(li);
-  });
-  else {
-    const li = document.createElement("li");
-    li.textContent = "Nothing on your shelf yet, so tonight's answers are doing all the work.";
-    ul1.appendChild(li);
-  }
-  likes.appendChild(ul1);
-  cols.appendChild(likes);
-
-  const fits = el("div");
-  fits.appendChild(el("h4",null,"How it fits tonight"));
-  const ul2 = document.createElement("ul");
-  checkFilters(rec.f).forEach(function(c){
-    if(!c.pass) return;
-    /* a bar nobody set is not a reason the film fits */
-    if(c.k === "rating"  && !S.rate) return;
-    if(c.k === "critics" && !minCritics()) return;
-    if(c.k === "genre"   && !S.genres.length) return;
-    const li = document.createElement("li");
-    li.textContent = c.detail.charAt(0).toUpperCase() + c.detail.slice(1);
-    ul2.appendChild(li);
-  });
-  fits.appendChild(ul2);
-  cols.appendChild(fits);
-
-  const near = seeds(rec, T, 3);
-  if(near.length){
-    const col = el("div");
-    col.appendChild(el("h4",null,"Feels closest to"));
-    const row = el("div","seeds");
-    near.forEach(function(L){
-      const s = el("div","seed");
-      s.appendChild(poster(L, "76px"));
-      s.appendChild(el("span","sn", L.t));
-      row.appendChild(s);
-    });
-    col.appendChild(row);
-    cols.appendChild(col);
-  }
-
-  p.appendChild(cols);
-  $("why").classList.add("open");
-}
-
-/* ---------- lock it in ---------- */
-function lockIt(rec){
+/* ---------- lock it in ----------
+   The last decision of the night, so it is allowed to feel heavier than the
+   rest: the button goes further down and stays down, the box on the counter
+   opens, the alternates step back, and the page says so in words. */
+function lockIt(rec, btn){
   const f = rec.f;
+  if(Reveal.busy()) return;
+  if(btn){ btn.classList.add("sealing"); btn.disabled = true; }
+  const candy = $("candy"); if(candy) candy.classList.add("open");
+  $("shelf-slot").classList.add("shelf-dim");
+  $("twin-slot").classList.add("shelf-dim");
+
   S.locked = {t:f.t, at:new Date().toISOString(), mins:f.r};
   S.bills = (S.bills || []).filter(function(b){ return b.t !== f.t; });
   S.bills.unshift({t:f.t, at:S.locked.at});
@@ -3255,9 +3797,16 @@ function lockIt(rec){
   markWatched(f.t);
   save();
   DEALER = false;
-  say("Locked in: " + f.t);
-  rebuild();
-  window.scrollTo({top:0, behavior: REDUCED ? "instant" : "smooth"});
+  JUST_LOCKED = true;
+  say("Tonight is sorted. " + f.t + " is locked in.");
+
+  Reveal.seal(function(){
+    rebuild();
+    $("shelf-slot").classList.add("shelf-dim");
+    $("twin-slot").classList.add("shelf-dim");
+    const c = $("candy"); if(c) c.classList.add("open");
+    window.scrollTo({top:0, behavior: REDUCED ? "instant" : "smooth"});
+  });
 }
 
 /* ---------- nothing made the cut ---------- */
@@ -3538,7 +4087,7 @@ function renderAisles(){
 /* Hand a browsed case straight to the counter. When tonight's filters already
    rank it, use the real record so the store's note can explain itself. */
 function aislePick(f){
-  DEALER = false; closeWhy();
+  DEALER = false; Reveal.cancel();
   const out = scoreAll();
   LAST = out;
   let idx = -1;
@@ -3618,21 +4167,24 @@ function init(){
   });
   $("rt-range").addEventListener("change", save);
 
-  $("show-bill").addEventListener("click", function(){ programme(); });
-  $("encore-go").addEventListener("click", function(){ programme(); });
+  $("show-bill").addEventListener("click", function(e){ programme({button:e.currentTarget}); });
+  $("encore-go").addEventListener("click", function(e){ programme({button:e.currentTarget}); });
   $("house-pick").addEventListener("click", houseDecides);
   $("encore-house").addEventListener("click", houseDecides);
-  $("back-tonight").addEventListener("click", function(){ showScene("tonight"); renderArrival(); });
+  $("back-tonight").addEventListener("click", function(){
+    Reveal.cancel(); showScene("tonight"); renderArrival();
+  });
 
   $("find").addEventListener("input", function(e){
     findQ = e.target.value; wallShown = 48; renderWall();
   });
 
   $("house").addEventListener("click", function(e){
-    e.preventDefault(); showScene("tonight"); renderArrival();
+    e.preventDefault(); Reveal.cancel(); showScene("tonight"); renderArrival();
   });
   document.querySelectorAll(".doors button").forEach(function(b){
     b.addEventListener("click", function(){
+      Reveal.cancel();                 /* leaving mid-reveal cancels it */
       showScene(b.dataset.go);
       if(b.dataset.go === "tonight") renderArrival();
     });
@@ -3643,12 +4195,34 @@ function init(){
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
 
+  /* The bulbs are fitted to the marquee and the title lines to their column,
+     so both are rebuilt when the box they live in changes — debounced, and
+     never while a reveal is mid-flight. */
+  buildBulbs();
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(buildBulbs).catch(function(){});
+  }
+  let sizing = null;
+  window.addEventListener("resize", function(){
+    clearTimeout(sizing);
+    sizing = setTimeout(function(){
+      buildBulbs();
+      if(SCENE === "bill" && HEAD && !Reveal.busy()){
+        lineWrap(document.querySelector("#bill-grid .bill-title"), HEAD.f.t);
+      }
+    }, 160);
+  }, {passive:true});
+
   document.addEventListener("keydown", function(e){
     const tag = (e.target.tagName || "").toLowerCase();
     if(tag === "input" || tag === "textarea" || e.metaKey || e.ctrlKey || e.altKey) return;
-    if(e.key === "Enter" && SCENE === "tonight" && !$("show-bill").disabled) programme();
+    if(e.key === "Enter" && SCENE === "tonight" && !$("show-bill").disabled){
+      programme({button:$("show-bill")});
+    }
     if(e.key.toLowerCase() === "r" && SCENE === "bill") dealAnother();
-    if(e.key === "Escape" && SCENE === "bill"){ showScene("tonight"); renderArrival(); }
+    if(e.key === "Escape" && SCENE === "bill"){
+      Reveal.cancel(); showScene("tonight"); renderArrival();
+    }
   });
 
   loadEnrichment();

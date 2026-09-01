@@ -48,6 +48,7 @@ jobs:
         run: |
           node scripts/enrich.test.mjs
           node scripts/merge.test.mjs
+          node scripts/reveal.test.mjs
 
       - name: Commit if anything changed
         run: |
