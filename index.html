@@ -1238,7 +1238,7 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
 }
 /* the reveal's own veil: deep enough to take the page away, and lifted again
    as the hero arrives underneath it */
-.dark.veil{opacity:.93;pointer-events:auto;transition:opacity 300ms var(--ease)}
+.dark.veil{opacity:.93;pointer-events:auto;transition:opacity 220ms var(--ease)}
 .dark.rv-lift{opacity:0;pointer-events:none;transition:opacity 460ms var(--ease)}
 .whisper{opacity:0;transition:opacity 200ms var(--ease);color:var(--cream-dim)}
 .dark.speak .whisper{opacity:1}
@@ -2715,6 +2715,11 @@ function chaseBulbs(){
   if(REDUCED) return;
   const mq = $("marquee");
   if(!mq || !$("s-tonight").classList.contains("on")) return;
+  /* Not just "is the scene on" — is the sign actually on screen. It fires
+     correctly from off-screen too, which is exactly how a chase nobody could
+     see survived a full round of testing. */
+  const r = mq.getBoundingClientRect();
+  if(r.bottom <= 0 || r.top >= window.innerHeight) return;
   mq.classList.remove("chase");
   void mq.offsetWidth;            /* one reflow, to restart the animation */
   mq.classList.add("chase");
@@ -3388,12 +3393,20 @@ const Reveal = (function(){
 
       at(200, function(){
         tonight.classList.add("rv-dim");
-        document.body.classList.add("veiled");   /* lift main over the veil */
         dark.classList.remove("rv-lift");
         dark.classList.add("veil","speak");
         $("whisper").textContent = opts.whisper || "Feature presentation";
         if(opts.deal && opts.deal.length) dealCards(opts.deal);
       });
+
+      /* The ask sits a full page below the marquee — by the time anyone has
+         answered three questions they are ~1000px down, and a chase around a
+         sign that is 900px above the fold is a chase nobody can see. So the
+         page goes back to the marquee while the veil is opaque (nothing to
+         see), and only then is main lifted so the sign comes up out of the
+         dark already in frame. No jump is ever visible. */
+      at(440, function(){ window.scrollTo({top:0, behavior:"instant"}); });
+      at(460, function(){ document.body.classList.add("veiled"); });
 
       at(500, chaseBulbs);
 

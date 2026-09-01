@@ -113,7 +113,8 @@ function installEnv({ reduced = false } = {}){
   globalThis.document = doc;
   globalThis.window = {
     matchMedia: (q) => ({ matches: /prefers-reduced-motion/.test(q) ? reduced : false }),
-    addEventListener(){}, scrollTo(){}, innerWidth: 1440, scrollY: 0,
+    addEventListener(){}, scrollTo(o){ globalThis.__scrolled = (o && o.top) || 0; },
+    innerWidth: 1440, innerHeight: 900, scrollY: 0,
     localStorage: { getItem: k => (store.has(k) ? store.get(k) : null), setItem: (k, v) => store.set(k, String(v)), removeItem: k => store.delete(k) }
   };
   globalThis.localStorage = globalThis.window.localStorage;
@@ -162,6 +163,8 @@ console.log("\nthe full reveal");
   button.disabled = false;
 
   let painted = 0;
+  globalThis.__scrolled = -1;
+  const scrolled = () => globalThis.__scrolled;
   const started = Reveal.full({
     rec: { f: { t: "Test Film", poster: null, backdrop: null } },
     button,
@@ -179,12 +182,22 @@ console.log("\nthe full reveal");
   to(200);
   eq("0.2s the questions step down", tonight.classList.contains("rv-dim"), true);
   eq("0.2s the room goes under", dark.classList.contains("veil"), true);
-  /* The regression that shipped: <main> is its own stacking context, so the
-     marquee cannot rise over the veil on its own z-index. main has to be
-     lifted, or the chase runs underneath an opaque sheet and is never seen. */
-  eq("0.2s main is lifted so the marquee clears the veil",
-     env.doc.body.classList.contains("veiled"), true);
   eq("0.2s nothing has been painted yet", painted, 0);
+
+  /* The chase shipped invisible: the ask sits ~1000px below the marquee, so
+     by the time anyone presses it the sign is a full screen above the fold.
+     The page must be back at the marquee, and main lifted, before 0.5s. */
+  to(440);
+  eq("0.44s the page returns to the marquee under the veil", scrolled(), 0);
+  eq("0.44s main is still down, so the scroll cannot be seen",
+     env.doc.body.classList.contains("veiled"), false);
+
+  /* <main> is its own stacking context, so the marquee cannot rise over the
+     veil on its own z-index — main itself has to be lifted, or the chase runs
+     underneath an opaque sheet and is never seen. */
+  to(460);
+  eq("0.46s main lifts and the sign comes up out of the dark",
+     env.doc.body.classList.contains("veiled"), true);
 
   to(500);
   ok("0.5s the bulbs are sent round", true, "");
@@ -382,6 +395,11 @@ console.log("\nthe marquee chase");
   ok("the controller raises and lowers it",
      html.includes('document.body.classList.add("veiled")') &&
      html.includes('document.body.classList.remove("veiled")'));
+  ok("the chase refuses to fire at an off-screen sign",
+     /r\.bottom <= 0 \|\| r\.top >= window\.innerHeight/.test(html),
+     "without this the lap runs correctly where nobody can see it");
+  ok("the page is returned to the marquee first",
+     /window\.scrollTo\(\{top:0, behavior:"instant"\}\); \}\);/.test(html));
 }
 
 console.log("\nthe poster on the hero");
