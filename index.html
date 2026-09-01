@@ -242,23 +242,47 @@ main{position:relative;z-index:10}
     #fff6e2 0 16%, var(--bulb) 44%, #eda94f 76%, #b9762c 100%);
   /* the socket ring keeps an unlit bulb reading as a bulb, not a hole */
   box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);
-  animation:shimmer var(--dur,3.6s) ease-in-out var(--del,0s) infinite;
-  will-change:opacity;
+  /* Two animations that do not fight: shimmer owns opacity, orbit owns the
+     glow and the scale. Split that way they compose instead of the later one
+     stamping on the earlier one's properties. */
+  animation:
+    shimmer var(--dur,3.6s) ease-in-out var(--del,0s) infinite,
+    orbit var(--orbit-dur,11s) linear var(--orbit,0s) infinite;
+  will-change:opacity, transform;
 }
 .l-top .bulb,.l-bottom .bulb{top:50%;margin-top:-4px;left:var(--p);margin-left:-4px}
 .l-left .bulb,.l-right .bulb{left:50%;margin-left:-4px;top:var(--p);margin-top:-4px}
 
 @keyframes shimmer{
-  0%,100%{opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8)}
-  50%    {opacity:var(--lo,.74);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 3px rgba(255,196,120,.42)}
+  0%,100%{opacity:var(--hi,.96)}
+  50%    {opacity:var(--lo,.74)}
+}
+
+/* One light walking the border at rest, slowly, forever. Each bulb is handed
+   its own position round the perimeter as a negative delay, so the wave is
+   already mid-lap on the first frame rather than ramping in. At eleven seconds
+   a circuit it reads as the sign being alive, not as a carnival. */
+@keyframes orbit{
+  0%,14%,100%{
+    box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);
+    transform:scale(1);
+  }
+  6%{
+    box-shadow:0 0 0 1.8px rgba(255,238,200,.95),
+               0 0 17px 4px rgba(255,214,150,.95),
+               0 0 34px 10px rgba(255,180,90,.4);
+    transform:scale(1.5);
+  }
 }
 
 /* One lap when the pick lands. --chase is the bulb's position around the
    perimeter, so the flare travels top -> right -> bottom -> left and stops. */
-.marquee.chase .bulb{animation:chase 200ms ease-out var(--chase,0ms) 1 both}
+.marquee.chase .bulb{animation:chase 400ms ease-out var(--chase,0ms) 1 both}
 @keyframes chase{
   0%  {opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);transform:scale(1)}
-  34% {opacity:1;box-shadow:0 0 0 1.4px rgba(255,232,186,.95), 0 0 18px 4px rgba(255,214,150,1);transform:scale(1.55)}
+  30% {opacity:1;
+       box-shadow:0 0 0 2px rgba(255,240,205,1), 0 0 26px 8px rgba(255,214,150,1), 0 0 52px 16px rgba(255,180,90,.75);
+       transform:scale(2.05)}
   100%{opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);transform:scale(1)}
 }
 /* The marquee is the one thing that stays lit while the page goes under.
@@ -2665,10 +2689,14 @@ function poster(f, sizes, eager, alt){
    flare travels the perimeter in DOM-independent order and stops.
    ========================================================================== */
 const BULB_PITCH = 29;      /* target spacing in px; fitted to each side */
-/* How long the flare takes to travel the whole border. This was 160ms, which
-   is a full lap in a sixth of a second — the mechanism fired, but it read as a
-   flicker rather than a lap. The hero beats below give it room to land. */
-const CHASE_SPREAD = 260;
+/* How long the flare takes to travel the whole border. It was wrong three
+   times in the same direction — 160ms, then 260ms, then 520ms — each a circuit
+   of the sign faster than an eye can follow it round. At 820ms, with a 400ms
+   flare on each bulb, the light is something you watch travel rather than
+   something you catch out of the corner of your eye. The hero waits for it:
+   the lap is the anticipation, so nothing may arrive on top of it. */
+const CHASE_SPREAD = 820;
+const ORBIT_MS = 11000;     /* a full idle circuit of the sign */
 let bulbLayout = "";
 
 /* Deterministic jitter. The same marquee shimmers the same way on every visit,
@@ -2727,7 +2755,10 @@ function buildBulbs(){
 
       /* chase: position around the perimeter, not position in the DOM */
       const k = ordinal + (sd.flip ? (n - 1 - i) : i);
-      b.style.setProperty("--chase", Math.round(k / total * CHASE_SPREAD) + "ms");
+      const f = k / total;
+      b.style.setProperty("--chase", Math.round(f * CHASE_SPREAD) + "ms");
+      /* negative, so every bulb is already somewhere in its cycle on frame one */
+      b.style.setProperty("--orbit", Math.round(-(1 - f) * ORBIT_MS) + "ms");
       frag.appendChild(b);
       salt++;
     }
@@ -3323,13 +3354,14 @@ function renderArrival(){
 
    0.0s  the ask depresses and locks out, so a second click cannot start a
          second sequence
-   0.2s  the questions step down and fade; the room goes under a veil
-   0.5s  one lap of the marquee bulbs, above the veil, landing at 0.96s
-   0.95s the hero is painted and the veil lifts off it while the film's own
+   0.3s  the questions step down and fade; the room goes under a veil
+   0.7s  the page returns to the marquee under the veil and main is lifted
+   0.8s  one slow lap of the marquee bulbs, above the veil, landing at 2.02s
+   2.05s the hero is painted and the veil lifts off it while the film's own
          colour spreads out of the middle
-   1.2s  the poster pulls into focus and forward; the title enters line by line
-   1.5s  what the store says
-   1.8s  "Lock it in" goes live and the shelf arrives underneath
+   2.35s the poster pulls into focus and forward; the title enters line by line
+   2.68s what the store says
+   3.0s  "Lock it in" goes live and the shelf arrives underneath
 
    Every beat is a ticketed timeout. A callback whose ticket is stale does
    nothing, so a fast second click, a navigation, or a fresh request part-way
@@ -3397,9 +3429,9 @@ const Reveal = (function(){
       cards[i % cards.length].style.opacity = "0";
       i++;
       cards[i % cards.length].style.opacity = "1";
-      if(i < 7) at(78, step);
+      if(i < 14) at(120, step);
     };
-    at(78, step);
+    at(120, step);
   }
 
   return {
@@ -3446,7 +3478,7 @@ const Reveal = (function(){
       bill.classList.remove("rv-3","rv-4","rv-5");
       $("acc-wash").classList.remove("on");
 
-      at(200, function(){
+      at(300, function(){
         tonight.classList.add("rv-dim");
         dark.classList.remove("rv-lift");
         dark.classList.add("veil","speak");
@@ -3460,17 +3492,17 @@ const Reveal = (function(){
          page goes back to the marquee while the veil is opaque (nothing to
          see), and only then is main lifted so the sign comes up out of the
          dark already in frame. No jump is ever visible. */
-      at(440, function(){ window.scrollTo({top:0, behavior:"instant"}); });
-      at(460, function(){ document.body.classList.add("veiled"); });
+      at(680, function(){ window.scrollTo({top:0, behavior:"instant"}); });
+      at(700, function(){ document.body.classList.add("veiled"); });
 
-      at(500, chaseBulbs);
+      at(800, chaseBulbs);
 
       /* The lap lands at 0.96s, so the scene cannot change at 0.8s without
          cutting the back half of it off. The hero beats move out by 150ms to
          make room; the sequence still finishes on 1.8s. */
-      at(960, function(){ const mq = $("marquee"); if(mq) mq.classList.remove("chase"); });
+      at(2030, function(){ const mq = $("marquee"); if(mq) mq.classList.remove("chase"); });
 
-      at(950, function(){
+      at(2050, function(){
         opts.paint();                  /* scene swap and full render, still held back */
         dark.classList.remove("veil","speak");
         dark.classList.add("rv-lift");
@@ -3479,16 +3511,16 @@ const Reveal = (function(){
         tonight.classList.remove("rv-dim");
       });
 
-      at(1200, function(){ bill.classList.add("rv-3"); });
-      at(1500, function(){ bill.classList.add("rv-4"); });
-      at(1800, function(){
+      at(2350, function(){ bill.classList.add("rv-3"); });
+      at(2680, function(){ bill.classList.add("rv-4"); });
+      at(3000, function(){
         bill.classList.add("rv-5");
         dark.classList.remove("rv-lift");
         done();
       });
       /* once every transition has landed, the staging classes have no work
          left to do and the hero goes back to its plain resting state */
-      at(2300, function(){ bill.classList.remove("revealing","rv-3","rv-4","rv-5"); });
+      at(3560, function(){ bill.classList.remove("revealing","rv-3","rv-4","rv-5"); });
       return true;
     },
 

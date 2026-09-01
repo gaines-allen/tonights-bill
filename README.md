@@ -221,15 +221,34 @@ the critic score on purpose; all five are printed within a few inches of it.
 No model and no network call: every ingredient is in hand by the time a pick
 exists. *The story* stays below it as the plot synopsis.
 
+### The bulbs
+Each bulb is its own element, because a background-image strip can only pulse
+as a single object and that is the tell of a fake marquee. At rest two
+animations ride together without touching each other's properties: `shimmer`
+owns opacity, giving every bulb its own period, phase and floor; `orbit` owns
+the glow and the scale, walking one light round the whole border every eleven
+seconds. Each bulb's place in that lap is handed to it as a *negative* delay,
+so the wave is already mid-circuit on the first frame instead of ramping in.
+
 ### The reveal
-Asking for a pick runs one 1.8-second sequence, owned by a single controller
+Asking for a pick runs one 3-second sequence, owned by a single controller
 (`Reveal`). The ask depresses and locks out; the questions step down and the
-room goes under a veil; the marquee bulbs run one lap; the hero is painted and
-the veil lifts off it while the film's own colour spreads out of the middle;
-the poster pulls forward as the title enters a line at a time; the store's card
-arrives; then *Lock it in* goes live and the shelf appears underneath. Taking
-an alternate off the shelf is not a new recommendation, so it gets a ~400ms
-swap instead.
+room goes under a veil; the page returns to the marquee while that veil is
+opaque and `main` is lifted over it, so the sign comes up out of the dark
+already in frame; one slow lap of the bulbs runs the full border; the hero is
+painted and the veil lifts off it while the film's own colour flares and
+settles; the poster comes forward past its resting angle as the title lands a
+line at a time; the store's card arrives; then *Lock it in* goes live and the
+shelf appears underneath. Taking an alternate off the shelf is not a new
+recommendation, so it gets a ~400ms swap instead.
+
+The lap is the anticipation, so nothing is allowed to arrive on top of it — the
+hero waits for it to finish. Getting that wrong is most of what went wrong
+here: the chase was first timed at 160ms, which is a circuit of the sign in
+less than a blink, and it was fired at a marquee sitting a full screen above
+the fold, because three questions is about a thousand pixels of page. It ran
+correctly every time and could never be seen. `chaseBulbs()` now refuses to
+fire at an off-screen sign rather than animating into the void.
 
 Every beat is a ticketed timeout: a callback whose ticket is stale does
 nothing, so a fast second click, a navigation, or a fresh request part-way

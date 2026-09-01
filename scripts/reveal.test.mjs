@@ -180,52 +180,52 @@ console.log("\nthe full reveal");
 
   const to = (ms) => Clock.tick(ms - Clock.now);
 
-  to(200);
-  eq("0.2s the questions step down", tonight.classList.contains("rv-dim"), true);
-  eq("0.2s the room goes under", dark.classList.contains("veil"), true);
-  eq("0.2s nothing has been painted yet", painted, 0);
+  to(300);
+  eq("0.3s the questions step down", tonight.classList.contains("rv-dim"), true);
+  eq("0.3s the room goes under", dark.classList.contains("veil"), true);
+  eq("0.3s nothing has been painted yet", painted, 0);
 
   /* The chase shipped invisible: the ask sits ~1000px below the marquee, so
      by the time anyone presses it the sign is a full screen above the fold.
      The page must be back at the marquee, and main lifted, before 0.5s. */
-  to(440);
-  eq("0.44s the page returns to the marquee under the veil", scrolled(), 0);
-  eq("0.44s main is still down, so the scroll cannot be seen",
+  to(680);
+  eq("0.68s the page returns to the marquee under the veil", scrolled(), 0);
+  eq("0.68s main is still down, so the scroll cannot be seen",
      env.doc.body.classList.contains("veiled"), false);
 
   /* <main> is its own stacking context, so the marquee cannot rise over the
      veil on its own z-index — main itself has to be lifted, or the chase runs
      underneath an opaque sheet and is never seen. */
-  to(460);
-  eq("0.46s main lifts and the sign comes up out of the dark",
+  to(700);
+  eq("0.7s main lifts and the sign comes up out of the dark",
      env.doc.body.classList.contains("veiled"), true);
 
-  to(500);
-  ok("0.5s the bulbs are sent round", true, "");
+  to(800);
+  ok("0.8s the bulbs are sent round", true, "");
 
-  to(940);
-  eq("the lap is still running just before the scene changes", painted, 0);
+  to(2020);
+  eq("the hero waits for the whole lap", painted, 0);
 
-  to(950);
-  eq("0.95s the hero is painted", painted, 1);
-  eq("0.95s the veil lifts", dark.classList.contains("rv-lift"), true);
-  eq("0.95s the veil is gone", dark.classList.contains("veil"), false);
-  eq("0.95s main drops back down", env.doc.body.classList.contains("veiled"), false);
+  to(2050);
+  eq("2.05s the hero is painted", painted, 1);
+  eq("2.05s the veil lifts", dark.classList.contains("rv-lift"), true);
+  eq("2.05s the veil is gone", dark.classList.contains("veil"), false);
+  eq("2.05s main drops back down", env.doc.body.classList.contains("veiled"), false);
 
-  to(1200);
-  eq("1.2s poster and title enter", bill.classList.contains("rv-3"), true);
-  eq("1.2s the card is still held", bill.classList.contains("rv-4"), false);
+  to(2350);
+  eq("2.35s poster and title enter", bill.classList.contains("rv-3"), true);
+  eq("2.35s the card is still held", bill.classList.contains("rv-4"), false);
 
-  to(1500);
-  eq("1.5s the store card arrives", bill.classList.contains("rv-4"), true);
-  eq("1.5s the night is not yet actionable", bill.classList.contains("rv-5"), false);
+  to(2680);
+  eq("2.68s the store card arrives", bill.classList.contains("rv-4"), true);
+  eq("2.68s the night is not yet actionable", bill.classList.contains("rv-5"), false);
 
-  to(1800);
-  eq("1.8s lock-in and the shelf go live", bill.classList.contains("rv-5"), true);
-  eq("1.8s the ask is released", button.disabled, false);
-  eq("1.8s the sequence is finished", Reveal.busy(), false);
+  to(3000);
+  eq("3.0s lock-in and the shelf go live", bill.classList.contains("rv-5"), true);
+  eq("3.0s the ask is released", button.disabled, false);
+  eq("3.0s the sequence is finished", Reveal.busy(), false);
 
-  Clock.tick(600);
+  Clock.tick(900);
   eq("the staging classes clean themselves up", bill.className.indexOf("rv-") === -1, true);
 }
 
@@ -245,7 +245,7 @@ console.log("\nduplicate requests");
   eq("a second click mid-reveal is refused", second, false);
   eq("so is a third", third, false);
 
-  Clock.tick(2500);
+  Clock.tick(3800);
   eq("only one hero was ever painted", painted, 1);
 
   const later = Reveal.full({ rec: null, button, paint, done: () => {} });
@@ -269,7 +269,7 @@ console.log("\ncancelling mid-reveal");
   eq("cancelling releases the ask", button.disabled, false);
   eq("cancelling ends the sequence", Reveal.busy(), false);
 
-  Clock.tick(3000);
+  Clock.tick(4000);
   eq("no beat fires after a cancel", painted, 0);
 }
 
@@ -384,11 +384,30 @@ console.log("\nthe marquee chase");
      sixth of a second, which fired correctly and read as a flicker. */
   const spread = Number(/const CHASE_SPREAD = (\d+)/.exec(html)[1]);
   const flare  = Number(/\.marquee\.chase \.bulb\{animation:chase (\d+)ms/.exec(html)[1]);
-  ok(`the lap is long enough to read (${spread}ms travel + ${flare}ms flare)`,
-     spread >= 240 && spread + flare >= 400, "a lap under ~400ms reads as a flicker");
-  ok("and it still lands before the scene changes at 0.95s",
-     500 + spread + flare <= 970, `lap ends at ${500 + spread + flare}ms`);
+  ok(`the lap is slow enough to watch travel (${spread}ms + ${flare}ms flare)`,
+     spread >= 750 && spread + flare >= 1150,
+     "160ms, 260ms and 520ms all crossed the whole sign faster than the eye follows");
+  ok("the hero waits for it, rather than arriving over the top of it",
+     800 + spread + flare <= 2050, `lap ends at ${800 + spread + flare}ms`);
+  ok("the whole reveal lands on 3s",
+     /at\(3000, function\(\)\{\s*bill\.classList\.add\("rv-5"\)/.test(html));
   ok("it runs once and settles", /animation:chase \d+ms ease-out var\(--chase,0ms\) 1 both/.test(html));
+
+  /* the slow lap the sign runs on its own, with nothing happening */
+  const orbit = Number(/const ORBIT_MS = (\d+)/.exec(html)[1]);
+  ok(`the idle lap is much slower than the reveal lap (${orbit}ms vs ${spread + flare}ms)`,
+     orbit >= 8000 && orbit > (spread + flare) * 5);
+  ok("every bulb rides it, at rest, forever",
+     /orbit var\(--orbit-dur,11s\) linear var\(--orbit,0s\) infinite/.test(html));
+  ok("shimmer and orbit do not fight over the same properties",
+     /@keyframes shimmer\{\s*0%,100%\{opacity:var\(--hi,\.96\)\}\s*50%\s*\{opacity:var\(--lo,\.74\)\}\s*\}/.test(html),
+     "shimmer must own opacity only, or orbit's glow gets stamped on");
+  ok("each bulb gets its place in the lap as a negative delay",
+     html.includes('"--orbit", Math.round(-(1 - f) * ORBIT_MS)'),
+     "positive delays would ramp the wave in over a full cycle");
+  ok("the reveal lap supersedes the idle one",
+     /\.marquee\.chase \.bulb\{animation:chase/.test(html));
+  ok("reduced motion stops both", /\.bulb,\.marquee\.chase \.bulb\{animation:none/.test(html));
 
   /* the stacking fix itself */
   ok("main is lifted over the veil in CSS", /body\.veiled main\{z-index:81\}/.test(html));
@@ -442,7 +461,7 @@ console.log("\nthe ask is never dead");
   programme({ button: btn });
   eq("answering it lets the reveal run", Reveal.busy(), true);
   eq("and the button locks for the duration", btn.disabled, true);
-  Clock.tick(2500);
+  Clock.tick(3800);
   eq("and comes back afterwards", btn.disabled, false);
 
   ok("gate() no longer disables the ask for being unanswered",
