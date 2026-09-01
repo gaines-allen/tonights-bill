@@ -1527,14 +1527,14 @@ const RAW = [
 ["Alien: Romulus",2024,119,"horror|scifi","scary|visceral|practical|propulsive|visual","HUL","Fede Alvarez","Young scavengers board a derelict station that is not derelict.","adult",2,"R",80],
 ["Some Like It Hot",1959,121,"comedy|romance","comic|brisk|stylish|ironic","MAX","Billy Wilder","Two musicians witness a hit and join an all-female band to disappear.","all",2,"NR",95],
 ["Singin' in the Rain",1952,103,"musical|comedy|romance","uplifting|comic|cozy|visual|brisk","MAX","Kelly, Donen","Silent film hits the sound era and nobody's voice survives contact.","all",3,"G",100],
-["The Apartment",1960,125,"comedy|romance|drama","ironic|melancholy|dialogue|romantic|characterstudy","MAX","Billy Wilder","A clerk lends out his apartment for affairs and falls for one of the women.","teen",2,"NR",93],
+["The Apartment",1960,125,"comedy|romance|drama","comic|ironic|melancholy|dialogue|romantic|characterstudy","MAX","Billy Wilder","A clerk lends out his apartment for affairs and falls for one of the women.","teen",2,"NR",93],
 ["Vertigo",1958,128,"thriller|mystery|romance","slowburn|weird|visual|stylish|twisty","PCK","Alfred Hitchcock","A detective with a fear of heights follows a woman into an obsession.","teen",2,"PG",94],
 
-["The Wolf of Wall Street",2013,180,"comedy|crime|drama","propulsive|ironic|visceral|characterstudy|ensemble","PRV","Martin Scorsese","Three hours of appalling behavior, funded entirely by other people's money.","adult",3,"R",80],
+["The Wolf of Wall Street",2013,180,"comedy|crime|drama","comic|propulsive|ironic|visceral|characterstudy|ensemble","PRV","Martin Scorsese","Three hours of appalling behavior, funded entirely by other people's money.","adult",3,"R",80],
 ["Catch Me If You Can",2002,141,"crime|drama|comedy","brisk|stylish|comic|characterstudy|propulsive","PAR","Steven Spielberg","A teenage forger stays one hotel ahead of the agent who almost likes him.","teen",3,"PG-13",96],
 ["Ocean's Eleven",2001,116,"crime|comedy","brisk|stylish|ensemble|twisty|comic","MAX","Steven Soderbergh","Eleven men, three casinos, one night, and a lot of charm.","teen",3,"PG-13",83],
 ["Spotlight",2015,129,"drama|crime","grounded|dialogue|ensemble|slowburn|earnest","PRV","Tom McCarthy","Reporters do the work, document by document, and it is riveting.","adult",2,"R",97],
-["The Big Short",2015,130,"drama|comedy","ironic|propulsive|ensemble|cerebral|dialogue","PRV","Adam McKay","A handful of people see the crash coming and bet on it, unhappily.","adult",2,"R",89],
+["The Big Short",2015,130,"drama|comedy","comic|ironic|propulsive|ensemble|cerebral|dialogue","PRV","Adam McKay","A handful of people see the crash coming and bet on it, unhappily.","adult",2,"R",89],
 ["Michael Clayton",2007,119,"thriller|drama","slowburn|grounded|dialogue|bleak|characterstudy","MAX","Tony Gilroy","A law firm's fixer runs out of things he is willing to fix.","adult",1,"R",91],
 ["Drive",2011,100,"crime|thriller","stylish|slowburn|violent|visual|melancholy","PRV","Nicolas Winding Refn","A stunt driver moonlights as a wheelman and does one favor too many.","adult",2,"R",93],
 ["Baby Driver",2017,113,"action|crime|music","stylish|propulsive|brisk|visual|comic","NFX","Edgar Wright","Every chase cut to the song in his earbuds.","adult",2,"R",92],
@@ -1580,7 +1580,7 @@ const RAW = [
 ["Boyhood",2014,165,"drama","slowburn|grounded|earnest|melancholy|characterstudy","PRV","Richard Linklater","Twelve years, one actor, filmed as he actually grew.","teen",2,"R",97],
 ["Coco Before Chanel",2009,110,"drama","slowburn|characterstudy|stylish|grounded","PRV","Anne Fontaine","Before the name meant anything, she was a seamstress with a plan.","teen",1,"PG-13",65],
 ["The Zone of Interest",2023,105,"drama|war","bleak|slowburn|cerebral|auteur|grounded","MAX","Jonathan Glazer","A family's pleasant garden life, with the sound of the camp over the wall.","adult",1,"PG-13",93],
-["Poor Things",2023,141,"comedy|drama|fantasy","weird|visual|stylish|ironic|auteur","HUL","Yorgos Lanthimos","A woman is reanimated with an infant's brain and grows up at speed.","adult",2,"R",92],
+["Poor Things",2023,141,"comedy|drama|fantasy","comic|weird|visual|stylish|ironic|auteur","HUL","Yorgos Lanthimos","A woman is reanimated with an infant's brain and grows up at speed.","adult",2,"R",92],
 ["Anatomy of a Fall",2023,152,"drama|mystery|thriller","slowburn|dialogue|cerebral|grounded|twisty","HUL","Justine Triet","A man falls from a window and his wife's marriage goes on trial.","adult",1,"R",96],
 ["Aftersun",2022,102,"drama","slowburn|melancholy|visual|characterstudy|grounded","MAX","Charlotte Wells","A holiday in Turkey, remembered later, when she understands what she saw.","adult",1,"R",96],
 ["Everything Went Fine",2021,113,"drama","grounded|melancholy|dialogue|characterstudy","PRV","Francois Ozon","A daughter is asked by her father to help him die.","adult",1,"NR",88],
@@ -1738,16 +1738,27 @@ function rateRank(f){
   return (r === undefined) ? NR_FALLBACK[f.k] : r;
 }
 
-/* Moods are the consumer-facing way in. Each one is just a bundle of the
-   attribute tags the scorer already understands, so nothing about the taste
-   maths changes — a mood simply adds a second thing to match against. */
+/* Moods are the consumer-facing way in. Each one is a bundle of the attribute
+   tags the scorer already understands, so nothing about the taste maths
+   changes — a mood simply adds a second thing to match against.
+
+   Two of them are genre asks wearing atmosphere clothes, and those carry a
+   `need`. "Make me laugh" is not a request for a film with jokes in it —
+   Die Hard has jokes in it, and carries `comic` for exactly that reason —
+   it is a request for a comedy. Scoring alone could never keep Die Hard off
+   that shelf, because `comic` is a true thing to say about it. So `need` is
+   enforced as a hard filter beside runtime and rating rather than as weight.
+   Everything else here asks about texture, not category, and stays soft. */
 const MOODS = [
   {k:"easy",    n:"Easy watch",      sub:"Nothing heavy", say:"an easy watch",
    up:["brisk","comic","uplifting","cozy","propulsive"], down:["slowburn","bleak","cerebral"]},
   {k:"laugh",   n:"Make me laugh",   sub:"Actually funny", say:"something funny",
-   up:["comic","ironic","brisk","ensemble"],             down:["bleak","slowburn"]},
+   need:["comedy"],
+   up:["comic","ironic","brisk"],
+   down:["bleak","melancholy","slowburn"]},
   {k:"guess",   n:"Keep me guessing",sub:"Twists and turns", say:"something twisty",
-   up:["twisty","cerebral","propulsive","mystery"],      down:["cozy"]},
+   up:["twisty","cerebral","propulsive","mystery","thriller"],
+   down:["cozy","earnest"]},
   {k:"big",     n:"I want a banger", sub:"Scale and spectacle", say:"a banger",
    up:["spectacle","epic","practical","propulsive","visual"], down:["dialogue"]},
   {k:"weird",   n:"Get weird",       sub:"Off the beaten path", say:"something strange",
@@ -1755,7 +1766,9 @@ const MOODS = [
   {k:"acting",  n:"Great acting",    sub:"People, not plot", say:"great acting",
    up:["characterstudy","dialogue","ensemble","earnest"],down:["spectacle"]},
   {k:"scream",  n:"I want to scream", sub:"Lights off, door locked", say:"something scary",
-   up:["scary","horror","visceral","weird"],             down:["cozy","uplifting"]},
+   need:["horror","thriller"],
+   up:["scary","horror","visceral","weird"],
+   down:["cozy","uplifting","comic"]},
   {k:"dark",    n:"Dark & intense",  sub:"Turn the lights off", say:"something dark",
    up:["bleak","visceral","violent","slowburn","scary"], down:["comic","cozy","uplifting"]},
   {k:"comfort", n:"Comfort movie",   sub:"Something kind", say:"a comfort movie",
@@ -1768,6 +1781,18 @@ const MOODS = [
    up:[], down:[], critics:88}
 ];
 const MOOD_BY = {}; MOODS.forEach(function(m){ MOOD_BY[m.k] = m; });
+
+/* The selected moods that rule films out rather than merely rank them. Several
+   moods can be on at once, and each one's `need` has to be met — asking to
+   laugh and to scream is a request for horror-comedy, not for either. */
+function moodGates(){
+  const out = [];
+  S.moods.forEach(function(k){
+    const m = MOOD_BY[k];
+    if(m && m.need) out.push(m);
+  });
+  return out;
+}
 
 /* Whichever bar is higher wins — the slider in Fine Tune still rules. */
 function minCritics(){
@@ -1790,7 +1815,16 @@ function moodVector(){
 }
 
 /* Same rarity-weighted coverage idea the taste profile uses: how much of what
-   tonight is asking for does this film actually carry? */
+   tonight is asking for does this film actually carry?
+
+   The gain on coverage used to be 1.6, which put the ceiling at 62% — a film
+   carrying two of the three things a laugh night asks for scored exactly the
+   same as one carrying all three, and every good answer arrived tied. Ranking
+   then fell through to the room and fame tiebreaks, which is how a PG cartoon
+   holding a mis-derived `cerebral` tag came to outrank Airplane! for someone
+   sitting on their own asking to laugh. At a gain of 1, the score reaches its
+   maximum when the film carries everything tonight asked for and not a moment
+   sooner, so the top of the list is ordered by fit again. */
 function moodScore(f, v){
   const keys = Object.keys(v);
   if(!keys.length) return 0.5;
@@ -1799,11 +1833,15 @@ function moodScore(f, v){
   f.a.forEach(function(a){ if(v[a]) hit += v[a] * idfA(a); });
   f.g.forEach(function(g){ if(v[g]) hit += v[g] * idfA(g) * 0.6; });
   const cov = mass ? hit / mass : 0;
-  return clamp((cov * 1.6 + 1) / 2, 0, 1);
+  return clamp((cov + 1) / 2, 0, 1);
 }
 
+/* Every genre the catalog actually uses. A genre present in the data but
+   missing here is unreachable: nothing can filter to it, and the "none of
+   them selected" explanation names a genre the viewer was never offered. */
 const GENRES = ["action","adventure","animation","comedy","crime","documentary","drama","fantasy",
-                "horror","musical","mystery","romance","scifi","thriller","war","family"];
+                "horror","music","musical","mystery","romance","scifi","thriller","war",
+                "western","family"];
 const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
 function gLabel(g){ return GENRE_LABEL[g] || g.charAt(0).toUpperCase()+g.slice(1); }
 
@@ -1850,6 +1888,23 @@ function applyEnrichment(payload){
   if(payload._meta && payload._meta.logos){
     Object.keys(payload._meta.logos).forEach(function(c){ SVC_LOGO[c] = payload._meta.logos[c]; });
   }
+  /* Tags a film certified for children cannot carry. The scan derives
+     attributes from genre and keywords, where a cartoon heist reads as violent
+     and a film about monsters reads as scary — so Fantastic Mr. Fox arrived
+     tagged `violent` and Monsters, Inc. `scary`. Those two tags are what
+     Comfort movie scores against, so the mistake buries the exact films that
+     night is asking for. The scan no longer derives them for a G or PG
+     certificate; this repeats the rule at the door so a catalog.json written
+     before that fix is corrected on load rather than after the next refresh.
+     Curated rows never pass through here — a hand-tagged film knows how it
+     plays, and Coraline is meant to be scary. */
+  const HARSH = ["violent","visceral","bleak","scary"];
+  function softenForKids(attrs, mpaa){
+    if(mpaa !== "G" && mpaa !== "PG") return attrs;
+    const kept = attrs.filter(function(a){ return HARSH.indexOf(a) === -1; });
+    return kept.length >= 3 ? kept : attrs;
+  }
+
   /* Titles the nightly scan found on the services. The curated catalog wins any
      collision: a hand-tagged film knows how it plays, a derived one guesses. */
   let shelved = 0;
@@ -1858,7 +1913,7 @@ function applyEnrichment(payload){
       if(!e || !e.t || BY_TITLE[e.t] || !(e.svcs && e.svcs.length)) return;
       FILMS.push({
         id: FILMS.length, t:e.t, y:e.y, r:e.r,
-        g: e.g || [], a: e.a || [],
+        g: e.g || [], a: softenForKids(e.a || [], e.mpaa || "NR"),
         s: e.svcs[0], svcs: e.svcs.slice(), svcChecked: true,
         d: e.d || "Unknown", h: e.h || "", k: e.k || "teen",
         pop: e.pop || 1, mpaa: e.mpaa || "NR",
@@ -2028,6 +2083,10 @@ function checkFilters(f){
   const on = f.svcs.filter(function(c){ return S.svc[c]; });
   const genreOK = !S.genres.length || f.g.some(function(g){ return S.genres.indexOf(g)>-1; });
   const critBar = minCritics();
+  const gates = moodGates();
+  const gateMiss = gates.filter(function(m){
+    return !f.g.some(function(g){ return m.need.indexOf(g) > -1; });
+  });
   return [
     {k:"clock", label:"Runtime", pass: f.r <= S.time,
      detail: f.r <= S.time
@@ -2049,6 +2108,13 @@ function checkFilters(f){
      detail: !S.genres.length ? f.g.map(gLabel).join(", ") + ", no genre filter"
        : (genreOK ? "matches " + f.g.filter(function(g){ return S.genres.indexOf(g)>-1; }).map(gLabel).join(", ")
                   : f.g.map(gLabel).join(", ") + ", none of them selected")},
+    {k:"mood", label:"Tonight's mood", pass: gateMiss.length === 0,
+     detail: !gates.length ? f.g.map(gLabel).join(", ") + ", no mood that rules films out"
+       : (gateMiss.length === 0
+          ? f.g.map(gLabel).join(", ") + " is what " + gates.map(function(m){ return "\u201c" + m.n.toLowerCase() + "\u201d"; }).join(" and ") + " asks for"
+          : f.g.map(gLabel).join(", ") + " \u2014 " + gateMiss.map(function(m){
+              return "\u201c" + m.n.toLowerCase() + "\u201d wants " + m.need.map(gLabel).join(" or ");
+            }).join(", "))},
     {k:"service", label:"Where it streams", pass: on.length > 0,
      detail: on.length ? "on " + on.map(function(c){ return SVC_NAME[c]; }).join(", ")
        : (f.svcs.length ? "only on " + f.svcs.map(function(c){ return SVC_NAME[c]; }).join(", ") + ", which you don't have"
@@ -3219,6 +3285,7 @@ function toggleWhy(rec, btn){
     if(c.k === "rating"  && !S.rate) return;
     if(c.k === "critics" && !minCritics()) return;
     if(c.k === "genre"   && !S.genres.length) return;
+    if(c.k === "mood"    && !moodGates().length) return;
     const li = document.createElement("li");
     li.textContent = c.detail.charAt(0).toUpperCase() + c.detail.slice(1);
     ul2.appendChild(li);
@@ -3276,7 +3343,13 @@ function darkHouse(){
   relax.appendChild(el("span","arw","→"));
   relax.addEventListener("click", function(){
     S.genres = []; S.rate = 0; S.minRT = 0;
-    S.moods = S.moods.filter(function(k){ return k !== "great"; });
+    /* Drop the moods that rule films out as well as the critic bar. A mood
+       gate can empty the shelf on its own, so a loosener that cannot clear
+       one is a button that does nothing. */
+    S.moods = S.moods.filter(function(k){
+      const m = MOOD_BY[k];
+      return k !== "great" && !(m && m.need);
+    });
     if(S.time < 150){ S.time = 150; S.timePreset = "long"; $("time-range").value = 150; syncRuntime(); }
     save();
     renderRatingTune(); renderGenreTune(); renderTimes(); renderNights(); renderMoodTune();

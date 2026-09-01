@@ -304,14 +304,34 @@ const TMDB_GENRE = {
   53:"thriller", 10752:"war", 37:"western"
 };
 
-/* One or two attributes a genre can be trusted to imply on its own. */
+/* One or two attributes a genre can be trusted to imply on its own — and the
+   test is that it holds for every film in the bucket, not most of them.
+   Two entries used to fail it and have been dropped. `crime` filed Despicable
+   Me, The Bad Guys and Fantastic Mr. Fox as violent, because a cartoon heist
+   is still a heist. `scifi` called Sonic the Hedgehog 2 cerebral. Both genres
+   are about subject matter and say nothing reliable about how a film plays,
+   which is the only thing an attribute is allowed to claim. */
 const GENRE_ATTRS = {
   horror:["scary"], comedy:["comic"], romance:["romantic"], documentary:["grounded"],
   war:["visceral"], thriller:["propulsive"], action:["propulsive"], animation:["visual"],
-  family:["cozy"], crime:["violent"], musical:["uplifting"], drama:["characterstudy"],
-  mystery:["twisty"], fantasy:["visual"], scifi:["cerebral"], adventure:["spectacle"],
+  family:["cozy"], musical:["uplifting"], drama:["characterstudy"],
+  mystery:["twisty"], fantasy:["visual"], adventure:["spectacle"],
   western:["grounded"]
 };
+
+/* Tags a film certified for children cannot carry, whatever its keywords say.
+   Monsters, Inc. is a G-rated film about monsters, so "monster" earns it
+   `scary`; Sonic the Hedgehog 2 picks up `violent` from a revenge beat. These
+   are not cosmetic blemishes. `scary` and `violent` are exactly what Comfort
+   movie scores against, so a bogus tag buries the films that night is for —
+   Fantastic Mr. Fox sat 417th on its own shelf. Curated rows are never
+   touched by this: a hand-tagged film knows how it plays. */
+const HARSH = ["violent", "visceral", "bleak", "scary"];
+const KID_CERTS = ["G", "PG"];
+export function softenForKids(attrs, cert) {
+  if (KID_CERTS.indexOf(cert) === -1) return attrs;
+  return attrs.filter((a) => HARSH.indexOf(a) === -1);
+}
 
 /* TMDB keywords are written by people, which makes them the best signal here
    for how a film actually plays rather than what it is filed under. */
@@ -342,7 +362,7 @@ const KEYWORD_ATTRS = [
  * Everything a discovered film's attribute list is allowed to come from.
  * Kept pure so it can be tested without touching the network.
  */
-export function deriveAttrs({ genres = [], keywords = [], runtime = 0, dirAttrs = [] }) {
+export function deriveAttrs({ genres = [], keywords = [], runtime = 0, dirAttrs = [], cert = null }) {
   const out = [];
   const add = (a) => { if (a && out.indexOf(a) === -1) out.push(a); };
 
@@ -355,7 +375,11 @@ export function deriveAttrs({ genres = [], keywords = [], runtime = 0, dirAttrs 
      forward, which is how a new Villeneuve lands as visual rather than generic. */
   dirAttrs.slice(0, 2).forEach(add);
 
-  return out.length >= 3 ? out.slice(0, 6) : null;
+  /* Softened before the three-tag floor is applied, so a children's film that
+     only cleared the bar on tags it should never have had is left on the shelf
+     rather than shelved on the strength of them. */
+  const kept = softenForKids(out, cert);
+  return kept.length >= 3 ? kept.slice(0, 6) : null;
 }
 
 export function audienceFrom(cert, genres = []) {
@@ -451,16 +475,17 @@ async function shelfRecord(id, dirLookup) {
 
   const keywords = (d.keywords?.keywords || []).map((k) => k.name);
   const director = (d.credits?.crew || []).find((c) => c.job === "Director")?.name || "";
+  const cert = usCertification(d.release_dates);
   const attrs = deriveAttrs({
     genres, keywords, runtime,
-    dirAttrs: dirLookup[director] || []
+    dirAttrs: dirLookup[director] || [],
+    cert
   });
   if (!attrs) return null;
 
   const overview = trimOverview(d.overview || "");
   if (!overview) return null;
 
-  const cert = usCertification(d.release_dates);
   return {
     t: d.title,
     y: year,

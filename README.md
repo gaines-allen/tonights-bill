@@ -63,6 +63,31 @@ ranking is fuzzy. The two rating controls squeeze from opposite ends:
 `hardPass()` is the single predicate for "does this fit tonight". Both the bill
 and the taste grid call it, so the two can never disagree on screen.
 
+**Two moods are cutoffs as well.** Most of them ask about texture — *Something
+beautiful*, *Dark & intense*, *Comfort movie* — and stay pure scoring weight.
+But *Make me laugh* and *I want to scream* are asking for a genre, so they
+carry a `need` that is enforced in `checkFilters()` alongside runtime and
+rating. The case that forced it: *Make me laugh* used to return Die Hard,
+Goodfellas and Pulp Fiction, all of which carry `comic` or `ironic` honestly —
+Die Hard *does* have jokes in it. No amount of scoring keeps a film off a list
+when the tag it scores on is true; only a filter does. Several gated moods
+compose, and each `need` has to be met, so asking to laugh *and* scream is a
+request for horror-comedy rather than for either.
+
+Because a mood can now empty the shelf on its own, **Loosen the night** clears
+the gating moods along with the critic bar. A recovery button that cannot undo
+the thing that emptied the room is a button that does nothing.
+
+### Coverage has to discriminate
+
+`moodScore()` ran coverage through a gain of 1.6, which put its ceiling at 62%
+— a film carrying two of the three things a laugh night asks for scored
+*identically* to one carrying all three. Every good answer arrived tied, and
+the room and fame tiebreaks decided the night instead, which is how a PG
+cartoon holding a mis-derived `cerebral` tag outranked *Airplane!* for someone
+sitting alone asking to laugh. At a gain of 1 the score peaks when the film
+carries everything tonight asked for and not a moment sooner.
+
 ## Editing the catalog
 
 Films live in the `RAW` array as positional rows:
@@ -110,8 +135,28 @@ its built-in data, replacing:
 | streaming availability | TMDB watch providers (JustWatch), US, subscription only |
 | poster art | TMDB images — no API key needed to *display* them |
 
-The attribute tags, hooks, fame and audience calls stay hand-authored. No API
-knows how a film plays, and that is what the recommender actually scores on.
+The attribute tags, hooks, fame and audience calls stay hand-authored for the
+curated catalog. No API knows how a film plays, and that is what the recommender
+actually scores on.
+
+Titles the nightly scan discovers are a separate shelf, and their attributes
+*are* derived — from TMDB's human-written keywords, the genres, the runtime and
+the director. Two genre implications had to go, because the test for one is
+that it holds for every film in the bucket rather than most of them. `crime`
+implied `violent`, which filed Despicable Me, The Bad Guys and Fantastic Mr. Fox
+as violent — a cartoon heist is still a heist. `scifi` implied `cerebral`, which
+called Sonic the Hedgehog 2 cerebral. Both genres describe subject matter and
+say nothing dependable about how a film plays, which is the only claim an
+attribute is allowed to make.
+
+A G or PG certificate now also refuses the harsh tags outright. Monsters, Inc.
+is a G-rated film about monsters, so "monster" earned it `scary`. That is not
+cosmetic: `scary` and `violent` are exactly what *Comfort movie* scores
+against, so the bogus tag buried the films that night is for — Fantastic Mr. Fox
+sat 417th on its own shelf. The page repeats the same rule as it merges, so a
+`catalog.json` written before this fix is corrected on load rather than a
+refresh later. Curated rows never pass through it: Coraline is meant to be
+scary, and a hand-tagged film knows how it plays.
 
 **The key never reaches the page.** Enrichment happens ahead of time and only
 its output ships, so this stays a static site with nothing to leak. The included
@@ -271,10 +316,11 @@ themselves on error and fall back to a typographic poster.
 
 `checkFilters()` is the single source of truth for "does this fit tonight", and
 it returns a per-filter pass/fail record with a written reason for each —
-runtime, room, rating floor, critic bar, genre, and where it streams
-("2h 25m runs past your 2h 20m — 5m too long"). `hardPass()` and `fitsTonight()`
-are both derived from it, so an explanation can never drift from the behaviour
-it describes.
+runtime, room, rating floor, critic bar, genre, tonight's mood, and where it
+streams ("2h 25m runs past your 2h 20m — 5m too long"; "Action, Thriller —
+“make me laugh” wants Comedy"). `hardPass()` and `fitsTonight()` are both
+derived from it, so an explanation can never drift from the behaviour it
+describes.
 
 The passing half of that record is what *Why this tonight* shows. The failing half is
 summarised under the bill: how many titles would have made it but sit on a
@@ -287,9 +333,13 @@ to debug in a recommender, because nothing appears to be wrong.
 ```bash
 node scripts/enrich.test.mjs   # transforms: service mapping, cert, providers, matching
 node scripts/merge.test.mjs    # merge safety against the real index.html catalog
+node scripts/moods.test.mjs    # mood calibration: the gates, the vocabulary, the ranking
 ```
 
-Both run offline — no API key, no network.
+All three run offline — no API key, no network. `moods.test.mjs` reads the
+catalog and the mood table straight out of `index.html`, so it fails on a
+mistyped tag, a genre present in the data but missing from the filters, or a
+laugh night that starts returning Die Hard again.
 
 ## Known limitations
 

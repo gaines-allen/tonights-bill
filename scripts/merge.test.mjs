@@ -72,5 +72,23 @@ eq("invalid certification ignored", BY_TITLE["Sinners"].mpaa, "R");
 eq("negative runtime ignored", BY_TITLE["Sinners"].r > 0, true);
 eq("empty providers keeps built-in", BY_TITLE["Sinners"].svcs, ["MAX"]);
 
+console.log("\nshelf rows are softened for a children's certificate");
+applyEnrichment({ films: [], shelf: [
+  { t:"Cartoon Heist", y:2021, r:95, g:["animation","comedy","crime"],
+    a:["violent","comic","cozy","visual"], svcs:["NFX"], mpaa:"PG", rt:80 },
+  { t:"Monster Factory", y:2001, r:92, g:["animation","family"],
+    a:["scary","visual","comic","cozy"], svcs:["NFX"], mpaa:"G", rt:90 },
+  { t:"Grown Up Business", y:2019, r:130, g:["crime","thriller"],
+    a:["violent","bleak","slowburn"], svcs:["NFX"], mpaa:"R", rt:85 },
+  { t:"Only Harsh Tags", y:2020, r:100, g:["horror"],
+    a:["scary","violent","bleak"], svcs:["NFX"], mpaa:"PG", rt:70 }
+]});
+eq("a PG cartoon heist is not violent", BY_TITLE["Cartoon Heist"].a, ["comic","cozy","visual"]);
+eq("a G film about monsters is not scary", BY_TITLE["Monster Factory"].a, ["visual","comic","cozy"]);
+eq("an R row is untouched", BY_TITLE["Grown Up Business"].a, ["violent","bleak","slowburn"]);
+eq("softening never empties a row", BY_TITLE["Only Harsh Tags"].a, ["scary","violent","bleak"]);
+eq("a hand-tagged scare survives — Coraline is meant to be scary",
+   BY_TITLE["Coraline"].a.indexOf("scary") > -1, true);
+
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail ? 1 : 0);

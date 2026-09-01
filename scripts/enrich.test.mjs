@@ -7,7 +7,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { serviceCode, parseCatalog, pickMatch, usCertification, flatrateCodes, logoPaths, rtFromOmdb,
-         deriveAttrs, audienceFrom, fameFrom, directorAttrs,
+         deriveAttrs, softenForKids, audienceFrom, fameFrom, directorAttrs,
          readOmdbPayload } from "./enrich.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -85,6 +85,31 @@ eq("caps at six",
                  runtime:95 }).length <= 6, true);
 eq("a known director lends his read",
    deriveAttrs({ genres:["drama"], keywords:["grief"], runtime:120, dirAttrs:["auteur","visual"] }).indexOf("auteur") > -1, true);
+
+console.log("\na children's certificate cannot carry a harsh tag");
+eq("G strips scary — Monsters, Inc. is not a horror film",
+   softenForKids(["scary","visual","comic","cozy"], "G"), ["visual","comic","cozy"]);
+eq("PG strips violent — a cartoon heist is not violence",
+   softenForKids(["violent","practical","visual","comic","cozy"], "PG"),
+   ["practical","visual","comic","cozy"]);
+eq("R is left exactly as it was",
+   softenForKids(["violent","bleak","slowburn"], "R"), ["violent","bleak","slowburn"]);
+eq("an unrated film is left alone rather than guessed at",
+   softenForKids(["bleak","cerebral","propulsive"], "NR"), ["bleak","cerebral","propulsive"]);
+eq("crime no longer implies violence",
+   deriveAttrs({ genres:["crime","comedy","family"], keywords:["heist"], runtime:95 })
+     .indexOf("violent"), -1);
+eq("science fiction no longer implies cerebral",
+   deriveAttrs({ genres:["scifi","action","family"], keywords:["battle"], runtime:99 })
+     .indexOf("cerebral"), -1);
+eq("a PG film loses scary even when the keywords earn it",
+   (deriveAttrs({ genres:["family","animation","comedy"], keywords:["monster","ghost"],
+                  runtime:92, cert:"PG" }) || []).indexOf("scary"), -1);
+eq("softening below three tags leaves the film off the shelf",
+   deriveAttrs({ genres:["horror"], keywords:["gore","slasher"], runtime:120, cert:"PG" }), null);
+eq("an R-rated horror still earns its tags",
+   deriveAttrs({ genres:["horror"], keywords:["gore","haunting"], runtime:95, cert:"R" })
+     .sort(), ["brisk","scary","violent"].sort());
 
 eq("PG-13 is a teen room", audienceFrom("PG-13", ["action"]), "teen");
 eq("R is grown-ups", audienceFrom("R", ["drama"]), "adult");
