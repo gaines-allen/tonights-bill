@@ -174,28 +174,39 @@ console.log("\nthe full reveal");
   eq("0.0s the ask is disabled", button.disabled, true);
   eq("0.0s the hero is held back", bill.classList.contains("revealing"), true);
 
-  Clock.tick(200);
+  const to = (ms) => Clock.tick(ms - Clock.now);
+
+  to(200);
   eq("0.2s the questions step down", tonight.classList.contains("rv-dim"), true);
   eq("0.2s the room goes under", dark.classList.contains("veil"), true);
+  /* The regression that shipped: <main> is its own stacking context, so the
+     marquee cannot rise over the veil on its own z-index. main has to be
+     lifted, or the chase runs underneath an opaque sheet and is never seen. */
+  eq("0.2s main is lifted so the marquee clears the veil",
+     env.doc.body.classList.contains("veiled"), true);
   eq("0.2s nothing has been painted yet", painted, 0);
 
-  Clock.tick(300);   /* 0.5s */
-  ok("0.5s the bulbs are sent round", true, "");   /* chase asserted below on the real marquee */
+  to(500);
+  ok("0.5s the bulbs are sent round", true, "");
 
-  Clock.tick(300);   /* 0.8s */
-  eq("0.8s the hero is painted", painted, 1);
-  eq("0.8s the veil lifts", dark.classList.contains("rv-lift"), true);
-  eq("0.8s the veil is gone", dark.classList.contains("veil"), false);
+  to(940);
+  eq("the lap is still running just before the scene changes", painted, 0);
 
-  Clock.tick(300);   /* 1.1s */
-  eq("1.1s poster and title enter", bill.classList.contains("rv-3"), true);
-  eq("1.1s the card is still held", bill.classList.contains("rv-4"), false);
+  to(950);
+  eq("0.95s the hero is painted", painted, 1);
+  eq("0.95s the veil lifts", dark.classList.contains("rv-lift"), true);
+  eq("0.95s the veil is gone", dark.classList.contains("veil"), false);
+  eq("0.95s main drops back down", env.doc.body.classList.contains("veiled"), false);
 
-  Clock.tick(300);   /* 1.4s */
-  eq("1.4s the store card arrives", bill.classList.contains("rv-4"), true);
-  eq("1.4s the night is not yet actionable", bill.classList.contains("rv-5"), false);
+  to(1200);
+  eq("1.2s poster and title enter", bill.classList.contains("rv-3"), true);
+  eq("1.2s the card is still held", bill.classList.contains("rv-4"), false);
 
-  Clock.tick(400);   /* 1.8s */
+  to(1500);
+  eq("1.5s the store card arrives", bill.classList.contains("rv-4"), true);
+  eq("1.5s the night is not yet actionable", bill.classList.contains("rv-5"), false);
+
+  to(1800);
   eq("1.8s lock-in and the shelf go live", bill.classList.contains("rv-5"), true);
   eq("1.8s the ask is released", button.disabled, false);
   eq("1.8s the sequence is finished", Reveal.busy(), false);
@@ -240,6 +251,7 @@ console.log("\ncancelling mid-reveal");
   Reveal.cancel();                       /* the viewer navigates away */
 
   eq("cancelling clears the staging", bill.classList.contains("revealing"), false);
+  eq("cancelling puts main back down", env.doc.body.classList.contains("veiled"), false);
   eq("cancelling releases the ask", button.disabled, false);
   eq("cancelling ends the sequence", Reveal.busy(), false);
 
@@ -350,6 +362,40 @@ console.log("\nwhat the store says");
 
   eq("the oxford list reads correctly", listOf(["a", "b", "c"]), "a, b, and c");
   eq("two items take no comma", listOf(["a", "b"]), "a and b");
+}
+
+console.log("\nthe marquee chase");
+{
+  /* The chase used to travel the whole border in 160ms — a full lap in a
+     sixth of a second, which fired correctly and read as a flicker. */
+  const spread = Number(/const CHASE_SPREAD = (\d+)/.exec(html)[1]);
+  const flare  = Number(/\.marquee\.chase \.bulb\{animation:chase (\d+)ms/.exec(html)[1]);
+  ok(`the lap is long enough to read (${spread}ms travel + ${flare}ms flare)`,
+     spread >= 240 && spread + flare >= 400, "a lap under ~400ms reads as a flicker");
+  ok("and it still lands before the scene changes at 0.95s",
+     500 + spread + flare <= 970, `lap ends at ${500 + spread + flare}ms`);
+  ok("it runs once and settles", /animation:chase \d+ms ease-out var\(--chase,0ms\) 1 both/.test(html));
+
+  /* the stacking fix itself */
+  ok("main is lifted over the veil in CSS", /body\.veiled main\{z-index:81\}/.test(html));
+  ok("the veil sits below that", /\.dark\{[^}]*z-index:80/.test(html));
+  ok("the controller raises and lowers it",
+     html.includes('document.body.classList.add("veiled")') &&
+     html.includes('document.body.classList.remove("veiled")'));
+}
+
+console.log("\nthe poster on the hero");
+{
+  const f = /\.bill-poster \.poster img\{filter:([^}]+)\}/.exec(html)[1];
+  const brightness = Number(/brightness\(([\d.]+)\)/.exec(f)[1]);
+  const saturate   = Number(/saturate\(([\d.]+)\)/.exec(f)[1]);
+  ok(`brightness is up 15-20% (${Math.round((brightness - 1) * 100)}%)`,
+     brightness >= 1.15 && brightness <= 1.20);
+  ok(`saturation is raised enough to see (${Math.round((saturate - 1) * 100)}%)`,
+     saturate >= 1.2, "1.09 was arithmetically a raise and visually nothing");
+  ok("the poster starts back and blurred, then comes into focus",
+     /#s-bill\.revealing \.bill-poster\{[^}]*filter:blur/.test(html) &&
+     /#s-bill\.revealing\.rv-3 \.bill-poster\{[^}]*filter:none/.test(html));
 }
 
 console.log("\nthe title stagger");

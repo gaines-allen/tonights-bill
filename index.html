@@ -257,13 +257,21 @@ main{position:relative;z-index:10}
 
 /* One lap when the pick lands. --chase is the bulb's position around the
    perimeter, so the flare travels top -> right -> bottom -> left and stops. */
-.marquee.chase .bulb{animation:chase 180ms ease-out var(--chase,0ms) 1 both}
+.marquee.chase .bulb{animation:chase 200ms ease-out var(--chase,0ms) 1 both}
 @keyframes chase{
   0%  {opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);transform:scale(1)}
   34% {opacity:1;box-shadow:0 0 0 1.4px rgba(255,232,186,.95), 0 0 18px 4px rgba(255,214,150,1);transform:scale(1.55)}
   100%{opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);transform:scale(1)}
 }
-/* the marquee is the one thing that stays lit while the page goes under */
+/* The marquee is the one thing that stays lit while the page goes under.
+
+   A z-index on the marquee alone cannot do this: <main> is position:relative
+   with z-index:10, which makes it a stacking context, so every z-index inside
+   it is sealed under 10 and the veil at 80 paints over the lot. Raising main
+   itself is what actually works — and it costs nothing, because under .rv-dim
+   the questionnaire has already taken itself to 12% and the night to zero. The
+   only thing left standing above the veil is the marquee. */
+body.veiled main{z-index:81}
 .rv-dim .marquee{position:relative;z-index:81}
 
 .board{
@@ -936,8 +944,10 @@ a.svc-chip:hover .svc-go{opacity:1}
   box-shadow:0 24px 44px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5),
     0 0 34px -6px var(--acc-glow, transparent);
 }
-/* TMDB artwork is graded for a white page and goes muddy on this one */
-.bill-poster .poster img{filter:brightness(1.18) saturate(1.09)}
+/* TMDB artwork is graded for a white page and goes muddy on this one. The
+   saturation was at 1.09, which is a nine percent lift — arithmetically a
+   raise and visually nothing at all. */
+.bill-poster .poster img{filter:brightness(1.18) saturate(1.28) contrast(1.04)}
 
 /* --------------------------------------------------------------------------
    LOCKING IT IN
@@ -2633,7 +2643,10 @@ function poster(f, sizes, eager, alt){
    flare travels the perimeter in DOM-independent order and stops.
    ========================================================================== */
 const BULB_PITCH = 29;      /* target spacing in px; fitted to each side */
-const CHASE_SPREAD = 160;   /* ms for the flare to travel the whole border */
+/* How long the flare takes to travel the whole border. This was 160ms, which
+   is a full lap in a sixth of a second — the mechanism fired, but it read as a
+   flicker rather than a lap. The hero beats below give it room to land. */
+const CHASE_SPREAD = 260;
 let bulbLayout = "";
 
 /* Deterministic jitter. The same marquee shimmers the same way on every visit,
@@ -3256,11 +3269,11 @@ function renderArrival(){
    0.0s  the ask depresses and locks out, so a second click cannot start a
          second sequence
    0.2s  the questions step down and fade; the room goes under a veil
-   0.5s  one lap of the marquee bulbs, above the veil
-   0.8s  the hero is painted and the veil lifts off it while the film's own
+   0.5s  one lap of the marquee bulbs, above the veil, landing at 0.96s
+   0.95s the hero is painted and the veil lifts off it while the film's own
          colour spreads out of the middle
-   1.1s  the poster pulls into focus and forward; the title enters line by line
-   1.4s  what the store says
+   1.2s  the poster pulls into focus and forward; the title enters line by line
+   1.5s  what the store says
    1.8s  "Lock it in" goes live and the shelf arrives underneath
 
    Every beat is a ticketed timeout. A callback whose ticket is stale does
@@ -3297,6 +3310,7 @@ const Reveal = (function(){
   function stages(){
     $("s-bill").classList.remove("revealing","rv-3","rv-4","rv-5");
     $("s-tonight").classList.remove("rv-dim");
+    document.body.classList.remove("veiled");
     const mq = $("marquee"); if(mq) mq.classList.remove("chase");
     const d = $("dark");
     d.classList.remove("veil","rv-lift","down","dealing","speak","lift");
@@ -3379,6 +3393,7 @@ const Reveal = (function(){
 
       at(200, function(){
         tonight.classList.add("rv-dim");
+        document.body.classList.add("veiled");   /* lift main over the veil */
         dark.classList.remove("rv-lift","lift","down");
         dark.classList.add("veil","speak");
         $("whisper").textContent = opts.whisper || "Feature presentation";
@@ -3386,18 +3401,23 @@ const Reveal = (function(){
       });
 
       at(500, chaseBulbs);
-      at(860, function(){ const mq = $("marquee"); if(mq) mq.classList.remove("chase"); });
 
-      at(800, function(){
+      /* The lap lands at 0.96s, so the scene cannot change at 0.8s without
+         cutting the back half of it off. The hero beats move out by 150ms to
+         make room; the sequence still finishes on 1.8s. */
+      at(960, function(){ const mq = $("marquee"); if(mq) mq.classList.remove("chase"); });
+
+      at(950, function(){
         opts.paint();                  /* scene swap and full render, still held back */
         dark.classList.remove("veil","speak","dealing");
         dark.classList.add("rv-lift");
+        document.body.classList.remove("veiled");
         $("deal").innerHTML = "";
         tonight.classList.remove("rv-dim");
       });
 
-      at(1100, function(){ bill.classList.add("rv-3"); });
-      at(1400, function(){ bill.classList.add("rv-4"); });
+      at(1200, function(){ bill.classList.add("rv-3"); });
+      at(1500, function(){ bill.classList.add("rv-4"); });
       at(1800, function(){
         bill.classList.add("rv-5");
         dark.classList.remove("rv-lift");
