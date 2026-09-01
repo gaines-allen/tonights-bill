@@ -203,11 +203,6 @@ main{position:relative;z-index:10}
 .scene{display:none}
 .scene.on{display:block}
 
-.receding{
-  opacity:.18;filter:blur(3px);transform:scale(.988);
-  transition:opacity 300ms var(--ease), filter 300ms var(--ease), transform 300ms var(--ease);
-  pointer-events:none;
-}
 
 /* --------------------------------------------------------------------------
    THE MARQUEE. The name above the door. Built once, imitated nowhere else.
@@ -907,8 +902,6 @@ a.svc-chip:hover .svc-go{opacity:1}
 .stub{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .stub .tick{color:var(--cream-dim)}
 .stub .slash{color:rgba(226,161,63,.5);font-family:var(--mono);font-size:11px}
-.stub .lit{color:var(--amber)}
-.where{color:#e0a494 !important}
 
 .acts{display:flex;align-items:center;gap:clamp(14px,2.4vw,28px);flex-wrap:wrap}
 .lock{
@@ -1243,14 +1236,12 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   background:#0a0705;opacity:0;
   transition:opacity 300ms var(--ease);
 }
-.dark.down{opacity:1;pointer-events:auto}
-.dark.lift{opacity:0;transition:opacity 700ms var(--ease)}
 /* the reveal's own veil: deep enough to take the page away, and lifted again
    as the hero arrives underneath it */
 .dark.veil{opacity:.93;pointer-events:auto;transition:opacity 300ms var(--ease)}
 .dark.rv-lift{opacity:0;pointer-events:none;transition:opacity 460ms var(--ease)}
 .whisper{opacity:0;transition:opacity 200ms var(--ease);color:var(--cream-dim)}
-.dark.speak .whisper,.dark.dealing .whisper{opacity:1}
+.dark.speak .whisper{opacity:1}
 .deal{width:178px}
 .deal .poster{box-shadow:0 20px 44px rgba(0,0,0,.8)}
 
@@ -2287,10 +2278,6 @@ function checkFilters(f){
 function hardPass(f){
   return checkFilters(f).every(function(c){ return c.k === "service" || c.pass; });
 }
-function fitsTonight(f){
-  return checkFilters(f).every(function(c){ return c.pass; });
-}
-
 function scoreAll(){
   const T = buildTaste();
   const R = room();
@@ -2498,7 +2485,10 @@ function storeSays(rec){
     return rec.upSet && rec.upSet[x] && ATTR_PHRASE[x];
   }).sort(rarest), 1);
   if(S.room === "solo") fit += ", and it is a better film watched alone";
-  else if(roomHit.length) fit += ", and " + phrases(roomHit)[0] + " is the right call for " +
+  /* "brings X to Y" rather than "X is right for Y": the trait phrases are a
+     mix of singular and plural — "style", "real scares", "practical effects" —
+     so any fixed verb disagrees with half of them. */
+  else if(roomHit.length) fit += ", and it brings " + phrases(roomHit)[0] + " to " +
                                  (ROOM_SAY[S.room] || "the room");
   said.push(fit + ".");
 
@@ -3318,7 +3308,7 @@ const Reveal = (function(){
     document.body.classList.remove("veiled");
     const mq = $("marquee"); if(mq) mq.classList.remove("chase");
     const d = $("dark");
-    d.classList.remove("veil","rv-lift","down","dealing","speak","lift");
+    d.classList.remove("veil","rv-lift","speak");
     $("deal").innerHTML = "";
   }
   function reset(){
@@ -3399,7 +3389,7 @@ const Reveal = (function(){
       at(200, function(){
         tonight.classList.add("rv-dim");
         document.body.classList.add("veiled");   /* lift main over the veil */
-        dark.classList.remove("rv-lift","lift","down");
+        dark.classList.remove("rv-lift");
         dark.classList.add("veil","speak");
         $("whisper").textContent = opts.whisper || "Feature presentation";
         if(opts.deal && opts.deal.length) dealCards(opts.deal);
@@ -3414,7 +3404,7 @@ const Reveal = (function(){
 
       at(950, function(){
         opts.paint();                  /* scene swap and full render, still held back */
-        dark.classList.remove("veil","speak","dealing");
+        dark.classList.remove("veil","speak");
         dark.classList.add("rv-lift");
         document.body.classList.remove("veiled");
         $("deal").innerHTML = "";

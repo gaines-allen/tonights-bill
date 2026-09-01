@@ -301,9 +301,8 @@ themselves on error and fall back to a typographic poster.
 `checkFilters()` is the single source of truth for "does this fit tonight", and
 it returns a per-filter pass/fail record with a written reason for each —
 runtime, room, rating floor, critic bar, genre, and where it streams
-("2h 25m runs past your 2h 20m — 5m too long"). `hardPass()` and `fitsTonight()`
-are both derived from it, so an explanation can never drift from the behaviour
-it describes.
+("2h 25m runs past your 2h 20m — 5m too long"). `hardPass()` is derived from it,
+so an explanation can never drift from the behaviour it describes.
 
 The passing half of that record is what the store's card draws on. The failing half is
 summarised under the bill: how many titles would have made it but sit on a
