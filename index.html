@@ -786,6 +786,11 @@ body.veiled main{z-index:81}
   text-transform:uppercase;line-height:.88;
   text-shadow:0 3px 24px rgba(0,0,0,.7);
 }
+/* The heading is focused programmatically so the result is announced from the
+   right place. It is not a control and cannot be tabbed to, so the ring has
+   nothing to tell anyone — and drawn round type this size it reads as a box
+   someone forgot to remove. Every real focus state is untouched. */
+.bill-title[tabindex="-1"]:focus{outline:none}
 
 /* ---- WHAT THE STORE SAYS ----
    One card now owns the whole recommendation. The old one-line pitch and the

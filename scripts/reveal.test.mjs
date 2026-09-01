@@ -521,6 +521,10 @@ console.log("\nannouncement and focus");
      html.includes('say("Tonight\'s pick is " + HEAD.f.t + ".")'));
   ok("focus moves to the recommendation heading", html.includes('h.setAttribute("tabindex","-1")'));
   ok("moving focus does not scroll the page", html.includes("preventScroll:true"));
+  ok("the announce-only heading draws no focus box",
+     /\.bill-title\[tabindex="-1"\]:focus\{outline:none\}/.test(html));
+  ok("but real focus states are left alone",
+     /:focus-visible\{outline:2px solid var\(--amber\)/.test(html));
   ok("the live region is polite", /aria-live="polite"/.test(html));
   ok("the feature poster keeps useful alternative text",
      html.includes('rec.f.t + " poster"'));
