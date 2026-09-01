@@ -70,6 +70,7 @@ function makeNode(tag){
     remove(){},
     querySelector(){ return null; },
     querySelectorAll(){ return []; },
+    closest(){ return null; },
     get className(){ return this._cls; },
     set className(v){ this._cls = String(v); },
     get textContent(){
@@ -414,6 +415,42 @@ console.log("\nthe poster on the hero");
   ok("the poster starts back and blurred, then comes into focus",
      /#s-bill\.revealing \.bill-poster\{[^}]*filter:blur/.test(html) &&
      /#s-bill\.revealing\.rv-3 \.bill-poster\{[^}]*filter:none/.test(html));
+}
+
+console.log("\nthe ask is never dead");
+{
+  /* Clearing site data resets timePreset, and "Who's watching" defaults to
+     two on the couch — so the form looked answered while the button was inert
+     and pressing it did nothing at all. */
+  const { mod, env } = await loadApp({ reduced: false });
+  const { S, programme } = mod;
+  S.room = "two"; S.timePreset = "";        /* exactly the post-clear state */
+  S.locked = null;
+
+  const btn = env.doc.getElementById("show-bill");
+  const { Reveal } = mod;
+
+  programme({ button: btn });
+  eq("an unanswered form does not start a reveal", Reveal.busy(), false);
+  eq("and the button is not left disabled for it", !!btn.disabled, false);
+  eq("the scene does not change", env.doc.getElementById("s-bill").classList.contains("on"), false);
+  ok("the missing question is announced",
+     env.doc.getElementById("announce").textContent.length > 0,
+     env.doc.getElementById("announce").textContent);
+
+  S.timePreset = "two";
+  programme({ button: btn });
+  eq("answering it lets the reveal run", Reveal.busy(), true);
+  eq("and the button locks for the duration", btn.disabled, true);
+  Clock.tick(2500);
+  eq("and comes back afterwards", btn.disabled, false);
+
+  ok("gate() no longer disables the ask for being unanswered",
+     !/\$\("show-bill"\)\.disabled = /.test(html),
+     "a dead primary button with no explanation is how this was missed");
+  ok("it still disables during a reveal", html.includes("btn.disabled = true"));
+  ok("pressing an unanswered form goes to the question",
+     html.includes("nudgeUnanswered()"));
 }
 
 console.log("\nthe payoff");

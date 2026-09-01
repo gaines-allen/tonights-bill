@@ -461,9 +461,19 @@ body.veiled main{z-index:81}
   filter:brightness(.92);
   transition:transform 110ms cubic-bezier(.3,.9,.3,1), box-shadow 110ms ease, filter 110ms ease;
 }
+/* only ever true mid-reveal now, so it reads as "working", not "refused" */
 .bill-go:disabled{
-  filter:saturate(.25) brightness(.62);cursor:not-allowed;
-  box-shadow:0 4px 0 #2c1610, 0 10px 20px rgba(0,0,0,.4);
+  filter:saturate(.85) brightness(.9);cursor:default;
+}
+/* answers still missing: quieter, but plainly pressable */
+.bill-go.waiting{filter:saturate(.7) brightness(.86)}
+.bill-go.waiting:hover{filter:none}
+
+/* the question it wants, marked when the ask sends you back to it */
+.decision.wants > .ask-of{animation:wants 1.6s var(--ease) 2}
+@keyframes wants{
+  0%,100%{color:var(--gold)}
+  40%    {color:var(--red-neon)}
 }
 .bill-go .arw{font-family:var(--sans);font-weight:600}
 .call-note{margin-top:14px;font-size:14px;color:var(--cream-mute);max-width:52ch}
@@ -3120,13 +3130,41 @@ function renderNights(){
 
 function syncRuntime(){ $("time-read").textContent = hm(S.time); }
 
+function ready(){ return !!S.room && !!S.timePreset; }
+
+/* The ask is never disabled for being unanswered.
+
+   It used to be, and the failure mode was ugly: "Who's watching" defaults to
+   two on the couch, so the first question looks answered while the runtime
+   quietly is not — which leaves a dead primary button under a form that looks
+   filled in. Anyone who clears their site data lands straight in it. The
+   button now always presses; if something is missing it takes you to the
+   question instead of refusing. It is still disabled during a reveal, which is
+   a different thing entirely. */
 function gate(){
-  const ready = !!S.room && !!S.timePreset;
-  $("show-bill").disabled = !ready;
-  $("encore-go").disabled = !ready;
-  $("call-note").textContent = ready
+  const ok = ready();
+  $("show-bill").classList.toggle("waiting", !ok);
+  $("encore-go").classList.toggle("waiting", !ok);
+  $("call-note").textContent = ok
     ? (Object.keys(S.taste).length ? "" : "Put five movies you'd defend on Your Shelf and the picks get sharper.")
     : (S.room ? "Tell us how much time you've got." : "Tell us who's watching and how much time you've got.");
+}
+
+/* Takes you to the first thing that has not been answered and marks it, rather
+   than leaving you to work out why nothing happened. */
+function nudgeUnanswered(){
+  const want = !S.room ? {block:"q-who",  say:"Tell us who's watching."}
+                       : {block:"q-time", say:"Tell us how much time you've got."};
+  const node = $(want.block);
+  if(!node) return;
+  const decision = node.closest(".decision") || node;
+  decision.classList.remove("wants");
+  void decision.offsetWidth;
+  decision.classList.add("wants");
+  decision.scrollIntoView({behavior: REDUCED ? "instant" : "smooth", block:"center"});
+  say(want.say);
+  const first = node.querySelector("button");
+  if(first) try { first.focus({preventScroll:true}); } catch(e) { first.focus(); }
 }
 
 /* ---------- the atmosphere behind the arrival ---------- */
@@ -3476,6 +3514,7 @@ const Reveal = (function(){
 function programme(opts){
   opts = opts || {};
   if(Reveal.busy()) return;
+  if(!ready() && !opts.quiet){ nudgeUnanswered(); return; }
   DEALER = false;
   REROLLS = 0;
   const out = scoreAll();
@@ -4261,7 +4300,7 @@ function init(){
   document.addEventListener("keydown", function(e){
     const tag = (e.target.tagName || "").toLowerCase();
     if(tag === "input" || tag === "textarea" || e.metaKey || e.ctrlKey || e.altKey) return;
-    if(e.key === "Enter" && SCENE === "tonight" && !$("show-bill").disabled){
+    if(e.key === "Enter" && SCENE === "tonight"){
       programme({button:$("show-bill")});
     }
     if(e.key.toLowerCase() === "r" && SCENE === "bill") dealAnother();
