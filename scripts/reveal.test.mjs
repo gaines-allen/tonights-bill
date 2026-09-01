@@ -416,6 +416,32 @@ console.log("\nthe poster on the hero");
      /#s-bill\.revealing\.rv-3 \.bill-poster\{[^}]*filter:none/.test(html));
 }
 
+console.log("\nthe payoff");
+{
+  /* The landing should read as the movie being put down hard, not placed. */
+  const punch = /--punch:cubic-bezier\(([\d.]+), ([\d.]+), ([\d.]+), ([\d.]+)\)/.exec(html);
+  ok("there is an overshoot curve", !!punch);
+  ok(`it actually overshoots (y1=${punch[2]} > 1)`, Number(punch[2]) > 1,
+     "a control point at or below 1 eases in without ever passing the mark");
+
+  ok("the poster lands on it",
+     /#s-bill \.bill-poster\{transition:[^}]*transform 620ms var\(--punch\)/.test(html));
+  ok("the title lands on it",
+     /\.bill-title \.ln > span\{[^}]*transform 440ms var\(--punch\)/.test(html));
+  ok("the title mask has headroom so the overshoot is not cropped",
+     /\.bill-title \.ln\{[^}]*padding-top:\.12em;margin-top:-\.12em/.test(html));
+
+  const mid = /42% \{[^}]*brightness\(([\d.]+)\)/.exec(html);
+  ok("the accent flares mid-way", !!mid);
+  ok(`it flares past its resting brightness (${mid && mid[1]}x)`, mid && Number(mid[1]) > 1.5);
+  ok("and settles back to normal",
+     /100%\{opacity:1;transform:scale\(1\);filter:brightness\(1\)\}/.test(html));
+  ok("the flare replays for every pick, not just the first",
+     html.includes('aw.classList.remove("on")') && html.includes('aw.classList.add("on")'));
+  ok("reduced motion switches the flare off",
+     /#acc-wash\{animation:none;opacity:1;transform:none\}/.test(html));
+}
+
 console.log("\nthe title stagger");
 {
   const { mod } = await loadApp({ reduced: false });

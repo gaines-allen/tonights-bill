@@ -59,6 +59,9 @@
 
   /* ---- motion ---- */
   --ease:cubic-bezier(.22, 1, .36, 1);
+  /* lands past the mark and settles back: the difference between a thing
+     arriving and a thing being placed */
+  --punch:cubic-bezier(.18, 1.42, .3, 1);
   --quick:180ms var(--ease);
   --calm:420ms var(--ease);
   --long:900ms var(--ease);
@@ -646,10 +649,17 @@ body.veiled main{z-index:81}
     radial-gradient(62% 78% at 52% 30%, var(--acc-glow) 0%, transparent 70%),
     linear-gradient(180deg, var(--acc-soft) 0%, transparent 58%);
   opacity:0;transform:scale(.86);
-  transition:opacity 640ms var(--ease), transform 940ms var(--ease);
   will-change:opacity, transform;
 }
-#acc-wash.on{opacity:1;transform:scale(1)}
+/* An animation rather than a transition, so the colour can overshoot its own
+   brightness on the way in. setFeature drops and re-adds .on, which restarts
+   it, so every pick gets the flare and not just the first. */
+#acc-wash.on{animation:accFlare 900ms var(--ease) both}
+@keyframes accFlare{
+  0%  {opacity:0;transform:scale(.86);filter:brightness(1)}
+  42% {opacity:1;transform:scale(1.07);filter:brightness(2) saturate(1.35)}
+  100%{opacity:1;transform:scale(1);filter:brightness(1)}
+}
 
 .feature-in{padding-bottom:clamp(30px,5vh,56px)}
 .bill-grid{
@@ -712,17 +722,23 @@ body.veiled main{z-index:81}
 #s-bill.revealing #footnote{opacity:0;transform:translateY(18px)}
 
 /* --- beat 3 (1.1s): the poster comes forward, the title enters line by line --- */
+/* the one element that should feel like it was put down hard */
+#s-bill .bill-poster{transition:opacity 520ms var(--ease), transform 620ms var(--punch), filter 400ms var(--ease)}
+#s-bill.revealing .bill-poster{transform:translateY(12px) scale(.9) rotate(5deg)}
 #s-bill.revealing.rv-3 .bill-poster{opacity:1;transform:rotate(1.3deg);filter:none}
 #s-bill.revealing.rv-3 .bill-copy .now{opacity:1;transform:none}
 .bill-title .ln{
   display:block;overflow:hidden;
-  /* the mask has to clear the face's descenders, so it is grown and the
-     growth is taken straight back out of the flow */
+  /* The mask has to clear the face's descenders, and it needs headroom above
+     as well: the line now overshoots its resting place by a few pixels, and
+     without the top padding the mask crops that travel straight off. Both are
+     taken back out of the flow so nothing moves. */
   padding-bottom:.08em;margin-bottom:-.08em;
+  padding-top:.12em;margin-top:-.12em;
 }
 .bill-title .ln > span{
   display:block;
-  transition:opacity 300ms var(--ease) var(--ld,0ms), transform 560ms var(--ease) var(--ld,0ms);
+  transition:opacity 220ms var(--ease) var(--ld,0ms), transform 440ms var(--punch) var(--ld,0ms);
   will-change:transform;
 }
 #s-bill.revealing.rv-3 .bill-title .ln > span{opacity:1;transform:none}
@@ -1270,7 +1286,7 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   .store-copy{font-family:var(--sans);font-size:15.5px;line-height:1.62;letter-spacing:0}
   .store-card{max-width:none}
   /* shorter throws: the same order, less distance to cover */
-  #s-bill.revealing .bill-poster{transform:translateY(8px) scale(.96) rotate(3deg);filter:blur(4px)}
+  #s-bill.revealing .bill-poster{transform:translateY(8px) scale(.94) rotate(3.4deg);filter:blur(4px)}
   #s-bill.revealing .store-card{transform:translateY(10px) rotate(-1.8deg)}
   #s-bill.revealing .bill-copy .now,
   #s-bill.revealing .bill-copy .stub,
@@ -1309,6 +1325,7 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   #s-bill.revealing #twin-slot,
   #s-bill.revealing #footnote{transform:none !important;filter:none !important}
   .candy .vine,.candy .lid{transition:none}
+  #acc-wash{animation:none;opacity:1;transform:none}
   *{transition-duration:1ms !important}
 }
 </style>
