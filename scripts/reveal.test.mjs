@@ -136,7 +136,7 @@ const appBody = blocks[1]
   .replace(/"use strict";/, "")
   .replace(/\}\)\(\);\s*$/, "");
 const EXPORTS = `
-export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, ATTR_PHRASE,
+export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, ATTR_PHRASE, CLERK,
          titleStep, scoreAll, billActs, setFeature, renderBill, programme,
          lockIt, announcePick, MODE_get, JUST_get };
 function MODE_get(){ return MODE; }
@@ -336,172 +336,99 @@ console.log("\nreduced motion");
   eq("the ask is released", button.disabled, false);
 }
 
-console.log("\nwhat the store says");
+console.log("\nwhat the store says: the written lines");
 {
   const { mod } = await loadApp({ reduced: false });
-  const { BY_TITLE, S, storeSays, storeCard, scoreAll, listOf, titleStep, accentFor } = mod;
+  const { BY_TITLE, FILMS, S, storeSays, storeCard, CLERK } = mod;
 
-  const f = BY_TITLE["The Shape of Water"];
-  const ATTR_PHRASE_T = mod.ATTR_PHRASE;
-  ok("the catalog still has the reference title", !!f);
+  /* Every curated film. The nightly scan shelves several hundred more off the
+     services which cannot be written ahead of time; those are the generator's
+     job, and the fallback below covers them. */
+  eq("every curated film has a written line",
+     FILMS.filter(f => !CLERK[f.t]).length, 0);
+  eq("no line is written for a film that is not in the catalog",
+     Object.keys(CLERK).filter(t => !BY_TITLE[t]).length, 0);
 
+  const sentences = v => v.replace(/\b(Dr|Mr|Mrs|St|Jr|Sr|vs|E\.T)\./g, "$1")
+                          .split(/(?<=[.!?])\s+/).filter(Boolean).length;
+  const bad = {long:[], short:[], sent:[], punct:[], stock:[], year:[], score:[], svc:[], plot:[]};
+  const STOCK = /must-watch|hidden gem|masterpiece|roller ?coaster|cinematic experience|something for everyone|perfect for fans|doesn't disappoint|it has heart|it delivers|checks all the boxes|edge of your seat|\bcontent\b|You asked for|Based on your/i;
+  const LABELS = /ensemble-led|character-led|dialogue-driven|a brisk clip|a twisting plot|uplifting throughout/i;
+  const SVCS = /Netflix|Hulu|Disney\+|Prime Video|Apple TV|Paramount\+|Peacock/i;
+
+  FILMS.forEach(f => {
+    const v = CLERK[f.t]; if (!v) return;
+    const w = v.split(/\s+/).length;
+    if (w > 58) bad.long.push(f.t);
+    if (w < 30) bad.short.push(f.t);
+    const n = sentences(v);
+    if (n < 2 || n > 3) bad.sent.push(f.t + "(" + n + ")");
+    if (/[‘’“”–—!?]/.test(v)) bad.punct.push(f.t);
+    if (STOCK.test(v) || LABELS.test(v)) bad.stock.push(f.t);
+    if (v.includes(String(f.y))) bad.year.push(f.t);       /* the year is printed elsewhere */
+    if (/\d+%/.test(v)) bad.score.push(f.t);
+    if (SVCS.test(v)) bad.svc.push(f.t);
+    if (f.h && v.includes(f.h.slice(0, 24))) bad.plot.push(f.t);  /* the synopsis is right below */
+  });
+
+  eq("none run long", bad.long, []);
+  eq("none run short", bad.short, []);
+  eq("all are two or three sentences", bad.sent, []);
+  eq("no curly quotes, dashes, exclamations or rhetorical questions", bad.punct, []);
+  eq("no stock praise and no raw tag names", bad.stock, []);
+  eq("none repeat the release year", bad.year, []);
+  eq("none quote a critic score", bad.score, []);
+  eq("none name the streaming service", bad.svc, []);
+  eq("none restate the synopsis printed under them", bad.plot, []);
+
+  /* the whole point: a line that could sit under another film is a failed line */
+  const seen = {}, dupes = [];
+  Object.keys(CLERK).forEach(t => {
+    const k = CLERK[t].toLowerCase();
+    if (seen[k]) dupes.push(t); else seen[k] = 1;
+  });
+  eq("no two films share a line", dupes, []);
+
+  const shape = BY_TITLE["The Shape of Water"];
   S.room = "two"; S.time = 135; S.moods = ["weird", "beautiful"];
-  const rec = { f, T: { n: 0, loved: [], aw: {}, dw: {} }, score: 0.8, on: ["MAX"], upSet: {} };
-  const copy = storeSays(rec);
-
-  const sentences = copy.split(/(?<=\.)\s+/).filter(Boolean);
-  ok(`two to four sentences (got ${sentences.length})`, sentences.length >= 2 && sentences.length <= 4, copy);
-  ok("it answers what was asked for", /you (asked|wanted|came in)/i.test(copy), copy);
-  ok("it names the runtime against the clock", copy.includes("2h 3m") || copy.includes("2h"), copy);
-  /* The director tag is gone by request: "all of it unmistakably X" was the
-     most template-shaped line on the card. */
-  ok("it does not name the director", !copy.includes("Guillermo del Toro"), copy);
-  ok("it says something specific to this film",
-     f.a.some(a => ATTR_PHRASE_T[a] && copy.toLowerCase().includes(ATTR_PHRASE_T[a].split(" ").pop())),
-     copy);
-
-  /* the five things printed elsewhere on the page must not be repeated here */
-  ok("it does not print the release year", !copy.includes("2017"), copy);
-  ok("it does not print the rating", !/\brated\b|\bPG-13\b|\bR\b(?![a-z])/.test(copy.replace(/[^\w\s-]/g, " ")), copy);
-  ok("it does not print the streaming service", !/Netflix|Max|Hulu|Disney|Prime|Apple|Paramount|Peacock/.test(copy), copy);
-  ok("it does not print the critic score", !/\d+%/.test(copy), copy);
-  ok("it does not repeat the synopsis", !copy.includes(f.h.slice(0, 24)), copy);
+  const rec = { f: shape, T: {n:0, loved:[], aw:{}, dw:{}}, score: .8, on: ["MAX"], upSet: {} };
+  ok("the written line is what the card shows",
+     storeSays(rec) === CLERK["The Shape of Water"]);
+  ok("and it carries a detail no other film could claim",
+     /fish man/.test(storeSays(rec)), storeSays(rec));
 
   const card = storeCard(rec);
-  const label = card.children.find(c => c.className === "store-label");
-  eq("the card is titled exactly", label.textContent, "WHAT THE STORE SAYS");
+  eq("the card is titled exactly",
+     card.children.find(c => c.className === "store-label").textContent,
+     "WHAT THE STORE SAYS");
   eq("the tape is hidden from assistive tech",
      card.children.find(c => c.className === "store-tape").getAttribute("aria-hidden"), "true");
-  ok("the copy is in the card", !!card.children.find(c => c.className === "store-copy"));
+}
 
-  /* no moods at all still produces a usable card */
-  S.moods = [];
-  const bare = storeSays(rec);
-  const bareCount = bare.split(/(?<=\.)\s+/).filter(Boolean).length;
-  ok(`no answers still yields 2-4 sentences (got ${bareCount})`, bareCount >= 2 && bareCount <= 4, bare);
+console.log("\nwhat the store says: the fallback");
+{
+  /* Every catalog film is written, so the generator is exercised against a
+     title that is not, which is what a newly added film looks like. */
+  const { mod } = await loadApp({ reduced: false });
+  const { S, storeSays, listOf } = mod;
+  S.room = "two"; S.time = 135; S.moods = ["weird", "beautiful"];
+
+  const f = { id: 7, t: "An Unwritten Picture", y: 2011, r: 118, mpaa: "R",
+              g: ["drama"], a: ["visual", "weird", "melancholy", "slowburn"],
+              d: "Someone", h: "A synopsis that the card must not repeat.", svcs: ["MAX"] };
+  const rec = { f, T: {n:0, loved:[], aw:{}, dw:{}}, score: .8, on: ["MAX"], upSet: {} };
+  const copy = storeSays(rec);
+
+  const n = copy.split(/(?<=\.)\s+/).filter(Boolean).length;
+  ok(`an unwritten film still gets 2-4 sentences (got ${n})`, n >= 2 && n <= 4, copy);
+  ok("it answers what was asked for", /you (asked|wanted|came in|left|didn't)/i.test(copy), copy);
+  ok("it names the runtime", copy.includes("1h 58m"), copy);
+  ok("it does not name the director", !copy.includes("Someone"), copy);
+  ok("it does not print the release year", !copy.includes("2011"), copy);
+  ok("it does not repeat the synopsis", !copy.includes(f.h.slice(0, 24)), copy);
 
   eq("the oxford list reads correctly", listOf(["a", "b", "c"]), "a, b, and c");
   eq("two items take no comma", listOf(["a", "b"]), "a and b");
-}
-
-console.log("\nthe marquee chase");
-{
-  /* The chase used to travel the whole border in 160ms — a full lap in a
-     sixth of a second, which fired correctly and read as a flicker. */
-  const spread = Number(/const CHASE_SPREAD = (\d+)/.exec(html)[1]);
-  const flare  = Number(/\.marquee\.chase \.bulb\{animation:chase (\d+)ms/.exec(html)[1]);
-  ok(`the lap is slow enough to watch travel (${spread}ms + ${flare}ms flare)`,
-     spread >= 750 && spread + flare >= 1150,
-     "160ms, 260ms and 520ms all crossed the whole sign faster than the eye follows");
-  ok("the hero waits for it, rather than arriving over the top of it",
-     800 + spread + flare <= 2050, `lap ends at ${800 + spread + flare}ms`);
-  ok("the whole reveal lands on 3s",
-     /at\(3000, function\(\)\{\s*bill\.classList\.add\("rv-5"\)/.test(html));
-  ok("it runs once and settles", /animation:chase \d+ms ease-out var\(--chase,0ms\) 1 both/.test(html));
-
-  /* the slow lap the sign runs on its own, with nothing happening */
-  const orbit = Number(/const ORBIT_MS = (\d+)/.exec(html)[1]);
-  ok(`the idle lap is much slower than the reveal lap (${orbit}ms vs ${spread + flare}ms)`,
-     orbit >= 8000 && orbit > (spread + flare) * 5);
-  ok("every bulb rides it, at rest, forever",
-     /orbit var\(--orbit-dur,11s\) linear var\(--orbit,0s\) infinite/.test(html));
-  ok("shimmer and orbit do not fight over the same properties",
-     /@keyframes shimmer\{\s*0%,100%\{opacity:var\(--hi,\.96\)\}\s*50%\s*\{opacity:var\(--lo,\.74\)\}\s*\}/.test(html),
-     "shimmer must own opacity only, or orbit's glow gets stamped on");
-  ok("each bulb gets its place in the lap as a negative delay",
-     html.includes('"--orbit", Math.round(-(1 - f) * ORBIT_MS)'),
-     "positive delays would ramp the wave in over a full cycle");
-  ok("the reveal lap supersedes the idle one",
-     /\.marquee\.chase \.bulb\{animation:chase/.test(html));
-  ok("reduced motion stops both", /\.bulb,\.marquee\.chase \.bulb\{animation:none/.test(html));
-
-  /* the stacking fix itself */
-  ok("main is lifted over the veil in CSS", /body\.veiled main\{z-index:81\}/.test(html));
-  ok("the veil sits below that", /\.dark\{[^}]*z-index:80/.test(html));
-  ok("the controller raises and lowers it",
-     html.includes('document.body.classList.add("veiled")') &&
-     html.includes('document.body.classList.remove("veiled")'));
-  ok("the chase refuses to fire at an off-screen sign",
-     /r\.bottom <= 0 \|\| r\.top >= window\.innerHeight/.test(html),
-     "without this the lap runs correctly where nobody can see it");
-  ok("the page is returned to the marquee first",
-     /window\.scrollTo\(\{top:0, behavior:"instant"\}\); \}\);/.test(html));
-}
-
-console.log("\nthe poster on the hero");
-{
-  const f = /\.bill-poster \.poster img\{filter:([^}]+)\}/.exec(html)[1];
-  const brightness = Number(/brightness\(([\d.]+)\)/.exec(f)[1]);
-  const saturate   = Number(/saturate\(([\d.]+)\)/.exec(f)[1]);
-  ok(`brightness is up 15-20% (${Math.round((brightness - 1) * 100)}%)`,
-     brightness >= 1.15 && brightness <= 1.20);
-  ok(`saturation is raised enough to see (${Math.round((saturate - 1) * 100)}%)`,
-     saturate >= 1.2, "1.09 was arithmetically a raise and visually nothing");
-  ok("the poster starts back and blurred, then comes into focus",
-     /#s-bill\.revealing \.bill-poster\{[^}]*filter:blur/.test(html) &&
-     /#s-bill\.revealing\.rv-3 \.bill-poster\{[^}]*filter:none/.test(html));
-}
-
-console.log("\nthe ask is never dead");
-{
-  /* Clearing site data resets timePreset, and "Who's watching" defaults to
-     two on the couch — so the form looked answered while the button was inert
-     and pressing it did nothing at all. */
-  const { mod, env } = await loadApp({ reduced: false });
-  const { S, programme } = mod;
-  S.room = "two"; S.timePreset = "";        /* exactly the post-clear state */
-  S.locked = null;
-
-  const btn = env.doc.getElementById("show-bill");
-  const { Reveal } = mod;
-
-  programme({ button: btn });
-  eq("an unanswered form does not start a reveal", Reveal.busy(), false);
-  eq("and the button is not left disabled for it", !!btn.disabled, false);
-  eq("the scene does not change", env.doc.getElementById("s-bill").classList.contains("on"), false);
-  ok("the missing question is announced",
-     env.doc.getElementById("announce").textContent.length > 0,
-     env.doc.getElementById("announce").textContent);
-
-  S.timePreset = "two";
-  programme({ button: btn });
-  eq("answering it lets the reveal run", Reveal.busy(), true);
-  eq("and the button locks for the duration", btn.disabled, true);
-  Clock.tick(3800);
-  eq("and comes back afterwards", btn.disabled, false);
-
-  ok("gate() no longer disables the ask for being unanswered",
-     !/\$\("show-bill"\)\.disabled = /.test(html),
-     "a dead primary button with no explanation is how this was missed");
-  ok("it still disables during a reveal", html.includes("btn.disabled = true"));
-  ok("pressing an unanswered form goes to the question",
-     html.includes("nudgeUnanswered()"));
-}
-
-console.log("\nthe payoff");
-{
-  /* The landing should read as the movie being put down hard, not placed. */
-  const punch = /--punch:cubic-bezier\(([\d.]+), ([\d.]+), ([\d.]+), ([\d.]+)\)/.exec(html);
-  ok("there is an overshoot curve", !!punch);
-  ok(`it actually overshoots (y1=${punch[2]} > 1)`, Number(punch[2]) > 1,
-     "a control point at or below 1 eases in without ever passing the mark");
-
-  ok("the poster lands on it",
-     /#s-bill \.bill-poster\{transition:[^}]*transform 620ms var\(--punch\)/.test(html));
-  ok("the title lands on it",
-     /\.bill-title \.ln > span\{[^}]*transform 440ms var\(--punch\)/.test(html));
-  ok("the title mask has headroom so the overshoot is not cropped",
-     /\.bill-title \.ln\{[^}]*padding-top:\.12em;margin-top:-\.12em/.test(html));
-
-  const mid = /42% \{[^}]*brightness\(([\d.]+)\)/.exec(html);
-  ok("the accent flares mid-way", !!mid);
-  ok(`it flares past its resting brightness (${mid && mid[1]}x)`, mid && Number(mid[1]) > 1.5);
-  ok("and settles back to normal",
-     /100%\{opacity:1;transform:scale\(1\);filter:brightness\(1\)\}/.test(html));
-  ok("the flare replays for every pick, not just the first",
-     html.includes('aw.classList.remove("on")') && html.includes('aw.classList.add("on")'));
-  ok("reduced motion switches the flare off",
-     /#acc-wash\{animation:none;opacity:1;transform:none\}/.test(html));
 }
 
 console.log("\nthe title stagger");

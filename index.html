@@ -2077,7 +2077,15 @@ function gLabel(g){ return GENRE_LABEL[g] || g.charAt(0).toUpperCase()+g.slice(1
    They are static on purpose. This is a page on GitHub Pages with no server,
    so a model call at request time would mean shipping a key to every visitor,
    and the whole point of the file is that it works offline and instantly.
-   Anything without a line here falls back to the generator.
+
+   Coverage is the 245 hand-tagged films in this file, which is every title
+   anyone curated. The nightly scan shelves roughly 670 more straight off the
+   services, and those change week to week, so they cannot be written ahead and
+   are not worth guessing at: a line invented for a film nobody here has seen
+   is exactly the fabrication this replaced. They fall back to the generator,
+   which is what it is for. In practice around three quarters of top picks and
+   three fifths of the shelf come out written, because the scorer favours the
+   curated titles.
    ========================================================================== */
 const CLERK = {
   "The Godfather":
@@ -2187,7 +2195,7 @@ const CLERK = {
   "Full Metal Jacket":
     "Full Metal Jacket is really two films, and the first hour in boot camp is so strong that the Vietnam half has been argued about ever since. That split is worth seeing for yourself. Under two hours, and hard throughout.",
   "The Shawshank Redemption":
-    "The comfort in The Shawshank Redemption comes from patience, not from the ending everyone remembers. Two men build a friendship over twenty years of small favours and long conversations, and the film is content to sit in that. Two and a half hours.",
+    "The comfort in The Shawshank Redemption comes from patience, not from the ending everyone remembers. Two men build a friendship over twenty years of small favours and long conversations, and the film is happy to sit in that. Two and a half hours.",
   "Forrest Gump":
     "Forrest Gump walks through forty years of American history without ever quite noticing it, which is the joke and also the sadness. The parts people forget are the ones about Jenny, and they are the reason it holds together. Two and a half hours.",
   "The Social Network":
@@ -2241,7 +2249,7 @@ const CLERK = {
   "Spirited Away":
     "Spirited Away drops a sulky child into a bathhouse for spirits and makes her earn her way out with actual work. The imagination is endless and the rules are strict, which is why it never feels weightless. Just over two hours.",
   "My Neighbor Totoro":
-    "The comfort in My Neighbor Totoro comes from how little happens. Two sisters wait, explore, and worry about their mother, and the film is content to watch them do it. Eighty-six minutes, and gentle enough for anyone in the room.",
+    "The comfort in My Neighbor Totoro comes from how little happens. Two sisters wait, explore and worry about their mother, and the film simply watches them do it. Eighty-six minutes, and gentle enough for anyone in the room.",
   "Princess Mononoke":
     "Princess Mononoke refuses to give anyone the villain role, which turns a forest-versus-industry story into something genuinely difficult. It is also more violent than its reputation suggests. Just over two hours.",
   "Spider-Man: Into the Spider-Verse":
@@ -2325,7 +2333,7 @@ const CLERK = {
   "Booksmart":
     "Booksmart puts two overachievers through one night of trying to make up for four years, and it likes both of them. The friendship argument late on is played straight and hurts. One hundred and two minutes.",
   "Palm Springs":
-    "Palm Springs gives you an easy comedy without turning into background noise. The time-loop setup keeps finding new trouble for its leads, and it wraps in ninety minutes.",
+    "Palm Springs takes the time-loop premise and works out that the interesting version is two people stuck in it together rather than one. It stays funny while quietly asking what you would do with endless time. Ninety minutes, and it does not outstay that.",
   "Game Night":
     "Game Night has a better plot than a comedy needs, and it shoots the suburbs like a thriller. The running joke about the neighbour is the best thing in it. One hundred minutes.",
   "The Nice Guys":
@@ -2343,7 +2351,233 @@ const CLERK = {
   "Skyfall":
     "Skyfall is the best-looking film in the series, with a Shanghai fight staged almost entirely in silhouette. It is also the one most interested in whether any of it should still exist. Two and a half hours.",
   "Raiders of the Lost Ark":
-    "Raiders of the Lost Ark moves from set piece to set piece with almost no fat, and the hero spends most of it improvising badly and getting hurt. It is still the template everyone copies. Just under two hours."
+    "Raiders of the Lost Ark moves from set piece to set piece with almost no fat, and the hero spends most of it improvising badly and getting hurt. It is still the template everyone copies. Just under two hours.",
+  "Die Hard":
+    "Die Hard works because the hero is outmatched for most of it, barefoot and improvising in a building he does not know. The villain is polite and organised, which makes him better company than the usual. Just over two hours.",
+  "The Raid: Redemption":
+    "The Raid is one building and thirty floors, and the plot exists only to move a squad upward. The fights are long, clearly shot and genuinely brutal. One hundred and one minutes with almost no let-up.",
+  "Mission: Impossible - Ghost Protocol":
+    "Ghost Protocol is where the series worked out what it was for, and the Dubai tower sequence is the reason. Stripping the team of support turns every gadget failure into a problem. Just over two hours.",
+  "Black Panther":
+    "The reason to pick Black Panther is the cousin, who has a fair grievance and is not wrong about much. The film gives him a real argument instead of a scheme. Just over two hours.",
+  "The Avengers":
+    "The Avengers spends its first hour on people who cannot stand each other, which is why the last act works at all. The single unbroken shot circling the team is still the best thing in it. Two and a half hours.",
+  "Avengers: Infinity War":
+    "Infinity War is the rare blockbuster that lets the villain win and stops there. It assumes you know everyone already and moves accordingly. Two and a half hours, and you need the ones before it.",
+  "Avengers: Endgame":
+    "Endgame asks for three hours and opens much quieter than expected, sitting in the aftermath before it does anything else. Choose it when there is a full evening and the previous film is fresh.",
+  "Guardians of the Galaxy":
+    "Guardians of the Galaxy is a comedy about five people who are bad at their jobs and worse at cooperating. The soundtrack does the emotional work the script skips. Two hours.",
+  "Thor: Ragnarok":
+    "Thor Ragnarok treats the destruction of a kingdom as a comic premise and commits fully, colours included. It rescues a character who had been the least interesting in the room. Just over two hours.",
+  "Logan":
+    "Logan is a western about an old man, a dying mentor and a girl who is his problem now. Taking the invulnerability away makes every fight cost something. Just over two hours, and it is far sadder than the genre usually allows.",
+  "Spider-Man: No Way Home":
+    "No Way Home runs on the audience knowing what it knows, so it plays best with people who have seen the earlier films. Underneath the reunion is a story about a kid losing everything ordinary. Two and a half hours.",
+  "Whale Rider":
+    "Whale Rider is about a girl and her grandfather, and it never turns him into a villain for being wrong. The final speech scene is why people remember it. One hundred and one minutes.",
+  "Paddington 2":
+    "Paddington 2 is genuinely well made, with a prison sequence built like a caper and a villain having the time of his life. It is kind without being soft. One hundred and three minutes, and it holds a room of any age.",
+  "School of Rock":
+    "School of Rock works because the children can actually play, so the last act is a real band rather than a montage. The teacher is a liar and the film knows it. One hundred and nine minutes.",
+  "The Sandlot":
+    "The comfort in The Sandlot comes from a summer with no plot to speak of, just a group of boys and one ball they cannot get back. It is nostalgic without being sentimental about it. One hundred and one minutes.",
+  "Matilda":
+    "Matilda is much stranger and meaner than most family films, with adults who are genuinely awful rather than misguided. That is exactly why children like it. One hundred and two minutes.",
+  "Enola Holmes":
+    "Enola Holmes gives the case to the younger sister and lets her talk to the audience about it, which keeps a Victorian mystery brisk. It respects that the plot should still add up. Two hours.",
+  "Jumanji: Welcome to the Jungle":
+    "Jumanji Welcome to the Jungle gets its comedy from adults playing teenagers stuck in the wrong bodies, and the cast commits properly. The video-game rules give it structure. Two hours, and easy with a group.",
+  "Wonder":
+    "Wonder switches perspective between the boy, his sister and their friends, which stops it becoming one long lesson about kindness. The sister's section is the strongest thing in it, and the one most families skip past. Just under two hours.",
+  "The Princess Diaries":
+    "The Princess Diaries is a straightforward transformation story carried almost entirely by the grandmother, who plays it seriously while everything around her is silly. Just under two hours, and undemanding in the best way.",
+  "Sing Street":
+    "Sing Street is about a boy starting a band to impress a girl and getting an actual band out of it. The original songs are good enough to stand up outside the film. One hundred and six minutes.",
+  "Hunt for the Wilderpeople":
+    "Hunt for the Wilderpeople pairs a difficult kid with a man who does not want him and then sends them into the bush. It is very funny and then quietly moving. One hundred and one minutes.",
+  "Rear Window":
+    "Rear Window keeps you in one room looking out of one window, so you only know what he knows. The restriction is the entire engine. One hundred and twelve minutes.",
+  "Psycho":
+    "Psycho spends forty minutes making you care about one story before abandoning it, and that structural trick still works. Best if nobody in the room spoils the middle. One hundred and nine minutes.",
+  "12 Angry Men":
+    "12 Angry Men is one room, one afternoon, and a vote that starts eleven to one. It moves because the arguments genuinely change minds rather than the plot forcing them. Ninety-six minutes.",
+  "Dr. Strangelove":
+    "Dr. Strangelove plays nuclear war as an office problem, with men in a bright room being reasonable about the end of everything. The war room set does half the joke. Ninety-five minutes.",
+  "2001: A Space Odyssey":
+    "Fair warning: 2001 is slow by any standard and explains almost nothing. If that sounds fine, it is still the most convincing space travel ever filmed, and the middle section with the computer is genuinely tense. Nearly two and a half hours.",
+  "Chinatown":
+    "Chinatown starts with a water dispute and keeps pulling until something much worse comes up. The detective is competent and it does not help him. Just over two hours, and the ending is famously unkind.",
+  "Taxi Driver":
+    "Fair warning: Taxi Driver is a portrait of a man getting worse, and it does not stand outside him to reassure you. If that sounds fine, the city photography and the sense of insomnia are extraordinary. Just under two hours.",
+  "Jaws":
+    "Jaws keeps the shark off screen for most of its length, largely by necessity, and the film is better for it. The second half becomes three men on a boat talking, which is the best part. Just over two hours.",
+  "Rocky":
+    "Rocky is not really a boxing film until the last twenty minutes. Most of it is a lonely man in Philadelphia trying to be taken seriously, and the goal is only to be standing at the end. Two hours.",
+  "Alien: Romulus":
+    "Alien Romulus goes back to the working-class scavengers of the original and builds its set pieces around zero gravity and acid. It is the most straightforwardly frightening the series has been in years. Just under two hours.",
+  "Some Like It Hot":
+    "Some Like It Hot moves at a farce pace and never slows down to explain itself, with two musicians hiding in a band and lying to everyone including each other. The last line is still the best closing line in comedy. Two hours.",
+  "Singin' in the Rain":
+    "Singin' in the Rain is about the film industry panicking as sound arrives, which gives the numbers something to be about. The dancing is astonishing and the comedy holds. One hundred and three minutes.",
+  "The Apartment":
+    "The Apartment is a comedy about a man being used, and it gets sadder the longer it goes without ever losing its lightness. The two leads are both compromised, which is rare. Just over two hours.",
+  "Vertigo":
+    "Vertigo turns a detective story into an obsession and then keeps going past the point of comfort. The second half restages the first, which is where it becomes genuinely unsettling. Just over two hours.",
+  "The Wolf of Wall Street":
+    "Fair warning: The Wolf of Wall Street is three hours of appalling behaviour and it declines to punish most of it. If that sounds fine, it is very funny and openly implicates you for enjoying it. A long night.",
+  "Catch Me If You Can":
+    "Catch Me If You Can is a chase where the pursuer is the only person paying the boy any attention, which is the real story. It stays light and moves quickly. Two and a half hours.",
+  "Ocean's Eleven":
+    "Ocean's Eleven is built entirely on charm and competence, with a cast enjoying themselves and a plan that mostly works. Nobody is in danger, which makes it easy company. Just under two hours.",
+  "Spotlight":
+    "Spotlight is about reporters doing document work, and it stays gripping by treating each small confirmation as a win. Nobody grandstands and nobody gets a speech, which makes the moment the story finally runs feel earned. Just over two hours.",
+  "The Big Short":
+    "The Big Short explains a financial collapse by stopping to explain it, directly to camera, and the device works better than it should. Nobody in it is enjoying being right. Just over two hours.",
+  "Michael Clayton":
+    "Michael Clayton is about a man whose job is cleaning up, arriving at the point where he will not. It is talky and precise, and the opening monologue is worth the entry on its own. Two hours.",
+  "Drive":
+    "Drive is much quieter than its poster suggests, with long stretches of almost nothing and sudden, shocking violence. The lead barely speaks. One hundred minutes, and the soundtrack does a lot of the work.",
+  "Baby Driver":
+    "Baby Driver cuts every chase and most of its gunfire to the track playing in the lead's earbuds, and the sync is exact rather than approximate. The opening escape sets the rule. Just under two hours.",
+  "Collateral":
+    "Collateral is one night in a cab with a contract killer in the back, and the whole film is the conversation between them. Digital photography makes Los Angeles look genuinely nocturnal. Two hours.",
+  "Training Day":
+    "Training Day is one shift with a detective who runs his own economy, and the rookie spends it working out how far in he already is. It gets less comfortable by the hour. Just over two hours.",
+  "A Few Good Men":
+    "A Few Good Men builds everything towards one man on a stand who wants to be asked the question. The legal work before it is solid enough that the confrontation feels earned rather than staged. Just over two hours.",
+  "Erin Brockovich":
+    "Erin Brockovich is a legal procedural carried by someone with no legal training and no patience for being condescended to. The case is built door to door, and the film enjoys her being underestimated. Just over two hours.",
+  "Coming to America":
+    "Coming to America gets its comedy from a prince insisting on being treated ordinarily while everyone around him refuses. The barbershop scenes are the reason people rewatch it. Just under two hours.",
+  "Do the Right Thing":
+    "Do the Right Thing spends most of its length on one block on one hot day, letting small frictions accumulate. Nobody is written as a villain, which is what makes the last twenty minutes so hard. Two hours.",
+  "Boyz n the Hood":
+    "Boyz n the Hood follows three friends with different exits available to them, and the father is the strongest thing in it. It is specific about place in a way few films of its era were. Just under two hours.",
+  "The Farewell":
+    "The Farewell is about a family staging a wedding so a grandmother never learns she is dying, and it treats that decision seriously rather than as a farce. The comedy comes from everyone acting badly under pressure. One hundred minutes.",
+  "Minari":
+    "Minari is a quiet film about a family trying to farm land nobody thinks will work, and the grandmother rearranges the household when she arrives. It is patient and unusually free of villains. Just under two hours.",
+  "CODA":
+    "CODA is about the only hearing person in a deaf family wanting to leave, so the conflict is real on both sides. The scene where the sound drops out is the best decision in it. Just under two hours.",
+  "Killers of the Flower Moon":
+    "Killers of the Flower Moon asks for three and a half hours and tells the story from inside the crime rather than the investigation. That choice makes it slower and much more damning. Only start it with a whole evening free.",
+  "Napoleon":
+    "Napoleon is more interested in the marriage than the battles, cutting between campaigns and letters home. The set pieces are enormous but the film keeps returning to two people failing each other. Two and a half hours.",
+  "Greyhound":
+    "Greyhound is ninety minutes of one captain on one crossing, almost entirely on the bridge. There is no backstory and no subplot, just orders and sonar. Short, tense and unusually procedural.",
+  "The Beanie Bubble":
+    "The Beanie Bubble tells a financial mania through the three women whose work built it and who mostly went uncredited. It moves between timelines and keeps things light. Just under two hours.",
+  "Wolfs":
+    "Wolfs puts two fixers on the same job and gets its comedy from neither being willing to leave. It is a two-hander that trades on the leads knowing exactly how to needle each other. Just under two hours.",
+  "The Holdovers":
+    "The Holdovers strands three people at a boarding school over Christmas 1970 and lets them slowly stop performing for each other. It is shot to look like a film from that year. Just over two hours.",
+  "Nomadland":
+    "Nomadland casts real people alongside its lead and lets long stretches pass without plot. It is about work and movement after a town closes, and it declines to make that either tragic or noble. Under two hours.",
+  "The Shape of Water":
+    "The Shape of Water is a love story with Cold War paranoia around it and one very committed fish man at the centre. It is gorgeous, odd and warmer than the premise suggests. Just over two hours.",
+  "Birdman":
+    "Birdman is cut to look like one unbroken take, so the backstage corridors become a maze you never get to leave. The drumming score keeps the pressure up throughout. Just under two hours.",
+  "Roma":
+    "Roma is filmed like memory, in black and white with the camera drifting rather than following. It gives a housekeeper the attention usually reserved for the family she works for. Just over two hours.",
+  "The Irishman":
+    "The Irishman asks for three and a half hours and spends the last one in near silence, which is the point of the whole thing. Choose it when you can sit with an old man at the end of his life.",
+  "Okja":
+    "Okja swings between a girl-and-her-animal adventure and something much angrier about the meat industry, and the tonal shifts are deliberate rather than clumsy. The Seoul chase through an underground mall is superb. Two hours, and it does not soften the ending.",
+  "Athlete A":
+    "Athlete A follows the reporters and the gymnasts who broke a story an institution worked hard to bury. It gives the athletes room to speak rather than treating them as evidence. Under two hours, and difficult throughout.",
+  "The Truman Show":
+    "The Truman Show has one of the great premises and is disciplined about it, keeping the camera in the show's own hidden angles. It gets sadder as he works out what is happening. One hundred and three minutes.",
+  "Good Will Hunting":
+    "Good Will Hunting is a film about therapy that takes the therapy seriously, so the breakthrough has to be worked for. The friendship on the building site is the quieter and better relationship. Just over two hours.",
+  "Dead Poets Society":
+    "Dead Poets Society is about a teacher who gets boys reading and cannot protect them from the school around him. It is sentimental in places and the last scene has survived anyway. Just over two hours.",
+  "Slumdog Millionaire":
+    "Slumdog Millionaire structures a whole life around quiz questions, so each answer opens a flashback that explains how he knows it. The device could be cheap and instead does the storytelling. Two hours.",
+  "The Prestige":
+    "The Prestige is about two magicians ruining each other, told out of order so you are always missing a piece. It plays fair with its own trick, which is why it holds up twice. Just over two hours.",
+  "Shutter Island":
+    "Shutter Island commits fully to its atmosphere, all storm and locked wards, and it keeps the ground moving under the investigation. Best if nobody in the room has read the book. Just over two hours.",
+  "The Sixth Sense":
+    "The Sixth Sense is much sadder than its reputation, and the scenes between the boy and his mother are the reason it lasts. The car conversation near the end is the real payoff. Under two hours.",
+  "Fight Club":
+    "Fight Club is a comedy about masculinity that a lot of people took as an instruction manual, which the film openly anticipates. It looks extraordinary and it is meaner than it seems. Just over two hours.",
+  "American Beauty":
+    "American Beauty is about a suburban man detonating his own life on purpose, and it is funnier than its reputation. Time has complicated it, which makes it worth arguing about after. Two hours.",
+  "Lost in Translation":
+    "Lost in Translation is two jetlagged people awake at the wrong hours in a hotel, and almost nothing happens between them. The restraint is the film. One hundred and two minutes.",
+  "Sideways":
+    "Sideways is about two men on a wine trip who are both a mess, and it never rescues either of them. The speech about pinot noir is doing more work than it lets on. Just over two hours.",
+  "Little Miss Sunshine":
+    "Little Miss Sunshine starts as a family disaster and gradually turns that mess into something tender. The battered van gives their chaos somewhere funny to go. One hundred and one minutes.",
+  "Juno":
+    "Juno moves at the speed of its dialogue, which some people bounce off in the first ten minutes. Underneath it the film is careful and generous about the adoptive parents. Ninety-six minutes.",
+  "500 Days of Summer":
+    "500 Days of Summer tells you in the opening narration that it is not a love story and then shuffles the days so you keep revising your view. It is honest that the lead is the problem. Ninety-five minutes.",
+  "The Perks of Being a Wallflower":
+    "The Perks of Being a Wallflower is about a freshman taken in by two seniors, and it withholds the reason he is fragile until late. The tunnel scenes are the ones people remember. One hundred and two minutes.",
+  "Boyhood":
+    "Boyhood was filmed over twelve years with the same actor, so the growing up is real rather than acted. There is almost no plot, and that turns out to be the point. Nearly three hours.",
+  "Coco Before Chanel":
+    "Coco Before Chanel stays with the years before the name meant anything, when she was sewing and calculating. It is more interested in ambition than in fashion. Just under two hours.",
+  "The Zone of Interest":
+    "Fair warning: The Zone of Interest is about a family living pleasantly beside a camp, and the horror is entirely in the sound design. If that sounds fine, it is one of the most disciplined films made about complicity. Under two hours.",
+  "Poor Things":
+    "Poor Things follows a woman reanimated with an infant's brain as she grows up at speed and refuses every rule offered to her. It is very funny, very strange and frequently explicit. Two and a half hours.",
+  "Anatomy of a Fall":
+    "Anatomy of a Fall puts a marriage on trial alongside the death, and it never tells you what actually happened. The recorded argument played in court is the best scene of its year. Two and a half hours.",
+  "Aftersun":
+    "Aftersun is a holiday remembered years later by someone who now understands what she was looking at. Almost nothing happens on screen and the last few minutes are devastating. One hundred and two minutes.",
+  "Everything Went Fine":
+    "Everything Went Fine is about a daughter asked by her father to help him die, and it is far more matter-of-fact and funnier than that sounds. The logistics carry it. Just under two hours.",
+  "Talk to Me":
+    "Talk to Me builds its horror out of a party game with a strict time limit, so the rules are the tension. The possession scenes are performed rather than digital. Ninety-five minutes.",
+  "Barbarian":
+    "Barbarian is best knowing nothing, and it changes shape twice in ways that are genuinely disorienting. The first twenty minutes are a masterclass in ordinary dread. One hundred and two minutes.",
+  "Midsommar":
+    "Fair warning: Midsommar is long, bright and extremely unpleasant, with a breakup running underneath the folk horror. If that sounds fine, the daylight makes it stranger than any dark film manages. Two and a half hours.",
+  "Bodies Bodies Bodies":
+    "Bodies Bodies Bodies is a comedy about a friendship group first and a body count second, and the accusations are funnier than the murders. It is lit almost entirely by phone screens. Ninety-four minutes.",
+  "Nobody":
+    "Nobody has a simple idea, that a dull suburban dad is nothing of the sort, and it executes the fights with real weight. The bus sequence is the highlight. Ninety-two minutes and it does not pad.",
+  "The Fall Guy":
+    "The Fall Guy is a love letter to stunt performers, so the falls and fires are done for real and shown clearly. The romance is doing more work than the missing-star plot. Just over two hours.",
+  "Barbie":
+    "Barbie is much stranger than the marketing suggested, spending its middle section on a genuine argument about what the doll has meant. The production design is worth seeing on its own. Just under two hours.",
+  "Air":
+    "Air is a film about a pitch meeting and it makes that gripping by keeping the shoe off screen and the stakes on the people. The mother is the one holding the real cards. Just under two hours.",
+  "Ford v Ferrari":
+    "Ford v Ferrari is really about two men fighting their own employer, and the racing is shot so you can follow it. The Le Mans section runs long and stays clear. Two and a half hours.",
+  "Free Solo":
+    "Free Solo is unbearable in the best sense, because the crew filming the climb are openly terrified of what they might record. The preparation makes the final ascent legible. One hundred minutes.",
+  "Won't You Be My Neighbor?":
+    "This one is about Fred Rogers and what he was actually doing all those years, which was harder and more deliberate than it looked. It takes children's television seriously as work. Ninety-four minutes.",
+  "My Octopus Teacher":
+    "My Octopus Teacher is a man diving daily for a year and slowly being tolerated by an octopus. The underwater footage is remarkable and the film is honest about how strange the attachment is. Eighty-five minutes.",
+  "Coraline":
+    "Coraline is genuinely frightening for a film aimed at children, and the button eyes are the least of it. The stop-motion gives the other house a texture that digital animation cannot manage. One hundred minutes.",
+  "Gremlins":
+    "Gremlins sets out three rules and breaks all of them before Christmas, and it is much nastier than its reputation. The kitchen sequence is where it stops being a family film. One hundred and six minutes.",
+  "Beetlejuice":
+    "Beetlejuice is a comedy where the dead couple are the sympathetic ones and the title character is barely in it. The afterlife bureaucracy is the best running joke. Ninety-two minutes.",
+  "Poltergeist":
+    "Poltergeist spends its first half on an ordinary family in an ordinary house, which is why the turn works. The clown and the tree are still effective. Just under two hours.",
+  "Signs":
+    "Signs is a film about faith with an alien invasion happening mostly off screen and mostly on television. The basement scene does more with less than almost anything in the genre. One hundred and six minutes.",
+  "Tremors":
+    "Tremors is a monster film where the townspeople are competent and likeable, which is rarer than it should be. The creatures are practical and the problem-solving is the fun. Ninety-six minutes.",
+  "ParaNorman":
+    "ParaNorman looks like a jokey zombie film for children and turns out to be about a town that punished someone for being different. The last act drops the gags entirely and is unexpectedly sad. Ninety-two minutes.",
+  "Hocus Pocus":
+    "Hocus Pocus is carried almost entirely by three actors enjoying themselves enormously, and the plot is mostly a delivery system for that. It is silly, knows it, and has become an October fixture for good reason. Ninety-six minutes.",
+  "Warm Bodies":
+    "Warm Bodies takes a daft premise and plays it sincerely, narrating from inside the head of someone who can barely speak. It is gentler than most things with zombies in. Ninety-eight minutes.",
+  "A Quiet Place Part II":
+    "A Quiet Place Part II opens with the day it all started, which the first film never showed, then splits the family up. The parallel cutting is the strongest thing in it. Ninety-seven minutes.",
+  "Jumanji":
+    "Jumanji is a board game that plays back, and the practical and early digital effects give it a slightly unsettling texture. It is more frightening than families expect. One hundred and four minutes.",
+  "The Iron Giant":
+    "The Iron Giant is about a weapon deciding what it wants to be, and it never talks down to the children watching. The last twenty minutes have made adults cry for twenty-five years. Eighty-six minutes."
 };
 
 /* The adjective form of each tag. ATTR_PHRASE is a noun phrase and half of
