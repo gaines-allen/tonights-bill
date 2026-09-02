@@ -1459,15 +1459,6 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
       <summary><span class="sign">+</span> Got rules?</summary>
       <div class="tune-body">
         <div class="tune-block">
-          <h3>Exact runtime</h3>
-          <div class="dial">
-            <input id="time-range" type="range" min="70" max="240" step="5" value="140"
-                   aria-label="Maximum runtime in minutes">
-            <span class="read" id="time-read"></span>
-          </div>
-        </div>
-
-        <div class="tune-block">
           <h3>Critics at least</h3>
           <div class="dial">
             <input id="rt-range" type="range" min="0" max="95" step="5" value="0"
@@ -2074,6 +2065,20 @@ const GENRES = ["action","adventure","animation","comedy","crime","documentary",
 const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
 function gLabel(g){ return GENRE_LABEL[g] || g.charAt(0).toUpperCase()+g.slice(1); }
 
+/* The adjective form of each tag. ATTR_PHRASE is a noun phrase and half of
+   them carry their own article ("a strong ensemble"), so it cannot be dropped
+   into an adjective slot without producing "with romantic over the top of it"
+   or "a lot of a strong ensemble". Two vocabularies, two kinds of slot. */
+const ATTR_ADJ = {
+  slowburn:"slow-burn", propulsive:"relentless", brisk:"brisk", bleak:"bleak",
+  hopeful:"hopeful", comic:"funny", melancholy:"melancholy", ironic:"wry",
+  earnest:"earnest", cerebral:"cerebral", visceral:"visceral", spectacle:"spectacular",
+  characterstudy:"character-led", twisty:"twisty", visual:"beautiful",
+  dialogue:"talky", ensemble:"ensemble-led", auteur:"singular", practical:"practical",
+  violent:"violent", romantic:"romantic", scary:"scary", weird:"strange",
+  grounded:"grounded", stylish:"stylish", epic:"epic", cozy:"warm", uplifting:"uplifting"
+};
+
 const ATTR_PHRASE = {
   slowburn:"slow-burn pacing", propulsive:"a relentless pace", brisk:"a brisk clip",
   bleak:"a bleak streak", hopeful:"hopefulness", comic:"comedy", melancholy:"melancholy",
@@ -2468,8 +2473,8 @@ function upFirst(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
 function storeSays(rec){
   const f = rec.f, T = rec.T;
 
-  /* One ledger for the whole card. Without it the same rare tag turns up as
-     the reason you were sold, the reason it fits, and the sign-off. */
+  /* One ledger for the card. Without it the same rare tag turns up as the
+     reason you were sold, the reason it fits, and the sign-off. */
   const spoken = {};
   function claim(list, n){
     const out = [];
@@ -2481,91 +2486,179 @@ function storeSays(rec){
     return out;
   }
   function rarest(a, b){ return idfA(b) - idfA(a); }
-  function phrases(list){ return list.map(function(x){ return ATTR_PHRASE[x] || x; }); }
+  /* noun-phrase slot vs adjective slot; they are not interchangeable */
+  const phrase = function(x){ return ATTR_PHRASE[x] || x; };
+  const adj    = function(x){ return ATTR_ADJ[x] || (ATTR_WORD[x] || x).toLowerCase(); };
 
-  const said = [];
+  /* Everything below is keyed off the title, never off a clock or a coin, so
+     a film reads the same way every time it comes up and two films with the
+     same tags do not come out in the same shape. */
+  const seed = hashTitle(f.t);
+  const pick = function(list, salt){ return list[(seed + salt) % list.length]; };
 
-  /* ---- 1. what was asked for, in their own words ---- */
+  /* ---------- the ask ---------- */
   const asked = S.moods.map(function(k){
     const m = MOOD_BY[k];
     return m ? (m.say || m.n.toLowerCase()) : null;
   }).filter(Boolean);
 
-  if(asked.length >= 3){
-    said.push("You asked for " + listOf(asked.slice(0, 3)) + ".");
-  } else if(asked.length === 2){
-    /* keyed off the film, not a coin, so the same pick reads the same way twice */
-    said.push(f.id % 2
-      ? "You wanted " + asked[0] + ", but still " + asked[1] + "."
-      : "You came in after " + asked[0] + " and " + asked[1] + ".");
+  let ask = null;
+  if(asked.length >= 2){
+    const a = asked[0], b = asked[1];
+    ask = pick([
+      "You wanted " + a + ", but still " + b + ".",
+      "You came in after " + a + " and " + b + ".",
+      "You asked for " + a + ". Also " + b + ".",
+      "Two things: " + a + " and " + b + "."
+    ], 1);
   } else if(asked.length === 1){
-    said.push("You asked for " + asked[0] + ".");
+    const a = asked[0];
+    ask = pick([
+      "You asked for " + a + ".",
+      upFirst(a) + ", you said.",
+      "You wanted " + a + " and not much else.",
+      "So: " + a + "."
+    ], 2);
   } else {
-    /* deliberately not the runtime or the room: sentence three is already
-       spending both, and hearing them twice reads like a form letter */
-    said.push("You didn't give us much to go on, so this is the store's own call.");
+    ask = pick([
+      "You left this one to us.",
+      "No rules tonight, so this is the store's own pick.",
+      "You didn't give us much to go on."
+    ], 3);
   }
 
-  /* ---- 2. what it actually carries, and whose film it is ----
-     Tonight's asks get first claim on the traits; the rarest of what is left
-     fills the gap, so the sentence is specific to this film and not to its
-     genre. The director is the one detail the catalog always has. */
+  /* ---------- what it actually is ----------
+     Tonight's asks get first claim on the tags, then the rarest of what is
+     left. One or two of them, never three: a trio of traits is a rhythm, and
+     a rhythm is what made every one of these cards sound the same. */
   const v = S.moods.length ? moodVector() : {};
-  /* "auteur" reads as "a singular director's hand", which is the director
-     clause again in different words. Whoever it is gets named instead. */
-  const usable = function(x){ return ATTR_PHRASE[x] && !(f.d && x === "auteur"); };
-  const wanted = f.a.filter(function(x){ return v[x] > 0 && usable(x); }).sort(rarest);
+  /* "You came in after something strange" followed by "Strange too" is the
+     card arguing with itself. A tag whose plain word is already in the ask is
+     not available to describe the film. */
+  const askLower = ask.toLowerCase();
+  const fresh = function(x){
+    return ATTR_PHRASE[x] && askLower.indexOf(adj(x)) === -1;
+  };
+  const wanted = f.a.filter(function(x){ return v[x] > 0 && fresh(x); }).sort(rarest);
   const pool = wanted.concat(
-    f.a.filter(function(x){ return usable(x) && wanted.indexOf(x) === -1; }).sort(rarest));
-  const got = claim(pool, 3);
-  if(got.length){
-    said.push("This one has " + listOf(phrases(got)) +
-      (f.d ? ", all of it unmistakably " + f.d + "." : "."));
-  } else if(f.d){
-    said.push("It is a " + f.d + " picture, and it behaves like one.");
+    f.a.filter(function(x){ return fresh(x) && wanted.indexOf(x) === -1; }).sort(rarest));
+  const got = claim(pool, 2);
+
+  let is = null;
+  if(got.length >= 2){
+    /* Every one of these leans on "has" or a bare adjective. The tag phrases
+       are a mix of singular and plural, so anything built on "there is" or
+       "X are" gets it wrong half the time. */
+    is = pick([
+      "It has " + phrase(got[0]) + " and " + phrase(got[1]) + ".",
+      "It runs on " + phrase(got[0]) + ", with " + phrase(got[1]) + " underneath.",
+      upFirst(adj(got[0])) + ", and " + adj(got[1]) + " with it.",
+      "It has " + phrase(got[0]) + ", and it is " + adj(got[1]) + " with it.",
+      "Built on " + phrase(got[0]) + ", and " + adj(got[1]) + " throughout.",
+      upFirst(adj(got[0])) + " throughout, and it has " + phrase(got[1]) + "."
+    ], 5);
+  } else if(got.length === 1){
+    is = pick([
+      "It runs on " + phrase(got[0]) + ".",
+      "What it has is " + phrase(got[0]) + ".",
+      "It leans hard on " + phrase(got[0]) + ".",
+      "Mostly it is " + adj(got[0]) + ".",
+      "It is " + adj(got[0]) + ", and it stays that way."
+    ], 7);
   }
 
-  /* ---- 3. the clock and the room ---- */
+  /* ---------- the clock ---------- */
   const slack = S.time - f.r;
-  let fit;
-  if(slack <= 12)      fit = "It runs " + hm(f.r) + ", which is very nearly all the time you have";
-  else if(slack >= 55) fit = "At " + hm(f.r) + " it leaves you " + hm(slack) + " back on the clock";
-  else                 fit = "At " + hm(f.r) + " it sits comfortably inside the " + hm(S.time) + " you gave us";
+  let clock;
+  if(slack <= 12){
+    clock = pick([
+      "It runs " + hm(f.r) + ", which is almost all of your " + hm(S.time) + ".",
+      "At " + hm(f.r) + " it is the whole evening.",
+      "You have " + hm(S.time) + " and it wants " + hm(f.r) + " of it."
+    ], 11);
+  } else if(slack >= 55){
+    clock = pick([
+      "It is only " + hm(f.r) + ", so there is " + hm(slack) + " spare.",
+      hm(f.r) + ", and " + hm(slack) + " left over.",
+      "Short, at " + hm(f.r) + "."
+    ], 13);
+  } else {
+    clock = pick([
+      "It runs " + hm(f.r) + ".",
+      "At " + hm(f.r) + " it fits.",
+      hm(f.r) + ", inside the " + hm(S.time) + " you gave us."
+    ], 17);
+  }
 
-  const roomHit = claim(f.a.filter(function(x){
-    return rec.upSet && rec.upSet[x] && ATTR_PHRASE[x];
-  }).sort(rarest), 1);
-  if(S.room === "solo") fit += ", and it is a better film watched alone";
-  /* "brings X to Y" rather than "X is right for Y": the trait phrases are a
-     mix of singular and plural — "style", "real scares", "practical effects" —
-     so any fixed verb disagrees with half of them. */
-  else if(roomHit.length) fit += ", and it brings " + phrases(roomHit)[0] + " to " +
-                                 (ROOM_SAY[S.room] || "the room");
-  said.push(fit + ".");
+  /* ---------- the room ---------- */
+  const roomName = ROOM_SAY[S.room] || "the room";
+  const room = S.room === "solo"
+    ? pick(["Better on your own.", "This one is for watching alone."], 19)
+    : pick([
+        "It plays well with " + roomName + ".",
+        "Good for " + roomName + ".",
+        upFirst(roomName) + " will be fine with it."
+      ], 23);
 
-  /* ---- 4. the sign-off ----
-     A film already on their shelf is the sharpest close available. Failing
-     that, three one-word reads of what is left unspoken. */
+  /* ---------- a film already on their shelf ---------- */
   const near = seeds(rec, T, 1)[0];
   const shared = near ? claim(f.a.filter(function(x){
     return near.a.indexOf(x) > -1 && ATTR_PHRASE[x];
   }).sort(rarest), 1) : [];
-
+  let shelf = null;
   if(near && shared.length){
-    said.push("It shares " + phrases(shared)[0] + " with <b>" + near.t +
-              "</b>, which is already on your shelf.");
+    shelf = "It shares " + phrase(shared[0]) + " with <b>" + near.t + "</b>, which you kept.";
   } else if(near){
-    said.push("If <b>" + near.t + "</b> earned its place on your shelf, this belongs next to it.");
-  } else {
-    const closers = f.a.filter(function(x){ return ATTR_WORD[x] && !spoken[x]; })
-                       .sort(rarest).slice(0, 3);
-    if(closers.length >= 2){
-      said.push(upFirst(listOf(closers.map(function(x){
-        return ATTR_WORD[x].toLowerCase();
-      }))) + ".");
-    }
+    shelf = pick([
+      "You put <b>" + near.t + "</b> on your shelf. This sits next to it.",
+      "If <b>" + near.t + "</b> earned its place, so does this."
+    ], 29);
   }
 
+  /* ---------- the last word: one or two, never a list ---------- */
+  const left = f.a.filter(function(x){ return ATTR_ADJ[x] && !spoken[x]; }).sort(rarest);
+  let close = null;
+  if(left.length >= 2){
+    close = pick([
+      upFirst(adj(left[0])) + " and " + adj(left[1]) + ".",
+      upFirst(adj(left[0])) + ", above all.",
+      "Mostly " + adj(left[0]) + ".",
+      upFirst(adj(left[0])) + ", if that matters."
+    ], 31);
+  } else if(left.length === 1){
+    close = upFirst(adj(left[0])) + ", above all.";
+  }
+
+  /* ---------- the shape ----------
+     Eight orders rather than one. The old card always ran ask, traits, clock,
+     sign-off, which is why every pick read like the last one however different
+     the film was. */
+  const SHAPES = [
+    ["ask", "is", "clock"],
+    ["is", "ask", "clock", "close"],
+    ["ask", "clock", "is"],
+    ["is", "clock", "shelf"],
+    ["ask", "is", "clock", "room"],
+    ["is", "ask", "clock", "shelf"],
+    ["ask", "is", "clock", "close"],
+    ["is", "clock", "ask", "close"]
+  ];
+  const parts = {ask:ask, is:is, clock:clock, room:room, shelf:shelf, close:close};
+  const shape = SHAPES[seed % SHAPES.length];
+
+  let said = shape.map(function(k){ return parts[k]; }).filter(Boolean);
+  /* a shape that lost its shelf line to an empty profile still has to say
+     enough to be worth reading */
+  ["is", "clock", "ask", "room", "close"].forEach(function(k){
+    if(said.length >= 3 || !parts[k] || said.indexOf(parts[k]) > -1) return;
+    said.push(parts[k]);
+  });
+
+  /* Some lines are two short sentences on purpose, for rhythm. The budget is
+     four sentences, so it has to be counted in sentences and not in lines. */
+  /* Every line above is a single sentence, so four lines is four sentences.
+     Rhythm comes from how long they are, not from splitting them: "Short, at
+     1h 41m." next to a twenty-word one is the variation worth having. */
   return said.slice(0, 4).join(" ");
 }
 
@@ -3124,7 +3217,7 @@ function renderTimes(){
     b.appendChild(el("span","cap", t.cap));
     b.addEventListener("click", function(){
       S.timePreset = t.k; S.time = t.mins; save();
-      $("time-range").value = t.mins; syncRuntime(); renderTimes(); gate();
+      renderTimes(); gate();
     });
     w.appendChild(b);
   });
@@ -3159,7 +3252,6 @@ function renderNights(){
   });
 }
 
-function syncRuntime(){ $("time-read").textContent = hm(S.time); }
 
 function ready(){ return !!S.room && !!S.timePreset; }
 
@@ -3942,7 +4034,7 @@ function darkHouse(){
   relax.addEventListener("click", function(){
     S.genres = []; S.rate = 0; S.minRT = 0;
     S.moods = S.moods.filter(function(k){ return k !== "great"; });
-    if(S.time < 150){ S.time = 150; S.timePreset = "long"; $("time-range").value = 150; syncRuntime(); }
+    if(S.time < 150){ S.time = 150; S.timePreset = "long"; }
     save();
     renderRatingTune(); renderGenreTune(); renderTimes(); renderNights(); renderMoodTune();
     $("rt-range").value = 0; $("rt-read").textContent = "Any";
@@ -4263,17 +4355,9 @@ function init(){
 
   renderWho(); renderTimes(); renderNights();
   renderRoomTune(); renderRatingTune(); renderMoodTune(); renderGenreTune(); renderServices();
-  syncRuntime(); renderColophon(); renderArrival(); gate();
+  renderColophon(); renderArrival(); gate();
   ambience(); drift();
   setInterval(function(){ if(SCENE === "tonight") $("stamp").textContent = stampNow(); }, 30000);
-
-  $("time-range").value = S.time;
-  $("time-range").addEventListener("input", function(e){
-    S.time = parseInt(e.target.value,10);
-    S.timePreset = "exact";
-    syncRuntime(); renderTimes(); gate();
-  });
-  $("time-range").addEventListener("change", save);
 
   $("rt-range").value = S.minRT;
   $("rt-read").textContent = S.minRT ? S.minRT + "%" : "Any";

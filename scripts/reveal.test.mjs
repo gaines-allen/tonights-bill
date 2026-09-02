@@ -136,7 +136,7 @@ const appBody = blocks[1]
   .replace(/"use strict";/, "")
   .replace(/\}\)\(\);\s*$/, "");
 const EXPORTS = `
-export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor,
+export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, ATTR_PHRASE,
          titleStep, scoreAll, billActs, setFeature, renderBill, programme,
          lockIt, announcePick, MODE_get, JUST_get };
 function MODE_get(){ return MODE; }
@@ -342,6 +342,7 @@ console.log("\nwhat the store says");
   const { BY_TITLE, S, storeSays, storeCard, scoreAll, listOf, titleStep, accentFor } = mod;
 
   const f = BY_TITLE["The Shape of Water"];
+  const ATTR_PHRASE_T = mod.ATTR_PHRASE;
   ok("the catalog still has the reference title", !!f);
 
   S.room = "two"; S.time = 135; S.moods = ["weird", "beautiful"];
@@ -352,7 +353,12 @@ console.log("\nwhat the store says");
   ok(`two to four sentences (got ${sentences.length})`, sentences.length >= 2 && sentences.length <= 4, copy);
   ok("it answers what was asked for", /you (asked|wanted|came in)/i.test(copy), copy);
   ok("it names the runtime against the clock", copy.includes("2h 3m") || copy.includes("2h"), copy);
-  ok("it reaches for a memorable detail", copy.includes("Guillermo del Toro"), copy);
+  /* The director tag is gone by request: "all of it unmistakably X" was the
+     most template-shaped line on the card. */
+  ok("it does not name the director", !copy.includes("Guillermo del Toro"), copy);
+  ok("it says something specific to this film",
+     f.a.some(a => ATTR_PHRASE_T[a] && copy.toLowerCase().includes(ATTR_PHRASE_T[a].split(" ").pop())),
+     copy);
 
   /* the five things printed elsewhere on the page must not be repeated here */
   ok("it does not print the release year", !copy.includes("2017"), copy);
