@@ -2065,6 +2065,287 @@ const GENRES = ["action","adventure","animation","comedy","crime","documentary",
 const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
 function gLabel(g){ return GENRE_LABEL[g] || g.charAt(0).toUpperCase()+g.slice(1); }
 
+/* ============================================================================
+   WHAT THE STORE SAYS, WRITTEN
+   A line per film, in the clerk's voice: one argument for the movie and one
+   detail that belongs to it and to nothing else.
+
+   These are written, not assembled. The generator below can vary its shape all
+   day and it will still be recombining the same thirty tags, because a tag is
+   shared by forty films and "one very committed fish man" is shared by one.
+
+   They are static on purpose. This is a page on GitHub Pages with no server,
+   so a model call at request time would mean shipping a key to every visitor,
+   and the whole point of the file is that it works offline and instantly.
+   Anything without a line here falls back to the generator.
+   ========================================================================== */
+const CLERK = {
+  "The Godfather":
+    "The Godfather asks for nearly three hours and spends them on one face changing. Michael starts the film as the son who got out, and the whole pleasure is watching how quietly he stops being that. Choose it when nobody is checking their phone.",
+  "Goodfellas":
+    "Goodfellas moves fast enough that you almost miss how bad things are getting. The narration keeps selling you on the life right up until the last stretch, when the same energy curdles into paranoia. A rise and fall told mostly at a sprint.",
+  "Pulp Fiction":
+    "The hook is structural: three stories that keep handing off to each other out of order. Pulp Fiction gets its charge from the talk between the violence, where hit men argue about hamburgers on the way to work. Nothing lands where you expect it to.",
+  "The Departed":
+    "Two moles, one inside the police and one inside the crew, each hunting the other without knowing the face. The Departed keeps them circling until the near misses get unbearable, and it turns a mobile phone into the most dangerous object in the film.",
+  "No Country for Old Men":
+    "No Country for Old Men is quiet in a way that makes every sound matter, and there is no score to hide behind. The man hunting the money never argues or threatens, which is exactly what makes him frightening. Just over two hours.",
+  "Heat":
+    "The reason to pick Heat is the two men at the centre, a thief and the detective chasing him, who understand each other better than anyone else in their lives. They get one conversation across a diner table and the whole film bends around it.",
+  "Se7en":
+    "Fair warning: Se7en is grim from the first scene and the rain never stops. If that sounds fine, it pays off with a case that gets more methodical and more awful as the two detectives close in, and it does not soften at the end.",
+  "Zodiac":
+    "Zodiac looks like a serial killer thriller and is really about obsession and paperwork. Nobody gets a satisfying ending, and watching three men lose years to a case that will not close is far more unsettling than a chase would be.",
+  "Gone Girl":
+    "Gone Girl starts as a missing person story and turns into something much colder about marriage and performance. The pleasure is watching two people manage their public image while the truth keeps moving underneath. Best with someone you can argue with afterwards.",
+  "Prisoners":
+    "Fair warning: Prisoners is bleak and it takes its time. What it offers back is a father who decides the law is moving too slowly, and a film that refuses to tell you whether he is right. Two and a half hours, uncomfortable throughout.",
+  "Sicario":
+    "Sicario keeps you exactly as lost as its lead, an agent brought along on an operation nobody will explain to her. The border crossing sequence builds its dread almost entirely out of sitting in traffic. Two hours, and most of the tension is silence.",
+  "The Silence of the Lambs":
+    "The reason to pick The Silence of the Lambs is the interview scenes. A trainee has to trade pieces of her own history for information, and the man on the other side of the glass is always several moves ahead. Under two hours.",
+  "Parasite":
+    "Parasite plays like a comedy for its first hour, a family talking their way into rich people's jobs one at a time. Then it turns, and the house you thought you understood has another floor. Best watched knowing as little as possible.",
+  "Memento":
+    "The hook is simple: a man who cannot form new memories is hunting his wife's killer, and the film runs backwards so you know as little as he does. Memento makes you assemble it in real time. You will want to talk it through after.",
+  "Nightcrawler":
+    "Nightcrawler looks like a crime film and is really a portrait of a man who discovers he is perfectly suited to filming other people's worst nights. He never doubts himself for a second, which is the horror of it. Just under two hours.",
+  "Uncut Gems":
+    "Fair warning: Uncut Gems is two hours of a man taking the worst available option at maximum volume, and it is exhausting on purpose. If that sounds fine, the last stretch tightens until it is hard to watch. Not a relaxing night.",
+  "Blade Runner 2049":
+    "Blade Runner 2049 asks for nearly three hours and spends them on silence, scale and weather. It is a detective story where the case keeps forcing the detective to ask what he is. Choose it with the lights off, not as background.",
+  "Blade Runner":
+    "Pick Blade Runner when you want atmosphere ahead of plot. The rain, the neon and the crowded streets do most of the work, and the question of who counts as a person lands harder than the chase does. Under two hours.",
+  "Arrival":
+    "Arrival looks like an alien invasion film and is really about translation. The tension comes from linguists and soldiers reading the same signals differently while the clock runs, and the ending reframes everything before it. Under two hours, and quietly devastating.",
+  "Dune":
+    "Dune spends two and a half hours building a world rather than racing through a plot, and it is the rare blockbuster comfortable with silence. The sheer size of the worms and the ships is the point. Choose it when everyone is ready to sit still.",
+  "Dune: Part Two":
+    "Dune: Part Two is where the story darkens: the prophecy everyone has been waiting for arrives, and the film treats it as a catastrophe rather than a triumph. The sandworm riding sequence alone justifies the running time, though you want the first one behind you.",
+  "Interstellar":
+    "Interstellar asks for nearly three hours and the reason it earns them is the clock. Time runs at different speeds for the crew and the family they left behind, so every delay costs somebody years. Choose it when you do not mind a film going big and sincere.",
+  "Inception":
+    "The hook is simple: a heist, except the vault is somebody's mind. Inception nests the job four layers deep and runs all four at once, which sounds confusing and is actually the clearest thing about it. Two and a half hours that move.",
+  "The Matrix":
+    "The Matrix has a genuinely good idea and builds the action around it rather than the other way round. The first hour is a man learning the rules, and the fights only start once you understand what breaking them costs him. Just over two hours.",
+  "Alien":
+    "Alien is a haunted house film on a spaceship, and the crew are working people rather than heroes. Most of it is corridors and waiting, which is why the moments that are not land as hard as they do. Under two hours.",
+  "Aliens":
+    "Aliens swaps the first film's dread for pressure and gives a room something to shout at. The marines arrive certain they will win and spend the rest of the film being wrong about that. Just over two hours, and it moves.",
+  "Ex Machina":
+    "The reason to pick Ex Machina is the three way standoff between a coder, his boss and the machine being tested, each of them working an angle. The test scenes are quiet conversations that keep shifting who is actually in control. Under two hours.",
+  "Everything Everywhere All at Once":
+    "Everything Everywhere All at Once looks like chaos, and the multiverse fighting is genuinely silly, but the film underneath is about a mother and a daughter failing to talk to each other. The absurdity is what makes the ending land.",
+  "Children of Men":
+    "Children of Men gives you a collapsing world without stopping to explain it, which is why it feels lived in rather than designed. The long unbroken takes put you inside the panic instead of watching it from outside. Under two hours.",
+  "Mad Max: Fury Road":
+    "Mad Max: Fury Road wastes no time on backstory. It is one chase out into the desert and the same chase back, told almost entirely through what you can see, and it holds that pitch for two hours without pausing to explain itself.",
+  "Edge of Tomorrow":
+    "The hook is simple: a coward relives the same losing battle until he gets good at it. Edge of Tomorrow gets real comedy out of how often he dies badly, then quietly turns into something else. Under two hours.",
+  "Her":
+    "Her starts as a gentle joke about a man dating his phone and gradually stops being funny at all. It takes the relationship seriously enough to follow it the whole way through, including the part where it cannot work. Sad and warm at once.",
+  "Annihilation":
+    "Fair warning: Annihilation is strange and does not explain itself. If that sounds fine, it offers a zone that copies and distorts everything inside it, and a final sequence that runs on almost no dialogue at all. Under two hours.",
+  "Gravity":
+    "At ninety minutes, Gravity gets you a whole survival story without taking the night. It is essentially one problem repeated with less and less oxygen, and the silence of the vacuum does more work than any score could.",
+  "The Martian":
+    "The Martian gives you a survival story without the misery. The pleasure is watching a competent man solve one problem at a time and narrate it cheerfully, which keeps surprisingly good company for a film about being stranded alone.",
+  "Looper":
+    "The hook is simple: hitmen kill people sent back from the future, until one of them is sent his own older self. Looper spends less time on the mechanics than you would expect and more on the farmhouse it all ends up at. Under two hours.",
+  "District 9":
+    "District 9 opens like a documentary about an alien refugee camp and turns much more personal once its bureaucrat lead starts changing. The handheld style keeps the effects grounded. Under two hours, and rougher than the premise suggests.",
+  "Minority Report":
+    "The hook is simple: a cop who arrests murderers before they kill is flagged for a murder of his own. Minority Report keeps the chase moving while the questions about prediction pile up underneath it. Two and a half hours.",
+  "Jurassic Park":
+    "Jurassic Park gives a room plenty to react to, and it still works because the dinosaurs stay off screen until they matter. The kitchen sequence is patient in a way blockbusters rarely risk now. Just over two hours.",
+  "E.T. the Extra-Terrestrial":
+    "The comfort in E.T. the Extra-Terrestrial comes from how seriously it takes a ten year old's loneliness, not from the alien. Shooting most of it at child height keeps the adults out of frame and unhelpful, which is exactly how childhood feels.",
+  "Back to the Future":
+    "Back to the Future is a time travel comedy that actually holds together, which is rarer than it sounds. Every setup pays off later, and the central problem is genuinely funny: a teenager has to talk his own parents into liking each other.",
+  "Star Wars: A New Hope":
+    "Star Wars: A New Hope moves like the serials it was built from, running farm boy to rescue to trench run in almost exactly two hours. What holds up is how lived in it all looks, every ship dented and both droids bickering. Easy to put on with almost anyone.",
+  "The Empire Strikes Back":
+    "The Empire Strikes Back is the one where the heroes lose, and it commits to that all the way to the last scene. Splitting the group up lets the training sections breathe while the chase tightens elsewhere. Better if the first film is fresh in mind.",
+  "Rogue One":
+    "Rogue One is the war film in the series, following the people who stole the plans and never get named again. Knowing where it has to end makes the last half hour heavier than the setup suggests. Just over two hours.",
+  "The Dark Knight":
+    "The reason to pick The Dark Knight is a villain with no plan beyond proving a point. He keeps setting the city moral tests it might fail, and the film is honest enough not to guarantee it passes. Two and a half hours that move quickly.",
+  "Batman Begins":
+    "Batman Begins spends its first hour on a man deciding what he wants to be, which is why the costume lands when it finally shows up. It is the most grounded of the three, more detective work than spectacle. Just over two hours.",
+  "Oppenheimer":
+    "Oppenheimer asks for three hours and splits them between building the bomb and the hearing that came after, cutting between the two until they comment on each other. Choose it when everyone is prepared to concentrate, because it is mostly rooms and talking.",
+  "Dunkirk":
+    "Dunkirk runs three timelines at different speeds and lets them converge, which sounds like a gimmick and turns out to be the whole tension. There is almost no dialogue and very little character history. Under two hours, and relentless.",
+  "Saving Private Ryan":
+    "Saving Private Ryan opens with half an hour on the beach that set the standard for every war film after it. What follows is quieter and more argumentative, a squad openly resenting the mission they were given. Nearly three hours.",
+  "1917":
+    "1917 is built to look like one unbroken shot, which keeps you tied to two runners in real time with no cutting away for relief. The trick would be hollow if the ground they cross were not so specific. Just under two hours.",
+  "Inglourious Basterds":
+    "The reason to pick Inglourious Basterds is the long conversations, where someone at the table knows more than they are letting on and the scene refuses to end. The opening farmhouse sequence sets the pattern. Two and a half hours of held breath.",
+  "Apocalypse Now":
+    "Apocalypse Now is a river trip that gets stranger at every stop, and the film is as unmoored as the men on the boat by the end. It is long, slow in stretches, and unlike anything else. Watch it when you can give it full attention.",
+  "Full Metal Jacket":
+    "Full Metal Jacket is really two films, and the first hour in boot camp is so strong that the Vietnam half has been argued about ever since. That split is worth seeing for yourself. Under two hours, and hard throughout.",
+  "The Shawshank Redemption":
+    "The comfort in The Shawshank Redemption comes from patience, not from the ending everyone remembers. Two men build a friendship over twenty years of small favours and long conversations, and the film is content to sit in that. Two and a half hours.",
+  "Forrest Gump":
+    "Forrest Gump walks through forty years of American history without ever quite noticing it, which is the joke and also the sadness. The parts people forget are the ones about Jenny, and they are the reason it holds together. Two and a half hours.",
+  "The Social Network":
+    "The Social Network is a legal deposition told as a thriller, cutting between the lawsuit and the nights that caused it. The talk moves fast enough that you lean in. Two hours, and nobody in it comes out well.",
+  "Whiplash":
+    "Whiplash is a horror film about a music teacher. The tension comes from never knowing whether the abuse is producing something or just breaking someone, and the film will not settle it for you. Under two hours, and the last ten minutes are extraordinary.",
+  "There Will Be Blood":
+    "There Will Be Blood is a portrait of a man who cannot bear anyone else doing well, and it gives him almost nobody to talk to. The first fifteen minutes have no dialogue at all. Two and a half hours, and deliberately airless.",
+  "Moonlight":
+    "Moonlight tells one life in three chapters with three actors, and the gaps between them do as much work as the scenes. It is quiet, and the restraint is why the diner scene at the end lands so hard. Under two hours.",
+  "Manchester by the Sea":
+    "Fair warning: Manchester by the Sea is about grief that does not resolve, and it declines to offer the recovery you expect. What it offers instead is exact, often funny observation of how people actually behave around a death. Just over two hours.",
+  "Marriage Story":
+    "Marriage Story is unusual in giving both people a fair case, so you keep changing sides. The lawyers turn a private failure into a competition neither wanted, and the argument scene is as good as screen acting gets. Just over two hours.",
+  "The Banshees of Inisherin":
+    "The Banshees of Inisherin starts as a comedy about a man who simply stops speaking to his friend, then gets much darker without changing its tone. The island setting keeps everyone trapped together. Under two hours.",
+  "Little Women":
+    "Little Women cuts between girlhood and adulthood rather than running straight, so every happy scene arrives with its consequence attached. The performances make four sisters feel like four people. Just over two hours.",
+  "Lady Bird":
+    "The reason to pick Lady Bird is the mother and daughter, who love each other and cannot get through a car journey without a fight. It is specific about Sacramento and about being seventeen. Ninety-four minutes, and it does not waste one.",
+  "The Grand Budapest Hotel":
+    "The Grand Budapest Hotel is a caper wrapped in a story wrapped in another story, and it moves at a clip. Underneath the symmetry and the pastel there is real loss about a Europe on the way out. Ninety-nine minutes.",
+  "Knives Out":
+    "Knives Out gives a room plenty to react to, from an awful family to a murder story that keeps rearranging. It is easy to follow together, but the structure hands you the solution early and then makes that the problem. Just over two hours.",
+  "The Menu":
+    "The Menu is a comedy about hospitality that turns steadily nastier as the courses arrive. Each dish is announced like a joke and lands like a threat. Under two hours, and best on an empty stomach.",
+  "Glass Onion":
+    "Glass Onion is looser and sillier than the first one, built around a tech billionaire who has staged his own murder party. The pleasure is watching a room full of hangers-on protect a man none of them respect. Just over two hours.",
+  "Get Out":
+    "Get Out is funny for much longer than you expect, which is what makes the turn work. The weekend keeps offering small wrongnesses that are easy to explain away until they are not. Under two hours.",
+  "Hereditary":
+    "Fair warning: Hereditary is genuinely upsetting and the first act is a family drama about grief before it is anything else. If that sounds fine, it earns its scares by making the household feel real first. Just over two hours.",
+  "The Babadook":
+    "The Babadook works because the monster and the exhaustion of single parenthood are the same thing, and the film never insists you pick one reading. The pop-up book is a genuinely unpleasant object. Ninety-four minutes.",
+  "A Quiet Place":
+    "A Quiet Place builds nearly everything from sound, so a nail on a step carries more weight than most jump scares. The family have worked out a whole life in silence, and watching the rules operate is half the pleasure. Ninety minutes.",
+  "The Shining":
+    "The Shining is more about a hotel and a marriage going wrong than about anything chasing anyone. The corridors, the carpet and the tricycle do the work, and it takes its time. Nearly two and a half hours.",
+  "The Thing":
+    "The Thing is a paranoia film first and a creature film second. Nobody knows who is still themselves, and the blood test scene is one of the great sustained set pieces. Under two hours, and the effects still hold up.",
+  "It Follows":
+    "It Follows has one rule and never cheats it, which is why the wide shots become unbearable once you start scanning the background yourself. The synth score does a lot of heavy lifting. One hundred minutes.",
+  "Scream":
+    "Scream is a slasher that knows it is one and uses that to keep you guessing about who survives. The opening phone call is still the best fifteen minutes in the genre. Under two hours, and it plays well with a group.",
+  "Sinners":
+    "Sinners spends a long first act on a juke joint in 1932 Mississippi before anything supernatural arrives, and that patience is why the second half hits. The music sequences are worth the ticket on their own. Just over two hours.",
+  "Nope":
+    "Nope is a spectacle film about the cost of chasing spectacle, and it keeps its creature mostly hidden and genuinely strange. The ranch setting gives it space and silence to work with. Just over two hours.",
+  "28 Days Later":
+    "28 Days Later opens with an empty London that still looks astonishing, then turns its attention to the people who survived rather than the infected. The last act argues that other survivors are the problem. Just under two hours.",
+  "Spirited Away":
+    "Spirited Away drops a sulky child into a bathhouse for spirits and makes her earn her way out with actual work. The imagination is endless and the rules are strict, which is why it never feels weightless. Just over two hours.",
+  "My Neighbor Totoro":
+    "The comfort in My Neighbor Totoro comes from how little happens. Two sisters wait, explore, and worry about their mother, and the film is content to watch them do it. Eighty-six minutes, and gentle enough for anyone in the room.",
+  "Princess Mononoke":
+    "Princess Mononoke refuses to give anyone the villain role, which turns a forest-versus-industry story into something genuinely difficult. It is also more violent than its reputation suggests. Just over two hours.",
+  "Spider-Man: Into the Spider-Verse":
+    "Spider-Man: Into the Spider-Verse looks unlike anything else animated, mixing comic-book texture and frame rates into something you have to adjust to for a minute. Underneath it is a straightforward story about a kid who is not ready. Just under two hours.",
+  "Spider-Man: Across the Spider-Verse":
+    "Across the Spider-Verse is bigger and busier than the first, with a different visual style for each world it visits. It ends mid-story, so line up the next one before you start. Two and a half hours.",
+  "The Incredibles":
+    "The Incredibles is a superhero film that is really about a marriage and a midlife crisis, and it treats the family arguments as seriously as the action. The villain has one of the better motives in the genre. Just under two hours.",
+  "Ratatouille":
+    "Ratatouille makes an unlikely premise work by taking cooking seriously, right down to a critic whose review is the best scene in the film. It is about who is allowed to be good at something. Just under two hours.",
+  "WALL-E":
+    "WALL-E spends its first forty minutes almost entirely without dialogue and is never once unclear. A robot tidying an abandoned Earth is enough to carry it, and the plant in the boot does the rest. Ninety-eight minutes, and it works for any age in the room.",
+  "Toy Story":
+    "Toy Story is about jealousy, which is why it still holds. A favourite toy gets replaced and behaves badly about it, and the film lets him be genuinely petty before it forgives him. Eighty-one minutes.",
+  "Inside Out":
+    "Inside Out puts five emotions in charge of a girl's head and then argues that the sad one is necessary. It explains something genuinely difficult to children without softening it. Ninety-five minutes, and the adults in the room take it harder.",
+  "Coco":
+    "Coco builds its afterlife around remembering people, so the stakes are about being forgotten rather than dying. The music is woven into the plot instead of pausing it. Under two hours, and the last song will get you.",
+  "Up":
+    "Up opens with four minutes that summarise a marriage and are better than most whole films. What follows is lighter, a grumpy widower dragging his house and an unwanted boy scout south. Ninety-six minutes.",
+  "Finding Nemo":
+    "Finding Nemo is a film about an anxious parent that happens to be set underwater. The son is fine almost the whole time, which makes the crossing the father's problem rather than the son's. One hundred minutes.",
+  "Zootopia":
+    "Zootopia is a proper detective story with a talking rabbit in it, and the case has actual moving parts. It is also franker about prejudice than most films aimed at children manage. Just under two hours.",
+  "Moana":
+    "Moana keeps its cast small and its ocean enormous, so most of the film is two characters arguing on a boat. The songs are strong and the water looks extraordinary. Just under two hours.",
+  "How to Train Your Dragon":
+    "How to Train Your Dragon earns its bond the slow way, with a long middle section of a boy and an injured animal working each other out. The flying sequences are the reward. Ninety-eight minutes.",
+  "The Lion King":
+    "The Lion King moves quickly and hits hard early, and the stampede still lands for anyone seeing it young. The songs carry the middle when the plot slows. Eighty-eight minutes.",
+  "Klaus":
+    "Klaus invents an origin for Christmas out of a selfish postman and a woodworker who has stopped speaking to people. The hand-drawn animation is worth seeing on its own. Ninety-six minutes, and it earns its ending.",
+  "Puss in Boots: The Last Wish":
+    "Puss in Boots: The Last Wish is much better than it has any right to be, mostly because it gives its hero a genuine fear of dying and a wolf who will not stop following him. The fight animation is startling. Just over an hour and a half.",
+  "The Lord of the Rings: The Fellowship of the Ring":
+    "Fellowship asks for three hours and uses them to make the journey feel like walking. The group forms slowly enough that you know all nine before anything goes wrong. Choose it when the evening is clear.",
+  "The Lord of the Rings: The Two Towers":
+    "The Two Towers splits the group three ways and builds everything towards one siege in the rain that runs most of the last hour. It is the darkest of the three. Nearly three hours, and it assumes you watched the first.",
+  "The Lord of the Rings: The Return of the King":
+    "Return of the King asks for well over three hours and spends the last stretch saying goodbye several times over. The Pelennor Fields sequence is the largest thing the trilogy attempts. Only worth starting with a clear night.",
+  "Pan's Labyrinth":
+    "Fair warning: Pan's Labyrinth is a fairy tale with real fascism in it, and the violence is not softened. If that sounds fine, the two halves feed each other, and the creatures are genuinely unnerving rather than whimsical. Just over two hours.",
+  "The Princess Bride":
+    "The Princess Bride is funny without ever sneering at its own adventure story, which is why it works for a room of mixed ages. The framing device with the grandfather lets it undercut itself and then commit anyway. Ninety-eight minutes.",
+  "Harry Potter and the Prisoner of Azkaban":
+    "Prisoner of Azkaban is where the series grows up and starts looking strange, with weather and shadow doing work the earlier films skipped. The time-travel section replays scenes you have already watched and changes them. Two and a half hours.",
+  "Casablanca":
+    "Casablanca is quicker and funnier than its reputation suggests, with a bar full of people running small schemes around the main one. The romance works because both people are already tired. One hundred and two minutes.",
+  "When Harry Met Sally":
+    "When Harry Met Sally follows the same two people across twelve years, so the friendship has time to become the point. The talk is sharp and the film is honest that the question it keeps asking has no clean answer. Ninety-six minutes.",
+  "Before Sunrise":
+    "Before Sunrise is two people walking around Vienna talking, and that is the entire film. It works because the conversation is genuinely good and the clock is running the whole time. One hundred and one minutes.",
+  "Eternal Sunshine of the Spotless Mind":
+    "Eternal Sunshine of the Spotless Mind runs backwards through a relationship as it is being deleted, so you meet the worst of it first and the best of it last. The practical effects for a collapsing memory still look better than anything digital. Under two hours.",
+  "La La Land":
+    "La La Land is a musical about two people helping each other get what they want at the cost of each other, and it is honest about that from early on. The last five minutes reframe everything before them. Just over two hours.",
+  "Notting Hill":
+    "Notting Hill takes a silly premise seriously by treating fame as a practical problem rather than a fantasy. The friends around the couple are given enough room to be funny on their own. Just over two hours.",
+  "Crazy Rich Asians":
+    "Crazy Rich Asians is a meet-the-family comedy where the family is a genuine obstacle rather than a joke, and the mahjong scene near the end does more than any argument could. It looks expensive throughout. Two hours.",
+  "Past Lives":
+    "Past Lives spans twenty-four years and refuses the easy version of its own premise. Almost nothing dramatic happens, and the final scene is devastating anyway. One hundred and five minutes.",
+  "Portrait of a Lady on Fire":
+    "Portrait of a Lady on Fire is about looking at someone, and it uses a painter studying a subject in secret to make that literal. There is no score for most of it, which makes one late scene extraordinary. Just over two hours.",
+  "Brokeback Mountain":
+    "Brokeback Mountain covers forty years of something neither man will say out loud, and the silences carry the weight. It is patient and it does not offer relief. Just over two hours.",
+  "Superbad":
+    "Superbad is crude for most of its length and then quietly turns out to be about two friends who cannot say they will miss each other. The last twenty minutes are the reason it lasted. Just under two hours.",
+  "Bridesmaids":
+    "Bridesmaids works because the rivalry is real: a woman losing her best friend to someone with more money and better taste. The set pieces are famous, but the arguments are the better material. Just over two hours.",
+  "Airplane!":
+    "Airplane runs a joke roughly every nine seconds and simply does not stop, so the ones that miss are gone before you notice. It requires no setup and no attention span. Eighty-eight minutes.",
+  "The Big Lebowski":
+    "The Big Lebowski has a plot it does not care about, which frees everyone in it to talk. The pleasure is a man who wants nothing except his rug back being dragged through a kidnapping. Just under two hours.",
+  "Groundhog Day":
+    "Groundhog Day gets darker in the middle than people remember, with a long stretch where the loop stops being funny. That is what makes the turn earn itself. One hundred and one minutes.",
+  "Hot Fuzz":
+    "Hot Fuzz spends an hour as a village comedy and then becomes an action film without changing its manner. Every throwaway line in the first half pays off in the second. Two hours, and it rewards a rewatch.",
+  "Shaun of the Dead":
+    "Shaun of the Dead is a zombie film where the apocalypse is mostly an inconvenience to a man trying to fix his relationship. It gets genuinely sad in the last twenty minutes. Ninety-nine minutes.",
+  "Booksmart":
+    "Booksmart puts two overachievers through one night of trying to make up for four years, and it likes both of them. The friendship argument late on is played straight and hurts. One hundred and two minutes.",
+  "Palm Springs":
+    "Palm Springs gives you an easy comedy without turning into background noise. The time-loop setup keeps finding new trouble for its leads, and it wraps in ninety minutes.",
+  "Game Night":
+    "Game Night has a better plot than a comedy needs, and it shoots the suburbs like a thriller. The running joke about the neighbour is the best thing in it. One hundred minutes.",
+  "The Nice Guys":
+    "The Nice Guys is a detective story where both detectives are bad at the job, and the film gets most of its comedy from them failing at basic things. Nineteen-seventies Los Angeles is rendered with real care. Just under two hours.",
+  "Jojo Rabbit":
+    "Jojo Rabbit is a comedy about a Hitler Youth boy that turns serious the moment it needs to, and the tonal switch is handled cleanly. The girl in the wall keeps the satire honest. Under two hours.",
+  "Mission: Impossible - Fallout":
+    "Mission: Impossible Fallout is built on stunts a real person actually performed, which is why the helicopter chase reads differently to digital spectacle. The plot exists to move him to the next one. Two and a half hours.",
+  "John Wick":
+    "John Wick has the cleanest motive in action cinema and then gets out of its own way. The fights are shot wide and held long enough to see what is happening. One hundred and one minutes.",
+  "Top Gun: Maverick":
+    "Top Gun Maverick puts real actors in real aircraft and the difference is obvious in every flight sequence. The training structure gives the last mission actual stakes. Just over two hours.",
+  "Casino Royale":
+    "Casino Royale strips Bond back to someone who can lose, and he does, repeatedly. The poker game is tense because the film bothers to explain what is at risk. Two and a half hours.",
+  "Skyfall":
+    "Skyfall is the best-looking film in the series, with a Shanghai fight staged almost entirely in silhouette. It is also the one most interested in whether any of it should still exist. Two and a half hours.",
+  "Raiders of the Lost Ark":
+    "Raiders of the Lost Ark moves from set piece to set piece with almost no fat, and the hero spends most of it improvising badly and getting hurt. It is still the template everyone copies. Just under two hours."
+};
+
 /* The adjective form of each tag. ATTR_PHRASE is a noun phrase and half of
    them carry their own article ("a strong ensemble"), so it cannot be dropped
    into an adjective slot without producing "with romantic over the top of it"
@@ -2472,6 +2753,10 @@ function upFirst(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
 
 function storeSays(rec){
   const f = rec.f, T = rec.T;
+
+  /* A written line always wins. The generator is the fallback for anything
+     that has not been written yet, not the other way round. */
+  if(CLERK[f.t]) return CLERK[f.t];
 
   /* One ledger for the card. Without it the same rare tag turns up as the
      reason you were sold, the reason it fits, and the sign-off. */
