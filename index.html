@@ -1175,14 +1175,18 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   gap:clamp(14px,1.8vw,24px);padding-bottom:clamp(44px,7vh,80px);
 }
 .keep{display:flex;flex-direction:column;gap:7px;position:relative}
-.keep .poster{cursor:pointer;order:1}
-/* One button owns the poster and the title. Its hit area is drawn over the
-   whole tile by the pseudo-element; the status buttons are its siblings, not
-   its children, and sit above it so a status click never opens the case. */
-.keep-open{display:flex;flex-direction:column;gap:7px;order:2;position:static}
-.keep-open::before{content:"";position:absolute;inset:0;z-index:1;border-radius:3px}
-.keep-open:focus-visible{outline:none}
-.keep-open:focus-visible::before{outline:2px solid var(--amber);outline-offset:3px}
+.keep .poster{cursor:pointer}
+/* One button, stretched over the whole tile, opens the case for the poster
+   and the title alike. It is a real element positioned against the tile, not
+   a pseudo-element: engines disagree about what an absolutely positioned
+   pseudo-element inside a button is positioned against, and a tap has to
+   land the same way on every phone. The status buttons are its siblings, not
+   its children, and sit above it so a status tap never opens the case. */
+.keep-open{
+  position:absolute;inset:0;z-index:1;border-radius:3px;
+  appearance:none;-webkit-appearance:none;-webkit-tap-highlight-color:transparent;
+}
+.keep-open:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 .keep[data-state="hated"] .poster img{filter:grayscale(1) brightness(.38)}
 .keep[data-state="loved"] .poster{
   box-shadow:0 0 0 2px var(--amber), 0 10px 20px rgba(0,0,0,.5);
@@ -4805,12 +4809,12 @@ function keepTile(f, index){
   const state = S.taste[f.t] || "";
   const c = el("div","keep");
   if(state) c.setAttribute("data-state", state);
-  /* The opener comes first so it is the first tab stop on the tile; the
-     stylesheet draws it after the poster. It never contains another button. */
+  /* The opener is an empty button stretched over the tile by the stylesheet,
+     named for assistive tech, first in the tile so it is its first tab stop.
+     It never contains another button; the poster and the printed title sit
+     beside it. */
   const open = el("button","keep-open"); open.type = "button";
   open.setAttribute("aria-label", "Open details for " + f.t);
-  open.appendChild(el("span","kt", f.t));
-  open.appendChild(el("span","ky", f.y + " / " + hm(f.r).toUpperCase()));
   open.addEventListener("click", function(){ openCase(f, open); });
   OPENERS[f.t] = open;
   c.appendChild(open);
@@ -4818,6 +4822,8 @@ function keepTile(f, index){
   if(index) box.appendChild(el("span","idx", String(index).padStart(2,"0")));
   box.appendChild(reactRow(f));
   c.appendChild(box);
+  c.appendChild(el("span","kt", f.t));
+  c.appendChild(el("span","ky", f.y + " / " + hm(f.r).toUpperCase()));
   return c;
 }
 /* Loved, Not for me, Seen it. The same three buttons on the tile and in the

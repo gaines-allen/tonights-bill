@@ -44,7 +44,10 @@ console.log("\nthe tile");
   ok("they sit above the opener's hit area", /\.keep \.react\{[^}]*z-index:2/.test(html));
   ok("and on touch screens stay in the overlay, always shown, where the poster cannot clip them",
      /@media \(hover:none\)\{\s*\.keep \.react\{opacity:1\}/.test(html));
-  ok("the hit area is the whole tile", /\.keep-open::before\{content:"";position:absolute;inset:0/.test(html));
+  ok("the hit area is the whole tile, as a real element rather than a pseudo-element",
+     /\.keep-open\{\s*position:absolute;inset:0;z-index:1/.test(html) && !/keep-open::before/.test(html));
+  eq("the button is empty; the printed title stays a plain element beside it",
+     [opener.children.length, walk(tile).some(n => n.className === "kt" && !walk(opener).includes(n))], [0, true]);
   eq("the case starts closed", env.doc.getElementById("case").hidden !== false, true);
 }
 
