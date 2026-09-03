@@ -3,154 +3,13 @@
  * swap, duplicate-request handling, the reduced-motion path, the "What the
  * store says" card, and the lock-in confirmation.
  *
- * The page is one file with no build step and no framework, so the app's real
- * source is lifted out of index.html and imported as a module against a small
- * DOM stub. Two things make that possible without dragging in a headless
- * browser:
- *
- *   - the IIFE ends with `if(document.readyState === "loading") ... else init()`,
- *     so a stub that reports "loading" loads every definition and renders
- *     nothing;
- *   - the controller reaches setTimeout through the global, so a virtual clock
- *     installed before import makes every beat instant and exact.
+ * The DOM stub, the virtual clock and the loader that lifts the app out of
+ * index.html live in harness.mjs, shared with session.test.mjs and
+ * shelf.test.mjs.
  */
 import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
-
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const html = await readFile(join(ROOT, "index.html"), "utf8");
-
-let pass = 0, fail = 0;
-const eq = (l, got, want) => {
-  const a = JSON.stringify(got), b = JSON.stringify(want);
-  if (a === b) { pass++; console.log(`  ok   ${l}`); }
-  else { fail++; console.log(`  FAIL ${l}\n       got  ${a}\n       want ${b}`); }
-};
-const ok = (l, cond, note) => {
-  if (cond) { pass++; console.log(`  ok   ${l}`); }
-  else { fail++; console.log(`  FAIL ${l}${note ? "\n       " + note : ""}`); }
-};
-
-/* ------------------------------------------------------------------ clock */
-const Clock = {
-  now: 0, seq: 1, jobs: new Map(),
-  reset(){ this.now = 0; this.jobs.clear(); },
-  set(fn, ms){ const id = this.seq++; this.jobs.set(id, {at: this.now + (ms || 0), fn}); return id; },
-  clr(id){ this.jobs.delete(id); },
-  /* run everything due up to now+ms, in time order, including work queued
-     by the jobs themselves (the dealing step re-queues itself) */
-  tick(ms){
-    const target = this.now + ms;
-    for (;;) {
-      let next = null;
-      for (const [id, j] of this.jobs) if (j.at <= target && (!next || j.at < next.j.at)) next = {id, j};
-      if (!next) break;
-      this.jobs.delete(next.id);
-      this.now = next.j.at;
-      next.j.fn();
-    }
-    this.now = target;
-  }
-};
-
-/* --------------------------------------------------------------- DOM stub */
-function makeNode(tag){
-  const n = {
-    tagName: String(tag).toUpperCase(),
-    _cls: "", children: [], parent: null, _text: "", value: "",
-    style: { _p: {}, setProperty(k, v){ this._p[k] = v; }, getPropertyValue(k){ return this._p[k] || ""; } },
-    attrs: {},
-    offsetWidth: 100, offsetTop: 0,
-    setAttribute(k, v){ this.attrs[k] = String(v); },
-    getAttribute(k){ return k in this.attrs ? this.attrs[k] : null; },
-    removeAttribute(k){ delete this.attrs[k]; },
-    addEventListener(){}, removeEventListener(){}, focus(){}, scrollIntoView(){},
-    appendChild(c){ c.parent = this; this.children.push(c); return c; },
-    remove(){},
-    querySelector(){ return null; },
-    querySelectorAll(){ return []; },
-    closest(){ return null; },
-    get className(){ return this._cls; },
-    set className(v){ this._cls = String(v); },
-    get textContent(){
-      if (this.children.length) return this.children.map(c => c.textContent).join("");
-      return this._text;
-    },
-    set textContent(v){ this._text = String(v); this.children = []; },
-    get innerHTML(){ return this._html || ""; },
-    set innerHTML(v){ this._html = String(v); if (v === "") this.children = []; },
-    classList: null
-  };
-  n.classList = {
-    add(...c){ c.forEach(x => { if (!n._cls.split(/\s+/).includes(x)) n._cls = (n._cls + " " + x).trim(); }); },
-    remove(...c){ n._cls = n._cls.split(/\s+/).filter(x => x && !c.includes(x)).join(" "); },
-    contains(x){ return n._cls.split(/\s+/).includes(x); },
-    toggle(x, on){ on ? this.add(x) : this.remove(x); }
-  };
-  return n;
-}
-
-function installEnv({ reduced = false } = {}){
-  Clock.reset();
-  const byId = new Map();
-  const doc = {
-    readyState: "loading",              /* keeps init() from firing on import */
-    createElement: makeNode,
-    createTextNode(t){ const n = makeNode("#text"); n._text = String(t); return n; },
-    createDocumentFragment(){ return makeNode("#fragment"); },
-    getElementById(id){
-      if (!byId.has(id)) { const n = makeNode("div"); n.attrs.id = id; byId.set(id, n); }
-      return byId.get(id);
-    },
-    querySelector(){ return null; },
-    querySelectorAll(){ return []; },
-    addEventListener(){},
-    documentElement: makeNode("html"),
-    body: makeNode("body"),
-    fonts: { ready: Promise.resolve() }
-  };
-  const store = new Map();
-  globalThis.document = doc;
-  globalThis.window = {
-    matchMedia: (q) => ({ matches: /prefers-reduced-motion/.test(q) ? reduced : false }),
-    addEventListener(){}, scrollTo(o){ globalThis.__scrolled = (o && o.top) || 0; },
-    innerWidth: 1440, innerHeight: 900, scrollY: 0,
-    localStorage: { getItem: k => (store.has(k) ? store.get(k) : null), setItem: (k, v) => store.set(k, String(v)), removeItem: k => store.delete(k) }
-  };
-  globalThis.localStorage = globalThis.window.localStorage;
-  globalThis.Image = function(){ this.src = ""; };
-  globalThis.fetch = () => Promise.reject(new Error("no network in tests"));
-  globalThis.requestAnimationFrame = (fn) => Clock.set(fn, 16);
-  globalThis.setTimeout = (fn, ms) => Clock.set(fn, ms);
-  globalThis.clearTimeout = (id) => Clock.clr(id);
-  globalThis.setInterval = () => 0;
-  globalThis.clearInterval = () => {};
-  return { doc, byId };
-}
-
-/* ------------------------------------------------------ load the app twice */
-const blocks = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
-const appBody = blocks[1]
-  .replace(/\(function\(\)\{/, "")
-  .replace(/"use strict";/, "")
-  .replace(/\}\)\(\);\s*$/, "");
-const EXPORTS = `
-export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, ATTR_PHRASE, CLERK,
-         titleStep, scoreAll, billActs, setFeature, renderBill, programme,
-         lockIt, announcePick, MODE_get, JUST_get };
-function MODE_get(){ return MODE; }
-function JUST_get(){ return JUST_LOCKED; }
-`;
-async function loadApp(opts){
-  const env = installEnv(opts);
-  const src = blocks[0] + "\n" + appBody + "\n" + EXPORTS;
-  const mod = await import(
-    "data:text/javascript;base64," + Buffer.from(src).toString("base64") +
-    "#" + Math.random()                       /* defeat the module cache */
-  );
-  return { mod, env };
-}
+import { join } from "node:path";
+import { ROOT, html, Clock, makeNode, loadApp, eq, ok, finish } from "./harness.mjs";
 
 /* ===================================================================== */
 console.log("\nthe full reveal");
@@ -603,5 +462,4 @@ console.log("\nannouncement and focus");
      (html.match(/class="lights [^"]*" *aria-hidden="true"/g) || []).length === 4);
 }
 
-console.log(`\n${pass} passed, ${fail} failed\n`);
-process.exit(fail ? 1 : 0);
+finish();

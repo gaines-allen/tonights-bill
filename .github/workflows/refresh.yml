@@ -49,6 +49,8 @@ jobs:
           node scripts/enrich.test.mjs
           node scripts/merge.test.mjs
           node scripts/reveal.test.mjs
+          node scripts/session.test.mjs
+          node scripts/shelf.test.mjs
 
       # The scan shelves titles nobody has written a store line for, and a
       # shelved title can be the top pick. This says which ones arrived

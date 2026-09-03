@@ -295,6 +295,21 @@ film **Seen it** and it stops being offered. *Offered* is automatic: the last
 three bills carry a small bounded penalty so tonight is not word-for-word
 yesterday. It reorders near-ties and never buries a better match.
 
+**Show me something else** is a third, shorter memory, and a hard one. Every
+film that has held the feature slot since the counter was last submitted is in
+the run's shown set, keyed by title and year: the first pick, each replacement,
+and any alternate promoted off the shelf. The next pick is the best-ranked
+candidate not in that set. The set is taken out of the pool before ranking,
+never applied as a penalty, because a penalised film can still win, which is
+how the first pick used to come back after three clicks. Films that only sit
+on the shelf are not counted. A skip is not a verdict: nothing is marked seen
+or disliked. The set lives in `sessionStorage`, apart from the profile, so a
+refresh keeps the chain and closing the tab drops it. It is cleared when the
+counter is submitted again, when the house deals, or on **Start this list
+over**. When every match has had its turn the page says so, *You've made it
+through every match for these answers*, and offers **Change tonight's answers**
+or **Start this list over** rather than going back round.
+
 **Keyboard:** `Enter` asks for tonight's pick, `R` deals another, `Esc` goes
 back to the counter. Shortcuts are ignored while typing in a field.
 
@@ -304,7 +319,16 @@ questions back.
 
 **Your Shelf** asks for five films you'd defend rather than five you liked.
 Loved posters are numbered `01`–`05` and outlined in red; the rest of the wall
-is untouched artwork.
+is untouched artwork. Each tile is a plain container holding one button for the
+poster and title, named *Open details for …*, with **Loved**, **Not for me**
+and **Seen it** as its siblings, so a status press never opens anything. The
+button opens the film's case: poster, year, runtime, rating, the story, where
+it streams, its shelf status, and the same three buttons, all from data the
+page already holds. Both surfaces call the same state change and repaint from
+the same stored state. The case is a labelled modal dialog: it closes on
+**Close**, Escape or the backdrop, keeps the tab ring inside itself, and hands
+focus back to the film's tile, looked up by title because the wall repaints
+under it.
 
 ### Mobile
 
@@ -354,10 +378,14 @@ to debug in a recommender, because nothing appears to be wrong.
 node scripts/enrich.test.mjs   # transforms: service mapping, cert, providers, matching
 node scripts/merge.test.mjs    # merge safety against the real index.html catalog
 node scripts/reveal.test.mjs   # the reveal sequence, store copy, accent, lock-in
+node scripts/session.test.mjs  # "show me something else" never repeats; the spent state
+node scripts/shelf.test.mjs    # the shelf tile, the film's case, status in both places
 node scripts/unwritten.mjs     # which shelved titles still need a store line
 ```
 
-Both run offline — no API key, no network.
+All run offline — no API key, no network, no headless browser. The three
+page tests share `scripts/harness.mjs`, a small DOM stub and virtual clock
+that import the app's real source out of `index.html`.
 
 ## Known limitations
 

@@ -1174,8 +1174,15 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(128px,13vw,168px),1fr));
   gap:clamp(14px,1.8vw,24px);padding-bottom:clamp(44px,7vh,80px);
 }
-.keep{display:flex;flex-direction:column;gap:7px}
-.keep .poster{cursor:default}
+.keep{display:flex;flex-direction:column;gap:7px;position:relative}
+.keep .poster{cursor:pointer;order:1}
+/* One button owns the poster and the title. Its hit area is drawn over the
+   whole tile by the pseudo-element; the status buttons are its siblings, not
+   its children, and sit above it so a status click never opens the case. */
+.keep-open{display:flex;flex-direction:column;gap:7px;order:2;position:static}
+.keep-open::before{content:"";position:absolute;inset:0;z-index:1;border-radius:3px}
+.keep-open:focus-visible{outline:none}
+.keep-open:focus-visible::before{outline:2px solid var(--amber);outline-offset:3px}
 .keep[data-state="hated"] .poster img{filter:grayscale(1) brightness(.38)}
 .keep[data-state="loved"] .poster{
   box-shadow:0 0 0 2px var(--amber), 0 10px 20px rgba(0,0,0,.5);
@@ -1194,10 +1201,8 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   background:linear-gradient(180deg, transparent, rgba(10,7,5,.9) 40%);
   opacity:0;transition:opacity var(--quick);
 }
-.keep .poster:hover .react,
-.keep .poster:focus-within .react{opacity:1}
-@media (hover:none){.keep .react{opacity:1;position:static;background:none;
-  flex-direction:row;flex-wrap:wrap;padding:0}}
+.keep:hover .react,
+.keep:focus-within .react{opacity:1}
 .keep .react button{
   font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--ink);background:var(--paper);border-radius:2px;
@@ -1207,9 +1212,50 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
 }
 .keep .react button:hover{background:#fff6de}
 .keep .react button.is-on{background:var(--amber);font-weight:500}
+/* Touch screens cannot hover, so the row is always shown. It stays as the
+   overlay at the foot of the poster: the poster clips its own frame, and a
+   row placed in flow beneath the artwork was cut off and could not be tapped. */
+@media (hover:none){
+  .keep .react{opacity:1}
+  .keep .react button{padding:8px 8px 7px}
+}
 .keep .kt{font-family:var(--display);font-size:.98rem;letter-spacing:.05em;
   text-transform:uppercase;color:var(--cream);line-height:1}
 .keep .ky{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--cream-mute)}
+
+/* --------------------------------------------------------------------------
+   THE CASE: one film pulled off the shelf
+   -------------------------------------------------------------------------- */
+.case{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:24px}
+.case-back{position:absolute;inset:0;background:rgba(10,7,5,.86)}
+.case-panel{
+  position:relative;width:min(760px,100%);max-height:calc(100vh - 48px);overflow:auto;
+  background:linear-gradient(180deg,var(--navy-2),var(--navy));
+  border:1px solid var(--navy-line);border-radius:6px;
+  box-shadow:0 30px 70px rgba(0,0,0,.7);
+  padding:clamp(20px,3vw,34px);
+}
+.case-panel:focus{outline:none}
+.case-close{position:absolute;top:14px;right:18px;z-index:2}
+.case-grid{
+  display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);
+  gap:clamp(18px,3vw,34px);align-items:start;
+}
+.case-poster{margin:0}
+.case-copy > * + *{margin-top:16px}
+.case-title{font-size:clamp(2rem,4vw,3.2rem);color:var(--cream);padding-right:64px}
+.case-status{border-top:1px dashed var(--hair);padding-top:14px}
+.case-state{font-family:var(--hand);font-size:clamp(18px,1.5vw,21px);color:var(--cream-dim);margin-top:4px}
+.case-react{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.case-react button{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);background:var(--paper);border-radius:2px;
+  min-height:44px;padding:10px 16px;text-align:center;
+  box-shadow:0 2px 4px rgba(0,0,0,.4);transition:all var(--quick);
+}
+.case-react button:hover{background:#fff6de}
+.case-react button.is-on{background:var(--amber);font-weight:500}
+body.cased{overflow:hidden}
 
 /* --------------------------------------------------------------------------
    PAST SHOWINGS: the rental history
@@ -1337,6 +1383,13 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   .encore-set .v{min-width:0}
   .svc-chip{padding:6px 13px 6px 6px;gap:9px}
   .svc-sticker{width:23px;height:23px;top:6px;right:6px}
+  /* the case comes up from the bottom of the phone and the poster steps aside */
+  .case{padding:0;align-items:end}
+  .case-panel{max-height:92vh;border-radius:8px 8px 0 0}
+  .case-grid{grid-template-columns:minmax(0,1fr)}
+  .case-poster{max-width:140px}
+  .case-title{padding-right:0;margin-top:6px}
+  .case-close{top:10px;right:14px}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -1585,6 +1638,15 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   <div style="text-align:center">
     <div class="deal" id="deal"></div>
     <p class="tick tick-sm whisper" id="whisper" style="margin-top:20px">Feature presentation</p>
+  </div>
+</div>
+
+<!-- one film pulled off the shelf: opened from Your Shelf, closed with Close, Escape or the backdrop -->
+<div class="case" id="case" hidden>
+  <div class="case-back" id="case-back"></div>
+  <div class="case-panel" id="case-panel" role="dialog" aria-modal="true" aria-labelledby="case-title" tabindex="-1">
+    <button class="act case-close" id="case-close" type="button">Close</button>
+    <div class="case-body" id="case-body"></div>
   </div>
 </div>
 
@@ -2692,6 +2754,33 @@ function load(k,dflt){
   return (k in MEM) ? MEM[k] : dflt;
 }
 
+/* ---------- this run's history ----------
+   Every film that has held the feature slot since the counter was last
+   submitted. "Show me something else" means exactly that: nothing in this set
+   may come back as the main recommendation until a new run begins (the
+   counter is submitted again, the house deals, or the viewer asks to start
+   the list over). A skip is not a verdict, so this lives apart from the taste
+   profile, the watched list and the offered memory, in sessionStorage: it
+   survives an accidental refresh and dies with the tab. */
+function filmKey(f){ return f.t + " (" + f.y + ")"; }   /* title and year, as the merge already identifies a film */
+const Run = (function(){
+  const KEY = "tb:run";
+  let shown = {};
+  try{
+    const raw = sessionStorage.getItem(KEY);
+    if(raw){ const arr = JSON.parse(raw); if(Array.isArray(arr)) arr.forEach(function(k){ shown[k] = 1; }); }
+  }catch(e){ /* no session storage: the set lasts for this page */ }
+  function write(){
+    try{ sessionStorage.setItem(KEY, JSON.stringify(Object.keys(shown))); }catch(e){}
+  }
+  return {
+    has:   function(f){ return !!(f && shown[filmKey(f)]); },
+    add:   function(f){ if(!f) return; shown[filmKey(f)] = 1; write(); },
+    clear: function(){ shown = {}; write(); },
+    keys:  function(){ return Object.keys(shown); }
+  };
+})();
+
 /* ---------- state ---------- */
 const svcDefault = {};
 SERVICES.forEach(function(s){ svcDefault[s.k] = s.on; });
@@ -3247,7 +3336,6 @@ const ATTR_WORD = {
 let SCENE   = "tonight";
 let LAST    = null;    /* most recent scoring run */
 let HEAD    = null;    /* what is in the feature slot */
-let REROLLS = 0;
 let DEALER  = false;
 let MODE    = "feature";
 let JUST_LOCKED = false;   /* one render of the lock-in confirmation */
@@ -4159,16 +4247,17 @@ function programme(opts){
   if(Reveal.busy()) return;
   if(!ready() && !opts.quiet){ nudgeUnanswered(); return; }
   DEALER = false;
-  REROLLS = 0;
+  Run.clear();                       /* the counter was submitted again: a new run */
   const out = scoreAll();
   LAST = out;
-  const paint = function(){ showScene("bill"); renderBill(out); };
+  const rec = heldRec(out) || nextPick(out);
+  const paint = function(){ showScene("bill"); renderBill(out, rec); };
   if(!opts.silent && out.picks.length){
     rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
   }
   if(opts.quiet){ Reveal.cancel(); paint(); announcePick(); return; }
   Reveal.full({
-    rec:    heldRec(out) || (out.picks.length ? out.picks[0] : null),
+    rec:    rec,
     button: opts.button,
     paint:  paint,
     done:   announcePick
@@ -4181,13 +4270,15 @@ function houseDecides(e){
   if(!S.timePreset){ S.timePreset = "two"; S.time = 135; }
   save();
   renderWho(); renderTimes(); renderNights(); gate();
-  DEALER = true; REROLLS = 0;
+  DEALER = true;
+  Run.clear();                       /* the house dealing is a new run too */
   const out = scoreAll();
   LAST = out;
-  const paint = function(){ showScene("bill"); renderBill(out); };
+  const rec = nextPick(out);
+  const paint = function(){ showScene("bill"); renderBill(out, rec); };
   if(out.picks.length) rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
   Reveal.full({
-    rec:     out.picks.length ? out.picks[0] : null,
+    rec:     rec,
     button:  e && e.currentTarget,
     paint:   paint,
     deal:    out.picks,
@@ -4218,7 +4309,29 @@ function heldRec(out){
   return {f:f, score:0, T:out.T, on:f.svcs.filter(function(c){ return S.svc[c]; }), upSet:{}};
 }
 
-function renderBill(out){
+/* The candidates this run has not yet put in the feature slot, best first.
+   The shown set comes out of the pool before anything is chosen, so a film
+   that has already headlined tonight cannot win again on score. */
+function eligible(out){
+  return out.picks.filter(function(r){ return !Run.has(r.f); });
+}
+function nextPick(out){
+  const rest = eligible(out);
+  return rest.length ? rest[0] : null;
+}
+/* The film in the slot now, as this scoring run ranks it, if it still fits. */
+function currentRec(out){
+  if(!HEAD) return null;
+  for(let i = 0; i < out.picks.length; i++){
+    if(filmKey(out.picks[i].f) === filmKey(HEAD.f)) return out.picks[i];
+  }
+  return null;
+}
+
+/* `want` is the record the caller has already chosen for the feature slot.
+   Without one, the slot keeps the film it has if that film still ranks, and
+   otherwise takes the best film this run has not shown yet. */
+function renderBill(out, want){
   $("shelf-slot").innerHTML = "";
   $("twin-slot").innerHTML = "";
   $("footnote").innerHTML = "";
@@ -4239,9 +4352,10 @@ function renderBill(out){
     renderFootnote(out);
     return;
   } else {
+    const rec = want || (MODE === "spent" ? null : currentRec(out)) || nextPick(out);
+    if(!rec){ MODE = "spent"; spentHouse(); return; }
     MODE = DEALER ? "house" : "feature";
-    REROLLS = Math.min(REROLLS, out.picks.length - 1);
-    setFeature(out.picks[REROLLS]);
+    setFeature(rec);
   }
 
   if(!DEALER) renderShelf(out);
@@ -4252,6 +4366,7 @@ function renderBill(out){
    Reveal controller's business, and only its business. */
 function setFeature(rec){
   HEAD = rec;
+  Run.add(rec.f);                      /* it has headlined tonight: not again this run */
   const grid = $("bill-grid");
   grid.innerHTML = "";
   grid.style.gridTemplateColumns = "";
@@ -4471,23 +4586,72 @@ function twinSlot(f, when){
    night, a different case — so it gets the short move, not the full reveal. */
 function promote(rec){
   if(!LAST) return;
-  const i = LAST.picks.indexOf(rec);
-  if(i > -1) REROLLS = i;
   MODE = DEALER ? "house" : "feature";
-  Reveal.swap(rec, announcePick);
+  Reveal.swap(rec, announcePick);      /* setFeature adds it to this run's shown set */
   $("s-bill").scrollIntoView({behavior: REDUCED ? "instant" : "smooth", block:"start"});
 }
 
 /* "Show me something else" is a request for a completely new recommendation,
-   so it runs the whole sequence rather than the shelf's short swap. */
+   so it runs the whole sequence rather than the shelf's short swap. It is a
+   skip for tonight, not a verdict: nothing is marked seen, loved or otherwise.
+   The film in the slot is already in this run's shown set, so the next pick
+   is the best candidate not yet shown. It used to step an index round the
+   ranked list, which came back to the start after as many clicks as there
+   were candidates. When nothing is left it says so instead. */
 function dealAnother(button){
-  if(!LAST || !LAST.picks.length || Reveal.busy()) return;
-  REROLLS = (REROLLS + 1) % LAST.picks.length;
-  const rec = LAST.picks[REROLLS];
+  if(!LAST || !LAST.picks.length || Reveal.busy() || MODE === "locked") return;
+  const rec = nextPick(LAST);
+  if(!rec){ spentNight(); return; }
   Reveal.full({
     rec:    rec,
     button: button || null,
-    paint:  function(){ showScene("bill"); renderBill(LAST); },
+    paint:  function(){ showScene("bill"); renderBill(LAST, rec); },
+    done:   announcePick
+  });
+}
+
+/* ---------- every match has had its turn ---------- */
+const SPENT_COPY = "You've made it through every match for these answers.";
+function spentNight(){
+  Reveal.cancel();
+  MODE = "spent";
+  $("shelf-slot").innerHTML = ""; $("twin-slot").innerHTML = ""; $("footnote").innerHTML = "";
+  spentHouse();
+  say(SPENT_COPY);
+}
+function spentHouse(){
+  const grid = $("bill-grid");
+  grid.innerHTML = "";
+  grid.style.gridTemplateColumns = "minmax(0,1fr)";
+  grid.classList.remove("out");
+  const b = el("div","bill-copy empty");
+  b.appendChild(withClass(nowShowing("The list is spent"), "res-1"));
+  b.appendChild(el("h2","say say-lg res-2", SPENT_COPY));
+  b.appendChild(el("p","res-3","Nothing gets shown twice. Change an answer, or run the same list again from the top."));
+  const acts = el("div","acts res-3");
+  const again = el("button","lock"); again.type = "button";
+  again.appendChild(el("span",null,"Start this list over"));
+  again.appendChild(el("span","arw","\u2192"));
+  again.addEventListener("click", function(e){ startListOver(e.currentTarget); });
+  acts.appendChild(again);
+  const back = el("button","act","Change tonight's answers"); back.type = "button";
+  back.addEventListener("click", function(){ Reveal.cancel(); showScene("tonight"); renderArrival(); });
+  acts.appendChild(back);
+  b.appendChild(acts);
+  grid.appendChild(b);
+}
+/* Forgets only what this run has shown, and deals again from the same answers. */
+function startListOver(button){
+  if(Reveal.busy()) return;
+  Run.clear();
+  const out = scoreAll();
+  LAST = out;
+  const rec = nextPick(out);
+  if(!rec){ renderBill(out); return; }          /* nothing fits at all any more */
+  Reveal.full({
+    rec:    rec,
+    button: button || null,
+    paint:  function(){ showScene("bill"); renderBill(out, rec); },
     done:   announcePick
   });
 }
@@ -4500,7 +4664,7 @@ function reshelfNow(){
 }
 function rebuild(){
   const out = scoreAll();
-  LAST = out; REROLLS = 0;
+  LAST = out;
   renderBill(out);
 }
 
@@ -4641,20 +4805,30 @@ function keepTile(f, index){
   const state = S.taste[f.t] || "";
   const c = el("div","keep");
   if(state) c.setAttribute("data-state", state);
+  /* The opener comes first so it is the first tab stop on the tile; the
+     stylesheet draws it after the poster. It never contains another button. */
+  const open = el("button","keep-open"); open.type = "button";
+  open.setAttribute("aria-label", "Open details for " + f.t);
+  open.appendChild(el("span","kt", f.t));
+  open.appendChild(el("span","ky", f.y + " / " + hm(f.r).toUpperCase()));
+  open.addEventListener("click", function(){ openCase(f, open); });
+  OPENERS[f.t] = open;
+  c.appendChild(open);
   const box = poster(f, "(max-width:767px) 33vw, 168px");
   if(index) box.appendChild(el("span","idx", String(index).padStart(2,"0")));
+  box.appendChild(reactRow(f));
+  c.appendChild(box);
+  return c;
+}
+/* Loved, Not for me, Seen it. The same three buttons on the tile and in the
+   case, wired to the same state, so neither surface can drift from the other. */
+function reactRow(f){
+  const state = S.taste[f.t] || "";
   const react = el("div","react");
   react.appendChild(reactBtn("Loved",      state === "loved", function(){ setTaste(f,"loved"); }));
   react.appendChild(reactBtn("Not for me", state === "hated", function(){ setTaste(f,"hated"); }));
-  react.appendChild(reactBtn("Seen it",    !!S.watched[f.t], function(){
-    if(S.watched[f.t]) unmarkWatched(f.t); else markWatched(f.t);
-    renderWall();
-  }));
-  box.appendChild(react);
-  c.appendChild(box);
-  c.appendChild(el("span","kt", f.t));
-  c.appendChild(el("span","ky", f.y + " / " + hm(f.r).toUpperCase()));
-  return c;
+  react.appendChild(reactBtn("Seen it",    !!S.watched[f.t], function(){ toggleWatched(f); }));
+  return react;
 }
 function reactBtn(label, on, fn){
   const b = el("button", on ? "is-on" : null, label);
@@ -4665,7 +4839,107 @@ function reactBtn(label, on, fn){
 }
 function setTaste(f, how){
   if(S.taste[f.t] === how) delete S.taste[f.t]; else S.taste[f.t] = how;
-  save(); renderWall(); gate();
+  save(); shelfChanged(); gate();
+}
+function toggleWatched(f){
+  if(S.watched[f.t]) unmarkWatched(f.t); else markWatched(f.t);
+  shelfChanged();
+}
+/* Every copy of a film's status is drawn from S, so one change repaints both
+   surfaces from the same stored state. */
+function shelfChanged(){
+  renderWall();
+  if(CASE) paintCase();
+}
+
+/* ---------- the case ----------
+   One film pulled off the shelf: the poster, copy and availability the rest
+   of the page already has, and the same three status buttons. Nothing is
+   fetched for it. Wired on first use, so the page pays nothing until then. */
+const OPENERS = {};          /* title -> the tile button that opens its case, for returning focus */
+let CASE = null;             /* {f, opener} while a case is open */
+let caseWired = false;
+
+function wireCase(){
+  if(caseWired) return;
+  caseWired = true;
+  $("case-close").addEventListener("click", closeCase);
+  $("case-back").addEventListener("click", closeCase);
+  $("case").addEventListener("keydown", function(e){
+    if(e.key === "Escape"){ e.preventDefault(); e.stopPropagation(); closeCase(); return; }
+    if(e.key !== "Tab") return;
+    /* the tab ring stays inside the case while it is open */
+    const panel = $("case-panel");
+    const stops = Array.prototype.filter.call(
+      panel.querySelectorAll('button, a[href], input, [tabindex]:not([tabindex="-1"])'),
+      function(n){ return !n.disabled && !n.hidden; });
+    if(!stops.length) return;
+    const first = stops[0], last = stops[stops.length - 1];
+    const active = document.activeElement;
+    if(e.shiftKey && (active === first || active === panel)){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && active === last){ e.preventDefault(); first.focus(); }
+  });
+}
+function openCase(f, opener){
+  wireCase();
+  CASE = {f:f, opener:opener || null};
+  paintCase();
+  $("case").hidden = false;
+  document.body.classList.add("cased");
+  const panel = $("case-panel");
+  try { panel.focus({preventScroll:true}); } catch(err) { panel.focus(); }
+}
+function closeCase(){
+  if(!CASE) return;
+  const was = CASE; CASE = null;
+  $("case").hidden = true;
+  $("case-body").innerHTML = "";
+  document.body.classList.remove("cased");
+  /* back to the film that opened it. The wall may have been repainted since,
+     so the button is looked up by title rather than trusted from memory. */
+  let back = OPENERS[was.f.t] || was.opener;
+  if(back && back.isConnected === false) back = null;
+  if(!back){ back = $("wall"); back.setAttribute("tabindex","-1"); }
+  try { back.focus({preventScroll:true}); } catch(err) { back.focus(); }
+}
+function paintCase(){
+  if(!CASE) return;
+  const f = CASE.f;
+  const body = $("case-body"); body.innerHTML = "";
+  const grid = el("div","case-grid");
+  const fig = el("figure","case-poster");
+  fig.appendChild(poster(f, "(max-width:767px) 40vw, 200px", true, f.t + " poster"));
+  grid.appendChild(fig);
+
+  const copy = el("div","case-copy");
+  const h = el("h2","say case-title", f.t);
+  h.id = "case-title";
+  copy.appendChild(h);
+  const meta = el("div","stub");
+  const bits = [String(f.y), hm(f.r).toUpperCase(), f.mpaa];
+  if(f.rt) bits.push(f.rt + "% " + (f.rtSrc === "rt" ? "CRITICS" : "AUDIENCE"));
+  bits.forEach(function(v, i){
+    if(i) meta.appendChild(el("span","slash","/"));
+    meta.appendChild(el("span","tick", v));
+  });
+  copy.appendChild(meta);
+  if(f.h) copy.appendChild(synopsisBlock(f));
+  copy.appendChild(whereRow({f:f, on:(f.svcs || []).filter(function(c){ return S.svc[c]; })}));
+
+  const status = el("div","case-status");
+  status.appendChild(el("p","tick tick-sm","On your shelf"));
+  status.appendChild(el("p","case-state", shelfState(f)));
+  status.appendChild(withClass(reactRow(f), "case-react"));
+  copy.appendChild(status);
+  grid.appendChild(copy);
+  body.appendChild(grid);
+}
+function shelfState(f){
+  const parts = [];
+  if(S.taste[f.t] === "loved") parts.push("Loved");
+  if(S.taste[f.t] === "hated") parts.push("Not for me");
+  if(S.watched[f.t]) parts.push("Seen it");
+  return parts.length ? parts.join(" \u00b7 ") : "Not marked yet";
 }
 
 /* ============================================================================
@@ -4823,7 +5097,6 @@ function aislePick(f){
   $("shelf-slot").innerHTML = ""; $("twin-slot").innerHTML = ""; $("footnote").innerHTML = "";
   showScene("bill");
   if(idx > -1){
-    REROLLS = idx;
     setFeature(out.picks[idx], false);
     renderShelf(out);
     renderFootnote(out);
