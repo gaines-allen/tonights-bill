@@ -76,11 +76,16 @@ export function makeNode(tag){
     removeAttribute(k){ delete this.attrs[k]; },
     addEventListener(t, fn){ (this._ev[t] = this._ev[t] || []).push(fn); },
     removeEventListener(t, fn){ this._ev[t] = (this._ev[t] || []).filter(f => f !== fn); },
-    /* fire the real handlers registered on this node; no bubbling */
+    /* fire the real handlers registered on this node, then bubble up through
+       the parents until something stops it, as a browser would */
     dispatch(t, props){
       const e = Object.assign({ type: t, target: this, currentTarget: this, key: "", shiftKey: false,
-        defaultPrevented: false, preventDefault(){ e.defaultPrevented = true; }, stopPropagation(){} }, props || {});
-      (this._ev[t] || []).slice().forEach(fn => fn.call(this, e));
+        defaultPrevented: false, _stopped: false,
+        preventDefault(){ e.defaultPrevented = true; }, stopPropagation(){ e._stopped = true; } }, props || {});
+      for (let n = this; n && !e._stopped; n = n.parent) {
+        e.currentTarget = n;
+        (n._ev[t] || []).slice().forEach(fn => fn.call(n, e));
+      }
       return e;
     },
     click(){ return this.dispatch("click"); },
@@ -182,7 +187,7 @@ export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, AT
          titleStep, scoreAll, billActs, setFeature, renderBill, programme, houseDecides,
          lockIt, announcePick, dealAnother, promote, startListOver, rebuild, aislePick,
          Run, filmKey, eligible, nextPick,
-         showScene, renderWall, keepTile, openCase, closeCase, setTaste, toggleWatched, markWatched,
+         showScene, renderWall, searchWall, keepTile, openCase, closeCase, setTaste, toggleWatched, markWatched,
          MODE_get, JUST_get, HEAD_get, LAST_get, CASE_get, SCENE_get };
 function MODE_get(){ return MODE; }
 function JUST_get(){ return JUST_LOCKED; }

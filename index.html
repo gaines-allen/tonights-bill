@@ -1174,18 +1174,16 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(128px,13vw,168px),1fr));
   gap:clamp(14px,1.8vw,24px);padding-bottom:clamp(44px,7vh,80px);
 }
-.keep{display:flex;flex-direction:column;gap:7px;position:relative}
-.keep .poster{cursor:pointer}
-/* One button, stretched over the whole tile, opens the case for the poster
-   and the title alike. It is a real element positioned against the tile, not
-   a pseudo-element: engines disagree about what an absolutely positioned
-   pseudo-element inside a button is positioned against, and a tap has to
-   land the same way on every phone. The status buttons are its siblings, not
-   its children, and sit above it so a status tap never opens the case. */
+.keep{display:flex;flex-direction:column}
+/* One button wraps the poster and the printed title, so either opens the
+   film's case. Nothing else on the tile is interactive: a status is changed
+   inside the case and printed here as a small badge under the title. */
 .keep-open{
-  position:absolute;inset:0;z-index:1;border-radius:3px;
-  appearance:none;-webkit-appearance:none;-webkit-tap-highlight-color:transparent;
+  display:flex;flex-direction:column;gap:7px;width:100%;border-radius:3px;
+  -webkit-tap-highlight-color:transparent;transition:transform var(--quick);
 }
+.keep-open:hover{transform:translateY(-2px)}
+.keep-open:hover .poster img{filter:brightness(1.06)}
 .keep-open:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 .keep[data-state="hated"] .poster img{filter:grayscale(1) brightness(.38)}
 .keep[data-state="loved"] .poster{
@@ -1199,33 +1197,17 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   box-shadow:0 3px 7px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,220,170,.4);
   transform:rotate(8deg);
 }
-.keep .react{
-  position:absolute;inset:auto 0 0 0;z-index:2;
-  display:flex;flex-direction:column;gap:5px;padding:10px 8px 8px;
-  background:linear-gradient(180deg, transparent, rgba(10,7,5,.9) 40%);
-  opacity:0;transition:opacity var(--quick);
-}
-.keep:hover .react,
-.keep:focus-within .react{opacity:1}
-.keep .react button{
-  font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ink);background:var(--paper);border-radius:2px;
-  padding:5px 8px 4px;text-align:center;
-  box-shadow:0 2px 4px rgba(0,0,0,.4);
-  transition:all var(--quick);
-}
-.keep .react button:hover{background:#fff6de}
-.keep .react button.is-on{background:var(--amber);font-weight:500}
-/* Touch screens cannot hover, so the row is always shown. It stays as the
-   overlay at the foot of the poster: the poster clips its own frame, and a
-   row placed in flow beneath the artwork was cut off and could not be tapped. */
-@media (hover:none){
-  .keep .react{opacity:1}
-  .keep .react button{padding:8px 8px 7px}
-}
 .keep .kt{font-family:var(--display);font-size:.98rem;letter-spacing:.05em;
   text-transform:uppercase;color:var(--cream);line-height:1}
 .keep .ky{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--cream-mute)}
+/* the saved status, printed rather than pressed */
+.keep .kb{
+  align-self:flex-start;margin-top:1px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:#241a08;background:var(--paper);border-radius:2px;padding:3px 7px 2px;
+}
+.keep[data-state="loved"] .kb{background:var(--amber)}
+.keep[data-state="hated"] .kb{background:var(--cream-mute)}
 
 /* --------------------------------------------------------------------------
    THE CASE: one film pulled off the shelf
@@ -4755,6 +4737,7 @@ let findQ = "";
 let wallShown = 48;
 const KEEP_TARGET = 5;
 
+function searchWall(q){ findQ = q; wallShown = 48; renderWall(); }
 function renderWall(){
   const loved = Object.keys(S.taste).filter(function(t){ return S.taste[t] === "loved"; });
 
@@ -4809,25 +4792,45 @@ function keepTile(f, index){
   const state = S.taste[f.t] || "";
   const c = el("div","keep");
   if(state) c.setAttribute("data-state", state);
-  /* The opener is an empty button stretched over the tile by the stylesheet,
-     named for assistive tech, first in the tile so it is its first tab stop.
-     It never contains another button; the poster and the printed title sit
-     beside it. */
+  /* One button wraps the poster and the printed title, so either opens the
+     case. It carries the film's key, not a position: the wall is re-sorted,
+     searched and extended underneath it. Nothing else on the tile is a
+     control; the status is changed inside the case and printed here. */
   const open = el("button","keep-open"); open.type = "button";
   open.setAttribute("aria-label", "Open details for " + f.t);
-  open.addEventListener("click", function(){ openCase(f, open); });
-  OPENERS[f.t] = open;
-  c.appendChild(open);
+  open.setAttribute("data-film", filmKey(f));
+  open.addEventListener("click", function(e){
+    openCaseFor(e.currentTarget.getAttribute("data-film"), e.currentTarget);
+  });
   const box = poster(f, "(max-width:767px) 33vw, 168px");
   if(index) box.appendChild(el("span","idx", String(index).padStart(2,"0")));
-  box.appendChild(reactRow(f));
-  c.appendChild(box);
-  c.appendChild(el("span","kt", f.t));
-  c.appendChild(el("span","ky", f.y + " / " + hm(f.r).toUpperCase()));
+  open.appendChild(box);
+  open.appendChild(el("span","kt", f.t));
+  open.appendChild(el("span","ky", f.y + " / " + hm(f.r).toUpperCase()));
+  const badge = shelfBadge(f);
+  if(badge) open.appendChild(el("span","kb", badge));
+  OPENERS[f.t] = open;
+  c.appendChild(open);
   return c;
 }
-/* Loved, Not for me, Seen it. The same three buttons on the tile and in the
-   case, wired to the same state, so neither surface can drift from the other. */
+/* One word for the tile. Taste outranks a watch: a loved film that has been
+   seen is still, first, loved. */
+function shelfBadge(f){
+  if(S.taste[f.t] === "loved") return "Loved";
+  if(S.taste[f.t] === "hated") return "Not for me";
+  if(S.watched[f.t]) return "Seen";
+  return "";
+}
+function filmByKey(key){
+  for(let i = 0; i < FILMS.length; i++) if(filmKey(FILMS[i]) === key) return FILMS[i];
+  return null;
+}
+function openCaseFor(key, opener){
+  const f = filmByKey(key);
+  if(f) openCase(f, opener);
+}
+/* Loved, Not for me, Seen it: the case's three buttons, wired to the same
+   state the tile prints. */
 function reactRow(f){
   const state = S.taste[f.t] || "";
   const react = el("div","react");
@@ -4851,8 +4854,8 @@ function toggleWatched(f){
   if(S.watched[f.t]) unmarkWatched(f.t); else markWatched(f.t);
   shelfChanged();
 }
-/* Every copy of a film's status is drawn from S, so one change repaints both
-   surfaces from the same stored state. */
+/* The tile's badge and the case's buttons are both drawn from S, so one
+   change repaints both from the same stored state. */
 function shelfChanged(){
   renderWall();
   if(CASE) paintCase();
@@ -5173,9 +5176,7 @@ function init(){
     Reveal.cancel(); showScene("tonight"); renderArrival();
   });
 
-  $("find").addEventListener("input", function(e){
-    findQ = e.target.value; wallShown = 48; renderWall();
-  });
+  $("find").addEventListener("input", function(e){ searchWall(e.target.value); });
 
   $("house").addEventListener("click", function(e){
     e.preventDefault(); Reveal.cancel(); showScene("tonight"); renderArrival();

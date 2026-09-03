@@ -319,16 +319,18 @@ questions back.
 
 **Your Shelf** asks for five films you'd defend rather than five you liked.
 Loved posters are numbered `01`–`05` and outlined in red; the rest of the wall
-is untouched artwork. Each tile is a plain container holding one button for the
-poster and title, named *Open details for …*, with **Loved**, **Not for me**
-and **Seen it** as its siblings, so a status press never opens anything. The
-button opens the film's case: poster, year, runtime, rating, the story, where
-it streams, its shelf status, and the same three buttons, all from data the
-page already holds. Both surfaces call the same state change and repaint from
-the same stored state. The case is a labelled modal dialog: it closes on
-**Close**, Escape or the backdrop, keeps the tab ring inside itself, and hands
-focus back to the film's tile, looked up by title because the wall repaints
-under it.
+is untouched artwork. Each tile is one button wrapping the poster and the
+printed title, named *Open details for …* and carrying the film's title-and-
+year key, so the right case opens however the wall has been searched, sorted
+or extended. Nothing else on a tile is a control: a saved status is printed
+as a small badge under the title (*Loved*, *Not for me*, *Seen*). The button
+opens the film's case: poster, year, runtime, rating, the story, where it
+streams, its shelf status, and the **Loved**, **Not for me** and **Seen it**
+buttons, which are the only place a status is changed, all from data the page
+already holds. Pressing the current status clears it. The case is a labelled
+modal dialog: it closes on **Close**, Escape or the backdrop, keeps the tab
+ring inside itself, locks the page behind it, and hands focus back to the
+film's tile, looked up by title because the wall repaints under it.
 
 ### Mobile
 
