@@ -50,6 +50,13 @@ jobs:
           node scripts/merge.test.mjs
           node scripts/reveal.test.mjs
 
+      # The scan shelves titles nobody has written a store line for, and a
+      # shelved title can be the top pick. This says which ones arrived
+      # tonight, on the run summary and in a committed worklist.
+      - name: Flag shelved titles with no store line
+        id: unwritten
+        run: node scripts/unwritten.mjs
+
       - name: Commit if anything changed
         run: |
           git config user.name  "github-actions[bot]"
@@ -58,8 +65,8 @@ jobs:
           # Stage first. On the very first run the file is untracked, and
           # `git diff` ignores untracked files — so comparing before staging
           # would report "no change" and silently throw the data away.
-          git add data/catalog.json
-          if git diff --cached --quiet -- data/catalog.json; then
+          git add data/catalog.json data/unwritten.json data/unwritten.md
+          if git diff --cached --quiet; then
             echo "no change"; exit 0
           fi
 
@@ -71,11 +78,22 @@ jobs:
                     | grep -E '^[+-]' \
                     | grep -vE '^(\+\+\+|---)' \
                     | grep -vc '"generatedAt"' || true)
-          if [ "$CHANGED" -eq 0 ]; then
-            echo "only the generated timestamp moved — skipping commit"
-            git reset -q -- data/catalog.json
+          # The worklist carries its own timestamp too, so it is compared the
+          # same way: a run where nothing but the clocks moved commits nothing.
+          WORK=$(git diff --cached -U0 -- data/unwritten.json data/unwritten.md \
+                 | grep -E '^[+-]' \
+                 | grep -vE '^(\+\+\+|---)' \
+                 | grep -vc '"generatedAt"' || true)
+          if [ "$CHANGED" -eq 0 ] && [ "$WORK" -eq 0 ]; then
+            echo "only the generated timestamps moved — skipping commit"
+            git reset -q -- data/catalog.json data/unwritten.json data/unwritten.md
             exit 0
           fi
 
-          git commit -m "Refresh catalog data from TMDB ($CHANGED field changes)"
+          NEW="${{ steps.unwritten.outputs.new_count }}"
+          MSG="Refresh catalog data from TMDB ($CHANGED field changes)"
+          if [ -n "$NEW" ] && [ "$NEW" != "0" ]; then
+            MSG="$MSG, $NEW newly shelved without a store line"
+          fi
+          git commit -m "$MSG"
           git push

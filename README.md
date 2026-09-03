@@ -230,6 +230,25 @@ the glow and the scale, walking one light round the whole border every eleven
 seconds. Each bulb's place in that lap is handed to it as a *negative* delay,
 so the wave is already mid-circuit on the first frame instead of ramping in.
 
+### Who writes the store's lines
+Each of the curated films has a line written by hand in `CLERK`. The nightly
+scan shelves several hundred more titles straight off the services, and those
+turn over week to week, so they cannot be written in advance and are not worth
+guessing at: a line invented for a film nobody here has seen is the same
+fabrication that hand-writing them was meant to replace. Those fall back to the
+generator. In practice about three quarters of top picks come out written,
+because the scorer favours the curated titles.
+
+The scan that shelves them also says which ones now need a line.
+`scripts/unwritten.mjs` writes `data/unwritten.md`, a worklist carrying the
+year, runtime, rating, service, genres, director and premise for each, sorted
+so the titles most likely to be recommended come first. Recency is read from
+each entry's `firstSeen` date rather than by diffing the file against its own
+previous run, which is what makes it idempotent: a night when nothing moved
+rewrites nothing and commits nothing. There is no timestamp in the output for
+the same reason. Write the line into `CLERK` and the title drops off the list
+on the next scan.
+
 ### The reveal
 Asking for a pick runs one 3-second sequence, owned by a single controller
 (`Reveal`). The ask depresses and locks out; the questions step down and the
@@ -335,6 +354,7 @@ to debug in a recommender, because nothing appears to be wrong.
 node scripts/enrich.test.mjs   # transforms: service mapping, cert, providers, matching
 node scripts/merge.test.mjs    # merge safety against the real index.html catalog
 node scripts/reveal.test.mjs   # the reveal sequence, store copy, accent, lock-in
+node scripts/unwritten.mjs     # which shelved titles still need a store line
 ```
 
 Both run offline — no API key, no network.

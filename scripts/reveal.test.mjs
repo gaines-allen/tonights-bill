@@ -405,6 +405,44 @@ console.log("\nwhat the store says: the written lines");
      card.children.find(c => c.className === "store-tape").getAttribute("aria-hidden"), "true");
 }
 
+console.log("\nthe nightly worklist");
+{
+  /* The scan shelves titles nobody has written a line for, and a shelved title
+     can be the top pick, so the job that shelves them says which ones need
+     one. The file has to be a pure function of its inputs: the first version
+     diffed against its own previous run, which committed churn every night. */
+  const { mod } = await loadApp({ reduced: false });
+  const { CLERK } = mod;
+  const src = await readFile(join(ROOT, "scripts/unwritten.mjs"), "utf8");
+
+  ok("the worklist carries no timestamp", !/generatedAt: new Date/.test(src),
+     "a timestamp in the output means a commit every night whether or not anything moved");
+  ok("recency comes from firstSeen, not from diffing the last run",
+     src.includes("e.firstSeen") && !src.includes("newSinceLastScan"));
+  ok("recency is measured against the catalog's own date, not the wall clock",
+     src.includes('payload._meta?.generatedAt'),
+     "using Date.now() makes the same input produce different output");
+  ok("it never fails the build", !/process\.exit\(1\)/.test(src));
+
+  let list = null;
+  try { list = JSON.parse(await readFile(join(ROOT, "data/unwritten.json"), "utf8")); }
+  catch { /* not generated in this checkout */ }
+
+  if (list) {
+    eq("the worklist has no timestamp field", "generatedAt" in list, false);
+    const rawBlock = html.slice(html.indexOf("const RAW = ["),
+                                html.indexOf("\n];", html.indexOf("const RAW = [")));
+    const curated = new Set([...rawBlock.matchAll(/^\["((?:[^"\\]|\\.)*)",\d{4},/gm)].map(m => m[1]));
+    eq("no curated film is on the worklist",
+       list.titles.filter(t => curated.has(t)), []);
+    eq("nothing already written is on the worklist",
+       list.titles.filter(t => CLERK[t]), []);
+    eq("the count matches the list", list.unwritten, list.titles.length);
+    ok("every recent title is also on the worklist",
+       list.recent.every(t => list.titles.includes(t)));
+  }
+}
+
 console.log("\nwhat the store says: the fallback");
 {
   /* Every catalog film is written, so the generator is exercised against a
