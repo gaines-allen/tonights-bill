@@ -389,6 +389,19 @@ All run offline — no API key, no network, no headless browser. The three
 page tests share `scripts/harness.mjs`, a small DOM stub and virtual clock
 that import the app's real source out of `index.html`.
 
+## Staying current
+
+The page is one file on a plain host, and a phone that brings it back from
+memory, a tab left open for a week or an icon on the home screen, shows the
+build it loaded, however long ago, until someone pulls down to refresh. So the
+page remembers which build it is (the host's ETag for the file, or its date)
+and, when it comes back into view after at least a minute away, or is restored
+from the back-forward cache, asks the host again with one HEAD request and
+reloads itself if the answer has changed. Nothing happens within a minute of
+leaving, mid-reveal, or when the check fails. A nightly catalog deploy changes
+the stamp too, so a page left open overnight picks up the new data on its next
+return. `scripts/fresh.test.mjs` covers it.
+
 ## Known limitations
 
 These are deliberate, and the page states them in its own footer:

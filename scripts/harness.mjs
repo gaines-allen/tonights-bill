@@ -186,7 +186,7 @@ const EXPORTS = `
 export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, ATTR_PHRASE, CLERK,
          titleStep, scoreAll, billActs, setFeature, renderBill, programme, houseDecides,
          lockIt, announcePick, dealAnother, promote, startListOver, rebuild, aislePick,
-         Run, filmKey, eligible, nextPick,
+         Run, filmKey, eligible, nextPick, Fresh, watchFreshness,
          showScene, renderWall, searchWall, keepTile, openCase, closeCase, setTaste, toggleWatched, markWatched,
          MODE_get, JUST_get, HEAD_get, LAST_get, CASE_get, SCENE_get };
 function MODE_get(){ return MODE; }

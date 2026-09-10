@@ -2718,6 +2718,55 @@ async function loadEnrichment(){
   }catch(e){ /* absent or blocked: built-in catalog stands */ }
 }
 
+/* ---------- staying current ----------
+   The page is one file on a plain host, and a phone that brings it back from
+   memory, a tab left open for a week or an icon on the home screen, shows the
+   build it loaded, however long ago, until someone thinks to pull down and
+   refresh. So the page remembers which build it is, asks the host again when
+   it comes back into view after being away, and reloads itself when the
+   answer has changed. One HEAD request per return, none within a minute of
+   leaving, none mid-reveal. A failed check changes nothing. */
+const Fresh = {
+  mark: null, away: 0, MIN_AWAY: 60000, checking: false,
+  where(){
+    return (typeof location !== "undefined" && location.origin)
+      ? location.origin + location.pathname : "./";
+  },
+  /* the host's stamp for this file: its ETag, or failing that its date */
+  async stamp(){
+    try{
+      const res = await fetch(this.where(), {method:"HEAD", cache:"no-store"});
+      if(!res.ok) return null;
+      return res.headers.get("etag") || res.headers.get("last-modified") || null;
+    }catch(e){ return null; }
+  },
+  async start(){ this.mark = await this.stamp(); },
+  hidden(){ this.away = Date.now(); },
+  /* back in view: is the host still serving the build we are? */
+  async shown(force){
+    if(!this.mark || this.checking) return false;
+    if(!force && Date.now() - this.away < this.MIN_AWAY) return false;
+    if(Reveal.busy()) return false;
+    this.checking = true;
+    const now = await this.stamp();
+    this.checking = false;
+    if(!now || now === this.mark) return false;
+    this.mark = now;
+    this.reload();
+    return true;
+  },
+  reload(){ location.reload(); }
+};
+function watchFreshness(){
+  Fresh.start();
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "hidden") Fresh.hidden(); else Fresh.shown();
+  });
+  /* restored from the back-forward cache: it was never unloaded, so it never
+     asked the host either */
+  window.addEventListener("pageshow", function(e){ if(e.persisted) Fresh.shown(true); });
+}
+
 /* ---------- storage ----------
    Some embedding contexts (sandboxed frames, data: URLs) block localStorage
    outright. Probe once so the page can tell the truth about whether a profile
@@ -5177,6 +5226,7 @@ function init(){
   });
 
   $("find").addEventListener("input", function(e){ searchWall(e.target.value); });
+  watchFreshness();
 
   $("house").addEventListener("click", function(e){
     e.preventDefault(); Reveal.cancel(); showScene("tonight"); renderArrival();
