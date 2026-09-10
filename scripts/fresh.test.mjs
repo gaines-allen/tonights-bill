@@ -29,6 +29,11 @@ console.log("\nremembering the build");
   eq("for this page", calls[0].url, "./");
   eq("the ETag is the stamp", mod.Fresh.mark, '"abc-1"');
 
+  const { mod: mw } = await loadApp({ reduced: true });
+  host({ etag: 'W/"abc-1"' });
+  await mw.Fresh.start();
+  eq("a weak ETag from the CDN is the same tag", mw.Fresh.mark, '"abc-1"');
+
   const { mod: m2 } = await loadApp({ reduced: true });
   host({ "last-modified": "Thu, 10 Sep 2026 15:03:48 GMT" });
   await m2.Fresh.start();

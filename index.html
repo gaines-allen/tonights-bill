@@ -2737,7 +2737,9 @@ const Fresh = {
     try{
       const res = await fetch(this.where(), {method:"HEAD", cache:"no-store"});
       if(!res.ok) return null;
-      return res.headers.get("etag") || res.headers.get("last-modified") || null;
+      /* the CDN sometimes marks the tag weak (W/"…"); the tag is the same */
+      const tag = (res.headers.get("etag") || "").replace(/^W\//, "");
+      return tag || res.headers.get("last-modified") || null;
     }catch(e){ return null; }
   },
   async start(){ this.mark = await this.stamp(); },
