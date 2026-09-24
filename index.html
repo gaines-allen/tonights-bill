@@ -2769,6 +2769,21 @@ function watchFreshness(){
   window.addEventListener("pageshow", function(e){ if(e.persisted) Fresh.shown(true); });
 }
 
+/* The day of the last scan, as words: "Wednesday, September 24". The scan
+   stamps a plain date, so it is read as a local day and not shifted by the
+   time zone; the generation time stands in if the date is missing. */
+function scanDay(meta){
+  let d = null;
+  if(meta.scannedAt && /^\d{4}-\d{2}-\d{2}$/.test(meta.scannedAt)){
+    const p = meta.scannedAt.split("-");
+    d = new Date(+p[0], +p[1] - 1, +p[2]);
+  }else if(meta.generatedAt){
+    d = new Date(meta.generatedAt);
+  }
+  if(!d || isNaN(d.getTime())) return "";
+  return d.toLocaleDateString([], {weekday:"long", month:"long", day:"numeric"});
+}
+
 /* ---------- storage ----------
    Some embedding contexts (sandboxed frames, data: URLs) block localStorage
    outright. Probe once so the page can tell the truth about whether a profile
@@ -5172,8 +5187,9 @@ function renderColophon(){
   const live = FILMS.filter(function(f){ return f.svcs && f.svcs.length; }).length;
   let t = FILMS.length + " films, " + live + " of them streaming somewhere tonight. ";
   if(ENRICHED && ENRICHED.shelved){
-    t += "The store is re-scanned every day: " + ENRICHED.shelved +
-         " titles came from that scan, and anything that has left every service drops off the shelves. ";
+    const when = scanDay(ENRICHED);
+    t += "The store is re-scanned every day" + (when ? ", most recently " + when : "") + ": " +
+         ENRICHED.shelved + " titles came from that scan, and anything that has left every service drops off the shelves. ";
   }
   t += ENRICHED
     ? ("Runtimes, ratings, posters, synopses and streaming homes from " + ENRICHED.source +

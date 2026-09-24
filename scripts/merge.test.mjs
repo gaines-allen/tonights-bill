@@ -9,9 +9,9 @@ const blocks = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]
 const body = blocks[1].split("/* ---------- state ---------- */")[0]
   .replace(/\(function\(\)\{/, "").replace(/"use strict";/, "");
 const src = blocks[0] + "\n" + body +
-  "\nexport {FILMS, BY_TITLE, applyEnrichment, ENRICHED};";
+  "\nexport {FILMS, BY_TITLE, applyEnrichment, ENRICHED, scanDay};";
 const mod = await import("data:text/javascript;base64," + Buffer.from(src).toString("base64"));
-const { FILMS, BY_TITLE, applyEnrichment } = mod;
+const { FILMS, BY_TITLE, applyEnrichment, scanDay } = mod;
 
 let pass = 0, fail = 0;
 const eq = (l, g, w) => {
@@ -71,6 +71,19 @@ eq("non-numeric rt ignored", BY_TITLE["Sinners"].rt, rt);
 eq("invalid certification ignored", BY_TITLE["Sinners"].mpaa, "R");
 eq("negative runtime ignored", BY_TITLE["Sinners"].r > 0, true);
 eq("empty providers keeps built-in", BY_TITLE["Sinners"].svcs, ["MAX"]);
+
+
+console.log("\nthe footer's scan date");
+{
+  const words = (m) => scanDay(m);
+  const local = new Date(2026, 8, 24).toLocaleDateString([], {weekday:"long", month:"long", day:"numeric"});
+  eq("the scan's plain date is read as a local day, so the time zone cannot shift it", words({ scannedAt: "2026-09-24" }), local);
+  eq("and is spelled out for the footer", /September 24/.test(words({ scannedAt: "2026-09-24" })), true);
+  eq("the generation time stands in when the date is missing",
+     words({ generatedAt: "2026-09-24T15:52:07.200Z" }), new Date("2026-09-24T15:52:07.200Z").toLocaleDateString([], {weekday:"long", month:"long", day:"numeric"}));
+  eq("a malformed date says nothing rather than 'Invalid Date'", words({ scannedAt: "yesterday" }), "");
+  eq("as does no date at all", words({}), "");
+}
 
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail ? 1 : 0);
