@@ -1638,7 +1638,7 @@ body.cased{overflow:hidden}
           </div>
 
           <div class="tune-block">
-            <h3>Rating floor</h3>
+            <h3>Rating</h3>
             <div class="opts" id="f-rating"></div>
           </div>
 
@@ -2187,12 +2187,20 @@ const AGE_SAY  = {all:"any age", teen:"teens and up", adult:"grown-ups"};
    "Who's watching", so the two controls squeeze from opposite directions.
    NR titles (older films, festival and streaming releases that never went
    through the board) fall back to the audience column, so an unrated film is
-   never silently treated as tamer than it is. */
+   never silently treated as tamer than it is.
+
+   G only is the one exception to the floor: it is a ceiling as well, for a
+   night that should be G and nothing else. It means the board's G, so an
+   unrated film never slips in under it, however gentle. */
 const RATE_RANK = {"G":0, "PG":1, "PG-13":2, "R":3, "NC-17":4};
 const NR_FALLBACK = {all:1, teen:2, adult:3};
+const RATE_G_ONLY = -1;
 const RATE_FLOORS = [
-  {k:0, n:"Any"}, {k:1, n:"PG+"}, {k:2, n:"PG-13+"}, {k:3, n:"R"}
+  {k:0, n:"Any"}, {k:RATE_G_ONLY, n:"G only"}, {k:1, n:"PG+"}, {k:2, n:"PG-13+"}, {k:3, n:"R"}
 ];
+function rateOK(f){
+  return S.rate === RATE_G_ONLY ? f.mpaa === "G" : rateRank(f) >= S.rate;
+}
 function floorName(k){
   const f = RATE_FLOORS.filter(function(c){ return c.k === k; })[0];
   return f ? f.n : "Any";
@@ -3014,7 +3022,7 @@ const S = {
   room:    load("room","two"),
   time:    load("time",140),
   /* was a ceiling (99 meant "no limit"); anything out of floor range migrates to 0 */
-  rate:    (function(v){ return (typeof v === "number" && v >= 0 && v <= 4) ? v : 0; })(load("rate",0)),
+  rate:    (function(v){ return (typeof v === "number" && v >= -1 && v <= 4) ? v : 0; })(load("rate",0)),
   minRT:   load("minRT",0),
   moods:   load("moods",[]),
   timePreset: load("timePreset",""),
@@ -3205,10 +3213,11 @@ function checkFilters(f){
      detail: roomOK
        ? "Pitched at " + AGE_SAY[f.k] + ", fine for " + (ROOM_SAY[S.room] || R.n.toLowerCase())
        : "Pitched at " + AGE_SAY[f.k] + ", too old for " + (ROOM_SAY[S.room] || R.n.toLowerCase())},
-    {k:"rating", label:"Minimum rating", pass: rateRank(f) >= S.rate,
-     detail: S.rate === 0 ? f.mpaa + ", no minimum set"
-       : (rateRank(f) >= S.rate ? f.mpaa + " meets " + floorName(S.rate)
-                                : f.mpaa + " is below your " + floorName(S.rate) + " floor")},
+    {k:"rating", label:"Rating", pass: rateOK(f),
+     detail: S.rate === 0 ? f.mpaa + ", no rating set"
+       : S.rate === RATE_G_ONLY ? (f.mpaa === "G" ? "G, as asked" : f.mpaa + " is not G")
+       : (rateOK(f) ? f.mpaa + " meets " + floorName(S.rate)
+                    : f.mpaa + " is below your " + floorName(S.rate) + " floor")},
     {k:"critics", label:"Critic score", pass: f.rt >= critBar,
      detail: critBar === 0 ? f.rt + "%, no bar set"
        : (f.rt >= critBar ? f.rt + "% clears " + critBar + "%"
@@ -4439,7 +4448,7 @@ function renderMoodTune(){
 function tuneCount(){
   const n = $("tune-count"); if(!n) return;
   const extra = S.moods.filter(function(k){ return NIGHTS.indexOf(k) === -1; }).length;
-  const on = S.genres.length + extra + (S.rate > 0 ? 1 : 0) + (S.minRT > 0 ? 1 : 0);
+  const on = S.genres.length + extra + (S.rate !== 0 ? 1 : 0) + (S.minRT > 0 ? 1 : 0);
   n.hidden = !on;
   n.textContent = on + " on";
   n.setAttribute("aria-label", on + (on === 1 ? " filter" : " filters") + " on");

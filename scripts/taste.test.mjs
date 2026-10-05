@@ -248,4 +248,21 @@ console.log("\nmore filters");
   eq("with filters set, it says how many", [c.hidden, c.textContent], [false, "3 on"]);
 }
 
+console.log("\nG only");
+{
+  const { mod } = await loadApp({ reduced: true });
+  night(mod.S);
+  mod.S.rate = -1;
+  const picks = mod.scoreAll().picks;
+  ok(`G only returns G-rated films (${picks.length} of them)`, picks.length > 0 && picks.every((r) => r.f.mpaa === "G"));
+  ok("nothing unrated sneaks in under it", picks.every((r) => r.f.mpaa !== "NR"));
+  mod.S.room = "kids";
+  ok("and it still works with kids in the room", mod.scoreAll().picks.every((r) => r.f.mpaa === "G"));
+  mod.S.rate = 1;
+  ok("PG+ still means PG and up, as before", mod.scoreAll().picks.every((r) => r.f.mpaa !== "G"));
+  mod.S.rate = 0;
+  ok("Any still allows G", mod.scoreAll().picks.some((r) => r.f.mpaa === "G"));
+  ok("the option sits beside the others", /\{k:RATE_G_ONLY, n:"G only"\}/.test(html));
+}
+
 finish();
