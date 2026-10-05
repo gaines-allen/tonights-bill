@@ -42,8 +42,7 @@ console.log("\nthe control");
   ok("all three drawn from one sprite on the same 16-unit grid",
      ["star", "up", "down"].every((g) => new RegExp('<symbol id="g-' + g + '" viewBox="0 0 16 16">').test(html)));
   eq("the row is labelled as a group", row.getAttribute("role"), "group");
-  ok("the case's own button style cannot reach the row inside it",
-     !/\.case-react button[{:.]/.test(html) && /\.case-react > button\{/.test(html));
+  ok("the case's old button style cannot reach the row inside it", !/\.case-react button[{:.]/.test(html));
 }
 
 console.log("\nwhat each press does");
@@ -190,17 +189,25 @@ console.log("\nhard limits are never crossed");
   ok("and a genre filter still filters", mod.scoreAll().picks.every((r) => r.f.g.includes("animation")));
 }
 
-console.log("\nsave is not watched; watched is still its own thing");
+console.log("\na thumb means seen; a save does not");
 {
-  const { mod } = await loadApp({ reduced: true });
+  const { mod, env } = await loadApp({ reduced: true });
   night(mod.S);
   const f = mod.BY_TITLE["Parasite"];
   mod.toggleSaved(f);
   ok("saved", mod.isSaved(f));
-  ok("not held back as seen", mod.scoreAll().watched.every((w) => w !== f));
-  mod.toggleWatched(f);
-  ok("Seen it still holds a film back", mod.scoreAll().watched.includes(f));
+  ok("a save alone does not hold a film back", !mod.scoreAll().watched.includes(f));
+  mod.setTaste(f, "loved");
+  ok("a thumb holds it back as seen", mod.scoreAll().watched.includes(f));
   ok("and the save survives it", mod.isSaved(f));
+  mod.setTaste(f, "loved");
+  ok("clearing the thumb offers it again", !mod.scoreAll().watched.includes(f));
+  ok("there is no Seen it button anywhere on the page", !/>Seen it</.test(html) && !/"Seen it"/.test(html));
+  mod.S.room = "solo"; mod.S.timePreset = "long"; mod.S.time = 240;
+  mod.programme({ quiet: true, silent: true });
+  const acts = walk(env.doc.getElementById("bill-grid")).filter((n) => n.tagName === "BUTTON").map((n) => n.textContent);
+  ok("the feature offers Lock it in and Show me something else, and no Seen it",
+     acts.some((x) => /Lock it in/.test(x)) && acts.some((x) => /something else/.test(x)) && !acts.includes("Seen it"));
 }
 
 console.log("\nthe entrance");
@@ -213,6 +220,8 @@ console.log("\nthe entrance");
   ok("the footer is the one line", /<footer class="colophon">\s*<p>Real Movies, Real Recommendations<\/p>\s*<\/footer>/.test(html));
   const rm = html.slice(html.indexOf("@media (prefers-reduced-motion: reduce)"));
   ok("the bulbs stop under reduced motion", /\.bulb,\.marquee\.chase \.bulb\{animation:none/.test(rm));
+  ok("the touch-screen tap-size rule never shrinks the mood cards",
+     !/@media \(pointer:coarse\)\{[^}]*\.night-opt[,{]/.test(html));
   ok("and the hero images and controls stop moving", /\.shot img\{transition:none\}/.test(rm) && /\.mini-b\.pop svg/.test(rm));
   ok("Find your movie opens the questionnaire, which starts closed",
      /<div class="evening frame" id="evening" hidden>/.test(html) && /aria-controls="evening"/.test(html));

@@ -31,15 +31,20 @@ page, stills). What it changed:
   Recommendations*. The provenance note that used to sit there is now at the
   foot of The Aisles, with the TMDB attribution; the scan date sits under the
   search; the storage note sits on Your Shelf.
-- **Search**, top right. See below.
+- **Search** is the last item in the header row (Tonight, The Aisles, Your
+  Shelf, Past Showings, Search). Pressing it opens the search bar with the
+  cursor in it; pressing it again, Close, or Escape puts it away. See below.
 - **Star · thumbs up · thumbs down** under every film. See below.
 - **Favicon.** A red-and-cream popcorn bucket: `assets/icons/favicon.svg`, a
   pixel-tuned 16px drawing, PNGs at 16/32/48/180/192/512, a multi-size
   `favicon.ico`, an Apple touch icon and `site.webmanifest`. Every path is
   relative, so it all works under the `/tonights-bill/` Pages base path.
-- **Type.** Bebas Neue for the marquee and display controls, Cormorant
-  Garamond for the questions and search titles, Archivo for body, IBM Plex
-  Mono for metadata, Caveat for the two handwritten asides.
+- **Type.** Bebas Neue for the marquee and display controls; Cinzel (the free
+  equivalent of Trajan, the movie-poster capitals) for the three questions;
+  Barlow Condensed for the mood cards and search; Archivo for body; IBM Plex
+  Mono for metadata; Caveat for the two handwritten asides. The handoff's
+  Cormorant Garamond was dropped on review for reading too much like a stock
+  serif. Trajan Pro itself is Adobe-only, so Cinzel ships instead.
 
 ### The month's three films
 
@@ -101,9 +106,11 @@ of a film's row repaints together.
   does not like the film or mark it watched, and a saved film can still be
   recommended.
 - **Thumbs up / down** are the old *Loved* / *Not for me*: one per film,
-  pressing the lit one clears it, pressing the other replaces it. A thumbed
-  film is not recommended again while the thumb stands, as before.
-- **Seen it** is unchanged and still lives on the feature and in the case.
+  pressing the lit one clears it, pressing the other replaces it. Either
+  thumb means the film has been seen, so it is not recommended again while
+  the thumb stands and the footnote counts it with the films you've seen.
+- **There is no Seen it button.** The thumbs say it. Locking a film in still
+  records it as watched for Past Showings, as before.
 
 Personalization extends the existing engine rather than replacing it: thumbs
 feed the rarity-weighted taste profile at full weight (dislikes at −1.15), a
@@ -404,8 +411,8 @@ alternative is flagged *Second choice*; the wild card — a well-reviewed film
 your profile would not have surfaced — is flagged *Wild card* and is promoted
 onto the shelf if the ranking would otherwise have buried it.
 
-**Recent evenings.** Two memories doing two jobs. *Watched* is explicit: mark a
-film **Seen it** and it stops being offered. *Offered* is automatic: the last
+**Recent evenings.** Two memories doing two jobs. *Watched* is explicit: thumb a
+film up or down, or lock it in, and it stops being offered. *Offered* is automatic: the last
 three bills carry a small bounded penalty so tonight is not word-for-word
 yesterday. It reorders near-ties and never buries a better match.
 
@@ -437,11 +444,11 @@ first), then asks for five films you'd defend. Liked posters are numbered
 the printed title, named *Open details for …* and carrying the film's
 title-and-year key, so the right case opens however the wall has been
 searched, sorted or extended. Under it sits the star and thumbs row; a status
-is printed as a small badge (*Liked*, *Not for me*, *Seen*, *Saved*). Thumbing
+is printed as a small badge (*Liked*, *Not for me*, *Watched*, *Saved*). Thumbing
 a tile repaints the wall in the order it already has, so the tile stays where
 the reader is; it moves to the front the next time the wall is laid out. The
 button opens the film's case: poster, year, runtime, rating, the story, where
-it streams, its shelf status, the same row and **Seen it**, all from data the
+it streams, its shelf status and the same row, all from data the
 page already holds. The case is a labelled modal dialog: it closes on
 **Close**, Escape or the backdrop, keeps the tab ring inside itself, locks the
 page behind it, and hands focus back to whatever opened it, looked up again

@@ -3,8 +3,8 @@
  * title, carrying the film's key; either opens the film's case, populated
  * before it is shown. The grid carries no status buttons at all, only a
  * printed badge, and under it the same star / thumbs up / thumbs down row as
- * everywhere else. Inside the case, that row and Seen it change the same
- * saved state the badge is drawn from, and the status survives a refresh. The case closes on Close, Escape and the backdrop, never on a
+ * everywhere else. Inside the case, that row changes the same saved state the
+ * badge is drawn from, and the status survives a refresh. The case closes on Close, Escape and the backdrop, never on a
  * click inside, and hands focus back to the tile that opened it.
  */
 import { loadApp, eq, ok, walk, finish, html } from "./harness.mjs";
@@ -102,9 +102,9 @@ console.log("\nopening the case");
   ok("the story", flat.some(n => n.className === "synopsis-copy" && n.textContent === f.h));
   ok("where it streams", flat.some(n => /playing-label/.test(n.className)));
   eq("the current status", caseState(env).textContent, "Not marked yet");
-  eq("and the shelf actions: the same row, and Seen it",
+  eq("and the shelf actions: the same row, nothing else",
      walk(caseReact(env)).filter(n => n.tagName === "BUTTON").map(b => b.getAttribute("aria-label") || b.textContent),
-     ["Save " + secondTitle, "Like " + secondTitle, "Dislike " + secondTitle, "Seen it"]);
+     ["Save " + secondTitle, "Like " + secondTitle, "Dislike " + secondTitle]);
   eq("nothing was fetched for any of it", globalThis.__fetches - fetchesBefore, 0);
   mod.closeCase();
 }
@@ -169,16 +169,9 @@ console.log("\nstatus, inside the case");
   eq("only one thumb is pressed", ["star","up","down"].map(k => mini(caseReact(env), k).getAttribute("aria-pressed")), ["false", "false", "true"]);
   eq("the badge follows", badgeOf(tileFor(env, title)), "Not for me");
 
-  btn(caseReact(env), "Seen it").click();
-  ok("Seen it is saved alongside", !!mod.S.watched[key]);
-  eq("the line says both", caseState(env).textContent, "Not for me · Seen it");
-  eq("the badge keeps the taste, which outranks a watch", badgeOf(tileFor(env, title)), "Not for me");
-
   mini(caseReact(env), "down").click();
   eq("pressing the lit thumb clears it, as the app always allowed", mod.S.taste[key], undefined);
-  eq("the badge falls back to Seen", badgeOf(tileFor(env, title)), "Seen");
-  btn(caseReact(env), "Seen it").click();
-  eq("clearing the watch removes the badge", badgeOf(tileFor(env, title)), null);
+  eq("clearing it removes the badge", badgeOf(tileFor(env, title)), null);
   eq("and unmarks the tile", tileFor(env, title).getAttribute("data-state"), null);
 
   mini(caseReact(env), "star").click();

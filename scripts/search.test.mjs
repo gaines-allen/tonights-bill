@@ -102,26 +102,27 @@ mod.closeCase();
 
 console.log("\nkeyboard and labels");
 ok("the input has a real label", /<label class="sr" for="hunt-q">Search movies<\/label>/.test(html));
-ok("the services button says what it does", /aria-label="Choose your streaming services"/.test(html));
-mod.openHunt();
-eq("opening shows the drawer", $("hunt-panel").hidden, false);
+ok("Search is an item in the header row, after the sections",
+   /data-go="showings">Past Showings<\/button>\s*<button type="button" class="door-hunt" id="hunt-go" aria-expanded="false" aria-controls="hunt-panel">Search<\/button>\s*<\/nav>/.test(html));
+ok("and the search bar is not in the header until it is opened",
+   html.indexOf('id="hunt-q"') > html.indexOf('id="hunt-panel"'));
+mod.wireHunt();                     /* what init() does on a real page */
+eq("closed to begin with", $("hunt-panel").hidden !== false, true);
+$("hunt-go").click();
+eq("pressing Search opens the bar", $("hunt-panel").hidden, false);
+eq("says so", $("hunt-go").getAttribute("aria-expanded"), "true");
+ok("with the cursor in the box", globalThis.__focused === $("hunt-q"));
 const esc = $("masthead").dispatch("keydown", { key: "Escape" });
 eq("Escape closes it", $("hunt-panel").hidden, true);
 ok("and the key goes no further", esc._stopped);
-ok("focus goes back to the input", globalThis.__focused === $("hunt-q"));
-/* a real browser fires focus when focus moves: closing must survive that */
-const realFocus = $("hunt-q").focus;
-$("hunt-q").focus = function(){ globalThis.__focused = this; this.dispatch("focus"); };
-mod.openHunt();
+ok("focus goes back to Search", globalThis.__focused === $("hunt-go"));
+$("hunt-go").click();
 $("hunt-close").click();
-eq("Close stays closed when focus returns to the box", $("hunt-panel").hidden, true);
-mod.openHunt();
-$("masthead").dispatch("keydown", { key: "Escape" });
-eq("so does Escape", $("hunt-panel").hidden, true);
-$("hunt-q").click();
-eq("clicking the box opens it again", $("hunt-panel").hidden, false);
+eq("Close closes it", $("hunt-panel").hidden, true);
+$("hunt-go").click(); $("hunt-go").click();
+eq("pressing Search again closes it too", $("hunt-panel").hidden, true);
+$("hunt-go").click();
 mod.closeHunt(false);
-$("hunt-q").focus = realFocus;
 
 console.log("\nchanging services under a pick");
 {
