@@ -25,10 +25,11 @@ console.log("\nshow me something else");
      stepped an index round the ranked list and wrapped. */
   const { mod } = await loadApp({ reduced: true });
   night(mod.S);
+  const firstTop = mod.filmKey(mod.scoreAll().picks[0].f);
   mod.programme({ quiet: true, silent: true }); settle();
   const pool = mod.scoreAll().picks.length;
   ok(`the pool is big enough to click through (${pool})`, pool >= 6);
-  eq("the first feature is the top pick", key(mod), mod.filmKey(mod.scoreAll().picks[0].f));
+  eq("the first feature is the top pick", key(mod), firstTop);
 
   const shown = [key(mod)];
   let ranked = 0;
@@ -119,7 +120,7 @@ console.log("\nwhen every match has had its turn");
   eq("change tonight's answers returns to the counter", mod.SCENE_get(), "tonight");
   eq("returning does not destroy the set by itself", mod.Run.keys().length, pool);
   mod.programme({ quiet: true, silent: true }); settle();
-  eq("submitting the counter again does", mod.Run.keys().length, 1);
+  eq("asking again once every match has had its turn starts the list over", mod.Run.keys().length, 1);
 }
 
 console.log("\nseen it, mid-run");
@@ -153,11 +154,17 @@ console.log("\na new run forgets the old one");
   const again = await loadApp({ reduced: true, session: env.session, store: env.store });
   eq("a refresh keeps the chain", again.mod.Run.keys(), stored);
 
-  /* a fresh run does not */
+  /* the same answers again carry on down the list */
   night(again.mod.S);
   again.mod.programme({ quiet: true, silent: true }); settle();
-  eq("submitting the counter starts over", again.mod.Run.keys().length, 1);
-  eq("with the top pick", key(again.mod), again.mod.filmKey(again.mod.scoreAll().picks[0].f));
+  eq("asking again with the same answers carries on", again.mod.Run.keys().length, 6);
+  ok("with a film not shown before", !stored.includes(key(again.mod)));
+  /* changed answers start fresh */
+  again.mod.S.moods = ["laugh"];
+  const freshTop = again.mod.filmKey(again.mod.scoreAll().picks[0].f);
+  again.mod.programme({ quiet: true, silent: true }); settle();
+  eq("changing an answer starts over", again.mod.Run.keys().length, 1);
+  eq("with the top pick for the new answers", key(again.mod), freshTop);
   eq("and replaces the stored chain", JSON.parse(again.env.session.get("tb:run")).length, 1);
 
   again.mod.dealAnother(); settle(); again.mod.dealAnother(); settle();
@@ -183,6 +190,43 @@ console.log("\na skip is not a verdict");
      snap(), before);
   eq("no skipped film was rated", Object.keys(mod.S.taste).length, 2);
   eq("none was marked watched", Object.keys(mod.S.watched).length, 1);
+}
+
+console.log("\nasking again rotates; the dealer deals");
+{
+  const { readFile } = await import("node:fs/promises");
+  const { join } = await import("node:path");
+  const { ROOT } = await import("./harness.mjs");
+  const catalog = JSON.parse(await readFile(join(ROOT, "data/catalog.json"), "utf8"));
+  for (const room of ["two", "solo", "kids"]) {
+    const { mod } = await loadApp({ reduced: true });
+    mod.applyEnrichment(catalog);
+    night(mod.S); mod.S.room = room; mod.S.rate = -1;     /* G only: a small, even pool */
+    const asks = [];
+    for (let i = 0; i < 3; i++) { mod.programme({ quiet: true }); settle(); asks.push(mod.HEAD_get().f.t); }
+    /* and with a mood that puts one film far ahead, the way Totoro was */
+    mod.S.moods = ["comfort"];
+    const lead = [];
+    for (let i = 0; i < 3; i++) { mod.programme({ quiet: true }); settle(); lead.push(mod.HEAD_get().f.t); }
+    eq(`G only + Comfort movie, ${room}: still three different films (${lead.join(" / ")})`, new Set(lead).size, 3);
+    eq(`G only, ${room}: three asks in a row give three different films (${asks.join(" / ")})`, new Set(asks).size, 3);
+    const top5 = mod.eligible(mod.scoreAll()).slice(0, 5).map((r) => r.f.t);
+    const dealt = new Set();
+    for (let i = 0; i < 20; i++) { mod.houseDecides(); settle(); dealt.add(mod.HEAD_get().f.t); }
+    ok(`G only, ${room}: dealer's choice deals more than one film (${dealt.size} over 20 deals)`, dealt.size > 1);
+  }
+  const { mod } = await loadApp({ reduced: true });
+  night(mod.S);
+  const real = Math.random;
+  const seen = [];
+  for (const r of [0, 0.25, 0.5, 0.75, 0.99]) {
+    Math.random = () => r;
+    const top = mod.eligible(mod.scoreAll()).slice(0, 5).map((x) => x.f.t);
+    mod.houseDecides(); settle();
+    seen.push(top.includes(mod.HEAD_get().f.t));
+  }
+  Math.random = real;
+  ok("every deal comes from the five best matches of that moment", seen.every(Boolean));
 }
 
 console.log("\nthe wiring");

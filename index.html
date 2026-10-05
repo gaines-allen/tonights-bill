@@ -2997,20 +2997,27 @@ function load(k,dflt){
    profile, the watched list and the offered memory, in sessionStorage: it
    survives an accidental refresh and dies with the tab. */
 const Run = (function(){
-  const KEY = "tb:run";
-  let shown = {};
+  const KEY = "tb:run", SIG = "tb:runsig";
+  let shown = {}, sig = "";
   try{
     const raw = sessionStorage.getItem(KEY);
     if(raw){ const arr = JSON.parse(raw); if(Array.isArray(arr)) arr.forEach(function(k){ shown[k] = 1; }); }
+    sig = sessionStorage.getItem(SIG) || "";
   }catch(e){ /* no session storage: the set lasts for this page */ }
   function write(){
-    try{ sessionStorage.setItem(KEY, JSON.stringify(Object.keys(shown))); }catch(e){}
+    try{
+      sessionStorage.setItem(KEY, JSON.stringify(Object.keys(shown)));
+      sessionStorage.setItem(SIG, sig);
+    }catch(e){}
   }
   return {
     has:   function(f){ return !!(f && shown[filmKey(f)]); },
     add:   function(f){ if(!f) return; shown[filmKey(f)] = 1; write(); },
-    clear: function(){ shown = {}; write(); },
-    keys:  function(){ return Object.keys(shown); }
+    clear: function(){ shown = {}; sig = ""; write(); },
+    keys:  function(){ return Object.keys(shown); },
+    /* which answers this run was dealt from */
+    sig:   function(){ return sig; },
+    setSig:function(v){ sig = v || ""; write(); }
   };
 })();
 
@@ -3039,6 +3046,7 @@ const S = {
   watched: load("watched2", null),
   saved:   load("saved", {}),
   pending: load("pending2", null),
+  headlined: load("headlined", []),
   ran:     false
 };
 
@@ -3080,6 +3088,7 @@ function save(){
   store("watched2",S.watched); store("offered",S.offered);
   store("moods",S.moods); store("bills",S.bills); store("locked",S.locked);
   store("timePreset",S.timePreset); store("pending2",S.pending);
+  store("headlined",S.headlined);
 }
 
 /* ---------- reading a film's standing ---------- */
@@ -3095,10 +3104,21 @@ function filmOf(rec){
 function sameFilm(rec, f){ return !!(rec && f && filmOf(rec) === f); }
 
 /* ---------- evening history ----------
-   Two memories doing two different jobs:
-   watched  - you actually watched it, so never offer it again until cleared
-   offered  - the last few bills, so tonight's does not repeat yesterday's */
+   Three memories doing three different jobs:
+   watched   - you actually watched it, so never offer it again until cleared
+   offered   - the last few bills, so tonight's does not repeat yesterday's
+   headlined - the films that actually held the feature slot lately. Asking
+               again with the same answers should not hand back the film you
+               were just shown; when the leaders are close (G only leaves a
+               small, even pool) this is what makes a fresh ask rotate. */
 const OFFER_MEMORY = 3;
+const HEADLINE_PENALTY = [0.12, 0.09, 0.06, 0.03];   /* most recent first */
+function noteHeadline(f){
+  const k = filmKey(f);
+  S.headlined = [k].concat((S.headlined || []).filter(function(x){ return x !== k; }))
+    .slice(0, HEADLINE_PENALTY.length);
+  save();
+}
 
 function recentlyOfferedIndex(title){
   for(let i = 0; i < S.offered.length && i < OFFER_MEMORY; i++){
@@ -3320,6 +3340,10 @@ function scoreAll(){
     const seenIdx = recentlyOfferedIndex(f.t);
     const stale = seenIdx === -1 ? 0 : (0.05 - seenIdx * 0.015);
     score = score * (1 - stale);
+    /* Headlined lately? A firmer push, so a fresh ask moves on to the next of
+       several close matches. A film far ahead of the rest still wins. */
+    const headIdx = (S.headlined || []).indexOf(key);
+    if(headIdx > -1) score = score * (1 - HEADLINE_PENALTY[headIdx]);
 
     const on = f.svcs.filter(function(c){ return S.svc[c]; });
     const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on,
@@ -4767,8 +4791,17 @@ function programme(opts){
   if(Reveal.busy()) return;
   if(!ready() && !opts.quiet){ nudgeUnanswered(); return; }
   DEALER = false;
-  Run.clear();                       /* the counter was submitted again: a new run */
-  const out = scoreAll();
+  /* Asking again with the same answers carries on down the same list, so it
+     never hands back a film it has already shown you tonight. Change any
+     answer and it starts a fresh list; when every match has had its turn,
+     the same answers start the list over rather than stopping. */
+  const sig = answersSig();
+  let out = scoreAll();
+  if(sig !== Run.sig() || !nextPick(out)){
+    Run.clear();
+    Run.setSig(sig);
+    out = scoreAll();
+  }
   LAST = out;
   const rec = heldRec(out) || nextPick(out);
   const paint = function(){ showScene("bill"); renderBill(out, rec); };
@@ -4784,6 +4817,12 @@ function programme(opts){
   });
 }
 
+const DEAL_FROM = 5;
+/* Everything the answers say about tonight, as one comparable string. */
+function answersSig(){
+  return JSON.stringify([S.room, S.time, S.moods.slice().sort(), S.genres.slice().sort(), S.rate, S.minRT,
+    SERVICES.filter(function(x){ return S.svc[x.k]; }).map(function(x){ return x.k; })]);
+}
 function houseDecides(e){
   if(Reveal.busy()) return;
   if(!S.room) S.room = "two";
@@ -4794,7 +4833,10 @@ function houseDecides(e){
   Run.clear();                       /* the house dealing is a new run too */
   const out = scoreAll();
   LAST = out;
-  const rec = nextPick(out);
+  /* The house actually deals: one of the five best matches, at random, not
+     the same top film the ask would have given. */
+  const hand = eligible(out).slice(0, DEAL_FROM);
+  const rec = hand.length ? hand[Math.floor(Math.random() * hand.length)] : null;
   const paint = function(){ showScene("bill"); renderBill(out, rec); };
   if(out.picks.length) rememberOffer(out.picks.slice(0,8).map(function(r){ return r.f.t; }));
   Reveal.full({
@@ -4887,6 +4929,7 @@ function renderBill(out, want){
 function setFeature(rec){
   HEAD = rec;
   Run.add(rec.f);                      /* it has headlined tonight: not again this run */
+  if(MODE !== "locked") noteHeadline(rec.f);
   const grid = $("bill-grid");
   grid.innerHTML = "";
   grid.style.gridTemplateColumns = "";

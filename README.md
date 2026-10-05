@@ -411,7 +411,11 @@ alternative is flagged *Second choice*; the wild card — a well-reviewed film
 your profile would not have surfaced — is flagged *Wild card* and is promoted
 onto the shelf if the ranking would otherwise have buried it.
 
-**Recent evenings.** Two memories doing two jobs. *Watched* is explicit: thumb a
+**Recent evenings.** Three memories doing three jobs. *Headlined* is the
+films that actually held the feature slot lately: asking again with the same
+answers pushes the last few down (12%, 9%, 6%, 3%), so a fresh ask rotates
+through close matches instead of handing back the film you just saw; a film
+far ahead of the rest still wins. The other two: *Watched* is explicit: thumb a
 film up or down, or lock it in, and it stops being offered. *Offered* is automatic: the last
 three bills carry a small bounded penalty so tonight is not word-for-word
 yesterday. It reorders near-ties and never buries a better match.
@@ -425,11 +429,13 @@ never applied as a penalty, because a penalised film can still win, which is
 how the first pick used to come back after three clicks. Films that only sit
 on the shelf are not counted. A skip is not a verdict: nothing is marked seen
 or disliked. The set lives in `sessionStorage`, apart from the profile, so a
-refresh keeps the chain and closing the tab drops it. It is cleared when the
-counter is submitted again, when the house deals, or on **Start this list
-over**. When every match has had its turn the page says so, *You've made it
-through every match for these answers*, and offers **Change tonight's answers**
-or **Start this list over** rather than going back round.
+refresh keeps the chain and closing the tab drops it. It is kept when the counter is submitted again with the same answers, so
+asking twice never hands back the same film; it is cleared when any answer
+changes, when the house deals, once every match has had its turn, or on
+**Start this list over**. When *Show me something else* reaches the end of the
+matches the page says so, *You've made it through every match for these
+answers*, and offers **Change tonight's answers** or **Start this list over**
+rather than going back round.
 
 **Keyboard:** `Enter` asks for tonight's pick, `R` deals another, `Esc` goes
 back to the counter. Shortcuts are ignored while typing in a field.
