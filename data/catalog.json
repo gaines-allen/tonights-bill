@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "generatedAt": "2026-10-05T23:29:25.573Z",
+  "generatedAt": "2026-10-05T23:32:54.410Z",
   "region": "US",
   "source": "TMDB + OMDb",
   "total": 245,
@@ -13,7 +13,8 @@
    "Do the Right Thing (1989)"
   ],
   "omdbErrors": {
-   "no Rotten Tomatoes entry for this title": 2
+   "Request limit reached!": 4,
+   "daily limit already reached": 191
   },
   "unmatched": [],
   "logos": {
@@ -30,110 +31,7 @@
   "servicesMissed": [],
   "shelfCount": 817,
   "streamingNow": 962,
-  "arrived": [
-   "White Chicks",
-   "The Devil Wears Prada",
-   "The Equalizer",
-   "Apex",
-   "The Rip",
-   "Angels & Demons",
-   "Ice Road: Vengeance",
-   "Jason Bourne",
-   "Extraction 2",
-   "The Next 365 Days",
-   "Speed",
-   "The Bourne Supremacy",
-   "Angel Has Fallen",
-   "M3GAN 2.0",
-   "Extraction",
-   "The Gray Man",
-   "Point Break",
-   "Back in Action",
-   "The Founder",
-   "After",
-   "The Bourne Legacy",
-   "The Love Hypothesis",
-   "The Runner",
-   "Crime 101",
-   "X",
-   "Tom Clancy's Jack Ryan: Ghost War",
-   "The Devil's Mouth",
-   "Road House",
-   "Heads of State",
-   "My Fault: London",
-   "Our Fault",
-   "Guy Ritchie's The Covenant",
-   "Lolita",
-   "Your Fault",
-   "Indiana Jones and the Temple of Doom",
-   "Play Dirty",
-   "The Girl Next Door",
-   "Now You See Me 2",
-   "Olympus Has Fallen",
-   "Creed",
-   "The Voyeurs",
-   "Escape Plan",
-   "Red, White & Royal Blue",
-   "Hunter Killer",
-   "Spectre",
-   "Creed III",
-   "Seven Pounds",
-   "The First Omen",
-   "Quantum of Solace",
-   "Jackpot!",
-   "The World Is Not Enough",
-   "Creed II",
-   "The Devil Wears Prada 2",
-   "Kraven the Hunter",
-   "Grown Ups",
-   "Anyone but You",
-   "Bullet Train",
-   "Nosferatu",
-   "Grown Ups 2",
-   "The King's Man",
-   "Die Hard 2",
-   "Live Free or Die Hard",
-   "Bad Boys for Life",
-   "Heretic",
-   "Hocus Pocus 2",
-   "Ex Machina",
-   "The Boogeyman",
-   "The Commuter",
-   "Die Hard: With a Vengeance",
-   "Fright Night",
-   "Remember the Titans",
-   "Twisters",
-   "The Conjuring 2",
-   "The Conjuring: Last Rites",
-   "Ballerina",
-   "Insidious: The Last Key",
-   "The Exorcist",
-   "Annabelle: Creation",
-   "Fantastic Beasts: The Secrets of Dumbledore",
-   "Ocean's Twelve",
-   "Greenland",
-   "The Equalizer 2",
-   "Challengers",
-   "We're the Millers",
-   "The King's Speech",
-   "The Intern",
-   "Just Go with It",
-   "Pet Sematary",
-   "Horrible Bosses 2",
-   "Knight and Day",
-   "The Ten Commandments",
-   "What Women Want",
-   "Sweeney Todd: The Demon Barber of Fleet Street",
-   "Fast X",
-   "The Forever Purge",
-   "The 40 Year-Old Virgin",
-   "Scary Stories to Tell in the Dark",
-   "The Last Voyage of the Demeter",
-   "Halloween",
-   "The Birds",
-   "Requiem for a Dream",
-   "Dracula"
-  ],
+  "arrived": [],
   "departed": []
  },
  "films": [
@@ -1968,7 +1866,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "1917",
@@ -2040,7 +1940,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "Apocalypse Now",
@@ -2078,7 +1980,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "Full Metal Jacket",
@@ -2116,7 +2020,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "The Shawshank Redemption",
@@ -2150,7 +2056,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Forrest Gump",
@@ -2188,7 +2096,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 75
+   "rt": 75,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Social Network",
@@ -2220,7 +2130,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Whiplash",
@@ -2254,7 +2166,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "There Will Be Blood",
@@ -2292,7 +2206,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Moonlight",
@@ -2327,7 +2243,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Manchester by the Sea",
@@ -2363,7 +2281,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Marriage Story",
@@ -2397,7 +2317,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Banshees of Inisherin",
@@ -2431,7 +2353,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Little Women",
@@ -2466,7 +2390,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Lady Bird",
@@ -2505,7 +2431,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Grand Budapest Hotel",
@@ -2540,7 +2468,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Knives Out",
@@ -2577,7 +2507,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Menu",
@@ -2616,7 +2548,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Glass Onion",
@@ -2655,7 +2589,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Get Out",
@@ -2693,7 +2629,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Hereditary",
@@ -2733,7 +2671,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Babadook",
@@ -2769,7 +2709,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "A Quiet Place",
@@ -2808,7 +2750,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Shining",
@@ -2846,7 +2790,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 84
+   "rt": 84,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Thing",
@@ -2885,7 +2831,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "It Follows",
@@ -2923,7 +2871,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Scream",
@@ -2964,7 +2914,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 78
+   "rt": 78,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Sinners",
@@ -3003,7 +2955,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Nope",
@@ -3040,7 +2994,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 83
+   "rt": 83,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "28 Days Later",
@@ -3075,7 +3031,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 87
+   "rt": 87,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Spirited Away",
@@ -3112,7 +3070,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "My Neighbor Totoro",
@@ -3149,7 +3109,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Princess Mononoke",
@@ -3186,7 +3148,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Spider-Man: Into the Spider-Verse",
@@ -3223,7 +3187,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Spider-Man: Across the Spider-Verse",
@@ -3264,7 +3230,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Incredibles",
@@ -3305,7 +3273,7 @@
    "k": "all",
    "pop": 3,
    "rt": null,
-   "omdbError": "no Rotten Tomatoes entry for this title"
+   "omdbError": "daily limit already reached"
   },
   {
    "t": "Ratatouille",
@@ -3346,7 +3314,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "WALL-E",
@@ -3385,7 +3355,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Toy Story",
@@ -3426,7 +3398,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 100
+   "rt": 100,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Inside Out",
@@ -3467,7 +3441,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Coco",
@@ -3506,7 +3482,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Up",
@@ -3546,7 +3524,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Finding Nemo",
@@ -3586,7 +3566,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Zootopia",
@@ -3626,7 +3608,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Moana",
@@ -3654,7 +3638,8 @@
     "adventure",
     "comedy",
     "family",
-    "animation"
+    "animation",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -3666,7 +3651,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "How to Train Your Dragon",
@@ -3706,7 +3693,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Lion King",
@@ -3733,11 +3722,12 @@
    "g": [
     "animation",
     "family",
-    "drama"
+    "drama",
+    "musical"
    ],
    "a": [
-    "earnest",
     "uplifting",
+    "earnest",
     "visual",
     "cozy",
     "hopeful",
@@ -3745,7 +3735,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Klaus",
@@ -3784,7 +3776,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Puss in Boots: The Last Wish",
@@ -3826,7 +3820,7 @@
    "k": "all",
    "pop": 2,
    "rt": null,
-   "omdbError": "no Rotten Tomatoes entry for this title"
+   "omdbError": "daily limit already reached"
   },
   {
    "t": "The Lord of the Rings: The Fellowship of the Ring",
@@ -3865,7 +3859,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Lord of the Rings: The Two Towers",
@@ -3904,7 +3900,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Lord of the Rings: The Return of the King",
@@ -3943,7 +3941,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Pan's Labyrinth",
@@ -3979,7 +3979,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Princess Bride",
@@ -4017,7 +4019,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Harry Potter and the Prisoner of Azkaban",
@@ -4053,7 +4057,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Casablanca",
@@ -4091,7 +4097,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "When Harry Met Sally",
@@ -4129,7 +4137,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Before Sunrise",
@@ -4165,7 +4175,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 100
+   "rt": 100,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Eternal Sunshine of the Spotless Mind",
@@ -4202,7 +4214,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "La La Land",
@@ -4227,18 +4241,21 @@
    "g": [
     "comedy",
     "drama",
-    "romance"
+    "romance",
+    "musical"
    ],
    "a": [
-    "comic",
     "uplifting",
+    "comic",
     "romantic",
     "earnest",
     "stylish"
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Notting Hill",
@@ -4276,7 +4293,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 84
+   "rt": 84,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Crazy Rich Asians",
@@ -4311,7 +4330,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Past Lives",
@@ -4347,7 +4368,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Portrait of a Lady on Fire",
@@ -4385,7 +4408,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Brokeback Mountain",
@@ -4418,7 +4443,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Superbad",
@@ -4452,7 +4479,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Bridesmaids",
@@ -4490,7 +4519,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Airplane!",
@@ -4525,7 +4556,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Big Lebowski",
@@ -4559,7 +4592,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 79
+   "rt": 79,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Groundhog Day",
@@ -4596,7 +4631,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Hot Fuzz",
@@ -4634,7 +4671,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Shaun of the Dead",
@@ -4672,7 +4711,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Booksmart",
@@ -4704,7 +4745,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Palm Springs",
@@ -4742,7 +4785,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Game Night",
@@ -4780,7 +4825,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Nice Guys",
@@ -4817,7 +4864,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Jojo Rabbit",
@@ -4852,7 +4901,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 81
+   "rt": 81,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Mission: Impossible - Fallout",
@@ -4887,7 +4938,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "John Wick",
@@ -4920,7 +4973,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 87
+   "rt": 87,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Top Gun: Maverick",
@@ -4956,7 +5011,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Casino Royale",
@@ -4994,7 +5051,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Skyfall",
@@ -5031,7 +5090,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Raiders of the Lost Ark",
@@ -5068,7 +5129,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Die Hard",
@@ -5107,7 +5170,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Raid: Redemption",
@@ -5143,7 +5208,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 87
+   "rt": 87,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Mission: Impossible - Ghost Protocol",
@@ -5179,7 +5246,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Black Panther",
@@ -5216,7 +5285,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Avengers",
@@ -5253,7 +5324,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Avengers: Infinity War",
@@ -5291,7 +5364,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Avengers: Endgame",
@@ -5330,7 +5405,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Guardians of the Galaxy",
@@ -5366,7 +5443,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Thor: Ragnarok",
@@ -5405,7 +5484,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Logan",
@@ -5441,7 +5522,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Spider-Man: No Way Home",
@@ -5480,7 +5563,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Whale Rider",
@@ -5514,7 +5599,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Paddington 2",
@@ -5551,7 +5638,9 @@
    ],
    "k": "all",
    "pop": 1,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "School of Rock",
@@ -5590,7 +5679,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Sandlot",
@@ -5628,7 +5719,9 @@
    ],
    "k": "all",
    "pop": 1,
-   "rt": 66
+   "rt": 66,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Matilda",
@@ -5665,7 +5758,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Enola Holmes",
@@ -5702,7 +5797,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Jumanji: Welcome to the Jungle",
@@ -5740,7 +5837,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 76
+   "rt": 76,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Wonder",
@@ -5773,7 +5872,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 86
+   "rt": 86,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Princess Diaries",
@@ -5812,7 +5913,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 50
+   "rt": 50,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Sing Street",
@@ -5849,7 +5952,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Hunt for the Wilderpeople",
@@ -5886,7 +5991,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Rear Window",
@@ -5922,7 +6029,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Psycho",
@@ -5962,7 +6071,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "12 Angry Men",
@@ -5997,7 +6108,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 100
+   "rt": 100,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Dr. Strangelove",
@@ -6033,7 +6146,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "2001: A Space Odyssey",
@@ -6072,7 +6187,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Chinatown",
@@ -6108,7 +6225,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Taxi Driver",
@@ -6144,7 +6263,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Jaws",
@@ -6180,7 +6301,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Rocky",
@@ -6218,7 +6341,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Alien: Romulus",
@@ -6253,7 +6378,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 80
+   "rt": 80,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Some Like It Hot",
@@ -6290,7 +6417,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Singin' in the Rain",
@@ -6316,7 +6445,8 @@
    "providersChecked": true,
    "g": [
     "comedy",
-    "romance"
+    "romance",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -6326,7 +6456,9 @@
    ],
    "k": "all",
    "pop": 1,
-   "rt": 100
+   "rt": 100,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Apartment",
@@ -6362,7 +6494,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Vertigo",
@@ -6399,7 +6533,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Wolf of Wall Street",
@@ -6438,7 +6574,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 79
+   "rt": 79,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Catch Me If You Can",
@@ -6476,7 +6614,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Ocean's Eleven",
@@ -6512,7 +6652,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 83
+   "rt": 83,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Spotlight",
@@ -6547,7 +6689,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Big Short",
@@ -6580,7 +6724,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Michael Clayton",
@@ -6614,7 +6760,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Drive",
@@ -6651,7 +6799,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Baby Driver",
@@ -6689,7 +6839,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Collateral",
@@ -6730,7 +6882,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 86
+   "rt": 86,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Training Day",
@@ -6765,7 +6919,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 74
+   "rt": 74,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "A Few Good Men",
@@ -6799,7 +6955,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Erin Brockovich",
@@ -6832,7 +6990,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 87
+   "rt": 87,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Coming to America",
@@ -6868,7 +7028,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 71
+   "rt": 71,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Do the Right Thing",
@@ -6899,7 +7061,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Boyz n the Hood",
@@ -6933,7 +7097,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Farewell",
@@ -6967,7 +7133,9 @@
    ],
    "k": "all",
    "pop": 1,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Minari",
@@ -7001,7 +7169,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "CODA",
@@ -7034,7 +7204,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Killers of the Flower Moon",
@@ -7069,7 +7241,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Napoleon",
@@ -7105,7 +7279,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 58
+   "rt": 58,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Greyhound",
@@ -7140,7 +7316,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 77
+   "rt": 77,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Beanie Bubble",
@@ -7173,7 +7351,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 46
+   "rt": 46,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Wolfs",
@@ -7206,7 +7386,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 66
+   "rt": 66,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Holdovers",
@@ -7244,7 +7426,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Nomadland",
@@ -7279,7 +7463,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Shape of Water",
@@ -7315,7 +7501,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Birdman",
@@ -7353,7 +7541,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Roma",
@@ -7387,7 +7577,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Irishman",
@@ -7425,7 +7617,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Okja",
@@ -7462,7 +7656,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 87
+   "rt": 87,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Athlete A",
@@ -7496,7 +7692,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 100
+   "rt": 100,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Truman Show",
@@ -7531,7 +7729,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Good Will Hunting",
@@ -7567,7 +7767,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Dead Poets Society",
@@ -7599,7 +7801,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Slumdog Millionaire",
@@ -7632,7 +7836,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Prestige",
@@ -7669,7 +7875,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 77
+   "rt": 77,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Shutter Island",
@@ -7708,7 +7916,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 69
+   "rt": 69,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Sixth Sense",
@@ -7748,7 +7958,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 86
+   "rt": 86,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Fight Club",
@@ -7781,7 +7993,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 81
+   "rt": 81,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "American Beauty",
@@ -7816,7 +8030,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 87
+   "rt": 87,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Lost in Translation",
@@ -7853,7 +8069,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Sideways",
@@ -7889,7 +8107,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Little Miss Sunshine",
@@ -7922,7 +8142,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Juno",
@@ -7958,7 +8180,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "500 Days of Summer",
@@ -7992,7 +8216,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 86
+   "rt": 86,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Perks of Being a Wallflower",
@@ -8028,7 +8254,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Boyhood",
@@ -8063,7 +8291,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Coco Before Chanel",
@@ -8095,7 +8325,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 63
+   "rt": 63,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Zone of Interest",
@@ -8130,7 +8362,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Poor Things",
@@ -8169,7 +8403,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Anatomy of a Fall",
@@ -8208,7 +8444,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Aftersun",
@@ -8243,7 +8481,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Everything Went Fine",
@@ -8276,7 +8516,9 @@
    ],
    "k": "all",
    "pop": 1,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Talk to Me",
@@ -8345,7 +8587,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Midsommar",
@@ -8385,7 +8629,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 83
+   "rt": 83,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Bodies Bodies Bodies",
@@ -8425,7 +8671,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Nobody",
@@ -8463,7 +8711,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 83
+   "rt": 83,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Fall Guy",
@@ -8497,7 +8747,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 81
+   "rt": 81,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Barbie",
@@ -8536,7 +8788,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Air",
@@ -8570,7 +8824,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Ford v Ferrari",
@@ -8605,7 +8861,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Free Solo",
@@ -8641,7 +8899,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Won't You Be My Neighbor?",
@@ -8673,7 +8933,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "My Octopus Teacher",
@@ -8707,7 +8969,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Coraline",
@@ -8749,7 +9013,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Gremlins",
@@ -8788,7 +9054,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 86
+   "rt": 86,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Beetlejuice",
@@ -8824,7 +9092,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 83
+   "rt": 83,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Poltergeist",
@@ -8860,7 +9130,9 @@
    ],
    "k": "all",
    "pop": 1,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Signs",
@@ -8899,7 +9171,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 76
+   "rt": 76,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Tremors",
@@ -8935,7 +9209,9 @@
    ],
    "k": "teen",
    "pop": 1,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "ParaNorman",
@@ -8977,7 +9253,9 @@
    ],
    "k": "all",
    "pop": 1,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Hocus Pocus",
@@ -9014,7 +9292,9 @@
    ],
    "k": "all",
    "pop": 1,
-   "rt": 42
+   "rt": 42,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Warm Bodies",
@@ -9051,7 +9331,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 81
+   "rt": 81,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "A Quiet Place Part II",
@@ -9091,7 +9373,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Jumanji",
@@ -9127,7 +9411,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 56
+   "rt": 56,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Iron Giant",
@@ -9166,7 +9452,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   }
  ],
  "shelf": [
@@ -9746,7 +10034,8 @@
    "g": [
     "fantasy",
     "adventure",
-    "romance"
+    "romance",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -11347,11 +11636,12 @@
     "adventure",
     "animation",
     "drama",
-    "family"
+    "family",
+    "musical"
    ],
    "a": [
-    "cozy",
     "uplifting",
+    "cozy",
     "hopeful",
     "earnest",
     "melancholy",
@@ -12026,7 +12316,8 @@
     "fantasy",
     "action",
     "romance",
-    "family"
+    "family",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -18189,12 +18480,13 @@
    "g": [
     "fantasy",
     "animation",
-    "family"
+    "family",
+    "musical"
    ],
    "a": [
     "cozy",
-    "visual",
     "uplifting",
+    "visual",
     "practical",
     "brisk"
    ],
@@ -18400,7 +18692,8 @@
     "animation",
     "comedy",
     "family",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -19187,11 +19480,12 @@
     "animation",
     "adventure",
     "comedy",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
-    "cozy",
     "uplifting",
+    "cozy",
     "earnest",
     "visual",
     "comic"
@@ -19390,7 +19684,8 @@
    "g": [
     "animation",
     "family",
-    "adventure"
+    "adventure",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -19762,7 +20057,8 @@
     "animation",
     "family",
     "adventure",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -19798,12 +20094,13 @@
     "adventure",
     "drama",
     "family",
-    "animation"
+    "animation",
+    "musical"
    ],
    "a": [
+    "uplifting",
     "earnest",
     "cozy",
-    "uplifting",
     "hopeful",
     "melancholy",
     "visual"
@@ -19834,14 +20131,15 @@
     "romance",
     "family",
     "animation",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
     "earnest",
+    "uplifting",
     "romantic",
     "visual",
     "cozy",
-    "uplifting",
     "hopeful"
    ],
    "svcs": [
@@ -19941,12 +20239,13 @@
     "fantasy",
     "adventure",
     "family",
-    "comedy"
+    "comedy",
+    "musical"
    ],
    "a": [
+    "uplifting",
     "comic",
     "cozy",
-    "uplifting",
     "cerebral",
     "brisk"
    ],
@@ -20077,11 +20376,12 @@
    "g": [
     "adventure",
     "family",
-    "animation"
+    "animation",
+    "musical"
    ],
    "a": [
-    "cozy",
     "uplifting",
+    "cozy",
     "earnest",
     "visual"
    ],
@@ -20351,11 +20651,12 @@
    "g": [
     "animation",
     "family",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
-    "earnest",
     "uplifting",
+    "earnest",
     "visual",
     "cozy",
     "epic",
@@ -20525,7 +20826,8 @@
     "adventure",
     "family",
     "fantasy",
-    "romance"
+    "romance",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -20942,11 +21244,12 @@
    "g": [
     "family",
     "fantasy",
-    "romance"
+    "romance",
+    "musical"
    ],
    "a": [
-    "cozy",
     "uplifting",
+    "cozy",
     "earnest",
     "romantic",
     "weird"
@@ -21252,11 +21555,12 @@
    "g": [
     "animation",
     "family",
-    "adventure"
+    "adventure",
+    "musical"
    ],
    "a": [
-    "cozy",
     "uplifting",
+    "cozy",
     "earnest",
     "spectacle",
     "visual",
@@ -21548,11 +21852,12 @@
     "animation",
     "romance",
     "fantasy",
-    "family"
+    "family",
+    "musical"
    ],
    "a": [
-    "cozy",
     "uplifting",
+    "cozy",
     "romantic",
     "visual",
     "brisk"
@@ -21789,7 +22094,8 @@
     "fantasy",
     "adventure",
     "comedy",
-    "romance"
+    "romance",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -21896,7 +22202,8 @@
     "family",
     "adventure",
     "fantasy",
-    "romance"
+    "romance",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -21931,7 +22238,8 @@
    "g": [
     "drama",
     "animation",
-    "family"
+    "family",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -22411,7 +22719,8 @@
     "animation",
     "comedy",
     "family",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -22849,7 +23158,8 @@
     "adventure",
     "fantasy",
     "romance",
-    "family"
+    "family",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -23687,7 +23997,8 @@
    "g": [
     "drama",
     "romance",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -25458,13 +25769,14 @@
    "g": [
     "adventure",
     "family",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
+    "uplifting",
     "visual",
     "practical",
     "cozy",
-    "uplifting",
     "earnest",
     "melancholy"
    ],
@@ -25479,8 +25791,8 @@
    "mpaa": "PG",
    "rt": 64,
    "rtSrc": "rt",
-   "rating": 7.292,
-   "votes": 2872,
+   "rating": 7.293,
+   "votes": 2875,
    "poster": "/pejayhTVBEL4w8YKSfrhOjjWVlH.jpg",
    "backdrop": "/mGkleIuPO2flRyvP8yBcUykSQsp.jpg",
    "tmdb": 13597,
@@ -25927,11 +26239,12 @@
    "g": [
     "family",
     "adventure",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
-    "cozy",
     "uplifting",
+    "cozy",
     "earnest",
     "romantic",
     "visual"
@@ -26705,11 +27018,12 @@
    "g": [
     "romance",
     "fantasy",
-    "animation"
+    "animation",
+    "musical"
    ],
    "a": [
-    "visual",
     "uplifting",
+    "visual",
     "romantic",
     "weird",
     "practical",
@@ -27639,7 +27953,8 @@
    "g": [
     "adventure",
     "fantasy",
-    "family"
+    "family",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -27998,7 +28313,8 @@
    "g": [
     "scifi",
     "horror",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -28923,12 +29239,13 @@
    "y": 2017,
    "r": 105,
    "g": [
-    "drama"
+    "drama",
+    "musical"
    ],
    "a": [
     "comic",
-    "grounded",
     "uplifting",
+    "grounded",
     "characterstudy",
     "weird"
    ],
@@ -29624,7 +29941,8 @@
    "g": [
     "family",
     "fantasy",
-    "comedy"
+    "comedy",
+    "musical"
    ],
    "a": [
     "comic",
@@ -33246,7 +33564,8 @@
    "r": 116,
    "g": [
     "drama",
-    "horror"
+    "horror",
+    "musical"
    ],
    "a": [
     "uplifting",
@@ -34535,7 +34854,8 @@
    "g": [
     "animation",
     "family",
-    "fantasy"
+    "fantasy",
+    "musical"
    ],
    "a": [
     "uplifting",

@@ -144,12 +144,12 @@ adventure, animation, comedy, family / dir. Hamilton Luske
 
 ### Aladdin
 1992 / 1h 31m / G / Disney+
-animation, family, adventure, fantasy, romance / dir. John Musker
+animation, family, adventure, fantasy, romance, musical / dir. John Musker
 > In the boorish city of Agrabah, kind-hearted street urchin Aladdin and Princess Jasmine fall in love, although she can only marry a prince. He and power-hungry Grand Vizier Jafar vie for a magic lamp that can fulfill their wishes.
 
 ### Beauty and the Beast
 1991 / 1h 24m / G / Disney+
-romance, family, animation, fantasy / dir. Gary Trousdale
+romance, family, animation, fantasy, musical / dir. Gary Trousdale
 > Follow the adventures of Belle, a bright young woman who finds herself in the castle of a prince who's been turned into a mysterious beast. With the help of the castle's enchanted staff, Belle soon learns the most important lesson of all -- that true beauty comes from within.
 
 ### Call Me by Your Name
@@ -174,7 +174,7 @@ horror, thriller / dir. Alfred Hitchcock
 
 ### The Nightmare Before Christmas
 1993 / 1h 16m / PG / Disney+
-fantasy, animation, family / dir. Henry Selick
+fantasy, animation, family, musical / dir. Henry Selick
 > Tired of scaring humans every October 31 with the same old bag of tricks, Jack Skellington, the spindly king of Halloween Town, kidnaps Santa Claus and plans to deliver shrunken heads and other ghoulish gifts to children on Christmas morning. But as Christmas approaches, Jack's rag-doll girlfriend, Sally, tries to foil his misguided plans.
 
 ### Train to Busan
@@ -354,7 +354,7 @@ action, adventure, scifi / dir. Justin Lin
 
 ### Sweeney Todd: The Demon Barber of Fleet Street
 2007 / 1h 56m / R / Paramount+
-drama, horror / dir. Tim Burton
+drama, horror, musical / dir. Tim Burton
 > The infamous story of Benjamin Barker, a.k.a Sweeney Todd, who sets up a barber shop down in London which is the basis for a sinister partnership with his fellow tenant, Mrs. Lovett. Based on the hit Broadway musical.
 
 ### Bridge to Terabithia
@@ -364,7 +364,7 @@ adventure, drama, family / dir. Gábor Csupó
 
 ### Corpse Bride
 2005 / 1h 17m / PG / Max
-romance, fantasy, animation / dir. Mike Johnson
+romance, fantasy, animation, musical / dir. Mike Johnson
 > In a 19th-century European village, a young man about to be married is whisked away to the underworld and wed to a mysterious corpse bride, while his real bride waits bereft in the land of the living.
 
 ### Nosferatu
@@ -389,7 +389,7 @@ action, mystery, thriller / dir. Doug Liman
 
 ### Willy Wonka & the Chocolate Factory
 1971 / 1h 40m / G / Max
-family, fantasy, comedy / dir. Mel Stuart
+family, fantasy, comedy, musical / dir. Mel Stuart
 > When eccentric candy man Willy Wonka promises a lifetime supply of sweets and a tour of his chocolate factory to five lucky kids, penniless Charlie Bucket seeks the golden ticket that will make him a winner.
 
 ### Begin Again
@@ -404,7 +404,7 @@ drama, action / dir. Steven Caple Jr.
 
 ### Hercules
 1997 / 1h 33m / G / Disney+
-animation, family, fantasy, adventure, comedy, romance / dir. John Musker
+animation, family, fantasy, adventure, comedy, romance, musical / dir. John Musker
 > Bestowed with superhuman strength, a young mortal named Hercules sets out to prove himself a hero in the eyes of his father, the great god Zeus. Along with his friends Pegasus, a flying horse, and Phil, a personal trainer, Hercules is tricked by the hilarious, hotheaded villain Hades, who's plotting to take over Mount Olympus!
 
 ### Liar Liar
@@ -559,7 +559,7 @@ thriller, action, crime / dir. Bilall Fallah
 
 ### Encanto
 2021 / 1h 42m / PG / Disney+
-animation, comedy, family, fantasy / dir. Byron Howard
+animation, comedy, family, fantasy, musical / dir. Byron Howard
 > The tale of an extraordinary family, the Madrigals, who live hidden in the mountains of Colombia, in a magical house, in a vibrant town, in a wondrous, charmed place called an Encanto. The magic of the Encanto has blessed every child in the family—every child except one, Mirabel.
 
 ### Godzilla
@@ -859,7 +859,7 @@ action, adventure, animation, scifi, thriller / dir. Shane Acker
 
 ### Aladdin
 2019 / 2h 7m / PG / Disney+
-adventure, fantasy, romance, family / dir. Guy Ritchie
+adventure, fantasy, romance, family, musical / dir. Guy Ritchie
 > A kindhearted street urchin named Aladdin embarks on a magical adventure after finding a lamp that releases a wisecracking genie while a power-hungry Grand Vizier vies for the same lamp that has the power to make their deepest wishes come true.
 
 ### Blade II
@@ -1309,7 +1309,7 @@ horror, thriller, scifi / dir. Nia DaCosta
 
 ### Descendants
 2015 / 1h 52m / G / Disney+, Hulu
-family, adventure, fantasy / dir. Kenny Ortega
+family, adventure, fantasy, musical / dir. Kenny Ortega
 > A present-day idyllic kingdom where the benevolent teenage son of King Adam and Queen Belle offers a chance of redemption for the troublemaking offspring of Disney's classic villains: Cruella De Vil (Carlos), Maleficent (Mal), the Evil Queen (Evie) and Jafar (Jay).
 
 ### Last Breath
@@ -1399,7 +1399,7 @@ war, action, thriller / dir. Guy Ritchie
 
 ### The Book of Life
 2014 / 1h 35m / PG / Disney+, Peacock
-animation, family, fantasy / dir. Jorge R. Gutierrez
+animation, family, fantasy, musical / dir. Jorge R. Gutierrez
 > The journey of Manolo, a young man who is torn between fulfilling the expectations of his family and following his heart. Before choosing which path to follow, he embarks on an incredible adventure that spans fantastical worlds where he must face his greatest fears.
 
 ### The Ten Commandments
@@ -1989,7 +1989,7 @@ fantasy, action, adventure / dir. Juan Carlos Fresnadillo
 
 ### Miraculous: Ladybug & Cat Noir, The Movie
 2023 / 1h 45m / PG / Netflix
-animation, fantasy, action, romance, family / dir. Jeremy Zag
+animation, fantasy, action, romance, family, musical / dir. Jeremy Zag
 > After a guardian of magical jewels turns an awkward girl and a popular boy into superheroes, they can never reveal their identities — even to each other.
 
 ### Anyone but You
@@ -2126,7 +2126,7 @@ action, adventure, scifi / dir. Bryan Singer
 
 ### Frozen
 2013 / 1h 42m / PG / Disney+
-animation, family, adventure, fantasy / dir. Jennifer Lee
+animation, family, adventure, fantasy, musical / dir. Jennifer Lee
 > Young princess Anna of Arendelle dreams about finding true love at her sister Elsa’s coronation. Fate takes her on a dangerous journey in an attempt to end the eternal winter that has fallen over the kingdom. She's accompanied by ice delivery man Kristoff, his reindeer Sven, and snowman Olaf. On an adventure where she will find out what friendship, courage, family, and true love really means.
 
 ### Shrek
@@ -2271,7 +2271,7 @@ adventure, scifi, thriller / dir. Colin Trevorrow
 
 ### Beauty and the Beast
 2017 / 2h 9m / PG / Disney+
-family, fantasy, romance / dir. Bill Condon
+family, fantasy, romance, musical / dir. Bill Condon
 > A live-action adaptation of Disney's version of the classic tale of a cursed prince and a beautiful young woman who helps him break the spell.
 
 ### Ready Player One
@@ -2346,7 +2346,7 @@ action, drama / dir. Akira Kurosawa
 
 ### The Wizard of Oz
 1939 / 1h 42m / G / Max
-adventure, fantasy, family / dir. Victor Fleming
+adventure, fantasy, family, musical / dir. Victor Fleming
 > Young Dorothy finds herself in a magical world where she makes friends with a lion, a scarecrow and a tin man as they make their way along the yellow brick road to talk with the Wizard and ask for the things they miss most in their lives. The Wicked Witch of the West is the only thing that could stop them.
 
 ### Your Name.
@@ -2471,7 +2471,7 @@ fantasy, drama, romance / dir. Tim Burton
 
 ### Mulan
 1998 / 1h 28m / G / Disney+
-animation, family, adventure / dir. Tony Bancroft
+animation, family, adventure, musical / dir. Tony Bancroft
 > When Imperial China calls one man from every family to defend the empire from invading Huns, a young woman disguises herself as a soldier to take her ailing father’s place. Facing ruthless invaders, brutal training, and the risk of execution if discovered, she must decide who she truly is— and what she’s willing to fight for.
 
 ### Shang-Chi and the Legend of the Ten Rings
@@ -2486,7 +2486,7 @@ horror, mystery, comedy / dir. Drew Goddard
 
 ### The Little Mermaid
 1989 / 1h 23m / G / Disney+
-animation, family, fantasy / dir. John Musker
+animation, family, fantasy, musical / dir. John Musker
 > This colorful adventure tells the story of an impetuous mermaid princess named Ariel who falls in love with the very human Prince Eric and puts everything on the line for the chance to be with him. Memorable songs and characters -- including the villainous sea witch Ursula.
 
 ### The School of Rock
@@ -2556,7 +2556,7 @@ horror, comedy / dir. Tyler Gillett
 
 ### Tangled
 2010 / 1h 40m / PG / Disney+
-animation, family, adventure / dir. Byron Howard
+animation, family, adventure, musical / dir. Byron Howard
 > Feisty teenager Rapunzel, who has long and magical hair, wants to go and see sky lanterns on her eighteenth birthday, but she's bound to a tower by her overprotective mother. She strikes a deal with Flynn Rider, a charming wanted thief, and the duo set off on an action-packed escapade.
 
 ### The Lego Batman Movie
@@ -2636,7 +2636,7 @@ comedy, family, romance / dir. Nancy Meyers
 
 ### The Princess and the Frog
 2009 / 1h 38m / G / Disney+
-animation, romance, fantasy, family / dir. Ron Clements
+animation, romance, fantasy, family, musical / dir. Ron Clements
 > A waitress, desperate to fulfill her dreams as a restaurant owner, is set on a journey to turn a frog prince back into a human being, but she has to face the same problem after she kisses him.
 
 ### 21 Jump Street
@@ -2751,7 +2751,7 @@ animation, family, comedy, fantasy / dir. Dan Scanlon
 
 ### The Hunchback of Notre Dame
 1996 / 1h 31m / G / Disney+
-drama, animation, family / dir. Gary Trousdale
+drama, animation, family, musical / dir. Gary Trousdale
 > Isolated in the bell tower of Notre Dame, Quasimodo longs to experience the world beyond the cathedral walls, despite the wishes of his stern guardian, the Judge of Paris Claude Frollo. His first venture into the city leads him to Esmeralda, a fearless Romani woman whose defiance of Frollo's tyranny draws her—and Quasimodo—into his dangerous obsession.
 
 ### Birds of Prey (and the Fantabulous Emancipation of One Harley Quinn)
@@ -2766,7 +2766,7 @@ comedy, drama, romance / dir. Glenn Ficarra
 
 ### The Prince of Egypt
 1998 / 1h 39m / PG / Netflix
-adventure, animation, drama, family / dir. Simon Wells
+adventure, animation, drama, family, musical / dir. Simon Wells
 > The strong bond between two Royal Egyptian brothers is challenged when their chosen responsibilities set them at odds, with extraordinary consequences.
 
 ### Madagascar 3: Europe's Most Wanted
@@ -2791,7 +2791,7 @@ action, comedy, scifi / dir. Shawn Levy
 
 ### Frozen II
 2019 / 1h 43m / PG / Disney+
-family, animation, adventure, comedy, fantasy / dir. Jennifer Lee
+family, animation, adventure, comedy, fantasy, musical / dir. Jennifer Lee
 > Elsa, Anna, Kristoff and Olaf head far into the forest to learn the truth about an ancient mystery of their kingdom.
 
 ### Green Book
@@ -3126,7 +3126,7 @@ horror, mystery, thriller / dir. Michael Chaves
 
 ### The Greatest Showman
 2017 / 1h 45m / PG / Max
-drama / dir. Michael Gracey
+drama, musical / dir. Michael Gracey
 > The story of American showman P.T. Barnum, founder of the circus that became the famous traveling Ringling Bros. and Barnum & Bailey Circus.
 
 ### Minions
@@ -3476,7 +3476,7 @@ scifi, thriller, horror / dir. Francis Lawrence
 
 ### Wicked
 2024 / 2h 42m / PG / Hulu
-drama, romance, fantasy / dir. Jon M. Chu
+drama, romance, fantasy, musical / dir. Jon M. Chu
 > In the land of Oz, ostracized and misunderstood green-skinned Elphaba is forced to share a room with the popular aristocrat Glinda at Shiz University, and the two's unlikely friendship is tested as they begin to fulfill their respective destinies as Glinda the Good and the Wicked Witch of the West.
 
 ### Roofman
@@ -3761,7 +3761,7 @@ action, scifi, thriller / dir. Patrick Hughes
 
 ### Wicked: For Good
 2025 / 2h 17m / PG / Netflix
-fantasy, adventure, romance / dir. Jon M. Chu
+fantasy, adventure, romance, musical / dir. Jon M. Chu
 > As an angry mob rises against the Wicked Witch, Glinda and Elphaba must unite one last time with honesty and empathy to fulfill their shared destiny and change the fate of Oz forever.
 
 ### Aquaman and the Lost Kingdom
@@ -3831,7 +3831,7 @@ adventure, thriller, scifi / dir. Ric Roman Waugh
 
 ### Labyrinth
 1986 / 1h 41m / PG / Hulu, Peacock
-adventure, family, fantasy / dir. Jim Henson
+adventure, family, fantasy, musical / dir. Jim Henson
 > Frustrated with babysitting on yet another weekend night, Sarah, a teenager with an active imagination, summons the Goblins to take her baby stepbrother away. When little Toby actually disappears, Sarah must follow him into a fantastical world to rescue him from the Goblin King.
 
 ### Scary Movie
@@ -3891,7 +3891,7 @@ family, fantasy, comedy, adventure / dir. Jared Hess
 
 ### The Little Mermaid
 2023 / 2h 15m / PG / Disney+
-adventure, family, fantasy, romance / dir. Rob Marshall
+adventure, family, fantasy, romance, musical / dir. Rob Marshall
 > The youngest of King Triton’s daughters, and the most defiant, Ariel longs to find out more about the world beyond the sea, and while visiting the surface, falls for the dashing Prince Eric.
 
 ### Trap
@@ -3901,7 +3901,7 @@ crime, thriller / dir. M. Night Shyamalan
 
 ### Moana 2
 2024 / 1h 40m / PG / Disney+
-adventure, animation, comedy, family, fantasy / dir. David G. Derrick Jr.
+adventure, animation, comedy, family, fantasy, musical / dir. David G. Derrick Jr.
 > After receiving an unexpected call from her wayfinding ancestors, Moana journeys alongside Maui and a new crew to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced.
 
 ### The Amateur
@@ -3911,7 +3911,7 @@ thriller, action / dir. James Hawes
 
 ### The Bride!
 2026 / 2h 7m / R / Max
-scifi, horror, fantasy / dir. Maggie Gyllenhaal
+scifi, horror, fantasy, musical / dir. Maggie Gyllenhaal
 > A lonely Frankenstein travels to 1930s Chicago to ask groundbreaking scientist Dr. Euphronious to create a companion for him. The two revive a murdered young woman and The Bride is born. But what ensues is beyond what either of them imagined.
 
 ### The Running Man
@@ -3941,7 +3941,7 @@ drama, comedy / dir. Damien Chazelle
 
 ### Descendants: The Rise of Red
 2024 / 1h 32m / G / Disney+, Hulu
-fantasy, adventure, family, comedy / dir. Jennifer Phang
+fantasy, adventure, family, comedy, musical / dir. Jennifer Phang
 > After the Queen of Hearts incites a coup on Auradon, her rebellious daughter Red and Cinderella's perfectionist daughter Chloe join forces and travel back in time to try to undo the traumatic event that set Red's mother down her villainous path.
 
 ### Despicable Me 4
@@ -3951,7 +3951,7 @@ animation, comedy, action, scifi, family / dir. Chris Renaud
 
 ### Mufasa: The Lion King
 2024 / 1h 58m / PG / Disney+
-adventure, family, animation / dir. Barry Jenkins
+adventure, family, animation, musical / dir. Barry Jenkins
 > Mufasa, a cub lost and alone, meets a sympathetic lion named Taka, the heir to a royal bloodline. The chance meeting sets in motion an expansive journey of a group of misfits searching for their destiny.
 
 ### Reminders of Him
