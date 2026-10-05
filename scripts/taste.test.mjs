@@ -233,4 +233,19 @@ console.log("\nthe entrance");
      ['href="favicon.ico"', 'href="assets/icons/favicon.svg"', 'href="assets/icons/apple-touch-icon.png"', 'href="site.webmanifest"'].every((h) => html.includes(h)));
 }
 
+console.log("\nmore filters");
+{
+  const i = html.indexOf('<details class="tune" id="tune">'), j = html.indexOf('id="show-bill"');
+  ok("More filters sits above the Show me the main feature button", i > -1 && j > -1 && i < j);
+  ok("and is called More filters", /<span class="tune-name">More filters<\/span>/.test(html) && !/Got rules/.test(html));
+  const { mod, env } = await loadApp({ reduced: true });
+  const c = env.doc.getElementById("tune-count");
+  mod.S.genres = []; mod.S.rate = 0; mod.S.minRT = 0; mod.S.moods = [];
+  mod.gate(); mod.tuneCount();
+  ok("with nothing set, no count shows", c.hidden === true);
+  mod.S.genres = ["horror", "comedy"]; mod.S.minRT = 80;
+  mod.tuneCount();
+  eq("with filters set, it says how many", [c.hidden, c.textContent], [false, "3 on"]);
+}
+
 finish();

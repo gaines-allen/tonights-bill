@@ -90,7 +90,7 @@ Each result says one of:
 
 With no services picked it asks for them first. Rent and buy listings never
 enter the catalog's service lists. The services checkboxes in the search drawer
-and the toggles under *Got rules?* are the same stored preference
+and the toggles under *More filters* are the same stored preference
 (`tb:svc`); changing either repaints both, re-runs the search, and re-scores
 a pick on screen. Opening a result opens the film's case. Escape closes the
 drawer; arrow keys walk the results.

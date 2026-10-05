@@ -542,21 +542,36 @@ body.veiled main{z-index:81}
 .call-note:empty{display:none}
 
 /* --------------------------------------------------------------------------
-   GOT RULES? Everything the engine can be told, folded away.
+   MORE FILTERS. Everything else the engine can be told, folded away above
+   the ask, with a count of what is switched on.
    -------------------------------------------------------------------------- */
-.tune{margin-top:12px;border-top:1px solid rgba(217,179,106,.13);color:var(--cream-mute);font-size:12px}
+.tune{margin:4px 0 22px}
+/* a real control, not a footnote: the same soft card as the answers above it */
 .tune summary{
-  cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:12px 0;font-family:var(--mono);font-size:11px;color:var(--cream-mute);
-  transition:color var(--quick);
+  cursor:pointer;list-style:none;display:flex;align-items:center;gap:12px;
+  padding:13px 16px;border-radius:9px;
+  color:var(--cream);background:linear-gradient(180deg,#263247,#1d2738);
+  border:1px solid rgba(217,179,106,.42);
+  box-shadow:0 3px 12px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.05);
+  transition:border-color var(--quick), background var(--quick), transform var(--quick);
 }
 .tune summary::-webkit-details-marker{display:none}
-.tune summary:hover{color:var(--cream)}
-.tune .sign{font-family:var(--mono);font-size:13px;line-height:1;color:var(--cream-mute);transition:transform var(--quick)}
+.tune summary:hover{border-color:rgba(217,179,106,.75);background:linear-gradient(180deg,#2c3a52,#222d40)}
+.tune[open] summary{border-color:rgba(217,179,106,.75);border-bottom-left-radius:0;border-bottom-right-radius:0}
+.tune-ico{width:18px;height:18px;flex:none;color:var(--gold)}
+.tune-name{font-family:var(--label);font-weight:600;font-size:20px;letter-spacing:.02em;line-height:1}
+.tune-hint{font-size:12px;color:var(--cream-mute);flex:1;min-width:0}
+.tune-count{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  color:#241a08;background:var(--gold);border-radius:999px;padding:3px 9px 2px;
+}
+.tune .sign{font-family:var(--mono);font-size:16px;line-height:1;color:var(--gold);transition:transform var(--quick)}
 .tune[open] .sign{transform:rotate(45deg)}
 .tune-body{
-  padding:5px 0 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  padding:18px 16px 20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
   gap:22px clamp(24px,3.5vw,48px);
+  background:rgba(29,39,56,.55);
+  border:1px solid rgba(217,179,106,.42);border-top:0;border-radius:0 0 9px 9px;
 }
 .tune-block h3{
   font-family:var(--mono);font-size:10.5px;font-weight:400;letter-spacing:.06em;
@@ -1404,6 +1419,8 @@ body.cased{overflow:hidden}
   #s-bill.revealing #footnote{transform:translateY(10px)}
   #s-tonight.rv-dim .evening{transform:translateY(10px)}
   .tune-body{grid-template-columns:minmax(0,1fr)}
+  .tune-hint{display:none}
+  .tune-name{flex:1}
   .find{margin-left:0;flex-basis:100%}
   .encore-set .v{min-width:0}
   .svc-chip{padding:6px 13px 6px 6px;gap:9px}
@@ -1597,23 +1614,14 @@ body.cased{overflow:hidden}
         <div class="nights" id="q-night" role="group" aria-labelledby="ask-night"></div>
       </div>
 
-      <div class="call">
-        <button class="bill-go" id="show-bill" type="button">
-          <span>Show me the main feature</span><span class="arw" aria-hidden="true">&rarr;</span>
-        </button>
-        <div class="house-band">
-          <p class="house-say">can't decide?</p>
-          <button class="house-pick" id="house-pick" type="button" aria-describedby="house-what">
-            Dealer's choice <span class="arw" aria-hidden="true">&rarr;</span>
-          </button>
-        </div>
-        <p class="ticket-line" id="ticket-line" aria-live="polite"></p>
-        <p class="call-note" id="call-note"></p>
-        <span class="sr" id="house-what">The house pulls one movie. That's the whole deal.</span>
-      </div>
-
       <details class="tune" id="tune">
-        <summary>Got rules? <span class="sign" aria-hidden="true">+</span></summary>
+        <summary>
+          <svg class="tune-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 4h7M12 4h2M2 12h2M7 12h7M2 8h3M8 8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><circle cx="10.5" cy="4" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="5.5" cy="12" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.5" cy="8" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="tune-name">More filters</span>
+          <span class="tune-hint">Genre, rating, critics, services</span>
+          <span class="tune-count" id="tune-count" hidden></span>
+          <span class="sign" aria-hidden="true">+</span>
+        </summary>
         <div class="tune-body">
           <div class="tune-block">
             <h3>Critics at least</h3>
@@ -1651,6 +1659,22 @@ body.cased{overflow:hidden}
           </div>
         </div>
       </details>
+
+      <div class="call">
+        <button class="bill-go" id="show-bill" type="button">
+          <span>Show me the main feature</span><span class="arw" aria-hidden="true">&rarr;</span>
+        </button>
+        <div class="house-band">
+          <p class="house-say">can't decide?</p>
+          <button class="house-pick" id="house-pick" type="button" aria-describedby="house-what">
+            Dealer's choice <span class="arw" aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+        <p class="ticket-line" id="ticket-line" aria-live="polite"></p>
+        <p class="call-note" id="call-note"></p>
+        <span class="sr" id="house-what">The house pulls one movie. That's the whole deal.</span>
+      </div>
+
     </div>
   </div>
 </section>
@@ -4397,7 +4421,7 @@ function renderRoomTune(){
 function renderRatingTune(){
   const w = $("f-rating"); w.innerHTML = "";
   RATE_FLOORS.forEach(function(c){
-    w.appendChild(opt(c.n, S.rate === c.k, function(){ S.rate = c.k; save(); renderRatingTune(); }));
+    w.appendChild(opt(c.n, S.rate === c.k, function(){ S.rate = c.k; save(); renderRatingTune(); tuneCount(); }));
   });
 }
 function renderMoodTune(){
@@ -4406,9 +4430,19 @@ function renderMoodTune(){
     w.appendChild(opt(m.n, S.moods.indexOf(m.k) > -1, function(){
       const at = S.moods.indexOf(m.k);
       if(at > -1) S.moods.splice(at,1); else S.moods.push(m.k);
-      save(); renderMoodTune(); renderNights(); gate();
+      save(); renderMoodTune(); renderNights(); gate(); tuneCount();
     }));
   });
+}
+/* How many of the folded-away filters are doing something, on the bar itself,
+   so a narrowed night is never a mystery. */
+function tuneCount(){
+  const n = $("tune-count"); if(!n) return;
+  const extra = S.moods.filter(function(k){ return NIGHTS.indexOf(k) === -1; }).length;
+  const on = S.genres.length + extra + (S.rate > 0 ? 1 : 0) + (S.minRT > 0 ? 1 : 0);
+  n.hidden = !on;
+  n.textContent = on + " on";
+  n.setAttribute("aria-label", on + (on === 1 ? " filter" : " filters") + " on");
 }
 function renderGenreTune(){
   const w = $("f-genres"); w.innerHTML = "";
@@ -4416,13 +4450,13 @@ function renderGenreTune(){
     w.appendChild(opt(gLabel(g), S.genres.indexOf(g) > -1, function(){
       const at = S.genres.indexOf(g);
       if(at > -1) S.genres.splice(at,1); else S.genres.push(g);
-      save(); renderGenreTune();
+      save(); renderGenreTune(); tuneCount();
     }));
   });
 }
 
 /* ---------- the services you pay for ----------
-   One preference, two places to change it: the clipboard under Got rules?
+   One preference, two places to change it: the clipboard under More filters
    and the drawer under the search. Both write S.svc through here and both are
    repainted from it, so they can never disagree, and the recommendations and
    the search read the same thing. */
@@ -5221,7 +5255,7 @@ function darkHouse(){
     S.moods = S.moods.filter(function(k){ return k !== "great"; });
     if(S.time < 150){ S.time = 150; S.timePreset = "long"; }
     save();
-    renderRatingTune(); renderGenreTune(); renderTimes(); renderNights(); renderMoodTune();
+    renderRatingTune(); renderGenreTune(); renderTimes(); renderNights(); renderMoodTune(); tuneCount();
     $("rt-range").value = 0; $("rt-read").textContent = "Any";
     programme({silent:true, quiet:true});
   });
@@ -5968,7 +6002,7 @@ function init(){
 
   renderWho(); renderTimes(); renderNights();
   renderRoomTune(); renderRatingTune(); renderMoodTune(); renderGenreTune(); renderServices();
-  renderHuntServices(); renderColophon(); renderArrival(); gate();
+  renderHuntServices(); renderColophon(); renderArrival(); gate(); tuneCount();
   measureMast();
   loadHero();
   wireHunt();
@@ -5978,6 +6012,7 @@ function init(){
   $("rt-range").addEventListener("input", function(e){
     S.minRT = parseInt(e.target.value,10);
     $("rt-read").textContent = S.minRT ? S.minRT + "%" : "Any";
+    tuneCount();
   });
   $("rt-range").addEventListener("change", save);
 
