@@ -52,6 +52,19 @@ ok("a tense-crime profile gets no straight comedy in its top ten", !light(picks)
 picks = top(["Hereditary (2018)", "Get Out (2017)"]);
 ok("a horror profile gets no straight comedy in its top ten", !light(picks).length, names(light(picks)));
 
+console.log("\nthree sci-fi likes ask for sci-fi");
+const scifi = ["Arrival (2016)", "Blade Runner 2049 (2017)", "Dune (2021)"];
+S.taste = Object.fromEntries(scifi.map((k) => [k, "loved"]));
+eq("sci-fi is the shared genre; drama, on two of three, is not counted", mod.genreAnchors(mod.buildTaste()), ["scifi"]);
+picks = top(scifi);
+const offGenre = picks.filter((f) => !f.g.includes("scifi"));
+ok("every film in that profile's top ten is sci-fi", !offGenre.length, names(offGenre));
+ok("so Manchester by the Sea is not among them", !picks.some((f) => f.t === "Manchester by the Sea"));
+S.taste = { "Manchester by the Sea (2016)": "loved", "Moonlight (2016)": "loved" };
+eq("two pure dramas set no genre: drama says too little to narrow by", mod.genreAnchors(mod.buildTaste()), []);
+S.taste = { "Arrival (2016)": "loved" };
+eq("one like is a hint, not a genre", mod.genreAnchors(mod.buildTaste()), []);
+
 console.log("\na mixed profile is left alone");
 S.taste = { "Superbad (2007)": "loved", "Se7en (1995)": "loved" };
 eq("one comedy and one thriller lean neither way", mod.toneLean(mod.buildTaste()), "");

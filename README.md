@@ -259,6 +259,13 @@ below everything that fits, and the wild card never picks one.
 `scripts/tone.test.mjs` checks this on every nightly refresh, against that
 night's tags, and a failure stops the refresh from being saved.
 
+The same idea holds for genre. A genre is someone's when it is on three in four
+of the films they liked (two likes at least), and a film with none of their
+genres drops below those that have one, however well its mood tags match.
+Arrival, Blade Runner 2049 and Dune ask for sci-fi, so Manchester by the Sea no
+longer rides in on a shared melancholy. Drama never counts, since TMDB files
+nearly every serious film under it.
+
 **The key never reaches the page.** Enrichment happens ahead of time and only
 its output ships, so this stays a static site with nothing to leak. The included
 GitHub Action re-runs it daily from repository secrets.

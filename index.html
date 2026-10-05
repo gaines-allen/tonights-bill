@@ -3202,6 +3202,28 @@ function toneLean(T){
   if(dark && dark / (light + dark) >= TONE_LEAN) return "dark";
   return "";
 }
+/* ---------- genre: three sci-fi likes ask for sci-fi ----------
+   A genre is "yours" when it is on three in four of the films you liked (two
+   likes at least). A film with none of your genres drops below the ones that
+   have one, however well its mood tags match: Arrival, Blade Runner 2049 and
+   Dune share melancholy with Manchester by the Sea, not a genre.
+   Drama never counts. TMDB files nearly every serious film under it, so
+   "three dramas" says nothing about what someone wants next. */
+const GENRE_LEAN = 0.75, GENRE_MISS = 0.6, GENRE_CATCHALL = ["drama"];
+function genreAnchors(T){
+  const n = T.loved.length + T.saved.length * SAVE_WEIGHT;
+  if(T.loved.length + T.saved.length < 2) return [];
+  const count = {};
+  T.loved.forEach(function(f){ f.g.forEach(function(g){ count[g] = (count[g]||0) + 1; }); });
+  T.saved.forEach(function(f){ f.g.forEach(function(g){ count[g] = (count[g]||0) + SAVE_WEIGHT; }); });
+  return Object.keys(count).filter(function(g){
+    return GENRE_CATCHALL.indexOf(g) === -1 && count[g] / n >= GENRE_LEAN;
+  });
+}
+function missesGenre(f, anchors){
+  return anchors.length > 0 && !f.g.some(function(g){ return anchors.indexOf(g) > -1; });
+}
+
 function clashes(f, lean){
   if(!lean) return false;
   const t = toneOf(f);
@@ -3310,6 +3332,7 @@ function scoreAll(){
      a mood weight that has nothing to weigh. */
   const hasMoodTags = Object.keys(MV).length > 0;
   const lean = toneLean(T);
+  const anchors = genreAnchors(T);
 
   FILMS.forEach(function(f){
     /* A thumb up or down means the film has been seen; so does a locked-in
@@ -3386,9 +3409,11 @@ function scoreAll(){
        drops below every film that fits the tone. */
     const clash = clashes(f, lean);
     if(clash) score = score * TONE_CLASH;
+    const offGenre = missesGenre(f, anchors);
+    if(offGenre) score = score * GENRE_MISS;
 
     const on = f.svcs.filter(function(c){ return S.svc[c]; });
-    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on, clash:clash,
+    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on, clash:clash, offGenre:offGenre,
                  parts:{taste:tasteN, genre:genreN, room:roomN, fame:fameN, mood:moodN},
                  weights:W, stale:stale, seenIdx:seenIdx};
     if(!f.svcs.length && f.svcChecked){ notStreaming.push(rec); return; }  /* rent or buy only */
