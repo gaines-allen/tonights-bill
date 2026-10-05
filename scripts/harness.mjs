@@ -188,6 +188,9 @@ export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, AT
          lockIt, announcePick, dealAnother, promote, startListOver, rebuild, aislePick,
          Run, filmKey, eligible, nextPick, Fresh, watchFreshness,
          showScene, renderWall, searchWall, keepTile, openCase, closeCase, setTaste, toggleWatched, markWatched,
+         toggleSaved, buildTaste, searchCatalog, availability, runSearch, openHunt, closeHunt, setService,
+         applyEnrichment, migrateLegacy, BY_KEY, reactionOf, isSaved, isWatched, filmOf, validHero, paintHero,
+         loadHero, renderSaved, openEvening, cardItem, miniRow, MINIS_get, CARD_OPENERS, gate,
          MODE_get, JUST_get, HEAD_get, LAST_get, CASE_get, SCENE_get };
 function MODE_get(){ return MODE; }
 function JUST_get(){ return JUST_LOCKED; }
@@ -195,6 +198,7 @@ function HEAD_get(){ return HEAD; }
 function LAST_get(){ return LAST; }
 function CASE_get(){ return CASE; }
 function SCENE_get(){ return SCENE; }
+function MINIS_get(){ return MINIS; }
 `;
 export async function loadApp(opts){
   const env = installEnv(opts);

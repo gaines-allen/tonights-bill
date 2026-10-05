@@ -1,7 +1,7 @@
 # Main Feature
 
-A movie picker for one household, dressed as a neighborhood video store that is
-still open late. (Formerly "Tonight's Bill".) You tell it who's on the couch,
+A movie picker for one household, dressed as a neighborhood video store.
+(Formerly "Tonight's Bill".) You tell it who's on the couch,
 how much time you have, what you're in the mood for, and which films you've
 loved or bounced off. It scores a catalog of 244 major releases against that and
 hands you tonight's pick, with a written reason from the store.
@@ -15,6 +15,114 @@ stock, laminated shelf signage, paper recommendation notes, and a browsable
 "The Aisles" section cut from the same catalog tags. Everything below about
 scoring, filters, and data still holds; where this document describes the old
 visual language, trust the code.
+
+## The October 2026 entrance
+
+The approved design handoff lives in `main-feature-handoff/` (brief, reference
+page, stills). What it changed:
+
+- **The entrance.** Three real film backdrops run edge to edge behind the
+  marquee, blended with overlapping masks so there is no seam. The marquee
+  says only *Main Feature*; the only other words in the hero are **Find your
+  movie →**, which opens the questionnaire (closed until then) and moves focus
+  to it. The bulbs keep their shimmer and slow orbit and stop under
+  `prefers-reduced-motion`. The old drifting backdrop, the date stamp and the
+  *Open Late* sign are gone. The footer is one line: *Real Movies, Real
+  Recommendations*. The provenance note that used to sit there is now at the
+  foot of The Aisles, with the TMDB attribution; the scan date sits under the
+  search; the storage note sits on Your Shelf.
+- **Search**, top right. See below.
+- **Star · thumbs up · thumbs down** under every film. See below.
+- **Favicon.** A red-and-cream popcorn bucket: `assets/icons/favicon.svg`, a
+  pixel-tuned 16px drawing, PNGs at 16/32/48/180/192/512, a multi-size
+  `favicon.ico`, an Apple touch icon and `site.webmanifest`. Every path is
+  relative, so it all works under the `/tonights-bill/` Pages base path.
+- **Type.** Bebas Neue for the marquee and display controls, Cormorant
+  Garamond for the questions and search titles, Archivo for body, IBM Plex
+  Mono for metadata, Caveat for the two handwritten asides.
+
+### The month's three films
+
+`scripts/hero.mjs` picks them and writes `data/hero.json`; the page only
+displays what is published, so everyone sees the same three all month,
+whatever services they have. It runs in the nightly refresh after the tests
+and needs no secret of its own (it reads `data/catalog.json`).
+
+- The month is decided in **America/Chicago**.
+- A film qualifies with a verified backdrop, a **TMDB audience rating of 7.5+
+  from 500+ votes**, and a subscription home on a supported service in the US.
+  One rating source for everyone; Rotten Tomatoes never enters the ranking.
+  Missing votes are never guessed.
+- Ranked by rating, then votes, then TMDB id. A new month skips last month's
+  three; if fewer than three others qualify it allows repeats before it would
+  ever lower the bar.
+- Within a month the set holds. Each night only re-checks availability: a
+  film that has left every supported service is replaced in its slot by the
+  next eligible film, the other two stay.
+- A failed or unhealthy refresh, or too few qualifiers, keeps the last valid
+  set. If `hero.json` is missing or an image fails, the page shows the
+  approved stills in `assets/hero/` for that slot.
+
+The first set (October 2026, The Godfather, 12 Angry Men, Interstellar) was
+chosen from the October 4 catalog. That catalog stored ratings rounded to a
+percentage, so this set's evidence is marked `ratingRounded`; `enrich.mjs` now
+also records the exact `rating` and shelf `votes`, and later months use those.
+
+### Search
+
+Searches every film the store knows, curated and scanned, whether or not it is
+on your services. Exact title first, then starts-with, then word, then
+anywhere; punctuation and accents are ignored and a trailing year narrows it
+("the thing 2011"). Films are de-duplicated by TMDB id, so one film never
+appears under two names, while two films sharing a title keep their years.
+Each result says one of:
+
+- **On your services: …** — a checked subscription home on a service you picked
+- **Not on your selected services** — checked; it says where it does stream,
+  or that it is on none of the services we track
+- **Availability not confirmed** — nobody has checked (a hand-tagged guess, or
+  the catalog did not load). Never reported as "no".
+
+With no services picked it asks for them first. Rent and buy listings never
+enter the catalog's service lists. The services checkboxes in the search drawer
+and the toggles under *Got rules?* are the same stored preference
+(`tb:svc`); changing either repaints both, re-runs the search, and re-scores
+a pick on screen. Opening a result opens the film's case. Escape closes the
+drawer; arrow keys walk the results.
+
+### Star, thumbs up, thumbs down
+
+One control, three equal 16px glyphs in equal boxes (44px targets on touch
+screens), under the feature, the shelf beneath it, the double feature, every
+aisle card, Your Shelf, past showings, search results and the case. Every copy
+of a film's row repaints together.
+
+- **Star** saves to *Your shelf* (a *Saved for later* rail at the top). It
+  does not like the film or mark it watched, and a saved film can still be
+  recommended.
+- **Thumbs up / down** are the old *Loved* / *Not for me*: one per film,
+  pressing the lit one clears it, pressing the other replaces it. A thumbed
+  film is not recommended again while the thumb stands, as before.
+- **Seen it** is unchanged and still lives on the feature and in the case.
+
+Personalization extends the existing engine rather than replacing it: thumbs
+feed the rarity-weighted taste profile at full weight (dislikes at −1.15), a
+save at 0.35 of a like. Until there are three reactions the taste weight ramps
+up and the head of the bill is re-dealt with a small cost for repeating a lead
+genre, so one thumbs up nudges the night instead of turning it into one genre.
+From three reactions on the ranking is exactly the old one (the Knives Out /
+Ocean's Eleven / Hot Fuzz canary still returns Glass Onion first). Hard
+filters are applied before any of this.
+
+### Saved data
+
+Everything is still browser-local; there is no account. Reactions, watches and
+saves are now keyed by title and year (`Heat (1995)`) in `tb:taste2`,
+`tb:watched2` and `tb:saved`. The old title-keyed `tb:taste` and `tb:watched`
+are read on first load, copied across, and never rewritten or deleted. A title
+the page cannot place until the catalog loads waits in `tb:pending2` and is
+placed afterwards. History records (`tb:bills`, `tb:locked`) gain a key and
+old ones without it still resolve by title.
 
 ## Why it isn't an AI app
 
@@ -317,20 +425,21 @@ back to the counter. Shortcuts are ignored while typing in a field.
 defend, a mono line recapping tonight, and one button. **Change** brings the
 questions back.
 
-**Your Shelf** asks for five films you'd defend rather than five you liked.
-Loved posters are numbered `01`–`05` and outlined in red; the rest of the wall
-is untouched artwork. Each tile is one button wrapping the poster and the
-printed title, named *Open details for …* and carrying the film's title-and-
-year key, so the right case opens however the wall has been searched, sorted
-or extended. Nothing else on a tile is a control: a saved status is printed
-as a small badge under the title (*Loved*, *Not for me*, *Seen*). The button
-opens the film's case: poster, year, runtime, rating, the story, where it
-streams, its shelf status, and the **Loved**, **Not for me** and **Seen it**
-buttons, which are the only place a status is changed, all from data the page
-already holds. Pressing the current status clears it. The case is a labelled
-modal dialog: it closes on **Close**, Escape or the backdrop, keeps the tab
-ring inside itself, locks the page behind it, and hands focus back to the
-film's tile, looked up by title because the wall repaints under it.
+**Your Shelf** opens with *Saved for later* (everything starred, newest
+first), then asks for five films you'd defend. Liked posters are numbered
+`01`–`05` and outlined in red. Each tile is one button wrapping the poster and
+the printed title, named *Open details for …* and carrying the film's
+title-and-year key, so the right case opens however the wall has been
+searched, sorted or extended. Under it sits the star and thumbs row; a status
+is printed as a small badge (*Liked*, *Not for me*, *Seen*, *Saved*). Thumbing
+a tile repaints the wall in the order it already has, so the tile stays where
+the reader is; it moves to the front the next time the wall is laid out. The
+button opens the film's case: poster, year, runtime, rating, the story, where
+it streams, its shelf status, the same row and **Seen it**, all from data the
+page already holds. The case is a labelled modal dialog: it closes on
+**Close**, Escape or the backdrop, keeps the tab ring inside itself, locks the
+page behind it, and hands focus back to whatever opened it, looked up again
+because the views repaint under it.
 
 ### Mobile
 
@@ -382,11 +491,14 @@ node scripts/merge.test.mjs    # merge safety against the real index.html catalo
 node scripts/reveal.test.mjs   # the reveal sequence, store copy, accent, lock-in
 node scripts/session.test.mjs  # "show me something else" never repeats; the spent state
 node scripts/shelf.test.mjs    # the shelf tile, the film's case, status in both places
+node scripts/taste.test.mjs    # star/thumbs control, persistence, migration, personalization
+node scripts/search.test.mjs   # header search, availability wording, shared services
+node scripts/hero.test.mjs     # the monthly marquee selection
 node scripts/unwritten.mjs     # which shelved titles still need a store line
 ```
 
-All run offline — no API key, no network, no headless browser. The three
-page tests share `scripts/harness.mjs`, a small DOM stub and virtual clock
+All run offline — no API key, no network, no headless browser. The page
+tests share `scripts/harness.mjs`, a small DOM stub and virtual clock
 that import the app's real source out of `index.html`.
 
 ## Staying current

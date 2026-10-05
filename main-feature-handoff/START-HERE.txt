@@ -1,0 +1,5 @@
+1. Unzip this folder into the root of your existing Main Feature repository.
+2. Open approved-preview.html in a browser to review the reference.
+3. Start Claude Code in the repository and paste:
+
+Read main-feature-handoff/PROMPT.md and REFERENCE-NOTES.md in full, then open approved-preview.html and inspect approved-fragment.html and the supplied assets. Implement this approved Main Feature design and all specified functionality in the existing application. Preserve the working recommendation engine and existing saved data. Complete and verify the build; do not stop at a plan. The written brief controls production behavior, and the preview controls the visual direction. Report any concrete credential/setup requirements. Do not push or publish.

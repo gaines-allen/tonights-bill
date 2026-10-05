@@ -2,9 +2,9 @@
  * Covers Your Shelf: each tile is one button wrapping the poster and the
  * title, carrying the film's key; either opens the film's case, populated
  * before it is shown. The grid carries no status buttons at all, only a
- * printed badge. Inside the case, Loved, Not for me and Seen it change the
- * same saved state the badge is drawn from, and the status survives a
- * refresh. The case closes on Close, Escape and the backdrop, never on a
+ * printed badge, and under it the same star / thumbs up / thumbs down row as
+ * everywhere else. Inside the case, that row and Seen it change the same
+ * saved state the badge is drawn from, and the status survives a refresh. The case closes on Close, Escape and the backdrop, never on a
  * click inside, and hands focus back to the tile that opened it.
  */
 import { loadApp, eq, ok, walk, finish, html } from "./harness.mjs";
@@ -21,7 +21,9 @@ const inCase    = (env) => walk(env.doc.getElementById("case-body"));
 const caseReact = (env) => inCase(env).find(n => /case-react/.test(n.className));
 const caseTitle = (env) => inCase(env).find(n => /case-title/.test(n.className));
 const caseState = (env) => inCase(env).find(n => n.className === "case-state");
-const btn = (row, label) => row.children.find(b => b.textContent === label);
+const btn = (row, label) => walk(row).find(b => b.tagName === "BUTTON" && b.textContent === label);
+const mini = (row, kind) => walk(row).find(n => n.getAttribute && n.getAttribute("data-mini") === kind);
+const miniOf = (tile) => tile.children.find(c => /\bmini\b/.test(c.className));
 const gridStatusButtons = (env) => walk(wallOf(env)).filter(n => n.tagName === "BUTTON" && STATUS.includes(n.textContent));
 const hm = (m) => { const h = Math.floor(m / 60), r = m % 60; return h ? (h + "h" + (r ? " " + r + "m" : "")) : r + "m"; };
 
@@ -40,8 +42,10 @@ console.log("\nthe tile");
   const title = titleOf(tile);
   const f = mod.BY_TITLE[title];
   eq("the tile itself is a plain container", tile.tagName, "DIV");
-  eq("holding one button", tile.children.length, 1);
-  eq("which is the opener", opener.tagName, "BUTTON");
+  eq("holding the opener and the save/taste row", tile.children.length, 2);
+  eq("the opener comes first", opener.tagName, "BUTTON");
+  eq("the row under it is exactly star, thumbs up, thumbs down",
+     miniOf(tile).children.map(b => b.getAttribute("aria-label")), ["Save " + title, "Like " + title, "Dislike " + title]);
   eq("with an accessible name", opener.getAttribute("aria-label"), "Open details for " + title);
   eq("a native button, so Enter and Space activate it", opener.type, "button");
   eq("it carries the film's key, the same title-and-year identifier the app uses elsewhere",
@@ -98,7 +102,9 @@ console.log("\nopening the case");
   ok("the story", flat.some(n => n.className === "synopsis-copy" && n.textContent === f.h));
   ok("where it streams", flat.some(n => /playing-label/.test(n.className)));
   eq("the current status", caseState(env).textContent, "Not marked yet");
-  eq("and the three shelf actions", caseReact(env).children.map(b => b.textContent), STATUS);
+  eq("and the shelf actions: the same row, and Seen it",
+     walk(caseReact(env)).filter(n => n.tagName === "BUTTON").map(b => b.getAttribute("aria-label") || b.textContent),
+     ["Save " + secondTitle, "Like " + secondTitle, "Dislike " + secondTitle, "Seen it"]);
   eq("nothing was fetched for any of it", globalThis.__fetches - fetchesBefore, 0);
   mod.closeCase();
 }
@@ -125,10 +131,14 @@ console.log("\nthe right film, however the wall is arranged");
   eq("a card past the first page opens its own film", caseTitle(env).textContent, titleOf(deep));
   mod.closeCase();
 
-  /* re-sorted: a rated film moves to the front of the wall */
+  /* re-sorted: a rated film keeps its place while you are working the wall,
+     and moves to the front the next time the wall is laid out */
   const late = tiles(env)[20], lateTitle = titleOf(late);
-  mod.setTaste(mod.BY_TITLE[lateTitle], "loved");
-  eq("rating a film moves it to the front", titleOf(tiles(env)[0]), lateTitle);
+  mini(miniOf(late), "up").click();
+  eq("rating a film on the wall leaves it where the reader is", titleOf(tiles(env)[20]), lateTitle);
+  eq("with its badge", badgeOf(tiles(env)[20]), "Liked");
+  mod.searchWall("");
+  eq("the next layout moves it to the front", titleOf(tiles(env)[0]), lateTitle);
   posterOf(tiles(env)[0]).click();
   eq("and it still opens its own case there", caseTitle(env).textContent, lateTitle);
   eq("the opener's key is what found it", openerOf(tiles(env)[0]).getAttribute("data-film"), mod.filmKey(mod.BY_TITLE[lateTitle]));
@@ -136,47 +146,56 @@ console.log("\nthe right film, however the wall is arranged");
   ok("the case is closed again", c.hidden);
 }
 
-console.log("\nstatus, inside the case only");
+console.log("\nstatus, inside the case");
 {
   const { mod, env } = await shelf();
   const c = env.doc.getElementById("case");
   const title = titleOf(tiles(env)[2]);
+  const key = mod.filmKey(mod.BY_TITLE[title]);
   posterOf(tileFor(env, title)).click();
 
-  btn(caseReact(env), "Loved").click();
-  eq("Loved is saved", mod.S.taste[title], "loved");
+  mini(caseReact(env), "up").click();
+  eq("thumbs up is saved, under the film's key", mod.S.taste[key], "loved");
   eq("the case stays open", c.hidden, false);
-  eq("the button shows it is pressed", btn(caseReact(env), "Loved").getAttribute("aria-pressed"), "true");
-  ok("visibly", btn(caseReact(env), "Loved").classList.contains("is-on"));
-  eq("the status line follows", caseState(env).textContent, "Loved");
-  eq("the tile's badge appears at once", badgeOf(tileFor(env, title)), "Loved");
+  eq("the button shows it is pressed", mini(caseReact(env), "up").getAttribute("aria-pressed"), "true");
+  eq("the status line follows", caseState(env).textContent, "Liked");
+  eq("the tile's badge appears at once", badgeOf(tileFor(env, title)), "Liked");
   eq("and the tile is marked", tileFor(env, title).getAttribute("data-state"), "loved");
-  eq("the grid still has no status buttons", gridStatusButtons(env).length, 0);
+  eq("the tile's own row agrees", mini(miniOf(tileFor(env, title)), "up").getAttribute("aria-pressed"), "true");
+  eq("the grid still has no Loved, Not for me or Seen it buttons", gridStatusButtons(env).length, 0);
 
-  btn(caseReact(env), "Not for me").click();
-  eq("Not for me replaces Loved", mod.S.taste[title], "hated");
-  eq("only one of the two is pressed", caseReact(env).children.map(b => b.getAttribute("aria-pressed")), ["false", "true", "false"]);
+  mini(caseReact(env), "down").click();
+  eq("thumbs down replaces thumbs up", mod.S.taste[key], "hated");
+  eq("only one thumb is pressed", ["star","up","down"].map(k => mini(caseReact(env), k).getAttribute("aria-pressed")), ["false", "false", "true"]);
   eq("the badge follows", badgeOf(tileFor(env, title)), "Not for me");
 
   btn(caseReact(env), "Seen it").click();
-  ok("Seen it is saved alongside", !!mod.S.watched[title]);
+  ok("Seen it is saved alongside", !!mod.S.watched[key]);
   eq("the line says both", caseState(env).textContent, "Not for me · Seen it");
   eq("the badge keeps the taste, which outranks a watch", badgeOf(tileFor(env, title)), "Not for me");
 
-  btn(caseReact(env), "Not for me").click();
-  eq("pressing the current status clears it, as the app always allowed", mod.S.taste[title], undefined);
+  mini(caseReact(env), "down").click();
+  eq("pressing the lit thumb clears it, as the app always allowed", mod.S.taste[key], undefined);
   eq("the badge falls back to Seen", badgeOf(tileFor(env, title)), "Seen");
   btn(caseReact(env), "Seen it").click();
   eq("clearing the watch removes the badge", badgeOf(tileFor(env, title)), null);
   eq("and unmarks the tile", tileFor(env, title).getAttribute("data-state"), null);
 
-  btn(caseReact(env), "Loved").click();
-  eq("the status is in localStorage", JSON.parse(env.store.get("tb:taste"))[title], "loved");
+  mini(caseReact(env), "star").click();
+  ok("the star saves it", mod.isSaved(mod.BY_TITLE[title]));
+  eq("without liking it", mod.S.taste[key], undefined);
+  ok("or marking it watched", !mod.S.watched[key]);
+  eq("the badge says Saved", badgeOf(tileFor(env, title)), "Saved");
+
+  mini(caseReact(env), "up").click();
+  eq("the status is in localStorage, by key", JSON.parse(env.store.get("tb:taste2"))[key], "loved");
+  ok("and so is the save", !!JSON.parse(env.store.get("tb:saved"))[key]);
   const again = await shelf({ store: env.store });
-  eq("a refresh keeps the status", again.mod.S.taste[title], "loved");
-  eq("and the badge", badgeOf(tileFor(again.env, title)), "Loved");
+  eq("a refresh keeps the status", again.mod.S.taste[key], "loved");
+  ok("and the save", again.mod.isSaved(again.mod.BY_TITLE[title]));
+  eq("and the badge", badgeOf(tileFor(again.env, title)), "Liked");
   posterOf(tileFor(again.env, title)).click();
-  eq("and the case agrees", caseState(again.env).textContent, "Loved");
+  eq("and the case agrees", caseState(again.env).textContent, "Saved · Liked");
 }
 
 console.log("\nclosing the case");
@@ -211,7 +230,7 @@ console.log("\nclosing the case");
   /* the wall is rebuilt under an open case when a status changes */
   posterOf(tileFor(env, title)).click();
   const before = openerOf(tileFor(env, title));
-  btn(caseReact(env), "Loved").click();
+  mini(caseReact(env), "up").click();
   const after = openerOf(tileFor(env, title));
   ok("the wall was rebuilt while the case was open", before !== after);
   c.dispatch("keydown", { key: "Escape" });

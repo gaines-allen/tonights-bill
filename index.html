@@ -3,15 +3,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12161f">
-<meta name="description" content="Main Feature picks tonight's movie. A neighborhood video store that is still open late.">
+<meta name="description" content="Main Feature picks tonight's movie from what is actually streaming on your services.">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icons/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <title>Main Feature</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap">
 <style>
 /* ==========================================================================
    MAIN FEATURE
-   A marquee over the door of a very good video store, open late.
+   A marquee over the door of a very good video store.
 
    The world: classic theater marquee x 1990s video store x Criterion Closet.
    The movies are the graphics. Paper, letterboard, laminate and wood carry
@@ -51,11 +57,12 @@
   --sans:'Archivo', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
   --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --hand:'Caveat', 'Comic Sans MS', cursive;
+  --serif:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 
   /* ---- measure ---- */
   --frame:1460px;
   --gut:clamp(18px, 4.2vw, 64px);
-  --mast:72px;
+  --mast:64px;              /* measured from the real masthead at runtime */
 
   /* ---- motion ---- */
   --ease:cubic-bezier(.22, 1, .36, 1);
@@ -115,17 +122,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   transform:rotate(-1.2deg);display:inline-block;
 }
 
-/* section signage: the laminated gold-on-navy shelf sign */
-.ask-of{
-  font-family:var(--display);font-weight:400;font-size:clamp(1.05rem,1.6vw,1.35rem);
-  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
-  display:flex;align-items:center;gap:14px;
-}
-.ask-of::before,.ask-of::after{
-  content:"";height:1px;background:linear-gradient(90deg,transparent,var(--gold));
-  flex:0 0 34px;opacity:.55;
-}
-.ask-of::after{background:linear-gradient(90deg,var(--gold),transparent)}
 
 /* small red bulb used in labels */
 .dot{
@@ -161,43 +157,93 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 }
 
 /* --------------------------------------------------------------------------
-   MASTHEAD: the small sign inside the door
+   MASTHEAD: the small sign inside the door, with the store's own search
+   at the far end. One solid band, so the films start where it stops.
    -------------------------------------------------------------------------- */
 .masthead{
   position:fixed;top:0;left:0;right:0;z-index:60;
-  transition:background var(--calm), border-color var(--calm);
+  background:var(--night);
   border-bottom:1px solid transparent;
+  transition:border-color var(--calm), box-shadow var(--calm);
 }
-.masthead.sunk{
-  background:rgba(14,12,9,.92);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
-  border-bottom-color:var(--hair);
-}
+.masthead.sunk{border-bottom-color:var(--hair);box-shadow:0 10px 28px rgba(0,0,0,.38)}
 .masthead-in{
-  max-width:var(--frame);margin:0 auto;padding:16px var(--gut);
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  max-width:var(--frame);margin:0 auto;padding:15px var(--gut);
+  display:grid;grid-template-columns:auto 1fr minmax(200px,236px);gap:24px;align-items:center;
 }
 .house{
-  font-family:var(--display);font-size:19px;letter-spacing:.1em;
+  justify-self:start;
+  font-family:var(--display);font-size:18px;letter-spacing:.06em;line-height:1.1;
   text-transform:uppercase;white-space:nowrap;
   background:var(--cream);color:var(--red-deep);
-  padding:5px 12px 3px;border-radius:3px;
-  box-shadow:0 2px 0 rgba(0,0,0,.4), inset 0 0 0 1px #d9c9a2;
-  transform:rotate(-.6deg);
+  padding:5px 10px 3px;border-radius:4px;
+  box-shadow:0 2px 8px rgba(0,0,0,.2);
 }
-.house .dot{display:none}
-.doors{display:flex;align-items:center;gap:clamp(14px,2.2vw,32px)}
+.doors{display:flex;align-items:center;justify-content:center;gap:clamp(14px,2vw,26px)}
 .doors button{
-  font-family:var(--display);font-size:15px;letter-spacing:.18em;text-transform:uppercase;
+  font-family:var(--display);font-size:14px;letter-spacing:.11em;text-transform:uppercase;
   color:var(--cream-mute);transition:color var(--quick);white-space:nowrap;
-  padding:8px 0;position:relative;
+  padding:6px 0 5px;position:relative;
 }
 .doors button:hover{color:var(--cream)}
 .doors button[aria-current="page"]{color:var(--cream)}
 .doors button[aria-current="page"]::after{
-  content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--amber);
-  box-shadow:0 0 8px rgba(226,161,63,.7);
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);
 }
+
+/* ---- the search slot ---- */
+.hunt{
+  display:flex;align-items:center;gap:8px;min-width:0;
+  border:1px solid rgba(217,179,106,.16);border-radius:8px;padding:0 5px 0 10px;
+  background:linear-gradient(180deg,#232b3b,#1c2330);
+  transition:border-color var(--quick), box-shadow var(--quick);
+}
+.hunt:focus-within{border-color:rgba(217,179,106,.6);box-shadow:0 0 0 2px rgba(226,161,63,.22)}
+.hunt-ico{width:14px;height:14px;flex:none;color:var(--cream-mute)}
+.hunt input{
+  flex:1;min-width:0;border:0;background:transparent;color:var(--cream);
+  padding:10px 0;font-family:var(--sans);font-size:12px;line-height:1.2;
+}
+.hunt input:focus{outline:none}
+.hunt input::placeholder{color:var(--cream-mute);opacity:1}
+.hunt input::-webkit-search-decoration{-webkit-appearance:none}
+.hunt-svcs{
+  display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:6px;
+  color:var(--cream-mute);transition:color var(--quick), background var(--quick);
+}
+.hunt-svcs:hover,.hunt-svcs[aria-expanded="true"]{color:var(--gold);background:rgba(242,231,205,.06)}
+.hunt-svcs svg{width:15px;height:15px;display:block}
+
+/* ---- the drawer under it: services, then what the shelf holds ---- */
+.hunt-panel{
+  background:linear-gradient(180deg,#222b3a,#1b2431);
+  border-top:1px solid rgba(217,179,106,.1);border-bottom:1px solid rgba(217,179,106,.19);
+  box-shadow:0 22px 44px rgba(0,0,0,.45);
+  max-height:calc(100vh - var(--mast));max-height:calc(100dvh - var(--mast));
+  overflow-y:auto;overscroll-behavior:contain;
+}
+.hunt-in{max-width:var(--frame);margin:0 auto;padding:18px var(--gut) 20px}
+.hunt-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.hunt-h{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.1;color:var(--cream)}
+.hunt-close{font-family:var(--sans);font-size:12px;color:var(--cream-mute);padding:8px 0;transition:color var(--quick)}
+.hunt-close:hover{color:var(--cream)}
+.hunt-svc-set{border:0;margin:14px 0 18px;padding:0;min-width:0}
+.hunt-svc-list{display:flex;flex-wrap:wrap;gap:8px 18px}
+.hunt-svc{display:flex;align-items:center;gap:6px;min-height:28px;color:var(--cream);font-size:12px;cursor:pointer}
+.hunt-svc input{accent-color:#ad8660;width:14px;height:14px;margin:0;cursor:pointer}
+.hunt-results > p{font-size:13px;line-height:1.6;color:var(--cream-mute);max-width:62ch}
+.hunt-results > p b{color:var(--cream);font-weight:500}
+.hunt-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin:0;padding:0;list-style:none}
+.hunt-hit{display:flex;flex-direction:column;gap:5px;border-top:1px solid rgba(217,179,106,.13);padding:12px 0 10px}
+.hunt-open{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;border-radius:4px;text-align:left}
+.hunt-t{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.1;color:var(--cream);transition:color var(--quick)}
+.hunt-open:hover .hunt-t{color:#fff8e6;text-decoration:underline;text-decoration-color:rgba(217,179,106,.5);text-underline-offset:3px;text-decoration-thickness:1px}
+.hunt-y{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--cream-mute)}
+.hunt-a{font-family:var(--sans);font-size:12px;line-height:1.5;color:#d9c394}
+.hunt-a--off,.hunt-a--unknown,.hunt-a--ask{color:var(--cream-mute)}
+.hunt-d{font-family:var(--sans);font-size:11.5px;line-height:1.45;color:var(--cream-mute)}
+.hunt-more{margin-top:10px;font-size:12px;color:var(--cream-mute)}
+.hunt-date{font-family:var(--mono);font-size:10px;line-height:1.5;color:var(--cream-mute);margin-top:16px}
 
 /* --------------------------------------------------------------------------
    SCENES
@@ -208,21 +254,58 @@ main{position:relative;z-index:10}
 
 
 /* --------------------------------------------------------------------------
-   THE MARQUEE. The name above the door. Built once, imitated nowhere else.
+   THE ENTRANCE. Three real films, run together so there is no seam, and the
+   marquee hung in the middle of them. The films change as a set once a
+   month (data/hero.json); nothing here swaps during a visit.
    -------------------------------------------------------------------------- */
-.arrival{position:relative;padding-top:calc(var(--mast) + clamp(20px,4vh,44px))}
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  margin-top:var(--mast);
+  display:flex;justify-content:center;align-items:center;
+  min-height:330px;padding:25px 32px;text-align:center;
+  background:var(--night);
+}
+.triptych{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#182132}
+.shot{position:absolute;top:0;bottom:0;width:46%}
+/* Overlapping masks, not frames: each film fades out across the next one's
+   fade in, so the joins are a gradual blend rather than a line. */
+.shot-l{left:0;
+  -webkit-mask-image:linear-gradient(90deg,#000 70%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 70%,transparent 100%)}
+.shot-m{left:27%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 23%,#000 77%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 23%,#000 77%,transparent 100%)}
+.shot-r{right:0;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%)}
+.shot img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(.75) brightness(.78);
+  opacity:0;transition:opacity 700ms var(--ease);
+}
+.shot img.on{opacity:1}
+.shot-l img{object-position:45% 35%}
+.shot-m img{object-position:50% 40%}
+.shot-r img{object-position:63% 35%}
+/* only the shade the marquee needs, and the foot run into the page */
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(0deg, rgba(18,22,31,.96) 0%, rgba(18,22,31,.12) 50%, rgba(18,22,31,.31) 100%),
+    radial-gradient(ellipse at center, rgba(18,22,31,.4), transparent 80%);
+}
+.hero-in{display:flex;flex-direction:column;align-items:center;width:100%;max-width:580px;margin:0 auto}
 
+/* --------------------------------------------------------------------------
+   THE MARQUEE. The name above the door, and nothing else on it.
+   -------------------------------------------------------------------------- */
 .marquee{
-  position:relative;max-width:900px;margin:0 auto;
-  transform:rotate(-.4deg);
-  filter:drop-shadow(0 22px 44px rgba(0,0,0,.6));
-  padding:clamp(20px,3.4vw,32px);
-  background:linear-gradient(180deg,#8a5028 0%, #6b3a1b 40%, #4c250f 100%);
-  border-radius:16px;
-  box-shadow:
-    inset 0 2px 0 rgba(255,214,150,.4),
-    inset 0 -3px 8px rgba(0,0,0,.55),
-    0 0 60px rgba(255,180,100,.14);
+  position:relative;width:440px;max-width:100%;margin:0 auto;
+  padding:16px 19px;
+  background:linear-gradient(180deg,#9b6338,#5c321c);
+  border-radius:11px;
+  box-shadow:0 8px 25px rgba(0,0,0,.33), 0 0 24px rgba(217,179,106,.13),
+    inset 0 1px 1px rgba(255,216,164,.48);
 }
 /* ---- the bulbs, one element apiece ----
    A strip of background-image bulbs can only ever pulse as one object: every
@@ -231,17 +314,17 @@ main{position:relative;z-index:10}
    period, phase and floor, and the border can be sent round once when a pick
    lands. Only opacity, box-shadow and a hairline scale animate — no layout. */
 .lights{position:absolute;pointer-events:none}
-.l-top   {left:14px;right:14px;top:4px;height:22px}
-.l-bottom{left:14px;right:14px;bottom:4px;height:22px}
-.l-left  {top:26px;bottom:26px;left:4px;width:22px}
-.l-right {top:26px;bottom:26px;right:4px;width:22px}
+.l-top   {left:11px;right:11px;top:2px;height:12px}
+.l-bottom{left:11px;right:11px;bottom:2px;height:12px}
+.l-left  {top:18px;bottom:18px;left:3px;width:12px}
+.l-right {top:18px;bottom:18px;right:3px;width:12px}
 
 .bulb{
-  position:absolute;width:8px;height:8px;border-radius:50%;
+  position:absolute;width:6px;height:6px;border-radius:50%;
   background:radial-gradient(circle at 38% 34%,
     #fff6e2 0 16%, var(--bulb) 44%, #eda94f 76%, #b9762c 100%);
   /* the socket ring keeps an unlit bulb reading as a bulb, not a hole */
-  box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);
+  box-shadow:0 0 0 1px rgba(70,32,8,.65), 0 0 5px rgba(255,196,120,.75);
   /* Two animations that do not fight: shimmer owns opacity, orbit owns the
      glow and the scale. Split that way they compose instead of the later one
      stamping on the earlier one's properties. */
@@ -250,8 +333,8 @@ main{position:relative;z-index:10}
     orbit var(--orbit-dur,11s) linear var(--orbit,0s) infinite;
   will-change:opacity, transform;
 }
-.l-top .bulb,.l-bottom .bulb{top:50%;margin-top:-4px;left:var(--p);margin-left:-4px}
-.l-left .bulb,.l-right .bulb{left:50%;margin-left:-4px;top:var(--p);margin-top:-4px}
+.l-top .bulb,.l-bottom .bulb{top:50%;margin-top:-3px;left:var(--p);margin-left:-3px}
+.l-left .bulb,.l-right .bulb{left:50%;margin-left:-3px;top:var(--p);margin-top:-3px}
 
 @keyframes shimmer{
   0%,100%{opacity:var(--hi,.96)}
@@ -264,14 +347,14 @@ main{position:relative;z-index:10}
    a circuit it reads as the sign being alive, not as a carnival. */
 @keyframes orbit{
   0%,14%,100%{
-    box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);
+    box-shadow:0 0 0 1px rgba(70,32,8,.65), 0 0 5px rgba(255,196,120,.75);
     transform:scale(1);
   }
   6%{
-    box-shadow:0 0 0 1.8px rgba(255,238,200,.95),
-               0 0 17px 4px rgba(255,214,150,.95),
-               0 0 34px 10px rgba(255,180,90,.4);
-    transform:scale(1.5);
+    box-shadow:0 0 0 1.4px rgba(255,238,200,.95),
+               0 0 11px 3px rgba(255,214,150,.9),
+               0 0 22px 6px rgba(255,180,90,.32);
+    transform:scale(1.4);
   }
 }
 
@@ -279,11 +362,11 @@ main{position:relative;z-index:10}
    perimeter, so the flare travels top -> right -> bottom -> left and stops. */
 .marquee.chase .bulb{animation:chase 400ms ease-out var(--chase,0ms) 1 both}
 @keyframes chase{
-  0%  {opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);transform:scale(1)}
+  0%  {opacity:var(--hi,.96);box-shadow:0 0 0 1px rgba(70,32,8,.65), 0 0 5px rgba(255,196,120,.75);transform:scale(1)}
   30% {opacity:1;
-       box-shadow:0 0 0 2px rgba(255,240,205,1), 0 0 26px 8px rgba(255,214,150,1), 0 0 52px 16px rgba(255,180,90,.75);
-       transform:scale(2.05)}
-  100%{opacity:var(--hi,.96);box-shadow:0 0 0 1.4px rgba(70,32,8,.65), 0 0 6px rgba(255,196,120,.8);transform:scale(1)}
+       box-shadow:0 0 0 1.6px rgba(255,240,205,1), 0 0 18px 6px rgba(255,214,150,1), 0 0 36px 12px rgba(255,180,90,.7);
+       transform:scale(1.9)}
+  100%{opacity:var(--hi,.96);box-shadow:0 0 0 1px rgba(70,32,8,.65), 0 0 5px rgba(255,196,120,.75);transform:scale(1)}
 }
 /* The marquee is the one thing that stays lit while the page goes under.
 
@@ -291,332 +374,251 @@ main{position:relative;z-index:10}
    with z-index:10, which makes it a stacking context, so every z-index inside
    it is sealed under 10 and the veil at 80 paints over the lot. Raising main
    itself is what actually works — and it costs nothing, because under .rv-dim
-   the questionnaire has already taken itself to 12% and the night to zero. The
-   only thing left standing above the veil is the marquee. */
+   the questionnaire has already taken itself to zero and the films to 12%.
+   The only thing left standing above the veil is the marquee. */
 body.veiled main{z-index:81}
 .rv-dim .marquee{position:relative;z-index:81}
 
 .board{
-  position:relative;text-align:center;border-radius:6px;
-  padding:clamp(22px,4.4vw,46px) clamp(16px,4vw,52px) clamp(20px,3.6vw,38px);
-  background:
-    repeating-linear-gradient(180deg,
-      var(--cream) 0px, var(--cream) 42px,
-      #e3d5b4 42px, #e3d5b4 43px);
-  box-shadow:
-    inset 0 0 46px rgba(122,92,44,.22),
-    inset 0 2px 0 rgba(255,255,255,.5),
-    inset 0 -2px 0 rgba(0,0,0,.12);
+  position:relative;text-align:center;border-radius:4px;
+  padding:22px 10px 19px;
+  background:repeating-linear-gradient(180deg, var(--cream) 0 24px, #d5c7a6 24px 25px);
+  box-shadow:inset 0 0 28px rgba(165,126,66,.16);
 }
 .mq-name{
-  font-family:var(--display);color:var(--red-deep);
-  font-size:clamp(3.4rem, 12.5vw, 8.2rem);line-height:.88;letter-spacing:.045em;
-  text-shadow:0 2px 0 rgba(255,255,255,.4), 0 -1px 0 rgba(60,20,10,.18);
-}
-.mq-sub{
-  font-family:var(--display);color:#232a3c;
-  font-size:clamp(1rem, 2.8vw, 1.7rem);letter-spacing:.36em;margin-top:10px;
-  padding-left:.36em; /* recentre the tracked-out line */
+  font-family:var(--display);font-weight:400;color:var(--red-deep);
+  font-size:60px;line-height:.9;letter-spacing:2px;text-transform:uppercase;
 }
 
-/* the one neon moment */
-.neon{
-  font-family:var(--display);font-size:clamp(.85rem,1.4vw,1.05rem);
-  letter-spacing:.3em;text-transform:uppercase;color:var(--red-neon);
-  text-shadow:0 0 6px rgba(255,90,66,.9), 0 0 20px rgba(255,60,40,.5);
-  border:2px solid rgba(255,106,85,.5);border-radius:9px;padding:6px 14px 4px;
-  box-shadow:0 0 16px rgba(255,80,55,.3), inset 0 0 12px rgba(255,80,55,.2);
-  display:inline-block;transform:rotate(1.4deg);
-  animation:neon 9s linear infinite;
+/* the way in: one soft red button under the sign */
+.find-go{
+  display:inline-flex;align-items:center;justify-content:space-between;gap:30px;
+  margin-top:18px;padding:14px 24px 12px;
+  font-family:var(--display);font-size:22px;letter-spacing:1px;line-height:1;
+  color:var(--cream);text-align:center;
+  background:linear-gradient(180deg,#ac4938,#853629);
+  border:1px solid rgba(209,155,118,.38);border-radius:9px;
+  box-shadow:0 3px 16px rgba(0,0,0,.2), inset 0 1px rgba(255,225,184,.13);
+  transition:transform 150ms ease, filter 180ms ease;
 }
-@keyframes neon{
-  0%,93.4%,94.2%,100%{opacity:1}
-  93.8%{opacity:.55}
-}
-
-.annot{
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-  padding:clamp(22px,4vh,40px) 0 clamp(10px,2vh,18px);
-}
-.arrival h1{max-width:20ch}
-.arrival .under{
-  margin-top:clamp(10px,1.6vh,18px);
-  font-size:clamp(15px,1.25vw,17px);color:var(--cream-mute);max-width:44ch;
-}
-
-/* the movie wall glowing behind the entrance */
-.amb{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.amb i{
-  position:absolute;inset:0;background-size:cover;background-position:center 30%;
-  opacity:0;transition:opacity 1200ms var(--ease);
-  filter:saturate(.82) sepia(.14) brightness(.66);
-}
-.amb i.on{opacity:.5}
-.amb::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(18,22,31,.42) 0%, rgba(18,22,31,.78) 55%, var(--night) 96%);
-}
+.find-go:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.find-go:active{transform:translateY(1px)}
+.find-go .arw{font-family:var(--sans);font-weight:500;font-size:.9em}
 
 /* --------------------------------------------------------------------------
-   TELL US ABOUT TONIGHT: the store's back wall
+   TELL US ABOUT TONIGHT. Opened from the entrance, three quick answers.
+   Soft blended buttons, a restrained highlight on the one you picked.
    -------------------------------------------------------------------------- */
-.night{padding-top:clamp(26px,4vh,44px);padding-bottom:clamp(40px,6vh,70px)}
-.decision{margin-top:clamp(30px,4.6vh,52px)}
-.decision > .ask-of{margin-bottom:clamp(14px,2vh,22px)}
-
-/* ---- one: who's watching. Cream tickets from behind the counter. ---- */
-.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:clamp(10px,1.4vw,18px)}
-.who button{
-  position:relative;text-align:center;
-  font-family:var(--display);font-size:clamp(1.25rem,1.8vw,1.6rem);
-  letter-spacing:.07em;text-transform:uppercase;color:var(--red-deep);
-  background:var(--paper);
-  padding:clamp(20px,2.6vw,30px) 10px clamp(16px,2.2vw,24px);
-  border-radius:4px;border:1px solid var(--paper-line);
-  box-shadow:0 6px 16px rgba(0,0,0,.45),
-    inset 0 0 0 4px var(--paper), inset 0 0 0 5px var(--paper-line);
-  transition:transform var(--quick), box-shadow var(--quick), background var(--quick);
+.evening{padding-top:25px;padding-bottom:20px;scroll-margin-top:calc(var(--mast) + 8px)}
+.ev-title{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:22px}
+.ev-h{
+  font-family:var(--display);font-weight:400;font-size:36px;letter-spacing:1px;line-height:1;
+  text-transform:uppercase;color:var(--cream);
 }
-.who button:nth-child(1){transform:rotate(-.7deg)}
-.who button:nth-child(2){transform:rotate(.4deg)}
-.who button:nth-child(3){transform:rotate(-.3deg)}
-.who button:nth-child(4){transform:rotate(.6deg)}
-.who button:hover{transform:translateY(-3px) rotate(0deg)}
-/* the punch: a picked ticket has a hole in it */
-.who button::before{
-  content:"";position:absolute;top:9px;left:50%;margin-left:-5px;
-  width:10px;height:10px;border-radius:50%;
-  background:transparent;transition:background var(--quick);
+.ev-h:focus{outline:none}
+.ev-sub{font-size:12px;line-height:1.5;color:var(--cream-mute)}
+.first-choices{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:24px}
+
+/* the questions themselves, in the editorial voice */
+.ask-of{
+  font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.1;
+  letter-spacing:0;text-transform:none;color:var(--cream);margin-bottom:10px;
+}
+/* the question it wants, marked when the ask sends you back to it */
+.decision.wants .ask-of{animation:wants 1.6s var(--ease) 2}
+@keyframes wants{
+  0%,100%{color:var(--cream)}
+  40%    {color:var(--red-neon)}
+}
+
+/* ---- one and two: who's watching, and for how long ---- */
+.who,.showtimes{display:flex;gap:7px;align-items:stretch;flex-wrap:wrap}
+.who button,.showtimes button{
+  flex:1;min-width:76px;text-align:center;
+  font-family:var(--display);font-size:15px;letter-spacing:.6px;line-height:1.1;
+  border:1px solid rgba(213,201,171,.33);border-radius:7px;padding:11px 7px 9px;
+  transition:transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+.who button{
+  color:var(--red-deep);
+  background:linear-gradient(180deg,#e8dec8,#d4c8ad);
+  box-shadow:0 3px 12px rgba(0,0,0,.13), inset 0 1px rgba(255,255,255,.2);
 }
 .who button[aria-pressed="true"]{
-  background:#f7eed6;color:var(--red);
-  box-shadow:0 8px 18px rgba(0,0,0,.5),
-    inset 0 0 0 4px #f7eed6, inset 0 0 0 6px var(--red);
-  transform:translateY(-3px) rotate(0deg);
+  background:linear-gradient(180deg,#f6ead0,#e5d4ad);
+  box-shadow:0 0 0 1px rgba(198,156,93,.53), 0 3px 14px rgba(217,179,106,.09);
 }
-.who button[aria-pressed="true"]::before{
-  background:var(--night);box-shadow:inset 0 1px 2px rgba(0,0,0,.7);
-}
-
-/* ---- two: the clock, as laminated rental-category labels ---- */
-.clockline{border:0}
-.showtimes{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:clamp(10px,1.4vw,18px)}
 .showtimes button{
-  display:flex;flex-direction:column;gap:3px;align-items:flex-start;
-  background:linear-gradient(180deg,var(--navy-2),var(--navy));
-  border:1px solid var(--navy-line);border-radius:4px;
-  padding:14px 16px 12px;
-  box-shadow:0 4px 12px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.07);
-  transition:border-color var(--quick), transform var(--quick), background var(--quick);
-}
-.showtimes button:hover{transform:translateY(-2px);border-color:var(--hair-2)}
-.showtimes .name{
-  font-family:var(--display);font-size:clamp(1.15rem,1.6vw,1.4rem);
-  letter-spacing:.08em;text-transform:uppercase;color:var(--gold);
-}
-.showtimes .cap{
-  font-family:var(--mono);font-size:10px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--cream-mute);
+  color:var(--cream);
+  background:linear-gradient(180deg,#263247,#1d2738);border-color:rgba(70,85,107,.53);
 }
 .showtimes button[aria-pressed="true"]{
-  background:linear-gradient(180deg,#eab04e,#d3922f);border-color:#f3cd8a;
+  color:#ebcf9b;
+  background:linear-gradient(180deg,#334156,#283449);border-color:rgba(189,162,107,.53);
+  box-shadow:0 0 15px rgba(217,179,106,.06);
 }
-.showtimes button[aria-pressed="true"] .name{color:#241a08}
-.showtimes button[aria-pressed="true"] .cap{color:#54401c}
+.who button:hover,.showtimes button:hover{transform:translateY(-2px)}
 
-/* ---- three: the night itself. Lit shelf-end cards, the movies doing the talking. ---- */
-.nights{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:clamp(10px,1.4vw,18px)}
+/* ---- three: the night itself, the movies doing the talking ---- */
+.mood-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:23px}
+.aside{font-family:var(--hand);font-weight:500;font-size:20px;line-height:1.1;color:var(--gold);
+  transform:rotate(-2deg);display:inline-block}
+.nights{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;margin:3px 0 20px}
 .night-opt{
-  position:relative;overflow:hidden;border-radius:5px;
-  min-height:clamp(108px,13vh,148px);
-  border:1px solid var(--hair);
-  background:var(--night-2);
-  display:flex;align-items:flex-end;
-  transition:border-color var(--quick), transform var(--quick), box-shadow var(--quick);
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:123px;padding:12px 10px;
+  display:flex;align-items:flex-end;text-align:left;
+  color:var(--cream);background:#202735;
+  border:1px solid rgba(217,179,106,.13);border-radius:9px;
+  transition:transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
-.night-opt:hover{transform:translateY(-3px)}
 .night-opt .wash{
-  position:absolute;inset:0;background-size:cover;background-position:center 28%;
-  filter:saturate(.88) sepia(.12) brightness(.8);
-  transition:filter var(--calm), transform var(--long);
+  position:absolute;inset:0;z-index:-2;
+  background-size:cover;background-position:50% 35%;
+  filter:saturate(.8);
+  transition:transform 600ms ease, filter 300ms ease;
 }
-.night-opt:hover .wash{filter:saturate(1) sepia(.06) brightness(.95);transform:scale(1.04)}
 .night-opt::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(18,22,31,0) 34%, rgba(14,11,8,.78) 94%);
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(0deg, rgba(18,22,31,.95), rgba(18,22,31,.56) 28%, rgba(18,22,31,.06) 85%);
 }
 .night-opt .label{
-  position:relative;z-index:2;display:flex;align-items:center;gap:.5em;
-  font-family:var(--display);letter-spacing:.06em;text-transform:uppercase;
-  color:var(--cream);padding:14px 16px;line-height:.95;
-  text-shadow:0 2px 10px rgba(0,0,0,.8);
+  font-family:var(--serif);font-weight:500;font-size:20px;line-height:.95;
+  color:var(--cream);text-shadow:0 2px 9px rgba(0,0,0,.67);
 }
-.night-opt .label .dot{background:rgba(242,231,205,.4);box-shadow:none;width:.38em;height:.38em}
-.night-opt[aria-pressed="true"]{
-  border-color:var(--amber);
-  box-shadow:0 0 0 1px var(--amber), 0 0 22px rgba(226,161,63,.35);
-}
-.night-opt[aria-pressed="true"] .wash{filter:saturate(1) sepia(.05) brightness(.95)}
-.night-opt[aria-pressed="true"] .label .dot{
-  background:var(--amber);box-shadow:0 0 8px rgba(226,161,63,.9);
+.night-opt:hover{transform:translateY(-3px)}
+.night-opt:hover .wash{transform:scale(1.045);filter:saturate(1)}
+.night-opt[aria-pressed="true"]{border-color:rgba(217,179,106,.6);box-shadow:0 0 18px rgba(217,179,106,.09)}
+/* a small lit bulb in the corner of the one you picked */
+.night-opt[aria-pressed="true"]::before{
+  content:"";position:absolute;right:9px;top:9px;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 6px var(--gold);
 }
 
 /* --------------------------------------------------------------------------
-   THE COUNTER: the big red button and the dealer's ticket
+   THE COUNTER: the red ask, the dealer, and a ticket of tonight's answers
    -------------------------------------------------------------------------- */
-.call{margin-top:clamp(36px,5.5vh,60px)}
+.call{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .bill-go{
-  display:inline-flex;align-items:center;gap:16px;
-  font-family:var(--display);font-size:clamp(1.35rem,2.4vw,1.9rem);
-  letter-spacing:.09em;text-transform:uppercase;color:var(--cream);
-  background:linear-gradient(180deg,#b8432c,#8e2c1d);
-  padding:16px 30px 13px;border-radius:5px;
-  border:1px solid #c96a50;
-  box-shadow:0 7px 0 #521509, 0 16px 30px rgba(0,0,0,.5),
-    inset 0 1px 0 rgba(255,220,180,.35);
-  transition:transform 90ms ease, box-shadow 90ms ease, filter var(--quick);
+  display:inline-flex;align-items:center;gap:22px;
+  font-family:var(--display);font-size:20px;line-height:1.1;letter-spacing:.7px;
+  color:var(--cream);
+  background:linear-gradient(180deg,#a94434,#813328);
+  padding:14px 20px 12px;border-radius:9px;
+  border:1px solid rgba(201,132,104,.36);
+  box-shadow:0 3px 11px rgba(0,0,0,.2), inset 0 1px rgba(255,225,184,.13);
+  transition:transform 150ms ease, box-shadow 150ms ease, filter 180ms ease;
 }
-.bill-go:hover{filter:brightness(1.09)}
-.bill-go:active{transform:translateY(5px);box-shadow:0 2px 0 #521509, 0 8px 18px rgba(0,0,0,.5)}
+.bill-go:hover{filter:brightness(1.1)}
+.bill-go:active{transform:translateY(2px)}
 /* the firm mechanical response at 0.0s: it goes down and stays down */
 .bill-go.pressed,.house-pick.pressed{
-  transform:translateY(6px);
-  box-shadow:0 0 0 #521509, 0 3px 8px rgba(0,0,0,.6), inset 0 2px 7px rgba(0,0,0,.5);
+  transform:translateY(2px);
+  box-shadow:inset 0 2px 7px rgba(0,0,0,.45);
   filter:brightness(.92);
   transition:transform 110ms cubic-bezier(.3,.9,.3,1), box-shadow 110ms ease, filter 110ms ease;
 }
 /* only ever true mid-reveal now, so it reads as "working", not "refused" */
-.bill-go:disabled{
-  filter:saturate(.85) brightness(.9);cursor:default;
-}
+.bill-go:disabled{filter:saturate(.85) brightness(.9);cursor:default}
 /* answers still missing: quieter, but plainly pressable */
 .bill-go.waiting{filter:saturate(.7) brightness(.86)}
 .bill-go.waiting:hover{filter:none}
+.bill-go .arw,.house-pick .arw{font-family:var(--sans);font-weight:500}
 
-/* the question it wants, marked when the ask sends you back to it */
-.decision.wants > .ask-of{animation:wants 1.6s var(--ease) 2}
-@keyframes wants{
-  0%,100%{color:var(--gold)}
-  40%    {color:var(--red-neon)}
-}
-.bill-go .arw{font-family:var(--sans);font-weight:600}
-.call-note{margin-top:14px;font-size:14px;color:var(--cream-mute);max-width:52ch}
-
-.house-band{
-  margin-top:clamp(24px,3.6vh,36px);display:flex;align-items:center;gap:18px;flex-wrap:wrap;
-}
-.house-say{
-  font-family:var(--hand);font-weight:500;font-size:clamp(18px,1.6vw,22px);
-  color:var(--amber);transform:rotate(-1.4deg);
-}
+.house-band{display:flex;align-items:center;gap:9px}
+.house-say{font-family:var(--hand);font-weight:500;font-size:20px;line-height:1.1;color:var(--gold)}
 .house-pick{
-  position:relative;display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--display);font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--red-deep);background:var(--paper);
-  padding:10px 18px 8px 24px;border-radius:3px;
-  border:1px solid var(--paper-line);
-  box-shadow:0 4px 10px rgba(0,0,0,.45);
-  transform:rotate(.6deg);
-  transition:transform var(--quick), box-shadow var(--quick);
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--display);font-size:16px;letter-spacing:.8px;line-height:1.1;
+  color:var(--red-deep);
+  background:linear-gradient(180deg,#e7dabe,#d7c7a5);
+  border:1px solid rgba(198,181,143,.53);border-radius:7px;
+  padding:10px 13px 8px;box-shadow:0 2px 9px rgba(0,0,0,.13);
+  transition:transform var(--quick), filter var(--quick);
 }
-.house-pick:hover{transform:translateY(-2px) rotate(0deg)}
-/* perforated stub edge */
-.house-pick::before{
-  content:"";position:absolute;left:9px;top:4px;bottom:4px;width:0;
-  border-left:1px dashed rgba(90,70,40,.55);
-}
-.house-pick .arw{font-family:var(--sans);font-weight:600}
-.house-fine{flex-basis:100%;font-family:var(--mono);font-size:10.5px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--cream-mute)}
+.house-pick:hover{transform:translateY(-2px);filter:brightness(1.04)}
+/* tonight's answers, stamped like a ticket each time one changes */
+.ticket-line{flex-basis:100%;font-family:var(--mono);font-size:10px;line-height:1.6;color:var(--cream-mute);margin-top:-9px}
+.ticket-line.stamped{animation:stamp 260ms ease-out}
+@keyframes stamp{from{transform:translateY(-2px);opacity:.5}to{transform:none;opacity:1}}
+.call-note{flex-basis:100%;margin-top:-14px;font-size:12px;line-height:1.5;color:var(--cream-mute);max-width:60ch}
+.call-note:empty{display:none}
 
 /* --------------------------------------------------------------------------
-   GOT RULES? The clipboard behind the counter.
+   GOT RULES? Everything the engine can be told, folded away.
    -------------------------------------------------------------------------- */
-.tune{margin-top:clamp(38px,6vh,64px);border-top:1px dashed var(--hair);padding-top:18px}
+.tune{margin-top:12px;border-top:1px solid rgba(217,179,106,.13);color:var(--cream-mute);font-size:12px}
 .tune summary{
-  cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:12px;
-  font-family:var(--display);font-size:1.05rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--cream-mute);
+  cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 0;font-family:var(--mono);font-size:11px;color:var(--cream-mute);
   transition:color var(--quick);
 }
 .tune summary::-webkit-details-marker{display:none}
 .tune summary:hover{color:var(--cream)}
-.tune .sign{
-  display:inline-grid;place-items:center;width:22px;height:22px;
-  border:1px solid var(--hair-2);border-radius:3px;
-  font-family:var(--mono);font-size:13px;color:var(--amber);
-}
+.tune .sign{font-family:var(--mono);font-size:13px;line-height:1;color:var(--cream-mute);transition:transform var(--quick)}
 .tune[open] .sign{transform:rotate(45deg)}
 .tune-body{
-  margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:26px clamp(24px,3.5vw,52px);
-  background:linear-gradient(180deg,var(--navy),#18202f);
-  border:1px solid var(--navy-line);border-radius:6px;
-  padding:clamp(20px,3vw,34px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 26px rgba(0,0,0,.35);
+  padding:5px 0 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px clamp(24px,3.5vw,48px);
 }
 .tune-block h3{
-  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--gold);margin-bottom:12px;
+  font-family:var(--mono);font-size:10.5px;font-weight:400;letter-spacing:.06em;
+  color:var(--cream-mute);margin-bottom:10px;
 }
 .tune-block--wide{grid-column:1/-1}
-.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts{display:flex;flex-wrap:wrap;gap:7px}
 .opts button{
-  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--cream-mute);border:1px solid var(--hair);border-radius:3px;
-  padding:7px 12px;transition:all var(--quick);background:rgba(0,0,0,.15);
+  font-family:var(--sans);font-size:12px;line-height:1.2;
+  color:var(--cream);background:linear-gradient(180deg,#283144,#222b3a);
+  border:1px solid rgba(86,96,118,.4);border-radius:7px;padding:9px 13px;
+  transition:border-color var(--quick), color var(--quick), background var(--quick);
 }
-.opts button:hover{color:var(--cream);border-color:var(--hair-2)}
+.opts button:hover{border-color:rgba(217,179,106,.35)}
 .opts button[aria-pressed="true"]{
-  background:var(--amber);border-color:#f3cd8a;color:#241a08;font-weight:500;
+  color:#f1d8a6;border-color:rgba(217,179,106,.53);
+  background:linear-gradient(180deg,#3c4145,#30363c);
 }
 .dial{display:flex;align-items:center;gap:16px}
-.dial input[type="range"]{flex:1;accent-color:var(--amber);height:22px}
-.dial .read{
-  font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--cream);
-  min-width:58px;text-align:right;
-}
-.svcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.dial input[type="range"]{flex:1;accent-color:#ad8660;height:22px}
+.dial .read{font-family:var(--mono);font-size:12px;color:var(--cream);min-width:58px;text-align:right}
+.svcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:7px}
 .svc{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
-  border:1px solid var(--hair);border-radius:3px;padding:9px 12px;
-  transition:all var(--quick);background:rgba(0,0,0,.15);
+  border:1px solid rgba(86,96,118,.4);border-radius:7px;padding:9px 12px;
+  background:linear-gradient(180deg,#283144,#222b3a);
+  transition:border-color var(--quick);
 }
-.svc:hover{border-color:var(--hair-2)}
-.svc .n{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cream-mute)}
+.svc:hover{border-color:rgba(217,179,106,.35)}
+.svc .n{font-family:var(--sans);font-size:12px;color:var(--cream-mute)}
 .svc .box{
-  width:14px;height:14px;border:1px solid var(--hair-2);border-radius:2px;flex:none;
+  width:14px;height:14px;border:1px solid var(--hair-2);border-radius:3px;flex:none;
   transition:all var(--quick);
 }
+.svc[aria-pressed="true"]{border-color:rgba(217,179,106,.45)}
 .svc[aria-pressed="true"] .n{color:var(--cream)}
-.svc[aria-pressed="true"] .box{
-  background:var(--amber);border-color:#f3cd8a;
-  box-shadow:0 0 8px rgba(226,161,63,.5);
-}
-.tune-note{grid-column:1/-1;font-size:12.5px;color:var(--cream-mute);margin-top:-8px}
-.tune .tune-note{margin-top:10px}
+.svc[aria-pressed="true"] .box{background:#ad8660;border-color:#d9b36a}
+.tune-note{grid-column:1/-1;font-size:12px;color:var(--cream-mute);margin-top:10px}
 
 /* --------------------------------------------------------------------------
    BACK FOR ANOTHER: the returning customer
    -------------------------------------------------------------------------- */
-.encore{margin-top:clamp(22px,3.6vh,36px)}
-.encore-shelf{margin-bottom:clamp(22px,3.4vh,34px)}
+.encore{margin-bottom:8px}
+.encore-shelf{margin-bottom:clamp(18px,3vh,28px)}
 .encore-set{
   display:flex;align-items:center;gap:18px;flex-wrap:wrap;
-  background:var(--paper);color:var(--ink);border-radius:4px;
+  background:linear-gradient(180deg,#f2e7cd,#e4d6b6);color:var(--ink);border-radius:7px;
   border:1px solid var(--paper-line);
-  padding:14px 18px;max-width:760px;
-  box-shadow:0 6px 16px rgba(0,0,0,.45);
-  transform:rotate(-.4deg);
+  padding:12px 16px;max-width:760px;margin-bottom:20px;
+  box-shadow:0 4px 14px rgba(0,0,0,.3);
 }
 .encore-set .tick{color:var(--ink-soft)}
 .encore-set .v{
-  font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--ink);
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink);
   flex:1;min-width:200px;
 }
 .recut{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--red-deep);border:1px solid rgba(125,36,27,.4);border-radius:3px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red-deep);border:1px solid rgba(125,36,27,.4);border-radius:5px;
   padding:7px 12px;transition:all var(--quick);
 }
 .recut:hover{background:var(--red-deep);color:var(--paper)}
@@ -731,6 +733,7 @@ body.veiled main{z-index:81}
 #s-bill .bill-copy .synopsis,
 #s-bill .bill-copy .playing,
 #s-bill .bill-copy .score,
+#s-bill .bill-copy .mini,
 #s-bill .acts,
 #s-bill #shelf-slot,
 #s-bill #twin-slot,
@@ -748,7 +751,8 @@ body.veiled main{z-index:81}
 #s-bill.revealing .bill-copy .stub,
 #s-bill.revealing .bill-copy .synopsis,
 #s-bill.revealing .bill-copy .playing,
-#s-bill.revealing .bill-copy .score{opacity:0;transform:translateY(10px)}
+#s-bill.revealing .bill-copy .score,
+#s-bill.revealing .bill-copy .mini{opacity:0;transform:translateY(10px)}
 #s-bill.revealing .acts{opacity:0}
 #s-bill.revealing .lock{pointer-events:none}
 #s-bill.revealing #shelf-slot,
@@ -782,7 +786,8 @@ body.veiled main{z-index:81}
 #s-bill.revealing.rv-4 .bill-copy .stub,
 #s-bill.revealing.rv-4 .bill-copy .synopsis,
 #s-bill.revealing.rv-4 .bill-copy .playing,
-#s-bill.revealing.rv-4 .bill-copy .score{opacity:1;transform:none}
+#s-bill.revealing.rv-4 .bill-copy .score,
+#s-bill.revealing.rv-4 .bill-copy .mini{opacity:1;transform:none}
 
 /* --- beat 5 (1.8s): the night becomes actionable --- */
 #s-bill.revealing.rv-5 .acts{opacity:1}
@@ -792,18 +797,14 @@ body.veiled main{z-index:81}
 #s-bill.revealing.rv-5 #footnote{opacity:1;transform:none}
 
 /* the questionnaire steps down and out; the marquee is left lit above it */
-#s-tonight .night,
-#s-tonight .annot,
-#s-tonight h1,
-#s-tonight .under,
-#s-tonight .encore{
+#s-tonight .evening,
+#s-tonight .triptych,
+#s-tonight .find-go{
   transition:opacity 340ms var(--ease), transform 420ms var(--ease);
 }
-#s-tonight.rv-dim .night{opacity:0;transform:translateY(16px);pointer-events:none}
-#s-tonight.rv-dim .annot,
-#s-tonight.rv-dim h1,
-#s-tonight.rv-dim .under,
-#s-tonight.rv-dim .encore{opacity:.12;transform:translateY(10px);pointer-events:none}
+#s-tonight.rv-dim .evening{opacity:0;transform:translateY(16px);pointer-events:none}
+#s-tonight.rv-dim .triptych,
+#s-tonight.rv-dim .find-go{opacity:.12;pointer-events:none}
 
 /* the red plaque over the pick */
 .now{
@@ -1061,7 +1062,7 @@ a.svc-chip:hover .svc-go{opacity:1}
 }
 /* the wood the cases sit on */
 .rail::after{content:"";flex:0 0 6px}
-.shelf .rail, .aisle .rail{
+.shelf .rail, .aisle .rail, .saved .rail{
   padding-bottom:24px;
   background:linear-gradient(180deg, transparent calc(100% - 18px),
     var(--wood-hi) calc(100% - 18px), var(--wood) calc(100% - 6px), var(--wood-lo) 100%);
@@ -1074,9 +1075,12 @@ a.svc-chip:hover .svc-go{opacity:1}
 }
 .rail-item:nth-child(odd){transform:rotate(-.5deg)}
 .rail-item:nth-child(even){transform:rotate(.4deg)}
-button.rail-item:hover{transform:translateY(-6px) rotate(0deg)}
+/* the poster and title are one button; the save/taste row sits under it */
+.rail-open{display:flex;flex-direction:column;gap:8px;width:100%;text-align:left;border-radius:3px}
+.rail-item.can-open:hover{transform:translateY(-6px) rotate(0deg)}
 .rail-item .poster img{filter:brightness(.86) saturate(.95);transition:filter var(--quick), transform var(--long)}
-button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
+.rail-open:hover .poster img{filter:brightness(1.04) saturate(1.02)}
+.rail-item .mini{margin:-2px 0 0 -6px}
 .rail-item .flag{
   position:absolute;z-index:3;top:-8px;left:-6px;
   font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.14em;
@@ -1101,6 +1105,7 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
 }
 .twin-slot{display:flex;gap:16px;align-items:center}
 .twin-slot .poster{width:clamp(84px,8vw,116px);flex:none}
+.twin-slot .mini{margin:6px 0 0 -6px}
 .twin-slot .when{font-family:var(--mono);font-size:10px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--amber)}
 .twin-slot .t{font-family:var(--display);font-size:clamp(1.2rem,1.8vw,1.6rem);
@@ -1201,6 +1206,7 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
   text-transform:uppercase;color:var(--cream);line-height:1}
 .keep .ky{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--cream-mute)}
 /* the saved status, printed rather than pressed */
+.keep .mini{margin:4px 0 0 -6px}
 .keep .kb{
   align-self:flex-start;margin-top:1px;
   font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
@@ -1232,7 +1238,8 @@ button.rail-item:hover .poster img{filter:brightness(1.04) saturate(1.02)}
 .case-title{font-size:clamp(2rem,4vw,3.2rem);color:var(--cream);padding-right:64px}
 .case-status{border-top:1px dashed var(--hair);padding-top:14px}
 .case-state{font-family:var(--hand);font-size:clamp(18px,1.5vw,21px);color:var(--cream-dim);margin-top:4px}
-.case-react{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.case-react{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;margin-top:12px}
+.case-react .mini{margin-left:-6px}
 .case-react button{
   font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink);background:var(--paper);border-radius:2px;
@@ -1277,6 +1284,7 @@ body.cased{overflow:hidden}
 }
 .ticket .sm{font-family:var(--mono);font-size:9px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--ink-soft);margin-top:5px}
+.ticket .mini{margin:6px 0 0 -6px}
 .ticket .drop{
   margin-top:9px;align-self:flex-start;
   font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
@@ -1290,24 +1298,66 @@ body.cased{overflow:hidden}
 .empty p{color:var(--cream-mute);margin-top:12px;max-width:44ch}
 
 /* --------------------------------------------------------------------------
-   COLOPHON: the navy strip on the way out
+   THE WAY OUT: one line, and the fine print where it is actually read
    -------------------------------------------------------------------------- */
 .colophon{
-  margin-top:clamp(48px,8vh,90px);
-  background:linear-gradient(180deg,var(--navy),#131a28);
-  border-top:1px solid var(--navy-line);
-  padding:clamp(30px,5vh,54px) 0 clamp(36px,6vh,60px);
+  display:flex;justify-content:center;text-align:center;
+  padding:14px var(--gut);
+  background:#171c28;border-top:1px solid rgba(217,179,106,.09);
+  font-family:var(--mono);font-size:10px;letter-spacing:.7px;color:var(--cream-mute);
 }
-.colophon .frame{display:flex;flex-direction:column;gap:16px}
-.colo-flavor{
-  font-family:var(--display);font-size:clamp(1rem,1.6vw,1.3rem);
-  letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
-}
-.colophon .house{align-self:flex-start}
-.colophon #colophon-note{
-  font-family:var(--mono);font-size:11px;line-height:1.9;letter-spacing:.04em;
+.scene:not(#s-tonight){padding-bottom:clamp(30px,5vh,56px)}
+.about-note{
+  margin-top:clamp(40px,7vh,72px);padding-top:18px;border-top:1px dashed var(--hair);
+  font-family:var(--mono);font-size:11px;line-height:1.9;letter-spacing:.03em;
   color:var(--cream-mute);max-width:78ch;
 }
+.keep-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--cream-mute);margin:-6px 0 18px}
+
+/* --------------------------------------------------------------------------
+   STAR · THUMBS UP · THUMBS DOWN
+   Three equal sixteen-pixel glyphs in three equal boxes, under every film
+   that can be saved or judged. Quiet at rest, a muted fill when on.
+   -------------------------------------------------------------------------- */
+.mini{display:flex;align-items:center;gap:2px}
+.mini-b{
+  display:grid;place-items:center;flex:none;
+  width:28px;height:28px;border-radius:6px;
+  color:var(--cream-mute);
+  transition:color var(--quick), background var(--quick);
+}
+/* fill and stroke are inherited into the shared drawings */
+.mini-b svg{width:16px;height:16px;display:block;overflow:visible;
+  fill:transparent;stroke:currentColor;stroke-width:1.5;
+  stroke-linejoin:round;stroke-linecap:round;transition:fill var(--quick);
+}
+.mini-b:hover{color:var(--cream);background:rgba(242,231,205,.07)}
+.mini-star[aria-pressed="true"]{color:#d9b36a}
+.mini-star[aria-pressed="true"] svg{fill:rgba(217,179,106,.72)}
+.mini-up[aria-pressed="true"]{color:#e2c68e;background:rgba(217,179,106,.12)}
+.mini-up[aria-pressed="true"] svg{fill:rgba(217,179,106,.3)}
+.mini-down[aria-pressed="true"]{color:#e3a796;background:rgba(227,167,150,.12)}
+.mini-down[aria-pressed="true"] svg{fill:rgba(227,167,150,.26)}
+.mini-b.pop svg{animation:pop 240ms var(--punch)}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.18)}100%{transform:scale(1)}}
+/* on cream card stock the same glyphs print in ink */
+.on-paper .mini-b{color:var(--ink-soft)}
+.on-paper .mini-b:hover{color:var(--ink);background:rgba(43,36,24,.07)}
+.on-paper .mini-star[aria-pressed="true"]{color:#8a6420}
+.on-paper .mini-star[aria-pressed="true"] svg{fill:rgba(184,138,52,.8)}
+.on-paper .mini-up[aria-pressed="true"]{color:#7a5a1c;background:rgba(184,138,52,.16)}
+.on-paper .mini-down[aria-pressed="true"]{color:var(--red-deep);background:rgba(125,36,27,.1)}
+@media (pointer:coarse){
+  /* the glyphs stay small; the targets do not */
+  .mini{gap:0}
+  .mini-b{width:44px;height:44px}
+}
+
+/* ---- saved for later, on Your Shelf ---- */
+.saved{margin-top:clamp(22px,3.4vh,34px)}
+.saved .shelf-head h2{color:var(--gold)}
+.saved .shelf-head h2:focus{outline:none}
+.saved-empty{color:var(--cream-mute);font-size:14px;max-width:52ch}
 
 /* --------------------------------------------------------------------------
    THE DARK: lights down between scenes
@@ -1330,23 +1380,24 @@ body.cased{overflow:hidden}
 /* --------------------------------------------------------------------------
    RESPONSIVE
    -------------------------------------------------------------------------- */
+@media (max-width:1100px){
+  .nights{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 @media (max-width:1023px){
   .bill-grid{grid-template-columns:minmax(0,1fr) minmax(150px,220px)}
 }
+@media (max-width:820px){
+  .masthead-in{grid-template-columns:auto 1fr;gap:10px 20px}
+  .doors{justify-content:flex-end}
+  .hunt{grid-column:1/-1;width:260px;justify-self:end}
+  .first-choices{grid-template-columns:minmax(0,1fr);gap:16px}
+  .night-opt{min-height:105px}
+  .hunt-list{grid-template-columns:minmax(0,1fr)}
+}
 @media (max-width:767px){
-  :root{--mast:60px}
-  .masthead-in{padding-top:12px;padding-bottom:12px;gap:12px}
-  .doors{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .doors::-webkit-scrollbar{display:none}
-  .doors button{font-size:12.5px;letter-spacing:.12em;flex:none}
-  .house{font-size:15px;flex:none}
   .bill-grid{grid-template-columns:minmax(0,1fr)}
   /* poster, then title, then the card: the explanation stays next to the name */
   .bill-poster{max-width:200px;order:-1;margin-bottom:6px}
-  .marquee{padding:14px}
-  .l-top{top:2px}
-  .l-bottom{bottom:2px}
-  .l-left,.l-right{display:none}
   /* Caveat at body size is hard work on a phone, so the store speaks in the
      normal voice here. The paper, tape and rule stay. */
   .store-copy{font-family:var(--sans);font-size:15.5px;line-height:1.62;letter-spacing:0}
@@ -1358,12 +1409,12 @@ body.cased{overflow:hidden}
   #s-bill.revealing .bill-copy .stub,
   #s-bill.revealing .bill-copy .synopsis,
   #s-bill.revealing .bill-copy .playing,
-  #s-bill.revealing .bill-copy .score{transform:translateY(6px)}
+  #s-bill.revealing .bill-copy .score,
+  #s-bill.revealing .bill-copy .mini{transform:translateY(6px)}
   #s-bill.revealing #shelf-slot,
   #s-bill.revealing #twin-slot,
   #s-bill.revealing #footnote{transform:translateY(10px)}
-  #s-tonight.rv-dim .night{transform:translateY(10px)}
-  .annot{flex-wrap:wrap;gap:10px}
+  #s-tonight.rv-dim .evening{transform:translateY(10px)}
   .tune-body{grid-template-columns:minmax(0,1fr)}
   .find{margin-left:0;flex-basis:100%}
   .encore-set .v{min-width:0}
@@ -1376,13 +1427,55 @@ body.cased{overflow:hidden}
   .case-poster{max-width:140px}
   .case-title{padding-right:0;margin-top:6px}
   .case-close{top:10px;right:14px}
+  /* scrolling down a phone tucks the search row away; scrolling up brings it back */
+  .masthead.tuck:not(.hunting) .hunt{display:none}
+}
+@media (max-width:600px){
+  .masthead-in{padding:12px 18px;gap:10px 12px;align-items:start}
+  .house{font-size:16px}
+  .doors{flex-wrap:wrap;gap:4px 14px;max-width:190px;justify-self:end}
+  .doors button{font-size:12px;letter-spacing:.09em;padding:4px 0 3px}
+  .hunt{width:100%}
+  .hunt input{font-size:16px}               /* no zoom-on-focus on iOS */
+  .hunt-in{padding:16px 18px}
+  .hunt-svc-list{gap:7px 14px}
+  .hunt-svc{min-height:35px}
+  .hero{min-height:310px;padding:24px 18px}
+  .shot{width:50%}
+  .shot-m{left:25%}
+  .shot-r img{object-position:65% 35%}
+  .marquee{width:300px}
+  .board{padding:18px 8px 16px}
+  .mq-name{font-size:42px;letter-spacing:1px}
+  .find-go{font-size:20px;padding:14px 23px 12px}
+  .evening{padding-left:18px;padding-right:18px}
+  .ev-title{flex-direction:column;align-items:flex-start;gap:6px}
+  .ev-h{font-size:31px}
+  .who button,.showtimes button{flex-basis:calc(50% - 7px);font-size:16px}
+  .nights{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .night-opt{min-height:96px}
+  .night-opt .label{font-size:22px}
+  .aside{font-size:18px}
+  .call{gap:12px}
+  .bill-go{font-size:19px;padding:13px 16px 11px;gap:14px}
+  .ticket-line{margin-top:0;font-size:11px}
+  .call-note{margin-top:-6px}
+  .colophon{padding:14px 18px;font-size:9px}
+}
+@media (pointer:coarse){
+  .who button,.showtimes button,.night-opt,.bill-go,.house-pick,.find-go,.opts button,.svc,.tune summary{min-height:44px}
+  .hunt input{min-height:42px}
+  .hunt-svcs{width:40px;height:40px}
+  .hunt-svc{min-height:44px}
+  .hunt-close{min-height:44px;padding:0 4px}
 }
 
 @media (prefers-reduced-motion: reduce){
   .air::after{animation:none}
   .bulb,.marquee.chase .bulb{animation:none;opacity:.94}
-  .neon{animation:none}
   .swap .res-1,.swap .res-2,.swap .res-3{animation:none}
+  .ticket-line.stamped,.mini-b.pop svg,.decision.wants .ask-of{animation:none}
+  .shot img{transition:none}
   /* No chase, no stagger, no rotation, no travel: the finished state fades up
      in one short step. The Reveal controller skips straight to it as well. */
   #s-bill.revealing .bill-poster,
@@ -1393,12 +1486,15 @@ body.cased{overflow:hidden}
   #s-bill.revealing .bill-copy .synopsis,
   #s-bill.revealing .bill-copy .playing,
   #s-bill.revealing .bill-copy .score,
+  #s-bill.revealing .bill-copy .mini,
   #s-bill.revealing .acts,
   #s-bill.revealing #shelf-slot,
   #s-bill.revealing #twin-slot,
   #s-bill.revealing #footnote{transform:none !important;filter:none !important}
   .candy .vine,.candy .lid{transition:none}
   #acc-wash{animation:none;opacity:1;transform:none}
+  .who button:hover,.showtimes button:hover,.night-opt:hover,.find-go:hover,.house-pick:hover,.rail-item.can-open:hover{transform:none}
+  .night-opt:hover .wash{transform:none}
   *{transition-duration:1ms !important}
 }
 </style>
@@ -1406,133 +1502,174 @@ body.cased{overflow:hidden}
 
 <div class="air" aria-hidden="true"></div>
 
+<!-- star, thumbs up, thumbs down: drawn once, the same 16-unit grid and stroke -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="g-star" viewBox="0 0 16 16"><path d="M8 1.7l1.93 3.92 4.32.63-3.13 3.05.74 4.3L8 11.57l-3.86 2.03.74-4.3L1.75 6.25l4.32-.63z"/></symbol>
+  <symbol id="g-up" viewBox="0 0 16 16"><path d="M2.2 7.2h2.7v6.6H2.2z"/><path d="M4.9 7.2l2.5-5c1 0 1.7.8 1.6 1.8l-.3 2.1h3.5c.9 0 1.6.8 1.4 1.7l-1 4.5c-.2.8-.8 1.4-1.6 1.4H4.9"/></symbol>
+  <symbol id="g-down" viewBox="0 0 16 16"><g transform="rotate(180 8 8)"><path d="M2.2 7.2h2.7v6.6H2.2z"/><path d="M4.9 7.2l2.5-5c1 0 1.7.8 1.6 1.8l-.3 2.1h3.5c.9 0 1.6.8 1.4 1.7l-1 4.5c-.2.8-.8 1.4-1.6 1.4H4.9"/></g></symbol>
+</svg>
+
 <header class="masthead" id="masthead">
-  <div class="masthead-in">
-    <a class="house" href="#s-tonight" id="house"><span class="dot"></span>Main Feature</a>
+  <div class="masthead-in" id="masthead-in">
+    <a class="house" href="#s-tonight" id="house">Main Feature</a>
     <nav class="doors" aria-label="Sections">
       <button type="button" data-go="tonight" aria-current="page">Tonight</button>
       <button type="button" data-go="aisles">The Aisles</button>
       <button type="button" data-go="taste">Your Shelf</button>
       <button type="button" data-go="showings">Past Showings</button>
     </nav>
+    <div class="hunt" id="hunt" role="search">
+      <svg class="hunt-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <label class="sr" for="hunt-q">Search movies</label>
+      <input id="hunt-q" type="search" placeholder="Search a movie" autocomplete="off" spellcheck="false"
+             enterkeyhint="search" aria-controls="hunt-panel">
+      <button class="hunt-svcs" id="hunt-svcs" type="button" aria-expanded="false" aria-controls="hunt-panel"
+              aria-label="Choose your streaming services">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="1.8" y="2.8" width="12.4" height="8.4" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 13.6h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
   </div>
+  <section class="hunt-panel" id="hunt-panel" aria-label="Movie search and streaming services" hidden>
+    <div class="hunt-in">
+      <div class="hunt-top">
+        <h2 class="hunt-h" id="hunt-h">Your streaming services</h2>
+        <button class="hunt-close" id="hunt-close" type="button" aria-label="Close movie search">Close &times;</button>
+      </div>
+      <fieldset class="hunt-svc-set">
+        <legend class="sr">Your streaming services</legend>
+        <div class="hunt-svc-list" id="hunt-svc-list"></div>
+      </fieldset>
+      <p class="sr" id="hunt-status" aria-live="polite"></p>
+      <div class="hunt-results" id="hunt-results"></div>
+      <p class="hunt-date" id="hunt-date"></p>
+    </div>
+  </section>
 </header>
 
 <main>
 
-<!-- ══════════════ THE STORE FRONT: MARQUEE AND THREE QUESTIONS ══════════════ -->
+<!-- ══════════════ THE ENTRANCE: THREE FILMS, THE MARQUEE, AND THE WAY IN ══════════════ -->
 <section class="scene on" id="s-tonight" aria-label="Tonight">
 
-  <div class="arrival frame">
-    <div class="amb" id="amb" aria-hidden="true"><i data-slot="a"></i><i data-slot="b"></i></div>
-
-    <div class="marquee" id="marquee">
-      <span class="lights l-top"    aria-hidden="true"></span>
-      <span class="lights l-right"  aria-hidden="true"></span>
-      <span class="lights l-bottom" aria-hidden="true"></span>
-      <span class="lights l-left"   aria-hidden="true"></span>
-      <div class="board">
-        <p class="mq-name">Main Feature</p>
-        <p class="mq-sub">Movies for Tonight</p>
+  <div class="hero" id="hero">
+    <div class="triptych" id="triptych" role="img" aria-label="Film stills">
+      <div class="shot shot-l"><img id="shot-l" alt="" decoding="async" fetchpriority="high"></div>
+      <div class="shot shot-m"><img id="shot-m" alt="" decoding="async" fetchpriority="high"></div>
+      <div class="shot shot-r"><img id="shot-r" alt="" decoding="async" fetchpriority="high"></div>
+    </div>
+    <div class="hero-in">
+      <div class="marquee" id="marquee">
+        <span class="lights l-top"    aria-hidden="true"></span>
+        <span class="lights l-right"  aria-hidden="true"></span>
+        <span class="lights l-bottom" aria-hidden="true"></span>
+        <span class="lights l-left"   aria-hidden="true"></span>
+        <div class="board">
+          <h1 class="mq-name">Main Feature</h1>
+        </div>
       </div>
+      <button class="find-go" id="find-go" type="button" aria-controls="evening" aria-expanded="false">
+        Find your movie <span class="arw" aria-hidden="true">&rarr;</span>
+      </button>
     </div>
+  </div>
 
-    <div class="annot">
-      <p class="tick" id="stamp"></p>
-      <p class="neon">Open Late</p>
+  <div class="evening frame" id="evening" hidden>
+    <div class="ev-title">
+      <h2 class="ev-h" id="statement" tabindex="-1">Tell us about tonight.</h2>
+      <p class="ev-sub" id="under">Three quick answers. One main feature.</p>
     </div>
-    <h1 class="say say-xl" id="statement">Tell us about tonight</h1>
-    <p class="under" id="under">Three quick answers and we hand you the movie.</p>
 
     <div class="encore" id="encore" hidden>
       <div class="encore-shelf" id="encore-shelf"></div>
       <div class="encore-set" id="encore-set"></div>
       <div class="call" id="encore-call">
         <button class="bill-go" id="encore-go" type="button">
-          <span>Show me the main feature</span><span class="arw">&rarr;</span>
+          <span>Show me the main feature</span><span class="arw" aria-hidden="true">&rarr;</span>
         </button>
-      <div class="house-band">
-        <p class="house-say">can't decide?</p>
-        <button class="house-pick" id="encore-house" type="button">
-          Dealer's choice <span class="arw">&rarr;</span>
+        <div class="house-band">
+          <p class="house-say">can't decide?</p>
+          <button class="house-pick" id="encore-house" type="button" aria-describedby="house-what">
+            Dealer's choice <span class="arw" aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="night" id="night">
+      <div class="first-choices">
+        <div class="decision">
+          <h3 class="ask-of" id="ask-who">Who's watching?</h3>
+          <div class="who" id="q-who" role="group" aria-labelledby="ask-who"></div>
+        </div>
+        <div class="decision">
+          <h3 class="ask-of" id="ask-time">How much time?</h3>
+          <div class="showtimes" id="q-time" role="group" aria-labelledby="ask-time"></div>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="mood-head">
+          <h3 class="ask-of" id="ask-night">What kind of night?</h3>
+          <span class="aside">Follow your mood.</span>
+        </div>
+        <div class="nights" id="q-night" role="group" aria-labelledby="ask-night"></div>
+      </div>
+
+      <div class="call">
+        <button class="bill-go" id="show-bill" type="button">
+          <span>Show me the main feature</span><span class="arw" aria-hidden="true">&rarr;</span>
         </button>
-        <p class="house-fine">The house pulls one movie. That's the whole deal.</p>
+        <div class="house-band">
+          <p class="house-say">can't decide?</p>
+          <button class="house-pick" id="house-pick" type="button" aria-describedby="house-what">
+            Dealer's choice <span class="arw" aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+        <p class="ticket-line" id="ticket-line" aria-live="polite"></p>
+        <p class="call-note" id="call-note"></p>
+        <span class="sr" id="house-what">The house pulls one movie. That's the whole deal.</span>
       </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="night frame" id="night">
-    <div class="decision">
-      <h2 class="ask-of">Who's watching?</h2>
-      <div class="who" id="q-who"></div>
-    </div>
+      <details class="tune" id="tune">
+        <summary>Got rules? <span class="sign" aria-hidden="true">+</span></summary>
+        <div class="tune-body">
+          <div class="tune-block">
+            <h3>Critics at least</h3>
+            <div class="dial">
+              <input id="rt-range" type="range" min="0" max="95" step="5" value="0"
+                     aria-label="Minimum critic score">
+              <span class="read" id="rt-read"></span>
+            </div>
+          </div>
 
-    <div class="decision">
-      <h2 class="ask-of">How much time?</h2>
-      <div class="clockline">
-        <div class="showtimes" id="q-time"></div>
-      </div>
-    </div>
+          <div class="tune-block">
+            <h3>Age in the room</h3>
+            <div class="opts" id="f-room"></div>
+          </div>
 
-    <div class="decision">
-      <h2 class="ask-of">What kind of night?</h2>
-      <div class="nights" id="q-night"></div>
-    </div>
+          <div class="tune-block">
+            <h3>Rating floor</h3>
+            <div class="opts" id="f-rating"></div>
+          </div>
 
-    <div class="call">
-      <button class="bill-go" id="show-bill" type="button">
-        <span>Show me the main feature</span><span class="arw">&rarr;</span>
-      </button>
-      <p class="call-note" id="call-note"></p>
-      <div class="house-band">
-        <p class="house-say">can't decide?</p>
-        <button class="house-pick" id="house-pick" type="button">
-          Dealer's choice <span class="arw">&rarr;</span>
-        </button>
-        <p class="house-fine">The house pulls one movie. That's the whole deal.</p>
-      </div>
-    </div>
+          <div class="tune-block tune-block--wide">
+            <h3>More of a mood</h3>
+            <div class="opts" id="f-moods"></div>
+          </div>
 
-    <details class="tune" id="tune">
-      <summary><span class="sign">+</span> Got rules?</summary>
-      <div class="tune-body">
-        <div class="tune-block">
-          <h3>Critics at least</h3>
-          <div class="dial">
-            <input id="rt-range" type="range" min="0" max="95" step="5" value="0"
-                   aria-label="Minimum critic score">
-            <span class="read" id="rt-read"></span>
+          <div class="tune-block tune-block--wide">
+            <h3>Genres</h3>
+            <div class="opts" id="f-genres"></div>
+          </div>
+
+          <div class="tune-block tune-block--wide">
+            <h3>What you subscribe to</h3>
+            <div class="svcs" id="f-services"></div>
+            <p class="tune-note">Saved in this browser, and shared with the search up top.</p>
           </div>
         </div>
-
-        <div class="tune-block">
-          <h3>Age in the room</h3>
-          <div class="opts" id="f-room"></div>
-        </div>
-
-        <div class="tune-block">
-          <h3>Rating floor</h3>
-          <div class="opts" id="f-rating"></div>
-        </div>
-
-        <div class="tune-block tune-block--wide">
-          <h3>More of a mood</h3>
-          <div class="opts" id="f-moods"></div>
-        </div>
-
-        <div class="tune-block tune-block--wide">
-          <h3>Genres</h3>
-          <div class="opts" id="f-genres"></div>
-        </div>
-
-        <div class="tune-block tune-block--wide">
-          <h3>What you subscribe to</h3>
-          <div class="svcs" id="f-services"></div>
-          <p class="tune-note">Saved in this browser, so you only set it once.</p>
-        </div>
-      </div>
-    </details>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -1581,6 +1718,7 @@ body.cased{overflow:hidden}
     <p class="under">Every case in the store, shelved the way we'd shelve them. Tap one and it becomes tonight's pick.</p>
   </div>
   <div class="frame" id="aisles-slot"></div>
+  <div class="frame"><p class="about-note" id="colophon-note"></p></div>
 </section>
 
 <!-- ══════════════════════ YOUR SHELF ══════════════════════ -->
@@ -1591,11 +1729,19 @@ body.cased{overflow:hidden}
     <p class="under">We'll work out the rest from there.</p>
   </div>
   <div class="frame">
+    <section class="saved" id="saved" aria-labelledby="saved-h">
+      <div class="shelf-head">
+        <h2 class="say say-md" id="saved-h" tabindex="-1">Saved for later</h2>
+        <p class="tick tick-sm" id="saved-count"></p>
+      </div>
+      <div id="saved-slot"></div>
+    </section>
     <div class="gauge">
       <div class="pips" id="pips" aria-hidden="true"></div>
       <p class="said" id="gauge-say"></p>
       <input class="find" id="find" type="search" placeholder="Find a movie&hellip;" aria-label="Search films">
     </div>
+    <p class="keep-note" id="keep-note"></p>
     <div class="read-out" id="read-out"></div>
     <div class="wall" id="wall"></div>
   </div>
@@ -1613,11 +1759,7 @@ body.cased{overflow:hidden}
 </main>
 
 <footer class="colophon">
-  <div class="frame">
-    <p class="colo-flavor">Good movies. Real recommendations.</p>
-    <p class="house"><span class="dot"></span>Main Feature</p>
-    <p id="colophon-note"></p>
-  </div>
+  <p>Real Movies, Real Recommendations</p>
 </footer>
 
 <div class="dark" id="dark" aria-hidden="true">
@@ -1627,7 +1769,7 @@ body.cased{overflow:hidden}
   </div>
 </div>
 
-<!-- one film pulled off the shelf: opened from Your Shelf, closed with Close, Escape or the backdrop -->
+<!-- one film pulled off the shelf: opened from Your Shelf, search or a card; closed with Close, Escape or the backdrop -->
 <div class="case" id="case" hidden>
   <div class="case-back" id="case-back"></div>
   <div class="case-panel" id="case-panel" role="dialog" aria-modal="true" aria-labelledby="case-title" tabindex="-1">
@@ -1932,6 +2074,12 @@ const FILMS = RAW.map(function(row,i){
   return o;
 });
 const BY_TITLE = {};
+/* A film's stable identity is its title and year, which is what the merge
+   already matches on. Two releases can share a title (Scream 1996 and 2022);
+   no two share both. BY_TITLE answers older, title-only records and always
+   names the curated film when titles collide. */
+const BY_KEY = {};
+function filmKey(f){ return f.t + " (" + f.y + ")"; }
 
 /* Rarity weighting. "comic" and "brisk" are everywhere; "twisty" and "auteur" are not.
    A shared rare tag says far more about taste than a shared common one, so every tag
@@ -1941,7 +2089,11 @@ const IDF_A = {}, IDF_G = {};
    and a tag's rarity is only meaningful against the shelf as it stands now. */
 function reindex(){
   Object.keys(BY_TITLE).forEach(function(k){ delete BY_TITLE[k]; });
-  FILMS.forEach(function(f){ BY_TITLE[f.t] = f; });
+  Object.keys(BY_KEY).forEach(function(k){ delete BY_KEY[k]; });
+  FILMS.forEach(function(f){
+    if(!BY_TITLE[f.t]) BY_TITLE[f.t] = f;      /* first wins: the curated film */
+    BY_KEY[filmKey(f)] = f;
+  });
   const dfA = {}, dfG = {}, N = FILMS.length;
   FILMS.forEach(function(f){
     f.a.forEach(function(x){ dfA[x] = (dfA[x]||0)+1; });
@@ -2689,8 +2841,16 @@ function applyEnrichment(payload){
      collision: a hand-tagged film knows how it plays, a derived one guesses. */
   let shelved = 0;
   if(Array.isArray(payload.shelf)){
+    /* The same film can come back from the scan under another title ("Star
+       Wars" for "Star Wars: A New Hope"), so a TMDB id already on the shelf is
+       the same case, whatever it is called. A different film that happens to
+       share a title (The Thing, 1982 and 2011) is a film in its own right. */
+    const known = {};
+    FILMS.forEach(function(f){ if(f.tmdb) known[f.tmdb] = 1; });
     payload.shelf.forEach(function(e){
-      if(!e || !e.t || BY_TITLE[e.t] || !(e.svcs && e.svcs.length)) return;
+      if(!e || !e.t || !(e.svcs && e.svcs.length)) return;
+      if(BY_KEY[filmKey(e)] || (e.tmdb && known[e.tmdb])) return;
+      if(e.tmdb) known[e.tmdb] = 1;
       FILMS.push({
         id: FILMS.length, t:e.t, y:e.y, r:e.r,
         g: e.g || [], a: e.a || [],
@@ -2702,6 +2862,7 @@ function applyEnrichment(payload){
         tmdb: e.tmdb || null, firstSeen: e.firstSeen || null,
         found: true
       });
+      BY_KEY[filmKey(e)] = FILMS[FILMS.length - 1];
       shelved++;
     });
   }
@@ -2814,7 +2975,6 @@ function load(k,dflt){
    the list over). A skip is not a verdict, so this lives apart from the taste
    profile, the watched list and the offered memory, in sessionStorage: it
    survives an accidental refresh and dies with the tab. */
-function filmKey(f){ return f.t + " (" + f.y + ")"; }   /* title and year, as the merge already identifies a film */
 const Run = (function(){
   const KEY = "tb:run";
   let shown = {};
@@ -2845,24 +3005,73 @@ const S = {
   minRT:   load("minRT",0),
   moods:   load("moods",[]),
   timePreset: load("timePreset",""),
-  watched: load("watched",{}),
   bills:   load("bills",[]),
   locked:  load("locked",null),
   offered: load("offered",[]),
   genres:  load("genres",[]),
   svc:     Object.assign({}, svcDefault, load("svc",{})),
-  taste:   load("taste",{}),
+  /* Keyed by filmKey ("Heat (1995)"), never by bare title:
+     taste   - "loved" (thumbs up) or "hated" (thumbs down), one per film
+     watched - films actually watched, so they are not offered again
+     saved   - starred for later; a bookmark, not a verdict */
+  taste:   load("taste2", null),
+  watched: load("watched2", null),
+  saved:   load("saved", {}),
+  pending: load("pending2", null),
   ran:     false
 };
 
+/* ---------- moving older shelves onto stable keys ----------
+   Earlier builds stored taste and watched by bare title. Those records are
+   read, never rewritten or deleted ("tb:taste" and "tb:watched" stay exactly
+   as they were), and copied across to title-and-year keys. A title the page
+   cannot place yet (a scanned film whose data has not loaded) waits in
+   `pending` and is placed after the catalog arrives, so nothing is dropped
+   for arriving early. */
+function migrateLegacy(){
+  if(S.taste === null || S.watched === null || S.pending === null){
+    const oldTaste = load("taste", {}), oldWatched = load("watched", {});
+    S.taste = S.taste || {};
+    S.watched = S.watched || {};
+    S.pending = {taste: Object.assign({}, oldTaste), watched: Object.assign({}, oldWatched)};
+  }
+  let moved = 0;
+  ["taste","watched"].forEach(function(kind){
+    const wait = S.pending[kind] || {};
+    Object.keys(wait).forEach(function(t){
+      const f = BY_TITLE[t];
+      if(!f) return;
+      const k = filmKey(f);
+      if(!(k in S[kind])) S[kind][k] = wait[t];
+      delete wait[t];
+      moved++;
+    });
+    S.pending[kind] = wait;
+  });
+  return moved;
+}
+migrateLegacy();
+
 function save(){
   store("room",S.room); store("time",S.time); store("genres",S.genres);
-  store("svc",S.svc);   store("taste",S.taste);
+  store("svc",S.svc);   store("taste2",S.taste); store("saved",S.saved);
   store("rate",S.rate); store("minRT",S.minRT);
-  store("watched",S.watched); store("offered",S.offered);
+  store("watched2",S.watched); store("offered",S.offered);
   store("moods",S.moods); store("bills",S.bills); store("locked",S.locked);
-  store("timePreset",S.timePreset);
+  store("timePreset",S.timePreset); store("pending2",S.pending);
 }
+
+/* ---------- reading a film's standing ---------- */
+function reactionOf(f){ return (f && S.taste[filmKey(f)]) || ""; }
+function isSaved(f){ return !!(f && S.saved[filmKey(f)]); }
+function isWatched(f){ return !!(f && S.watched[filmKey(f)]); }
+/* A history record ({t, k}) back to its film: the key when it has one, the
+   title for anything written before keys existed. */
+function filmOf(rec){
+  if(!rec) return null;
+  return (rec.k && BY_KEY[rec.k]) || BY_TITLE[rec.t] || null;
+}
+function sameFilm(rec, f){ return !!(rec && f && filmOf(rec) === f); }
 
 /* ---------- evening history ----------
    Two memories doing two different jobs:
@@ -2884,12 +3093,16 @@ function rememberOffer(titles){
 }
 /* State only. Repainting is the caller's job — reaching into the presentation
    layer from here is what broke when the interface was rebuilt around it. */
-function markWatched(title){
-  S.watched[title] = new Date().toISOString();
+function markWatched(f){
+  if(typeof f === "string") f = BY_TITLE[f];     /* a title from an older caller */
+  if(!f) return;
+  S.watched[filmKey(f)] = new Date().toISOString();
   save();
 }
-function unmarkWatched(title){
-  delete S.watched[title];
+function unmarkWatched(f){
+  if(typeof f === "string") f = BY_TITLE[f];
+  if(!f) return;
+  delete S.watched[filmKey(f)];
   save();
 }
 
@@ -2908,13 +3121,24 @@ function hm(m){
 function clamp(v,lo,hi){ return v<lo?lo:(v>hi?hi:v); }
 function room(){ return ROOMS.filter(function(r){ return r.k===S.room; })[0] || ROOMS[1]; }
 
-/* ---------- taste model ---------- */
+/* ---------- taste model ----------
+   Thumbs up and thumbs down are the explicit signal and carry full weight, as
+   Loved and Not for me always did. A star is a bookmark: it says "this looks
+   like me", not "I enjoyed it", so a saved film leans the profile at about a
+   third of a like and is ignored once the same film has a thumb. Everything
+   is rebuilt from the stored state on every run, so clearing or changing a
+   reaction takes its old influence with it. */
+const SAVE_WEIGHT = 0.35;
 function buildTaste(){
   const aw = {}, gw = {}, dw = {};
-  const loved = [], hated = [];
-  Object.keys(S.taste).forEach(function(t){
-    const f = BY_TITLE[t]; if(!f) return;
-    (S.taste[t] === "loved" ? loved : hated).push(f);
+  const loved = [], hated = [], saved = [];
+  Object.keys(S.taste).forEach(function(k){
+    const f = BY_KEY[k]; if(!f) return;
+    (S.taste[k] === "loved" ? loved : hated).push(f);
+  });
+  Object.keys(S.saved).forEach(function(k){
+    const f = BY_KEY[k]; if(!f || S.taste[k]) return;
+    saved.push(f);
   });
   function feed(list, sign){
     list.forEach(function(f){
@@ -2925,18 +3149,21 @@ function buildTaste(){
   }
   feed(loved, 1);
   feed(hated, -1.15);          /* a miss is a sharper signal than a like */
+  feed(saved, SAVE_WEIGHT);
   const n = loved.length + hated.length;
-  if(n){
+  /* how much the profile has to go on: explicit thumbs, plus saves at their weight */
+  const signal = n + saved.length * SAVE_WEIGHT;
+  if(signal){
     /* Scale, don't clamp. Clamping saturates whatever tag is most common in the
        profile, which flattens the distinctive traits into the generic ones. */
-    const d = Math.max(1, loved.length, hated.length);
+    const d = Math.max(1, loved.length + saved.length * SAVE_WEIGHT, hated.length);
     Object.keys(aw).forEach(function(k){ aw[k] = clamp(aw[k]/d, -1.3, 1.3); });
     Object.keys(gw).forEach(function(k){ gw[k] = clamp(gw[k]/d, -1.3, 1.3); });
   }
   /* total distinctive mass of what this viewer likes — the target a film tries to cover */
   let posMass = 0;
   Object.keys(aw).forEach(function(x){ if(aw[x] > 0) posMass += aw[x] * idfA(x); });
-  return {aw:aw, gw:gw, dw:dw, loved:loved, hated:hated, n:n, posMass:posMass};
+  return {aw:aw, gw:gw, dw:dw, loved:loved, hated:hated, saved:saved, n:n, signal:signal, posMass:posMass};
 }
 
 function mean(arr, fn){
@@ -3005,8 +3232,9 @@ function scoreAll(){
   const hasMoodTags = Object.keys(MV).length > 0;
 
   FILMS.forEach(function(f){
-    if(S.taste[f.t]) return;                                  /* rated, so already seen */
-    if(S.watched[f.t]){ watched.push(f); return; }            /* watched on a recent evening */
+    const key = filmKey(f);
+    if(S.taste[key]) return;                                  /* thumbed, so already judged */
+    if(S.watched[key]){ watched.push(f); return; }            /* watched on a recent evening */
     if(!hardPass(f)) return;                                  /* clock, room, rating, score, genre */
 
     /* taste */
@@ -3026,7 +3254,7 @@ function scoreAll(){
     const genreTaste = wmean(f.g, T.gw, IDF_G);
     const dirScore   = clamp((T.dw[f.d]||0)/1.5, -1, 1);
     const tasteRaw   = 0.62*attrScore + 0.26*genreTaste + 0.12*dirScore;
-    const tasteN     = T.n ? clamp((tasteRaw+1)/2, 0, 1) : 0.5;
+    const tasteN     = T.signal ? clamp((tasteRaw+1)/2, 0, 1) : 0.5;
 
     /* explicit genre ask */
     let genreN = 0.55;
@@ -3048,12 +3276,18 @@ function scoreAll(){
     /* Recognisability is only a tiebreak for someone we know nothing about.
        The moment they tell us a mood, that is real signal and fame gets out of
        the way — otherwise every cold-start answer returns the same famous films. */
-    const fameW = !T.n ? (hasMoodTags ? 0.10 : 0.34)
+    const fameW = !T.signal ? (hasMoodTags ? 0.10 : 0.34)
                 : ((S.room === "friends" || S.room === "kids") ? 0.16 : 0.09)
-                  / (1 + T.n * 0.35);
+                  / (1 + T.signal * 0.35);
+
+    /* One thumb is a hint, not a programme. Taste earns its full weight over
+       the first few reactions, so a single like nudges tonight instead of
+       turning the whole bill into that one genre. Three or more and it is
+       exactly the weight it always was. */
+    const tasteConf = T.signal ? Math.min(1, 0.45 + 0.2 * T.signal) : 1;
 
     const moodN = moodScore(f, MV);
-    const W = {taste:0.46, genre:0.22, room:0.18, fame:fameW, mood: hasMoodTags ? 0.40 : 0};
+    const W = {taste:0.46 * tasteConf, genre:0.22, room:0.18, fame:fameW, mood: hasMoodTags ? 0.40 : 0};
     let score = (W.taste*tasteN + W.genre*genreN + W.room*roomN + W.fame*fameN + W.mood*moodN) /
                 (W.taste + W.genre + W.room + W.fame + W.mood);
 
@@ -3074,9 +3308,37 @@ function scoreAll(){
   });
 
   kept.sort(function(a,b){ return b.score - a.score; });
+  varied(kept, T);
   lockedSvc.sort(function(a,b){ return b.score - a.score; });
   notStreaming.sort(function(a,b){ return b.score - a.score; });
   return {picks:kept, locked:lockedSvc, notStreaming:notStreaming, watched:watched, T:T};
+}
+
+/* A thin profile is weak evidence. One or two thumbs say "more like this",
+   not "only this", so while the profile is thin the head of the bill is
+   re-dealt with a small cost for repeating a lead genre already dealt. The
+   cost fades out as the profile fills in and is gone at three reactions, so
+   an established profile ranks exactly as it always did, and a cold start
+   (no reactions at all) is untouched. The best match always stays first. */
+const VARIETY_DEPTH = 40;
+function varied(list, T){
+  const thin = T.signal > 0 ? Math.max(0, 1 - T.signal / 3) : 0;
+  if(!thin || list.length < 3) return list;
+  const head = list.splice(0, Math.min(VARIETY_DEPTH, list.length));
+  const dealt = {}, out = [];
+  while(head.length){
+    let best = 0, bestScore = -Infinity;
+    for(let i = 0; i < head.length; i++){
+      const g = head[i].f.g[0];
+      const s = head[i].score - 0.03 * thin * (dealt[g] || 0);
+      if(s > bestScore){ bestScore = s; best = i; }
+    }
+    const r = head.splice(best, 1)[0];
+    dealt[r.f.g[0]] = (dealt[r.f.g[0]] || 0) + 1;
+    out.push(r);
+  }
+  list.unshift.apply(list, out);
+  return list;
 }
 
 /* A good film the profile would not have surfaced: strong on its own merits,
@@ -3131,7 +3393,7 @@ function storeSays(rec){
 
   /* A written line always wins. The generator is the fallback for anything
      that has not been written yet, not the other way round. */
-  if(CLERK[f.t]) return CLERK[f.t];
+  if(CLERK[f.t] && !f.found) return CLERK[f.t];   /* a line belongs to the curated film, not a namesake */
 
   /* One ledger for the card. Without it the same rare tag turns up as the
      reason you were sold, the reason it fits, and the sign-off. */
@@ -3369,10 +3631,14 @@ const NIGHT_PLATE = {
   laugh:"The Big Lebowski", guess:"Knives Out", big:"Dune: Part Two", scream:"Scream",
   beautiful:"Portrait of a Lady on Fire", comfort:"Groundhog Day", weird:"Everything Everywhere All at Once"
 };
-/* set sizes vary so the programme has a rhythm rather than a grid */
-const NIGHT_SIZE = ["2rem","1.72rem","2.12rem","1.78rem","2.06rem","1.84rem"];
 
-const ARRIVAL_PLATES = ["Blade Runner 2049","Mad Max: Fury Road","La La Land","Heat"];
+/* The same seven films as stills shipped with the page, so the programme has
+   its pictures before the catalog arrives, and if a backdrop is blocked. */
+const NIGHT_STILL = {
+  laugh:"assets/moods/laugh.jpg", guess:"assets/moods/guess.jpg", big:"assets/moods/big.jpg",
+  scream:"assets/moods/scream.jpg", beautiful:"assets/moods/beautiful.jpg",
+  comfort:"assets/moods/comfort.jpg", weird:"assets/moods/weird.jpg"
+};
 
 /* one-word reads of the rarer tags — shelf captions, not sentences */
 const ATTR_WORD = {
@@ -3403,8 +3669,8 @@ function posterSet(path){
          "https://image.tmdb.org/t/p/w342" + path + " 342w, " +
          "https://image.tmdb.org/t/p/w500" + path + " 500w";
 }
-function backdropURL(path){
-  return "https://image.tmdb.org/t/p/" + (NARROW() ? "w780" : "w1280") + path;
+function backdropURL(path, size){
+  return "https://image.tmdb.org/t/p/" + (size || (NARROW() ? "w780" : "w1280")) + path;
 }
 function poster(f, sizes, eager, alt){
   const box = el("div","poster");
@@ -3440,7 +3706,7 @@ function poster(f, sizes, eager, alt){
    Real ones drift apart. Individual bulbs also make the chase possible: the
    flare travels the perimeter in DOM-independent order and stops.
    ========================================================================== */
-const BULB_PITCH = 29;      /* target spacing in px; fitted to each side */
+const BULB_PITCH = 24;      /* target spacing in px; fitted to each side */
 /* How long the flare takes to travel the whole border. It was wrong three
    times in the same direction — 160ms, then 260ms, then 520ms — each a circuit
    of the sign faster than an eye can follow it round. At 820ms, with a 400ms
@@ -3469,18 +3735,15 @@ function buildBulbs(){
   bulbLayout = key;
 
   const sides = [
-    {sel:".l-top",    len:Math.max(0, w - 28), flip:false},
-    {sel:".l-right",  len:Math.max(0, h - 52), flip:false},
-    {sel:".l-bottom", len:Math.max(0, w - 28), flip:true},   /* runs right to left */
-    {sel:".l-left",   len:Math.max(0, h - 52), flip:true}    /* runs bottom to top */
+    {sel:".l-top",    len:Math.max(0, w - 22), flip:false},
+    {sel:".l-right",  len:Math.max(0, h - 36), flip:false},
+    {sel:".l-bottom", len:Math.max(0, w - 22), flip:true},   /* runs right to left */
+    {sel:".l-left",   len:Math.max(0, h - 36), flip:true}    /* runs bottom to top */
   ];
 
-  /* The side rails are dropped on narrow screens, so they are not built there
-     either — a hidden bulb still holding a slot in the chase would leave the
-     flare stalling against the edge of the board for no visible reason. */
-  const narrow = w < 768;
-  const counts = sides.map(function(sd, i){
-    if(narrow && (i === 1 || i === 3)) return 0;
+  /* The sign is small enough now to keep all four rails at every width, so
+     the chase always makes a full lap. */
+  const counts = sides.map(function(sd){
     return sd.len < 20 ? 0 : Math.max(2, Math.round(sd.len / BULB_PITCH));
   });
   const total = counts.reduce(function(a,b){ return a + b; }, 0) || 1;
@@ -3673,7 +3936,8 @@ function plater(root){
     pre.src = url;
   };
 }
-let ambPlate = null, billPlate = null;
+let billPlate = null;
+const HOVERS = !!(window.matchMedia && window.matchMedia("(hover: hover)").matches);
 
 /* The film's own palette, blown up and blurred under the whole viewport. */
 function colourWash(url){
@@ -3688,9 +3952,9 @@ function colourWash(url){
   pre.src = url;
 }
 
-function plateFor(title){
+function plateFor(title, size){
   const f = title && BY_TITLE[title];
-  return (f && f.backdrop) ? backdropURL(f.backdrop) : null;
+  return (f && f.backdrop) ? backdropURL(f.backdrop, size) : null;
 }
 function anyPlate(){
   for(let i = 0; i < FILMS.length; i++){
@@ -3710,11 +3974,6 @@ function nowShowing(text){
   p.appendChild(el("span","dot"));
   p.appendChild(document.createTextNode(text));
   return p;
-}
-function stampNow(){
-  const d = new Date();
-  return d.toLocaleDateString([], {weekday:"long"}).toUpperCase() + " / " +
-         d.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}).toUpperCase();
 }
 function clock(mins){
   const d = new Date(Date.now() + mins * 60000);
@@ -3786,6 +4045,8 @@ function whereRow(rec){
   });
   row.appendChild(chips);
   if(!have.length) row.appendChild(el("span","playing-note","not a service you have"));
+  /* a hand-tagged home nobody has checked is a guess, and says so */
+  if(!f.svcChecked) row.appendChild(el("span","playing-note","not confirmed"));
   return row;
 }
 
@@ -3846,34 +4107,196 @@ function showScene(name){
 }
 
 /* ============================================================================
-   SCENE 02 — three decisions, three languages
+   STAR · THUMBS UP · THUMBS DOWN
+   One control, used under every film that can be saved or judged: the
+   feature, the shelf under it, the aisles, Your Shelf, past showings, the
+   search drawer and the film's case. Every copy on screen is registered, so
+   pressing one repaints all of them from the same stored state.
+   ========================================================================== */
+/* The three drawings live once, in the sprite at the top of <body>; each
+   button points at one. The aisles alone paint a few thousand of these. */
+const GLYPH = {
+  star:'<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#g-star"/></svg>',
+  up:'<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#g-up"/></svg>',
+  down:'<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#g-down"/></svg>'
+};
+let MINIS = [];              /* {key, scope, star, up, down} for every row painted */
+let TASTE_DIRTY = false;     /* a reaction since the last scoring run */
+
+const MINI_KINDS = [["star","Save"],["up","Like"],["down","Dislike"]];
+/* One row is drawn once and cloned after that: the aisles paint thousands,
+   and parsing the same three buttons each time is most of their cost. */
+let MINI_TPL = null;
+function miniTemplate(){
+  if(MINI_TPL) return MINI_TPL;
+  const row = el("div","mini");
+  row.setAttribute("role","group");
+  MINI_KINDS.forEach(function(k){
+    const b = el("button","mini-b mini-" + k[0]); b.type = "button";
+    b.innerHTML = GLYPH[k[0]];
+    b.setAttribute("data-mini", k[0]);
+    row.appendChild(b);
+  });
+  return (MINI_TPL = row);
+}
+function pop(b){
+  if(REDUCED || !b.classList) return;
+  b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop");
+}
+function miniRow(f, scope, cls){
+  scope = scope || "card";
+  const tpl = miniTemplate();
+  let row;
+  if(tpl.cloneNode) row = tpl.cloneNode(true);
+  else { MINI_TPL = null; row = miniTemplate(); MINI_TPL = null; }   /* no cloning here: build fresh */
+  if(cls) row.className += " " + cls;
+  row.setAttribute("aria-label","Save or rate " + f.t);
+  const key = filmKey(f);
+  const btns = row.children;
+  MINI_KINDS.forEach(function(k, i){
+    const b = btns[i];
+    b.setAttribute("aria-label", k[1] + " " + f.t);
+    b.setAttribute("data-film", key);
+    b.setAttribute("data-scope", scope);
+    b.addEventListener("click", function(e){
+      if(e && e.stopPropagation) e.stopPropagation();
+      if(k[0] === "star") toggleSaved(f);
+      else setTaste(f, k[0] === "up" ? "loved" : "hated");
+      pop(b);
+    });
+  });
+  const entry = {key:key, scope:scope, row:row, star:btns[0], up:btns[1], down:btns[2]};
+  paintMini(entry, f);
+  /* views repaint wholesale, so rows that have left the page are let go */
+  if(MINIS.length > 4000) MINIS = MINIS.filter(function(m){ return m.row.isConnected !== false; });
+  MINIS.push(entry);
+  return row;
+}
+function paintMini(entry, f){
+  const r = reactionOf(f), sv = isSaved(f);
+  entry.star.setAttribute("aria-pressed", sv ? "true" : "false");
+  entry.up.setAttribute("aria-pressed", r === "loved" ? "true" : "false");
+  entry.down.setAttribute("aria-pressed", r === "hated" ? "true" : "false");
+}
+/* every visible copy of this film's row, in every view, from the stored state;
+   rows that have left the page are dropped from the register as we go */
+function refreshMinis(f){
+  const key = filmKey(f);
+  MINIS = MINIS.filter(function(m){ return m.row.isConnected !== false; });
+  MINIS.forEach(function(m){ if(m.key === key) paintMini(m, f); });
+}
+
+/* Repainting a view replaces its buttons, and a keyboard user would be
+   dropped back to the top of the page. So the control that had focus is
+   found again in the new paint, by film, kind and place, and focused. */
+function keepFocus(paint){
+  const a = document.activeElement;
+  const was = a && a.getAttribute && a.getAttribute("data-mini")
+    ? {key:a.getAttribute("data-film"), kind:a.getAttribute("data-mini"), scope:a.getAttribute("data-scope")}
+    : null;
+  paint();
+  if(!was) return;
+  const hit = MINIS.filter(function(m){
+    return m.key === was.key && m.scope === was.scope && m.row.isConnected !== false;
+  }).pop();
+  const target = hit ? hit[was.kind === "star" ? "star" : was.kind] : null;
+  if(target){ try { target.focus({preventScroll:true}); } catch(e) { target.focus(); } }
+  else if(was.scope === "saved"){ const h = $("saved-h"); if(h) try { h.focus({preventScroll:true}); } catch(e) { h.focus(); } }
+}
+
+/* ---- the three actions ----
+   Star toggles a save and nothing else: saving does not like a film or mark
+   it watched. The thumbs are one choice: pressing the lit one clears it,
+   pressing the other replaces it. */
+function toggleSaved(f){
+  const k = filmKey(f);
+  if(S.saved[k]){ delete S.saved[k]; say("Removed " + f.t + " from Your shelf."); }
+  else {
+    S.saved[k] = {at:new Date().toISOString(), t:f.t, y:f.y, tmdb:f.tmdb || null};
+    say("Saved " + f.t + " to Your shelf.");
+  }
+  save();
+  tasteChanged(f);
+}
+function setTaste(f, how){
+  const k = filmKey(f);
+  const was = S.taste[k];
+  if(was === how) delete S.taste[k]; else S.taste[k] = how;
+  save();
+  const now = S.taste[k];
+  say(!now ? "Cleared your " + (was === "loved" ? "like" : "dislike") + " on " + f.t + "."
+      : now === "loved" ? "Liked " + f.t + ". More like it from now on."
+      : "Disliked " + f.t + ". We'll steer away from films like it.");
+  tasteChanged(f);
+}
+function toggleWatched(f){
+  if(isWatched(f)) unmarkWatched(f); else markWatched(f);
+  TASTE_DIRTY = true;
+  shelfChanged(f);
+}
+/* One change, every view: the rows everywhere, the shelf page if it is up,
+   the case if it is open. The bill on screen is left where it is (a film
+   does not vanish from under the cursor because it was liked), but the next
+   pick is scored afresh. */
+function tasteChanged(f){
+  TASTE_DIRTY = true;
+  refreshMinis(f);
+  shelfChanged(f);
+  gate();
+}
+function shelfChanged(f){
+  keepFocus(function(){
+    if(SCENE === "taste") renderWall(true);
+    if(CASE) paintCase();
+  });
+  if(f) refreshMinis(f);
+}
+
+/* ============================================================================
+   SCENE 02 — the entrance opens onto three decisions
    ========================================================================== */
 
-/* ---- one: who's watching. Type, and a rule that draws itself. ---- */
+/* The questionnaire waits behind "Find your movie". Once opened it stays
+   open for the visit: coming back from a pick lands on the counter, not on a
+   closed door. */
+let EVENING_OPEN = false;
+function openEvening(opts){
+  opts = opts || {};
+  const ev = $("evening");
+  const was = EVENING_OPEN;
+  EVENING_OPEN = true;
+  ev.hidden = false;
+  $("find-go").setAttribute("aria-expanded","true");
+  renderArrival();
+  if(opts.go){
+    try { ev.scrollIntoView({behavior: REDUCED ? "auto" : "smooth", block:"start"}); } catch(e) { ev.scrollIntoView(); }
+    const h = $("statement");
+    if(h) try { h.focus({preventScroll:true}); } catch(e) { h.focus(); }
+  }
+}
+
+/* ---- one: who's watching ---- */
 function renderWho(){
   const w = $("q-who"); w.innerHTML = "";
   AUDIENCES.forEach(function(a){
     const b = el("button", null, a.n); b.type = "button";
     b.setAttribute("aria-pressed", S.room === a.k ? "true" : "false");
     b.addEventListener("click", function(){
-      steer(); S.room = a.k; save(); renderWho(); renderRoomTune(); gate(); ambience();
+      S.room = a.k; save(); renderWho(); renderRoomTune(); gate();
     });
-    if(HOVERS){
-      b.addEventListener("mouseenter", function(){ ambPlate(plateFor(a.plate) || anyPlate()); });
-      b.addEventListener("mouseleave", ambience);
-    }
     w.appendChild(b);
   });
 }
 
-/* ---- two: runtime, printed across a rule like a showtime listing ---- */
+/* ---- two: runtime. The ceiling is kept for screen readers; the button
+   says it in words. ---- */
 function renderTimes(){
   const w = $("q-time"); w.innerHTML = "";
   TIMES.forEach(function(t){
     const b = el("button"); b.type = "button";
     b.setAttribute("aria-pressed", S.timePreset === t.k ? "true" : "false");
     b.appendChild(el("span","name", t.n));
-    b.appendChild(el("span","cap", t.cap));
+    b.appendChild(el("span","cap sr", ", " + t.cap.toLowerCase()));
     b.addEventListener("click", function(){
       S.timePreset = t.k; S.time = t.mins; save();
       renderTimes(); gate();
@@ -3882,30 +4305,31 @@ function renderTimes(){
   });
 }
 
-/* ---- three: the night itself, set as a programme page ---- */
+/* ---- three: the night itself, each one a real film still ----
+   The local still paints at once and never fails; the catalog's own backdrop
+   for the same film is layered over it when the data has it, and if that
+   larger image is blocked the still simply shows through. */
 function renderNights(){
   const w = $("q-night"); w.innerHTML = "";
-  NIGHTS.forEach(function(k, i){
+  NIGHTS.forEach(function(k){
     const m = MOOD_BY[k]; if(!m) return;
     const b = el("button","night-opt"); b.type = "button";
     b.setAttribute("aria-pressed", S.moods.indexOf(k) > -1 ? "true" : "false");
 
     const wash = el("span","wash");
-    const url = plateFor(NIGHT_PLATE[k]);
-    if(url) wash.style.backgroundImage = 'url("' + url + '")';
+    wash.setAttribute("aria-hidden","true");
+    const layers = [];
+    const url = plateFor(NIGHT_PLATE[k], "w780");
+    if(url) layers.push('url("' + url + '")');
+    if(NIGHT_STILL[k]) layers.push('url("' + NIGHT_STILL[k] + '")');
+    if(layers.length) wash.style.backgroundImage = layers.join(", ");
     b.appendChild(wash);
-
-    const label = el("span","label");
-    label.appendChild(el("span","dot"));
-    label.appendChild(document.createTextNode(m.n));
-    label.style.fontSize = NIGHT_SIZE[i % NIGHT_SIZE.length];
-    b.appendChild(label);
+    b.appendChild(el("span","label", m.n));
 
     b.addEventListener("click", function(){
-      steer();
       const at = S.moods.indexOf(k);
       if(at > -1) S.moods.splice(at,1); else S.moods.push(k);
-      save(); renderNights(); renderMoodTune(); gate(); ambience();
+      save(); renderNights(); renderMoodTune(); gate();
     });
     w.appendChild(b);
   });
@@ -3928,13 +4352,34 @@ function gate(){
   $("show-bill").classList.toggle("waiting", !ok);
   $("encore-go").classList.toggle("waiting", !ok);
   $("call-note").textContent = ok
-    ? (Object.keys(S.taste).length ? "" : "Put five movies you'd defend on Your Shelf and the picks get sharper.")
+    ? (Object.keys(S.taste).length ? "" : "Thumbs up a few movies you'd defend and the picks get sharper.")
     : (S.room ? "Tell us how much time you've got." : "Tell us who's watching and how much time you've got.");
+  ticketLine();
+}
+
+/* Tonight's answers as one stamped line: "Date night · About two hours · Keep me guessing". */
+let lastTicket = "";
+function ticketLine(){
+  const n = $("ticket-line"); if(!n) return;
+  const a = AUDIENCES.filter(function(x){ return x.k === S.room; })[0]
+         || ROOMS.filter(function(r){ return r.k === S.room; })[0];
+  const t = TIMES.filter(function(x){ return x.k === S.timePreset; })[0];
+  const parts = [a ? a.n : "Anyone", t ? t.n : "Any length",
+    S.moods.length ? S.moods.map(function(k){ return MOOD_BY[k] ? MOOD_BY[k].n : k; }).join(", ") : "Any mood"];
+  const text = parts.join(" · ");
+  if(text === lastTicket) return;
+  lastTicket = text;
+  n.textContent = text;
+  if(REDUCED) return;
+  n.classList.remove("stamped");
+  void n.offsetWidth;
+  n.classList.add("stamped");
 }
 
 /* Takes you to the first thing that has not been answered and marks it, rather
    than leaving you to work out why nothing happened. */
 function nudgeUnanswered(){
+  openEvening();
   const want = !S.room ? {block:"q-who",  say:"Tell us who's watching."}
                        : {block:"q-time", say:"Tell us how much time you've got."};
   const node = $(want.block);
@@ -3947,37 +4392,6 @@ function nudgeUnanswered(){
   say(want.say);
   const first = node.querySelector("button");
   if(first) try { first.focus({preventScroll:true}); } catch(e) { first.focus(); }
-}
-
-/* ---------- the atmosphere behind the arrival ---------- */
-let ambIdx = 0, ambTimer = null, STEERED = false;
-const HOVERS = !!(window.matchMedia && window.matchMedia("(hover: hover)").matches);
-
-function ambList(){
-  const loved = Object.keys(S.taste)
-    .filter(function(t){ return S.taste[t] === "loved" && BY_TITLE[t] && BY_TITLE[t].backdrop; });
-  return loved.length >= 2 ? loved : ARRIVAL_PLATES;
-}
-function ambience(){
-  if(!ambPlate) return;
-  if(STEERED){
-    const k = S.moods[S.moods.length - 1];
-    const byNight = k && plateFor(NIGHT_PLATE[k]);
-    if(byNight){ ambPlate(byNight); return; }
-    const a = AUDIENCES.filter(function(x){ return x.k === S.room; })[0];
-    const byRoom = a && plateFor(a.plate);
-    if(byRoom){ ambPlate(byRoom); return; }
-  }
-  const list = ambList();
-  ambPlate(plateFor(list[ambIdx % list.length]) || anyPlate());
-}
-function steer(){ STEERED = true; clearInterval(ambTimer); ambTimer = null; }
-function drift(){
-  if(REDUCED || ambTimer) return;
-  ambTimer = setInterval(function(){
-    if(STEERED || SCENE !== "tonight" || document.hidden) return;
-    ambIdx++; ambience();
-  }, 12000);
 }
 
 /* ---------- fine tune ---------- */
@@ -4007,7 +4421,7 @@ function renderMoodTune(){
     w.appendChild(opt(m.n, S.moods.indexOf(m.k) > -1, function(){
       const at = S.moods.indexOf(m.k);
       if(at > -1) S.moods.splice(at,1); else S.moods.push(m.k);
-      save(); renderMoodTune(); renderNights();
+      save(); renderMoodTune(); renderNights(); gate();
     }));
   });
 }
@@ -4021,6 +4435,34 @@ function renderGenreTune(){
     }));
   });
 }
+
+/* ---------- the services you pay for ----------
+   One preference, two places to change it: the clipboard under Got rules?
+   and the drawer under the search. Both write S.svc through here and both are
+   repainted from it, so they can never disagree, and the recommendations and
+   the search read the same thing. */
+function setService(code, on){
+  if(!(code in svcDefault)) return;
+  S.svc[code] = !!on;
+  save();
+  renderServices();
+  renderHuntServices();
+  if(Hunt.open) runSearch();
+  /* the pick on screen follows: if it was only on the service just dropped,
+     the next best film that you can actually watch takes its place. A pick
+     still on a service you have stays put, even one you have just thumbed
+     (a thumbed film leaves future rankings, not the screen it is on); only
+     its streaming row and the shelf under it are brought up to date. */
+  if(SCENE === "bill" && LAST && !Reveal.busy() && MODE !== "locked" && MODE !== "dark"){
+    const stays = HEAD && MODE !== "spent" && HEAD.f.svcs.some(function(c){ return S.svc[c]; });
+    if(!stays){ rebuild(); return; }
+    LAST = scoreAll(); TASTE_DIRTY = false;
+    HEAD.on = HEAD.f.svcs.filter(function(c){ return S.svc[c]; });
+    setFeature(HEAD);
+    reshelfNow();
+    renderFootnote(LAST);
+  }
+}
 function renderServices(){
   const w = $("f-services"); w.innerHTML = "";
   SERVICES.forEach(function(s){
@@ -4028,7 +4470,7 @@ function renderServices(){
     b.setAttribute("aria-pressed", S.svc[s.k] ? "true" : "false");
     b.appendChild(el("span","n", s.n));
     b.appendChild(el("span","box"));
-    b.addEventListener("click", function(){ S.svc[s.k] = !S.svc[s.k]; save(); renderServices(); });
+    b.addEventListener("click", function(){ setService(s.k, !S.svc[s.k]); });
     w.appendChild(b);
   });
 }
@@ -4038,13 +4480,11 @@ function returning(){
   return Object.keys(S.taste).length >= 3 || (S.bills || []).length > 0;
 }
 function renderArrival(){
-  $("stamp").textContent = stampNow();
-
   if(!returning()){
     $("encore").hidden = true;
     $("night").hidden = false;
-    $("statement").textContent = "Tell us about tonight";
-    $("under").textContent = "Three quick answers and we hand you the movie.";
+    $("statement").textContent = "Tell us about tonight.";
+    $("under").textContent = "Three quick answers. One main feature.";
     $("under").hidden = false;
     gate();
     return;
@@ -4056,13 +4496,13 @@ function renderArrival(){
   $("night").hidden = !RECUT;
   $("encore-call").hidden = RECUT;
   $("statement").textContent = "Back for another?";
-  $("under").textContent = "";
-  $("under").hidden = true;
+  $("under").textContent = "Same as last time, or change it up.";
+  $("under").hidden = false;
 
   const loved = Object.keys(S.taste)
-    .filter(function(t){ return S.taste[t] === "loved" && BY_TITLE[t]; }).slice(0,10);
-  const seen = (S.bills || []).map(function(b){ return b.t; })
-    .filter(function(t){ return BY_TITLE[t]; }).slice(0,10);
+    .filter(function(k){ return S.taste[k] === "loved" && BY_KEY[k]; })
+    .map(function(k){ return BY_KEY[k]; }).slice(0,10);
+  const seen = (S.bills || []).map(filmOf).filter(Boolean).slice(0,10);
   const shelf = loved.length ? loved : seen;
 
   const box = $("encore-shelf"); box.innerHTML = "";
@@ -4070,10 +4510,10 @@ function renderArrival(){
     box.appendChild(tick(loved.length ? "Because you'd defend" : "Because you watched", true));
     const rail = el("div","rail");
     rail.style.marginTop = "16px";
-    shelf.forEach(function(t){
+    shelf.forEach(function(f){
       const item = el("div","rail-item");
       item.style.flexBasis = "clamp(80px,8vw,110px)";
-      item.appendChild(poster(BY_TITLE[t], "(max-width:767px) 80px, 110px"));
+      item.appendChild(poster(f, "(max-width:767px) 80px, 110px"));
       rail.appendChild(item);
     });
     box.appendChild(rail);
@@ -4356,7 +4796,7 @@ function announcePick(){
    ========================================================================== */
 function heldRec(out){
   if(!S.locked) return null;
-  const f = BY_TITLE[S.locked.t];
+  const f = filmOf(S.locked);
   if(!f){ S.locked = null; save(); return null; }
   return {f:f, score:0, T:out.T, on:f.svcs.filter(function(c){ return S.svc[c]; }), upSet:{}};
 }
@@ -4488,6 +4928,7 @@ function billCopy(rec){
     b.appendChild(withClass(whereRow(rec), "res-3"));
   }
 
+  b.appendChild(miniRow(f, "bill", "res-3"));
   b.appendChild(billActs(rec));
 
   /* the arithmetic lives at the bottom of the hierarchy */
@@ -4527,16 +4968,17 @@ function billActs(rec){
     }
     const un = el("button","lock lock--quiet","Change my mind"); un.type = "button";
     un.addEventListener("click", function(){
-      unmarkWatched(S.locked.t);
-      S.bills = (S.bills || []).filter(function(x){ return x.t !== S.locked.t; });
+      const lf = filmOf(S.locked);
+      unmarkWatched(lf);
+      S.bills = (S.bills || []).filter(function(x){ return !sameFilm(x, lf); });
       S.locked = null; save(); rebuild();
     });
     acts.appendChild(un);
     const back = el("button","act","Pick something else"); back.type = "button";
     back.addEventListener("click", function(){
       Reveal.cancel();
-      unmarkWatched(S.locked.t); S.locked = null; save();
-      showScene("tonight"); renderArrival();
+      unmarkWatched(filmOf(S.locked)); S.locked = null; save();
+      showScene("tonight"); openEvening({go:true});
     });
     acts.appendChild(back);
     return acts;
@@ -4550,7 +4992,7 @@ function billActs(rec){
 
   const seen = el("button","act","Seen it"); seen.type = "button";
   seen.addEventListener("click", function(){
-    markWatched(f.t); say(f.t + " marked as seen."); rebuild();
+    markWatched(f); say(f.t + " marked as seen."); rebuild();
   });
   acts.appendChild(seen);
 
@@ -4601,17 +5043,41 @@ function renderShelf(out){
   }
 }
 
-function shelfItem(rec, flag){
-  const f = rec.f;
-  const b = el("button","rail-item"); b.type = "button";
-  b.setAttribute("aria-label", "Make " + f.t + " tonight's feature");
-  b.appendChild(el("span","flag" + (flag ? "" : " blank"), flag || " "));
-  const box = poster(f, "(max-width:767px) 41vw, 186px");
+/* A case on a rail: the poster and title as one button, and the star and
+   thumbs row under it. Without an `onOpen` the button opens the film's case. */
+const CARD_OPENERS = {};     /* scope|key -> the card button, for returning focus from the case */
+function cardItem(f, o){
+  o = o || {};
+  const scope = o.scope || "card";
+  const item = el("div","rail-item can-open");
+  const b = el("button","rail-open"); b.type = "button";
+  b.setAttribute("aria-label", o.label || ("Open details for " + f.t));
+  b.setAttribute("data-film", filmKey(f));
+  b.appendChild(el("span","flag" + (o.flag ? "" : " blank"), o.flag || "\u00a0"));
+  const box = poster(f, o.sizes || "(max-width:767px) 33vw, 150px");
   stickerOn(box, f);
   b.appendChild(box);
   b.appendChild(el("span","rt", f.t));
-  b.appendChild(el("span","rm", shelfLine(f)));
-  b.addEventListener("click", function(){ promote(rec); });
+  b.appendChild(el("span","rm", o.meta || shelfLine(f)));
+  const id = scope + "|" + filmKey(f);
+  CARD_OPENERS[id] = b;
+  b.addEventListener("click", o.onOpen || function(e){
+    openCase(f, e.currentTarget, function(){ return CARD_OPENERS[id]; });
+  });
+  item.appendChild(b);
+  item.appendChild(miniRow(f, scope));
+  item._open = b;
+  return item;
+}
+
+function shelfItem(rec, flag){
+  const f = rec.f;
+  const item = cardItem(f, {
+    scope:"shelf", flag:flag, sizes:"(max-width:767px) 41vw, 186px",
+    label:"Make " + f.t + " tonight's feature",
+    onOpen:function(){ promote(rec); }
+  });
+  const b = item._open;
   if(HOVERS){
     b.addEventListener("mouseenter", function(){
       if(f.backdrop) billPlate(backdropURL(f.backdrop));
@@ -4620,7 +5086,7 @@ function shelfItem(rec, flag){
       if(HEAD && HEAD.f.backdrop) billPlate(backdropURL(HEAD.f.backdrop));
     });
   }
-  return b;
+  return item;
 }
 
 function twinSlot(f, when){
@@ -4630,6 +5096,7 @@ function twinSlot(f, when){
   b.appendChild(el("p","when", when));
   b.appendChild(el("p","t", f.t));
   b.appendChild(withClass(tick(f.y + " / " + hm(f.r).toUpperCase() + " / " + f.mpaa, true), "m"));
+  b.appendChild(miniRow(f, "twin"));
   row.appendChild(b);
   return row;
 }
@@ -4652,6 +5119,9 @@ function promote(rec){
    were candidates. When nothing is left it says so instead. */
 function dealAnother(button){
   if(!LAST || !LAST.picks.length || Reveal.busy() || MODE === "locked") return;
+  /* a thumb since the last run changes the ranking: score again (the shown
+     set still holds, so nothing repeats) */
+  if(TASTE_DIRTY){ LAST = scoreAll(); TASTE_DIRTY = false; }
   const rec = nextPick(LAST);
   if(!rec){ spentNight(); return; }
   Reveal.full({
@@ -4687,7 +5157,7 @@ function spentHouse(){
   again.addEventListener("click", function(e){ startListOver(e.currentTarget); });
   acts.appendChild(again);
   const back = el("button","act","Change tonight's answers"); back.type = "button";
-  back.addEventListener("click", function(){ Reveal.cancel(); showScene("tonight"); renderArrival(); });
+  back.addEventListener("click", function(){ Reveal.cancel(); showScene("tonight"); openEvening({go:true}); });
   acts.appendChild(back);
   b.appendChild(acts);
   grid.appendChild(b);
@@ -4715,6 +5185,7 @@ function reshelfNow(){
   renderShelf(LAST);
 }
 function rebuild(){
+  TASTE_DIRTY = false;
   const out = scoreAll();
   LAST = out;
   renderBill(out);
@@ -4733,11 +5204,11 @@ function lockIt(rec, btn){
   $("shelf-slot").classList.add("shelf-dim");
   $("twin-slot").classList.add("shelf-dim");
 
-  S.locked = {t:f.t, at:new Date().toISOString(), mins:f.r};
-  S.bills = (S.bills || []).filter(function(b){ return b.t !== f.t; });
-  S.bills.unshift({t:f.t, at:S.locked.at});
+  S.locked = {t:f.t, k:filmKey(f), at:new Date().toISOString(), mins:f.r};
+  S.bills = (S.bills || []).filter(function(b){ return !sameFilm(b, f); });
+  S.bills.unshift({t:f.t, k:filmKey(f), at:S.locked.at});
   S.bills = S.bills.slice(0,24);
-  markWatched(f.t);
+  markWatched(f);
   save();
   DEALER = false;
   JUST_LOCKED = true;
@@ -4777,7 +5248,7 @@ function darkHouse(){
   });
   acts.appendChild(relax);
   const back = el("button","act","Back to the counter"); back.type = "button";
-  back.addEventListener("click", function(){ showScene("tonight"); renderArrival(); });
+  back.addEventListener("click", function(){ showScene("tonight"); openEvening({go:true}); });
   acts.appendChild(back);
   b.appendChild(acts);
   grid.appendChild(b);
@@ -4801,17 +5272,41 @@ function renderFootnote(out){
    ========================================================================== */
 let findQ = "";
 let wallShown = 48;
+let wallOrder = null;          /* the order the wall was laid out in, by key */
 const KEEP_TARGET = 5;
 
-function searchWall(q){ findQ = q; wallShown = 48; renderWall(); }
-function renderWall(){
-  const loved = Object.keys(S.taste).filter(function(t){ return S.taste[t] === "loved"; });
+function searchWall(q){ findQ = q; wallShown = 48; wallOrder = null; renderWall(); }
+
+/* ---- saved for later: everything starred, newest first ---- */
+function renderSaved(){
+  const slot = $("saved-slot"); if(!slot) return;
+  slot.innerHTML = "";
+  const keys = Object.keys(S.saved)
+    .filter(function(k){ return BY_KEY[k]; })
+    .sort(function(a,b){ return String(S.saved[b].at).localeCompare(String(S.saved[a].at)); });
+  $("saved-count").textContent = keys.length ? keys.length + (keys.length === 1 ? " movie" : " movies") : "";
+  if(!keys.length){
+    slot.appendChild(el("p","saved-empty",
+      "Nothing saved yet. Tap the star under any movie, here, in search or on tonight's pick, and it waits for you on this shelf."));
+    return;
+  }
+  const rail = el("div","rail");
+  keys.forEach(function(k){ rail.appendChild(cardItem(BY_KEY[k], {scope:"saved", sizes:"(max-width:767px) 33vw, 150px"})); });
+  slot.appendChild(rail);
+}
+
+/* `keep` repaints the wall in the order it already has, so a tile that has
+   just been thumbed stays where the reader is instead of jumping to the
+   front. A fresh visit, a search or "Show more" sorts it again. */
+function renderWall(keep){
+  renderSaved();
+  const loved = Object.keys(S.taste).filter(function(k){ return S.taste[k] === "loved"; });
 
   const pips = $("pips"); pips.innerHTML = "";
   for(let i = 0; i < KEEP_TARGET; i++) pips.appendChild(el("span", i < loved.length ? "on" : null));
 
   const said = $("gauge-say");
-  const msgs = ["Name one you'd defend.", "One. Keep going.", "Two. There's a shape here.",
+  const msgs = ["Thumbs up one you'd defend.", "One. Keep going.", "Two. There's a shape here.",
                 "Three. Two more and we've got you.", "One more."];
   if(loved.length >= KEEP_TARGET){
     said.textContent = "That'll do it. We've got you.";
@@ -4825,15 +5320,21 @@ function renderWall(){
   tasteTraits(buildTaste(), 6).forEach(function(t){ out.appendChild(el("span","trait", t)); });
 
   const w = $("wall"); w.innerHTML = "";
-  const q = findQ.trim().toLowerCase();
-  const list = FILMS.filter(function(f){
-      if(!q) return true;
-      return f.t.toLowerCase().indexOf(q) > -1 || f.d.toLowerCase().indexOf(q) > -1;
-    })
-    .sort(function(a,b){
-      const sa = S.taste[a.t] ? 1 : 0, sb = S.taste[b.t] ? 1 : 0;
-      return (sb - sa) || (b.pop - a.pop) || (b.y - a.y);
-    });
+  let list;
+  if(keep === true && wallOrder){
+    list = wallOrder.map(function(k){ return BY_KEY[k]; }).filter(Boolean);
+  } else {
+    const q = findQ.trim().toLowerCase();
+    list = FILMS.filter(function(f){
+        if(!q) return true;
+        return f.t.toLowerCase().indexOf(q) > -1 || f.d.toLowerCase().indexOf(q) > -1;
+      })
+      .sort(function(a,b){
+        const sa = reactionOf(a) ? 1 : 0, sb = reactionOf(b) ? 1 : 0;
+        return (sb - sa) || (b.pop - a.pop) || (b.y - a.y);
+      });
+    wallOrder = list.map(filmKey);
+  }
 
   if(!list.length){
     w.appendChild(el("p", null, 'Nothing on the shelf matches "' + findQ + '".'));
@@ -4841,27 +5342,27 @@ function renderWall(){
   }
   let n = 0;
   list.slice(0, wallShown).forEach(function(f){
-    if(S.taste[f.t] === "loved") n++;
-    w.appendChild(keepTile(f, S.taste[f.t] === "loved" ? n : 0));
+    if(reactionOf(f) === "loved") n++;
+    w.appendChild(keepTile(f, reactionOf(f) === "loved" ? n : 0));
   });
 
   if(list.length > wallShown){
     const more = el("button","recut","Show more"); more.type = "button";
     const holder = el("div"); holder.style.gridColumn = "1/-1"; holder.style.marginTop = "8px";
-    more.addEventListener("click", function(){ wallShown += 48; renderWall(); });
+    more.addEventListener("click", function(){ wallShown += 48; wallOrder = null; renderWall(); });
     holder.appendChild(more);
     w.appendChild(holder);
   }
 }
 
 function keepTile(f, index){
-  const state = S.taste[f.t] || "";
+  const state = reactionOf(f);
   const c = el("div","keep");
   if(state) c.setAttribute("data-state", state);
   /* One button wraps the poster and the printed title, so either opens the
      case. It carries the film's key, not a position: the wall is re-sorted,
-     searched and extended underneath it. Nothing else on the tile is a
-     control; the status is changed inside the case and printed here. */
+     searched and extended underneath it. Under it sits the same star and
+     thumbs row as everywhere else; Seen it lives in the case. */
   const open = el("button","keep-open"); open.type = "button";
   open.setAttribute("aria-label", "Open details for " + f.t);
   open.setAttribute("data-film", filmKey(f));
@@ -4875,34 +5376,32 @@ function keepTile(f, index){
   open.appendChild(el("span","ky", f.y + " / " + hm(f.r).toUpperCase()));
   const badge = shelfBadge(f);
   if(badge) open.appendChild(el("span","kb", badge));
-  OPENERS[f.t] = open;
+  OPENERS[filmKey(f)] = open;
   c.appendChild(open);
+  c.appendChild(miniRow(f, "wall"));
   return c;
 }
-/* One word for the tile. Taste outranks a watch: a loved film that has been
-   seen is still, first, loved. */
+/* One word for the tile. Taste outranks a watch: a liked film that has been
+   seen is still, first, liked. */
 function shelfBadge(f){
-  if(S.taste[f.t] === "loved") return "Loved";
-  if(S.taste[f.t] === "hated") return "Not for me";
-  if(S.watched[f.t]) return "Seen";
+  const r = reactionOf(f);
+  if(r === "loved") return "Liked";
+  if(r === "hated") return "Not for me";
+  if(isWatched(f)) return "Seen";
+  if(isSaved(f)) return "Saved";
   return "";
 }
-function filmByKey(key){
-  for(let i = 0; i < FILMS.length; i++) if(filmKey(FILMS[i]) === key) return FILMS[i];
-  return null;
-}
+function filmByKey(key){ return BY_KEY[key] || null; }
 function openCaseFor(key, opener){
   const f = filmByKey(key);
   if(f) openCase(f, opener);
 }
-/* Loved, Not for me, Seen it: the case's three buttons, wired to the same
-   state the tile prints. */
+/* The case's controls: the same star and thumbs as everywhere, and Seen it,
+   which is the explicit watched mark and is unchanged. */
 function reactRow(f){
-  const state = S.taste[f.t] || "";
   const react = el("div","react");
-  react.appendChild(reactBtn("Loved",      state === "loved", function(){ setTaste(f,"loved"); }));
-  react.appendChild(reactBtn("Not for me", state === "hated", function(){ setTaste(f,"hated"); }));
-  react.appendChild(reactBtn("Seen it",    !!S.watched[f.t], function(){ toggleWatched(f); }));
+  react.appendChild(miniRow(f, "case"));
+  react.appendChild(reactBtn("Seen it", isWatched(f), function(){ toggleWatched(f); }));
   return react;
 }
 function reactBtn(label, on, fn){
@@ -4912,27 +5411,13 @@ function reactBtn(label, on, fn){
   b.addEventListener("click", fn);
   return b;
 }
-function setTaste(f, how){
-  if(S.taste[f.t] === how) delete S.taste[f.t]; else S.taste[f.t] = how;
-  save(); shelfChanged(); gate();
-}
-function toggleWatched(f){
-  if(S.watched[f.t]) unmarkWatched(f.t); else markWatched(f.t);
-  shelfChanged();
-}
-/* The tile's badge and the case's buttons are both drawn from S, so one
-   change repaints both from the same stored state. */
-function shelfChanged(){
-  renderWall();
-  if(CASE) paintCase();
-}
 
 /* ---------- the case ----------
    One film pulled off the shelf: the poster, copy and availability the rest
-   of the page already has, and the same three status buttons. Nothing is
-   fetched for it. Wired on first use, so the page pays nothing until then. */
-const OPENERS = {};          /* title -> the tile button that opens its case, for returning focus */
-let CASE = null;             /* {f, opener} while a case is open */
+   of the page already has, and the same controls. Nothing is fetched for it.
+   Wired on first use, so the page pays nothing until then. */
+const OPENERS = {};          /* film key -> the wall tile that opens its case, for returning focus */
+let CASE = null;             /* {f, opener, refind} while a case is open */
 let caseWired = false;
 
 function wireCase(){
@@ -4955,9 +5440,11 @@ function wireCase(){
     else if(!e.shiftKey && active === last){ e.preventDefault(); first.focus(); }
   });
 }
-function openCase(f, opener){
+/* `refind` looks the opener up again on close, for views that repaint while
+   the case is open; without one, the wall's own register is used. */
+function openCase(f, opener, refind){
   wireCase();
-  CASE = {f:f, opener:opener || null};
+  CASE = {f:f, opener:opener || null, refind:refind || null};
   paintCase();
   $("case").hidden = false;
   document.body.classList.add("cased");
@@ -4970,9 +5457,9 @@ function closeCase(){
   $("case").hidden = true;
   $("case-body").innerHTML = "";
   document.body.classList.remove("cased");
-  /* back to the film that opened it. The wall may have been repainted since,
-     so the button is looked up by title rather than trusted from memory. */
-  let back = OPENERS[was.f.t] || was.opener;
+  /* back to the film that opened it. The view may have been repainted since,
+     so the button is looked up again rather than trusted from memory. */
+  let back = (was.refind && was.refind()) || (!was.refind && OPENERS[filmKey(was.f)]) || was.opener;
   if(back && back.isConnected === false) back = null;
   if(!back){ back = $("wall"); back.setAttribute("tabindex","-1"); }
   try { back.focus({preventScroll:true}); } catch(err) { back.focus(); }
@@ -5011,10 +5498,283 @@ function paintCase(){
 }
 function shelfState(f){
   const parts = [];
-  if(S.taste[f.t] === "loved") parts.push("Loved");
-  if(S.taste[f.t] === "hated") parts.push("Not for me");
-  if(S.watched[f.t]) parts.push("Seen it");
-  return parts.length ? parts.join(" \u00b7 ") : "Not marked yet";
+  if(isSaved(f)) parts.push("Saved");
+  if(reactionOf(f) === "loved") parts.push("Liked");
+  if(reactionOf(f) === "hated") parts.push("Not for me");
+  if(isWatched(f)) parts.push("Seen it");
+  return parts.length ? parts.join(" · ") : "Not marked yet";
+}
+
+/* ============================================================================
+   SEARCH
+   Every film the store knows, curated and scanned, whether or not it is on
+   a service you have. Matched by stable identity, so one film never appears
+   twice under two titles and two films that share a title keep their years.
+   Availability is read from the same records the recommendations use, and
+   says only what the data can support:
+     on your services     - a checked subscription home on one you selected
+     not on your services - checked, and streaming somewhere you don't pay
+                            for, or on none of the services we track
+     not confirmed        - nobody has checked: a hand-tagged guess, or the
+                            catalog did not load. Never reported as "no".
+   Rent and buy listings never enter the catalog's service lists, so they
+   can never be shown as included with a subscription.
+   ========================================================================== */
+const Hunt = {open:false, timer:null, wired:false};
+const HUNT_SHOWN = 8;
+
+function huntNorm(t){
+  return String(t || "").toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/&/g, " and ").replace(/[^a-z0-9]+/g, " ").trim();
+}
+/* Exact title first, then titles that start with it, then a word inside the
+   title, then anywhere, then the same letters with the punctuation squeezed
+   out ("spiderman" finds Spider-Man). Fame and recency settle ties. A year at
+   the end narrows it: "dune 1984". */
+function searchCatalog(q){
+  let nq = huntNorm(q);
+  if(!nq) return [];
+  let year = null;
+  const ym = nq.match(/^(.*\S)\s+((?:19|20)\d\d)$/);
+  if(ym){ nq = ym[1]; year = +ym[2]; }
+  const squash = nq.replace(/ /g, "");
+  const seen = {}, hits = [];
+  FILMS.forEach(function(f){
+    const id = f.tmdb ? "tmdb:" + f.tmdb : "key:" + filmKey(f);
+    if(seen[id]) return;
+    if(year && f.y !== year) return;
+    const nt = huntNorm(f.t), bare = nt.replace(/^(the|a|an) /, "");
+    let rank = -1;
+    if(nt === nq || bare === nq) rank = 0;
+    else if(nt.indexOf(nq) === 0 || bare.indexOf(nq) === 0) rank = 1;
+    else if((" " + nt).indexOf(" " + nq) > -1) rank = 2;
+    else if(nt.indexOf(nq) > -1) rank = 3;
+    else if(squash.length >= 3 && nt.replace(/ /g, "").indexOf(squash) > -1) rank = 4;
+    if(rank < 0) return;
+    seen[id] = 1;
+    hits.push({f:f, rank:rank});
+  });
+  hits.sort(function(a, b){
+    return (a.rank - b.rank) || ((b.f.pop || 0) - (a.f.pop || 0)) || (b.f.y - a.f.y) || a.f.t.localeCompare(b.f.t);
+  });
+  return hits.map(function(h){ return h.f; });
+}
+
+function svcNames(codes){ return codes.map(function(c){ return SVC_NAME[c] || c; }).join(" · "); }
+function availability(f){
+  const svcs = (f.svcs || []).filter(function(c){ return SVC_NAME[c]; });
+  const picked = SERVICES.filter(function(s){ return S.svc[s.k]; });
+  if(!f.svcChecked) return {k:"unknown", line:"Availability not confirmed",
+    detail:"Nobody has checked where this one streams yet."};
+  if(!picked.length) return {k:"ask", line:"Select your services to check availability.",
+    detail: svcs.length ? "Streams on " + svcNames(svcs) + "." : "Not on any of the services we track."};
+  const on = svcs.filter(function(c){ return S.svc[c]; });
+  if(on.length) return {k:"on", line:"On your services: " + svcNames(on)};
+  return {k:"off", line:"Not on your selected services",
+    detail: svcs.length ? "Streams on " + svcNames(svcs) + "." : "Not on any of the services we track."};
+}
+
+function renderHuntServices(){
+  const w = $("hunt-svc-list"); if(!w) return;
+  w.innerHTML = "";
+  SERVICES.forEach(function(s){
+    const lab = el("label","hunt-svc");
+    const box = document.createElement("input");
+    box.type = "checkbox"; box.value = s.k; box.checked = !!S.svc[s.k];
+    box.addEventListener("change", function(){ setService(s.k, box.checked); });
+    lab.appendChild(box);
+    lab.appendChild(document.createTextNode(s.n));
+    w.appendChild(lab);
+  });
+}
+
+const HUNT_OPENERS = {};
+function runSearch(){
+  const q = $("hunt-q").value || "";
+  const box = $("hunt-results"); box.innerHTML = "";
+  const status = $("hunt-status");
+  if(!q.trim()){
+    box.appendChild(el("p", null, "Search a title to see where it fits your subscriptions."));
+    status.textContent = "";
+    return;
+  }
+  const found = searchCatalog(q);
+  if(!found.length){
+    const p = el("p");
+    p.appendChild(el("b", null, "“" + q.trim() + "”"));
+    p.appendChild(document.createTextNode(" isn't in our catalog. That doesn't mean it isn't streaming somewhere, only that this store doesn't carry it."));
+    box.appendChild(p);
+    status.textContent = "No match in the catalog.";
+    return;
+  }
+  const picked = SERVICES.filter(function(s){ return S.svc[s.k]; }).length;
+  if(!picked) box.appendChild(el("p", null, "Select your services above and each title will say whether it's on one of them."));
+  const list = el("ol","hunt-list");
+  found.slice(0, HUNT_SHOWN).forEach(function(f){
+    const li = el("li","hunt-hit");
+    const open = el("button","hunt-open"); open.type = "button";
+    open.setAttribute("data-film", filmKey(f));
+    open.appendChild(el("span","hunt-t", f.t));
+    open.appendChild(el("span","hunt-y", String(f.y)));
+    const av = availability(f);
+    open.appendChild(el("span","hunt-a hunt-a--" + av.k, av.line));
+    if(av.detail) open.appendChild(el("span","hunt-d", av.detail));
+    const key = filmKey(f);
+    HUNT_OPENERS[key] = open;
+    open.addEventListener("click", function(e){
+      openCase(f, e.currentTarget, function(){ return HUNT_OPENERS[key]; });
+    });
+    li.appendChild(open);
+    li.appendChild(miniRow(f, "search"));
+    list.appendChild(li);
+  });
+  box.appendChild(list);
+  if(found.length > HUNT_SHOWN){
+    box.appendChild(el("p","hunt-more", (found.length - HUNT_SHOWN) + " more " +
+      (found.length - HUNT_SHOWN === 1 ? "match" : "matches") + ". Keep typing to narrow it down."));
+  }
+  status.textContent = found.length + (found.length === 1 ? " match" : " matches") + " for " + q.trim() + ".";
+}
+
+function openHunt(){
+  wireHunt();
+  if(Hunt.open) return;
+  Hunt.open = true;
+  $("hunt-panel").hidden = false;
+  $("hunt-svcs").setAttribute("aria-expanded","true");
+  $("masthead").classList.add("hunting");
+  renderHuntServices();
+  runSearch();
+}
+function closeHunt(refocus){
+  if(!Hunt.open) return;
+  Hunt.open = false;
+  $("hunt-panel").hidden = true;
+  $("hunt-svcs").setAttribute("aria-expanded","false");
+  $("masthead").classList.remove("hunting");
+  if(refocus) try { $("hunt-q").focus({preventScroll:true}); } catch(e) { $("hunt-q").focus(); }
+}
+function huntResults(){
+  return Array.prototype.slice.call(document.querySelectorAll("#hunt-results .hunt-open"));
+}
+function wireHunt(){
+  if(Hunt.wired) return;
+  Hunt.wired = true;
+  const q = $("hunt-q");
+  q.addEventListener("focus", openHunt);
+  q.addEventListener("input", function(){
+    openHunt();
+    clearTimeout(Hunt.timer);
+    Hunt.timer = setTimeout(runSearch, 120);
+  });
+  q.addEventListener("keydown", function(e){
+    if(e.key === "ArrowDown"){
+      const r = huntResults();
+      if(r.length){ e.preventDefault(); r[0].focus(); }
+    }
+    if(e.key === "Enter"){ clearTimeout(Hunt.timer); runSearch(); }
+  });
+  $("hunt-svcs").addEventListener("click", function(){
+    if(Hunt.open) closeHunt(false); else openHunt();
+  });
+  $("hunt-close").addEventListener("click", function(){ closeHunt(true); });
+  /* keys inside the drawer stay inside it: Escape closes it, arrows walk the
+     results, and nothing reaches the page's own shortcuts */
+  const head = $("masthead");
+  head.addEventListener("keydown", function(e){
+    if(!Hunt.open) return;
+    if(e.key === "Escape"){ e.preventDefault(); e.stopPropagation(); closeHunt(true); return; }
+    const r = huntResults(), at = r.indexOf(document.activeElement);
+    if(at > -1 && (e.key === "ArrowDown" || e.key === "ArrowUp")){
+      e.preventDefault();
+      const next = e.key === "ArrowDown" ? r[at + 1] : (at ? r[at - 1] : q);
+      if(next) next.focus();
+    }
+    if(e.target && e.target.closest && e.target.closest("#hunt-panel")) e.stopPropagation();
+  });
+  /* a press anywhere outside the header (or the case it opened) puts it away */
+  document.addEventListener("pointerdown", function(e){
+    if(!Hunt.open || !e.target || !e.target.closest) return;
+    if(e.target.closest("#masthead") || e.target.closest("#case")) return;
+    closeHunt(false);
+  });
+}
+
+/* ============================================================================
+   THE MONTH'S THREE FILMS
+   data/hero.json is written by scripts/hero.mjs during the nightly refresh,
+   and only changes when the month turns or a film stops streaming. The page
+   never chooses: it shows the published set, so everyone sees the same three
+   all month, whatever services they have. The stills shipped with the page
+   stand in if the file is missing or an image will not load.
+   ========================================================================== */
+const HERO_SLOTS = ["shot-l","shot-m","shot-r"];
+const HERO_FALLBACK = [
+  {title:"The Big Lebowski", src:"assets/hero/the-big-lebowski.jpg"},
+  {title:"Knives Out",       src:"assets/hero/knives-out.jpg"},
+  {title:"Blade Runner 2049", src:"assets/hero/blade-runner-2049.jpg"}
+];
+let HERO_SHOWN = null;
+
+function validHero(m){
+  if(!m || !Array.isArray(m.films) || m.films.length !== 3) return false;
+  const ids = {};
+  return m.films.every(function(f){
+    if(!f || !f.title || typeof f.backdrop !== "string") return false;
+    if(!/^\/[\w-]+\.(jpg|jpeg|png|webp)$/i.test(f.backdrop)) return false;
+    if(ids[f.id || f.title]) return false;
+    ids[f.id || f.title] = 1;
+    return true;
+  });
+}
+function heroLabel(){
+  const n = (HERO_SHOWN || []).map(function(x){ return x.title; });
+  $("triptych").setAttribute("aria-label", n.length === 3
+    ? "Film stills from " + n[0] + ", " + n[1] + " and " + n[2]
+    : "Film stills");
+}
+function paintHero(films){
+  HERO_SHOWN = films.map(function(f, i){ return {title:f.title, backdrop:f.backdrop || null, i:i}; });
+  HERO_SHOWN.forEach(function(h, i){
+    const img = $(HERO_SLOTS[i]);
+    const fall = function(){
+      img.onerror = null;
+      img.removeAttribute("srcset");
+      img.src = HERO_FALLBACK[i].src;
+      h.title = HERO_FALLBACK[i].title;
+      heroLabel();
+    };
+    img.onload = function(){ img.classList.add("on"); };
+    img.onerror = h.backdrop ? fall : function(){ img.onerror = null; };
+    if(h.backdrop){
+      img.sizes = "(max-width:600px) 50vw, 46vw";
+      img.srcset = "https://image.tmdb.org/t/p/w780" + h.backdrop + " 780w, " +
+                   "https://image.tmdb.org/t/p/w1280" + h.backdrop + " 1280w";
+      img.src = "https://image.tmdb.org/t/p/w1280" + h.backdrop;
+    } else {
+      img.src = HERO_FALLBACK[i].src;
+    }
+  });
+  heroLabel();
+}
+async function loadHero(){
+  try{
+    const res = await fetch("data/hero.json", {cache:"no-cache"});
+    if(res.ok){
+      const m = await res.json();
+      if(validHero(m)){ paintHero(m.films); return m; }
+    }
+  }catch(e){ /* absent, blocked or opened from disk: the shipped stills stand */ }
+  paintHero(HERO_FALLBACK.map(function(f){ return {title:f.title, backdrop:null}; }));
+  return null;
+}
+
+/* The header's real height, so the films start where it stops at every width. */
+function measureMast(){
+  const m = $("masthead-in");
+  if(!m || !m.offsetHeight || !document.documentElement.style) return;
+  document.documentElement.style.setProperty("--mast", m.offsetHeight + "px");
 }
 
 /* ============================================================================
@@ -5022,7 +5782,7 @@ function shelfState(f){
    ========================================================================== */
 function renderShowings(){
   const w = $("showings-slot"); w.innerHTML = "";
-  const bills = (S.bills || []).filter(function(b){ return BY_TITLE[b.t]; });
+  const bills = (S.bills || []).filter(function(b){ return filmOf(b); });
 
   if(!bills.length){
     const e = el("div","empty");
@@ -5033,7 +5793,7 @@ function renderShowings(){
     go.appendChild(el("span",null,"Pick tonight's movie"));
     go.appendChild(el("span","arw","→"));
     go.style.marginTop = "28px";
-    go.addEventListener("click", function(){ showScene("tonight"); renderArrival(); });
+    go.addEventListener("click", function(){ showScene("tonight"); openEvening({go:true}); });
     e.appendChild(go);
     w.appendChild(e);
     return;
@@ -5064,18 +5824,19 @@ function renderShowings(){
 }
 
 function ticketFor(b){
-  const f = BY_TITLE[b.t];
+  const f = filmOf(b);
   const c = el("div","ticket");
   c.appendChild(poster(f, "(max-width:767px) 33vw, 158px"));
   c.appendChild(el("span","sd", new Date(b.at).toLocaleDateString([], {month:"short", day:"numeric"})));
   c.appendChild(el("span","st", f.t));
   c.appendChild(el("span","sm", hm(f.r).toUpperCase() + " / " + f.mpaa));
+  c.appendChild(miniRow(f, "ticket", "on-paper"));
   const rm = el("button","drop","Remove"); rm.type = "button";
   rm.setAttribute("aria-label","Remove " + f.t + " from past showings");
   rm.addEventListener("click", function(){
-    S.bills = S.bills.filter(function(x){ return x.t !== b.t; });
-    unmarkWatched(b.t);
-    if(S.locked && S.locked.t === b.t) S.locked = null;
+    S.bills = S.bills.filter(function(x){ return !sameFilm(x, f); });
+    unmarkWatched(f);
+    if(S.locked && sameFilm(S.locked, f)) S.locked = null;
     save(); renderShowings();
   });
   c.appendChild(rm);
@@ -5144,16 +5905,11 @@ function renderAisles(){
     sec.appendChild(sign);
     const rail = el("div","rail");
     films.forEach(function(f){
-      const b = el("button","rail-item"); b.type = "button";
-      b.setAttribute("aria-label", "Make " + f.t + " tonight's pick");
-      b.appendChild(el("span","flag blank"," "));
-      const box = poster(f, "(max-width:767px) 33vw, 150px");
-      stickerOn(box, f);
-      b.appendChild(box);
-      b.appendChild(el("span","rt", f.t));
-      b.appendChild(el("span","rm", f.y + " · " + hm(f.r)));
-      b.addEventListener("click", function(){ aislePick(f); });
-      rail.appendChild(b);
+      rail.appendChild(cardItem(f, {
+        scope:"aisle-" + a.k, meta: f.y + " \u00b7 " + hm(f.r),
+        label:"Make " + f.t + " tonight's pick",
+        onOpen:function(){ aislePick(f); }
+      }));
     });
     sec.appendChild(rail);
     w.appendChild(sec);
@@ -5181,7 +5937,10 @@ function aislePick(f){
   }
 }
 
-/* ---------- provenance ---------- */
+/* ---------- provenance ----------
+   The footer carries one line now. What it used to say is said where it is
+   read: the scan date and the source under the search, the full account at
+   the foot of the aisles, the storage note on Your Shelf. */
 function renderColophon(){
   const rtCount = FILMS.filter(function(f){ return f.rtSrc === "rt"; }).length;
   const live = FILMS.filter(function(f){ return f.svcs && f.svcs.length; }).length;
@@ -5196,36 +5955,48 @@ function renderColophon(){
        ". " + (rtCount ? "Critic scores are Rotten Tomatoes, via OMDb. " : "") +
        "Availability is accurate to about a day, not to the minute. Check before you commit the evening. ")
     : "Streaming homes and critic scores here are our own estimates, not sourced feeds. ";
-  t += STORAGE_OK
-    ? "Your shelf is saved in this browser only."
-    : "This viewer blocks storage, so tonight's answers last for this visit.";
+  t += "The three films behind the marquee are chosen once a month from the best-rated films streaming in the US, by TMDB audience rating. ";
+  t += "This product uses the TMDB API but is not endorsed or certified by TMDB.";
   $("colophon-note").textContent = t;
+
+  const when = ENRICHED ? scanDay(ENRICHED) : "";
+  $("hunt-date").textContent = ENRICHED
+    ? "Availability from Main Feature's catalog" + (when ? " · Updated " + when : "") + " · US subscriptions only, via TMDB"
+    : "The live catalog hasn't loaded, so where a film streams is not confirmed.";
+  $("keep-note").textContent = STORAGE_OK
+    ? "Your shelf is saved in this browser only. No account, nothing sent anywhere."
+    : "This viewer blocks storage, so your shelf lasts for this visit only.";
 }
 
 /* Sourced data lands after first paint; repaint what is on screen. */
 function afterEnrichment(){
+  if(migrateLegacy()) save();   /* older shelf entries for scanned titles can be placed now */
   renderColophon();
-  renderNights();          /* the programme washes need backdrops */
-  ambience();
+  renderNights();          /* the programme washes can use the catalog's backdrops */
+  if(Hunt.open) runSearch();
   if(SCENE === "aisles")   renderAisles();
   if(SCENE === "taste")    renderWall();
   if(SCENE === "showings") renderShowings();
-  if(SCENE === "tonight")  renderArrival();
+  if(SCENE === "tonight" && EVENING_OPEN) renderArrival();
   if(SCENE === "bill"){ const out = scoreAll(); LAST = out; renderBill(out); }
 }
 
 /* ============================================================================
    DOORS OPEN
    ========================================================================== */
+function goTonight(){
+  Reveal.cancel(); showScene("tonight");
+  if(EVENING_OPEN) renderArrival();
+}
 function init(){
-  ambPlate  = plater($("amb"));
   billPlate = plater($("plate"));
 
   renderWho(); renderTimes(); renderNights();
   renderRoomTune(); renderRatingTune(); renderMoodTune(); renderGenreTune(); renderServices();
-  renderColophon(); renderArrival(); gate();
-  ambience(); drift();
-  setInterval(function(){ if(SCENE === "tonight") $("stamp").textContent = stampNow(); }, 30000);
+  renderHuntServices(); renderColophon(); renderArrival(); gate();
+  measureMast();
+  loadHero();
+  wireHunt();
 
   $("rt-range").value = S.minRT;
   $("rt-read").textContent = S.minRT ? S.minRT + "%" : "Any";
@@ -5235,30 +6006,37 @@ function init(){
   });
   $("rt-range").addEventListener("change", save);
 
+  $("find-go").addEventListener("click", function(){ openEvening({go:true}); });
   $("show-bill").addEventListener("click", function(e){ programme({button:e.currentTarget}); });
   $("encore-go").addEventListener("click", function(e){ programme({button:e.currentTarget}); });
   $("house-pick").addEventListener("click", houseDecides);
   $("encore-house").addEventListener("click", houseDecides);
-  $("back-tonight").addEventListener("click", function(){
-    Reveal.cancel(); showScene("tonight"); renderArrival();
-  });
+  $("back-tonight").addEventListener("click", goTonight);
 
   $("find").addEventListener("input", function(e){ searchWall(e.target.value); });
   watchFreshness();
 
-  $("house").addEventListener("click", function(e){
-    e.preventDefault(); Reveal.cancel(); showScene("tonight"); renderArrival();
-  });
+  $("house").addEventListener("click", function(e){ e.preventDefault(); goTonight(); });
   document.querySelectorAll(".doors button").forEach(function(b){
     b.addEventListener("click", function(){
       Reveal.cancel();                 /* leaving mid-reveal cancels it */
+      if(b.dataset.go === "tonight"){ goTonight(); return; }
       showScene(b.dataset.go);
-      if(b.dataset.go === "tonight") renderArrival();
     });
   });
 
+  /* The header darkens its edge once the page moves; on a phone it also
+     tucks the search row away while scrolling down and brings it straight
+     back on the way up, so two rows of header never sit over the films. */
   const mast = $("masthead");
-  const onScroll = function(){ mast.classList.toggle("sunk", window.scrollY > 30); };
+  let lastY = window.scrollY || 0;
+  const onScroll = function(){
+    const y = window.scrollY || 0;
+    mast.classList.toggle("sunk", y > 30);
+    if(y > lastY + 4 && y > 140) mast.classList.add("tuck");
+    else if(y < lastY - 4 || y < 140) mast.classList.remove("tuck");
+    lastY = y;
+  };
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
 
@@ -5267,12 +6045,13 @@ function init(){
      never while a reveal is mid-flight. */
   buildBulbs();
   if(document.fonts && document.fonts.ready){
-    document.fonts.ready.then(buildBulbs).catch(function(){});
+    document.fonts.ready.then(function(){ buildBulbs(); measureMast(); }).catch(function(){});
   }
   let sizing = null;
   window.addEventListener("resize", function(){
     clearTimeout(sizing);
     sizing = setTimeout(function(){
+      measureMast();
       buildBulbs();
       if(SCENE === "bill" && HEAD && !Reveal.busy()){
         lineWrap(document.querySelector("#bill-grid .bill-title"), HEAD.f.t);
@@ -5282,14 +6061,15 @@ function init(){
 
   document.addEventListener("keydown", function(e){
     const tag = (e.target.tagName || "").toLowerCase();
-    if(tag === "input" || tag === "textarea" || e.metaKey || e.ctrlKey || e.altKey) return;
-    if(e.key === "Enter" && SCENE === "tonight"){
-      programme({button:$("show-bill")});
+    if(tag === "input" || tag === "textarea" || tag === "select" || e.metaKey || e.ctrlKey || e.altKey) return;
+    if(CASE) return;                   /* the case owns the keyboard while it is open */
+    /* Enter on a focused control is that control's own press, not a request */
+    if(e.key === "Enter" && SCENE === "tonight" && tag !== "button" && tag !== "a" && tag !== "summary"){
+      if(!EVENING_OPEN) openEvening({go:true});
+      else programme({button:$("show-bill")});
     }
     if(e.key.toLowerCase() === "r" && SCENE === "bill") dealAnother();
-    if(e.key === "Escape" && SCENE === "bill"){
-      Reveal.cancel(); showScene("tonight"); renderArrival();
-    }
+    if(e.key === "Escape" && SCENE === "bill") goTonight();
   });
 
   loadEnrichment();

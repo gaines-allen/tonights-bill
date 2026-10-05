@@ -51,6 +51,19 @@ jobs:
           node scripts/reveal.test.mjs
           node scripts/session.test.mjs
           node scripts/shelf.test.mjs
+          node scripts/taste.test.mjs
+          node scripts/search.test.mjs
+
+      # The three films behind the marquee. Chosen from tonight's catalog on
+      # the first good refresh of a new month (America/Chicago), then only
+      # re-checked: a film that has left every supported service is swapped
+      # for the next eligible one. If anything above failed, this step never
+      # runs and last month's set stays up. No extra secret: it reads only
+      # data/catalog.json.
+      - name: Choose or re-check the month's marquee films
+        run: |
+          node scripts/hero.mjs
+          node scripts/hero.test.mjs
 
       # The scan shelves titles nobody has written a store line for, and a
       # shelved title can be the top pick. This says which ones arrived
@@ -67,7 +80,7 @@ jobs:
           # Stage first. On the very first run the file is untracked, and
           # `git diff` ignores untracked files — so comparing before staging
           # would report "no change" and silently throw the data away.
-          git add data/catalog.json data/unwritten.json data/unwritten.md
+          git add data/catalog.json data/unwritten.json data/unwritten.md data/hero.json
           if git diff --cached --quiet; then
             echo "no change"; exit 0
           fi
@@ -86,9 +99,11 @@ jobs:
                  | grep -E '^[+-]' \
                  | grep -vE '^(\+\+\+|---)' \
                  | grep -vc '"generatedAt"' || true)
-          if [ "$CHANGED" -eq 0 ] && [ "$WORK" -eq 0 ]; then
+          # hero.json carries no clock of its own: any diff is a real change.
+          HERO=$(git diff --cached --name-only -- data/hero.json | wc -l | tr -d ' ')
+          if [ "$CHANGED" -eq 0 ] && [ "$WORK" -eq 0 ] && [ "$HERO" -eq 0 ]; then
             echo "only the generated timestamps moved — skipping commit"
-            git reset -q -- data/catalog.json data/unwritten.json data/unwritten.md
+            git reset -q -- data/catalog.json data/unwritten.json data/unwritten.md data/hero.json
             exit 0
           fi
 
@@ -96,6 +111,9 @@ jobs:
           MSG="Refresh catalog data from TMDB ($CHANGED field changes)"
           if [ -n "$NEW" ] && [ "$NEW" != "0" ]; then
             MSG="$MSG, $NEW newly shelved without a store line"
+          fi
+          if [ "$HERO" -ne 0 ]; then
+            MSG="$MSG; marquee films updated"
           fi
           git commit -m "$MSG"
           git push

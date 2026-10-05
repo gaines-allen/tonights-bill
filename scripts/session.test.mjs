@@ -173,8 +173,8 @@ console.log("\na skip is not a verdict");
 {
   const { mod } = await loadApp({ reduced: true });
   night(mod.S);
-  mod.S.taste = { "Heat": "loved", "Barbie": "hated" };
-  mod.S.watched = { "Coraline": "2026-01-01T00:00:00.000Z" };
+  mod.S.taste = { "Heat (1995)": "loved", "Barbie (2023)": "hated" };
+  mod.S.watched = { "Coraline (2009)": "2026-01-01T00:00:00.000Z" };
   mod.programme({ quiet: true, silent: true }); settle();
   const snap = () => JSON.stringify([mod.S.taste, mod.S.watched, mod.S.bills, mod.S.locked, mod.S.offered]);
   const before = snap();

@@ -210,6 +210,9 @@ async function enrichOne(film) {
   out.runtime = details?.runtime || null;
   out.cert    = usCertification(rel);
   out.tmdbScore = details?.vote_average ? Math.round(details.vote_average * 10) : null;
+  /* The exact audience rating as well as the rounded percentage: the monthly
+     marquee (scripts/hero.mjs) ranks on this, and 7.46 is not 7.5. */
+  out.rating  = typeof details?.vote_average === "number" ? details.vote_average : null;
   out.votes   = details?.vote_count ?? null;
   out.poster  = details?.poster_path || hit.poster_path || null;
   /* A real plot synopsis, in complete sentences. The hand-written hooks in
@@ -475,6 +478,8 @@ async function shelfRecord(id, dirLookup) {
     mpaa: cert || "NR",
     rt: d.vote_average ? Math.round(d.vote_average * 10) : 0,
     rtSrc: "tmdb",
+    rating: typeof d.vote_average === "number" ? d.vote_average : null,
+    votes: typeof d.vote_count === "number" ? d.vote_count : null,
     poster: d.poster_path,
     backdrop: d.backdrop_path,
     tmdb: d.id,

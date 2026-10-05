@@ -1,0 +1,75 @@
+{
+ "version": 1,
+ "region": "US",
+ "timeZone": "America/Chicago",
+ "ratingSource": "TMDB audience rating (vote_average, 0-10) with its vote_count",
+ "rule": {
+  "minRating": 7.5,
+  "minVotes": 500,
+  "rank": "rating desc, then votes desc, then TMDB id asc",
+  "services": [
+   "NFX",
+   "MAX",
+   "HUL",
+   "DIS",
+   "PRV",
+   "APL",
+   "PAR",
+   "PCK"
+  ],
+  "monetization": "subscription (flatrate or ad tier), US"
+ },
+ "catalogScannedAt": "2026-10-04",
+ "imageSource": "TMDB",
+ "month": "2026-10",
+ "selectedAt": "2026-10-04T16:00:00.000Z",
+ "previous": null,
+ "repeatsAllowed": false,
+ "films": [
+  {
+   "slot": "left",
+   "id": 238,
+   "key": "The Godfather (1972)",
+   "title": "The Godfather",
+   "year": 1972,
+   "backdrop": "/ejdD20cdHNFAYAN2DlqPToXKyzx.jpg",
+   "rating": 8.7,
+   "ratingRounded": true,
+   "votes": 23682,
+   "services": [
+    "PRV",
+    "PAR"
+   ]
+  },
+  {
+   "slot": "middle",
+   "id": 389,
+   "key": "12 Angry Men (1957)",
+   "title": "12 Angry Men",
+   "year": 1957,
+   "backdrop": "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
+   "rating": 8.6,
+   "ratingRounded": true,
+   "votes": 10431,
+   "services": [
+    "HUL"
+   ]
+  },
+  {
+   "slot": "right",
+   "id": 157336,
+   "key": "Interstellar (2014)",
+   "title": "Interstellar",
+   "year": 2014,
+   "backdrop": "/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
+   "rating": 8.5,
+   "ratingRounded": true,
+   "votes": 41367,
+   "services": [
+    "PRV",
+    "PAR"
+   ]
+  }
+ ],
+ "replacements": []
+}
