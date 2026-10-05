@@ -232,8 +232,8 @@ async function enrichOne(film) {
      one are described in one vocabulary by one rule. A curated film keeps its
      place even when the rules find fewer than three attributes; it is just
      described thinly, and the run reports how many. */
-  const genres = genresFrom(details?.genres);
   const keywords = (details?.keywords?.keywords || []).map((k) => k.name);
+  const genres = genresFrom(details?.genres, keywords);
   out._src = sourceOf(details?.genres, keywords);
   if (genres.length) {
     out.g = genres;
@@ -319,43 +319,182 @@ export function trimOverview(text, max = 400) {
 const TMDB_GENRE = {
   28:"action", 12:"adventure", 16:"animation", 35:"comedy", 80:"crime",
   99:"documentary", 18:"drama", 10751:"family", 14:"fantasy", 36:"drama",
-  27:"horror", 10402:"musical", 9648:"mystery", 10749:"romance", 878:"scifi",
+  27:"horror", 9648:"mystery", 10749:"romance", 878:"scifi",
   53:"thriller", 10752:"war", 37:"western"
 };
+/* TMDB files any film about musicians under "Music": Whiplash, A Complete
+   Unknown, even the thriller Trap. It is only a musical when the people
+   tagging it on TMDB also call it one. */
+const TMDB_MUSIC = 10402;
 
-/* One or two attributes a genre can be trusted to imply on its own. */
+/* Only what a genre guarantees on its own. A crime film is not necessarily
+   violent (Knives Out), an adventure is not necessarily spectacle (Paddington
+   2), a drama is not necessarily a character study: those calls are left to
+   the keywords, which describe the film rather than the shelf it sits on. */
 const GENRE_ATTRS = {
   horror:["scary"], comedy:["comic"], romance:["romantic"], documentary:["grounded"],
-  war:["visceral"], thriller:["propulsive"], action:["propulsive"], animation:["visual"],
-  family:["cozy"], crime:["violent"], musical:["uplifting"], drama:["characterstudy"],
-  mystery:["twisty"], fantasy:["visual"], scifi:["cerebral"], adventure:["spectacle"],
-  western:["grounded"]
+  animation:["visual"], family:["cozy"], mystery:["twisty"], musical:["uplifting"],
+  action:["propulsive"], war:["visceral"]
 };
 
-/* TMDB keywords are written by people, which makes them the best signal here
-   for how a film actually plays rather than what it is filed under. */
-const KEYWORD_ATTRS = [
-  [/dystopi|post.?apocalyp|nihilis|despair|bleak/,                 "bleak"],
-  [/time loop|surreal|absurd|psychedelic|bizarre|body horror/,     "weird"],
-  [/dark comedy|black comedy|satire|parody/,                       "ironic"],
-  [/coming of age|father son|mother daughter|family relationship/, "earnest"],
-  [/christmas|holiday season|feel.?good|heartwarming/,             "cozy"],
-  [/twist ending|unreliable narrator|whodunit|conspiracy/,         "twisty"],
-  [/heist|chase|race against time|escape|manhunt|survival/,        "propulsive"],
-  [/based on (a )?true|biography|true crime|docudrama/,            "grounded"],
-  [/revenge|gore|slasher|brutality|massacre/,                      "violent"],
-  [/supernatural|haunting|ghost|possession|demon|monster|serial killer/, "scary"],
-  [/love triangle|wedding|first love|romantic/,                    "romantic"],
-  [/space|alien|superhero|kaiju|giant monster|battle/,             "spectacle"],
-  [/stop motion|puppet|practical effect|miniature/,                "practical"],
-  [/courtroom|trial|dialogue|stage play|play adaptation/,          "dialogue"],
-  [/ensemble cast|multiple storylines/,                            "ensemble"],
-  [/artificial intelligence|philosoph|memory|identity|time travel/,"cerebral"],
-  [/grief|loss|loneliness|terminal illness|melancholy/,            "melancholy"],
-  [/redemption|inspirational|underdog|triumph/,                    "hopeful"],
-  [/slow burn|meditative|contemplative/,                           "slowburn"],
-  [/visually striking|cinematography|neo.?noir|stylish/,           "stylish"]
-];
+/* TMDB keywords are written by people, and since 2023 TMDB has asked them for
+   the tone of a film as well as its subject ("amused", "suspenseful",
+   "dreary"), which is the closest any source gets to how a film plays.
+   Matched whole, never as a substring, so "love" cannot fire on "glove".
+   Built from the keywords actually on the 960 films in the store. */
+const KEYWORD_ATTRS = {
+  comic: ["amused", "hilarious", "witty", "playful", "absurd", "satirical", "sexual humor",
+    "slapstick", "slapstick comedy", "parody", "spoof", "romcom", "buddy comedy", "farce",
+    "comedy of errors", "dark comedy", "black comedy", "screwball comedy", "mockumentary",
+    "stoner comedy", "sketch comedy", "teen comedy", "comedic", "funny"],
+  ironic: ["dark comedy", "black comedy", "satire", "satirical", "parody", "spoof", "irony",
+    "cynical", "critical", "mockumentary", "absurdism"],
+  cozy: ["comforting", "lighthearted", "whimsical", "serene", "relaxed", "christmas",
+    "holiday", "feel-good", "feel good", "heartwarming", "wholesome", "cute", "sweet"],
+  uplifting: ["cheerful", "joyful", "joyous", "exuberant", "celebratory", "triumphant", "inspirational",
+    "exhilarated", "enthusiastic", "feel-good", "feel good", "musical", "uplifting",
+    "3d animation", "pixar", "cartoon", "hilarious", "adoring", "anthropomorphism"],
+  hopeful: ["hopeful", "underdog", "redemption", "second chance", "triumph", "overcoming adversity",
+    "optimistic"],
+  earnest: ["earnest", "sincere", "coming of age", "parent child relationship", "family relationships",
+    "father son relationship", "father daughter relationship", "mother son relationship",
+    "mother daughter relationship", "sibling relationship", "friendship", "empathetic",
+    "compassionate", "tender", "heartfelt", "family", "comforting", "high school", "school",
+    "single mother", "adoring", "cartoon", "hopeful", "inspirational", "semi autobiographical",
+    "powerful"],
+  melancholy: ["melancholy", "sadness", "sad", "tragic", "tragedy", "grief", "loss", "loss of loved one",
+    "dying and death", "loneliness", "terminal illness", "regret", "nostalgic", "nostalgia",
+    "bittersweet", "mourning", "death of husband", "death of wife", "death of father",
+    "death of mother", "death of son", "death of daughter", "heartbreak", "grieving",
+    "psychological drama", "semi autobiographical", "marriage crisis", "memory"],
+  bleak: ["dreary", "bleak", "dystopia", "dystopian", "despair", "nihilism", "nihilistic",
+    "post-apocalyptic future", "post-apocalyptic", "apocalypse", "genocide", "war crimes",
+    "misanthrophy", "depression", "drug addiction", "addiction", "hopelessness", "grim",
+    "anti war", "mass grave", "holocaust", "concentration camp", "psychological thriller",
+    "psychopath", "violence", "dysfunctional family", "psychological disorders", "paranoia",
+    "child abuse", "grieving", "cruelty"],
+  cerebral: ["philosophical", "existentialism", "consciousness", "artificial intelligence (a.i.)",
+    "artificial intelligence", "time travel", "thought-provoking", "mathematics", "puzzle",
+    "quantum mechanics", "physics", "simulation", "mind-bending", "multiverse", "time paradox",
+    "memory loss"],
+  twisty: ["twist ending", "plot twist", "whodunit", "murder mystery", "unreliable narrator",
+    "conspiracy", "heist", "caper", "con artist", "con man", "double cross", "deception",
+    "manipulation", "detective", "mind-bending", "nonlinear timeline", "cat and mouse",
+    "mistaken identity", "puzzle", "riddle", "whodunnit"],
+  propulsive: ["suspenseful", "intense", "exhilarated", "chase", "car chase",
+    "race against time", "escape", "manhunt", "on the run", "heist", "getaway car",
+    "getaway driver", "survival", "action hero", "one man army", "shootout", "gunfight",
+    "gunfights", "martial arts", "hitman", "assassin", "spy", "secret agent", "mission",
+    "bank robbery", "armed robbery", "fast-paced", "thrilling", "tense", "pursuit"],
+  visceral: ["aggressive", "brutality", "combat", "battle", "martial arts", "boxing", "boxer",
+    "brawl", "torture", "gore", "body horror", "survival horror", "fighting", "hand to hand combat",
+    "mixed martial arts", "war", "world war ii", "world war i", "vietnam war", "trench warfare",
+    "visceral", "gruesome", "fistfight"],
+  violent: ["violence", "brutality", "gore", "slasher", "massacre", "torture", "serial killer",
+    "psychopath", "violent retaliation", "gunfight", "gunfights", "shootout", "gangster",
+    "organized crime", "hitman", "assassin", "mafia", "mobster", "bratva (russian mafia)",
+    "yakuza", "cartel", "drug cartel", "war crimes", "genocide", "bloody", "blood",
+    "splatter", "home invasion", "vigilante", "killing spree", "mass murder", "decapitation"],
+  scary: ["frightened", "supernatural horror", "psychological horror", "haunted house",
+    "haunting", "haunted", "ghost", "demon", "demonic possession", "possession", "poltergeist",
+    "slasher", "monster", "creature", "zombie", "vampire", "werewolf", "curse",
+    "paranormal phenomena", "paranormal", "body horror", "survival horror", "serial killer",
+    "horror", "folk horror", "cosmic horror", "occult", "exorcism", "creepy", "terrifying",
+    "jump scare", "evil spirit", "killer doll"],
+  romantic: ["romantic", "romance", "romcom", "falling in love", "new love", "first love",
+    "love triangle", "soulmates", "star crossed lovers", "love of one's life",
+    "unexpected romance", "gay romance", "secret love", "lovers", "love affair",
+    "forbidden love", "lost love", "childhood sweethearts", "romantic comedy"],
+  spectacle: ["superhero", "superhero team", "alien invasion", "space opera", "space battle",
+    "kaiju", "giant monster", "dinosaur", "disaster", "disaster movie", "epic battle",
+    "spacecraft", "space travel", "fighter pilot", "aircraft carrier", "naval aviation",
+    "saving the world", "globetrotting", "marvel cinematic universe (mcu)",
+    "dc extended universe (dceu)", "dragon", "awestruck", "mecha", "giant robot",
+    "end of the world", "natural disaster", "space war", "battlefield", "spectacle", "explosion"],
+  visual: ["vibrant", "awestruck", "wonder", "anime", "3d animation", "stop motion", "surrealism",
+    "surreal", "fantasy world", "parallel world", "black and white", "visually striking",
+    "neo-noir", "colorful", "hand-drawn animation", "dreamlike", "beautiful", "breathtaking",
+    "cinematography", "magical realism", "reflective", "admiring", "alien contact",
+    "astronaut", "space station", "magic realism", "cyberpunk", "epic fantasy"],
+  stylish: ["neo-noir", "stylish", "stylized", "bold", "audacious", "james bond", "split screen",
+    "flashy", "film noir", "noir", "retro", "slick", "whodunit", "spy", "alter ego", "heist",
+    "con artist", "cyberpunk", "tech noir", "voyeurism", "paranoid", "frantic", "caper"],
+  grounded: ["based on true story", "biography", "docudrama", "true crime", "matter of fact",
+    "autobiographical", "semi autobiographical", "nature documentary", "sports documentary",
+    "recession", "working class", "rural setting", "immigrant", "historical event",
+    "based on real person", "biopic", "realism", "poverty", "blue collar", "sports",
+    "parenting", "journalist", "moral dilemma", "journalism"],
+  dialogue: ["talking", "conversation", "legal drama", "court case", "courtroom", "court martial",
+    "legal thriller", "military court", "based on play or musical", "stage play",
+    "play adaptation", "based on play", "witty", "debate", "dinner party", "trial", "lawyer",
+    "screenplay", "talky", "monologue", "chamber piece", "moral dilemma", "journalist"],
+  ensemble: ["group of friends", "ensemble cast", "multiple storylines", "superhero team", "heist crew",
+    "ensemble", "multiple perspectives", "large cast", "family reunion", "band of brothers",
+    "platoon", "marvel cinematic universe (mcu)", "murder mystery", "whodunit", "heist",
+    "caper", "epic fantasy", "fellowship", "companionship", "sword and sorcery"],
+  characterstudy: ["character study", "psychological study", "loneliness", "obsession", "narcissism",
+    "mental illness", "mental health", "masculinity", "midlife crisis", "addict", "alcoholic",
+    "alcoholism", "introspective", "intimate", "self-discovery", "inner conflict", "trauma",
+    "ptsd", "existential crisis", "psychological drama", "personality disorder", "biography",
+    "semi autobiographical", "provocative", "grief", "grieving"],
+  slowburn: ["slow burn", "meditative", "contemplative", "reflective", "quiet", "minimalism",
+    "atmospheric", "slow-paced", "patient", "dreary", "semi autobiographical", "isolation",
+    "symbolism", "loneliness", "grief", "grieving", "psychological disorders",
+    "existentialism", "character study"],
+  weird: ["surrealism", "surreal", "absurd", "absurdism", "bizarre", "psychedelic", "time loop",
+    "body horror", "parallel world", "mind-bending", "weird", "strange", "dreamlike",
+    "eccentric", "quirky", "offbeat", "cult film", "cosmic horror", "multiverse",
+    "magic realism", "dark fantasy"],
+  practical: ["stop motion", "puppet", "puppetry", "practical effects", "animatronics",
+    "claymation", "miniature", "stop-motion animation", "clay animation"],
+  epic: ["epic", "saga", "dynasty", "multiple generations", "historical epic", "war epic",
+    "epic battle", "space opera", "epic fantasy", "sword and sorcery", "hero's journey",
+    "empire", "rebellion", "chosen one", "destiny", "good versus evil"]
+};
+
+/* When a film's keywords say too little, its genres fill it up to three tags,
+   and only to three: a film whose keywords already describe it is never
+   overruled by what its genre usually means. Crime never fills with
+   "violent", so a crime comedy cannot come out reading like a thriller. */
+const GENRE_FILL = {
+  drama:["characterstudy", "earnest"], thriller:["propulsive", "twisty"],
+  adventure:["spectacle", "propulsive"], fantasy:["visual", "spectacle"],
+  scifi:["spectacle", "cerebral"], crime:["twisty", "stylish"], western:["grounded", "epic"],
+  romance:["earnest", "cozy"], family:["uplifting", "earnest"], animation:["uplifting", "cozy"],
+  documentary:["earnest", "characterstudy"], horror:["visceral", "bleak"],
+  war:["bleak", "grounded"], action:["spectacle", "visceral"], mystery:["propulsive", "stylish"],
+  musical:["cozy", "visual"], comedy:["ironic", "cozy"]
+};
+
+/* Some keywords name a subject, not a feeling. A monster is frightening in a
+   horror film and a mascot in Monsters, Inc.; a gangster is violent in Heat and
+   a sight gag in a cartoon. These only vote when the genre says the subject is
+   played straight. Mood keywords ("frightened", "terrifying") always vote. */
+const SUBJECT_ONLY = {
+  scary: { words: ["supernatural horror", "psychological horror", "haunted house", "haunting",
+    "haunted", "ghost", "demon", "demonic possession", "possession", "poltergeist", "monster",
+    "creature", "zombie", "vampire", "werewolf", "curse", "paranormal phenomena", "paranormal",
+    "occult", "exorcism", "evil spirit", "killer doll", "serial killer", "slasher"],
+    when: (g) => g.includes("horror") || g.includes("thriller") },
+  violent: { words: ["gangster", "organized crime", "hitman", "assassin", "mafia", "mobster",
+    "bratva (russian mafia)", "yakuza", "cartel", "drug cartel", "home invasion", "vigilante",
+    "shootout", "gunfight", "gunfights", "blood", "bloody"],
+    when: (g) => !g.includes("family") && !g.includes("animation") }
+};
+
+/* keyword -> the attributes it votes for, built once */
+const KW_INDEX = (() => {
+  const idx = new Map();
+  for (const [attr, words] of Object.entries(KEYWORD_ATTRS)) {
+    for (const w of words) {
+      if (!idx.has(w)) idx.set(w, []);
+      if (idx.get(w).indexOf(attr) === -1) idx.get(w).push(attr);
+    }
+  }
+  return idx;
+})();
+/* Order the vocabulary is listed in, used only to break ties. */
+const ATTR_ORDER = Object.keys(KEYWORD_ATTRS).concat(["brisk"]);
 
 /* What the tags were made from, kept so the rules can be tuned and tested
    offline. Written to data/keywords.json, which the page never loads. */
@@ -364,25 +503,46 @@ function sourceOf(genres, keywords) {
 }
 
 /* TMDB's genre objects in the catalog's vocabulary, duplicates folded. */
-export function genresFrom(list = []) {
-  return [...new Set((list || []).map((g) => TMDB_GENRE[g.id]).filter(Boolean))];
+export function genresFrom(list = [], keywords = []) {
+  const out = (list || []).map((g) => TMDB_GENRE[g.id]).filter(Boolean);
+  const isMusical = (keywords || []).some((k) => String(k).toLowerCase() === "musical");
+  if ((list || []).some((g) => g.id === TMDB_MUSIC) && isMusical) out.push("musical");
+  return [...new Set(out)];
 }
 
 /**
  * Everything any film's attribute list is allowed to come from, curated or
  * scanned. Kept pure so it can be tested without touching the network.
+ *
+ * Every keyword votes for the attributes it names; a genre adds one vote for
+ * what it guarantees. The six with the most votes win, so a film's strongest
+ * traits are the ones that survive the cap, not whichever rule ran first.
  */
 export function tagsFrom({ genres = [], keywords = [], runtime = 0 }) {
-  const out = [];
-  const add = (a) => { if (a && out.indexOf(a) === -1) out.push(a); };
+  const votes = {};
+  const vote = (a, n = 1) => { votes[a] = (votes[a] || 0) + n; };
 
-  const kw = keywords.map((k) => String(k).toLowerCase()).join(" | ");
-  for (const [re, attr] of KEYWORD_ATTRS) if (re.test(kw)) add(attr);
-  for (const g of genres) (GENRE_ATTRS[g] || []).forEach(add);
-  if (runtime && runtime <= 100) add("brisk");
-  if (runtime && runtime >= 150) add("epic");
+  for (const k of new Set(keywords.map((x) => String(x).toLowerCase().trim()))) {
+    (KW_INDEX.get(k) || []).forEach((a) => {
+      const rule = SUBJECT_ONLY[a];
+      if (rule && rule.words.includes(k) && !rule.when(genres)) return;
+      vote(a);
+    });
+  }
+  for (const g of genres) (GENRE_ATTRS[g] || []).forEach((a) => vote(a));
+  if (runtime && runtime <= 100) vote("brisk");
+  if (runtime && runtime >= 150) vote("epic");
 
-  return out.slice(0, 6);
+  const out = Object.keys(votes)
+    .sort((a, b) => votes[b] - votes[a] || ATTR_ORDER.indexOf(a) - ATTR_ORDER.indexOf(b))
+    .slice(0, 6);
+  for (let i = 0; out.length < 3 && i < 2; i++) {
+    for (const g of genres) {
+      const a = (GENRE_FILL[g] || [])[i];
+      if (a && out.length < 3 && out.indexOf(a) === -1) out.push(a);
+    }
+  }
+  return out;
 }
 
 /* The scan's bar for shelving a film: the same tags, but at least three. */
@@ -479,10 +639,10 @@ async function shelfRecord(id) {
   const providers = flatrateCodes(d["watch/providers"]);
   if (!providers.length) return null;                 // discovery only ever shelves what streams
 
-  const genres = genresFrom(d.genres);
+  const keywords = (d.keywords?.keywords || []).map((k) => k.name);
+  const genres = genresFrom(d.genres, keywords);
   if (!genres.length) return null;
 
-  const keywords = (d.keywords?.keywords || []).map((k) => k.name);
   const director = (d.credits?.crew || []).find((c) => c.job === "Director")?.name || "";
   const attrs = deriveAttrs({ genres, keywords, runtime });
   if (!attrs) return null;

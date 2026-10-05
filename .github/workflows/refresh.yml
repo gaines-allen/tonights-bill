@@ -53,6 +53,7 @@ jobs:
           node scripts/shelf.test.mjs
           node scripts/taste.test.mjs
           node scripts/search.test.mjs
+          node scripts/tone.test.mjs
 
       # The three films behind the marquee. Chosen from tonight's catalog on
       # the first good refresh of a new month (America/Chicago), then only

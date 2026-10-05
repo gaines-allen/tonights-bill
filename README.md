@@ -225,7 +225,8 @@ its built-in data, replacing:
 | plot synopsis | TMDB overview, trimmed on sentence boundaries |
 | streaming availability | TMDB watch providers (JustWatch), US, subscription only |
 | poster art | TMDB images — no API key needed to *display* them |
-| genres, attribute tags | TMDB genres, keywords and runtime, through `tagsFrom()` |
+| genres | TMDB genres; "Music" only counts as a musical when TMDB's taggers also say "musical" |
+| attribute tags | TMDB keywords (including its tone words: "amused", "suspenseful", "dreary"), genres and runtime, through `tagsFrom()` |
 | audience, fame | certification and TMDB vote count |
 
 **Every film is tagged the same way, every night.** The curated 245 and the
@@ -233,6 +234,30 @@ scanned shelf go through the same `tagsFrom()` rules, so a film's tags never
 depend on which list it came from. The tags written into `index.html` are only
 used when the page has no data file. The rules cannot produce `auteur`, which
 only ever came from hand-written tags, so it no longer appears.
+
+How the rules decide, in order:
+
+- **Keywords vote.** Each keyword votes for the tags it names; the six tags with
+  the most votes win. Matching is whole-keyword, never a substring.
+- **Subjects are not moods.** "Monster" or "ghost" only votes `scary` in a
+  horror film or thriller; "gangster" or "shootout" never votes `violent` in a
+  family or animated film. Tone words ("frightened", "terrifying") always vote.
+- **Genre only says what it guarantees.** Horror is `scary`, comedy is `comic`.
+  Crime is never `violent` and adventure is never `spectacle` on genre alone.
+- **Thin films are filled to three, and no further,** from their genres.
+
+`data/keywords.json` keeps the genres and keywords behind every film so the
+rules can be tuned offline. The page never loads it.
+
+## Tone: a comedy night is not a thriller night
+
+Each film's tone comes from its genres: a comedy is *light*; a thriller, horror,
+war or crime film that is not a comedy and is tagged violent, scary or bleak is
+*dark*; a crime comedy like Knives Out is *mixed* and never clashes. When three
+in four of the films someone likes lean one way, films of the other tone drop
+below everything that fits, and the wild card never picks one.
+`scripts/tone.test.mjs` checks this on every nightly refresh, against that
+night's tags, and a failure stops the refresh from being saved.
 
 **The key never reaches the page.** Enrichment happens ahead of time and only
 its output ships, so this stays a static site with nothing to leak. The included

@@ -3170,6 +3170,43 @@ function room(){ return ROOMS.filter(function(r){ return r.k===S.room; })[0] || 
    is rebuilt from the stored state on every run, so clearing or changing a
    reaction takes its old influence with it. */
 const SAVE_WEIGHT = 0.35;
+
+/* ---------- tone: a comedy night is not a thriller night ----------
+   Read straight off a film's genres and tags, the same way for every film.
+   "light" is a comedy. "dark" is a thriller, horror, war or crime film that is
+   not a comedy and actually plays hard (violent, scary or bleak). Anything
+   else, including a crime comedy like Knives Out, is neither, and never
+   clashes with anyone. */
+const DARK_GENRES = ["thriller", "horror", "war", "crime"];
+const DARK_TAGS = ["violent", "scary", "bleak"];
+function toneOf(f){
+  const comedy = f.g.indexOf("comedy") > -1;
+  const darkG  = f.g.some(function(g){ return DARK_GENRES.indexOf(g) > -1; });
+  if(comedy) return darkG ? "mixed" : "light";
+  if(darkG && f.a.some(function(a){ return DARK_TAGS.indexOf(a) > -1; })) return "dark";
+  return "";
+}
+/* Which way the liked films lean. Any comedy, crime comedies included, counts
+   as liking comedy. Three in four on one side, and none of the other side's
+   films is allowed near the top of the bill. */
+const TONE_LEAN = 0.75, TONE_CLASH = 0.45;
+function toneLean(T){
+  let light = 0, dark = 0;
+  function count(f, w){
+    const t = toneOf(f);
+    if(t === "light" || t === "mixed") light += w; else if(t === "dark") dark += w;
+  }
+  T.loved.forEach(function(f){ count(f, 1); });
+  T.saved.forEach(function(f){ count(f, SAVE_WEIGHT); });
+  if(light && light / (light + dark) >= TONE_LEAN) return "light";
+  if(dark && dark / (light + dark) >= TONE_LEAN) return "dark";
+  return "";
+}
+function clashes(f, lean){
+  if(!lean) return false;
+  const t = toneOf(f);
+  return (lean === "light" && t === "dark") || (lean === "dark" && t === "light");
+}
 function buildTaste(){
   const aw = {}, gw = {}, dw = {};
   const loved = [], hated = [], saved = [];
@@ -3272,6 +3309,7 @@ function scoreAll(){
   /* "Something great" adds no tags, so asking for it alone must not switch on
      a mood weight that has nothing to weigh. */
   const hasMoodTags = Object.keys(MV).length > 0;
+  const lean = toneLean(T);
 
   FILMS.forEach(function(f){
     /* A thumb up or down means the film has been seen; so does a locked-in
@@ -3344,9 +3382,13 @@ function scoreAll(){
        several close matches. A film far ahead of the rest still wins. */
     const headIdx = (S.headlined || []).indexOf(key);
     if(headIdx > -1) score = score * (1 - HEADLINE_PENALTY[headIdx]);
+    /* A hard thriller for someone who only likes comedies, or the reverse,
+       drops below every film that fits the tone. */
+    const clash = clashes(f, lean);
+    if(clash) score = score * TONE_CLASH;
 
     const on = f.svcs.filter(function(c){ return S.svc[c]; });
-    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on,
+    const rec = {f:f, score:score, taste:tasteRaw, T:T, upSet:upSet, on:on, clash:clash,
                  parts:{taste:tasteN, genre:genreN, room:roomN, fame:fameN, mood:moodN},
                  weights:W, stale:stale, seenIdx:seenIdx};
     if(!f.svcs.length && f.svcChecked){ notStreaming.push(rec); return; }  /* rent or buy only */
@@ -3394,7 +3436,7 @@ function wildCard(picks){
   if(picks.length < 6) return null;
   const tail = picks.slice(4);
   const scored = tail
-    .filter(function(r){ return r.f.rt >= 82; })
+    .filter(function(r){ return r.f.rt >= 82 && !r.clash; })   /* a surprise, never the wrong tone */
     .map(function(r){ return {r:r, off: (r.f.rt/100) - r.parts.taste}; })
     .sort(function(a,b){ return b.off - a.off; });
   return scored.length ? scored[0].r : null;

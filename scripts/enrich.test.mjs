@@ -17,6 +17,7 @@ const eq = (label, got, want) => {
   if (g === w) { pass++; console.log(`  ok   ${label}`); }
   else { fail++; console.log(`  FAIL ${label}\n       got  ${g}\n       want ${w}`); }
 };
+const ok = (label, cond) => eq(label, !!cond, true);
 
 console.log("\nservice name mapping (TMDB display names drift a lot)");
 eq("Netflix",                     serviceCode("Netflix"), "NFX");
@@ -71,7 +72,7 @@ eq("dedupes repeats",
 console.log("\ndiscovered titles must earn their tags");
 eq("keywords carry the read",
    deriveAttrs({ genres:["horror"], keywords:["haunting","gore","dystopia"], runtime:95 }).sort(),
-   ["bleak","brisk","scary","violent"].sort());
+   ["bleak","brisk","scary","violent","visceral"].sort());
 eq("too thin to shelve",
    deriveAttrs({ genres:[], keywords:[], runtime:0 }), null);
 eq("a long film reads as epic",
@@ -84,9 +85,42 @@ eq("caps at six",
                  keywords:["ghost","dark comedy","heist","grief","wedding","space","dystopia"],
                  runtime:95 }).length <= 6, true);
 eq("a director's name lends nothing: every film is read on its own data",
-   deriveAttrs({ genres:["drama"], keywords:["grief"], runtime:120, dirAttrs:["auteur","visual"] }), null);
-eq("curated films use the same rules but keep a thin list",
-   tagsFrom({ genres:["drama"], keywords:["grief"], runtime:120 }).sort(), ["characterstudy","melancholy"]);
+   deriveAttrs({ genres:["drama"], keywords:["grief"], runtime:120, dirAttrs:["auteur","visual"] }).indexOf("auteur"), -1);
+eq("curated and scanned films go through the same rules",
+   tagsFrom({ genres:["drama"], keywords:["grief"], runtime:120 }),
+   deriveAttrs({ genres:["drama"], keywords:["grief"], runtime:120 }));
+
+console.log("\nwhat a genre may and may not say");
+eq("a crime comedy is not violent just for being filed under crime",
+   tagsFrom({ genres:["comedy","crime","mystery"], keywords:["whodunit","murder","family"], runtime:130 }).indexOf("violent"), -1);
+eq("an adventure its keywords describe is not spectacle just for being an adventure",
+   tagsFrom({ genres:["adventure","comedy","family"], keywords:["whimsical","heartwarming","witty"], runtime:104 }).indexOf("spectacle"), -1);
+eq("a thinly described film is filled up to three from its genres, and no further",
+   tagsFrom({ genres:["drama"], keywords:[], runtime:120 }), ["characterstudy","earnest"].concat([]).slice(0, 2));
+eq("one genre fills two; a second genre fills the third",
+   tagsFrom({ genres:["drama","thriller"], keywords:[], runtime:120 }).length, 3);
+eq("a film its keywords describe is not overruled by a genre guess",
+   tagsFrom({ genres:["drama"], keywords:["hilarious","witty","amused","playful"], runtime:120 }).indexOf("characterstudy"), -1);
+eq("keywords match whole, never inside another word",
+   tagsFrom({ genres:[], keywords:["glove","lovebirds"], runtime:120 }), []);
+
+console.log("\nsubjects are not moods");
+eq("a monster in a family film is not scary",
+   tagsFrom({ genres:["animation","family","comedy"], keywords:["monster","ghost"], runtime:92 }).indexOf("scary"), -1);
+ok("a monster in a horror film is",
+   tagsFrom({ genres:["horror"], keywords:["monster","ghost"], runtime:92 }).indexOf("scary") > -1);
+ok("a frightened tone is scary in any genre",
+   tagsFrom({ genres:["animation","family"], keywords:["frightened","terrifying"], runtime:92 }).indexOf("scary") > -1);
+eq("a gangster in a cartoon is not violence",
+   tagsFrom({ genres:["animation","family"], keywords:["gangster","shootout"], runtime:92 }).indexOf("violent"), -1);
+ok("a gangster in a crime film is",
+   tagsFrom({ genres:["crime","drama"], keywords:["gangster","shootout"], runtime:150 }).indexOf("violent") > -1);
+
+console.log("\ngenres come from TMDB, with one correction");
+eq("a film about musicians is not a musical",
+   genresFrom([{ id:18 }, { id:10402 }, { id:53 }], ["drummer","music school"]), ["drama","thriller"]);
+eq("a film TMDB's taggers call a musical is",
+   genresFrom([{ id:35 }, { id:10402 }, { id:10749 }], ["musical","hollywood"]), ["comedy","romance","musical"]);
 eq("the shelf bar is the same tags, at three or more",
    deriveAttrs({ genres:["horror"], keywords:["haunting","gore","dystopia"], runtime:95 }),
    tagsFrom({ genres:["horror"], keywords:["haunting","gore","dystopia"], runtime:95 }));
