@@ -121,6 +121,8 @@ eq("a film about musicians is not a musical",
    genresFrom([{ id:18 }, { id:10402 }, { id:53 }], ["drummer","music school"]), ["drama","thriller"]);
 eq("a film TMDB's taggers call a musical is",
    genresFrom([{ id:35 }, { id:10402 }, { id:10749 }], ["musical","hollywood"]), ["comedy","romance","musical"]);
+eq("even when TMDB left it out of Music, as with La La Land",
+   genresFrom([{ id:35 }, { id:18 }, { id:10749 }], ["dancing","musical"]), ["comedy","drama","romance","musical"]);
 eq("the shelf bar is the same tags, at three or more",
    deriveAttrs({ genres:["horror"], keywords:["haunting","gore","dystopia"], runtime:95 }),
    tagsFrom({ genres:["horror"], keywords:["haunting","gore","dystopia"], runtime:95 }));

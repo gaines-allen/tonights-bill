@@ -322,10 +322,11 @@ const TMDB_GENRE = {
   27:"horror", 9648:"mystery", 10749:"romance", 878:"scifi",
   53:"thriller", 10752:"war", 37:"western"
 };
-/* TMDB files any film about musicians under "Music": Whiplash, A Complete
-   Unknown, even the thriller Trap. It is only a musical when the people
-   tagging it on TMDB also call it one. */
-const TMDB_MUSIC = 10402;
+/* TMDB files any film about musicians under "Music" (Whiplash, A Complete
+   Unknown, even the thriller Trap) and leaves La La Land and Singin' in the
+   Rain out of it. The people tagging films on TMDB get it right, so a film is
+   a musical exactly when they call it one, whatever its genres say. */
+const MUSICAL_WORDS = ["musical", "jukebox musical", "musical comedy", "horror musical", "rock musical"];
 
 /* Only what a genre guarantees on its own. A crime film is not necessarily
    violent (Knives Out), an adventure is not necessarily spectacle (Paddington
@@ -505,8 +506,7 @@ function sourceOf(genres, keywords) {
 /* TMDB's genre objects in the catalog's vocabulary, duplicates folded. */
 export function genresFrom(list = [], keywords = []) {
   const out = (list || []).map((g) => TMDB_GENRE[g.id]).filter(Boolean);
-  const isMusical = (keywords || []).some((k) => String(k).toLowerCase() === "musical");
-  if ((list || []).some((g) => g.id === TMDB_MUSIC) && isMusical) out.push("musical");
+  if ((keywords || []).some((k) => MUSICAL_WORDS.includes(String(k).toLowerCase()))) out.push("musical");
   return [...new Set(out)];
 }
 
