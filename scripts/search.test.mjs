@@ -109,6 +109,19 @@ const esc = $("masthead").dispatch("keydown", { key: "Escape" });
 eq("Escape closes it", $("hunt-panel").hidden, true);
 ok("and the key goes no further", esc._stopped);
 ok("focus goes back to the input", globalThis.__focused === $("hunt-q"));
+/* a real browser fires focus when focus moves: closing must survive that */
+const realFocus = $("hunt-q").focus;
+$("hunt-q").focus = function(){ globalThis.__focused = this; this.dispatch("focus"); };
+mod.openHunt();
+$("hunt-close").click();
+eq("Close stays closed when focus returns to the box", $("hunt-panel").hidden, true);
+mod.openHunt();
+$("masthead").dispatch("keydown", { key: "Escape" });
+eq("so does Escape", $("hunt-panel").hidden, true);
+$("hunt-q").click();
+eq("clicking the box opens it again", $("hunt-panel").hidden, false);
+mod.closeHunt(false);
+$("hunt-q").focus = realFocus;
 
 console.log("\nchanging services under a pick");
 {

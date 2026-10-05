@@ -42,6 +42,8 @@ console.log("\nthe control");
   ok("all three drawn from one sprite on the same 16-unit grid",
      ["star", "up", "down"].every((g) => new RegExp('<symbol id="g-' + g + '" viewBox="0 0 16 16">').test(html)));
   eq("the row is labelled as a group", row.getAttribute("role"), "group");
+  ok("the case's own button style cannot reach the row inside it",
+     !/\.case-react button[{:.]/.test(html) && /\.case-react > button\{/.test(html));
 }
 
 console.log("\nwhat each press does");

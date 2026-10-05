@@ -80,7 +80,7 @@ Each result says one of:
 - **On your services: …** — a checked subscription home on a service you picked
 - **Not on your selected services** — checked; it says where it does stream,
   or that it is on none of the services we track
-- **Availability not confirmed** — nobody has checked (a hand-tagged guess, or
+- **Availability not confirmed** — nobody has checked (a built-in guess, or
   the catalog did not load). Never reported as "no".
 
 With no services picked it asks for them first. Rent and buy listings never
@@ -128,7 +128,7 @@ old ones without it still resolve by title.
 
 The obvious design is a page that asks a model for recommendations. That isn't
 possible in the environment this was built for, and it turned out to be the
-better constraint. A local engine over hand-tagged data cannot invent a film
+better constraint. A local engine over a fixed tagged catalog cannot invent a film
 that doesn't exist or claim something is on Netflix when it isn't — the two
 failure modes that would have made an LLM version useless in practice.
 
@@ -196,7 +196,8 @@ the canary for the scoring regression described above.
 
 ## Sourced data (optional)
 
-Out of the box the catalog is entirely hand-authored, including the streaming
+Out of the box the catalog runs on the tags and estimates written into
+`index.html` by Claude when the app was built, including the streaming
 homes and critic scores — those are estimates, and the page says so. Running the
 enrichment script replaces them with sourced values.
 
@@ -217,9 +218,14 @@ its built-in data, replacing:
 | plot synopsis | TMDB overview, trimmed on sentence boundaries |
 | streaming availability | TMDB watch providers (JustWatch), US, subscription only |
 | poster art | TMDB images — no API key needed to *display* them |
+| genres, attribute tags | TMDB genres, keywords and runtime, through `tagsFrom()` |
+| audience, fame | certification and TMDB vote count |
 
-The attribute tags, hooks, fame and audience calls stay hand-authored. No API
-knows how a film plays, and that is what the recommender actually scores on.
+**Every film is tagged the same way, every night.** The curated 245 and the
+scanned shelf go through the same `tagsFrom()` rules, so a film's tags never
+depend on which list it came from. The tags written into `index.html` are only
+used when the page has no data file. The rules cannot produce `auteur`, which
+only ever came from hand-written tags, so it no longer appears.
 
 **The key never reaches the page.** Enrichment happens ahead of time and only
 its output ships, so this stays a static site with nothing to leak. The included
@@ -518,7 +524,7 @@ return. `scripts/fresh.test.mjs` covers it.
 
 These are deliberate, and the page states them in its own footer:
 
-- **Streaming locations are hand-tagged until you run the enrichment**, and
+- **Streaming locations are built-in guesses until you run the enrichment**, and
   rights move constantly. Verify before committing the evening.
 - **Critic scores are estimates until you run the enrichment.** The built-in
   numbers approximate critical consensus; they are not sourced from, affiliated

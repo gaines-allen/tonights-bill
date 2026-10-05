@@ -1240,14 +1240,14 @@ a.svc-chip:hover .svc-go{opacity:1}
 .case-state{font-family:var(--hand);font-size:clamp(18px,1.5vw,21px);color:var(--cream-dim);margin-top:4px}
 .case-react{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;margin-top:12px}
 .case-react .mini{margin-left:-6px}
-.case-react button{
+.case-react > button{
   font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink);background:var(--paper);border-radius:2px;
   min-height:44px;padding:10px 16px;text-align:center;
   box-shadow:0 2px 4px rgba(0,0,0,.4);transition:all var(--quick);
 }
-.case-react button:hover{background:#fff6de}
-.case-react button.is-on{background:var(--amber);font-weight:500}
+.case-react > button:hover{background:#fff6de}
+.case-react > button.is-on{background:var(--amber);font-weight:500}
 body.cased{overflow:hidden}
 
 /* --------------------------------------------------------------------------
@@ -2278,7 +2278,7 @@ function gLabel(g){ return GENRE_LABEL[g] || g.charAt(0).toUpperCase()+g.slice(1
    so a model call at request time would mean shipping a key to every visitor,
    and the whole point of the file is that it works offline and instantly.
 
-   Coverage is the 245 hand-tagged films in this file, which is every title
+   Coverage is the 245 curated films in this file, which is every title
    anyone curated. The nightly scan shelves roughly 670 more straight off the
    services, and those change week to week, so they cannot be written ahead and
    are not worth guessing at: a line invented for a film nobody here has seen
@@ -2832,13 +2832,20 @@ function applyEnrichment(payload){
     if(e.poster) f.poster = e.poster;
     if(e.backdrop) f.backdrop = e.backdrop;
     if(e.overview){ f.h = e.overview; f.hSrc = "tmdb"; }   /* real synopsis beats the terse hook */
+    /* Tonight's tags, by the same rules as every scanned film. The ones written
+       into RAW above only stand in when the page has no data file. */
+    if(Array.isArray(e.g) && e.g.length) f.g = e.g.slice();
+    if(Array.isArray(e.a) && e.a.length){ f.a = e.a.slice(); f.aSrc = "tmdb"; }
+    if(e.k) f.k = e.k;
+    if(e.pop) f.pop = e.pop;
     hit++;
   });
   if(payload._meta && payload._meta.logos){
     Object.keys(payload._meta.logos).forEach(function(c){ SVC_LOGO[c] = payload._meta.logos[c]; });
   }
-  /* Titles the nightly scan found on the services. The curated catalog wins any
-     collision: a hand-tagged film knows how it plays, a derived one guesses. */
+  /* Titles the nightly scan found on the services. Both lists are tagged by the
+     same rules; the curated catalog wins a collision because it carries the
+     written store line and the checked match. */
   let shelved = 0;
   if(Array.isArray(payload.shelf)){
     /* The same film can come back from the scan under another title ("Star
@@ -4045,7 +4052,7 @@ function whereRow(rec){
   });
   row.appendChild(chips);
   if(!have.length) row.appendChild(el("span","playing-note","not a service you have"));
-  /* a hand-tagged home nobody has checked is a guess, and says so */
+  /* a built-in home nobody has checked is a guess, and says so */
   if(!f.svcChecked) row.appendChild(el("span","playing-note","not confirmed"));
   return row;
 }
@@ -5515,12 +5522,12 @@ function shelfState(f){
      on your services     - a checked subscription home on one you selected
      not on your services - checked, and streaming somewhere you don't pay
                             for, or on none of the services we track
-     not confirmed        - nobody has checked: a hand-tagged guess, or the
+     not confirmed        - nobody has checked: a built-in guess, or the
                             catalog did not load. Never reported as "no".
    Rent and buy listings never enter the catalog's service lists, so they
    can never be shown as included with a subscription.
    ========================================================================== */
-const Hunt = {open:false, timer:null, wired:false};
+const Hunt = {open:false, timer:null, wired:false, returning:false};
 const HUNT_SHOWN = 8;
 
 function huntNorm(t){
@@ -5653,7 +5660,13 @@ function closeHunt(refocus){
   $("hunt-panel").hidden = true;
   $("hunt-svcs").setAttribute("aria-expanded","false");
   $("masthead").classList.remove("hunting");
-  if(refocus) try { $("hunt-q").focus({preventScroll:true}); } catch(e) { $("hunt-q").focus(); }
+  /* focus goes back to the box it came from, without that focus opening
+     the drawer again */
+  if(refocus){
+    Hunt.returning = true;
+    try { $("hunt-q").focus({preventScroll:true}); } catch(e) { $("hunt-q").focus(); }
+    Hunt.returning = false;
+  }
 }
 function huntResults(){
   return Array.prototype.slice.call(document.querySelectorAll("#hunt-results .hunt-open"));
@@ -5662,7 +5675,9 @@ function wireHunt(){
   if(Hunt.wired) return;
   Hunt.wired = true;
   const q = $("hunt-q");
-  q.addEventListener("focus", openHunt);
+  q.addEventListener("focus", function(){ if(!Hunt.returning) openHunt(); });
+  /* a click in the box after closing it, or typing, opens it again */
+  q.addEventListener("click", openHunt);
   q.addEventListener("input", function(){
     openHunt();
     clearTimeout(Hunt.timer);
@@ -5845,7 +5860,7 @@ function ticketFor(b){
 
 /* ============================================================================
    THE AISLES
-   Browsing, not scoring. Every shelf is cut from the same hand-tagged catalog;
+   Browsing, not scoring. Every shelf is cut from the same catalog;
    nothing here touches the engine.
    ========================================================================== */
 /* Days since an ISO date, for the arrivals shelf. */

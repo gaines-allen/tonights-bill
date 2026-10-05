@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 /**
- * Enrich the hand-authored catalog with sourced data.
+ * Enrich the curated catalog with sourced data.
  *
- * What stays hand-authored: the attribute tags, the one-line hook, the fame
- * rating, the audience call. No API knows how a film *plays*, and that is what
- * the recommender actually scores on.
+ * Every film in the store is tagged by the same rules, every night: genres,
+ * attributes, audience and fame all come from tagsFrom() and TMDB, whether the
+ * film is on the curated list or turned up in the scan. The tags written into
+ * index.html are only the fallback for a page opened without data/catalog.json.
  *
- * What this replaces with sourced values: runtime, MPAA certification, critic
- * score, poster art, and which services actually carry it right now.
+ * Also sourced: runtime, MPAA certification, critic score, poster art, and
+ * which services actually carry it right now.
  *
  *   TMDB_TOKEN=<v4 read token>  node scripts/enrich.mjs
  *   TMDB_API_KEY=<v3 key>       node scripts/enrich.mjs --limit 10
@@ -199,7 +200,7 @@ async function enrichOne(film) {
   if (!hit) { out.error = "no confident TMDB match"; return out; }
 
   const [details, rel, prov] = await Promise.all([
-    getJSON(tmdbUrl(`/movie/${hit.id}`)),
+    getJSON(tmdbUrl(`/movie/${hit.id}`, { append_to_response: "keywords" })),
     getJSON(tmdbUrl(`/movie/${hit.id}/release_dates`)),
     getJSON(tmdbUrl(`/movie/${hit.id}/watch/providers`))
   ]);
@@ -226,6 +227,22 @@ async function enrichOne(film) {
      Without this the page would keep showing a hand-guessed service for a
      film that is demonstrably not streaming anywhere. */
   out.providersChecked = !!prov;
+
+  /* The same tagging the scanned shelf gets, so a curated film and a scanned
+     one are described in one vocabulary by one rule. A curated film keeps its
+     place even when the rules find fewer than three attributes; it is just
+     described thinly, and the run reports how many. */
+  const genres = genresFrom(details?.genres);
+  if (genres.length) {
+    out.g = genres;
+    out.a = tagsFrom({
+      genres,
+      keywords: (details?.keywords?.keywords || []).map((k) => k.name),
+      runtime: out.runtime || 0
+    });
+    out.k = audienceFrom(out.cert, genres);
+    out.pop = fameFrom(out.votes || 0);
+  }
 
   if (OMDB && out.imdb) {
     const r = await fetchOmdb(out.imdb);
@@ -288,16 +305,17 @@ export function trimOverview(text, max = 400) {
 
 /* ============================================================================
    DISCOVERY
-   The hand-authored catalog is a seed, not the whole store. This walks what is
+   The curated catalog is a seed, not the whole store. This walks what is
    actually on the eight services right now and brings back everything worth
    shelving, streaming originals included, since an original only ever lives on
    its own service and would never turn up in a hand-written list.
 
    Nothing here invents a tag it cannot defend. Attributes come from TMDB's own
-   human-curated keywords, the genres, the runtime, and, where the director is
-   already someone the curated catalog has an opinion about, from that opinion.
-   A film that cannot earn at least three attributes is left on the shelf,
-   because a thinly-tagged film scores badly and would crowd out a real match.
+   human-curated keywords, the genres and the runtime, and nothing else: the
+   curated films are tagged by these same rules, so there is no hand-written
+   opinion left for a scanned film to borrow. A scanned film that cannot earn
+   at least three attributes is left off the shelf, because a thinly-tagged
+   film scores badly and would crowd out a real match.
    ============================================================================ */
 
 const TMDB_GENRE = {
@@ -341,11 +359,16 @@ const KEYWORD_ATTRS = [
   [/visually striking|cinematography|neo.?noir|stylish/,           "stylish"]
 ];
 
+/* TMDB's genre objects in the catalog's vocabulary, duplicates folded. */
+export function genresFrom(list = []) {
+  return [...new Set((list || []).map((g) => TMDB_GENRE[g.id]).filter(Boolean))];
+}
+
 /**
- * Everything a discovered film's attribute list is allowed to come from.
- * Kept pure so it can be tested without touching the network.
+ * Everything any film's attribute list is allowed to come from, curated or
+ * scanned. Kept pure so it can be tested without touching the network.
  */
-export function deriveAttrs({ genres = [], keywords = [], runtime = 0, dirAttrs = [] }) {
+export function tagsFrom({ genres = [], keywords = [], runtime = 0 }) {
   const out = [];
   const add = (a) => { if (a && out.indexOf(a) === -1) out.push(a); };
 
@@ -354,11 +377,14 @@ export function deriveAttrs({ genres = [], keywords = [], runtime = 0, dirAttrs 
   for (const g of genres) (GENRE_ATTRS[g] || []).forEach(add);
   if (runtime && runtime <= 100) add("brisk");
   if (runtime && runtime >= 150) add("epic");
-  /* A director the curated catalog already has a read on carries that read
-     forward, which is how a new Villeneuve lands as visual rather than generic. */
-  dirAttrs.slice(0, 2).forEach(add);
 
-  return out.length >= 3 ? out.slice(0, 6) : null;
+  return out.slice(0, 6);
+}
+
+/* The scan's bar for shelving a film: the same tags, but at least three. */
+export function deriveAttrs(input) {
+  const a = tagsFrom(input);
+  return a.length >= 3 ? a : null;
 }
 
 export function audienceFrom(cert, genres = []) {
@@ -435,7 +461,7 @@ async function discoverOn(providerId, pages, minVotes, minScore) {
 
 /* One request per candidate: details, keywords, credits, certification and
    availability all come back together. */
-async function shelfRecord(id, dirLookup) {
+async function shelfRecord(id) {
   const d = await getJSON(tmdbUrl(`/movie/${id}`, {
     append_to_response: "keywords,credits,release_dates,watch/providers"
   }));
@@ -449,15 +475,12 @@ async function shelfRecord(id, dirLookup) {
   const providers = flatrateCodes(d["watch/providers"]);
   if (!providers.length) return null;                 // discovery only ever shelves what streams
 
-  const genres = [...new Set((d.genres || []).map((g) => TMDB_GENRE[g.id]).filter(Boolean))];
+  const genres = genresFrom(d.genres);
   if (!genres.length) return null;
 
   const keywords = (d.keywords?.keywords || []).map((k) => k.name);
   const director = (d.credits?.crew || []).find((c) => c.job === "Director")?.name || "";
-  const attrs = deriveAttrs({
-    genres, keywords, runtime,
-    dirAttrs: dirLookup[director] || []
-  });
+  const attrs = deriveAttrs({ genres, keywords, runtime });
   if (!attrs) return null;
 
   const overview = trimOverview(d.overview || "");
@@ -486,21 +509,6 @@ async function shelfRecord(id, dirLookup) {
     imdb: d.imdb_id || null,
     logos: logoPaths(d["watch/providers"])
   };
-}
-
-/* What the curated catalog believes about each director it already knows. */
-export function directorAttrs(curated) {
-  const tally = {};
-  for (const f of curated) {
-    if (!f.d) continue;
-    const bag = (tally[f.d] = tally[f.d] || {});
-    String(f.a || "").split("|").forEach((a) => { if (a) bag[a] = (bag[a] || 0) + 1; });
-  }
-  const out = {};
-  for (const [dir, bag] of Object.entries(tally)) {
-    out[dir] = Object.entries(bag).sort((a, b) => b[1] - a[1]).map(([a]) => a);
-  }
-  return out;
 }
 
 /* ---------------- runner ---------------- */
@@ -569,7 +577,6 @@ async function main() {
       directory = await providerDirectory();
       const codes = Object.keys(directory.ids);
       console.log(`\nScanning ${codes.length} services for what is streaming now…`);
-      const dirLookup = directorAttrs(films);
 
       const candidates = new Map();
       for (const code of codes) {
@@ -600,7 +607,7 @@ async function main() {
         .slice(0, MAX_SHELF);
       console.log(`\n${fresh.length} new candidates, fetching details…`);
       const built = await pool(fresh.map((r) => ({ id: r.id, t: r.title, y: 0 })), CONCURRENCY,
-        (item) => shelfRecord(item.id, dirLookup));
+        (item) => shelfRecord(item.id));
 
       const byKey = new Map();
       for (const r of built) {
@@ -698,6 +705,8 @@ async function main() {
       withProviders: ok.filter((r) => r.providers.length).length,
       withRT: ok.filter((r) => r.rt != null).length,
       withOverview: ok.filter((r) => r.overview).length,
+      tagged: ok.filter((r) => r.a).length,
+      thinlyTagged: ok.filter((r) => r.a && r.a.length < 3).map((r) => `${r.t} (${r.y})`),
       omdbErrors: (() => {
         const tally = {};
         ok.forEach((r) => { if (r.omdbError) tally[r.omdbError] = (tally[r.omdbError] || 0) + 1; });
@@ -739,6 +748,7 @@ async function main() {
   }
   console.log(`with poster      ${ok.filter((r) => r.poster).length}`);
   console.log(`with synopsis    ${payload._meta.withOverview}`);
+  console.log(`tagged by rule   ${payload._meta.tagged}${payload._meta.thinlyTagged.length ? ` (${payload._meta.thinlyTagged.length} with fewer than three attributes)` : ""}`);
   if (missed.length) {
     console.log(`\nunmatched (${missed.length}) — check these by hand:`);
     missed.slice(0, 25).forEach((r) => console.log(`  - ${r.t} (${r.y}): ${r.error}`));
