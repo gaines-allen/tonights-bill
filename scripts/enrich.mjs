@@ -233,13 +233,11 @@ async function enrichOne(film) {
      place even when the rules find fewer than three attributes; it is just
      described thinly, and the run reports how many. */
   const genres = genresFrom(details?.genres);
+  const keywords = (details?.keywords?.keywords || []).map((k) => k.name);
+  out._src = sourceOf(details?.genres, keywords);
   if (genres.length) {
     out.g = genres;
-    out.a = tagsFrom({
-      genres,
-      keywords: (details?.keywords?.keywords || []).map((k) => k.name),
-      runtime: out.runtime || 0
-    });
+    out.a = tagsFrom({ genres, keywords, runtime: out.runtime || 0 });
     out.k = audienceFrom(out.cert, genres);
     out.pop = fameFrom(out.votes || 0);
   }
@@ -358,6 +356,12 @@ const KEYWORD_ATTRS = [
   [/slow burn|meditative|contemplative/,                           "slowburn"],
   [/visually striking|cinematography|neo.?noir|stylish/,           "stylish"]
 ];
+
+/* What the tags were made from, kept so the rules can be tuned and tested
+   offline. Written to data/keywords.json, which the page never loads. */
+function sourceOf(genres, keywords) {
+  return { genres: (genres || []).map((g) => g.name), keywords };
+}
 
 /* TMDB's genre objects in the catalog's vocabulary, duplicates folded. */
 export function genresFrom(list = []) {
@@ -507,7 +511,8 @@ async function shelfRecord(id) {
     backdrop: d.backdrop_path,
     tmdb: d.id,
     imdb: d.imdb_id || null,
-    logos: logoPaths(d["watch/providers"])
+    logos: logoPaths(d["watch/providers"]),
+    _src: sourceOf(d.genres, keywords)
   };
 }
 
@@ -728,12 +733,26 @@ async function main() {
       arrived,
       departed
     },
-    films: ok.map(({ logos, ...rest }) => rest),
-    shelf: shelf.map(({ logos, ...rest }) => rest)
+    films: ok.map(({ logos, _src, ...rest }) => rest),
+    shelf: shelf.map(({ logos, _src, ...rest }) => rest)
   };
 
   await mkdir(join(ROOT, "data"), { recursive: true });
   await writeFile(join(ROOT, "data", "catalog.json"), JSON.stringify(payload, null, 1) + "\n");
+
+  /* The raw genres and keywords behind every film's tags, one line a film. A
+     shelf title carried over from a failed scan keeps yesterday's line. */
+  let prevSrc = {};
+  try { prevSrc = JSON.parse(await readFile(join(ROOT, "data", "keywords.json"), "utf8")); }
+  catch { /* first run */ }
+  const src = {};
+  for (const r of [...ok, ...shelf]) {
+    const key = `${r.t} (${r.y})`;
+    if (r._src) src[key] = { curated: ok.includes(r), ...r._src };
+    else if (prevSrc[key]) src[key] = prevSrc[key];
+  }
+  await writeFile(join(ROOT, "data", "keywords.json"),
+    "{\n" + Object.entries(src).map(([k, v]) => JSON.stringify(k) + ":" + JSON.stringify(v)).join(",\n") + "\n}\n");
 
   console.log(`\nmatched          ${ok.length}/${rows.length}`);
   console.log(`with providers   ${payload._meta.withProviders}`);

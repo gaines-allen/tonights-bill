@@ -80,7 +80,7 @@ jobs:
           # Stage first. On the very first run the file is untracked, and
           # `git diff` ignores untracked files — so comparing before staging
           # would report "no change" and silently throw the data away.
-          git add data/catalog.json data/unwritten.json data/unwritten.md data/hero.json
+          git add data/catalog.json data/unwritten.json data/unwritten.md data/hero.json data/keywords.json
           if git diff --cached --quiet; then
             echo "no change"; exit 0
           fi
@@ -101,9 +101,11 @@ jobs:
                  | grep -vc '"generatedAt"' || true)
           # hero.json carries no clock of its own: any diff is a real change.
           HERO=$(git diff --cached --name-only -- data/hero.json | wc -l | tr -d ' ')
-          if [ "$CHANGED" -eq 0 ] && [ "$WORK" -eq 0 ] && [ "$HERO" -eq 0 ]; then
+          # keywords.json has no clock either: what the tags were built from.
+          KW=$(git diff --cached --name-only -- data/keywords.json | wc -l | tr -d ' ')
+          if [ "$CHANGED" -eq 0 ] && [ "$WORK" -eq 0 ] && [ "$HERO" -eq 0 ] && [ "$KW" -eq 0 ]; then
             echo "only the generated timestamps moved — skipping commit"
-            git reset -q -- data/catalog.json data/unwritten.json data/unwritten.md data/hero.json
+            git reset -q -- data/catalog.json data/unwritten.json data/unwritten.md data/hero.json data/keywords.json
             exit 0
           fi
 
