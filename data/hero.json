@@ -19,7 +19,7 @@
   ],
   "monetization": "subscription (flatrate or ad tier), US"
  },
- "catalogScannedAt": "2026-10-04",
+ "catalogScannedAt": "2026-10-09",
  "imageSource": "TMDB",
  "month": "2026-10",
  "selectedAt": "2026-10-04T16:00:00.000Z",
@@ -43,16 +43,15 @@
   },
   {
    "slot": "middle",
-   "id": 389,
-   "key": "12 Angry Men (1957)",
-   "title": "12 Angry Men",
-   "year": 1957,
-   "backdrop": "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
-   "rating": 8.6,
-   "ratingRounded": true,
-   "votes": 10431,
+   "id": 980431,
+   "key": "Avatar Aang: The Last Airbender (2026)",
+   "title": "Avatar Aang: The Last Airbender",
+   "year": 2026,
+   "backdrop": "/ezbrL1dMymKQZw7mDEWa2ZTzN7d.jpg",
+   "rating": 9.1,
+   "votes": 1283,
    "services": [
-    "HUL"
+    "PAR"
    ]
   },
   {
@@ -71,5 +70,13 @@
    ]
   }
  ],
- "replacements": []
+ "replacements": [
+  {
+   "at": "2026-10-09T17:29:54.413Z",
+   "slot": "middle",
+   "out": 389,
+   "in": 980431,
+   "reason": "left every supported subscription service"
+  }
+ ]
 }
