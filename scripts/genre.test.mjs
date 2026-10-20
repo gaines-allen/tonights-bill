@@ -112,6 +112,45 @@ const drift = mod.FILMS.filter((f) => {
 ok("every film's genre row agrees with the rule", !drift.length, names(drift));
 S.genres = [];
 
+console.log("\nasking for a genre asks for films centred on it");
+/* With a single genre selected, the old score was hits / min(...) — which is 1
+   for every film that carries the genre at all. The ask contributed nothing to
+   the order, so fame and acclaim decided it, and a Comedy-only bill opened
+   with The Wolf of Wall Street, Parasite and Forrest Gump. */
+eq("a film that reads like the ask scores top",
+   mod.genreCentre({ a: ["comic", "brisk", "cozy"] }, ["comedy"]), 1);
+eq("one that reads like its opposite scores bottom",
+   mod.genreCentre({ a: ["bleak", "slowburn"] }, ["comedy"]), 0);
+eq("carrying both lands in the middle",
+   mod.genreCentre({ a: ["comic", "bleak"] }, ["comedy"]), 0.5);
+eq("tags that say neither are neutral",
+   mod.genreCentre({ a: ["grounded"] }, ["comedy"]), 0.5);
+eq("a genre with no tone entry does not guess",
+   mod.genreCentre({ a: ["comic"] }, ["nonsense"]), 0.5);
+console.log("\nno genre in the data is unreachable from the filter");
+{
+  const inData = new Set();
+  mod.FILMS.forEach((f) => f.g.forEach((g) => inData.add(g)));
+  const unreachable = [...inData].filter((g) => mod.GENRES.indexOf(g) === -1).sort();
+  eq("every genre the catalog uses can be selected", unreachable, []);
+}
+
+ok("every genre in the tone table is one the filter offers",
+   Object.keys(mod.GENRE_TONE).every((g) => mod.GENRES.indexOf(g) > -1),
+   Object.keys(mod.GENRE_TONE).filter((g) => mod.GENRES.indexOf(g) === -1).join(", "));
+
+/* The ordering this exists for, on tonight's data. */
+S.genres = ["comedy"];
+const ranked = mod.scoreAll().picks.map((r) => r.f.t);
+S.genres = [];
+const at = (t) => ranked.indexOf(t);
+for (const t of ["The Wolf of Wall Street", "Parasite", "Forrest Gump"]) {
+  if (at(t) > -1) ok(t + " no longer opens a comedy night", at(t) > 20, "ranked #" + (at(t) + 1));
+}
+ok("a bleak comedy-filed drama ranks below a straight comedy of similar fame",
+   at("Parasite") === -1 || at("Parasite") > at("Monsters, Inc."),
+   "Parasite #" + (at("Parasite") + 1) + " vs Monsters, Inc. #" + (at("Monsters, Inc.") + 1));
+
 console.log("\nthe mood buttons are gated too");
 /* "Make me laugh" is not a request for a film with jokes in it — Die Hard has
    jokes in it — it is a request for a comedy. Before this, with no genre

@@ -211,7 +211,8 @@ export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, AT
          showScene, renderWall, searchWall, keepTile, openCase, closeCase, setTaste, markWatched,
          toggleSaved, buildTaste, searchCatalog, availability, runSearch, openHunt, closeHunt, wireHunt, setService,
          applyEnrichment, migrateLegacy, toneOf, toneLean, clashes, genreAnchors, missesGenre, BY_KEY,
-         checkFilters, hardPass, isScare, SCARE_GENRE, SCARE_TAG, moodGates, MOOD_BY, MOODS, reactionOf, isSaved, isWatched, filmOf, validHero, paintHero,
+         checkFilters, hardPass, isScare, SCARE_GENRE, SCARE_TAG, moodGates, MOOD_BY, MOODS,
+         genreCentre, GENRE_TONE, GENRES, reactionOf, isSaved, isWatched, filmOf, validHero, paintHero,
          loadHero, renderSaved, tuneCount, openEvening, cardItem, miniRow, MINIS_get, CARD_OPENERS, gate,
          MODE_get, JUST_get, HEAD_get, LAST_get, CASE_get, SCENE_get };
 function MODE_get(){ return MODE; }

@@ -205,6 +205,30 @@ to scream* work at all. `isScare()` is the test and the genre row in
 `checkFilters()` enforces it, so a film held back says it plays as a scare
 rather than quietly vanishing.
 
+**Asking for a genre asks for films centred on it.** The genre score was
+`hits / min(...)`, which with a single genre selected is 1 for every film that
+carries it at all — so the ask contributed nothing to the order and fame and
+acclaim decided the night. A Comedy-only bill opened with The Wolf of Wall
+Street, Parasite and Forrest Gump: bleak prestige dramas TMDB happens to file
+under comedy.
+
+`GENRE_TONE` says what a film of each genre is like when it really is one, and
+what argues it is not, read off the same tags every film is given.
+`genreCentre()` scores a film 1 when its tone agrees and nothing contradicts,
+0 when it reads like the opposite, 0.5 when the tags say neither; it is
+weighted at about two thirds of the genre term against one third breadth. The
+Wolf of Wall Street went from 1st to 30th, Parasite to 77th, Forrest Gump to
+78th, and the straight comedies all rose — Superbad 100th to 84th, Hot Fuzz
+102nd to 86th. Nothing is excluded by it: Hot Fuzz, Snatch and The Gentlemen
+are violent comedies and stay eligible, because violence is not what argues a
+film is not funny. `bleak` and `melancholy` are.
+
+One case it cannot reach: *Once Upon a Time... in Hollywood* still ranks high
+on a Comedy ask. TMDB files it as comedy, it carries `comic`, and its tags
+read as comedic, so nothing in the data says otherwise. `epic` and
+`characterstudy` both looked like candidates and both do more harm than good —
+`epic` is also on Klaus, Kung Fu Panda and SpongeBob.
+
 **Two moods are cutoffs as well.** Most of them ask about texture — *Comfort
 movie*, *Something beautiful*, *Dark & intense* — and stay pure scoring
 weight. But *Make me laugh* and *I want to scream* are asking for a genre, so

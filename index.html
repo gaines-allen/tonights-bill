@@ -2295,14 +2295,60 @@ function moodScore(f, v){
   return clamp((cov * 1.6 + 1) / 2, 0, 1);
 }
 
+/* Every genre the catalog actually uses. One missing here is unreachable: no
+   filter can select it, and the genre row names it in "none of them selected"
+   as though it had been on offer. Western was missing, with six streaming
+   films behind it — No Country for Old Men, The Revenant, Dances with Wolves. */
 const GENRES = ["action","adventure","animation","comedy","crime","documentary","drama","fantasy",
-                "horror","musical","mystery","romance","scifi","thriller","war","family"];
+                "horror","musical","mystery","romance","scifi","thriller","war","western","family"];
 const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
 /* A scare has to be asked for: see the genre row in checkFilters. A film is a
    scare if it is filed as horror or if it plays as one, and the tag is the
    better half of that test — it is derived for every film the same way, from
    TMDB's own keywords. */
 const SCARE_GENRE = "horror", SCARE_TAG = "scary";
+
+/* What a film of each genre is like when it really is one, and what argues it
+   is not. Read off the same tags every film is given, so none of this leans on
+   TMDB's genre order, which is not a ranking: Happy Death Day lists Comedy
+   first and Toy Story does not. A genre missing from this table simply scores
+   neutral rather than guessing. */
+const GENRE_TONE = {
+  comedy:   {is:["comic","ironic","brisk"],         not:["bleak","melancholy","slowburn"]},
+  horror:   {is:["scary","visceral"],               not:["cozy","uplifting"]},
+  thriller: {is:["propulsive","twisty","bleak"],    not:["cozy"]},
+  action:   {is:["propulsive","spectacle"],         not:["slowburn"]},
+  adventure:{is:["spectacle","propulsive"],         not:["bleak"]},
+  romance:  {is:["romantic"],                       not:["bleak","scary"]},
+  family:   {is:["cozy","uplifting"],               not:["bleak","violent","scary"]},
+  animation:{is:["visual"],                         not:["bleak"]},
+  crime:    {is:["grounded","violent","twisty"],    not:["cozy"]},
+  war:      {is:["visceral","bleak","epic"],        not:["cozy"]},
+  mystery:  {is:["twisty"],                         not:["cozy"]},
+  fantasy:  {is:["visual","weird"],                 not:["grounded"]},
+  scifi:    {is:["cerebral","spectacle"],           not:["cozy"]},
+  drama:    {is:["characterstudy","grounded"],      not:[]},
+  musical:  {is:["uplifting","visual"],             not:["bleak"]},
+  documentary:{is:["grounded"],                     not:[]},
+  western:  {is:["grounded","epic"],                not:["cozy"]}
+};
+
+/* How centred a film is on the genres that were actually asked for: its own
+   tone agreeing, and its opposite absent. 1 when it reads like the thing you
+   asked for, 0 when it reads like the opposite, 0.5 when the tags say neither.
+   This is what keeps a bleak prestige drama that TMDB happens to file under
+   comedy — The Wolf of Wall Street, Parasite — from leading a comedy night. */
+function genreCentre(f, picked){
+  let want = 0, is = 0, not = 0;
+  picked.forEach(function(g){
+    const t = GENRE_TONE[g]; if(!t) return;
+    want++;
+    if(t.is.some(function(x){ return f.a.indexOf(x) > -1; })) is++;
+    if(t.not.some(function(x){ return f.a.indexOf(x) > -1; })) not++;
+  });
+  if(!want) return 0.5;
+  return clamp((is - not + want) / (2 * want), 0, 1);
+}
 function isScare(f){
   return f.g.indexOf(SCARE_GENRE) > -1 || f.a.indexOf(SCARE_TAG) > -1;
 }
@@ -3425,11 +3471,17 @@ function scoreAll(){
     const tasteRaw   = 0.62*attrScore + 0.26*genreTaste + 0.12*dirScore;
     const tasteN     = T.signal ? clamp((tasteRaw+1)/2, 0, 1) : 0.5;
 
-    /* explicit genre ask */
+    /* explicit genre ask.
+       The breadth half used to be the whole of it, and with a single genre
+       selected it is 1 for every film that carries it at all — so the ask
+       contributed nothing to the order and fame and acclaim decided the night.
+       That is how The Wolf of Wall Street, Parasite and Forrest Gump came to
+       top a Comedy-only bill. Centredness is the half that discriminates. */
     let genreN = 0.55;
     if(S.genres.length){
       const hits = f.g.filter(function(g){ return S.genres.indexOf(g)>-1; }).length;
-      genreN = clamp(hits / Math.min(f.g.length, S.genres.length), 0, 1);
+      const breadth = clamp(hits / Math.min(f.g.length, S.genres.length), 0, 1);
+      genreN = 0.35*breadth + 0.65*genreCentre(f, S.genres);
     }
 
     /* room fit */
