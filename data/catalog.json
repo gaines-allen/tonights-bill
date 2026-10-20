@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "generatedAt": "2026-10-20T15:41:55.939Z",
+  "generatedAt": "2026-10-20T16:28:07.509Z",
   "region": "US",
   "source": "TMDB + OMDb",
   "total": 245,
@@ -13,9 +13,8 @@
    "Do the Right Thing (1989)"
   ],
   "omdbErrors": {
-   "no Rotten Tomatoes entry for this title": 2,
-   "daily limit already reached": 134,
-   "Request limit reached!": 1
+   "Request limit reached!": 6,
+   "daily limit already reached": 238
   },
   "unmatched": [],
   "logos": {
@@ -30,382 +29,16 @@
   "scannedAt": "2026-10-20",
   "scanOk": true,
   "servicesMissed": [],
-  "shelfCount": 774,
-  "streamingNow": 919,
-  "arrived": [
-   "Animals",
-   "Triangle of Sadness",
-   "Godzilla Minus One",
-   "The Art of Racing in the Rain",
-   "Hamnet",
-   "The Bourne Ultimatum",
-   "Train Dreams",
-   "Damsel",
-   "Paddington in Peru",
-   "Goosebumps 2: Haunted Halloween",
-   "The Girl with the Dragon Tattoo",
-   "Made of Honor",
-   "Knocked Up",
-   "Thrash",
-   "The Impossible",
-   "The Life List",
-   "Shoplifters",
-   "A House of Dynamite",
-   "Society of the Snow",
-   "The Ice Road",
-   "Antz",
-   "After We Collided",
-   "Look Both Ways",
-   "Carry-On",
-   "My Oxford Year",
-   "Malcolm & Marie",
-   "That Christmas",
-   "Sleepless in Seattle",
-   "Den of Thieves 2: Pantera",
-   "Jackpot!",
-   "The Godfather Part III",
-   "Scream 7",
-   "The Marksman",
-   "The Lost City of Z",
-   "The Bone Collector",
-   "The Three Musketeers: D'Artagnan",
-   "Spectre",
-   "Enemy of the State",
-   "Dragged Across Concrete",
-   "A Christmas Carol",
-   "Bombshell",
-   "Novocaine",
-   "Cape Fear",
-   "The Spy Who Loved Me",
-   "Boiling Point",
-   "Octopussy",
-   "25th Hour",
-   "The Aeronauts",
-   "A View to a Kill",
-   "Memory",
-   "The Host",
-   "Mia and the White Lion",
-   "A Cure for Wellness",
-   "The Girl with the Dragon Tattoo",
-   "Stonehearst Asylum",
-   "The November Man",
-   "Star Wars",
-   "Hoppers",
-   "Guardians of the Galaxy Vol. 3",
-   "Avatar: The Way of Water",
-   "Iron Man",
-   "Spider-Man",
-   "Snow White and the Seven Dwarfs",
-   "Big Hero 6",
-   "Monsters, Inc.",
-   "The Princess and the Frog",
-   "Venom",
-   "Thunderbolts*",
-   "Brave",
-   "Toy Story 3",
-   "The Emperor's New Groove",
-   "Star Wars: The Force Awakens",
-   "Ralph Breaks the Internet",
-   "Cruella",
-   "Raya and the Last Dragon",
-   "Pirates of the Caribbean: Dead Men Tell No Tales",
-   "Elio",
-   "The Aristocats",
-   "Brother Bear",
-   "The BFG",
-   "Star Wars: Episode I - The Phantom Menace",
-   "The Simpsons Movie",
-   "The Jungle Book",
-   "Lady and the Tramp",
-   "Star Wars: Episode II - Attack of the Clones",
-   "Ant-Man",
-   "Secret of the Wings",
-   "Rogue One: A Star Wars Story",
-   "Solo: A Star Wars Story",
-   "Onward",
-   "Aladdin",
-   "We Bought a Zoo",
-   "Percy Jackson & the Olympians: The Lightning Thief",
-   "The Lion King II: Simba's Pride",
-   "Ice Princess",
-   "Tinker Bell and the Pirate Fairy",
-   "The Hunger Games: Mockingjay - Part 1",
-   "The Hunger Games: Mockingjay - Part 2",
-   "The Hunger Games: Catching Fire",
-   "Pearl",
-   "The Commuter",
-   "Ghostbusters II",
-   "Bad Boys for Life",
-   "Missing",
-   "Freelance",
-   "Ghostbusters",
-   "The Unholy",
-   "Predator: Killer of Killers",
-   "MaXXXine",
-   "Mrs. Doubtfire",
-   "Thanksgiving",
-   "Good Boy",
-   "Twisters",
-   "In the Lost Lands",
-   "The Swan Princess",
-   "It Ends with Us",
-   "The Animal Kingdom",
-   "Tarot",
-   "Last Christmas",
-   "Descendants 3",
-   "Lee",
-   "Whitney Houston: I Wanna Dance with Somebody",
-   "Father Stu",
-   "Primitive War",
-   "Bloodshot",
-   "Evil Dead Burn",
-   "Furiosa: A Mad Max Saga",
-   "The Death of Robin Hood",
-   "Evil Dead Rise",
-   "Hidden Figures",
-   "John Wick: Chapter 2",
-   "Prometheus",
-   "They Will Kill You",
-   "Shazam!",
-   "When Marnie Was There",
-   "The Lego Batman Movie",
-   "Castle in the Sky",
-   "Les Misérables",
-   "Maze Runner: The Death Cure",
-   "Final Destination 5",
-   "DC League of Super-Pets",
-   "Ferdinand",
-   "The Lobster",
-   "War for the Planet of the Apes",
-   "Annabelle: Creation",
-   "The Lord of the Rings: The War of the Rohirrim",
-   "The Boy and the Heron",
-   "Wonka",
-   "Final Destination 3",
-   "Freddy vs. Jason",
-   "Kingsman: The Golden Circle",
-   "Blink Twice",
-   "Scream",
-   "Challengers",
-   "Dracula",
-   "The Lego Movie",
-   "Top Gun",
-   "Transformers: Rise of the Beasts",
-   "Gemini Man",
-   "Mission: Impossible - Dead Reckoning Part One",
-   "The Untouchables",
-   "Basic Instinct",
-   "50 First Dates",
-   "The Mechanic",
-   "American Assassin",
-   "Fatal Attraction",
-   "Clueless",
-   "Argo",
-   "The Intern",
-   "We Were Soldiers",
-   "Star Trek Into Darkness",
-   "Dora and the Lost City of Gold",
-   "Hansel & Gretel: Witch Hunters",
-   "Passenger",
-   "We're the Millers",
-   "Star Trek",
-   "Jason Lives - Friday the 13th Part VI",
-   "V for Vendetta",
-   "Friday the 13th Part 2",
-   "The School of Rock",
-   "Daddy's Home",
-   "Clifford the Big Red Dog",
-   "The English Patient",
-   "Goosebumps",
-   "Smurfs: The Lost Village",
-   "Easy A",
-   "Shrek Forever After",
-   "Scary Stories to Tell in the Dark",
-   "The Grinch",
-   "The Pianist",
-   "Renfield",
-   "Paul",
-   "The Omen",
-   "Freaky",
-   "All My Life",
-   "News of the World",
-   "The Secret Garden",
-   "Hush",
-   "Begin Again",
-   "The Hand That Rocks the Cradle",
-   "The Fog",
-   "The Crow",
-   "Krampus",
-   "Requiem for a Dream",
-   "Drop",
-   "Coherence",
-   "Ride On",
-   "Unfriended: Dark Web"
-  ],
+  "shelfCount": 768,
+  "streamingNow": 913,
+  "arrived": [],
   "departed": [
-   "Boyhood",
-   "Jurassic World Dominion",
-   "Bugonia",
-   "The Sea Beast",
-   "I Swear",
-   "Until Dawn",
-   "The Next 365 Days",
-   "Conan the Barbarian",
-   "The Ministry of Ungentlemanly Warfare",
-   "The Twilight Saga: Breaking Dawn - Part 2",
-   "Red Notice",
-   "Back in Action",
-   "Law Abiding Citizen",
-   "After We Fell",
-   "Violent Night",
-   "Purple Hearts",
-   "13 Going on 30",
-   "Lawrence of Arabia",
-   "The Boogeyman",
-   "The Other Guys",
-   "Speed",
-   "Split",
-   "Emilia Pérez",
-   "Still Alice",
-   "Wind River",
-   "The Electric State",
-   "The Founder",
-   "Happy Gilmore 2",
-   "Pearl Harbor",
-   "Zathura: A Space Adventure",
-   "Enola Holmes 3",
-   "Wish Dragon",
-   "Murder Mystery",
-   "The Killer",
-   "Zero Dark Thirty",
-   "True Romance",
-   "The Gray Man",
-   "The Judge",
-   "The Devil's Mouth",
-   "The Witch",
-   "Play Dirty",
-   "Guy Ritchie's The Covenant",
-   "Playdate",
-   "Deep Cover",
-   "Blue Beetle",
-   "Only the Brave",
-   "Don't Breathe",
-   "The Great Escape",
-   "The Tomorrow War",
-   "The Foreigner",
-   "The Pickup",
-   "Lone Survivor",
-   "House of Gucci",
-   "Lolita",
-   "Regretting You",
-   "Boyka: Undisputed IV",
-   "The First Omen",
-   "National Lampoon's Van Wilder",
-   "Baywatch",
-   "Tomorrow Never Dies",
-   "Licence to Kill",
-   "My Spy",
-   "Atomic Blonde",
-   "Primate",
-   "Roofman",
-   "Lord of War",
-   "Hellraiser",
-   "Idiocracy",
-   "Eternals",
-   "Kraven the Hunter",
-   "Ant-Man and the Wasp",
-   "Ant-Man and the Wasp: Quantumania",
-   "Disenchanted",
-   "The Sorcerer's Apprentice",
-   "Phineas and Ferb the Movie: Across the 2nd Dimension",
-   "The Adventures of Ichabod and Mr. Toad",
-   "Confessions of a Shopaholic",
-   "Enchanted",
-   "Captain America: The Winter Soldier",
-   "Fantasia",
-   "Diary of a Wimpy Kid: Rodrick Rules",
-   "TRON: Ares",
-   "The Lion King 1½",
-   "Encanto",
-   "Freakier Friday",
-   "Miss Peregrine's Home for Peculiar Children",
-   "Captain America: The First Avenger",
-   "Hercules",
-   "Wicked",
-   "Ghostbusters: Afterlife",
-   "Fast & Furious Presents: Hobbs & Shaw",
-   "The Secret Agent",
-   "Mr. Jones",
-   "The Roses",
-   "Girl in the Basement",
-   "Descendants 2",
-   "The Taste of Things",
-   "Boston Strangler",
-   "Boss Level",
-   "Elevation",
-   "The Village",
-   "Together",
-   "Moneyball",
-   "True Lies",
-   "The Family Man",
-   "Pineapple Express",
-   "Lyle, Lyle, Crocodile",
-   "Howl's Moving Castle",
-   "Mortal Kombat II",
-   "Wedding Crashers",
-   "The Cat Returns",
-   "Pom Poko",
-   "Evil Dead II",
-   "The Bride!",
-   "Space Jam",
-   "Happy Together",
-   "Knox Goes Away",
-   "Insidious: The Last Key",
-   "Constantine",
-   "Materialists",
-   "The Killing of a Sacred Deer",
-   "Ocean's Twelve",
-   "Watchmen",
-   "Life of Pi",
-   "Days of Being Wild",
-   "Eddington",
-   "Monster-in-Law",
-   "The Great Beauty",
-   "Final Destination 2",
-   "Faster",
-   "Addams Family Values",
-   "Shakespeare in Love",
-   "The Patriot",
-   "Ghost",
-   "Tropic Thunder",
-   "Horrible Bosses",
-   "Rush Hour 2",
-   "What Women Want",
-   "Shooter",
-   "Almost Famous",
-   "The Hustle",
-   "The Autopsy of Jane Doe",
-   "A Haunted House 2",
-   "300",
-   "Molly's Game",
-   "The Book of Life",
-   "Silent Hill",
-   "Killer Elite",
-   "Happy Death Day",
-   "Fright Night",
-   "Fantastic Beasts: The Crimes of Grindelwald",
-   "Marry Me",
-   "The Rock",
-   "The Spiderwick Chronicles",
-   "Spirit Untamed",
-   "Cloverfield",
-   "The Last House on the Left",
-   "Remember Me",
-   "Strays",
-   "Wolf Man",
-   "The Endless",
-   "The Firm",
-   "We Need to Talk About Kevin"
+   "Rush Hour 3",
+   "Life Is Beautiful",
+   "Fatal Attraction",
+   "Terminator: Dark Fate",
+   "Knight and Day",
+   "Argo"
   ]
  },
  "films": [
@@ -444,7 +77,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "Goodfellas",
@@ -478,7 +113,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "Pulp Fiction",
@@ -518,7 +155,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "The Departed",
@@ -557,7 +196,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "No Country for Old Men",
@@ -596,7 +237,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "Heat",
@@ -636,7 +279,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 84
+   "rt": 84,
+   "omdbError": "Request limit reached!",
+   "rtCarried": true
   },
   {
    "t": "Se7en",
@@ -675,7 +320,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 84
+   "rt": 84,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Zodiac",
@@ -714,7 +361,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Gone Girl",
@@ -751,7 +400,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Prisoners",
@@ -788,7 +439,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 81
+   "rt": 81,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Sicario",
@@ -827,7 +480,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Silence of the Lambs",
@@ -867,7 +522,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Parasite",
@@ -906,7 +563,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Memento",
@@ -947,7 +606,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Nightcrawler",
@@ -986,7 +647,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Uncut Gems",
@@ -1023,7 +686,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Blade Runner 2049",
@@ -1062,7 +727,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Blade Runner",
@@ -1099,7 +766,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Arrival",
@@ -1139,7 +808,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Dune",
@@ -1155,7 +826,7 @@
    "cert": "PG-13",
    "tmdbScore": 78,
    "rating": 7.785,
-   "votes": 15751,
+   "votes": 15753,
    "poster": "/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
    "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people.",
    "backdrop": "/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
@@ -1175,7 +846,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 83
+   "rt": 83,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Dune: Part Two",
@@ -1210,7 +883,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Interstellar",
@@ -1250,7 +925,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 73
+   "rt": 73,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Inception",
@@ -1286,7 +963,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 86
+   "rt": 86,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Matrix",
@@ -1322,7 +1001,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 83
+   "rt": 83,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Alien",
@@ -1358,7 +1039,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Aliens",
@@ -1397,7 +1080,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Ex Machina",
@@ -1435,7 +1120,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Everything Everywhere All at Once",
@@ -1474,7 +1161,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Children of Men",
@@ -1509,7 +1198,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Mad Max: Fury Road",
@@ -1543,7 +1234,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Edge of Tomorrow",
@@ -1581,7 +1274,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Her",
@@ -1618,7 +1313,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Annihilation",
@@ -1654,7 +1351,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Gravity",
@@ -1690,7 +1389,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Martian",
@@ -1725,7 +1426,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Looper",
@@ -1762,7 +1465,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "District 9",
@@ -1794,7 +1499,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Minority Report",
@@ -1834,7 +1541,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Jurassic Park",
@@ -1867,7 +1576,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "E.T. the Extra-Terrestrial",
@@ -1902,7 +1613,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Back to the Future",
@@ -1939,7 +1652,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Star Wars: A New Hope",
@@ -1976,7 +1691,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Empire Strikes Back",
@@ -2012,7 +1729,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Rogue One",
@@ -2048,7 +1767,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 84
+   "rt": 84,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Dark Knight",
@@ -2087,7 +1808,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Batman Begins",
@@ -2126,7 +1849,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Oppenheimer",
@@ -2164,7 +1889,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Dunkirk",
@@ -2202,7 +1929,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Saving Private Ryan",
@@ -2239,7 +1968,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "1917",
@@ -2274,7 +2005,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Inglourious Basterds",
@@ -2311,7 +2044,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Apocalypse Now",
@@ -2349,7 +2084,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Full Metal Jacket",
@@ -2387,7 +2124,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Shawshank Redemption",
@@ -2421,7 +2160,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 89
+   "rt": 89,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Forrest Gump",
@@ -2460,7 +2201,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 75
+   "rt": 75,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Social Network",
@@ -2492,7 +2235,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Whiplash",
@@ -2526,7 +2271,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "There Will Be Blood",
@@ -2564,7 +2311,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Moonlight",
@@ -2598,7 +2347,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Manchester by the Sea",
@@ -2634,7 +2385,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Marriage Story",
@@ -2668,7 +2421,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Banshees of Inisherin",
@@ -2702,7 +2457,9 @@
    ],
    "k": "adult",
    "pop": 1,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Little Women",
@@ -2737,7 +2494,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Lady Bird",
@@ -2775,7 +2534,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Grand Budapest Hotel",
@@ -2810,7 +2571,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Knives Out",
@@ -2847,7 +2610,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Menu",
@@ -2886,7 +2651,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 88
+   "rt": 88,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Glass Onion",
@@ -2925,7 +2692,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Get Out",
@@ -2963,7 +2732,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Hereditary",
@@ -3004,7 +2775,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Babadook",
@@ -3040,7 +2813,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "A Quiet Place",
@@ -3079,7 +2854,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Shining",
@@ -3117,7 +2894,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 84
+   "rt": 84,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Thing",
@@ -3156,7 +2935,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 85
+   "rt": 85,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "It Follows",
@@ -3194,7 +2975,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Scream",
@@ -3235,7 +3018,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 78
+   "rt": 78,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Sinners",
@@ -3274,7 +3059,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Nope",
@@ -3311,7 +3098,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 83
+   "rt": 83,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "28 Days Later",
@@ -3346,7 +3135,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 87
+   "rt": 87,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Spirited Away",
@@ -3383,7 +3174,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "My Neighbor Totoro",
@@ -3420,7 +3213,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Princess Mononoke",
@@ -3457,7 +3252,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Spider-Man: Into the Spider-Verse",
@@ -3494,7 +3291,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Spider-Man: Across the Spider-Verse",
@@ -3508,9 +3307,9 @@
    },
    "runtime": 140,
    "cert": "PG",
-   "tmdbScore": 83,
-   "rating": 8.349,
-   "votes": 9420,
+   "tmdbScore": 84,
+   "rating": 8.35,
+   "votes": 9424,
    "poster": "/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
    "overview": "After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence.",
    "backdrop": "/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
@@ -3535,7 +3334,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Incredibles",
@@ -3576,7 +3377,7 @@
    "k": "all",
    "pop": 3,
    "rt": null,
-   "omdbError": "no Rotten Tomatoes entry for this title"
+   "omdbError": "daily limit already reached"
   },
   {
    "t": "Ratatouille",
@@ -3615,7 +3416,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "WALL-E",
@@ -3654,7 +3457,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Toy Story",
@@ -3670,7 +3475,7 @@
    "cert": "G",
    "tmdbScore": 80,
    "rating": 7.99,
-   "votes": 20698,
+   "votes": 20699,
    "poster": "/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg",
    "overview": "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
    "backdrop": "/3Rfvhy1Nl6sSGJwyjb0QiZzZYlB.jpg",
@@ -3694,7 +3499,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 100
+   "rt": 100,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Inside Out",
@@ -3735,7 +3542,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Coco",
@@ -3774,7 +3583,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 97
+   "rt": 97,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Up",
@@ -3814,7 +3625,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Finding Nemo",
@@ -3853,7 +3666,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Zootopia",
@@ -3893,7 +3708,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 98
+   "rt": 98,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Moana",
@@ -3934,7 +3751,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 96
+   "rt": 96,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "How to Train Your Dragon",
@@ -3974,7 +3793,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Lion King",
@@ -4014,7 +3835,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 92
+   "rt": 92,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Klaus",
@@ -4053,7 +3876,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Puss in Boots: The Last Wish",
@@ -4095,7 +3920,7 @@
    "k": "all",
    "pop": 2,
    "rt": null,
-   "omdbError": "no Rotten Tomatoes entry for this title"
+   "omdbError": "daily limit already reached"
   },
   {
    "t": "The Lord of the Rings: The Fellowship of the Ring",
@@ -4134,7 +3959,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Lord of the Rings: The Two Towers",
@@ -4173,7 +4000,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Lord of the Rings: The Return of the King",
@@ -4212,7 +4041,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 94
+   "rt": 94,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Pan's Labyrinth",
@@ -4248,7 +4079,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 95
+   "rt": 95,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "The Princess Bride",
@@ -4287,7 +4120,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Harry Potter and the Prisoner of Azkaban",
@@ -4323,7 +4158,9 @@
    ],
    "k": "all",
    "pop": 3,
-   "rt": 90
+   "rt": 90,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Casablanca",
@@ -4361,7 +4198,9 @@
    ],
    "k": "all",
    "pop": 2,
-   "rt": 99
+   "rt": 99,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "When Harry Met Sally",
@@ -4437,7 +4276,9 @@
    ],
    "k": "adult",
    "pop": 2,
-   "rt": 100
+   "rt": 100,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Eternal Sunshine of the Spotless Mind",
@@ -4474,7 +4315,9 @@
    ],
    "k": "adult",
    "pop": 3,
-   "rt": 93
+   "rt": 93,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "La La Land",
@@ -4511,7 +4354,9 @@
    ],
    "k": "teen",
    "pop": 3,
-   "rt": 91
+   "rt": 91,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Notting Hill",
@@ -4548,7 +4393,9 @@
    ],
    "k": "teen",
    "pop": 2,
-   "rt": 84
+   "rt": 84,
+   "omdbError": "daily limit already reached",
+   "rtCarried": true
   },
   {
    "t": "Crazy Rich Asians",
@@ -4584,7 +4431,7 @@
    "k": "teen",
    "pop": 2,
    "rt": 91,
-   "omdbError": "Request limit reached!",
+   "omdbError": "daily limit already reached",
    "rtCarried": true
   },
   {
@@ -5017,7 +4864,7 @@
    "cert": "R",
    "tmdbScore": 73,
    "rating": 7.339,
-   "votes": 3949,
+   "votes": 3950,
    "poster": "/gnAfqiV7yO3Jq9IntTmwkcaICqc.jpg",
    "overview": "When carefree Nyles and reluctant maid of honor Sarah have a chance encounter at a Palm Springs wedding, things get complicated when they find themselves unable to escape the venue, themselves, or each other.",
    "backdrop": "/d7JUXVvjvVCXWs1mlpyO5ESdWdT.jpg",
@@ -5282,8 +5129,8 @@
    "runtime": 144,
    "cert": "PG-13",
    "tmdbScore": 76,
-   "rating": 7.577,
-   "votes": 12114,
+   "rating": 7.578,
+   "votes": 12119,
    "poster": "/lMrxYKKhd4lqRzwUHAy5gcx9PSO.jpg",
    "overview": "Le Chiffre, a banker to the world's terrorists, is scheduled to participate in a high-stakes poker game in Montenegro, where he intends to use his winnings to establish his financial grip on the terrorist market. M sends Bond—on his maiden mission as a 00 Agent—to attend this game and prevent Le Chiffre from winning.",
    "backdrop": "/klJMCIblHLFwCuGjKz7tyOpekIC.jpg",
@@ -5986,7 +5833,7 @@
    "cert": "PG",
    "tmdbScore": 72,
    "rating": 7.194,
-   "votes": 5001,
+   "votes": 5002,
    "poster": "/wYoDpWInsBEVSmWStnRH06ddoyk.jpg",
    "overview": "Matilda Wormwood is an brilliant and intelligent little girl. Unfortunately, her parents, Harry and Zinnia, fail to see that fact. As time passes, she finally starts school and has a kind teacher, loyal friends, and a terrifying, sadistic headmistress.",
    "backdrop": "/t3HVA7XdVnQneMjI5hYjEhXmHY3.jpg",
@@ -6373,7 +6220,7 @@
    "cert": "PG",
    "tmdbScore": 81,
    "rating": 8.12,
-   "votes": 6424,
+   "votes": 6426,
    "poster": "/gHm96BRW4GoI339rF1vYoYTB6Qe.jpg",
    "overview": "After the insane General Jack D. Ripper initiates a nuclear strike on the Soviet Union, a war room full of politicians, generals and a Russian diplomat all frantically try to stop it.",
    "backdrop": "/7i0L2ee4Iy0aXV6vR5u1ZmblOrx.jpg",
@@ -6607,8 +6454,8 @@
    "runtime": 119,
    "cert": "R",
    "tmdbScore": 72,
-   "rating": 7.158,
-   "votes": 4979,
+   "rating": 7.157,
+   "votes": 4980,
    "poster": "/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
    "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
    "backdrop": "/iYqSQaWDttQIQzsxg9xHyg0bttG.jpg",
@@ -7186,7 +7033,7 @@
    "cert": "R",
    "tmdbScore": 76,
    "rating": 7.6,
-   "votes": 4371,
+   "votes": 4372,
    "poster": "/rLOk4z9zL1tTukIYV56P94aZXKk.jpg",
    "overview": "When cocky military lawyer Lt. Daniel Kaffee and his co-counsel, Lt. Cmdr. JoAnne Galloway, are assigned to a murder case, they uncover a hazing ritual that could implicate high-ranking officials such as shady Col. Nathan Jessep.",
    "backdrop": "/8UOdqhVP28OcnzNL6DnQf0GDLvR.jpg",
@@ -7692,8 +7539,8 @@
    "runtime": 108,
    "cert": "R",
    "tmdbScore": 72,
-   "rating": 7.159,
-   "votes": 3499,
+   "rating": 7.16,
+   "votes": 3501,
    "poster": "/8Vc5EOUEIF1EUXuX9eLFf7BvN3P.jpg",
    "overview": "A woman in her sixties embarks on a journey through the western United States after losing everything in the Great Recession, living as a van-dwelling modern-day nomad.",
    "backdrop": "/563sRDK3rZS31TXCdTY4lfcwrNK.jpg",
@@ -7883,7 +7730,7 @@
    "runtime": 120,
    "cert": "PG-13",
    "tmdbScore": 73,
-   "rating": 7.318,
+   "rating": 7.317,
    "votes": 4670,
    "poster": "/pHlRr2MfjK77VIIAO7p0R4jhsJI.jpg",
    "overview": "A young girl named Mija risks everything to prevent a powerful, multi-national company from kidnapping her best friend - a massive animal named Okja.",
@@ -7994,8 +7841,8 @@
    "runtime": 127,
    "cert": "R",
    "tmdbScore": 82,
-   "rating": 8.167,
-   "votes": 14461,
+   "rating": 8.2,
+   "votes": 14463,
    "poster": "/z2FnLKpFi1HPO7BEJxdkv6hpJSU.jpg",
    "overview": "Will Hunting is a headstrong, working-class genius who is failing the lessons of life. After one too many run-ins with the law, Will's last chance is a psychology professor, who might be the only man who can reach him.",
    "backdrop": "/xj1Sv1xm4Y0ydBueGuf10Y9qM0O.jpg",
@@ -8181,8 +8028,8 @@
    "runtime": 107,
    "cert": "PG-13",
    "tmdbScore": 80,
-   "rating": 7.956,
-   "votes": 13479,
+   "rating": 7.957,
+   "votes": 13482,
    "poster": "/vOyfUXNFSnaTk7Vk5AjpsKTUWsu.jpg",
    "overview": "Following an unexpected tragedy, child psychologist Malcolm Crowe meets a nine year old boy named Cole Sear, who is hiding a dark secret.",
    "backdrop": "/6TjllWT3cGrPFyqDXurVZ3L8bBi.jpg",
@@ -8445,7 +8292,7 @@
    "cert": "PG-13",
    "tmdbScore": 73,
    "rating": 7.31,
-   "votes": 11398,
+   "votes": 11397,
    "poster": "/qXAuQ9hF30sQRsXf40OfRVl0MJZ.jpg",
    "overview": "Tom, greeting-card writer and hopeless romantic, is caught completely off-guard when his girlfriend, Summer, suddenly dumps him. He reflects on their 500 days together to try to figure out where their love affair went sour, and in doing so, Tom rediscovers his true passions in life.",
    "backdrop": "/1M2i4Mxd03elGOTmEkIvqrHfmyS.jpg",
@@ -9432,8 +9279,8 @@
    "runtime": 96,
    "cert": "PG-13",
    "tmdbScore": 70,
-   "rating": 6.954,
-   "votes": 3752,
+   "rating": 6.953,
+   "votes": 3754,
    "poster": "/cA4ggkZ3r1d5r9hOAUWC8x5ul2i.jpg",
    "overview": "Val McKee and Earl Bassett are in a fight for their lives when they discover that their desolate town has been infested with gigantic, man-eating creatures that live below the ground.",
    "backdrop": "/3L3DUwfRLW18OUiLSdmovfICyY3.jpg",
@@ -10130,8 +9977,8 @@
    "mpaa": "PG",
    "rt": 37,
    "rtSrc": "rt",
-   "rating": 6.396,
-   "votes": 8335,
+   "rating": 6.395,
+   "votes": 8336,
    "poster": "/dfp1BZF7FxbBUyzHvMOI9t8NWDD.jpg",
    "backdrop": "/scLQDnf1m2AqEEQSjAEdMRD6K9I.jpg",
    "tmdb": 57800,
@@ -12409,8 +12256,8 @@
    "mpaa": "R",
    "rt": 63,
    "rtSrc": "rt",
-   "rating": 6.7,
-   "votes": 5418,
+   "rating": 6.674,
+   "votes": 5419,
    "poster": "/1gDV0Lm9y8ufIKzyf0h0GBgb9Zj.jpg",
    "backdrop": "/6RDgtEBzjuF7W25DVziXRABchpX.jpg",
    "tmdb": 109428,
@@ -13018,7 +12865,7 @@
    "rt": 70,
    "rtSrc": "tmdb",
    "rating": 6.978,
-   "votes": 1328,
+   "votes": 1329,
    "poster": "/c90Lt7OQGsOmhv6x4JoFdoHzw5l.jpg",
    "backdrop": "/7Q2CmqIVJuDAESPPp76rWIiA0AD.jpg",
    "tmdb": 1011477,
@@ -13348,7 +13195,7 @@
    "rt": 79,
    "rtSrc": "rt",
    "rating": 7.379,
-   "votes": 3103,
+   "votes": 3104,
    "poster": "/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg",
    "backdrop": "/wRxLAw4l17LqiFcPLkobriPTZAw.jpg",
    "tmdb": 697843,
@@ -14719,7 +14566,7 @@
    "rt": 74,
    "rtSrc": "tmdb",
    "rating": 7.413,
-   "votes": 7131,
+   "votes": 7134,
    "poster": "/lm3pQ2QoQ16pextRsmnUbG2onES.jpg",
    "backdrop": "/zNnjHLDtV8Ti3aworltaeaLMov4.jpg",
    "tmdb": 242,
@@ -14784,7 +14631,7 @@
    "mpaa": "NR",
    "rt": 78,
    "rtSrc": "rt",
-   "rating": 6.752,
+   "rating": 6.8,
    "votes": 2066,
    "poster": "/ju10W5gl3PPK3b7TjEmVOZap51I.jpg",
    "backdrop": "/bHfGHipZ32Oec94FDJO4mWs3aZ5.jpg",
@@ -15684,7 +15531,7 @@
    "rt": 74,
    "rtSrc": "rt",
    "rating": 7.831,
-   "votes": 10389,
+   "votes": 10390,
    "poster": "/kJZoAHq1SLDdWjeNGtlHAnGpmFV.jpg",
    "backdrop": "/gTghF8ardwJ48XLHkiapWk3ZmSo.jpg",
    "tmdb": 107,
@@ -15817,8 +15664,8 @@
    "mpaa": "PG-13",
    "rt": 48,
    "rtSrc": "rt",
-   "rating": 7.375,
-   "votes": 6006,
+   "rating": 7.376,
+   "votes": 6008,
    "poster": "/fDPAjvfPMomkKF7cMRmL5Anak61.jpg",
    "backdrop": "/uMBByiSDpgFwWVegAtwwnuzvogJ.jpg",
    "tmdb": 297,
@@ -16253,7 +16100,7 @@
    "mpaa": "R",
    "rt": 58,
    "rtSrc": "rt",
-   "rating": 6.618,
+   "rating": 6.6,
    "votes": 6851,
    "poster": "/1guBpk75GGPtx9mirXqzwziPITy.jpg",
    "backdrop": "/blfZnm6StMPnTY35kaooPBCsSVp.jpg",
@@ -16885,8 +16732,8 @@
    "mpaa": "R",
    "rt": 73,
    "rtSrc": "tmdb",
-   "rating": 7.306,
-   "votes": 2683,
+   "rating": 7.307,
+   "votes": 2685,
    "poster": "/uW7tTRElr2tRhmAVESzvHy4ByXg.jpg",
    "backdrop": "/mpfRchw4jh2cEBajB9EJltTnDH2.jpg",
    "tmdb": 1429,
@@ -17217,7 +17064,7 @@
    "mpaa": "PG",
    "rt": 53,
    "rtSrc": "rt",
-   "rating": 6.89,
+   "rating": 6.9,
    "votes": 3594,
    "poster": "/kNbaxEsnCyWBTfANVPHayujBsxp.jpg",
    "backdrop": "/p50q3DO1DTFhKH5CqNLRGio6zCo.jpg",
@@ -17319,8 +17166,8 @@
    "mpaa": "PG-13",
    "rt": 62,
    "rtSrc": "tmdb",
-   "rating": 6.213,
-   "votes": 3081,
+   "rating": 6.212,
+   "votes": 3082,
    "poster": "/jwoaKYVqPgYemFpaANL941EF94R.jpg",
    "backdrop": "/dCgrFY6uTqhEpyhe8MzP1oExyLt.jpg",
    "tmdb": 1032823,
@@ -18681,7 +18528,7 @@
    "rt": 79,
    "rtSrc": "rt",
    "rating": 7.836,
-   "votes": 22942,
+   "votes": 22943,
    "poster": "/poHwCZeWzJCShH7tOjg8RIoyjcw.jpg",
    "backdrop": "/uRNgkJSkNBFbbn9fPsEjDIy8Sh3.jpg",
    "tmdb": 22,
@@ -18812,8 +18659,8 @@
    "mpaa": "PG-13",
    "rt": 51,
    "rtSrc": "rt",
-   "rating": 6.244,
-   "votes": 11245,
+   "rating": 6.243,
+   "votes": 11247,
    "poster": "/db32LaOibwEliAmSL2jjDF6oDdj.jpg",
    "backdrop": "/auJKGst3vXpJozHZh4nMFs0xWIU.jpg",
    "tmdb": 181812,
@@ -18989,8 +18836,8 @@
    "mpaa": "PG",
    "rt": 72,
    "rtSrc": "rt",
-   "rating": 7.178,
-   "votes": 2330,
+   "rating": 7.176,
+   "votes": 2331,
    "poster": "/ckQzKpQJO4ZQDCN5evdpKcfm7Ys.jpg",
    "backdrop": "/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
    "tmdb": 552524,
@@ -20077,7 +19924,7 @@
    "rt": 71,
    "rtSrc": "rt",
    "rating": 6.766,
-   "votes": 19249,
+   "votes": 19251,
    "poster": "/jexoNYnPd6vVrmygwF6QZmWPFdu.jpg",
    "backdrop": "/sxskOU71CO8LaNX2LOtjYFUtKv7.jpg",
    "tmdb": 1930,
@@ -21636,8 +21483,8 @@
    "mpaa": "PG",
    "rt": 73,
    "rtSrc": "rt",
-   "rating": 7.59,
-   "votes": 5585,
+   "rating": 7.589,
+   "votes": 5589,
    "poster": "/4Y1WNkd88JXmGfhtWR7dmDAo1T2.jpg",
    "backdrop": "/4fLZUr1e65hKPPVw0R3PmKFKxj1.jpg",
    "tmdb": 976573,
@@ -21733,7 +21580,7 @@
    "rt": 65,
    "rtSrc": "rt",
    "rating": 7.128,
-   "votes": 1897,
+   "votes": 1898,
    "poster": "/7ze7YNmUaX81ufctGqt0AgHxRtL.jpg",
    "backdrop": "/ml8YBTJq7UkALfI022FWscCQuQW.jpg",
    "tmdb": 642885,
@@ -21902,8 +21749,8 @@
    "mpaa": "R",
    "rt": 89,
    "rtSrc": "rt",
-   "rating": 7.132,
-   "votes": 6635,
+   "rating": 7.129,
+   "votes": 6642,
    "poster": "/lqoMzCcZYEFK729d6qzt349fB4o.jpg",
    "backdrop": "/bVSOgrxasVJF6V71T7v2KfBRSzu.jpg",
    "tmdb": 933260,
@@ -23126,7 +22973,7 @@
    "rt": 91,
    "rtSrc": "rt",
    "rating": 7.344,
-   "votes": 12584,
+   "votes": 12587,
    "poster": "/mSmAc9G25fhOHH45SLEeagR0qi7.jpg",
    "backdrop": "/3SozaNPOYUadcmTPgndDibMyDNC.jpg",
    "tmdb": 119450,
@@ -23293,7 +23140,7 @@
    "rt": 60,
    "rtSrc": "rt",
    "rating": 7.285,
-   "votes": 6899,
+   "votes": 6903,
    "poster": "/buqmCdFQEWwEpL3agGgg2GVjN2d.jpg",
    "backdrop": "/fBvSfLetWlAMevQVHa0nBDV1Fon.jpg",
    "tmdb": 1572,
@@ -24131,7 +23978,7 @@
    "mpaa": "PG",
    "rt": 65,
    "rtSrc": "tmdb",
-   "rating": 6.53,
+   "rating": 6.531,
    "votes": 2849,
    "poster": "/tTDsCVlDA8QR4Dc6t6nERfwl5z.jpg",
    "backdrop": "/Y50RfoNVKIj9dSJavE8uBdN377.jpg",
@@ -25473,7 +25320,7 @@
    "rt": 85,
    "rtSrc": "rt",
    "rating": 7.674,
-   "votes": 12710,
+   "votes": 12712,
    "poster": "/74xTEgt7R36Fpooo50r9T25onhq.jpg",
    "backdrop": "/rvtdN5XkWAfGX6xDuPL6yYS2seK.jpg",
    "tmdb": 414906,
@@ -25544,7 +25391,7 @@
    "rt": 85,
    "rtSrc": "rt",
    "rating": 7.595,
-   "votes": 10526,
+   "votes": 10525,
    "poster": "/3RAoVTxUk1OzZClscAsynuu670p.jpg",
    "backdrop": "/v23fWgJUEt8EMmvn19btIacxP8E.jpg",
    "tmdb": 3933,
@@ -25646,7 +25493,7 @@
    "rt": 82,
    "rtSrc": "rt",
    "rating": 7.709,
-   "votes": 24246,
+   "votes": 24247,
    "poster": "/sdEOH0992YZ0QSxgXNIGLq1ToUi.jpg",
    "backdrop": "/bvRnPaai6JL7XHF4K6414DdSHro.jpg",
    "tmdb": 672,
@@ -26044,8 +25891,8 @@
    "mpaa": "R",
    "rt": 70,
    "rtSrc": "tmdb",
-   "rating": 6.96,
-   "votes": 4060,
+   "rating": 6.958,
+   "votes": 4062,
    "poster": "/5ik4ATKmNtmJU6AYD0bLm56BCVM.jpg",
    "backdrop": "/7bWxAsNPv9CXHOhZbJVlj2KxgfP.jpg",
    "tmdb": 713704,
@@ -26703,7 +26550,7 @@
    "rt": 90,
    "rtSrc": "rt",
    "rating": 8.052,
-   "votes": 11272,
+   "votes": 11271,
    "poster": "/bRYLt8fV82tdVoDppSFTZIcJiLN.jpg",
    "backdrop": "/oQHF0Y4gCw6VdPmapjsbZoxY2ht.jpg",
    "tmdb": 359940,
@@ -30159,8 +30006,8 @@
    "mpaa": "PG-13",
    "rt": 38,
    "rtSrc": "rt",
-   "rating": 6.393,
-   "votes": 10989,
+   "rating": 6.394,
+   "votes": 10993,
    "poster": "/enA22EPyzc2WQ1VVyY7zxresQQr.jpg",
    "backdrop": "/o1l6OCqA3pYDZHIc5L1s7CEzCMv.jpg",
    "tmdb": 608,
@@ -30291,8 +30138,8 @@
    "mpaa": "PG-13",
    "rt": 73,
    "rtSrc": "rt",
-   "rating": 6.767,
-   "votes": 7930,
+   "rating": 6.768,
+   "votes": 7932,
    "poster": "/vKGYCpmQyV9uHybWDzXuII8Los5.jpg",
    "backdrop": "/bYKeB9uUcPmvikjouEEQ86uvPw9.jpg",
    "tmdb": 956,
@@ -30694,7 +30541,7 @@
    "rt": 70,
    "rtSrc": "tmdb",
    "rating": 6.953,
-   "votes": 4581,
+   "votes": 4582,
    "poster": "/76Ts0yoHk8kVQj9MMnoMixhRWoh.jpg",
    "backdrop": "/7FRraud59N3s10bbf9bfYjvwx3v.jpg",
    "tmdb": 402,
@@ -30866,141 +30713,6 @@
    "firstSeen": "2026-09-04"
   },
   {
-   "t": "Rush Hour 3",
-   "y": 2007,
-   "r": 90,
-   "g": [
-    "action",
-    "comedy",
-    "crime"
-   ],
-   "a": [
-    "propulsive",
-    "comic",
-    "visceral",
-    "brisk"
-   ],
-   "svcs": [
-    "PAR"
-   ],
-   "d": "Brett Ratner",
-   "h": "After a botched assassination attempt, the mismatched duo finds themselves in Paris, struggling to retrieve a precious list of names, as the murderous crime syndicate's henchmen try their best to stop them. Once more, Lee and Carter must fight their way through dangerous gangsters; however, this time, the past has come back to haunt Lee. Will the boys get the job done once and for all?",
-   "k": "teen",
-   "pop": 1,
-   "mpaa": "PG-13",
-   "rt": 65,
-   "rtSrc": "tmdb",
-   "rating": 6.503,
-   "votes": 3900,
-   "poster": "/mp9CzKxLa2i7yblMXUrzVfGqsCo.jpg",
-   "backdrop": "/ozsLB1HRCN6ZAmJN89pWtoiAwnb.jpg",
-   "tmdb": 5174,
-   "imdb": "tt0293564",
-   "firstSeen": "2026-10-05"
-  },
-  {
-   "t": "Life Is Beautiful",
-   "y": 1997,
-   "r": 116,
-   "g": [
-    "comedy",
-    "drama"
-   ],
-   "a": [
-    "comic",
-    "melancholy",
-    "visceral",
-    "romantic",
-    "ironic",
-    "bleak"
-   ],
-   "svcs": [
-    "PAR"
-   ],
-   "d": "Roberto Benigni",
-   "h": "A touching story of an Italian book seller of Jewish ancestry who lives in his own little fairy tale. His creative and happy life would come to an abrupt halt when his entire family is deported to a concentration camp during World War II. While locked up he tries to convince his son that the whole thing is just a game.",
-   "k": "teen",
-   "pop": 2,
-   "mpaa": "PG-13",
-   "rt": 80,
-   "rtSrc": "rt",
-   "rating": 8.436,
-   "votes": 14331,
-   "poster": "/74hLDKjD5aGYOotO6esUVaeISa2.jpg",
-   "backdrop": "/6aNKD81RHR1DqUUa8kOZ1TBY1Lp.jpg",
-   "tmdb": 637,
-   "imdb": "tt0118799",
-   "firstSeen": "2026-09-24"
-  },
-  {
-   "t": "Fatal Attraction",
-   "y": 1987,
-   "r": 119,
-   "g": [
-    "thriller",
-    "drama",
-    "romance"
-   ],
-   "a": [
-    "comic",
-    "melancholy",
-    "romantic",
-    "dialogue",
-    "characterstudy",
-    "weird"
-   ],
-   "svcs": [
-    "PAR"
-   ],
-   "d": "Adrian Lyne",
-   "h": "A married man's one-night stand comes back to haunt him when that lover begins to stalk him and his family.",
-   "k": "adult",
-   "pop": 1,
-   "mpaa": "R",
-   "rt": 68,
-   "rtSrc": "tmdb",
-   "rating": 6.839,
-   "votes": 1777,
-   "poster": "/vjB9XwJKnYqFKKjhWcE6WpAf5Ki.jpg",
-   "backdrop": "/2UlBdiveZcOVrlNe5MYcI6TYeA7.jpg",
-   "tmdb": 10998,
-   "imdb": "tt0093010",
-   "firstSeen": "2026-10-20"
-  },
-  {
-   "t": "Terminator: Dark Fate",
-   "y": 2019,
-   "r": 128,
-   "g": [
-    "scifi",
-    "action",
-    "adventure",
-    "thriller"
-   ],
-   "a": [
-    "cerebral",
-    "bleak",
-    "propulsive"
-   ],
-   "svcs": [
-    "PAR"
-   ],
-   "d": "Tim Miller",
-   "h": "Decades after Sarah Connor prevented Judgment Day, a lethal new Terminator is sent to eliminate the future leader of the resistance. In a fight to save mankind, battle-hardened Sarah Connor teams up with an unexpected ally and an enhanced super soldier to stop the deadliest Terminator yet.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 70,
-   "rtSrc": "rt",
-   "rating": 6.419,
-   "votes": 5923,
-   "poster": "/vqzNJRH4YyquRiWxCCOH0aXggHI.jpg",
-   "backdrop": "/a6cDxdwaQIFjSkXf7uskg78ZyTq.jpg",
-   "tmdb": 290859,
-   "imdb": "tt6450804",
-   "firstSeen": "2026-09-18"
-  },
-  {
    "t": "The SpongeBob Movie: Sponge Out of Water",
    "y": 2015,
    "r": 93,
@@ -31038,6 +30750,71 @@
    "firstSeen": "2026-08-31"
   },
   {
+   "t": "Mission: Impossible II",
+   "y": 2000,
+   "r": 123,
+   "g": [
+    "adventure",
+    "action",
+    "thriller"
+   ],
+   "a": [
+    "propulsive",
+    "melancholy",
+    "stylish"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "John Woo",
+   "h": "With computer genius Luther Stickell at his side and a beautiful thief on his mind, agent Ethan Hunt races across Australia and Spain to stop a former IMF agent from unleashing a genetically engineered biological weapon called Chimera. This mission, should Hunt choose to accept it, plunges him into the center of an international crisis of terrifying magnitude.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 61,
+   "rtSrc": "tmdb",
+   "rating": 6.138,
+   "votes": 7902,
+   "poster": "/hfnrual76gPeNFduhD4xzHWpfTw.jpg",
+   "backdrop": "/24DZfupDlhXeTchmcOkoGRhP5Vg.jpg",
+   "tmdb": 955,
+   "imdb": "tt0120755",
+   "firstSeen": "2026-10-12"
+  },
+  {
+   "t": "Rush Hour",
+   "y": 1998,
+   "r": 97,
+   "g": [
+    "action",
+    "comedy",
+    "crime"
+   ],
+   "a": [
+    "propulsive",
+    "comic",
+    "visceral",
+    "brisk"
+   ],
+   "svcs": [
+    "PAR"
+   ],
+   "d": "Brett Ratner",
+   "h": "When Hong Kong Inspector Lee is summoned to Los Angeles to investigate a kidnapping, the FBI doesn't want any outside help and assigns cocky LAPD Detective James Carter to distract Lee from the case. Not content to watch the action from the sidelines, Lee and Carter form an unlikely partnership and investigate the case themselves.",
+   "k": "teen",
+   "pop": 2,
+   "mpaa": "PG-13",
+   "rt": 62,
+   "rtSrc": "rt",
+   "rating": 7.089,
+   "votes": 5981,
+   "poster": "/nwPhAsfnb7f46bZkWLG7IRP5HXr.jpg",
+   "backdrop": "/9FrpAtF87VKblKkDEiIZzYgO40K.jpg",
+   "tmdb": 2109,
+   "imdb": "tt0120812",
+   "firstSeen": "2026-10-11"
+  },
+  {
    "t": "Clueless",
    "y": 1995,
    "r": 97,
@@ -31071,36 +30848,38 @@
    "firstSeen": "2026-10-20"
   },
   {
-   "t": "Knight and Day",
-   "y": 2010,
-   "r": 109,
+   "t": "Smile",
+   "y": 2022,
+   "r": 115,
    "g": [
-    "action",
-    "comedy"
+    "horror",
+    "mystery"
    ],
    "a": [
-    "propulsive",
-    "comic",
-    "cozy",
-    "stylish"
+    "scary",
+    "twisty",
+    "characterstudy",
+    "bleak",
+    "visceral",
+    "weird"
    ],
    "svcs": [
     "PAR"
    ],
-   "d": "James Mangold",
-   "h": "A fugitive couple goes on a glamorous and sometimes deadly adventure where nothing and no one – even themselves – are what they seem. Amid shifting alliances and unexpected betrayals, they race across the globe, with their survival ultimately hinging on the battle of truth vs. trust.",
-   "k": "teen",
+   "d": "Parker Finn",
+   "h": "After witnessing a bizarre, traumatic incident involving a patient, Dr. Rose Cotter starts experiencing frightening occurrences that she can't explain.",
+   "k": "adult",
    "pop": 2,
-   "mpaa": "PG-13",
-   "rt": 51,
+   "mpaa": "R",
+   "rt": 79,
    "rtSrc": "rt",
-   "rating": 6.242,
-   "votes": 5080,
-   "poster": "/phhp52CZZJiGYmiOTp9ZBDkGHB3.jpg",
-   "backdrop": "/k5mNW8qutywD3GhAuaq33qcQR2y.jpg",
-   "tmdb": 37834,
-   "imdb": "tt1013743",
-   "firstSeen": "2026-10-05"
+   "rating": 6.668,
+   "votes": 4333,
+   "poster": "/aPqcQwu4VGEewPhagWNncDbJ9Xp.jpg",
+   "backdrop": "/kMZIMqEXO5MFd5Y1Ha2jZZF4pvF.jpg",
+   "tmdb": 882598,
+   "imdb": "tt15474916",
+   "firstSeen": "2026-10-12"
   },
   {
    "t": "Doctor Sleep",
@@ -31168,67 +30947,35 @@
    "firstSeen": "2026-10-02"
   },
   {
-   "t": "Rush Hour",
-   "y": 1998,
-   "r": 97,
+   "t": "Hansel & Gretel: Witch Hunters",
+   "y": 2013,
+   "r": 88,
    "g": [
-    "action",
-    "comedy",
-    "crime"
+    "fantasy",
+    "horror",
+    "action"
    ],
    "a": [
     "propulsive",
-    "comic",
-    "visceral",
+    "scary",
     "brisk"
    ],
    "svcs": [
     "PAR"
    ],
-   "d": "Brett Ratner",
-   "h": "When Hong Kong Inspector Lee is summoned to Los Angeles to investigate a kidnapping, the FBI doesn't want any outside help and assigns cocky LAPD Detective James Carter to distract Lee from the case. Not content to watch the action from the sidelines, Lee and Carter form an unlikely partnership and investigate the case themselves.",
-   "k": "teen",
-   "pop": 2,
-   "mpaa": "PG-13",
-   "rt": 62,
-   "rtSrc": "rt",
-   "rating": 7.089,
-   "votes": 5981,
-   "poster": "/nwPhAsfnb7f46bZkWLG7IRP5HXr.jpg",
-   "backdrop": "/9FrpAtF87VKblKkDEiIZzYgO40K.jpg",
-   "tmdb": 2109,
-   "imdb": "tt0120812",
-   "firstSeen": "2026-10-11"
-  },
-  {
-   "t": "Argo",
-   "y": 2012,
-   "r": 120,
-   "g": [
-    "drama",
-    "thriller"
-   ],
-   "a": [
-    "grounded",
-    "characterstudy",
-    "propulsive"
-   ],
-   "svcs": [
-    "PAR"
-   ],
-   "d": "Ben Affleck",
-   "h": "As the Iranian revolution reaches a boiling point, a CIA 'exfiltration' specialist concocts a risky plan to free six Americans who have found shelter at the home of the Canadian ambassador.",
+   "d": "Tommy Wirkola",
+   "h": "After getting a taste for blood as children, Hansel and Gretel have become the ultimate vigilantes, hell-bent on retribution. Now, unbeknownst to them, Hansel and Gretel have become the hunted, and must face an evil far greater than witches... their past.",
    "k": "adult",
    "pop": 2,
    "mpaa": "R",
-   "rt": 73,
+   "rt": 61,
    "rtSrc": "tmdb",
-   "rating": 7.285,
-   "votes": 9268,
-   "poster": "/m5gPWFZFIp4UJFABgWyLkbXv8GX.jpg",
-   "backdrop": "/iVk4mVKwNE66JbBcoDwcYFvuUXM.jpg",
-   "tmdb": 68734,
-   "imdb": "tt1024648",
+   "rating": 6.114,
+   "votes": 7264,
+   "poster": "/j343Rpj3WeNvP0SV80zveve70io.jpg",
+   "backdrop": "/mJSe5dxKu8Sq0GfdjdWVqdGvzfV.jpg",
+   "tmdb": 60304,
+   "imdb": "tt1428538",
    "firstSeen": "2026-10-20"
   },
   {
@@ -31260,38 +31007,6 @@
    "tmdb": 257211,
    "imdb": "tt2361509",
    "firstSeen": "2026-10-20"
-  },
-  {
-   "t": "Mission: Impossible II",
-   "y": 2000,
-   "r": 123,
-   "g": [
-    "adventure",
-    "action",
-    "thriller"
-   ],
-   "a": [
-    "propulsive",
-    "melancholy",
-    "stylish"
-   ],
-   "svcs": [
-    "PAR"
-   ],
-   "d": "John Woo",
-   "h": "With computer genius Luther Stickell at his side and a beautiful thief on his mind, agent Ethan Hunt races across Australia and Spain to stop a former IMF agent from unleashing a genetically engineered biological weapon called Chimera. This mission, should Hunt choose to accept it, plunges him into the center of an international crisis of terrifying magnitude.",
-   "k": "teen",
-   "pop": 2,
-   "mpaa": "PG-13",
-   "rt": 61,
-   "rtSrc": "tmdb",
-   "rating": 6.138,
-   "votes": 7902,
-   "poster": "/hfnrual76gPeNFduhD4xzHWpfTw.jpg",
-   "backdrop": "/24DZfupDlhXeTchmcOkoGRhP5Vg.jpg",
-   "tmdb": 955,
-   "imdb": "tt0120755",
-   "firstSeen": "2026-10-12"
   },
   {
    "t": "We Were Soldiers",
@@ -31466,40 +31181,6 @@
    "firstSeen": "2026-10-20"
   },
   {
-   "t": "Smile",
-   "y": 2022,
-   "r": 115,
-   "g": [
-    "horror",
-    "mystery"
-   ],
-   "a": [
-    "scary",
-    "twisty",
-    "characterstudy",
-    "bleak",
-    "visceral",
-    "weird"
-   ],
-   "svcs": [
-    "PAR"
-   ],
-   "d": "Parker Finn",
-   "h": "After witnessing a bizarre, traumatic incident involving a patient, Dr. Rose Cotter starts experiencing frightening occurrences that she can't explain.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 79,
-   "rtSrc": "rt",
-   "rating": 6.668,
-   "votes": 4333,
-   "poster": "/aPqcQwu4VGEewPhagWNncDbJ9Xp.jpg",
-   "backdrop": "/kMZIMqEXO5MFd5Y1Ha2jZZF4pvF.jpg",
-   "tmdb": 882598,
-   "imdb": "tt15474916",
-   "firstSeen": "2026-10-12"
-  },
-  {
    "t": "Pet Sematary",
    "y": 1989,
    "r": 103,
@@ -31530,38 +31211,6 @@
    "tmdb": 8913,
    "imdb": "tt0098084",
    "firstSeen": "2026-10-14"
-  },
-  {
-   "t": "Hansel & Gretel: Witch Hunters",
-   "y": 2013,
-   "r": 88,
-   "g": [
-    "fantasy",
-    "horror",
-    "action"
-   ],
-   "a": [
-    "propulsive",
-    "scary",
-    "brisk"
-   ],
-   "svcs": [
-    "PAR"
-   ],
-   "d": "Tommy Wirkola",
-   "h": "After getting a taste for blood as children, Hansel and Gretel have become the ultimate vigilantes, hell-bent on retribution. Now, unbeknownst to them, Hansel and Gretel have become the hunted, and must face an evil far greater than witches... their past.",
-   "k": "adult",
-   "pop": 2,
-   "mpaa": "R",
-   "rt": 61,
-   "rtSrc": "tmdb",
-   "rating": 6.114,
-   "votes": 7264,
-   "poster": "/j343Rpj3WeNvP0SV80zveve70io.jpg",
-   "backdrop": "/mJSe5dxKu8Sq0GfdjdWVqdGvzfV.jpg",
-   "tmdb": 60304,
-   "imdb": "tt1428538",
-   "firstSeen": "2026-10-20"
   },
   {
    "t": "Ghost in the Shell",
@@ -33765,7 +33414,7 @@
    "mpaa": "NR",
    "rt": 88,
    "rtSrc": "rt",
-   "rating": 6.645,
+   "rating": 6.6,
    "votes": 2617,
    "poster": "/qEAlwXbYk6IHA4ztoS2XFFaa7Xo.jpg",
    "backdrop": "/4QJtcL4D3abqdX6Snrk8ciRkroa.jpg",
