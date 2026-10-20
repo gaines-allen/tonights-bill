@@ -85,5 +85,29 @@ console.log("\nthe footer's scan date");
   eq("as does no date at all", words({}), "");
 }
 
+console.log("\nno test may name a film that streaming rights can take away");
+/* The nightly refresh runs these tests against the catalog it just scanned and
+   commits only if they pass, so an assertion naming a *shelved* title fails on
+   the night that title leaves every service — and throws the whole scan away.
+   It happened: taste.test.mjs named The Thing (2011), the film left, and five
+   nights of data were discarded. Curated titles live in index.html and cannot
+   move, so they are safe to name; shelved ones are built with shelfRow(). */
+{
+  const { readdir, readFile: rf } = await import("node:fs/promises");
+  const rawStart = html.indexOf("const RAW = [");
+  const rawBlock = html.slice(rawStart, html.indexOf("\n];", rawStart));
+  const curated = new Set([...rawBlock.matchAll(/^\["([^"]+)",(\d{4})/gm)].map((m) => m[1] + " (" + m[2] + ")"));
+  const live = JSON.parse(await rf(join(ROOT, "data/catalog.json"), "utf8"));
+  const shelved = new Set((live.shelf || []).map((e) => e.t + " (" + e.y + ")"));
+  const offenders = [];
+  for (const f of (await readdir(join(ROOT, "scripts"))).filter((x) => x.endsWith(".test.mjs"))) {
+    const src = await rf(join(ROOT, "scripts", f), "utf8");
+    for (const k of new Set([...src.matchAll(/"([^"\n]{2,70} \(\d{4}\))"/g)].map((m) => m[1]))) {
+      if (!curated.has(k) && shelved.has(k)) offenders.push(f + ' names "' + k + '"');
+    }
+  }
+  eq("every film a test names is curated, not shelved", offenders, []);
+}
+
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail ? 1 : 0);

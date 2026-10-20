@@ -116,6 +116,27 @@ export function makeNode(tag){
   return n;
 }
 
+/* A shelf row the test owns.
+ *
+ * The scan's shelf turns over as streaming rights move, so a test that names
+ * a real shelved title fails on the night that title leaves every service —
+ * and because the nightly refresh runs these tests before it commits, that
+ * failure throws the whole scan away. It did: taste.test.mjs asserted that
+ * The Thing (2011) was on the shelf, the film left, and five nights of data
+ * were discarded before anyone noticed. Anything asserting on a *scanned*
+ * film builds one of these instead of borrowing one.
+ *
+ * Curated titles are safe to name — they live in index.html and cannot move.
+ */
+export function shelfRow(over = {}){
+  return Object.assign({
+    t: "Test Picture", y: 1999, r: 100,
+    g: ["drama"], a: ["grounded", "earnest", "dialogue"],
+    svcs: ["NFX"], d: "A Director", h: "A film that exists only in the tests.",
+    k: "teen", pop: 1, mpaa: "PG-13", rt: 75, rtSrc: "tmdb", tmdb: 990000000
+  }, over);
+}
+
 /* every descendant of a node, in document order */
 export function walk(node){
   const out = [];
@@ -189,7 +210,8 @@ export { FILMS, BY_TITLE, S, Reveal, storeSays, storeCard, listOf, accentFor, AT
          Run, filmKey, eligible, nextPick, Fresh, watchFreshness,
          showScene, renderWall, searchWall, keepTile, openCase, closeCase, setTaste, markWatched,
          toggleSaved, buildTaste, searchCatalog, availability, runSearch, openHunt, closeHunt, wireHunt, setService,
-         applyEnrichment, migrateLegacy, toneOf, toneLean, clashes, genreAnchors, missesGenre, BY_KEY, reactionOf, isSaved, isWatched, filmOf, validHero, paintHero,
+         applyEnrichment, migrateLegacy, toneOf, toneLean, clashes, genreAnchors, missesGenre, BY_KEY,
+         checkFilters, hardPass, OPT_IN_GENRES, reactionOf, isSaved, isWatched, filmOf, validHero, paintHero,
          loadHero, renderSaved, tuneCount, openEvening, cardItem, miniRow, MINIS_get, CARD_OPENERS, gate,
          MODE_get, JUST_get, HEAD_get, LAST_get, CASE_get, SCENE_get };
 function MODE_get(){ return MODE; }

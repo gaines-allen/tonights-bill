@@ -7,11 +7,18 @@
  */
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { loadApp, eq, ok, walk, finish, html, ROOT } from "./harness.mjs";
+import { loadApp, eq, ok, walk, finish, html, ROOT, shelfRow } from "./harness.mjs";
 
 const catalog = JSON.parse(await readFile(join(ROOT, "data/catalog.json"), "utf8"));
 const { mod, env } = await loadApp({ reduced: true });
-mod.applyEnrichment(catalog);
+/* Two films sharing a title, built here rather than borrowed off the shelf.
+   A real shelved title leaves when its rights move, and these tests gate the
+   nightly commit, so naming one makes the scan fail on that film's last day. */
+mod.applyEnrichment({ ...catalog, shelf: [
+  ...catalog.shelf,
+  shelfRow({ t: "Test Picture", y: 1982, tmdb: 990000001 }),
+  shelfRow({ t: "Test Picture", y: 2011, tmdb: 990000002 })
+]});
 Object.keys(mod.S.svc).forEach((k) => { mod.S.svc[k] = true; });
 const titles = (q) => mod.searchCatalog(q).map((f) => f.t + " (" + f.y + ")");
 const $ = (id) => env.doc.getElementById(id);
@@ -31,10 +38,10 @@ eq("a leading article is optional", titles("godfather")[0], "The Godfather (1972
 eq("exact beats partial: 'Up' is Up, not Upgrade", titles("up")[0], "Up (2009)");
 
 console.log("\ntwo films, one title");
-const things = titles("the thing");
-ok("both films named The Thing are there", things.includes("The Thing (1982)") && things.includes("The Thing (2011)"));
-eq("each keeps its own year", things.filter((t) => /^The Thing \(/.test(t)).length, 2);
-eq("a year narrows it", titles("the thing 2011")[0], "The Thing (2011)");
+const things = titles("test picture");
+ok("both films sharing the title are there", things.includes("Test Picture (1982)") && things.includes("Test Picture (2011)"));
+eq("each keeps its own year", things.filter((t) => /^Test Picture \(/.test(t)).length, 2);
+eq("a year narrows it", titles("test picture 2011")[0], "Test Picture (2011)");
 const ids = mod.searchCatalog("star wars").map((f) => f.tmdb).filter(Boolean);
 eq("one film under two names comes back once", ids.length, new Set(ids).size);
 ok("as the curated record", titles("star wars").includes("Star Wars: A New Hope (1977)") && !titles("star wars").includes("Star Wars (1977)"));

@@ -8,7 +8,7 @@
  */
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { loadApp, eq, ok, walk, finish, html, ROOT } from "./harness.mjs";
+import { loadApp, eq, ok, walk, finish, html, ROOT, shelfRow } from "./harness.mjs";
 
 const catalog = JSON.parse(await readFile(join(ROOT, "data/catalog.json"), "utf8"));
 const settle = () => {};
@@ -84,7 +84,7 @@ console.log("\nwhat each press does");
 console.log("\nolder shelves move onto stable keys, safely");
 {
   const store = new Map([
-    ["tb:taste", JSON.stringify({ "Knives Out": "loved", "Barbie": "hated", "Demon Slayer: Kimetsu no Yaiba Infinity Castle": "loved" })],
+    ["tb:taste", JSON.stringify({ "Knives Out": "loved", "Barbie": "hated", "Test Picture": "loved" })],
     ["tb:watched", JSON.stringify({ "Coraline": "2026-02-01T00:00:00.000Z" })],
     ["tb:bills", JSON.stringify([{ t: "Coraline", at: "2026-02-01T00:00:00.000Z" }])],
     ["tb:locked", JSON.stringify({ t: "Coraline", at: "2026-02-01T00:00:00.000Z", mins: 100 })]
@@ -94,9 +94,10 @@ console.log("\nolder shelves move onto stable keys, safely");
   eq("so is a dislike", mod.S.taste["Barbie (2023)"], "hated");
   eq("and a watch", mod.S.watched["Coraline (2009)"], "2026-02-01T00:00:00.000Z");
   ok("a scanned title the page cannot place yet waits instead of being dropped",
-     mod.S.pending.taste["Demon Slayer: Kimetsu no Yaiba Infinity Castle"] === "loved");
-  mod.applyEnrichment(catalog); mod.migrateLegacy();
-  eq("and is placed once the catalog arrives", mod.S.taste["Demon Slayer: Kimetsu no Yaiba Infinity Castle (2025)"], "loved");
+     mod.S.pending.taste["Test Picture"] === "loved");
+  mod.applyEnrichment({ ...catalog, shelf: [...catalog.shelf, shelfRow()] });
+  mod.migrateLegacy();
+  eq("and is placed once the catalog arrives", mod.S.taste["Test Picture (1999)"], "loved");
   eq("nothing is left waiting", Object.keys(mod.S.pending.taste).length, 0);
   eq("an old title-only history record still finds its film", mod.filmOf(mod.S.bills[0]).t, "Coraline");
   eq("and the locked night", mod.filmOf(mod.S.locked).y, 2009);
@@ -104,23 +105,33 @@ console.log("\nolder shelves move onto stable keys, safely");
   eq("the old record is never rewritten", JSON.parse(env.store.get("tb:taste"))["Heat"], undefined);
   ok("nor deleted", env.store.has("tb:taste") && env.store.has("tb:watched"));
   eq("the new one holds both old and new", Object.keys(JSON.parse(env.store.get("tb:taste2"))).sort(),
-     ["Barbie (2023)", "Demon Slayer: Kimetsu no Yaiba Infinity Castle (2025)", "Heat (1995)", "Knives Out (2019)"]);
+     ["Barbie (2023)", "Heat (1995)", "Knives Out (2019)", "Test Picture (1999)"]);
 }
 
 console.log("\none film, one identity");
 {
   const { mod } = await loadApp({ reduced: true });
-  mod.applyEnrichment(catalog);
+  /* The remake pair is built here rather than borrowed off the shelf. A real
+     shelved title leaves when its rights move, and these tests gate the
+     nightly commit, so naming one makes the scan fail on a film's last day. */
+  mod.applyEnrichment({ ...catalog, shelf: [
+    ...catalog.shelf,
+    shelfRow({ t: "Test Picture", y: 1982, tmdb: 990000001 }),
+    shelfRow({ t: "Test Picture", y: 2011, tmdb: 990000002 }),
+    shelfRow({ t: "Heat",         y: 2031, tmdb: 990000003 })
+  ]});
   const byTmdb = {};
   mod.FILMS.forEach((f) => { if (f.tmdb) byTmdb[f.tmdb] = (byTmdb[f.tmdb] || 0) + 1; });
   eq("no TMDB id appears twice in the catalog", Object.values(byTmdb).filter((n) => n > 1).length, 0);
   ok("'Star Wars' from the scan is not a second A New Hope", !mod.FILMS.some((f) => f.t === "Star Wars" && f.y === 1977));
-  ok("but The Thing (2011) is its own film beside The Thing (1982)",
-     !!mod.BY_KEY["The Thing (2011)"] && !!mod.BY_KEY["The Thing (1982)"]);
-  eq("and a title-only lookup still means the curated film", mod.BY_TITLE["The Thing"].y, 1982);
-  ok("a remake never borrows the original's written store line",
-     !/Antarctic/.test(mod.storeSays({ f: mod.BY_KEY["The Thing (2011)"], T: mod.buildTaste(), parts: {}, weights: {}, on: [] })) ||
-     /Antarctic/.test(mod.BY_KEY["The Thing (2011)"].h));
+  ok("a remake is its own film beside the original",
+     !!mod.BY_KEY["Test Picture (1982)"] && !!mod.BY_KEY["Test Picture (2011)"] &&
+     mod.BY_KEY["Test Picture (1982)"] !== mod.BY_KEY["Test Picture (2011)"]);
+  ok("a scanned film never merges into a curated one that shares its title",
+     !!mod.BY_KEY["Heat (2031)"] && mod.BY_KEY["Heat (2031)"] !== mod.BY_KEY["Heat (1995)"]);
+  eq("and a title-only lookup still means the curated film", mod.BY_TITLE["Heat"].y, 1995);
+  const line = (k) => mod.storeSays({ f: mod.BY_KEY[k], T: mod.buildTaste(), parts: {}, weights: {}, on: [] });
+  ok("a remake never borrows the original's written store line", line("Heat (2031)") !== line("Heat (1995)"));
 }
 
 console.log("\nreactions move the ranking, in the right direction");
