@@ -2217,7 +2217,9 @@ const MOODS = [
   {k:"easy",    n:"Easy watch",      sub:"Nothing heavy", say:"an easy watch",
    up:["brisk","comic","uplifting","cozy","propulsive"], down:["slowburn","bleak","cerebral"]},
   {k:"laugh",   n:"Make me laugh",   sub:"Actually funny", say:"something funny",
-   up:["comic","ironic","brisk","ensemble"],             down:["bleak","slowburn"]},
+   need:["comedy"],
+   up:["comic","ironic","brisk"],
+   down:["bleak","melancholy","slowburn"]},
   {k:"guess",   n:"Keep me guessing",sub:"Twists and turns", say:"something twisty",
    up:["twisty","cerebral","propulsive","mystery"],      down:["cozy"]},
   {k:"big",     n:"I want a banger", sub:"Scale and spectacle", say:"a banger",
@@ -2227,6 +2229,7 @@ const MOODS = [
   {k:"acting",  n:"Great acting",    sub:"People, not plot", say:"great acting",
    up:["characterstudy","dialogue","ensemble","earnest"],down:["spectacle"]},
   {k:"scream",  n:"I want to scream", sub:"Lights off, door locked", say:"something scary",
+   need:["horror","thriller"],
    up:["scary","horror","visceral","weird"],             down:["cozy","uplifting"]},
   {k:"dark",    n:"Dark & intense",  sub:"Turn the lights off", say:"something dark",
    up:["bleak","visceral","violent","slowburn","scary"], down:["comic","cozy","uplifting"]},
@@ -2242,6 +2245,24 @@ const MOODS = [
 const MOOD_BY = {}; MOODS.forEach(function(m){ MOOD_BY[m.k] = m; });
 
 /* Whichever bar is higher wins — the slider in Fine Tune still rules. */
+/* The selected moods that rule films out rather than merely rank them.
+   "Make me laugh" is not a request for a film with jokes in it — Die Hard has
+   jokes in it, and carries `comic` for exactly that reason — it is a request
+   for a comedy. Scoring alone can never keep Die Hard off that shelf, because
+   `comic` is a true thing to say about it, so these are enforced as hard
+   filters beside runtime and rating. Every selected mood's `need` has to be
+   met: asking to laugh and to scream is a request for horror-comedy, not for
+   either. The other moods ask about texture rather than category and stay
+   soft. */
+function moodGates(){
+  const out = [];
+  S.moods.forEach(function(k){
+    const m = MOOD_BY[k];
+    if(m && m.need) out.push(m);
+  });
+  return out;
+}
+
 function minCritics(){
   let bar = S.minRT;
   S.moods.forEach(function(k){
@@ -2277,6 +2298,14 @@ function moodScore(f, v){
 const GENRES = ["action","adventure","animation","comedy","crime","documentary","drama","fantasy",
                 "horror","musical","mystery","romance","scifi","thriller","war","family"];
 const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
+/* A scare has to be asked for: see the genre row in checkFilters. A film is a
+   scare if it is filed as horror or if it plays as one, and the tag is the
+   better half of that test — it is derived for every film the same way, from
+   TMDB's own keywords. */
+const SCARE_GENRE = "horror", SCARE_TAG = "scary";
+function isScare(f){
+  return f.g.indexOf(SCARE_GENRE) > -1 || f.a.indexOf(SCARE_TAG) > -1;
+}
 function gLabel(g){ return GENRE_LABEL[g] || g.charAt(0).toUpperCase()+g.slice(1); }
 
 /* ============================================================================
@@ -3281,7 +3310,33 @@ function checkFilters(f){
   const R = room();
   const roomOK = FLOOR_RANK[f.k] <= FLOOR_RANK[R.floor];
   const on = f.svcs.filter(function(c){ return S.svc[c]; });
-  const genreOK = !S.genres.length || f.g.some(function(g){ return S.genres.indexOf(g)>-1; });
+  /* Asking for a genre asks for films centred on it, and selecting Comedy
+     used to return The Menu, Evil Dead II, Bride of Chucky and A Haunted
+     House 2, because the filter asked only whether Comedy appeared somewhere
+     in a film's list.
+
+     Which genre a film is centred on is not in the data. TMDB's genre order
+     is not a ranking — Happy Death Day and A Haunted House 2 list Comedy
+     first, while Shaun of the Dead and Evil Dead II list Horror first — and
+     its keywords separate them no better. What the catalog does know is how a
+     film plays, because every film is tagged from those keywords by the same
+     rules. So the rule is about the scare rather than the filing: unless
+     horror was asked for, a film that is filed as horror or that plays as a
+     scare does not make the bill. An action comedy is not a scare, so Hot
+     Fuzz, Game Night, Thor: Ragnarok and 22 Jump Street all still come
+     through, and so do the animated comedies TMDB files under family first.
+
+     It bites only once a genre filter is set. With none set the viewer has
+     asked for nothing in particular, horror included, which is what lets
+     "I want to scream" work at all. */
+  const picked = f.g.filter(function(g){ return S.genres.indexOf(g) > -1; });
+  const unasked = S.genres.length > 0 && isScare(f) &&
+                  S.genres.indexOf(SCARE_GENRE) === -1;
+  const genreOK = !S.genres.length || (picked.length > 0 && !unasked);
+  const gates = moodGates();
+  const gateMiss = gates.filter(function(m){
+    return !f.g.some(function(g){ return m.need.indexOf(g) > -1; });
+  });
   const critBar = minCritics();
   return [
     {k:"clock", label:"Runtime", pass: f.r <= S.time,
@@ -3303,8 +3358,18 @@ function checkFilters(f){
                           : f.rt + "% is under your " + critBar + "% bar")},
     {k:"genre", label:"Genre", pass: genreOK,
      detail: !S.genres.length ? f.g.map(gLabel).join(", ") + ", no genre filter"
-       : (genreOK ? "matches " + f.g.filter(function(g){ return S.genres.indexOf(g)>-1; }).map(gLabel).join(", ")
-                  : f.g.map(gLabel).join(", ") + ", none of them selected")},
+       : unasked
+         ? f.g.map(gLabel).join(", ") + ", and it plays as a scare, which you didn't ask for"
+         : (genreOK ? "matches " + picked.map(gLabel).join(", ")
+                    : f.g.map(gLabel).join(", ") + ", none of them selected")},
+    {k:"mood", label:"Tonight's mood", pass: gateMiss.length === 0,
+     detail: !gates.length ? f.g.map(gLabel).join(", ") + ", no mood that rules films out"
+       : gateMiss.length === 0
+         ? f.g.map(gLabel).join(", ") + " is what "
+           + gates.map(function(m){ return "\u201c" + m.n.toLowerCase() + "\u201d"; }).join(" and ") + " asks for"
+         : f.g.map(gLabel).join(", ") + " \u2014 " + gateMiss.map(function(m){
+             return "\u201c" + m.n.toLowerCase() + "\u201d wants " + m.need.map(gLabel).join(" or ");
+           }).join(", ")},
     {k:"service", label:"Where it streams", pass: on.length > 0,
      detail: on.length ? "on " + on.map(function(c){ return SVC_NAME[c]; }).join(", ")
        : (f.svcs.length ? "only on " + f.svcs.map(function(c){ return SVC_NAME[c]; }).join(", ") + ", which you don't have"
@@ -5371,7 +5436,13 @@ function darkHouse(){
   relax.appendChild(el("span","arw","→"));
   relax.addEventListener("click", function(){
     S.genres = []; S.rate = 0; S.minRT = 0;
-    S.moods = S.moods.filter(function(k){ return k !== "great"; });
+    /* Drop the moods that rule films out as well as the critic bar. A mood
+       gate can empty the shelf on its own, so a loosener that cannot clear
+       one is a button that does nothing. */
+    S.moods = S.moods.filter(function(k){
+      const m = MOOD_BY[k];
+      return k !== "great" && !(m && m.need);
+    });
     if(S.time < 150){ S.time = 150; S.timePreset = "long"; }
     save();
     renderRatingTune(); renderGenreTune(); renderTimes(); renderNights(); renderMoodTune(); tuneCount();

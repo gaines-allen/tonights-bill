@@ -178,6 +178,46 @@ ranking is fuzzy. The two rating controls squeeze from opposite ends:
 `hardPass()` is the single predicate for "does this fit tonight". Both the bill
 and the taste grid call it, so the two can never disagree on screen.
 
+**A scare has to be asked for.** The genre filter used to ask only whether a
+film carried a selected genre *somewhere* in its list, so Comedy on its own
+returned The Menu, Evil Dead II, Bride of Chucky, Fright Night and eleven more.
+
+Asking for a genre asks for films centred on it, and which genre a film is
+centred on is not in the data. TMDB's genre order is not a ranking: Happy
+Death Day and A Haunted House 2 list Comedy first, while Shaun of the Dead and
+Evil Dead II list Horror first, and Toy Story, Shrek, Zootopia and Ratatouille
+are all filed under animation or family ahead of comedy. Its keywords separate
+them no better — A Haunted House 2 carries more comedy keywords than any of
+them. So ordering is not usable, and a strict "no second genre" rule returns
+nine comedies and nothing at all for Action, Romance or Animation.
+
+What the catalog does know is how a film plays, because every film is tagged
+from those keywords by the same rules. So the rule is about the scare rather
+than the filing: unless horror was asked for, a film filed as horror or tagged
+`scary` does not make the bill. That holds back twenty of the 272 comedies and
+keeps the rest, including the action comedies — Hot Fuzz, Game Night, Thor:
+Ragnarok and 22 Jump Street are not scares — and the animated ones. Selecting
+Comedy and Horror together brings the horror comedies back.
+
+The rule bites only once a genre filter is set. With none set the viewer has
+asked for nothing in particular, horror included, which is what lets *I want
+to scream* work at all. `isScare()` is the test and the genre row in
+`checkFilters()` enforces it, so a film held back says it plays as a scare
+rather than quietly vanishing.
+
+**Two moods are cutoffs as well.** Most of them ask about texture — *Comfort
+movie*, *Something beautiful*, *Dark & intense* — and stay pure scoring
+weight. But *Make me laugh* and *I want to scream* are asking for a genre, so
+they carry a `need` that `checkFilters()` enforces beside runtime and rating.
+With no genre filter set, *Make me laugh* used to return Scream VI, The
+Substance, Inglourious Basterds and Full Metal Jacket, all of which carry
+`comic` or `ironic` honestly — Die Hard has jokes in it, which is the whole
+problem. No amount of scoring keeps a film off a list when the tag it scores
+on is true; only a filter does. Gates compose, so laugh and scream together is
+a request for horror-comedy. **Loosen the night** clears them along with the
+critic bar, since a recovery button that cannot undo what emptied the room
+does nothing.
+
 ## Editing the catalog
 
 Films live in the `RAW` array as positional rows:
@@ -545,6 +585,9 @@ node scripts/shelf.test.mjs    # the shelf tile, the film's case, status in both
 node scripts/taste.test.mjs    # star/thumbs control, persistence, migration, personalization
 node scripts/search.test.mjs   # header search, availability wording, shared services
 node scripts/hero.test.mjs     # the monthly marquee selection
+node scripts/tone.test.mjs     # a comedy night is not a thriller night
+node scripts/genre.test.mjs    # the genre filter: horror never rides along
+node scripts/fresh.test.mjs    # the build-freshness check
 node scripts/unwritten.mjs     # which shelved titles still need a store line
 ```
 

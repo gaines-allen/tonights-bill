@@ -99,10 +99,17 @@ console.log("\nno test may name a film that streaming rights can take away");
   const curated = new Set([...rawBlock.matchAll(/^\["([^"]+)",(\d{4})/gm)].map((m) => m[1] + " (" + m[2] + ")"));
   const live = JSON.parse(await rf(join(ROOT, "data/catalog.json"), "utf8"));
   const shelved = new Set((live.shelf || []).map((e) => e.t + " (" + e.y + ")"));
+  /* Named on purpose, to assert they are ABSENT. A negative assertion cannot
+     be broken by a film arriving on the shelf or leaving it — "Star Wars"
+     comes back from the scan as another name for A New Hope, and
+     search.test.mjs and taste.test.mjs both check it is not filed as a second
+     film. Anything positive about a shelved title still has to be built. */
+  const NAMED_TO_BE_ABSENT = new Set(["Star Wars (1977)"]);
   const offenders = [];
   for (const f of (await readdir(join(ROOT, "scripts"))).filter((x) => x.endsWith(".test.mjs"))) {
     const src = await rf(join(ROOT, "scripts", f), "utf8");
     for (const k of new Set([...src.matchAll(/"([^"\n]{2,70} \(\d{4}\))"/g)].map((m) => m[1]))) {
+      if (NAMED_TO_BE_ABSENT.has(k)) continue;
       if (!curated.has(k) && shelved.has(k)) offenders.push(f + ' names "' + k + '"');
     }
   }
