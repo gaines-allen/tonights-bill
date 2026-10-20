@@ -223,11 +223,27 @@ Wolf of Wall Street went from 1st to 30th, Parasite to 77th, Forrest Gump to
 are violent comedies and stay eligible, because violence is not what argues a
 film is not funny. `bleak` and `melancholy` are.
 
-One case it cannot reach: *Once Upon a Time... in Hollywood* still ranks high
-on a Comedy ask. TMDB files it as comedy, it carries `comic`, and its tags
-read as comedic, so nothing in the data says otherwise. `epic` and
-`characterstudy` both looked like candidates and both do more harm than good —
-`epic` is also on Klaus, Kung Fu Panda and SpongeBob.
+**And one hand-authored list, because the tags cannot do it.** Some films are
+filed under a genre nobody would pick them for, and no rule can tell: Parasite
+reads `comic`, `bleak`, `stylish`, and so does The Big Lebowski. A rule strict
+enough to drop Parasite drops The Big Lebowski, The Truman Show and Little
+Miss Sunshine with it, which is a worse page than the one that kept Parasite.
+"Bleak with no relief" looked like it threaded the needle and did not: it
+isolated Parasite, The Wolf of Wall Street and The Lobster among the films
+that were streaming that day, and only the test suite noticed it was also
+taking out three comedies that happened to be off every service.
+
+So `NOT_TONIGHT` is the exception, by stable key, and it is the only one. It
+takes a film out of the genre it is wrongly filed under and changes nothing
+else: Parasite is still a thriller night, still a drama night, still offered
+when no genre is set, and still findable by name. It applies to the moods that
+are genre asks too, because *Make me laugh* is a comedy ask.
+
+Keep it short. It corrects films someone has actually watched and objected to;
+the nightly scan shelves hundreds nobody has looked at, so it is a correction,
+not a strategy. `genre.test.mjs` fails if a key names no film, or names a
+genre that film is not filed under — a mistyped key is otherwise a silent
+no-op, which is the whole risk of a hand-written list.
 
 **Two moods are cutoffs as well.** Most of them ask about texture — *Comfort
 movie*, *Something beautiful*, *Dark & intense* — and stay pure scoring

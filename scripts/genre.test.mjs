@@ -106,7 +106,7 @@ console.log("\nthe filter and the explanation can never disagree");
 S.genres = ["comedy"];
 const drift = mod.FILMS.filter((f) => {
   const r = mod.checkFilters(f).find((c) => c.k === "genre");
-  const wanted = f.g.includes("comedy") && !mod.isScare(f);
+  const wanted = f.g.includes("comedy") && !mod.isScare(f) && mod.offeredFor(f, "comedy");
   return r.pass !== wanted;
 });
 ok("every film's genre row agrees with the rule", !drift.length, names(drift));
@@ -150,6 +150,65 @@ for (const t of ["The Wolf of Wall Street", "Parasite", "Forrest Gump"]) {
 ok("a bleak comedy-filed drama ranks below a straight comedy of similar fame",
    at("Parasite") === -1 || at("Parasite") > at("Monsters, Inc."),
    "Parasite #" + (at("Parasite") + 1) + " vs Monsters, Inc. #" + (at("Monsters, Inc.") + 1));
+
+console.log("\nthe hand-authored exceptions");
+/* The tags cannot catch these: Parasite reads comic, bleak and stylish, and so
+   does The Big Lebowski. Any rule strict enough to drop one drops the other. */
+{
+  /* A key that resolves to nothing is a silent no-op, which is the whole risk
+     of a hand-written list, so it is checked rather than trusted. */
+  const unknown = Object.keys(mod.NOT_TONIGHT).filter((k) => !mod.BY_KEY[k]);
+  eq("every key names a film that exists", unknown, []);
+  const strayGenres = [];
+  Object.entries(mod.NOT_TONIGHT).forEach(([k, gs]) => {
+    gs.forEach((g) => {
+      if (mod.GENRES.indexOf(g) === -1) strayGenres.push(k + " -> " + g);
+      const f = mod.BY_KEY[k];
+      if (f && f.g.indexOf(g) === -1) strayGenres.push(k + " is not filed under " + g);
+    });
+  });
+  eq("and a genre it is actually filed under", strayGenres, []);
+
+  S.genres = ["comedy"];
+  for (const k of Object.keys(mod.NOT_TONIGHT)) {
+    const f = mod.BY_KEY[k];
+    if (!f || mod.NOT_TONIGHT[k].indexOf("comedy") === -1) continue;
+    const row = mod.checkFilters(f).find((c) => c.k === "genre");
+    ok(f.t + " is not a comedy night", !row.pass);
+    ok("and says so", /is not a comedy night/.test(row.detail), row.detail);
+  }
+  /* The films the automatic rules kept catching, which is why this list exists
+     instead of a stricter rule. */
+  for (const t of ["The Big Lebowski", "The Truman Show", "Little Miss Sunshine"]) {
+    const f = mod.FILMS.find((x) => x.t === t);
+    if (f) ok(t + " is still a comedy night", mod.checkFilters(f).find((c) => c.k === "genre").pass);
+  }
+  S.genres = [];
+
+  /* An exception takes a film out of one genre, not out of the store. */
+  const para = mod.BY_KEY["Parasite (2019)"];
+  if (para) {
+    S.genres = ["thriller"];
+    ok("Parasite is still a thriller night", mod.checkFilters(para).find((c) => c.k === "genre").pass);
+    S.genres = ["drama"];
+    ok("and still a drama night", mod.checkFilters(para).find((c) => c.k === "genre").pass);
+    S.genres = [];
+    ok("and still offered when nothing is selected",
+       mod.checkFilters(para).find((c) => c.k === "genre").pass);
+    ok("and still findable by name", mod.searchCatalog("parasite").some((f) => f.t === "Parasite"));
+  }
+
+  /* "Make me laugh" is a comedy ask, so the same exception has to hold there. */
+  S.moods = ["laugh"];
+  const laughPool = mod.scoreAll().picks.map((r) => r.f.t);
+  S.moods = [];
+  for (const k of Object.keys(mod.NOT_TONIGHT)) {
+    const f = mod.BY_KEY[k];
+    if (f && mod.NOT_TONIGHT[k].indexOf("comedy") > -1) {
+      ok(f.t + " is not a laugh night either", laughPool.indexOf(f.t) === -1);
+    }
+  }
+}
 
 console.log("\nthe mood buttons are gated too");
 /* "Make me laugh" is not a request for a film with jokes in it — Die Hard has

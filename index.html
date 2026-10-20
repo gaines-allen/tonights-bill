@@ -2308,6 +2308,34 @@ const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
    TMDB's own keywords. */
 const SCARE_GENRE = "horror", SCARE_TAG = "scary";
 
+/* Films filed under a genre nobody would pick them for.
+ *
+ * The tags cannot catch these. Parasite reads comic, bleak and stylish; so
+ * does The Big Lebowski. Any rule strict enough to drop one drops the other,
+ * and a rule that drops The Big Lebowski from a comedy night is worse than
+ * one that keeps Parasite. So this is the hand-authored exception, by stable
+ * key, and it is deliberately the only one: it takes a film out of the genre
+ * it is wrongly filed under and changes nothing else. Parasite is still a
+ * thriller night, still a drama night, and still itself in search and on the
+ * taste grid.
+ *
+ * It applies wherever the viewer asks for a genre — the genre filter and the
+ * moods that are genre asks — because "Make me laugh" is a comedy ask too.
+ *
+ * Keep it short. It covers what someone has actually watched and objected to;
+ * the nightly scan shelves hundreds of titles nobody has looked at, so this
+ * is a correction, not a strategy.
+ */
+const NOT_TONIGHT = {
+  "Parasite (2019)":                         ["comedy"],
+  "The Wolf of Wall Street (2013)":          ["comedy"],
+  "Once Upon a Time... in Hollywood (2019)": ["comedy"]
+};
+function offeredFor(f, g){
+  const no = NOT_TONIGHT[filmKey(f)];
+  return !no || no.indexOf(g) === -1;
+}
+
 /* What a film of each genre is like when it really is one, and what argues it
    is not. Read off the same tags every film is given, so none of this leans on
    TMDB's genre order, which is not a ranking: Happy Death Day lists Comedy
@@ -3375,13 +3403,17 @@ function checkFilters(f){
      It bites only once a genre filter is set. With none set the viewer has
      asked for nothing in particular, horror included, which is what lets
      "I want to scream" work at all. */
-  const picked = f.g.filter(function(g){ return S.genres.indexOf(g) > -1; });
+  const picked = f.g.filter(function(g){
+    return S.genres.indexOf(g) > -1 && offeredFor(f, g);
+  });
   const unasked = S.genres.length > 0 && isScare(f) &&
                   S.genres.indexOf(SCARE_GENRE) === -1;
   const genreOK = !S.genres.length || (picked.length > 0 && !unasked);
   const gates = moodGates();
   const gateMiss = gates.filter(function(m){
-    return !f.g.some(function(g){ return m.need.indexOf(g) > -1; });
+    return !f.g.some(function(g){
+      return m.need.indexOf(g) > -1 && offeredFor(f, g);
+    });
   });
   const critBar = minCritics();
   return [
@@ -3406,6 +3438,10 @@ function checkFilters(f){
      detail: !S.genres.length ? f.g.map(gLabel).join(", ") + ", no genre filter"
        : unasked
          ? f.g.map(gLabel).join(", ") + ", and it plays as a scare, which you didn't ask for"
+       : (NOT_TONIGHT[filmKey(f)] || []).some(function(g){ return S.genres.indexOf(g) > -1; })
+         ? f.g.map(gLabel).join(", ") + ", but it is not a "
+           + (NOT_TONIGHT[filmKey(f)] || []).filter(function(g){ return S.genres.indexOf(g) > -1; })
+               .map(gLabel).join(" or ").toLowerCase() + " night"
          : (genreOK ? "matches " + picked.map(gLabel).join(", ")
                     : f.g.map(gLabel).join(", ") + ", none of them selected")},
     {k:"mood", label:"Tonight's mood", pass: gateMiss.length === 0,
