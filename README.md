@@ -245,16 +245,28 @@ not a strategy. `genre.test.mjs` fails if a key names no film, or names a
 genre that film is not filed under — a mistyped key is otherwise a silent
 no-op, which is the whole risk of a hand-written list.
 
-**Two moods are cutoffs as well.** Most of them ask about texture — *Comfort
+**Four moods are cutoffs as well.** Most of them ask about texture — *Comfort
 movie*, *Something beautiful*, *Dark & intense* — and stay pure scoring
-weight. But *Make me laugh* and *I want to scream* are asking for a genre, so
-they carry a `need` that `checkFilters()` enforces beside runtime and rating.
+weight. But *Make me laugh*, *Keep me guessing*, *I want a banger* and *I want
+to scream* are asking for a genre, so they carry a `need` that
+`checkFilters()` enforces beside runtime and rating: Comedy; Mystery,
+Thriller or Crime; Action, Adventure, Sci-Fi or War; Horror or Thriller.
 With no genre filter set, *Make me laugh* used to return Scream VI, The
 Substance, Inglourious Basterds and Full Metal Jacket, all of which carry
 `comic` or `ironic` honestly — Die Hard has jokes in it, which is the whole
 problem. No amount of scoring keeps a film off a list when the tag it scores
 on is true; only a filter does. Gates compose, so laugh and scream together is
-a request for horror-comedy. **Loosen the night** clears them along with the
+a request for horror-comedy.
+
+A `need` alone let horror back in, because a horror comedy is filed under
+Comedy: the Comedy filter turned Shaun of the Dead, Evil Dead II and The Menu
+away while *Make me laugh* dealt them. So a gated mood also carries a
+`keepOut`, applied unless horror was asked for somewhere (the Horror genre or
+*I want to scream*). *Make me laugh* keeps out any scare, the same rule as the
+genre row, and deals exactly the Comedy filter's films. *Keep me guessing* and
+*I want a banger* keep out films filed as horror, which is narrower on
+purpose: Se7en, Zodiac and The Silence of the Lambs play as scares but belong
+on a twisty night. **Loosen the night** clears them along with the
 critic bar, since a recovery button that cannot undo what emptied the room
 does nothing.
 
