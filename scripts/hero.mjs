@@ -6,17 +6,22 @@
  *   node scripts/hero.mjs --now 2026-11-01T12:00:00Z   pretend it is another day
  *
  * Runs after the nightly catalog refresh and needs no key of its own: every
- * fact it uses is already in data/catalog.json, sourced from TMDB that night.
+ * fact it uses is already in data/catalog.json, sourced that night from Movie
+ * of the Night's Streaming Availability API.
  *
  * The rule, as briefed:
  *   - the month is decided in America/Chicago, so a 7pm Central refresh on the
  *     31st does not start next month early;
- *   - a candidate needs a verified backdrop, a TMDB audience rating of 7.5 or
- *     more from at least 500 votes, and a subscription home on one of the
+ *   - a candidate needs a verified backdrop, an audience rating of 7.5 or
+ *     more out of 10, a fame of at least 2 (well known, so the marquee is never
+ *     three films nobody has heard of), and a subscription home on one of the
  *     services the app supports, in the US;
- *   - one rating source for everyone (TMDB vote_average + vote_count). Rotten
- *     Tomatoes percentages are a different scale and never enter the ranking;
- *   - rank by rating, then votes, then TMDB id, so the order is total and the
+ *   - one rating source for everyone (the source's 0-100 rating, read on a
+ *     0-10 scale). Rotten Tomatoes percentages are a different scale and never
+ *     enter the ranking. The source publishes no vote counts, so fame (hand
+ *     written for curated films, popularity rank for scanned ones) stands in
+ *     for "enough people have seen it";
+ *   - rank by rating, then fame, then TMDB id, so the order is total and the
  *     same data always gives the same three;
  *   - a new month skips last month's three while there are enough others, and
  *     only after that would a repeat be allowed. The thresholds never weaken;
@@ -35,12 +40,12 @@ import { dirname, join } from "node:path";
 
 export const RULE = Object.freeze({
   minRating: 7.5,
-  minVotes: 500,
+  minFame: 2,
   timeZone: "America/Chicago",
   region: "US",
   services: ["NFX", "MAX", "HUL", "DIS", "PRV", "APL", "PAR", "PCK"]
 });
-export const RATING_SOURCE = "TMDB audience rating (vote_average, 0-10) with its vote_count";
+export const RATING_SOURCE = "Movie of the Night audience rating (0-100, read as 0-10) with the catalog's fame";
 const SLOTS = ["left", "middle", "right"];
 
 /* "2026-10" for any instant, as the calendar reads in Chicago. */
@@ -63,20 +68,20 @@ export function candidates(catalog) {
   };
   for (const f of catalog?.films || []) {
     if (!f || !f.ok || !f.tmdb) continue;
-    take(record(f.tmdb, f.t, f.y, f.backdrop, f.rating, f.tmdbScore, f.votes,
+    take(record(f.tmdb, f.t, f.y, f.backdrop, f.rating, f.score ?? f.tmdbScore, f.pop,
       f.providersChecked ? (f.providers || []) : null));
   }
   for (const f of catalog?.shelf || []) {
     if (!f || !f.tmdb) continue;
-    take(record(f.tmdb, f.t, f.y, f.backdrop, f.rating, null, f.votes, f.svcs || []));
+    take(record(f.tmdb, f.t, f.y, f.backdrop, f.rating, null, f.pop, f.svcs || []));
   }
   return out;
 }
 
-/* rating: the raw vote_average when the refresh recorded it, otherwise the
-   rounded percentage the older refresh kept, read back to the same 0-10 scale.
-   votes are never guessed: a record without them cannot qualify. */
-function record(id, title, year, backdrop, rating, score, votes, services) {
+/* rating: the 0-10 rating when the refresh recorded it, otherwise the 0-100
+   score read back to the same scale. fame is never guessed: a record without
+   it cannot qualify. */
+function record(id, title, year, backdrop, rating, score, fame, services) {
   let r = null, rounded = false;
   if (typeof rating === "number" && isFinite(rating)) r = rating;
   else if (typeof score === "number" && isFinite(score)) { r = score / 10; rounded = true; }
@@ -84,7 +89,7 @@ function record(id, title, year, backdrop, rating, score, votes, services) {
     id, key: `${title} (${year})`, title, year,
     backdrop: typeof backdrop === "string" && backdrop ? backdrop : null,
     rating: r, ratingRounded: rounded,
-    votes: typeof votes === "number" && isFinite(votes) ? votes : null,
+    fame: typeof fame === "number" && isFinite(fame) ? fame : null,
     services: Array.isArray(services) ? services.filter((s) => RULE.services.includes(s)) : null
   };
 }
@@ -94,12 +99,12 @@ export function streams(c) { return !!(c && c.services && c.services.length); }
 export function qualifies(c) {
   return !!(c && c.backdrop && streams(c) &&
     c.rating !== null && c.rating >= RULE.minRating &&
-    c.votes !== null && c.votes >= RULE.minVotes);
+    c.fame !== null && c.fame >= RULE.minFame);
 }
 
 export function ranked(pool) {
   return [...pool.values()].filter(qualifies).sort((a, b) =>
-    (b.rating - a.rating) || (b.votes - a.votes) || (a.id - b.id));
+    (b.rating - a.rating) || (b.fame - a.fame) || (a.id - b.id));
 }
 
 /* Is this a catalog worth deciding anything on? A refresh that matched
@@ -117,7 +122,7 @@ function evidence(c, slot) {
     slot, id: c.id, key: c.key, title: c.title, year: c.year,
     backdrop: c.backdrop,
     rating: c.rating, ...(c.ratingRounded ? { ratingRounded: true } : {}),
-    votes: c.votes, services: c.services.slice()
+    fame: c.fame, services: c.services.slice()
   };
 }
 
@@ -141,12 +146,12 @@ export function decide({ catalog, previous, now }) {
     timeZone: RULE.timeZone,
     ratingSource: RATING_SOURCE,
     rule: {
-      minRating: RULE.minRating, minVotes: RULE.minVotes,
-      rank: "rating desc, then votes desc, then TMDB id asc",
-      services: RULE.services, monetization: "subscription (flatrate or ad tier), US"
+      minRating: RULE.minRating, minFame: RULE.minFame,
+      rank: "rating desc, then fame desc, then TMDB id asc",
+      services: RULE.services, monetization: "subscription or free on the service itself, US"
     },
     catalogScannedAt: catalog._meta?.scannedAt || null,
-    imageSource: "TMDB"
+    imageSource: "Movie of the Night"
   };
 
   /* ---- same month: hold the set, re-check availability only ---- */
@@ -226,7 +231,7 @@ async function main() {
   const out = decide({ catalog, previous, now });
   console.log(`hero: ${out.reason}`);
   if (out.manifest && out.manifest.films) {
-    out.manifest.films.forEach((f) => console.log(`  ${f.slot.padEnd(6)} ${f.title} (${f.year})  ${f.rating}/10 from ${f.votes} votes  ${f.services.join(" ")}`));
+    out.manifest.films.forEach((f) => console.log(`  ${f.slot.padEnd(6)} ${f.title} (${f.year})  ${f.rating}/10, fame ${f.fame}  ${f.services.join(" ")}`));
   }
   if (out.changed) await writeFile(join(ROOT, "data/hero.json"), JSON.stringify(out.manifest, null, 1) + "\n");
 }

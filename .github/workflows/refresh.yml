@@ -1,18 +1,23 @@
-# Re-pull runtimes, certifications, scores, posters and streaming availability.
+# Re-pull runtimes, scores, posters, synopses and streaming availability from
+# Movie of the Night's Streaming Availability API.
 #
-# TMDB's availability data comes from JustWatch and refreshes once every 24
-# hours, so running more often than daily buys nothing. Set TMDB_TOKEN (and
-# optionally OMDB_KEY for real Rotten Tomatoes scores) in
-# Settings -> Secrets and variables -> Actions.
+# Needs the repository secret STREAMING_AVAILABILITY_KEY (the API key from
+# developers.movieofthenight.com) and optionally OMDB_KEY for real Rotten
+# Tomatoes scores, both in Settings -> Secrets and variables -> Actions.
+#
+# The free plan allows 1,000 API calls a month, so each run is capped at
+# MOTN_BUDGET calls (default 30) and works round the services and films over
+# several nights. On a paid plan, set the repository variable MOTN_BUDGET to a
+# higher number, or 0 for no cap, and every night reads everything.
 name: Refresh catalog data
 
 on:
   schedule:
-    - cron: "20 11 * * *"     # 11:20 UTC daily, after JustWatch's push to TMDB
+    - cron: "20 11 * * *"     # 11:20 UTC daily
   workflow_dispatch:           # and on demand from the Actions tab
     inputs:
       args:
-        description: "Extra args for the refresh (e.g. --probe, --no-discover)"
+        description: "Extra args for the refresh (e.g. --probe, --no-discover, --budget 100)"
         required: false
         default: ""
 
@@ -29,13 +34,14 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Enrich from TMDB
+      - name: Enrich from Movie of the Night
         env:
-          TMDB_TOKEN: ${{ secrets.TMDB_TOKEN }}
+          STREAMING_AVAILABILITY_KEY: ${{ secrets.STREAMING_AVAILABILITY_KEY }}
           OMDB_KEY: ${{ secrets.OMDB_KEY }}
+          MOTN_BUDGET: ${{ vars.MOTN_BUDGET || '30' }}
         run: |
-          if [ -z "$TMDB_TOKEN" ]; then
-            echo "::error::TMDB_TOKEN secret is not set — nothing to refresh."
+          if [ -z "$STREAMING_AVAILABILITY_KEY" ]; then
+            echo "::error::STREAMING_AVAILABILITY_KEY secret is not set, nothing to refresh."
             exit 1
           fi
           if [ "${{ inputs.args }}" = "--probe" ]; then
@@ -47,6 +53,7 @@ jobs:
       - name: Verify the merge still holds
         run: |
           node scripts/enrich.test.mjs
+          node scripts/fresh.test.mjs
           node scripts/merge.test.mjs
           node scripts/reveal.test.mjs
           node scripts/session.test.mjs
@@ -55,6 +62,7 @@ jobs:
           node scripts/search.test.mjs
           node scripts/tone.test.mjs
           node scripts/genre.test.mjs
+          node scripts/refresh.test.mjs
 
       # The three films behind the marquee. Chosen from tonight's catalog on
       # the first good refresh of a new month (America/Chicago), then only
@@ -112,7 +120,7 @@ jobs:
           fi
 
           NEW="${{ steps.unwritten.outputs.new_count }}"
-          MSG="Refresh catalog data from TMDB ($CHANGED field changes)"
+          MSG="Refresh catalog data from Movie of the Night ($CHANGED field changes)"
           if [ -n "$NEW" ] && [ "$NEW" != "0" ]; then
             MSG="$MSG, $NEW newly shelved without a store line"
           fi

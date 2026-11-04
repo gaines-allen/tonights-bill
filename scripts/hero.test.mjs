@@ -10,9 +10,9 @@ import { join } from "node:path";
 import { decide, monthIn, candidates, ranked, qualifies, RULE } from "./hero.mjs";
 import { ROOT, eq, ok, finish } from "./harness.mjs";
 
-const film = (id, rating, votes, providers, extra = {}) => ({
+const film = (id, rating, fame, providers, extra = {}) => ({
   t: "Film " + id, y: 2000 + (id % 20), ok: true, tmdb: id,
-  rating, votes, backdrop: "/b" + id + ".jpg",
+  rating, pop: fame, backdrop: "/b" + id + ".jpg",
   providers, providersChecked: true, ...extra
 });
 const catalog = (films, shelf = [], meta = {}) => ({
@@ -22,16 +22,16 @@ const catalog = (films, shelf = [], meta = {}) => ({
 });
 /* six good films, ranked 1..6 by rating, plus some that fail one test each */
 const GOOD = [
-  film(1, 8.9, 9000, ["NFX"]), film(2, 8.8, 9000, ["MAX"]), film(3, 8.7, 9000, ["HUL"]),
-  film(4, 8.6, 9000, ["DIS"]), film(5, 8.5, 9000, ["PRV"]), film(6, 8.4, 9000, ["APL"])
+  film(1, 8.9, 3, ["NFX"]), film(2, 8.8, 3, ["MAX"]), film(3, 8.7, 3, ["HUL"]),
+  film(4, 8.6, 3, ["DIS"]), film(5, 8.5, 3, ["PRV"]), film(6, 8.4, 3, ["APL"])
 ];
 const BAD = [
-  film(20, 9.5, 499, ["NFX"]),                         // too few votes
-  film(21, 7.49, 90000, ["NFX"]),                      // just under the bar
-  film(22, 9.0, 9000, []),                             // checked, streams nowhere
-  film(23, 9.0, 9000, ["NFX"], { backdrop: null }),    // no verified backdrop
-  film(24, 9.0, null, ["NFX"]),                        // votes missing: never guessed
-  film(25, 9.0, 9000, ["STARZ"])                       // not a supported service
+  film(20, 9.5, 1, ["NFX"]),                           // not well known enough
+  film(21, 7.49, 3, ["NFX"]),                      // just under the bar
+  film(22, 9.0, 3, []),                             // checked, streams nowhere
+  film(23, 9.0, 3, ["NFX"], { backdrop: null }),    // no verified backdrop
+  film(24, 9.0, null, ["NFX"]),                        // fame missing: never guessed
+  film(25, 9.0, 3, ["STARZ"])                       // not a supported service
 ];
 const C = catalog(GOOD.concat(BAD));
 const ids = (m) => m.films.map((f) => f.id);
@@ -44,16 +44,16 @@ eq("the zone is fixed in the rule", RULE.timeZone, "America/Chicago");
 console.log("\neligibility");
 const pool = candidates(C);
 eq("only the six good films qualify", ranked(pool).map((c) => c.id), [1, 2, 3, 4, 5, 6]);
-ok("499 votes is not enough", !qualifies(pool.get(20)));
+ok("fame 1 is not enough", !qualifies(pool.get(20)));
 ok("7.49 is not 7.5", !qualifies(pool.get(21)));
 ok("checked and streaming nowhere is out", !qualifies(pool.get(22)));
 ok("no backdrop is out", !qualifies(pool.get(23)));
-ok("missing votes are not invented", !qualifies(pool.get(24)) && pool.get(24).votes === null);
+ok("missing fame is not invented", !qualifies(pool.get(24)) && pool.get(24).fame === null);
 ok("an unsupported service does not count", !qualifies(pool.get(25)));
-const tie = candidates(catalog([film(9, 8, 1000, ["NFX"]), film(8, 8, 1000, ["NFX"]), film(7, 8, 2000, ["NFX"])]));
-eq("ties go to votes, then the lower TMDB id", ranked(tie).map((c) => c.id), [7, 8, 9]);
-const rounded = candidates(catalog([{ ...film(30, undefined, 900, ["NFX"]), tmdbScore: 81 }]));
-eq("an older refresh's rounded score reads back on the same scale", rounded.get(30).rating, 8.1);
+const tie = candidates(catalog([film(9, 8, 2, ["NFX"]), film(8, 8, 2, ["NFX"]), film(7, 8, 3, ["NFX"])]));
+eq("ties go to fame, then the lower TMDB id", ranked(tie).map((c) => c.id), [7, 8, 9]);
+const rounded = candidates(catalog([{ ...film(30, undefined, 3, ["NFX"]), score: 81 }]));
+eq("a 0-100 score reads back on the 0-10 scale", rounded.get(30).rating, 8.1);
 ok("and says it was rounded", rounded.get(30).ratingRounded === true);
 
 console.log("\nfirst selection");
@@ -61,9 +61,9 @@ const oct = decide({ catalog: C, previous: null, now: new Date("2026-10-04T16:00
 eq("the top three by rating", ids(oct.manifest), [1, 2, 3]);
 eq("for this month", oct.manifest.month, "2026-10");
 eq("in left, middle, right slots", oct.manifest.films.map((f) => f.slot), ["left", "middle", "right"]);
-ok("carries the evidence: rating, votes, services, backdrop",
-   oct.manifest.films.every((f) => f.rating && f.votes && f.services.length && f.backdrop));
-eq("names its rating source", /TMDB/.test(oct.manifest.ratingSource), true);
+ok("carries the evidence: rating, fame, services, backdrop",
+   oct.manifest.films.every((f) => f.rating && f.fame && f.services.length && f.backdrop));
+eq("names its rating source", /Movie of the Night/.test(oct.manifest.ratingSource), true);
 eq("and its region", oct.manifest.region, "US");
 
 console.log("\nstable within the month");
@@ -88,7 +88,7 @@ const four = catalog(GOOD.slice(0, 4).concat(BAD));
 const thin = decide({ catalog: four, previous: oct.manifest, now: new Date("2026-11-02T12:00:00Z") });
 eq("one new film plus two repeats", ids(thin.manifest), [4, 1, 2]);
 ok("flagged as a relaxed month", thin.manifest.repeatsAllowed === true);
-ok("no film under the bar crept in", thin.manifest.films.every((f) => f.rating >= 7.5 && f.votes >= 500));
+ok("no film under the bar crept in", thin.manifest.films.every((f) => f.rating >= 7.5 && f.fame >= 2));
 const two = catalog(GOOD.slice(0, 2).concat(BAD));
 const short = decide({ catalog: two, previous: oct.manifest, now: new Date("2026-12-01T12:00:00Z") });
 ok("two qualifiers: nothing incomplete is published", !short.changed);
@@ -122,16 +122,16 @@ eq("with its new home recorded", hop.manifest.films[2].services, ["PCK"]);
 const unmatched = catalog(GOOD.map((f) => f.tmdb === 1 ? { ...f, ok: false } : f));
 const blip = decide({ catalog: unmatched, previous: oct.manifest, now: new Date("2026-10-15T12:00:00Z") });
 ok("a curated film that failed to match tonight is not treated as gone", !blip.changed);
-const shelfSet = decide({ catalog: catalog([film(40, 6.0, 9000, ["NFX"])], [{ tmdb: 50, t: "A", y: 2020, rating: 8, votes: 900, backdrop: "/a", svcs: ["NFX"] },
-  { tmdb: 51, t: "B", y: 2020, rating: 8, votes: 800, backdrop: "/b", svcs: ["NFX"] },
-  { tmdb: 52, t: "C", y: 2020, rating: 8, votes: 700, backdrop: "/c", svcs: ["NFX"] },
-  { tmdb: 53, t: "D", y: 2020, rating: 8, votes: 600, backdrop: "/d", svcs: ["NFX"] }], { matched: 1, withProviders: 1 }),
+const shelfSet = decide({ catalog: catalog([film(40, 6.0, 3, ["NFX"])], [{ tmdb: 50, t: "A", y: 2020, rating: 8, pop: 3, backdrop: "/a", svcs: ["NFX"] },
+  { tmdb: 51, t: "B", y: 2020, rating: 8, pop: 3, backdrop: "/b", svcs: ["NFX"] },
+  { tmdb: 52, t: "C", y: 2020, rating: 8, pop: 3, backdrop: "/c", svcs: ["NFX"] },
+  { tmdb: 53, t: "D", y: 2020, rating: 8, pop: 3, backdrop: "/d", svcs: ["NFX"] }], { matched: 1, withProviders: 1 }),
   previous: null, now: new Date("2026-10-04T12:00:00Z") });
-eq("shelved titles with real votes qualify too", ids(shelfSet.manifest), [50, 51, 52]);
-const shelfLeft = { ...catalog([film(40, 6.0, 9000, ["NFX"]), film(1, 8.9, 9000, ["NFX"])], [
-  { tmdb: 50, t: "A", y: 2020, rating: 8, votes: 900, backdrop: "/a", svcs: ["NFX"] },
-  { tmdb: 52, t: "C", y: 2020, rating: 8, votes: 700, backdrop: "/c", svcs: ["NFX"] },
-  { tmdb: 53, t: "D", y: 2020, rating: 8, votes: 600, backdrop: "/d", svcs: ["NFX"] }]) };
+eq("shelved titles with a real fame qualify too", ids(shelfSet.manifest), [50, 51, 52]);
+const shelfLeft = { ...catalog([film(40, 6.0, 3, ["NFX"]), film(1, 8.9, 3, ["NFX"])], [
+  { tmdb: 50, t: "A", y: 2020, rating: 8, pop: 3, backdrop: "/a", svcs: ["NFX"] },
+  { tmdb: 52, t: "C", y: 2020, rating: 8, pop: 3, backdrop: "/c", svcs: ["NFX"] },
+  { tmdb: 53, t: "D", y: 2020, rating: 8, pop: 3, backdrop: "/d", svcs: ["NFX"] }]) };
 const dropped = decide({ catalog: shelfLeft, previous: shelfSet.manifest, now: new Date("2026-10-20T12:00:00Z") });
 eq("a shelved film that fell off every service is replaced in place", ids(dropped.manifest), [50, 1, 52]);
 
@@ -140,7 +140,7 @@ const real = JSON.parse(await readFile(join(ROOT, "data/hero.json"), "utf8"));
 eq("holds exactly three films", real.films.length, 3);
 eq("all distinct", new Set(real.films.map((f) => f.id)).size, 3);
 ok("each meets the bar on the evidence it records",
-   real.films.every((f) => f.rating >= 7.5 && f.votes >= 500 && f.backdrop && f.services.length));
+   real.films.every((f) => f.rating >= 7.5 && (f.fame >= 2 || f.votes >= 500) && f.backdrop && f.services.length));
 ok("each on a supported service", real.films.every((f) => f.services.every((s) => RULE.services.includes(s))));
 const realCat = JSON.parse(await readFile(join(ROOT, "data/catalog.json"), "utf8"));
 const again = decide({ catalog: realCat, previous: real, now: new Date(real.selectedAt) });
