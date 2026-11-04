@@ -239,6 +239,69 @@ ok("laugh and scream together asks for horror-comedy",
    bothMoods.length > 0 && bothMoods.every((f) => f.g.includes("comedy") && (f.g.includes("horror") || f.g.includes("thriller"))),
    names(bothMoods.filter((f) => !(f.g.includes("comedy") && (f.g.includes("horror") || f.g.includes("thriller"))))));
 
+console.log("\na mood button keeps horror out the way the genre row does");
+/* The Comedy filter already turned away Shaun of the Dead, Evil Dead II and
+   The Menu, but "Make me laugh" only checked that Comedy was in the list, so
+   a laugh night could still deal a horror film. */
+const scaresOn = (fs) => fs.filter((f) => mod.isScare(f));
+ok("a laugh night deals no scare at all", !scaresOn(laugh).length, names(scaresOn(laugh)));
+for (const t of ["Shaun of the Dead", "Evil Dead II", "The Menu", "A Haunted House 2", "Gremlins",
+                 "Happy Death Day", "Tucker and Dale vs. Evil", "Bodies Bodies Bodies"]) {
+  const f = mod.FILMS.find((x) => x.t === t);
+  if (f && f.svcs.length) ok(t + " is not a laugh night", !has(laugh, t));
+}
+for (const t of ["The Big Lebowski", "Hot Fuzz", "Ghostbusters", "Knives Out"]) {
+  const f = mod.FILMS.find((x) => x.t === t);
+  if (f && f.svcs.length) ok(t + " is still a laugh night", has(laugh, t));
+}
+{
+  /* the laugh pool is exactly the Comedy filter's pool, so the two never drift */
+  S.genres = ["comedy"]; const viaGenre = mod.scoreAll().picks.map((r) => r.f.t).sort(); S.genres = [];
+  eq("make me laugh deals the same films as the Comedy filter", laugh.map((f) => f.t).sort(), viaGenre);
+}
+
+eq("keep me guessing is a mystery, thriller or crime ask",
+   mod.MOOD_BY["guess"].need, ["mystery", "thriller", "crime"]);
+eq("i want a banger is an action, adventure, sci-fi or war ask",
+   mod.MOOD_BY["big"].need, ["action", "adventure", "scifi", "war"]);
+const guess = moodPool(["guess"]);
+const offGuess = guess.filter((f) => !f.g.some((g) => ["mystery", "thriller", "crime"].includes(g)));
+ok("every film a guessing night can return is a mystery, thriller or crime film", !offGuess.length, names(offGuess));
+ok("and none of them is filed as horror", !horrorIn(guess).length, names(horrorIn(guess)));
+ok("and there are enough to programme from", guess.length > 100, "pool: " + guess.length);
+for (const t of ["Knives Out", "Se7en", "Zodiac", "Gone Girl", "Memento"]) {
+  const f = mod.FILMS.find((x) => x.t === t);
+  if (f && f.svcs.length) ok(t + " is a guessing night", has(guess, t));
+}
+const big = moodPool(["big"]);
+const offBig = big.filter((f) => !f.g.some((g) => ["action", "adventure", "scifi", "war"].includes(g)));
+ok("every film a banger night can return is action, adventure, sci-fi or war", !offBig.length, names(offBig));
+ok("and none of them is filed as horror", !horrorIn(big).length, names(horrorIn(big)));
+ok("and there are enough to programme from", big.length > 100, "pool: " + big.length);
+for (const t of ["Dune: Part Two", "Mad Max: Fury Road", "Spider-Man: Into the Spider-Verse"]) {
+  const f = mod.FILMS.find((x) => x.t === t);
+  if (f && f.svcs.length) ok(t + " is a banger", has(big, t));
+}
+for (const t of ["Corpse Bride", "The Nightmare Before Christmas"]) {
+  const f = mod.FILMS.find((x) => x.t === t);
+  if (f) ok(t + " is not a banger", !has(big, t));
+}
+
+console.log("\nasking for horror anywhere lets it back in");
+const screamLaugh = moodPool(["laugh", "scream"]);
+ok("laugh and scream together deal Shaun of the Dead", has(screamLaugh, "Shaun of the Dead"));
+S.genres = ["horror"];
+const laughHorror = moodPool(["laugh"]);
+S.genres = [];
+ok("so does Make me laugh with the Horror genre", laughHorror.length > 0 && has(laughHorror, "Shaun of the Dead"));
+S.genres = ["comedy"];
+const screamComedy = moodPool(["scream"]);
+S.genres = [];
+ok("and I want to scream with the Comedy genre", has(screamComedy, "Shaun of the Dead"));
+S.moods = ["guess", "scream"];
+ok("a guessing night that also asks to scream can deal Scream", mod.scoreAll().picks.some((r) => r.f.t === "Scream"));
+S.moods = [];
+
 const comfortPool = moodPool(["comfort"]);
 ok("comfort movie is still soft, so the whole shelf stays eligible", comfortPool.length > laugh.length);
 
@@ -249,6 +312,16 @@ if (diehard) {
   const row = mod.checkFilters(diehard).find((c) => c.k === "mood");
   eq("Die Hard fails a laugh night", row.pass, false);
   ok("and is told why", /wants Comedy/.test(row.detail), row.detail);
+}
+{
+  const shaun = mod.FILMS.find((f) => f.t === "Shaun of the Dead");
+  const row = mod.checkFilters(shaun).find((c) => c.k === "mood");
+  eq("Shaun of the Dead fails a laugh night", row.pass, false);
+  ok("and is told it is a scare nobody asked for", /plays as a scare/.test(row.detail), row.detail);
+  S.moods = ["guess"];
+  const screamFilm = mod.FILMS.find((f) => f.t === "Scream");
+  const grow = mod.checkFilters(screamFilm).find((c) => c.k === "mood");
+  ok("Scream on a guessing night is told it is a horror film", !grow.pass && /horror film/.test(grow.detail), grow.detail);
 }
 S.moods = [];
 

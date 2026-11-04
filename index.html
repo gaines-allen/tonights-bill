@@ -2217,12 +2217,14 @@ const MOODS = [
   {k:"easy",    n:"Easy watch",      sub:"Nothing heavy", say:"an easy watch",
    up:["brisk","comic","uplifting","cozy","propulsive"], down:["slowburn","bleak","cerebral"]},
   {k:"laugh",   n:"Make me laugh",   sub:"Actually funny", say:"something funny",
-   need:["comedy"],
+   need:["comedy"], keepOut:"scare",
    up:["comic","ironic","brisk"],
    down:["bleak","melancholy","slowburn"]},
   {k:"guess",   n:"Keep me guessing",sub:"Twists and turns", say:"something twisty",
+   need:["mystery","thriller","crime"], keepOut:"horror",
    up:["twisty","cerebral","propulsive","mystery"],      down:["cozy"]},
   {k:"big",     n:"I want a banger", sub:"Scale and spectacle", say:"a banger",
+   need:["action","adventure","scifi","war"], keepOut:"horror",
    up:["spectacle","epic","practical","propulsive","visual"], down:["dialogue"]},
   {k:"weird",   n:"Get weird",       sub:"Off the beaten path", say:"something strange",
    up:["weird","auteur","visual","stylish"],             down:["grounded"]},
@@ -2252,8 +2254,8 @@ const MOOD_BY = {}; MOODS.forEach(function(m){ MOOD_BY[m.k] = m; });
    `comic` is a true thing to say about it, so these are enforced as hard
    filters beside runtime and rating. Every selected mood's `need` has to be
    met: asking to laugh and to scream is a request for horror-comedy, not for
-   either. The other moods ask about texture rather than category and stay
-   soft. */
+   either. Keep me guessing and I want a banger are genre asks the same way.
+   The other moods ask about texture rather than category and stay soft. */
 function moodGates(){
   const out = [];
   S.moods.forEach(function(k){
@@ -2261,6 +2263,40 @@ function moodGates(){
     if(m && m.need) out.push(m);
   });
   return out;
+}
+
+/* Horror is asked for by name: the Horror genre, or a selected mood whose
+   gate takes it (I want to scream). Anything else that asks for a genre,
+   whether the genre row or a mood button, is not an ask for a scare. */
+function scareAsked(){
+  return S.genres.indexOf(SCARE_GENRE) > -1 ||
+         moodGates().some(function(m){ return m.need.indexOf(SCARE_GENRE) > -1; });
+}
+
+/* Does this film meet one mood's gate? It has to be filed under a genre the
+   mood names, and unless horror was asked for somewhere it cannot be what the
+   mood's keepOut names:
+
+     "scare"   filed as horror or plays as one, the rule the genre row uses.
+               "Make me laugh" used to let Shaun of the Dead, Evil Dead II,
+               The Menu and A Haunted House 2 through, because each is filed
+               under Comedy, while the Comedy filter had already ruled them out.
+     "horror"  filed as horror. Keep me guessing used to open on Old, Scream 7,
+               The Thing and It Follows because they are also filed under
+               Mystery. Se7en, Zodiac and The Silence of the Lambs play as
+               scares but are not horror films, and a twisty night is exactly
+               where they belong, so the narrower rule. */
+function moodGateFiled(f, m){
+  return f.g.some(function(g){
+    return m.need.indexOf(g) > -1 && offeredFor(f, g);
+  });
+}
+function moodKeptOut(f, m){
+  if(!m.keepOut || scareAsked()) return false;
+  return m.keepOut === "scare" ? isScare(f) : f.g.indexOf(SCARE_GENRE) > -1;
+}
+function moodGatePass(f, m){
+  return moodGateFiled(f, m) && !moodKeptOut(f, m);
 }
 
 function minCritics(){
@@ -3406,15 +3442,15 @@ function checkFilters(f){
   const picked = f.g.filter(function(g){
     return S.genres.indexOf(g) > -1 && offeredFor(f, g);
   });
-  const unasked = S.genres.length > 0 && isScare(f) &&
-                  S.genres.indexOf(SCARE_GENRE) === -1;
+  const unasked = S.genres.length > 0 && isScare(f) && !scareAsked();
   const genreOK = !S.genres.length || (picked.length > 0 && !unasked);
   const gates = moodGates();
-  const gateMiss = gates.filter(function(m){
-    return !f.g.some(function(g){
-      return m.need.indexOf(g) > -1 && offeredFor(f, g);
-    });
-  });
+  const gateMiss = gates.filter(function(m){ return !moodGatePass(f, m); });
+  /* Filed under the right genre and turned away only for being a scare. */
+  const gateScare = gateMiss.length > 0 &&
+                    gateMiss.every(function(m){ return moodGateFiled(f, m); });
+  const gateScareSay = gateMiss.some(function(m){ return m.keepOut === "scare"; })
+    ? "it plays as a scare" : "it is a horror film";
   const critBar = minCritics();
   return [
     {k:"clock", label:"Runtime", pass: f.r <= S.time,
@@ -3449,9 +3485,13 @@ function checkFilters(f){
        : gateMiss.length === 0
          ? f.g.map(gLabel).join(", ") + " is what "
            + gates.map(function(m){ return "\u201c" + m.n.toLowerCase() + "\u201d"; }).join(" and ") + " asks for"
-         : f.g.map(gLabel).join(", ") + " \u2014 " + gateMiss.map(function(m){
-             return "\u201c" + m.n.toLowerCase() + "\u201d wants " + m.need.map(gLabel).join(" or ");
-           }).join(", ")},
+         : gateScare
+           ? f.g.map(gLabel).join(", ") + ", and " + gateScareSay + ", which "
+             + gateMiss.map(function(m){ return "\u201c" + m.n.toLowerCase() + "\u201d"; }).join(" and ")
+             + " didn't ask for"
+           : f.g.map(gLabel).join(", ") + " \u2014 " + gateMiss.map(function(m){
+               return "\u201c" + m.n.toLowerCase() + "\u201d wants " + m.need.map(gLabel).join(" or ");
+             }).join(", ")},
     {k:"service", label:"Where it streams", pass: on.length > 0,
      detail: on.length ? "on " + on.map(function(c){ return SVC_NAME[c]; }).join(", ")
        : (f.svcs.length ? "only on " + f.svcs.map(function(c){ return SVC_NAME[c]; }).join(", ") + ", which you don't have"
