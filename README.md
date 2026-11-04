@@ -29,7 +29,7 @@ page, stills). What it changed:
   `prefers-reduced-motion`. The old drifting backdrop, the date stamp and the
   *Open Late* sign are gone. The footer is one line: *Real Movies, Real
   Recommendations*. The provenance note that used to sit there is now at the
-  foot of The Aisles, with the TMDB attribution; the scan date sits under the
+  foot of The Aisles, with the Movie of the Night credit; the scan date sits under the
   search; the storage note sits on Your Shelf.
 - **Search** is the last item in the header row (Tonight, The Aisles, Your
   Shelf, Past Showings, Search). Pressing it opens the search bar with the
@@ -54,11 +54,14 @@ whatever services they have. It runs in the nightly refresh after the tests
 and needs no secret of its own (it reads `data/catalog.json`).
 
 - The month is decided in **America/Chicago**.
-- A film qualifies with a verified backdrop, a **TMDB audience rating of 7.5+
-  from 500+ votes**, and a subscription home on a supported service in the US.
-  One rating source for everyone; Rotten Tomatoes never enters the ranking.
-  Missing votes are never guessed.
-- Ranked by rating, then votes, then TMDB id. A new month skips last month's
+- A film qualifies with a verified backdrop, an **audience rating of 7.5+ out
+  of 10 (Movie of the Night's 0-100 rating) and a fame of 2 or more**, and a
+  subscription home on a supported service in the US. One rating source for
+  everyone; Rotten Tomatoes never enters the ranking. The source publishes no
+  vote counts, so fame stands in for "enough people have seen it": hand-written
+  for curated films, from the scan's popularity order for shelved ones. Missing
+  fame is never guessed.
+- Ranked by rating, then fame, then TMDB id. A new month skips last month's
   three; if fewer than three others qualify it allows repeats before it would
   ever lower the bar.
 - Within a month the set holds. Each night only re-checks availability: a
@@ -183,7 +186,7 @@ film carried a selected genre *somewhere* in its list, so Comedy on its own
 returned The Menu, Evil Dead II, Bride of Chucky, Fright Night and eleven more.
 
 Asking for a genre asks for films centred on it, and which genre a film is
-centred on is not in the data. TMDB's genre order is not a ranking: Happy
+centred on is not in the data. The genre order is not a ranking: Happy
 Death Day and A Haunted House 2 list Comedy first, while Shaun of the Dead and
 Evil Dead II list Horror first, and Toy Story, Shrek, Zootopia and Ratatouille
 are all filed under animation or family ahead of comedy. Its keywords separate
@@ -209,7 +212,7 @@ rather than quietly vanishing.
 `hits / min(...)`, which with a single genre selected is 1 for every film that
 carries it at all — so the ask contributed nothing to the order and fame and
 acclaim decided the night. A Comedy-only bill opened with The Wolf of Wall
-Street, Parasite and Forrest Gump: bleak prestige dramas TMDB happens to file
+Street, Parasite and Forrest Gump: bleak prestige dramas the genre data happens to file
 under comedy.
 
 `GENRE_TONE` says what a film of each genre is like when it really is one, and
@@ -301,25 +304,45 @@ homes and critic scores — those are estimates, and the page says so. Running t
 enrichment script replaces them with sourced values.
 
 ```bash
-export TMDB_TOKEN='<v4 read access token>'   # free: themoviedb.org/settings/api
-export OMDB_KEY='<key>'                      # optional: omdbapi.com — adds real RT scores
-node scripts/enrich.mjs                      # or --limit 10 to try it first
+export STREAMING_AVAILABILITY_KEY='<key>'   # developers.movieofthenight.com
+export OMDB_KEY='<key>'                     # optional: omdbapi.com, adds real RT scores
+node scripts/enrich.mjs                     # or --limit 10 to try it first
+node scripts/enrich.mjs --budget 30         # stop after 30 API calls
+node scripts/probe.mjs                      # three calls: is the key good, what comes back
 ```
+
+The data comes from Movie of the Night's Streaming Availability API. Its free
+plan allows paid apps, with 1,000 API calls and 1 GB of image traffic a month;
+Starter ($49 a month) allows 25,000 calls and 25 GB. A full nightly read of the
+eight services and the 245 curated films takes about 110 calls, so:
+
+- **On the free plan** each run is capped by `--budget` (the Action uses 30,
+  from the repository variable `MOTN_BUDGET`). A capped run reads the services
+  and films least recently read first and carries the rest forward from the
+  last run, so the whole store is re-read over a few weeks rather than nightly.
+  A curated film found in a service scan costs no extra call.
+- **On a paid plan** set `MOTN_BUDGET` to 0 (no cap) and every night reads
+  everything.
+
+The poster and still addresses Movie of the Night returns are signed and expire
+after some months; each refresh rewrites them. A data file written before the
+switch still holds TMDB image paths, and the page keeps drawing those until the
+next refresh replaces them.
 
 That writes `data/catalog.json`, which the page fetches on load and merges over
 its built-in data, replacing:
 
 | Field | Source |
 |---|---|
-| runtime | TMDB movie details |
-| MPAA certification | TMDB release dates, US theatrical |
-| critic score | **OMDb** (real Rotten Tomatoes) if `OMDB_KEY` is set, else TMDB user score |
-| plot synopsis | TMDB overview, trimmed on sentence boundaries |
-| streaming availability | TMDB watch providers (JustWatch), US, subscription only |
-| poster art | TMDB images — no API key needed to *display* them |
-| genres | TMDB genres; "Music" only counts as a musical when TMDB's taggers also say "musical" |
-| attribute tags | TMDB keywords (including its tone words: "amused", "suspenseful", "dreary"), genres and runtime, through `tagsFrom()` |
-| audience, fame | certification and TMDB vote count |
+| runtime | Movie of the Night show details |
+| critic score | **OMDb** (real Rotten Tomatoes) if `OMDB_KEY` is set, else Movie of the Night's audience rating |
+| plot synopsis | Movie of the Night overview, trimmed on sentence boundaries |
+| streaming availability | Movie of the Night, US, subscription or free on the service itself (no rentals, no add-on channels) |
+| watch links | a link straight to the title on each service, and one rental listing for films no subscription carries |
+| poster art, stills, service logos | Movie of the Night images |
+| genres | Movie of the Night genres (history reads as drama); a film is a musical when its synopsis says so |
+| attribute tags | the vocabulary words found in the synopsis, genres and runtime, through `tagsFrom()` |
+| audience, fame, certificate | curated films keep the hand-written values (the source has no certificates or vote counts); shelved films get audience from genre, fame from the scan's popularity order, and NR |
 
 **Every film is tagged the same way, every night.** The curated 245 and the
 scanned shelf go through the same `tagsFrom()` rules, so a film's tags never
@@ -329,8 +352,11 @@ only ever came from hand-written tags, so it no longer appears.
 
 How the rules decide, in order:
 
-- **Keywords vote.** Each keyword votes for the tags it names; the six tags with
-  the most votes win. Matching is whole-keyword, never a substring.
+- **Synopsis words vote.** Each vocabulary phrase found in the synopsis votes
+  for the tags it names; the six tags with the most votes win. Matching is
+  whole-phrase, never a substring. (The vocabulary was built from TMDB's
+  keywords; Movie of the Night has none, so the synopsis is read instead, and
+  films are tagged more from their genres than before.)
 - **Subjects are not moods.** "Monster" or "ghost" only votes `scary` in a
   horror film or thriller; "gangster" or "shootout" never votes `violent` in a
   family or animated film. Tone words ("frightened", "terrifying") always vote.
@@ -338,8 +364,8 @@ How the rules decide, in order:
   Crime is never `violent` and adventure is never `spectacle` on genre alone.
 - **Thin films are filled to three, and no further,** from their genres.
 
-`data/keywords.json` keeps the genres and keywords behind every film so the
-rules can be tuned offline. The page never loads it.
+`data/keywords.json` keeps the genres and synopsis terms behind every film so
+the rules can be tuned offline. The page never loads it.
 
 ## Tone: a comedy night is not a thriller night
 
@@ -355,7 +381,7 @@ The same idea holds for genre. A genre is someone's when it is on three in four
 of the films they liked (two likes at least), and a film with none of their
 genres drops below those that have one, however well its mood tags match.
 Arrival, Blade Runner 2049 and Dune ask for sci-fi, so Manchester by the Sea no
-longer rides in on a shared melancholy. Drama never counts, since TMDB files
+longer rides in on a shared melancholy. Drama never counts, since the genre data files
 nearly every serious film under it.
 
 **The key never reaches the page.** Enrichment happens ahead of time and only
@@ -374,7 +400,7 @@ Three deliberate properties:
   and year agree, and each field is validated before it overwrites anything.
   `scripts/merge.test.mjs` covers the malformed cases.
 
-Posters are `<img>` tags pointed at TMDB's CDN. Some embedded viewers block
+Posters are `<img>` tags pointed at Movie of the Night's image CDN. Some embedded viewers block
 external images; those elements remove themselves on error rather than leaving
 broken boxes, which is why posters appear on GitHub Pages or locally but not
 inside a sandboxed artifact frame.
@@ -604,9 +630,9 @@ large display type, where 3:1 applies.
 
 ### Performance
 
-Posters are lazy `<img>` tags with a `srcset` across TMDB's 185/342/500 widths
+Posters are lazy `<img>` tags with a `srcset` across 240 and 480 widths
 and an explicit aspect ratio, so nothing reflows under the reader. Backdrops
-are requested at 780px on phones and 1280px above, preloaded off-screen and
+are requested at 1080px, preloaded off-screen and
 crossfaded in so a half-drawn image never appears. Only the artwork on screen
 is fetched. Everything moves on CSS transitions — there is no animation
 library. Some embedded viewers block external images; those elements remove
@@ -671,9 +697,9 @@ These are deliberate, and the page states them in its own footer:
   with, or endorsed by any review aggregator. Run `scripts/enrich.mjs` with an
   OMDb key to replace them with real Rotten Tomatoes scores. Note the catalog
   skews acclaimed either way, so the score floor only really bites above 95%.
-- **Availability is accurate to about a day, not the minute.** JustWatch pushes
-  to TMDB once per 24 hours, so a title that moved this morning may still show
-  yesterday's home.
+- **Availability is accurate to about a day, not the minute,** and to a few
+  days on the free plan's call budget, so a title that moved this morning may
+  still show yesterday's home.
 - **Profile persistence depends on the host.** It saves to `localStorage`, which
   some embedded viewers block. The page probes for this on load and tells you
   which case you're in rather than silently losing your settings.

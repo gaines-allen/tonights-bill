@@ -923,6 +923,7 @@ body.veiled main{z-index:81}
   box-shadow:0 3px 8px rgba(0,0,0,.55);
 }
 .svc-mark img{width:100%;height:100%;object-fit:cover;display:block}
+.svc-mark--logo img{object-fit:contain;padding:18%;box-sizing:border-box}
 .svc-mark--plate{
   font-family:var(--display);font-size:13px;letter-spacing:.03em;text-transform:uppercase;
   color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45);
@@ -1005,7 +1006,7 @@ a.svc-chip:hover .svc-go{opacity:1}
   box-shadow:0 24px 44px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5),
     0 0 34px -6px var(--acc-glow, transparent);
 }
-/* TMDB artwork is graded for a white page and goes muddy on this one. The
+/* Studio poster art is graded for a white page and goes muddy on this one. The
    saturation was at 1.09, which is a nine percent lift — arithmetically a
    raise and visually nothing at all. */
 .bill-poster .poster img{filter:brightness(1.18) saturate(1.28) contrast(1.04)}
@@ -1800,7 +1801,7 @@ body.cased{overflow:hidden}
      critic score ......... 0-100. Built in, these are ESTIMATES of critical consensus,
                             not sourced from any aggregator. Running scripts/enrich.mjs
                             replaces them with real Rotten Tomatoes scores (via OMDb),
-                            or TMDB user scores when no OMDb key is set.
+                            or Movie of the Night audience scores when no OMDb key is set.
    Availability is a snapshot, not a live feed. Verify before you commit the evening.
    ========================================================================== */
 const COLS = ["t","y","r","g","a","s","d","h","k","pop","mpaa","rt"];
@@ -2140,7 +2141,10 @@ const SVC_COLOR = {}; SERVICES.forEach(function(s){ SVC_COLOR[s.k]=s.c; });
 /* Real service logos arrive with the enrichment (_meta.logos). Until they do,
    or if the image is blocked, a brand-coloured plate stands in so a film is
    never left with an unlabelled square. */
-const LOGO_BASE = "https://image.tmdb.org/t/p/w92";
+/* Movie of the Night sends each service's mark as a white logo, drawn here on
+   the service's own colour. An older data file may still hold a TMDB logo
+   path; that is read the old way until the next refresh replaces it. */
+const LEGACY_LOGO_BASE = "https://image.tmdb.org/t/p/w92";
 const SVC_LOGO  = {};
 const SVC_SHORT = {NFX:"N", MAX:"max", HUL:"hulu", DIS:"D+", PRV:"prime", APL:"tv+", PAR:"P+", PCK:"pea"};
 /* No service publishes a way to look up its own title IDs, so a link to the
@@ -2158,7 +2162,11 @@ const SVC_URL = {
   PAR:"https://www.paramountplus.com/search/?q=",
   PCK:"https://www.peacocktv.com/watch/search?q="
 };
-function svcURL(code, title){
+/* The refresh now records a link straight to the title on each service.
+   That wins when it is there; the search route is the fallback. */
+function svcURL(code, title, links){
+  const direct = links && links[code];
+  if(typeof direct === "string" && /^https:\/\//i.test(direct)) return direct;
   return SVC_URL[code] ? SVC_URL[code] + encodeURIComponent(title) : null;
 }
 
@@ -2341,7 +2349,7 @@ const GENRE_LABEL = {scifi:"Sci-Fi", documentary:"Documentary"};
 /* A scare has to be asked for: see the genre row in checkFilters. A film is a
    scare if it is filed as horror or if it plays as one, and the tag is the
    better half of that test — it is derived for every film the same way, from
-   TMDB's own keywords. */
+   the sourced genres and synopsis. */
 const SCARE_GENRE = "horror", SCARE_TAG = "scary";
 
 /* Films filed under a genre nobody would pick them for.
@@ -2374,7 +2382,7 @@ function offeredFor(f, g){
 
 /* What a film of each genre is like when it really is one, and what argues it
    is not. Read off the same tags every film is given, so none of this leans on
-   TMDB's genre order, which is not a ranking: Happy Death Day lists Comedy
+   the source's genre order, which is not a ranking: Happy Death Day lists Comedy
    first and Toy Story does not. A genre missing from this table simply scores
    neutral rather than guessing. */
 const GENRE_TONE = {
@@ -2400,7 +2408,7 @@ const GENRE_TONE = {
 /* How centred a film is on the genres that were actually asked for: its own
    tone agreeing, and its opposite absent. 1 when it reads like the thing you
    asked for, 0 when it reads like the opposite, 0.5 when the tags say neither.
-   This is what keeps a bleak prestige drama that TMDB happens to file under
+   This is what keeps a bleak prestige drama that the genre data happens to file under
    comedy — The Wolf of Wall Street, Parasite — from leading a comedy night. */
 function genreCentre(f, picked){
   let want = 0, is = 0, not = 0;
@@ -2959,12 +2967,21 @@ const ATTR_PHRASE = {
 };
 
 /* ---------- sourced data ----------
-   data/catalog.json is produced by scripts/enrich.mjs from TMDB (and OMDb for
-   real Rotten Tomatoes scores). It is optional on purpose: opened as a bare
+   data/catalog.json is produced by scripts/enrich.mjs from Movie of the
+   Night's Streaming Availability API (and OMDb for real Rotten Tomatoes
+   scores). It is optional on purpose: opened as a bare
    file, or served without it, the page falls back to its built-in catalog and
    says so. Nothing here ever blocks first render. */
-const POSTER_BASE   = "https://image.tmdb.org/t/p/w342";
-const BACKDROP_BASE = "https://image.tmdb.org/t/p/w1280";
+/* Images arrive as full addresses. A data file written before the switch
+   holds TMDB paths instead ("/abc.jpg"); those still resolve until the next
+   refresh rewrites them, so the page never shows a blank case in between. */
+const LEGACY_IMG = "https://image.tmdb.org/t/p/";
+function imgURL(v, legacySize){
+  if(typeof v !== "string" || !v) return null;
+  if(/^https:\/\//i.test(v)) return v;
+  if(/^\/[\w-]+\.(jpg|jpeg|png|webp)$/i.test(v)) return LEGACY_IMG + legacySize + v;
+  return null;
+}
 let ENRICHED = null;
 
 function applyEnrichment(payload){
@@ -2976,19 +2993,23 @@ function applyEnrichment(payload){
     if(typeof e.runtime === "number" && e.runtime > 0) f.r = e.runtime;
     if(e.cert && RATE_RANK[e.cert] !== undefined)      f.mpaa = e.cert;
     if(typeof e.rt === "number")                        { f.rt = e.rt; f.rtSrc = "rt"; }
-    else if(typeof e.tmdbScore === "number")            { f.rt = e.tmdbScore; f.rtSrc = "tmdb"; }
+    else if(typeof e.score === "number")                { f.rt = e.score; f.rtSrc = "audience"; }
+    else if(typeof e.tmdbScore === "number")            { f.rt = e.tmdbScore; f.rtSrc = "audience"; }
     if(Array.isArray(e.providers) && (e.providers.length || e.providersChecked)){
       f.svcs = e.providers.slice();
       f.svcChecked = true;      /* checked and empty means "on nothing", not "unknown" */
     }
     if(e.tmdb) f.tmdb = e.tmdb;
     if(e.poster) f.poster = e.poster;
+    if(e.posterSm) f.posterSm = e.posterSm;
     if(e.backdrop) f.backdrop = e.backdrop;
-    if(e.overview){ f.h = e.overview; f.hSrc = "tmdb"; }   /* real synopsis beats the terse hook */
+    if(e.links) f.links = e.links;
+    if(e.rentLink) f.rentLink = e.rentLink;
+    if(e.overview){ f.h = e.overview; f.hSrc = "source"; }   /* real synopsis beats the terse hook */
     /* Tonight's tags, by the same rules as every scanned film. The ones written
        into RAW above only stand in when the page has no data file. */
     if(Array.isArray(e.g) && e.g.length) f.g = e.g.slice();
-    if(Array.isArray(e.a) && e.a.length){ f.a = e.a.slice(); f.aSrc = "tmdb"; }
+    if(Array.isArray(e.a) && e.a.length){ f.a = e.a.slice(); f.aSrc = "rule"; }
     if(e.k) f.k = e.k;
     if(e.pop) f.pop = e.pop;
     hit++;
@@ -3017,8 +3038,9 @@ function applyEnrichment(payload){
         s: e.svcs[0], svcs: e.svcs.slice(), svcChecked: true,
         d: e.d || "Unknown", h: e.h || "", k: e.k || "teen",
         pop: e.pop || 1, mpaa: e.mpaa || "NR",
-        rt: e.rt || 0, rtSrc: e.rtSrc || "tmdb",
-        poster: e.poster || null, backdrop: e.backdrop || null,
+        rt: e.rt || 0, rtSrc: e.rtSrc === "rt" ? "rt" : "audience",
+        poster: e.poster || null, posterSm: e.posterSm || null, backdrop: e.backdrop || null,
+        links: e.links || null, rentLink: e.rentLink || null,
         tmdb: e.tmdb || null, firstSeen: e.firstSeen || null,
         found: true
       });
@@ -3346,7 +3368,7 @@ function toneLean(T){
    likes at least). A film with none of your genres drops below the ones that
    have one, however well its mood tags match: Arrival, Blade Runner 2049 and
    Dune share melancholy with Manchester by the Sea, not a genre.
-   Drama never counts. TMDB files nearly every serious film under it, so
+   Drama never counts. The genre data files nearly every serious film under it, so
    "three dramas" says nothing about what someone wants next. */
 const GENRE_LEAN = 0.75, GENRE_MISS = 0.6, GENRE_CATCHALL = ["drama"];
 function genreAnchors(T){
@@ -3425,7 +3447,7 @@ function checkFilters(f){
      House 2, because the filter asked only whether Comedy appeared somewhere
      in a film's list.
 
-     Which genre a film is centred on is not in the data. TMDB's genre order
+     Which genre a film is centred on is not in the data. The genre order
      is not a ranking — Happy Death Day and A Haunted House 2 list Comedy
      first, while Shaun of the Dead and Evil Dead II list Horror first — and
      its keywords separate them no better. What the catalog does know is how a
@@ -3434,7 +3456,7 @@ function checkFilters(f){
      horror was asked for, a film that is filed as horror or that plays as a
      scare does not make the bill. An action comedy is not a scare, so Hot
      Fuzz, Game Night, Thor: Ragnarok and 22 Jump Street all still come
-     through, and so do the animated comedies TMDB files under family first.
+     through, and so do the animated comedies filed under family first.
 
      It bites only once a genre filter is set. With none set the viewer has
      asked for nothing in particular, horror included, which is what lets
@@ -3971,13 +3993,18 @@ const NARROW  = function(){ return window.innerWidth < 768; };
 
 /* ---------- imagery ----------
    Only what is on screen is fetched, at a size the slot can use. */
-function posterSet(path){
-  return "https://image.tmdb.org/t/p/w185" + path + " 185w, " +
-         "https://image.tmdb.org/t/p/w342" + path + " 342w, " +
-         "https://image.tmdb.org/t/p/w500" + path + " 500w";
+function posterSet(f){
+  if(/^\//.test(f.poster || "")){
+    return LEGACY_IMG + "w185" + f.poster + " 185w, " +
+           LEGACY_IMG + "w342" + f.poster + " 342w, " +
+           LEGACY_IMG + "w500" + f.poster + " 500w";
+  }
+  const big = imgURL(f.poster), small = imgURL(f.posterSm);
+  return (small ? small + " 240w, " : "") + (big ? big + " 480w" : "");
 }
+function posterURL(f){ return imgURL(f.poster, "w342"); }
 function backdropURL(path, size){
-  return "https://image.tmdb.org/t/p/" + (size || (NARROW() ? "w780" : "w1280")) + path;
+  return imgURL(path, size || (NARROW() ? "w780" : "w1280"));
 }
 function poster(f, sizes, eager, alt){
   const box = el("div","poster");
@@ -3997,8 +4024,8 @@ function poster(f, sizes, eager, alt){
     img.loading = eager ? "eager" : "lazy";
     img.width = 342; img.height = 513;   /* holds the frame: no reflow */
     img.sizes = sizes || "170px";
-    img.srcset = posterSet(f.poster);
-    img.src = POSTER_BASE + f.poster;
+    img.srcset = posterSet(f);
+    img.src = posterURL(f);
     img.addEventListener("load",  function(){ box.classList.remove("pending"); });
     img.addEventListener("error", function(){ box.classList.remove("pending"); img.remove(); unset(); });
     box.appendChild(img);
@@ -4308,7 +4335,13 @@ function svcMark(code, silent){
     img.alt = silent ? "" : (SVC_NAME[code] || "");
     img.decoding = "async"; img.loading = "lazy";
     img.width = 46; img.height = 46;
-    img.src = LOGO_BASE + SVC_LOGO[code];
+    if(/^https:\/\//.test(SVC_LOGO[code])){
+      box.classList.add("svc-mark--logo");
+      box.style.background = SVC_COLOR[code] || "#3a3a3a";
+      img.src = SVC_LOGO[code];
+    } else {
+      img.src = LEGACY_LOGO_BASE + SVC_LOGO[code];
+    }
     img.addEventListener("error", function(){ img.remove(); plate(); });
     box.appendChild(img);
   } else plate();
@@ -4325,9 +4358,9 @@ function whereRow(rec){
   if(!list.length){
     row.appendChild(el("span","playing-label",
       f.svcChecked ? "Rent or buy only tonight" : "No availability recorded"));
-    if(f.tmdb){
-      const rent = el("a","rent-link","Where to rent it");
-      rent.href = "https://www.themoviedb.org/movie/" + f.tmdb + "/watch?locale=US";
+    if(f.rentLink && /^https:\/\//i.test(f.rentLink.link || "")){
+      const rent = el("a","rent-link","Rent it on " + (f.rentLink.name || "a store"));
+      rent.href = f.rentLink.link;
       rent.target = "_blank"; rent.rel = "noopener noreferrer";
       rent.setAttribute("aria-label", "Where to rent " + f.t + ", opens in a new tab");
       row.appendChild(rent);
@@ -4337,13 +4370,13 @@ function whereRow(rec){
   row.appendChild(el("span","playing-label", have.length ? "Streaming on" : "Only on"));
   const chips = el("div","svc-chips");
   list.slice(0,3).forEach(function(c){
-    const url = svcURL(c, f.t);
+    const url = svcURL(c, f.t, f.links);
     const chip = el(url ? "a" : "span", "svc-chip");
     if(url){
       chip.href = url;
       chip.target = "_blank"; chip.rel = "noopener noreferrer";
       chip.setAttribute("aria-label",
-        "Find " + f.t + " on " + (SVC_NAME[c] || c) + ", opens in a new tab");
+        (f.links && f.links[c] ? "Watch " : "Find ") + f.t + " on " + (SVC_NAME[c] || c) + ", opens in a new tab");
     }
     chip.appendChild(svcMark(c, true));
     chip.appendChild(el("span","svc-name", SVC_NAME[c] || c));
@@ -4357,7 +4390,7 @@ function whereRow(rec){
   return row;
 }
 
-/* The plot, as printed on the back of the case. TMDB's synopsis when the
+/* The plot, as printed on the back of the case. The sourced synopsis when the
    enrichment has landed, the hand-written hook when it has not. */
 function synopsisBlock(f){
   const wrap = el("div","synopsis");
@@ -4973,7 +5006,7 @@ const Reveal = (function(){
          after it. If it is slow or missing the sequence still runs to time and
          the poster falls back to its printed case. */
       if(rec && rec.f){
-        if(rec.f.poster){ const pi = new Image(); pi.src = POSTER_BASE + rec.f.poster; }
+        if(rec.f.poster){ const pi = new Image(); pi.src = posterURL(rec.f); }
         if(rec.f.backdrop){ const bi = new Image(); bi.src = backdropURL(rec.f.backdrop); }
       }
 
@@ -6049,7 +6082,8 @@ function validHero(m){
   const ids = {};
   return m.films.every(function(f){
     if(!f || !f.title || typeof f.backdrop !== "string") return false;
-    if(!/^\/[\w-]+\.(jpg|jpeg|png|webp)$/i.test(f.backdrop)) return false;
+    if(!/^\/[\w-]+\.(jpg|jpeg|png|webp)$/i.test(f.backdrop) &&
+       !/^https:\/\/cdn\.movieofthenight\.com\/[^\s"'<>]+$/i.test(f.backdrop)) return false;
     if(ids[f.id || f.title]) return false;
     ids[f.id || f.title] = 1;
     return true;
@@ -6076,9 +6110,14 @@ function paintHero(films){
     img.onerror = h.backdrop ? fall : function(){ img.onerror = null; };
     if(h.backdrop){
       img.sizes = "(max-width:600px) 50vw, 46vw";
-      img.srcset = "https://image.tmdb.org/t/p/w780" + h.backdrop + " 780w, " +
-                   "https://image.tmdb.org/t/p/w1280" + h.backdrop + " 1280w";
-      img.src = "https://image.tmdb.org/t/p/w1280" + h.backdrop;
+      if(/^\//.test(h.backdrop)){
+        img.srcset = LEGACY_IMG + "w780" + h.backdrop + " 780w, " +
+                     LEGACY_IMG + "w1280" + h.backdrop + " 1280w";
+        img.src = LEGACY_IMG + "w1280" + h.backdrop;
+      } else {
+        img.removeAttribute("srcset");
+        img.src = h.backdrop;
+      }
     } else {
       img.src = HERO_FALLBACK[i].src;
     }
@@ -6187,7 +6226,7 @@ function onTheShelves(f){ return !!(f.svcs && f.svcs.length); }
 const AISLES = [
   {k:"new",     n:"Just added", note:"landed in the last fortnight.",
    pick:function(f){ return f.firstSeen && daysSince(f.firstSeen) <= 14; }},
-  /* A Rotten Tomatoes critic score and a TMDB audience score do not sit on the
+  /* A Rotten Tomatoes critic score and an audience score do not sit on the
      same scale, so each is judged against its own bar. */
   {k:"staff",   n:"Staff picks", note:"trust us on these.",
    pick:function(f){ return f.pop <= 2 && f.rt >= (f.rtSrc === "rt" ? 90 : 78); }},
@@ -6264,6 +6303,20 @@ function aislePick(f){
   }
 }
 
+/* Movie of the Night's terms ask for credit with a link wherever their data
+   is shown. Built as nodes, never as HTML. */
+function motnCredit(lead){
+  const span = document.createElement("span");
+  span.appendChild(document.createTextNode(lead));
+  const a = document.createElement("a");
+  a.href = "https://www.movieofthenight.com";
+  a.target = "_blank"; a.rel = "noopener noreferrer";
+  a.textContent = "Movie of the Night";
+  span.appendChild(a);
+  span.appendChild(document.createTextNode("."));
+  return span;
+}
+
 /* ---------- provenance ----------
    The footer carries one line now. What it used to say is said where it is
    read: the scan date and the source under the search, the full account at
@@ -6282,14 +6335,16 @@ function renderColophon(){
        ". " + (rtCount ? "Critic scores are Rotten Tomatoes, via OMDb. " : "") +
        "Availability is accurate to about a day, not to the minute. Check before you commit the evening. ")
     : "Streaming homes and critic scores here are our own estimates, not sourced feeds. ";
-  t += "The three films behind the marquee are chosen once a month from the best-rated films streaming in the US, by TMDB audience rating. ";
-  t += "This product uses the TMDB API but is not endorsed or certified by TMDB.";
-  $("colophon-note").textContent = t;
+  t += "The three films behind the marquee are chosen once a month from the best-rated films streaming in the US, by audience rating. ";
+  const note = $("colophon-note");
+  note.textContent = t;
+  note.appendChild(motnCredit("Streaming availability, posters and synopses provided by "));
 
   const when = ENRICHED ? scanDay(ENRICHED) : "";
   $("hunt-date").textContent = ENRICHED
-    ? "Availability from Main Feature's catalog" + (when ? " · Updated " + when : "") + " · US subscriptions only, via TMDB"
+    ? "Availability from Main Feature's catalog" + (when ? " · Updated " + when : "") + " · US subscriptions only · "
     : "The live catalog hasn't loaded, so where a film streams is not confirmed.";
+  if(ENRICHED) $("hunt-date").appendChild(motnCredit("Data by "));
   $("keep-note").textContent = STORAGE_OK
     ? "Your shelf is saved in this browser only. No account, nothing sent anywhere."
     : "This viewer blocks storage, so your shelf lasts for this visit only.";

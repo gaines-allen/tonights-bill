@@ -24,7 +24,7 @@ const names = (fs) => fs.map((f) => f.t).join(", ");
 const film = (k) => mod.BY_KEY[k];
 
 console.log("\nthe tags are tonight's, from the same rules for every film");
-ok("every curated film carries sourced tags", mod.FILMS.filter((f) => !f.found).every((f) => f.aSrc === "tmdb"),
+ok("every curated film carries sourced tags", mod.FILMS.filter((f) => !f.found).every((f) => f.aSrc === "rule"),
    mod.FILMS.filter((f) => !f.found && f.aSrc !== "tmdb").map((f) => f.t).slice(0, 5).join(", "));
 ok("and at least two of them", mod.FILMS.every((f) => f.a.length >= 2),
    mod.FILMS.filter((f) => f.a.length < 2).map((f) => f.t).slice(0, 5).join(", "));

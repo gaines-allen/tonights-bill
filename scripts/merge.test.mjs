@@ -9,9 +9,9 @@ const blocks = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]
 const body = blocks[1].split("/* ---------- state ---------- */")[0]
   .replace(/\(function\(\)\{/, "").replace(/"use strict";/, "");
 const src = blocks[0] + "\n" + body +
-  "\nexport {FILMS, BY_TITLE, applyEnrichment, ENRICHED, scanDay};";
+  "\nexport {FILMS, BY_TITLE, applyEnrichment, ENRICHED, scanDay, svcURL, imgURL, SVC_LOGO};";
 const mod = await import("data:text/javascript;base64," + Buffer.from(src).toString("base64"));
-const { FILMS, BY_TITLE, applyEnrichment, scanDay } = mod;
+const { FILMS, BY_TITLE, applyEnrichment, scanDay, svcURL, imgURL, SVC_LOGO } = mod;
 
 let pass = 0, fail = 0;
 const eq = (l, g, w) => {
@@ -52,7 +52,7 @@ eq("provenance marked as rt", BY_TITLE["Parasite"].rtSrc, "rt");
 eq("multi-service availability", BY_TITLE["Parasite"].svcs.sort(), ["MAX","NFX"]);
 eq("poster path stored", BY_TITLE["Parasite"].poster, "/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg");
 eq("falls back to tmdbScore when no RT", BY_TITLE["Heat"].rt, 79);
-eq("provenance marked as tmdb", BY_TITLE["Heat"].rtSrc, "tmdb");
+eq("provenance marked as an audience score", BY_TITLE["Heat"].rtSrc, "audience");
 eq("Heat runtime updated", BY_TITLE["Heat"].r, 170);
 
 console.log("\nsafety: bad rows must not corrupt the catalog");
@@ -115,6 +115,23 @@ console.log("\nno test may name a film that streaming rights can take away");
   }
   eq("every film a test names is curated, not shelved", offenders, []);
 }
+
+console.log("\na Movie of the Night record");
+const POSTER = "https://cdn.movieofthenight.com/show/1/poster/vertical/en/480.jpg?Expires=1&Signature=a&Key-Pair-Id=K";
+applyEnrichment({ _meta: { generatedAt: new Date().toISOString(), region: "US", source: "Movie of the Night",
+    logos: { NFX: "https://media.movieofthenight.com/services/netflix/logo-white.svg" } },
+  films: [{ t: "Heat", y: 1995, ok: true, runtime: 170, score: 84, rating: 8.4, providers: ["NFX"], providersChecked: true,
+    poster: POSTER, posterSm: POSTER.replace("480", "240"), backdrop: "https://cdn.movieofthenight.com/show/1/backdrop/horizontal/1080.jpg",
+    links: { NFX: "https://www.netflix.com/title/70000001" } }] });
+eq("its audience score fills the score, marked as audience", [BY_TITLE["Heat"].rt, BY_TITLE["Heat"].rtSrc], [84, "audience"]);
+eq("the poster address is kept whole", BY_TITLE["Heat"].poster, POSTER);
+eq("a full address is used as it is", imgURL(POSTER, "w342"), POSTER);
+eq("an older TMDB path still resolves until the next refresh", imgURL("/abc.jpg", "w342"), "https://image.tmdb.org/t/p/w342/abc.jpg");
+eq("anything else is refused", [imgURL("javascript:alert(1)"), imgURL("//evil/x.jpg"), imgURL(null)], [null, null, null]);
+eq("the service link opens the title itself", svcURL("NFX", "Heat", BY_TITLE["Heat"].links), "https://www.netflix.com/title/70000001");
+eq("and falls back to a search without one", svcURL("HUL", "Heat", BY_TITLE["Heat"].links), "https://www.hulu.com/search?q=Heat");
+eq("a link that is not https is never used", svcURL("NFX", "Heat", { NFX: "javascript:alert(1)" }), "https://www.netflix.com/search?q=Heat");
+eq("the service mark is Movie of the Night's", SVC_LOGO.NFX, "https://media.movieofthenight.com/services/netflix/logo-white.svg");
 
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail ? 1 : 0);

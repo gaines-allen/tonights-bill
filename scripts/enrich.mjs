@@ -2,17 +2,23 @@
 /**
  * Enrich the curated catalog with sourced data.
  *
- * Every film in the store is tagged by the same rules, every night: genres,
- * attributes, audience and fame all come from tagsFrom() and TMDB, whether the
- * film is on the curated list or turned up in the scan. The tags written into
- * index.html are only the fallback for a page opened without data/catalog.json.
+ * Every film in the store is tagged by the same rules, every night: genres and
+ * attributes come from tagsFrom() and the Streaming Availability API (Movie of
+ * the Night), whether the film is on the curated list or turned up in the
+ * scan. The tags written into index.html are only the fallback for a page
+ * opened without data/catalog.json.
  *
- * Also sourced: runtime, MPAA certification, critic score, poster art, and
- * which services actually carry it right now.
+ * Also sourced: runtime, audience score, poster art, a synopsis, and which
+ * services actually carry it right now, with a link straight to the title on
+ * each service.
  *
- *   TMDB_TOKEN=<v4 read token>  node scripts/enrich.mjs
- *   TMDB_API_KEY=<v3 key>       node scripts/enrich.mjs --limit 10
- *   OMDB_KEY=<key>              (optional — adds real Rotten Tomatoes scores)
+ *   STREAMING_AVAILABILITY_KEY=<key>  node scripts/enrich.mjs
+ *   STREAMING_AVAILABILITY_KEY=<key>  node scripts/enrich.mjs --limit 10
+ *   --budget 30            stop after 30 API calls and carry the rest forward
+ *   OMDB_KEY=<key>         (optional, adds real Rotten Tomatoes scores)
+ *
+ * The key comes from developers.movieofthenight.com. It is read from the
+ * environment only, never from a file in the repo.
  *
  * Writes data/catalog.json. The page falls back to its built-in catalog when
  * that file is absent, so index.html keeps working as a standalone file.
@@ -23,8 +29,9 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const TMDB = "https://api.themoviedb.org/3";
+export const API = process.env.STREAMING_AVAILABILITY_URL || "https://api.movieofthenight.com/v4";
 const REGION = process.env.REGION || "US";
+const COUNTRY = REGION.toLowerCase();
 
 const args = process.argv.slice(2);
 const flag = (n, d) => {
@@ -32,39 +39,36 @@ const flag = (n, d) => {
   return i === -1 ? d : (args[i + 1] ?? true);
 };
 const LIMIT = Number(flag("--limit", 0)) || 0;
-const CONCURRENCY = Number(flag("--concurrency", 6));
+const CONCURRENCY = Number(flag("--concurrency", 4));
 const VERBOSE = args.includes("--verbose");
 const NO_DISCOVER   = args.includes("--no-discover");
 const PAGES         = Number(flag("--pages", 9));        /* per service, 20 titles a page */
-const MIN_VOTES     = Number(flag("--min-votes", 400));  /* enough that someone has seen it */
-const MIN_SCORE     = Number(flag("--min-score", 6.1));
+const MIN_SCORE     = Number(flag("--min-score", 61));   /* Movie of the Night's 0-100 rating */
 const MAX_SHELF     = Number(flag("--max-shelf", 900));  /* ceiling on discovered titles */
 const OMDB_BUDGET   = Number(flag("--omdb-budget", 950)); /* OMDb allows 1000 lookups a day */
+/* API calls one run may spend. 0 means no ceiling. The free plan allows 1,000
+   calls a month, so a nightly run on it needs about 30; see README. */
+const BUDGET        = Number(flag("--budget", process.env.MOTN_BUDGET || 0)) || 0;
 
-const TOKEN = process.env.TMDB_TOKEN || "";
-const APIKEY = process.env.TMDB_API_KEY || "";
+const KEY = process.env.STREAMING_AVAILABILITY_KEY || "";
 const OMDB = process.env.OMDB_KEY || "";
 
 /* ---------------- service mapping ----------------
-   TMDB returns display names that drift ("Netflix Standard with Ads",
-   "Max Amazon Channel"). Match on how the name STARTS so resold channels
-   still map to the parent service, and so "Cinemax" never becomes "Max". */
-const SERVICE_RULES = [
-  [/^netflix\b/i,               "NFX"],
-  [/^(hbo\s+)?max\b/i,          "MAX"],
-  [/^hulu\b/i,                  "HUL"],
-  [/^disney\s*\+?\s*(plus)?\b/i,"DIS"],
-  [/^(amazon\s+)?prime\s+video\b/i, "PRV"],
-  [/^apple\s*tv\s*\+/i,         "APL"],
-  [/^apple\s*tv\s+plus\b/i,     "APL"],
-  [/^paramount\s*\+?\s*(plus)?\b/i, "PAR"],
-  [/^peacock\b/i,               "PCK"]
-];
-export function serviceCode(name) {
-  if (!name) return null;
-  for (const [re, code] of SERVICE_RULES) if (re.test(name.trim())) return code;
-  return null;
+   Movie of the Night names each service by a stable id, so there is no display
+   name to drift. Only these eight are tracked; anything else is ignored. */
+export const SERVICE_IDS = Object.freeze({
+  netflix: "NFX", hbo: "MAX", hulu: "HUL", disney: "DIS",
+  prime: "PRV", apple: "APL", paramount: "PAR", peacock: "PCK"
+});
+export function serviceCode(id) {
+  return (id && SERVICE_IDS[String(id).toLowerCase()]) || null;
 }
+/* Watching it on the service itself with a subscription you already pay for,
+   or free there. Rent, buy and add-on channels (Max inside Prime Video) never
+   count: "on Max" means on Max. Apple TV's subscription catalog is Apple TV+;
+   its store listings are rent or buy and are left out. */
+const COUNTED = new Set(["subscription", "free"]);
+function counted(o) { return o && COUNTED.has(o.type) && !o.addon && serviceCode(o.service?.id); }
 
 /* ---------------- catalog parsing ----------------
    index.html holds the hand-authored catalog as a JS array literal. Pull the
@@ -82,55 +86,79 @@ export function parseCatalog(html) {
   });
 }
 
-/* ---------------- http ---------------- */
-function tmdbUrl(path, params = {}) {
-  const u = new URL(TMDB + path);
-  for (const [k, v] of Object.entries(params)) if (v != null) u.searchParams.set(k, v);
-  if (!TOKEN && APIKEY) u.searchParams.set("api_key", APIKEY);
+/* ---------------- http ----------------
+   One counter for the whole run, so --budget is a real ceiling. */
+export class BudgetSpent extends Error {
+  constructor() { super("request budget for this run is spent"); this.name = "BudgetSpent"; }
+}
+export const calls = { made: 0, budget: BUDGET };
+function apiUrl(path, params = {}) {
+  const u = new URL(API.replace(/\/$/, "") + path);
+  for (const [k, v] of Object.entries(params)) if (v != null && v !== "") u.searchParams.set(k, v);
   return u.toString();
 }
+export function headersFor(url, key = KEY) {
+  /* The same API is also sold through RapidAPI under another host and header. */
+  const h = { accept: "application/json" };
+  if (/rapidapi\.com/i.test(url)) {
+    h["X-RapidAPI-Key"] = key;
+    h["X-RapidAPI-Host"] = new URL(url).host;
+  } else {
+    h["X-API-Key"] = key;
+  }
+  return h;
+}
 
-async function getJSON(url, tries = 4) {
+export async function getJSON(url, { tries = 4, fetchImpl = fetch, key = KEY } = {}) {
   for (let i = 0; i < tries; i++) {
+    if (calls.budget && calls.made >= calls.budget) throw new BudgetSpent();
+    calls.made++;
     let res;
     try {
-      res = await fetch(url, {
-        headers: TOKEN
-          ? { Authorization: `Bearer ${TOKEN}`, accept: "application/json" }
-          : { accept: "application/json" }
-      });
+      res = await fetchImpl(url, { headers: headersFor(url, key) });
     } catch (e) {
       if (i === tries - 1) throw e;
       await sleep(600 * (i + 1));
       continue;
     }
     if (res.status === 429) {
-      const wait = Number(res.headers.get("retry-after") || 1) * 1000 + 250;
+      const wait = Number(res.headers?.get?.("retry-after") || 2) * 1000 + 250;
+      if (i === tries - 1) throw new Error("429 rate limited (monthly quota or per-second limit)");
       await sleep(wait);
       continue;
     }
     if (res.status === 404) return null;
+    if (res.status === 401 || res.status === 403) {
+      throw new Error(`${res.status}: the API refused the key (check STREAMING_AVAILABILITY_KEY)`);
+    }
     if (!res.ok) {
       if (res.status >= 500 && i < tries - 1) { await sleep(1500 * (i + 1) ** 2); continue; }
-      throw new Error(`${res.status} ${res.statusText} for ${url.replace(/api_key=[^&]+/, "api_key=***")}`);
+      throw new Error(`${res.status} ${res.statusText || ""} for ${url}`.trim());
     }
     return res.json();
   }
-  throw new Error("retries exhausted: " + url.replace(/api_key=[^&]+/, "api_key=***"));
+  throw new Error("retries exhausted: " + url);
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/* ---------------- matching ----------------
-   Search can return the wrong film for common titles, so score candidates on
-   exact-title and exact-year rather than trusting result order. */
+/* ---------------- reading a show ---------------- */
 const norm = (s) => (s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
+/* "movie/155" -> 155. The id stays the film's identity across the store, so a
+   film shelved before the switch is still the same film after it. */
+export function tmdbIdOf(show) {
+  const m = String(show?.tmdbId || "").match(/^movie\/(\d+)$/);
+  return m ? Number(m[1]) : null;
+}
+
+/* Title search can return the wrong film for common titles, so score
+   candidates on exact title and exact year rather than trusting result order. */
 export function pickMatch(results, title, year) {
   if (!results || !results.length) return null;
   const want = norm(title);
-  const scored = results.map((r) => {
-    const t = norm(r.title), ot = norm(r.original_title);
-    const ry = Number((r.release_date || "").slice(0, 4));
+  const scored = results.filter((r) => !r.showType || r.showType === "movie").map((r) => {
+    const t = norm(r.title), ot = norm(r.originalTitle);
+    const ry = Number(r.releaseYear) || 0;
     let s = 0;
     if (t === want || ot === want) s += 100;
     else if (t.startsWith(want) || want.startsWith(t)) s += 55;
@@ -139,193 +167,90 @@ export function pickMatch(results, title, year) {
       const d = Math.abs(ry - year);
       s += d === 0 ? 60 : d === 1 ? 40 : d <= 3 ? 10 : -35;
     }
-    s += Math.min(12, (r.popularity || 0) / 12);
     return { r, s };
   });
+  if (!scored.length) return null;
   scored.sort((a, b) => b.s - a.s);
   return scored[0].s >= 55 ? scored[0].r : null;
 }
 
-export function usCertification(releaseDates) {
-  const us = (releaseDates?.results || []).find((x) => x.iso_3166_1 === REGION);
-  if (!us) return null;
-  const dates = us.release_dates || [];
-  // prefer theatrical (3), then digital (4), then anything carrying a value
-  for (const type of [3, 4, 1, 2, 5, 6]) {
-    const hit = dates.find((d) => d.type === type && d.certification);
-    if (hit) return hit.certification;
-  }
-  return dates.find((d) => d.certification)?.certification || null;
+/* Which of the eight services carry it tonight, by subscription or free. */
+export function streamingCodes(show, country = COUNTRY) {
+  const opts = show?.streamingOptions?.[country] || [];
+  return [...new Set(opts.filter(counted).map((o) => serviceCode(o.service.id)))];
 }
 
-export function flatrateCodes(providers) {
-  const region = providers?.results?.[REGION];
-  if (!region) return [];
-  const names = [...(region.flatrate || []), ...(region.ads || [])].map((p) => p.provider_name);
-  return [...new Set(names.map(serviceCode).filter(Boolean))];
-}
-
-/* The per-movie providers payload already carries each service's own logo, so
-   the marks shown next to a film are the real ones rather than hand-drawn
-   imitations. Collected once across the whole run into _meta, never per film. */
-export function logoPaths(providers) {
-  const region = providers?.results?.[REGION];
-  if (!region) return {};
+/* A link straight to the title on each service, so "where to stream" opens the
+   film itself instead of a search. https only; anything else is dropped. */
+export function watchLinks(show, country = COUNTRY) {
   const out = {};
-  for (const p of [...(region.flatrate || []), ...(region.ads || [])]) {
-    const code = serviceCode(p.provider_name);
-    if (code && p.logo_path && !out[code]) out[code] = p.logo_path;
+  const opts = (show?.streamingOptions?.[country] || []).filter(counted);
+  /* a subscription listing beats a free one for the same service */
+  opts.sort((a, b) => (a.type === "subscription" ? 0 : 1) - (b.type === "subscription" ? 0 : 1));
+  for (const o of opts) {
+    const code = serviceCode(o.service.id);
+    if (!out[code] && /^https:\/\//i.test(o.link || "")) out[code] = o.link;
   }
   return out;
 }
 
-export function rtFromOmdb(omdb) {
-  const r = (omdb?.Ratings || []).find((x) => x.Source === "Rotten Tomatoes");
-  if (!r) return null;
-  const n = parseInt(String(r.Value).replace("%", ""), 10);
-  return Number.isFinite(n) ? n : null;
+/* Where to rent or buy it when no subscription carries it: one store listing,
+   rental first, so "rent or buy only" can still lead somewhere real. */
+export function rentLinkOf(show, country = COUNTRY) {
+  const opts = (show?.streamingOptions?.[country] || [])
+    .filter((o) => (o.type === "rent" || o.type === "buy") && /^https:\/\//i.test(o.link || ""));
+  opts.sort((a, b) => (a.type === "rent" ? 0 : 1) - (b.type === "rent" ? 0 : 1));
+  const o = opts[0];
+  return o ? { name: o.service?.name || "", link: o.link } : null;
 }
 
-/* ---------------- per-film pipeline ---------------- */
-async function enrichOne(film) {
-  const out = { t: film.t, y: film.y, ok: false };
-  const search = await getJSON(
-    tmdbUrl("/search/movie", { query: film.t, primary_release_year: film.y, include_adult: false })
-  );
-  let hit = pickMatch(search?.results, film.t, film.y);
-  if (!hit) {
-    const loose = await getJSON(tmdbUrl("/search/movie", { query: film.t, include_adult: false }));
-    hit = pickMatch(loose?.results, film.t, film.y);
+/* Each service's own logo, collected once per run into _meta. The white mark
+   is drawn on the service's colour, which is how the page shows it. */
+export function logoUrls(show, country = COUNTRY) {
+  const out = {};
+  for (const o of (show?.streamingOptions?.[country] || []).filter(counted)) {
+    const code = serviceCode(o.service.id);
+    const img = o.service.imageSet?.whiteImage || o.service.imageSet?.darkThemeImage;
+    if (code && !out[code] && /^https:\/\//i.test(img || "")) out[code] = img;
   }
-  if (!hit) { out.error = "no confident TMDB match"; return out; }
-
-  const [details, rel, prov] = await Promise.all([
-    getJSON(tmdbUrl(`/movie/${hit.id}`, { append_to_response: "keywords" })),
-    getJSON(tmdbUrl(`/movie/${hit.id}/release_dates`)),
-    getJSON(tmdbUrl(`/movie/${hit.id}/watch/providers`))
-  ]);
-
-  out.tmdb    = hit.id;
-  out.imdb    = details?.imdb_id || null;
-  out.matched = { title: hit.title, year: Number((hit.release_date || "").slice(0, 4)) || null };
-  out.runtime = details?.runtime || null;
-  out.cert    = usCertification(rel);
-  out.tmdbScore = details?.vote_average ? Math.round(details.vote_average * 10) : null;
-  /* The exact audience rating as well as the rounded percentage: the monthly
-     marquee (scripts/hero.mjs) ranks on this, and 7.46 is not 7.5. */
-  out.rating  = typeof details?.vote_average === "number" ? details.vote_average : null;
-  out.votes   = details?.vote_count ?? null;
-  out.poster  = details?.poster_path || hit.poster_path || null;
-  /* A real plot synopsis, in complete sentences. The hand-written hooks in
-     index.html are deliberately terse and often sentence fragments; this
-     replaces them wherever TMDB has something usable. */
-  out.overview = trimOverview(details?.overview || hit.overview || "");
-  out.backdrop = details?.backdrop_path || hit.backdrop_path || null;
-  out.providers = flatrateCodes(prov);
-  out.logos = logoPaths(prov);
-  /* Distinguishes "checked, and it is on nothing" from "never checked".
-     Without this the page would keep showing a hand-guessed service for a
-     film that is demonstrably not streaming anywhere. */
-  out.providersChecked = !!prov;
-
-  /* The same tagging the scanned shelf gets, so a curated film and a scanned
-     one are described in one vocabulary by one rule. A curated film keeps its
-     place even when the rules find fewer than three attributes; it is just
-     described thinly, and the run reports how many. */
-  const keywords = (details?.keywords?.keywords || []).map((k) => k.name);
-  const genres = genresFrom(details?.genres, keywords);
-  out._src = sourceOf(details?.genres, keywords);
-  if (genres.length) {
-    out.g = genres;
-    out.a = tagsFrom({ genres, keywords, runtime: out.runtime || 0 });
-    out.k = audienceFrom(out.cert, genres);
-    out.pop = fameFrom(out.votes || 0);
-  }
-
-  if (OMDB && out.imdb) {
-    const r = await fetchOmdb(out.imdb);
-    out.rt = r.rt;
-    if (r.error) out.omdbError = r.error;
-  }
-  out.ok = true;
   return out;
 }
 
-/**
- * OMDb reports failures in the BODY with HTTP 401, so a plain !res.ok throw
- * loses the actual reason ("Invalid API key!", "No API key provided.",
- * "Request limit reached!"). Read the body either way and return the reason,
- * so a misconfigured key is visible instead of silently yielding null scores.
- */
-export async function readOmdbPayload(res, text) {
-  let body = null;
-  try { body = JSON.parse(text); } catch { /* non-JSON error page */ }
-  if (!body) return { rt: null, error: `HTTP ${res.status}: ${text.slice(0, 90)}` };
-  if (String(body.Response) === "False") return { rt: null, error: body.Error || "OMDb returned Response:False" };
-  const rt = rtFromOmdb(body);
-  return { rt, error: rt == null ? "no Rotten Tomatoes entry for this title" : null };
+/* Poster and still, as full addresses. The image addresses are signed and
+   expire after some months, which is why every nightly run rewrites them. */
+export function imagesOf(show) {
+  const is = show?.imageSet || {};
+  const ok = (u) => (typeof u === "string" && /^https:\/\//i.test(u) ? u : null);
+  return {
+    poster: ok(is.verticalPoster?.w480) || ok(is.verticalPoster?.w360),
+    posterSm: ok(is.verticalPoster?.w240),
+    /* the clean still, never the horizontal poster with its title lettering */
+    backdrop: ok(is.horizontalBackdrop?.w1080) || ok(is.horizontalBackdrop?.w720)
+  };
 }
 
-/* OMDb allows 1000 lookups a day and answers every one after that with the
-   same refusal. Once it says so, stop asking for the rest of the run. */
-let omdbSpent = false;
-async function fetchOmdb(imdbId) {
-  if (omdbSpent) return { rt: null, error: "daily limit already reached" };
-  const url = `https://www.omdbapi.com/?apikey=${encodeURIComponent(OMDB)}&i=${imdbId}&tomatoes=true`;
-  try {
-    const res = await fetch(url, { headers: { accept: "application/json" } });
-    const out = await readOmdbPayload(res, await res.text());
-    if (out.error && /limit reached/i.test(out.error)) omdbSpent = true;
-    return out;
-  } catch (e) {
-    return { rt: null, error: "network: " + e.message };
-  }
-}
-
-/**
- * TMDB overviews run from one line to a full marketing paragraph. Keep whole
- * sentences up to a readable length rather than cutting mid-clause, and drop
- * anything too thin to be worth showing.
- */
-export function trimOverview(text, max = 400) {
-  const t = String(text || "").replace(/\s+/g, " ").trim();
-  if (t.length < 40) return null;                 // stubs like "No overview found."
-  if (t.length <= max) return t;
-  const sentences = t.match(/[^.!?]+[.!?]+(\s|$)/g) || [];
-  let out = "";
-  for (const s of sentences) {
-    if ((out + s).trim().length > max) break;
-    out += s;
-  }
-  out = out.trim();
-  return out.length >= 60 ? out : t.slice(0, max).replace(/\s+\S*$/, "") + "\u2026";
-}
+/* Movie of the Night's genre ids, in the catalog's vocabulary. History reads
+   as drama, as it always has here; music is not a genre the page has. */
+const MOTN_GENRE = {
+  action: "action", adventure: "adventure", animation: "animation", comedy: "comedy",
+  crime: "crime", documentary: "documentary", drama: "drama", family: "family",
+  fantasy: "fantasy", history: "drama", horror: "horror", mystery: "mystery",
+  romance: "romance", scifi: "scifi", thriller: "thriller", war: "war", western: "western"
+};
 
 /* ============================================================================
-   DISCOVERY
-   The curated catalog is a seed, not the whole store. This walks what is
-   actually on the eight services right now and brings back everything worth
-   shelving, streaming originals included, since an original only ever lives on
-   its own service and would never turn up in a hand-written list.
-
-   Nothing here invents a tag it cannot defend. Attributes come from TMDB's own
-   human-curated keywords, the genres and the runtime, and nothing else: the
-   curated films are tagged by these same rules, so there is no hand-written
-   opinion left for a scanned film to borrow. A scanned film that cannot earn
-   at least three attributes is left off the shelf, because a thinly-tagged
-   film scores badly and would crowd out a real match.
+   TAGGING
+   Nothing here invents a tag it cannot defend. Attributes come from the
+   film's genres, the words of its synopsis and its runtime, and nothing else:
+   the curated films are tagged by these same rules, so there is no
+   hand-written opinion left for a scanned film to borrow. A scanned film that
+   cannot earn at least three attributes is left off the shelf, because a
+   thinly-tagged film scores badly and would crowd out a real match.
    ============================================================================ */
 
-const TMDB_GENRE = {
-  28:"action", 12:"adventure", 16:"animation", 35:"comedy", 80:"crime",
-  99:"documentary", 18:"drama", 10751:"family", 14:"fantasy", 36:"drama",
-  27:"horror", 9648:"mystery", 10749:"romance", 878:"scifi",
-  53:"thriller", 10752:"war", 37:"western"
-};
-/* TMDB files any film about musicians under "Music" (Whiplash, A Complete
-   Unknown, even the thriller Trap) and leaves La La Land and Singin' in the
-   Rain out of it. The people tagging films on TMDB get it right, so a film is
-   a musical exactly when they call it one, whatever its genres say. */
+/* A film is a musical when its own synopsis says so, whatever its genres say:
+   music films (Whiplash, A Complete Unknown) are not musicals, and the genre
+   lists leave La La Land out of music altogether. */
 const MUSICAL_WORDS = ["musical", "jukebox musical", "musical comedy", "horror musical", "rock musical"];
 
 /* Only what a genre guarantees on its own. A crime film is not necessarily
@@ -338,11 +263,11 @@ const GENRE_ATTRS = {
   action:["propulsive"], war:["visceral"]
 };
 
-/* TMDB keywords are written by people, and since 2023 TMDB has asked them for
-   the tone of a film as well as its subject ("amused", "suspenseful",
-   "dreary"), which is the closest any source gets to how a film plays.
-   Matched whole, never as a substring, so "love" cannot fire on "glove".
-   Built from the keywords actually on the 960 films in the store. */
+/* Phrases that say how a film plays. Each one found in a film's synopsis is a
+   vote for the attributes it names. Matched whole, never as a substring, so
+   "love" cannot fire on "glove". The list was first built from the keywords
+   people wrote for the films in the store; the synopsis is the text the
+   current source carries, so the same vocabulary is read from there. */
 const KEYWORD_ATTRS = {
   comic: ["amused", "hilarious", "witty", "playful", "absurd", "satirical", "sexual humor",
     "slapstick", "slapstick comedy", "parody", "spoof", "romcom", "buddy comedy", "farce",
@@ -497,16 +422,29 @@ const KW_INDEX = (() => {
 /* Order the vocabulary is listed in, used only to break ties. */
 const ATTR_ORDER = Object.keys(KEYWORD_ATTRS).concat(["brisk"]);
 
-/* What the tags were made from, kept so the rules can be tuned and tested
-   offline. Written to data/keywords.json, which the page never loads. */
-function sourceOf(genres, keywords) {
-  return { genres: (genres || []).map((g) => g.name), keywords };
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const TERM_RES = [...KW_INDEX.keys()].concat(MUSICAL_WORDS)
+  .filter((w, i, all) => all.indexOf(w) === i)
+  .map((w) => [w, new RegExp("(^|[^a-z0-9])" + escapeRe(w) + "($|[^a-z0-9])")]);
+
+/* The vocabulary phrases a synopsis actually uses, whole words only. */
+export function overviewTerms(text) {
+  const t = String(text || "").toLowerCase().replace(/[‘’]/g, "'");
+  if (!t) return [];
+  return TERM_RES.filter(([, re]) => re.test(t)).map(([w]) => w);
 }
 
-/* TMDB's genre objects in the catalog's vocabulary, duplicates folded. */
-export function genresFrom(list = [], keywords = []) {
-  const out = (list || []).map((g) => TMDB_GENRE[g.id]).filter(Boolean);
-  if ((keywords || []).some((k) => MUSICAL_WORDS.includes(String(k).toLowerCase()))) out.push("musical");
+/* What the tags were made from, kept so the rules can be tuned and tested
+   offline. Written to data/keywords.json, which the page never loads. */
+function sourceOf(genres, terms) {
+  return { genres: (genres || []).map((g) => g.name || g.id), terms };
+}
+
+/* Movie of the Night's genre objects in the catalog's vocabulary, duplicates
+   folded. A synopsis that calls the film a musical makes it one. */
+export function genresFrom(list = [], terms = []) {
+  const out = (list || []).map((g) => MOTN_GENRE[g?.id]).filter(Boolean);
+  if ((terms || []).some((k) => MUSICAL_WORDS.includes(String(k).toLowerCase()))) out.push("musical");
   return [...new Set(out)];
 }
 
@@ -560,120 +498,267 @@ export function audienceFrom(cert, genres = []) {
   return "teen";
 }
 
-/* How recognisable a film is, on the catalog's 3/2/1 scale. Vote count tracks
-   reach far better than TMDB's own popularity number, which spikes on release. */
-export function fameFrom(votes = 0) {
-  return votes >= 15000 ? 3 : votes >= 4000 ? 2 : 1;
+
+/* How recognisable a film is, on the catalog's 3/2/1 scale, from where it sits
+   in a service's all-time popularity list (0 is the most popular). The source
+   publishes no vote counts, so the scan's own order stands in: roughly the
+   top tenth of each service's list reads as iconic, the top half as well
+   known. Curated films keep the fame written for them by hand. */
+export function fameFromRank(rank) {
+  if (typeof rank !== "number" || !isFinite(rank) || rank < 0) return 1;
+  return rank < 18 ? 3 : rank < 90 ? 2 : 1;
 }
 
-/* Provider ids are looked up by name rather than hardcoded, so a service that
-   renumbers (HBO Max -> Max did exactly that) cannot silently stop returning
-   anything. The same call carries every service's logo. */
-async function providerDirectory() {
-  const list = await getJSON(tmdbUrl("/watch/providers/movie", { watch_region: REGION }));
-  const ids = {}, logos = {};
-  for (const p of list?.results || []) {
-    const code = serviceCode(p.provider_name);
-    if (!code || ids[code]) continue;
-    ids[code] = p.provider_id;
-    if (p.logo_path) logos[code] = p.logo_path;
-  }
-  return { ids, logos };
+export function rtFromOmdb(omdb) {
+  const r = (omdb?.Ratings || []).find((x) => x.Source === "Rotten Tomatoes");
+  if (!r) return null;
+  const n = parseInt(String(r.Value).replace("%", ""), 10);
+  return Number.isFinite(n) ? n : null;
 }
 
 /**
- * A page of what a service is streaming.
- *
- * TMDB 500s on any vote_* filter or sort combined with a provider filter,
- * confirmed by walking the query up one parameter at a time (scripts/probe.mjs).
- * So the query never mentions votes and the thresholds are applied here. Same
- * result set, minus a server-side bug we cannot fix from this end.
+ * OMDb reports failures in the BODY with HTTP 401, so a plain !res.ok throw
+ * loses the actual reason ("Invalid API key!", "No API key provided.",
+ * "Request limit reached!"). Read the body either way and return the reason,
+ * so a misconfigured key is visible instead of silently yielding null scores.
  */
-async function discoverPage(providerId, page) {
-  return getJSON(tmdbUrl("/discover/movie", {
-    watch_region: REGION,
-    with_watch_providers: providerId,
-    with_watch_monetization_types: "flatrate",
-    sort_by: "popularity.desc",
-    include_adult: false,
-    page
-  }));
+export async function readOmdbPayload(res, text) {
+  let body = null;
+  try { body = JSON.parse(text); } catch { /* non-JSON error page */ }
+  if (!body) return { rt: null, error: `HTTP ${res.status}: ${text.slice(0, 90)}` };
+  if (String(body.Response) === "False") return { rt: null, error: body.Error || "OMDb returned Response:False" };
+  const rt = rtFromOmdb(body);
+  return { rt, error: rt == null ? "no Rotten Tomatoes entry for this title" : null };
 }
 
-async function discoverOn(providerId, pages, minVotes, minScore) {
+/* OMDb allows 1000 lookups a day and answers every one after that with the
+   same refusal. Once it says so, stop asking for the rest of the run. */
+let omdbSpent = false;
+async function fetchOmdb(imdbId) {
+  if (omdbSpent) return { rt: null, error: "daily limit already reached" };
+  const url = `https://www.omdbapi.com/?apikey=${encodeURIComponent(OMDB)}&i=${imdbId}&tomatoes=true`;
+  try {
+    const res = await fetch(url, { headers: { accept: "application/json" } });
+    const out = await readOmdbPayload(res, await res.text());
+    if (out.error && /limit reached/i.test(out.error)) omdbSpent = true;
+    return out;
+  } catch (e) {
+    return { rt: null, error: "network: " + e.message };
+  }
+}
+
+/**
+ * Synopses run from one line to a full marketing paragraph. Keep whole
+ * sentences up to a readable length rather than cutting mid-clause, and drop
+ * anything too thin to be worth showing.
+ */
+export function trimOverview(text, max = 400) {
+  const t = String(text || "").replace(/\s+/g, " ").trim();
+  if (t.length < 40) return null;                 // stubs like "No overview found."
+  if (t.length <= max) return t;
+  const sentences = t.match(/[^.!?]+[.!?]+(\s|$)/g) || [];
+  let out = "";
+  for (const s of sentences) {
+    if ((out + s).trim().length > max) break;
+    out += s;
+  }
+  out = out.trim();
+  return out.length >= 60 ? out : t.slice(0, max).replace(/\s+\S*$/, "") + "\u2026";
+}
+
+/* ============================================================================
+   RECORDS
+   One show object from the API carries everything a record needs: title,
+   year, runtime, rating, synopsis, genres, poster, still, and where it streams
+   in the country asked for. So a film seen in the scan costs no extra call.
+   ============================================================================ */
+
+/* The facts any record is built from, curated or scanned. Pure. */
+export function factsOf(show, country = COUNTRY) {
+  const terms = overviewTerms(show?.overview);
+  const genres = genresFrom(show?.genres, terms);
+  const img = imagesOf(show);
+  return {
+    tmdb: tmdbIdOf(show),
+    imdb: show?.imdbId || null,
+    title: show?.title || "",
+    year: Number(show?.releaseYear) || null,
+    runtime: Number(show?.runtime) || null,
+    /* the source's 0-100 audience rating; 0 means it has none */
+    score: typeof show?.rating === "number" && show.rating > 0 ? show.rating : null,
+    overview: trimOverview(show?.overview || ""),
+    ...img,
+    providers: streamingCodes(show, country),
+    links: watchLinks(show, country),
+    rentLink: rentLinkOf(show, country),
+    logos: logoUrls(show, country),
+    director: (show?.directors || [])[0] || "",
+    genres, terms,
+    _src: sourceOf(show?.genres, terms)
+  };
+}
+
+/* A curated film, checked tonight. Audience, fame and certificate are not in
+   the source, so the hand-written values in index.html stand for those. */
+export function curatedRecord(film, show, today, country = COUNTRY) {
+  const f = factsOf(show, country);
+  const out = {
+    t: film.t, y: film.y, ok: true,
+    tmdb: f.tmdb, imdb: f.imdb,
+    matched: { title: f.title, year: f.year },
+    runtime: f.runtime,
+    score: f.score,
+    /* the same rating on a 0-10 scale, for the monthly marquee */
+    rating: f.score != null ? f.score / 10 : null,
+    poster: f.poster, posterSm: f.posterSm, backdrop: f.backdrop,
+    overview: f.overview,
+    providers: f.providers,
+    links: f.links,
+    ...(f.providers.length ? {} : { rentLink: f.rentLink }),
+    logos: f.logos,
+    /* Distinguishes "checked, and it is on nothing" from "never checked".
+       Without this the page would keep showing a hand-guessed service for a
+       film that is demonstrably not streaming anywhere. */
+    providersChecked: true,
+    checkedAt: today,
+    _src: f._src
+  };
+  if (typeof film.pop === "number") out.pop = film.pop;
+  if (f.genres.length) {
+    out.g = f.genres;
+    out.a = tagsFrom({ genres: f.genres, keywords: f.terms, runtime: f.runtime || 0 });
+  }
+  return out;
+}
+
+/* A scanned film worth shelving, or null. The bar is the one the shelf has
+   always had: a real runtime, a poster and a still, a streaming home, genres,
+   three attributes and a synopsis. */
+export function shelfRecord(show, rank, country = COUNTRY) {
+  if (!show || (show.showType && show.showType !== "movie")) return null;
+  const f = factsOf(show, country);
+  if (!f.title || !f.year) return null;
+  const runtime = f.runtime || 0;
+  if (runtime < 60 || runtime > 260) return null;
+  if (!f.poster || !f.backdrop) return null;
+  if (!f.providers.length) return null;          // discovery only ever shelves what streams
+  if (!f.genres.length) return null;
+  const attrs = deriveAttrs({ genres: f.genres, keywords: f.terms, runtime });
+  if (!attrs) return null;
+  if (!f.overview) return null;
+  return {
+    t: f.title,
+    y: f.year,
+    r: runtime,
+    g: f.genres,
+    a: attrs,
+    svcs: f.providers,
+    d: f.director || "Unknown",
+    h: f.overview,
+    k: audienceFrom(null, f.genres),
+    pop: fameFromRank(rank),
+    mpaa: "NR",
+    rt: f.score || 0,
+    rtSrc: "audience",
+    rating: f.score != null ? f.score / 10 : null,
+    poster: f.poster,
+    posterSm: f.posterSm,
+    backdrop: f.backdrop,
+    links: f.links,
+    tmdb: f.tmdb,
+    imdb: f.imdb,
+    logos: f.logos,
+    _src: f._src
+  };
+}
+
+/* ============================================================================
+   DISCOVERY
+   The curated catalog is a seed, not the whole store. This walks what is
+   actually on the eight services right now, most popular first, and brings
+   back everything worth shelving, streaming originals included.
+   ============================================================================ */
+
+/* What to search on each service: its subscription catalog, plus its free
+   tier where it has one. */
+export const SCAN_CATALOGS = Object.freeze({
+  netflix: "netflix.subscription",
+  hbo: "hbo.subscription",
+  hulu: "hulu.subscription",
+  disney: "disney.subscription",
+  prime: "prime.subscription,prime.free",
+  apple: "apple.subscription",
+  paramount: "paramount.subscription,paramount.free",
+  peacock: "peacock.subscription,peacock.free"
+});
+
+export function scanUrl(serviceId, cursor, { country = COUNTRY, minScore = MIN_SCORE } = {}) {
+  return apiUrl("/shows/search/filters", {
+    country,
+    catalogs: SCAN_CATALOGS[serviceId],
+    show_type: "movie",
+    order_by: "popularity_alltime",
+    order_direction: "desc",
+    rating_min: minScore,
+    output_language: "en",
+    cursor
+  });
+}
+
+/* Up to `pages` pages of one service, each show with its place in the list.
+   Losing page 7 is not a reason to lose pages 1-6; running out of budget part
+   way is, because a half-read service would read as films leaving it. */
+export async function scanService(serviceId, pages, opts = {}) {
+  const get = opts.getJSON || getJSON;
   const found = [];
+  let cursor;
   for (let page = 1; page <= pages; page++) {
     let data;
     try {
-      data = await discoverPage(providerId, page);
+      data = await get(scanUrl(serviceId, cursor, opts));
     } catch (e) {
-      /* These queries flake. Losing page 7 is not a reason to lose pages 1-6. */
-      if (page === 1) throw e;
+      if (e instanceof BudgetSpent || page === 1) throw e;
       break;
     }
-    if (!data?.results?.length) break;
-    for (const r of data.results) {
-      if ((r.vote_count || 0) < minVotes) continue;
-      if ((r.vote_average || 0) < minScore) continue;
-      found.push(r);
-    }
-    if (page >= (data.total_pages || 1)) break;
-    await sleep(320);          /* these queries are expensive at their end */
+    const shows = data?.shows || [];
+    for (const s of shows) found.push({ show: s, rank: found.length });
+    if (!data?.hasMore || !data.nextCursor || !shows.length) break;
+    cursor = data.nextCursor;
+    if (!opts.getJSON) await sleep(250);
   }
   return found;
 }
 
-/* One request per candidate: details, keywords, credits, certification and
-   availability all come back together. */
-async function shelfRecord(id) {
-  const d = await getJSON(tmdbUrl(`/movie/${id}`, {
-    append_to_response: "keywords,credits,release_dates,watch/providers"
+/* Services least recently read go first, so a run on a small budget works
+   round the eight over several nights instead of reading Netflix every time. */
+export function scanOrder(serviceScans = {}) {
+  return Object.keys(SERVICE_IDS).sort((a, b) => {
+    const da = serviceScans[SERVICE_IDS[a]] || "", db = serviceScans[SERVICE_IDS[b]] || "";
+    return da < db ? -1 : da > db ? 1 : 0;
+  });
+}
+
+/* Curated films that need their own call, least recently checked first. */
+export function checkOrder(films, prevByKey) {
+  return films.slice().sort((a, b) => {
+    const pa = prevByKey.get(`${a.t}::${a.y}`)?.checkedAt || "";
+    const pb = prevByKey.get(`${b.t}::${b.y}`)?.checkedAt || "";
+    return pa < pb ? -1 : pa > pb ? 1 : 0;
+  });
+}
+
+/* One curated film looked up on its own: by its TMDB id when we hold one,
+   otherwise by title, scored on title and year. */
+async function lookupCurated(film, prev) {
+  const id = prev?.tmdb || film.tmdb;
+  if (id) {
+    const show = await getJSON(apiUrl(`/shows/movie/${id}`, { country: COUNTRY, output_language: "en" }));
+    if (show) return show;
+  }
+  const list = await getJSON(apiUrl("/shows/search/title", {
+    title: film.t, country: COUNTRY, show_type: "movie", output_language: "en"
   }));
-  if (!d || !d.title || !d.release_date) return null;
-
-  const year = Number(d.release_date.slice(0, 4));
-  const runtime = d.runtime || 0;
-  if (!year || runtime < 60 || runtime > 260) return null;
-  if (!d.poster_path || !d.backdrop_path) return null;
-
-  const providers = flatrateCodes(d["watch/providers"]);
-  if (!providers.length) return null;                 // discovery only ever shelves what streams
-
-  const keywords = (d.keywords?.keywords || []).map((k) => k.name);
-  const genres = genresFrom(d.genres, keywords);
-  if (!genres.length) return null;
-
-  const director = (d.credits?.crew || []).find((c) => c.job === "Director")?.name || "";
-  const attrs = deriveAttrs({ genres, keywords, runtime });
-  if (!attrs) return null;
-
-  const overview = trimOverview(d.overview || "");
-  if (!overview) return null;
-
-  const cert = usCertification(d.release_dates);
-  return {
-    t: d.title,
-    y: year,
-    r: runtime,
-    g: genres,
-    a: attrs,
-    svcs: providers,
-    d: director || "Unknown",
-    h: overview,
-    k: audienceFrom(cert, genres),
-    pop: fameFrom(d.vote_count || 0),
-    mpaa: cert || "NR",
-    rt: d.vote_average ? Math.round(d.vote_average * 10) : 0,
-    rtSrc: "tmdb",
-    rating: typeof d.vote_average === "number" ? d.vote_average : null,
-    votes: typeof d.vote_count === "number" ? d.vote_count : null,
-    poster: d.poster_path,
-    backdrop: d.backdrop_path,
-    tmdb: d.id,
-    imdb: d.imdb_id || null,
-    logos: logoPaths(d["watch/providers"]),
-    _src: sourceOf(d.genres, keywords)
-  };
+  return pickMatch(Array.isArray(list) ? list : [], film.t, film.y);
 }
 
 /* ---------------- runner ---------------- */
@@ -688,155 +773,179 @@ async function pool(items, n, fn) {
         catch (e) { results[idx] = { t: items[idx].t, y: items[idx].y, ok: false, error: e.message }; }
         done++;
         if (!VERBOSE && done % 10 === 0) process.stdout.write(`\r  ${done}/${items.length}`);
-        if (VERBOSE) console.log(`  ${done}/${items.length}  ${results[idx].ok ? "ok " : "MISS"} ${items[idx].t}`);
+        if (VERBOSE) console.log(`  ${done}/${items.length}  ${results[idx]?.ok ? "ok " : "MISS"} ${items[idx].t}`);
       }
     })
   );
-  if (!VERBOSE) process.stdout.write(`\r  ${done}/${items.length}\n`);
+  if (!VERBOSE && items.length) process.stdout.write(`\r  ${done}/${items.length}\n`);
   return results;
 }
 
 async function main() {
-  if (!TOKEN && !APIKEY) {
+  if (!KEY) {
     console.error(
-      "No TMDB credentials.\n" +
-      "  export TMDB_TOKEN='<v4 read access token>'   # preferred\n" +
-      "  export TMDB_API_KEY='<v3 api key>'           # also works\n" +
-      "  export OMDB_KEY='<key>'                      # optional, adds real RT scores\n" +
-      "Get them free at https://www.themoviedb.org/settings/api"
+      "No Streaming Availability API key.\n" +
+      "  export STREAMING_AVAILABILITY_KEY='<key>'   # from developers.movieofthenight.com\n" +
+      "  export OMDB_KEY='<key>'                     # optional, adds real RT scores\n" +
+      "On GitHub, add it as the repository secret STREAMING_AVAILABILITY_KEY."
     );
     process.exit(1);
   }
   const html = await readFile(join(ROOT, "index.html"), "utf8");
   let films = parseCatalog(html);
   if (LIMIT) films = films.slice(0, LIMIT);
-  console.log(`Enriching ${films.length} titles from TMDB${OMDB ? " + OMDb" : ""} (region ${REGION})…`);
+  const today = new Date().toISOString().slice(0, 10);
+  console.log(`Enriching ${films.length} titles from Movie of the Night${OMDB ? " + OMDb" : ""} ` +
+    `(region ${REGION}${BUDGET ? `, budget ${BUDGET} calls` : ""})…`);
 
   let previous = null;
   try { previous = JSON.parse(await readFile(join(ROOT, "data", "catalog.json"), "utf8")); }
   catch { /* first run */ }
+  const prevByKey = new Map((previous?.films || []).map((f) => [`${f.t}::${f.y}`, f]));
+  const serviceScans = Object.assign({}, previous?._meta?.serviceScans || {});
 
-  const rows = await pool(films, CONCURRENCY, enrichOne);
-  const ok = rows.filter((r) => r.ok);
-  const missed = rows.filter((r) => !r.ok);
+  /* ---- what is on the services right now ---------------------------------
+     Runs first: a curated film found here needs no call of its own. */
+  const scanShare = BUDGET ? Math.max(PAGES, Math.floor(BUDGET * 0.6)) : Infinity;
+  const candidates = new Map();        // show id -> { show, rank }
+  const failed = [], deferred = [], scannedCodes = [];
+  if (!NO_DISCOVER) {
+    console.log(`\nScanning services for what is streaming now…`);
+    for (const id of scanOrder(serviceScans)) {
+      const code = SERVICE_IDS[id];
+      if (calls.made + PAGES > scanShare) { deferred.push(code); continue; }
+      try {
+        const rows = await scanService(id, PAGES);
+        for (const { show, rank } of rows) {
+          const had = candidates.get(show.id);
+          if (!had || rank < had.rank) candidates.set(show.id, { show, rank });
+        }
+        scannedCodes.push(code);
+        serviceScans[code] = today;
+        console.log(`  ${code.padEnd(4)} ${String(rows.length).padStart(4)} titles`);
+      } catch (e) {
+        if (e instanceof BudgetSpent) { deferred.push(code); continue; }
+        /* One service having a bad day is not the whole store closing. */
+        failed.push(code);
+        console.log(`  ${code.padEnd(4)}    - unreachable (${e.message.slice(0, 60)})`);
+      }
+    }
+    if (deferred.length) console.log(`  left for another night: ${deferred.join(" ")}`);
+  }
+  const scanned = scannedCodes.length > 0;
 
-  /* A critic score we already hold is better than one we could not fetch today.
-     Without this, a day when OMDb is out of quota quietly rewrites every real
-     Rotten Tomatoes score as a TMDB audience score. */
+  /* ---- the curated films ---------------------------------------------------- */
+  const byTmdb = new Map(), byTitle = new Map();
+  for (const { show } of candidates.values()) {
+    const id = tmdbIdOf(show);
+    if (id) byTmdb.set(id, show);
+    byTitle.set(`${norm(show.title)}::${show.releaseYear}`, show);
+  }
+  const rows = new Array(films.length);
+  const lookups = [];
+  films.forEach((film, i) => {
+    const prev = prevByKey.get(`${film.t}::${film.y}`);
+    const seen = (prev?.tmdb && byTmdb.get(prev.tmdb)) || byTitle.get(`${norm(film.t)}::${film.y}`);
+    if (seen) rows[i] = curatedRecord(film, seen, today);
+    else lookups.push({ film, prev, i });
+  });
+  const ordered = checkOrder(lookups.map((l) => l.film), prevByKey)
+    .map((film) => lookups.find((l) => l.film === film));
+  let carriedCurated = 0;
+  await pool(ordered.map((l) => ({ ...l, t: l.film.t, y: l.film.y })), CONCURRENCY, async (l) => {
+    try {
+      const show = await lookupCurated(l.film, l.prev);
+      rows[l.i] = show ? curatedRecord(l.film, show, today)
+                       : { t: l.film.t, y: l.film.y, ok: false, error: "no confident match" };
+    } catch (e) {
+      /* Not checked tonight is not the same as not found: keep what we knew. */
+      if (l.prev?.ok) { rows[l.i] = { ...l.prev, carried: true }; carriedCurated++; }
+      else rows[l.i] = { t: l.film.t, y: l.film.y, ok: false,
+        error: e instanceof BudgetSpent ? "not checked yet (request budget)" : e.message };
+    }
+    return rows[l.i];
+  });
+  const ok = rows.filter((r) => r && r.ok);
+  const missed = rows.filter((r) => r && !r.ok);
+
+  /* A critic score we already hold is better than one we could not fetch today. */
   const heldRT = new Map();
-  for (const f of previous?.films || []) if (f.rt != null && f.rtSrc !== "tmdb") heldRT.set(`${f.t}::${f.y}`, f.rt);
+  for (const f of previous?.films || []) if (f.rt != null && f.rtSrc !== "tmdb" && f.rtSrc !== "audience") heldRT.set(`${f.t}::${f.y}`, f.rt);
   for (const f of previous?.shelf || []) if (f.rt != null && f.rtSrc === "rt") heldRT.set(`${f.t}::${f.y}`, f.rt);
   let carried = 0;
-  for (const r of ok) {
+  const fresh = ok.filter((r) => !r.carried);
+  if (OMDB) {
+    const queue = fresh.filter((r) => r.imdb).slice(0, OMDB_BUDGET);
+    if (queue.length) console.log(`\nCritic scores for ${queue.length} curated titles…`);
+    await pool(queue, CONCURRENCY, async (r) => {
+      const res = await fetchOmdb(r.imdb);
+      r.rt = res.rt;
+      if (res.error) r.omdbError = res.error;
+      return { ok: true, t: r.t };
+    });
+  }
+  /* Without this, a day when OMDb is out of quota quietly drops every real
+     Rotten Tomatoes score. */
+  for (const r of fresh) {
     if (r.rt == null && heldRT.has(`${r.t}::${r.y}`)) { r.rt = heldRT.get(`${r.t}::${r.y}`); r.rtCarried = true; carried++; }
   }
 
-  /* ---- what is on the services right now ---------------------------------
-     Runs after the curated pass so a discovered title can be checked against
-     the hand-authored list and never shelved twice. */
-  const seen = new Set(films.map((f) => `${norm(f.t)}::${f.y}`));
-  let shelf = [], directory = { ids: {}, logos: {} }, scanned = false;
-  const failed = [];
-  if (!NO_DISCOVER) {
-    try {
-      directory = await providerDirectory();
-      const codes = Object.keys(directory.ids);
-      console.log(`\nScanning ${codes.length} services for what is streaming now…`);
-
-      const candidates = new Map();
-      for (const code of codes) {
-        try {
-          let rows;
-          try {
-            rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
-          } catch (first) {
-            /* The 500s come and go rather than tracking any one service, which
-               reads as load at their end. Stand back and ask once more before
-               writing the service off for the night. */
-            await sleep(6000);
-            rows = await discoverOn(directory.ids[code], PAGES, MIN_VOTES, MIN_SCORE);
-          }
-          for (const r of rows) if (!candidates.has(r.id)) candidates.set(r.id, r);
-          console.log(`  ${code.padEnd(4)} ${String(rows.length).padStart(4)} candidates`);
-          await sleep(900);
-        } catch (e) {
-          /* One service having a bad day is not the whole store closing. */
-          failed.push(code);
-          console.log(`  ${code.padEnd(4)}    - unreachable (${e.message.slice(0, 60)})`);
-        }
-      }
-      if (!candidates.size) throw new Error("every service returned nothing");
-
-      const fresh = [...candidates.values()]
-        .filter((r) => !seen.has(`${norm(r.title)}::${Number((r.release_date || "").slice(0, 4))}`))
-        .slice(0, MAX_SHELF);
-      console.log(`\n${fresh.length} new candidates, fetching details…`);
-      const built = await pool(fresh.map((r) => ({ id: r.id, t: r.title, y: 0 })), CONCURRENCY,
-        (item) => shelfRecord(item.id));
-
-      const byKey = new Map();
-      for (const r of built) {
-        if (!r || !r.t) continue;
+  /* ---- the shelf ------------------------------------------------------------ */
+  const seenCurated = new Set(films.map((f) => `${norm(f.t)}::${f.y}`));
+  const curatedIds = new Set(ok.map((r) => r.tmdb).filter(Boolean));
+  let shelf = [];
+  if (!NO_DISCOVER && scanned) {
+    const byKey = new Map();
+    const fresh = [...candidates.values()].sort((a, b) => a.rank - b.rank);
+    for (const { show, rank } of fresh) {
+      if (byKey.size >= MAX_SHELF) break;
+      const r = shelfRecord(show, rank);
+      if (!r) continue;
+      const key = `${norm(r.t)}::${r.y}`;
+      if (seenCurated.has(key) || (r.tmdb && curatedIds.has(r.tmdb)) || byKey.has(key)) continue;
+      byKey.set(key, r);
+    }
+    shelf = [...byKey.values()];
+    /* Films whose only homes are services not read tonight would otherwise
+       vanish and read as "left the service". Carry those forward from the last
+       scan instead of pretending they are gone. */
+    const unread = new Set([...failed, ...deferred]);
+    if (unread.size) {
+      const held = new Set(shelf.map((r) => `${norm(r.t)}::${r.y}`));
+      for (const r of previous?.shelf || []) {
         const key = `${norm(r.t)}::${r.y}`;
-        if (!byKey.has(key)) byKey.set(key, r);
+        if (held.has(key) || seenCurated.has(key)) continue;
+        if ((r.svcs || []).some((c) => unread.has(c))) { shelf.push(r); held.add(key); }
       }
-      shelf = [...byKey.values()];
-      /* Films whose only home is a service we could not read this time would
-         otherwise vanish and read as "left the service". Carry those forward
-         from the last good scan instead of pretending they are gone. */
-      if (failed.length) {
-        const held = new Set(shelf.map((r) => `${norm(r.t)}::${r.y}`));
-        for (const r of previous?.shelf || []) {
-          const key = `${norm(r.t)}::${r.y}`;
-          if (held.has(key)) continue;
-          if ((r.svcs || []).some((c) => failed.includes(c))) { shelf.push(r); held.add(key); }
-        }
-      }
-      /* A TMDB user score and a Rotten Tomatoes critic score are not the same
-         number, and the page prints this one under the word "critics". Score
-         the discovered shelf the same way the curated rows are scored so the
-         two populations can be compared at all. OMDb has a daily ceiling, so
-         the most recognisable titles go first and the rest keep the TMDB score,
-         clearly marked as an audience number. */
-      if (OMDB && shelf.length) {
-        const budget = Math.max(0, OMDB_BUDGET - ok.length);
-        const queue = shelf.filter((r) => r.imdb)
-                           .sort((a, b) => b.pop - a.pop || b.rt - a.rt)
-                           .slice(0, budget);
-        console.log(`\nCritic scores for ${queue.length} of ${shelf.length} discovered titles…`);
-        await pool(queue.map((r) => ({ t: r.t, y: r.y, rec: r })), CONCURRENCY, async (item) => {
-          const held = heldRT.get(`${item.rec.t}::${item.rec.y}`);
-          if (held != null) { item.rec.rt = held; item.rec.rtSrc = "rt"; return { ok: true, t: item.t }; }
-          const res = await fetchOmdb(item.rec.imdb);
-          if (res.rt != null) { item.rec.rt = res.rt; item.rec.rtSrc = "rt"; }
-          return { ok: true, t: item.t };
-        });
-      }
-      scanned = true;
-    } catch (e) {
-      /* A daily job must not turn a bad afternoon at TMDB into an empty store.
-         Keep yesterday's shelf and say so, rather than reporting that every
-         film on it has left. */
-      console.warn(`\n  !! scan failed: ${e.message.slice(0, 120)}`);
-      console.warn(`  keeping the shelf from the last good scan.`);
-      shelf = (previous?.shelf || []).slice();
+    }
+    /* Critic scores for the shelf, most recognisable first, within OMDb's
+       daily ceiling. The rest keep the audience score, clearly marked. */
+    if (OMDB && shelf.length) {
+      const budget = Math.max(0, OMDB_BUDGET - ok.length);
+      const queue = shelf.filter((r) => r.imdb && r.rtSrc !== "rt")
+                         .sort((a, b) => b.pop - a.pop || b.rt - a.rt)
+                         .slice(0, budget);
+      console.log(`\nCritic scores for ${queue.length} of ${shelf.length} discovered titles…`);
+      await pool(queue.map((r) => ({ t: r.t, y: r.y, rec: r })), CONCURRENCY, async (item) => {
+        const held = heldRT.get(`${item.rec.t}::${item.rec.y}`);
+        if (held != null) { item.rec.rt = held; item.rec.rtSrc = "rt"; return { ok: true, t: item.t }; }
+        const res = await fetchOmdb(item.rec.imdb);
+        if (res.rt != null) { item.rec.rt = res.rt; item.rec.rtSrc = "rt"; }
+        return { ok: true, t: item.t };
+      });
     }
   } else if (previous?.shelf) {
+    /* No scan tonight (or every service failed): keep yesterday's shelf
+       rather than reporting that every film on it has left. */
+    if (!NO_DISCOVER) console.warn(`\n  !! no service could be read; keeping the shelf from the last good scan.`);
     shelf = previous.shelf.slice();
   }
 
   /* ---- what changed since yesterday --------------------------------------
      Only a scan that actually ran can claim a title has left. */
-  const today = new Date().toISOString().slice(0, 10);
   const firstSeen = new Map();
   for (const r of previous?.shelf || []) if (r.firstSeen) firstSeen.set(`${norm(r.t)}::${r.y}`, r.firstSeen);
-  /* On the first run there is nothing to compare against, so every title would
-     read as "just arrived". Leave the date unset instead of claiming a whole
-     catalog landed today; tomorrow's run is the first that can tell. */
   const hadShelf = Array.isArray(previous?.shelf) && previous.shelf.length > 0;
-  /* Presence on yesterday's shelf is what makes a title old, not whether it
-     happened to carry a date. Keying on the date marked an entire carried-over
-     shelf as arriving today the first time dates existed. */
   const prevKeys = new Set((previous?.shelf || []).map((r) => `${norm(r.t)}::${r.y}`));
   const arrived = [];
   for (const r of shelf) {
@@ -853,7 +962,7 @@ async function main() {
   for (const f of ok)    if ((f.providers || []).length) nowStreaming.add(f.t);
   for (const r of shelf) nowStreaming.add(r.t);
   let departed = [];
-  if (scanned && !failed.length) {
+  if (scanned) {
     const wasStreaming = new Set();
     for (const f of previous?.films || []) if ((f.providers || []).length) wasStreaming.add(f.t);
     for (const r of previous?.shelf  || []) wasStreaming.add(r.t);
@@ -864,10 +973,13 @@ async function main() {
     _meta: {
       generatedAt: new Date().toISOString(),
       region: REGION,
-      source: OMDB ? "TMDB + OMDb" : "TMDB",
+      source: OMDB ? "Movie of the Night + OMDb" : "Movie of the Night",
+      attribution: { name: "Movie of the Night", url: "https://www.movieofthenight.com" },
       total: rows.length,
       matched: ok.length,
-      withProviders: ok.filter((r) => r.providers.length).length,
+      checkedTonight: ok.filter((r) => !r.carried).length,
+      carriedForward: carriedCurated,
+      withProviders: ok.filter((r) => (r.providers || []).length).length,
       withRT: ok.filter((r) => r.rt != null).length,
       withOverview: ok.filter((r) => r.overview).length,
       tagged: ok.filter((r) => r.a).length,
@@ -879,29 +991,38 @@ async function main() {
       })(),
       unmatched: missed.map((r) => `${r.t} (${r.y}): ${r.error || "unknown"}`),
       logos: (() => {
-        const all = Object.assign({}, directory.logos);
-        [...ok, ...shelf].forEach((r) => Object.entries(r.logos || {}).forEach(([code, path]) => {
-          if (!all[code]) all[code] = path;
+        const all = {};
+        [...ok, ...shelf].forEach((r) => Object.entries(r.logos || {}).forEach(([code, url]) => {
+          if (!all[code] && /^https:\/\//.test(url)) all[code] = url;
         }));
+        /* keep last night's mark for a service nobody streamed on tonight; an
+           older TMDB logo path still draws until a new mark replaces it */
+        for (const [code, url] of Object.entries(previous?._meta?.logos || {})) {
+          if (!all[code] && typeof url === "string" && url) all[code] = url;
+        }
         return all;
       })(),
       scannedAt: today,
       scanOk: scanned,
+      serviceScans,
       servicesMissed: failed,
+      servicesDeferred: deferred,
+      requests: calls.made,
+      budget: BUDGET || null,
       shelfCount: shelf.length,
       streamingNow: nowStreaming.size,
       arrived,
       departed
     },
-    films: ok.map(({ logos, _src, ...rest }) => rest),
+    films: ok.map(({ logos, _src, carried, ...rest }) => rest),
     shelf: shelf.map(({ logos, _src, ...rest }) => rest)
   };
 
   await mkdir(join(ROOT, "data"), { recursive: true });
   await writeFile(join(ROOT, "data", "catalog.json"), JSON.stringify(payload, null, 1) + "\n");
 
-  /* The raw genres and keywords behind every film's tags, one line a film. A
-     shelf title carried over from a failed scan keeps yesterday's line. */
+  /* The raw genres and synopsis terms behind every film's tags, one line a
+     film. A record carried over from an earlier night keeps its earlier line. */
   let prevSrc = {};
   try { prevSrc = JSON.parse(await readFile(join(ROOT, "data", "keywords.json"), "utf8")); }
   catch { /* first run */ }
@@ -914,27 +1035,25 @@ async function main() {
   await writeFile(join(ROOT, "data", "keywords.json"),
     "{\n" + Object.entries(src).map(([k, v]) => JSON.stringify(k) + ":" + JSON.stringify(v)).join(",\n") + "\n}\n");
 
-  console.log(`\nmatched          ${ok.length}/${rows.length}`);
+  console.log(`\nAPI calls        ${calls.made}${BUDGET ? ` of ${BUDGET}` : ""}`);
+  console.log(`matched          ${ok.length}/${rows.length}${carriedCurated ? ` (${carriedCurated} carried from an earlier night)` : ""}`);
   console.log(`with providers   ${payload._meta.withProviders}`);
   console.log(`with RT score    ${payload._meta.withRT}${carried ? ` (${carried} held from the last good run)` : ""}`);
   const errs = Object.entries(payload._meta.omdbErrors || {});
   if (OMDB && errs.length) {
     console.log(`\nOMDb did not return scores. Reasons:`);
     errs.sort((a, b) => b[1] - a[1]).forEach(([msg, n]) => console.log(`  ${n}x  ${msg}`));
-    if (errs.some(([m]) => /api key/i.test(m))) {
-      console.log(`\n  -> An OMDb key only works after you click the activation link they email you.`);
-    }
   }
   console.log(`with poster      ${ok.filter((r) => r.poster).length}`);
   console.log(`with synopsis    ${payload._meta.withOverview}`);
   console.log(`tagged by rule   ${payload._meta.tagged}${payload._meta.thinlyTagged.length ? ` (${payload._meta.thinlyTagged.length} with fewer than three attributes)` : ""}`);
   if (missed.length) {
-    console.log(`\nunmatched (${missed.length}) — check these by hand:`);
+    console.log(`\nunmatched (${missed.length}), check these by hand:`);
     missed.slice(0, 25).forEach((r) => console.log(`  - ${r.t} (${r.y}): ${r.error}`));
   }
-  const suspect = ok.filter((r) => r.matched.year && Math.abs(r.matched.year - r.y) > 1);
+  const suspect = ok.filter((r) => r.matched?.year && Math.abs(r.matched.year - r.y) > 1);
   if (suspect.length) {
-    console.log(`\nyear drift — verify these matched the right film:`);
+    console.log(`\nyear drift, verify these matched the right film:`);
     suspect.forEach((r) => console.log(`  - "${r.t}" (${r.y}) matched "${r.matched.title}" (${r.matched.year})`));
   }
   console.log(`\ndiscovered      ${shelf.length} streaming titles`);

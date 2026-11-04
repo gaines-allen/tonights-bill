@@ -56,13 +56,20 @@ ok("an empty query gets a prompt", /Search a title/.test(results()[0].textConten
 
 console.log("\navailability, honestly");
 const film = (t) => mod.BY_TITLE[t];
-const godfather = film("The Godfather");           /* checked: PRV, PAR */
-ok("the fixture streams where we think", godfather.svcChecked && godfather.svcs.includes("PRV"));
-Object.keys(mod.S.svc).forEach((k) => { mod.S.svc[k] = (k === "PRV"); });
-eq("on a selected service", mod.availability(godfather).line, "On your services: Prime Video");
-Object.keys(mod.S.svc).forEach((k) => { mod.S.svc[k] = (k === "NFX"); });
+/* The fixture is read from tonight's data, never named by hand: a film that
+   leaves a service overnight (The Godfather left Prime Video on Nov 2) must
+   not fail the nightly refresh. Any checked curated film on exactly one
+   service, whose title search finds it first, will do. */
+const SVC_LABEL = { NFX:"Netflix", MAX:"Max", HUL:"Hulu", DIS:"Disney+", PRV:"Prime Video", APL:"Apple TV+", PAR:"Paramount+", PCK:"Peacock" };
+const godfather = mod.FILMS.find((f) => !f.found && f.svcChecked && f.svcs.length === 1 && SVC_LABEL[f.svcs[0]] &&
+  mod.searchCatalog(f.t)[0] === f);
+const HOME = godfather && godfather.svcs[0], ELSE = HOME === "NFX" ? "HUL" : "NFX";
+ok("the fixture streams where we think", godfather && godfather.svcChecked && godfather.svcs.includes(HOME));
+Object.keys(mod.S.svc).forEach((k) => { mod.S.svc[k] = (k === HOME); });
+eq("on a selected service", mod.availability(godfather).line, "On your services: " + SVC_LABEL[HOME]);
+Object.keys(mod.S.svc).forEach((k) => { mod.S.svc[k] = (k === ELSE); });
 eq("on services you didn't pick", mod.availability(godfather).line, "Not on your selected services");
-ok("and it says where it is", /Prime Video/.test(mod.availability(godfather).detail));
+ok("and it says where it is", mod.availability(godfather).detail.includes(SVC_LABEL[HOME]));
 const nowhere = mod.FILMS.find((f) => f.svcChecked && !f.svcs.length);
 ok("a checked film on no tracked service is not 'on' anything", mod.availability(nowhere).k === "off");
 ok("and is described as not on the services we track, not as unstreamable",
@@ -72,15 +79,16 @@ eq("an unchecked hand-tagged film is 'not confirmed'", mod.availability(guess).l
 eq("never 'not on your services'", mod.availability(guess).k, "unknown");
 Object.keys(mod.S.svc).forEach((k) => { mod.S.svc[k] = false; });
 eq("with no services picked it asks first", mod.availability(godfather).line, "Select your services to check availability.");
-search("godfather");
+search(godfather.t);
 ok("and a title search still lists catalog matches", hits().length > 0);
 
 console.log("\nsubscriptions only");
 const enrich = await readFile(join(ROOT, "scripts/enrich.mjs"), "utf8");
-ok("the catalog only ever records flatrate and ad-tier offers", /\[\.\.\.\(region\.flatrate \|\| \[\]\), \.\.\.\(region\.ads \|\| \[\]\)\]/.test(enrich) && !/region\.(rent|buy)/.test(enrich));
-const { flatrateCodes } = await import(join(ROOT, "scripts/enrich.mjs"));
+ok("the catalog only ever records subscription and free listings", /new Set\(\["subscription", "free"\]\)/.test(enrich));
+const { streamingCodes } = await import(join(ROOT, "scripts/enrich.mjs"));
+const listing = (id, type) => ({ service: { id }, type, link: "https://example.com/" + id });
 eq("a rental-only listing yields no subscription service",
-   flatrateCodes({ results: { US: { rent: [{ provider_name: "Netflix" }], buy: [{ provider_name: "Max" }] } } }), []);
+   streamingCodes({ streamingOptions: { us: [listing("netflix", "rent"), listing("hbo", "buy")] } }, "us"), []);
 
 console.log("\none services setting, both places");
 mod.setService("NFX", true);
@@ -93,9 +101,9 @@ eq("unticking in the drawer changes the stored preference", mod.S.svc.NFX, false
 eq("and More filters follows at once", walk($("f-services")).find((n) => n.textContent === "Netflix").getAttribute("aria-pressed"), "false");
 ok("and it is saved", JSON.parse(env.store.get("tb:svc")).NFX === false);
 ok("Peacock keeps its existing code", walk($("hunt-svc-list")).some((n) => n.value === "PCK"));
-Object.keys(mod.S.svc).forEach((k) => mod.setService(k, k === "PRV"));
-search("godfather");
-eq("results repaint against the new choice", lineOf(hits()[0]), "On your services: Prime Video");
+Object.keys(mod.S.svc).forEach((k) => mod.setService(k, k === HOME));
+search(godfather.t);
+eq("results repaint against the new choice", lineOf(hits()[0]), "On your services: " + SVC_LABEL[HOME]);
 
 console.log("\nresults are films you can act on");
 const first = hits()[0];
